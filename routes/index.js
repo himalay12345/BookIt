@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+router.use('/admin',require('./admin'));
 const homeController = require('../controllers/index');
 
 router.get('/',homeController.home);
