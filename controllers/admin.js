@@ -4,12 +4,12 @@ module.exports.appointmentList = (req, res) => {
     })
 }
 module.exports.blankPage = (req, res) => {
-    return res.render('blank-page', {
+    return res.render('a-blank-page', {
         title: 'Blank Page'
     })
 }
 module.exports.componentsList = (req, res) => {
-    return res.render('components', {
+    return res.render('a-components', {
         title: 'Components'
     })
 }
@@ -34,7 +34,7 @@ module.exports.error500 = (req, res) => {
     })
 }
 module.exports.forgotPassword = (req, res) => {
-    return res.render('forgot-password', {
+    return res.render('a-forgot-password', {
         title: 'Forgot Password'
     })
 }
@@ -64,7 +64,7 @@ module.exports.formVertical = (req, res) => {
     })
 }
 module.exports.index = (req, res) => {
-    return res.render('index', {
+    return res.render('a-index', {
         title: 'Index List'
     })
 }
@@ -89,7 +89,7 @@ module.exports.lockScreen = (req, res) => {
     })
 }
 module.exports.login = (req, res) => {
-    return res.render('login', {
+    return res.render('a-login', {
         title: 'Login '
     })
 }
@@ -104,12 +104,12 @@ module.exports.profile = (req, res) => {
     })
 }
 module.exports.register = (req, res) => {
-    return res.render('register', {
+    return res.render('a-register', {
         title: 'Register'
     })
 }
 module.exports.reviews = (req, res) => {
-    return res.render('reviews', {
+    return res.render('a-reviews', {
         title: 'Reviews'
     })
 }
