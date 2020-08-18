@@ -1,5 +1,5 @@
 module.exports.appointmentList = (req, res) => {
-    return res.render('appointment-list', {
+    return res.render('a-appointment-list', {
         title: 'Appointment List'
     })
 }
@@ -14,22 +14,22 @@ module.exports.componentsList = (req, res) => {
     })
 }
 module.exports.dataTables = (req, res) => {
-    return res.render('data-tables', {
+    return res.render('a-data-tables', {
         title: 'Data Tables'
     })
 }
 module.exports.doctorList = (req, res) => {
-    return res.render('doctor-list', {
+    return res.render('a-doctor-list', {
         title: 'Doctor List'
     })
 }
 module.exports.error404 = (req, res) => {
-    return res.render('error-404', {
+    return res.render('a-error-404', {
         title: 'Error 404'
     })
 }
 module.exports.error500 = (req, res) => {
-    return res.render('error-500', {
+    return res.render('a-error-500', {
         title: 'Error 500'
     })
 }
@@ -39,27 +39,27 @@ module.exports.forgotPassword = (req, res) => {
     })
 }
 module.exports.formBasicInputs = (req, res) => {
-    return res.render('form-basic-inputs', {
+    return res.render('a-form-basic-inputs', {
         title: 'Form Basic Inputs'
     })
 }
 module.exports.formHorizontal = (req, res) => {
-    return res.render('form-horizontal', {
+    return res.render('a-form-horizontal', {
         title: 'Form horizontal'
     })
 }
 module.exports.formInputGroups = (req, res) => {
-    return res.render('form-input-groups', {
+    return res.render('a-form-input-groups', {
         title: 'Form Input Group'
     })
 }
 module.exports.formMask = (req, res) => {
-    return res.render('form-mask', {
+    return res.render('a-form-mask', {
         title: 'Form Mask'
     })
 }
 module.exports.formVertical = (req, res) => {
-    return res.render('form-vertical', {
+    return res.render('a-form-vertical', {
         title: 'Form Vertical'
     })
 }
@@ -69,22 +69,22 @@ module.exports.index = (req, res) => {
     })
 }
 module.exports.formValidation = (req, res) => {
-    return res.render('form-validation', {
+    return res.render('a-form-validation', {
         title: 'Form Validation'
     })
 }
 module.exports.invoice = (req, res) => {
-    return res.render('invoice', {
+    return res.render('a-invoice', {
         title: 'Invoice List'
     })
 }
 module.exports.invoiceReport = (req, res) => {
-    return res.render('invoice-report', {
+    return res.render('a-invoice-report', {
         title: 'Invoice Report'
     })
 }
 module.exports.lockScreen = (req, res) => {
-    return res.render('lock-screen', {
+    return res.render('a-lock-screen', {
         title: 'lock Screen'
     })
 }
@@ -94,12 +94,12 @@ module.exports.login = (req, res) => {
     })
 }
 module.exports.patientList = (req, res) => {
-    return res.render('patient-list', {
+    return res.render('a-patient-list', {
         title: 'Patient List'
     })
 }
 module.exports.profile = (req, res) => {
-    return res.render('profile', {
+    return res.render('a-profile', {
         title: 'Profile'
     })
 }
@@ -114,22 +114,22 @@ module.exports.reviews = (req, res) => {
     })
 }
 module.exports.settings = (req, res) => {
-    return res.render('settings', {
+    return res.render('a-settings', {
         title: 'Setting'
     })
 }
 module.exports.tablesBasic = (req, res) => {
-    return res.render('tables-basic', {
+    return res.render('a-tables-basic', {
         title: 'tablesBasic'
     })
 }
 module.exports.specialities = (req, res) => {
-    return res.render('specialities', {
+    return res.render('a-specialities', {
         title: 'Specialities List'
     })
 }
 module.exports.transactionsList = (req, res) => {
-    return res.render('transactions-list', {
+    return res.render('a-transactions-list', {
         title: 'Transactions List'
     })
 }
