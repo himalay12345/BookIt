@@ -1717,6 +1717,16 @@ button.bg-danger:hover {
     top: 12px;
     font-size: 13px;
 }
+
+.main-nav > li .asubmenu > li.ahas-submenu > a::after {
+    content: "\f054";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 5px;
+    top: 12px;
+    font-size: 13px;
+}
 .main-nav > li .submenu li {
     position: relative;
 }
@@ -5791,12 +5801,46 @@ html.menu-opened body {
 		visibility: hidden;
 		z-index: 1000;
 	}
+	.amain-nav li > ul {
+		background-color: #fff;
+		border-radius: 5px;
+		box-shadow: 0 0 3px  rgba(0, 0, 0, 0.1);
+		display: block;
+		font-size: 14px;
+		left: -123px;
+		margin: 0;
+		min-width: 200px;
+		opacity: 0;
+		padding: 0;
+		position: absolute;
+		-webkit-transition: all .2s ease;
+		transition: all .2s ease;
+		-webkit-transform: translateY(20px);
+		-ms-transform: translateY(20px);
+		transform: translateY(20px);
+		top: 100%;
+		visibility: hidden;
+		z-index: 1000;
+	}
 	.main-nav li .submenu::before {
 		border: 7px solid #fff;
 		border-color: transparent transparent #fff #fff;
 		box-shadow: -2px 2px 2px -1px rgba(0, 0, 0, 0.1);
 		content: "";
 		left: 45px;
+		position: absolute;
+		top: 2px;
+		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
+		-webkit-transform: rotate(135deg);
+		transform: rotate(135deg);
+	}
+	.main-nav li .asubmenu::before {
+		border: 7px solid #fff;
+		border-color: transparent transparent #fff #fff;
+		box-shadow: -2px 2px 2px -1px rgba(0, 0, 0, 0.1);
+		content: "";
+		left: 160px;
 		position: absolute;
 		top: 2px;
 		-webkit-transform-origin: 0 0;

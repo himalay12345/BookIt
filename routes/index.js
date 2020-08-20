@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.use('/admin',require('./admin'));
+router.use('/user',require('./user'));
 const homeController = require('../controllers/index');
 
 router.get('/',homeController.home);
@@ -26,7 +27,7 @@ router.get('/edit-billing',homeController.editBilling);
 router.get('/edit-prescription',homeController.editPrescription);
 router.get('/favourites',homeController.favourites);
 router.get('/forgot-password',homeController.forgotPassword);
-router.get('/home2',homeController.home2);
+router.get('/index-2',homeController.home2);
 router.get('/invoice-view',homeController.invoiceView);
 router.get('/invoices',homeController.invoices);
 router.get('/login',homeController.login);
@@ -43,6 +44,9 @@ router.get('/social-media',homeController.socialMedia);
 router.get('/term-condition',homeController.termCondition);
 router.get('/video-call',homeController.videoCall);
 router.get('/voice-call',homeController.voiceCall);
+router.post('/verify',homeController.verify);
+router.post('/signup',homeController.signUp);
+
 
 
 

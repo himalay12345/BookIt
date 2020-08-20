@@ -8,22 +8,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		
 		<!-- Favicons -->
-		<link href="/img/favicon.png" rel="icon">
+		<link href="img/favicon.png" rel="icon">
 		
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		
 		<!-- Fontawesome CSS -->
-		<link rel="stylesheet" href="/plugins/fontawesome//css/fontawesome.min.css">
-		<link rel="stylesheet" href="/plugins/fontawesome//css/all.min.css">
+		<link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
 		
 		<!-- Main CSS -->
-		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="css/style.css">
 		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
-			<script src="/js/html5shiv.min.js"></script>
-			<script src="/js/respond.min.js"></script>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
 		<![endif]-->
 	
 	</head>
@@ -44,13 +44,13 @@
 							</span>
 						</a>
 						<a href="/index-2" class="navbar-brand logo">
-							</img src="/img/logo.png" class="/img-fluid" alt="Logo">
+							<img src="img/logo.png" class="img-fluid" alt="Logo">
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="/index-2" class="menu-logo">
-								</img src="/img/logo.png" class="/img-fluid" alt="Logo">
+								<img src="img/logo.png" class="img-fluid" alt="Logo">
 							</a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
@@ -121,7 +121,7 @@
 					</div>		 
 					<ul class="nav header-navbar-rht">
 						<li class="nav-item contact-item">
-							<div class="header-contact-/img">
+							<div class="header-contact-img">
 								<i class="far fa-hospital"></i>							
 							</div>
 							<div class="header-contact-detail">
@@ -148,7 +148,7 @@
 							<div class="account-content">
 								<div class="row align-items-center justify-content-center">
 									<div class="col-md-7 col-lg-6 login-left">
-										</img src="/img/login-banner.png" class="/img-fluid" alt="Doccure Register">	
+										<img src="img/login-banner.png" class="img-fluid" alt="Doccure Register">	
 									</div>
 									<div class="col-md-12 col-lg-6 login-right">
 										<div class="login-header">
@@ -156,30 +156,35 @@
 										</div>
 										
 										<!-- Register Form -->
-										<form action="/user/create" method="POST">
-											<div class="form-group form-focus">
-												<input type="text" name="name" class="form-control floating">
+										<form action="/verify" method="POST">
+											<!-- <div class="form-group form-focus">
+												<input type="text" class="form-control floating">
 												<label class="focus-label">Name</label>
-											</div>
-											<div class="form-group form-focus" style="display: inline-flex;">
-												<!-- <select name="countryCode" id="" style="width:50%;padding:9px; background-color: white;border-color:lightgrey;border-radius: 5px;color: rgb(194, 190, 190); outline: none;">
-													<option data-countryCode="GB" value="44" Selected>IND(+91)</option>
-													<optgroup label="Other">
-														<option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-													</optgroup>
-												</select> -->
-												<input type="text" id="mobile" name="phone" value="<%=phone%>"class="form-control floating" >
+											</div> -->
+											<div class="form-group form-focus">
+												<input type="text" name="phone" class="form-control floating">
 												<label class="focus-label">Mobile Number</label>
 											</div>
-											<div class="form-group form-focus">
-												<input type="password" id="password" name="password" class="form-control floating">
+											<!-- <div class="form-group form-focus">
+												<input type="password" class="form-control floating">
 												<label class="focus-label">Create Password</label>
-											</div>
+											</div> -->
 											<div class="text-right">
 												<a class="forgot-link" href="login">Already have an account?</a>
 											</div>
-											<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
-											
+											<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
+											<div class="login-or">
+												<span class="or-line"></span>
+												<span class="span-or">or</span>
+											</div>
+											<div class="row form-row social-login">
+												<div class="col-6">
+													<a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
+												</div>
+												<div class="col-6">
+													<a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
+												</div>
+											</div>
 										</form>
 										<!-- /Register Form -->
 										
@@ -208,7 +213,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-										</img src="/img/footer-logo.png" alt="logo">
+										<img src="img/footer-logo.png" alt="logo">
 									</div>
 									<div class="footer-about-content">
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -339,14 +344,14 @@
 		<!-- /Main Wrapper -->
 	  
 		<!-- jQuery -->
-		<script src="/js/jquery.min.js"></script>
+		<script src="js/jquery.min.js"></script>
 		
 		<!-- Bootstrap Core JS -->
-		<script src="/js/popper.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
+		<script src="js/popper.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
 		
 		<!-- Custom JS -->
-		<script src="/js/script.js"></script>
+		<script src="js/script.js"></script>
 		
 	</body>
 
