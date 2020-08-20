@@ -1,3 +1,5 @@
+const config = require('../config/twilio');
+const client = require('twilio')(config.accountSID, config.authToken);
 
 module.exports.home = (req, res)=>{
     return res.render('index',{
@@ -130,7 +132,7 @@ module.exports.forgotPassword = (req, res)=>{
 }
 
 module.exports.home2 = (req, res)=>{
-    return res.render('index-2',{
+    return res.render('index',{
         title:'Home'
     })
 }
@@ -148,6 +150,9 @@ module.exports.invoices = (req, res)=>{
 }
 
 module.exports.login = (req, res)=>{
+    if(req.isAuthenticated()){
+        return res.redirect('/')
+    }
     return res.render('login',{
         title:'Login'
     })
@@ -184,9 +189,46 @@ module.exports.profileSettings = (req, res)=>{
 }
 
 module.exports.register = (req, res)=>{
-    return res.render('register',{
+    if(req.isAuthenticated()){
+        return res.redirect('/')
+    }
+    return res.render('phone-login',{
         title:'Register'
     })
+}
+
+module.exports.signUp =async (req, res)=>{
+
+    let data = await client
+    .verify
+    .services(config.serviceID)
+    .verificationChecks
+    .create({
+        to:`+91${req.body.phone}`,
+        code:req.body.otp
+    });
+
+    console.log(data);
+
+
+    if(data.status == 'approved')
+    {
+        return res.render('register',{
+            title:'Register',
+            phone:req.body.phone
+        });
+    
+    }
+
+    else{
+        return res.render('phone-verify',{
+            title:'Phone verification',
+            phone:req.body.phone
+        })
+       
+    }
+
+    
 }
 
 module.exports.reviews = (req, res)=>{
@@ -228,5 +270,22 @@ module.exports.videoCall = (req, res)=>{
 module.exports.voiceCall = (req, res)=>{
     return res.render('voice-call',{
         title:'Voice Call'
+    })
+}
+
+module.exports.verify = (req, res)=>{
+
+    client
+    .verify
+    .services(config.serviceID)
+    .verifications
+    .create({
+        to:`+91${req.body.phone}`,
+        channel:'sms'
+    });
+
+    return res.render('phone-verify',{
+        title:'Phone verification',
+        phone:req.body.phone
     })
 }

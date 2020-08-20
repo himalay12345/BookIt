@@ -16,6 +16,9 @@ Version      : 1.0
 			  additionalMarginTop: 30
 			});
 		}
+		$('.hideme').css('display', 'none');
+		$('.hideinphone').css('display', 'block');
+
 	}
 	
 // Sidebar

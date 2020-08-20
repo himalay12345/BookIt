@@ -42,6 +42,8 @@
                     <a id="mobile_btn" href="javascript:void(0);">
                         <span class="bar-icon">
 								<span></span>
+								<span></span>
+								<span></span>
 							</span>
 						</a>
 						<a href="/index-2" class="navbar-brand logo">
@@ -76,7 +78,7 @@
 									<li><a href="/doctor-register">Doctor Register</a></li>
 								</ul>
 							</li>	
-							<li class="has-submenu">
+							<!-- <li class="has-submenu">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
 									<li><a href="/search">Search Doctor</a></li>
@@ -90,7 +92,7 @@
 									<li><a href="/profile-settings">Profile Settings</a></li>
 									<li><a href="/change-password">Change Password</a></li>
 								</ul>
-							</li>	
+							</li>	 -->
 							<li class="has-submenu">
 								<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
@@ -115,9 +117,36 @@
 							<li>
 								<a href="/admin/index" target="_blank">Admin</a>
 							</li>
-							<li class="login-link">
-								<a href="/login">Login / Signup</a>
-							</li>
+								<%if(locals.user){%>
+									<li class="has-submenu hideme">
+										<a href="#">
+											<span class="user-img">
+												<img class="rounded-circle" src="img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+											</span>
+											<span style="margin-left: 8px;">
+												<%=locals.user.name%>
+											</span>
+											<i class="fas fa-chevron-down"></i>
+										</a>
+										
+										<ul class="submenu">
+											<li><a href="/search">Search Doctor</a></li>
+											<li><a href="/booking">Booking</a></li>
+											<li><a href="/checkout">Checkout</a></li>
+											<li><a href="/booking-success">Booking Success</a></li>
+											<li><a href="/patient-dashboard">My Dashboard</a></li>
+											<li><a href="/favourites">My Favourites</a></li>
+											<li><a href="/chat">Messages</a></li>
+											<li><a href="/profile-settings">Profile Settings</a></li>
+											<li><a href="/change-password">Change Password</a></li>
+											<li><a href="/user/logout">Logout</a></li>
+										</ul>
+									</li>
+								<%}else{%>
+									<li class="login-link">
+										<a href="/login">Login / Signup</a>
+									</li>								
+								<%}%>
 						</ul>		 
 					</div>		 
 					<ul class="nav header-navbar-rht">
@@ -130,10 +159,42 @@
 								<p class="contact-info-header"> +1 315 369 5943</p>
 							</div>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link header-login" href="/login">login / Signup </a>
-						</li>
+						<%if(locals.user){%>
+							
+								
+							<%}else{%>
+								<li class="nav-item">
+									<a class="nav-link header-login" href="/login">login / Signup </a>
+								</li>	
+							<%}%>
 					</ul>
+					<%if(locals.user){%>
+					<div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+						<ul class="main-nav amain-nav">
+							<li class="has-submenu ahas-submenu">
+								<a href="#">
+									<span class="user-img">
+										<img class="rounded-circle" src="img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+									</span>
+									<i class="fas fa-chevron-down"></i>
+								</a>
+								
+								<ul class="submenu asubmenu">
+									<li><a href="/search">Search Doctor</a></li>
+									<li><a href="/booking">Booking</a></li>
+									<li><a href="/checkout">Checkout</a></li>
+									<li><a href="/booking-success">Booking Success</a></li>
+									<li><a href="/patient-dashboard">My Dashboard</a></li>
+									<li><a href="/favourites">My Favourites</a></li>
+									<li><a href="/chat">Messages</a></li>
+									<li><a href="/profile-settings">Profile Settings</a></li>
+									<li><a href="/change-password">Change Password</a></li>
+									<li><a href="/user/logout">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<%}%>
 				</nav>
 			</header>
 			<!-- /Header -->
@@ -173,10 +234,11 @@
 				<div class="container-fluid">
 					<div class="section-header text-center">
 						<h2>Clinic and Specialities</h2>
-						<p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						<p class="sub-title">
+							Start your care now by choosing from our top specialities</p>
 					</div>
 					<div class="row justify-content-center">
-						<div class="col-md-9">
+						<div class="col-md-10">
 							<!-- Slider -->
 							<div class="specialities-slider slider">
 								<a href="/doctor-profile"><div class="speicality-item text-center">
@@ -287,11 +349,10 @@
 						<div class="col-lg-4">
 							<div class="section-header ">
 								<h2>Book Our Doctor</h2>
-								<p>Lorem Ipsum is simply dummy text </p>
+								<p>Find experienced doctors across all specialties</p>
 							</div>
 							<div class="about-content">
-								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
-								<p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes</p>					
+								<p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is now a critical tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
 								<a href="javascript:;">Read More..</a>
 							</div>
 						</div>
@@ -698,8 +759,8 @@
 						</div>
 						<div class="col-md-7">
 							<div class="section-header">	
-								<h2 class="mt-2">Availabe Features in Our Clinic</h2>
-								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+								<h2 class="mt-2">Availabe Features in Doccure</h2>
+								<p>Doccure is a new era online platform which gives you ease from booking an appointment to tracking it. </p>
 							</div>	
 							<div class="features-slider slider">
 								<!-- Slider Item -->
