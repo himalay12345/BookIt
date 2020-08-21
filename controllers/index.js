@@ -181,6 +181,11 @@ module.exports.patientProfile = (req, res) => {
         title: 'Patient Profile'
     })
 }
+module.exports.docRegister = (req, res) => {
+    return res.render('doc-register', {
+        title: 'Doctor Register'
+    })
+}
 
 module.exports.privacyPolicy = (req, res) => {
     return res.render('privacy-policy', {
