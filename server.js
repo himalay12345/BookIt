@@ -7,12 +7,14 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportGoogle = require('./config/google_passport_auth2');
+const passportFacebook = require('./config/passport-facebook-oauth-strategy');
 const MongoStore = require('connect-mongo')(session);
 // const twilio = require('./config/twilio');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static('./assets'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 

@@ -1,22 +1,61 @@
 const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+const AVATAR_PATH = path.join('/uploads/patient/avatars');
 
 const patientSchema = mongoose.Schema({
-    name:{
-        type:String
+    name: {
+        type: String
     },
-    phone:{
-        type:Number
+    dob: {
+        type: String
     },
-    email:{
-        type:String
+    bloodgroup: {
+        type: String
     },
-    password:{
-        type:String
+    address: {
+        type: String
     },
-    fbid:{
-        type:String
+    city: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    pincode: {
+        type: Number
+    },
+    country: {
+        type: String
+    },
+    avatar: {
+        type: String
+    },
+    phone: {
+        type: Number
+    },
+    email: {
+        type: String
+    },
+    password: {
+        type: String
+    },
+    fbid: {
+        type: String
     }
-},{timestamps:true});
+}, { timestamps: true });
+let storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, '..', AVATAR_PATH));
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now());
+    }
+});
 
-const Patient = mongoose.model('Patient',patientSchema);
+//static function
+patientSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
+patientSchema.statics.avatarPath = AVATAR_PATH;
+
+const Patient = mongoose.model('Patient', patientSchema);
 module.exports = Patient;

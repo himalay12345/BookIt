@@ -1,4 +1,5 @@
 const config = require('../config/twilio');
+const Patient = require("../models/patient");
 const client = require('twilio')(config.accountSID, config.authToken);
 
 module.exports.home = (req, res) => {
@@ -15,6 +16,11 @@ module.exports.addBilling = (req, res) => {
 module.exports.addPrescription = (req, res) => {
     return res.render('add-prescription', {
         title: 'Add Prescription'
+    })
+}
+module.exports.Specialist = (req, res) => {
+    return res.render('specialist', {
+        title: 'Specialist Doctor'
     })
 }
 
@@ -182,9 +188,11 @@ module.exports.privacyPolicy = (req, res) => {
     })
 }
 
-module.exports.profileSettings = (req, res) => {
+module.exports.profileSettings = async(req, res) => {
+    let patient = await Patient.findById(req.user.id)
     return res.render('profile-settings', {
-        title: 'Profile Settings'
+        title: 'Profile Settings',
+        patient: patient
     })
 }
 
