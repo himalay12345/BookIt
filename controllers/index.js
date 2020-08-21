@@ -54,15 +54,19 @@ module.exports.calendar = (req, res) => {
     })
 }
 
-module.exports.changePassword = (req, res) => {
+module.exports.changePassword = async (req, res) => {
+    let patient = await Patient.findById(req.user.id)
     return res.render('change-password', {
-        title: 'Change Password'
+        title: 'Change Password',
+        patient:patient
     })
 }
 
-module.exports.chat = (req, res) => {
+module.exports.chat = async (req, res) => {
+    let patient = await Patient.findById(req.user.id)
     return res.render('chat', {
-        title: 'Chat'
+        title: 'Chat',
+        patient:patient
     })
 }
 
@@ -125,9 +129,11 @@ module.exports.editPrescription = (req, res) => {
     })
 }
 
-module.exports.favourites = (req, res) => {
+module.exports.favourites = async (req, res) => {
+    let patient = await Patient.findById(req.user.id)
     return res.render('favourites', {
-        title: 'Favourites'
+        title: 'Favourites',
+        patient:patient
     })
 }
 
@@ -170,9 +176,11 @@ module.exports.myPatients = (req, res) => {
     })
 }
 
-module.exports.patientDashboard = (req, res) => {
+module.exports.patientDashboard = async (req, res) => {
+    let patient = await Patient.findById(req.user.id)
     return res.render('patient-dashboard', {
-        title: 'Patient Dashboard'
+        title: 'Patient Dashboard',
+        patient: patient
     })
 }
 
@@ -278,8 +286,16 @@ module.exports.voiceCall = (req, res) => {
     })
 }
 
-module.exports.verify = (req, res) => {
+module.exports.verify = async (req, res) => {
 
+    let patient = Patient.findOne({phone:req.body.phone});
+    if(patient)
+    {
+        req.flash('error','Account already linked with this mobile number');
+        return res.redirect('back');
+    }
+    
+else{
     client
         .verify
         .services(config.serviceID)
@@ -287,11 +303,14 @@ module.exports.verify = (req, res) => {
         .create({
             to: `+91${req.body.phone}`,
             channel: 'sms'
+        }).then((data) => {
+           
+            return res.render('phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone
+            });
         });
 
+    }
 
-    return res.render('phone-verify', {
-        title: 'Phone verification',
-        phone: req.body.phone
-    })
 }

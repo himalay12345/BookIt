@@ -9,6 +9,8 @@ const passportLocal = require('./config/passport-local-strategy');
 const passportGoogle = require('./config/google_passport_auth2');
 const passportFacebook = require('./config/passport-facebook-oauth-strategy');
 const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
+const customMiddleware = require('./config/noty');
 // const twilio = require('./config/twilio');
 
 app.use(express.urlencoded());
@@ -48,6 +50,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(customMiddleware.setFlash);
 app.use('/', require('./routes/index'));
 
 app.listen(port, function(err) {

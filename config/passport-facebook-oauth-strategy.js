@@ -1,18 +1,18 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const crypto = require('crypto');
-const User = require('../models/patient');
+const Patient = require('../models/patient');
 
 
 passport.use(new FacebookStrategy({
-        clientID: '307867103814688',
-        clientSecret: '732c295e4ae72f2638770811193af75f',
+        clientID: '247163950066857',
+        clientSecret: 'c522c88a2060f9d8861cf47228f1964d',
         callbackURL: "http://localhost:4000/user/auth/facebook/callback",
         profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
     },
     function(accessToken, refreshToken, profile, done) {
         // console.log(profile);
-        User.findOne({ fbid: profile.id }).exec(function(err, user) {
+        Patient.findOne({ fbid: profile.id }).exec(function(err, patient) {
             if (err) {
                 console.log('Error in facebook passport strategy', err);
                 return;
@@ -20,21 +20,24 @@ passport.use(new FacebookStrategy({
 
             console.log(profile);
 
-            if (user) {
-                return done(null, user);
-            } else {
-                User.create({
+            if (patient) {
+                return done(null, patient);
+            } 
+            else {
+                Patient.create({
+                        fbid: profile.id,
                         name: profile.displayName,
+                        email:profile.emails[0].value,
                         password: crypto.randomBytes(20).toString('hex'),
                         avatar: profile.photos[0].value
-                    }),
-                    function(err, user) {
+                    },
+                    function(err, new_patient) {
                         if (err) {
                             console.log('Error in creating facebook passport strategy', err);
                             return;
                         }
-                        return done(null, user);
-                    }
+                        return done(null, new_patient);
+                    });
             }
         });
     }

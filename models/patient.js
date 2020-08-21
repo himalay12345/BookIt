@@ -25,6 +25,9 @@ const patientSchema = mongoose.Schema({
     pincode: {
         type: Number
     },
+    service:{
+        type:String
+    },
     country: {
         type: String
     },

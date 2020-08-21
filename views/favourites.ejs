@@ -75,21 +75,7 @@
 									<li><a href="/doctor-register">Doctor Register</a></li>
 								</ul>
 							</li>	
-							<li class="has-submenu active">
-								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
-								<ul class="submenu">
-									<li><a href="/search">Search Doctor</a></li>
-									<li><a href="/doctor-profile">Doctor Profile</a></li>
-									<li><a href="/booking">Booking</a></li>
-									<li><a href="/checkout">Checkout</a></li>
-									<li><a href="/booking-success">Booking Success</a></li>
-									<li><a href="/patient-dashboard">Patient Dashboard</a></li>
-									<li class="active"><a href="/favourites">Favourites</a></li>
-									<li><a href="/chat">Chat</a></li>
-									<li><a href="/profile-settings">Profile Settings</a></li>
-									<li><a href="/change-password">Change Password</a></li>
-								</ul>
-							</li>	
+							
 							<li class="has-submenu">
 								<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
@@ -130,31 +116,34 @@
 							</div>
 						</li>
 						
-						<!-- User Menu -->
-						<li class="nav-item dropdown has-arrow logged-item">
-							<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-								<span class="user-img">
-									<img class="rounded-circle" src="img/patients/patient.jpg" width="31" alt="Ryan Taylor">
-								</span>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right">
-								<div class="user-header">
-									<div class="avatar avatar-sm">
-										<img src="img/patients/patient.jpg" alt="User Image" class="avatar-img rounded-circle">
-									</div>
-									<div class="user-text">
-										<h6>Richard Wilson</h6>
-										<p class="text-muted mb-0">Patient</p>
-									</div>
-								</div>
-								<a class="dropdown-item" href="/patient-dashboard">Dashboard</a>
-								<a class="dropdown-item" href="/profile-settings">Profile Settings</a>
-								<a class="dropdown-item" href="/login">Logout</a>
-							</div>
-						</li>
-						<!-- /User Menu -->
+						
 						
 					</ul>
+					<div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+						<ul class="main-nav amain-nav">
+							<li class="has-submenu ahas-submenu">
+								<a href="#">
+									<span class="user-img">
+										<img class="rounded-circle" src="<%=patient.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+									</span>
+									<i class="fas fa-chevron-down"></i>
+								</a>
+	
+								<ul class="submenu asubmenu">
+									<li><a href="/search">Search Doctor</a></li>
+									<li><a href="/booking">Booking</a></li>
+									<li><a href="/checkout">Checkout</a></li>
+									<li><a href="/booking-success">Booking Success</a></li>
+									<li><a href="/patient-dashboard">My Dashboard</a></li>
+									<li><a href="/favourites">My Favourites</a></li>
+									<li><a href="/chat">Messages</a></li>
+									<li><a href="/profile-settings">Profile Settings</a></li>
+									<li><a href="/change-password">Change Password</a></li>
+									<li><a href="/user/logout">Logout</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</nav>
 			</header>
 			<!-- /Header -->
@@ -186,13 +175,38 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="img/patients/patient.jpg" alt="User Image">
+											<img src="<%=patient.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
 										</a>
 										<div class="profile-det-info">
-											<h3>Richard Wilson</h3>
+											<h3>
+												<%=patient.name%>
+											</h3>
+										   
 											<div class="patient-details">
-												<h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
+												<%if(patient.dob){var newDateObject = new Date();
+	
+													var newObjectCurrentYear = newDateObject.getFullYear();
+													
+													var userDateObject = patient.dob;
+													
+													var userDateObjectPieces = userDateObject.split("/");
+													
+													var userObjectYear = userDateObjectPieces[2];
+													
+													var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
+	
+													%>
+												<h5><i class="fas fa-birthday-cake"></i>
+													<%=patient.dob%> , <%=age%> Years
+	
+												</h5>
+												<%}%>
+												<%if(patient.city){%>
+												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i>
+													<%=patient.city%> 
+														<%=patient.state%>
+												</h5>
+												<%}%>
 											</div>
 										</div>
 									</div>
@@ -232,7 +246,7 @@
 												</a>
 											</li>
 											<li>
-												<a href="/index-2">
+												<a href="/user/logout">
 													<i class="fas fa-sign-out-alt"></i>
 													<span>Logout</span>
 												</a>

@@ -7,7 +7,8 @@ module.exports.create = async(req, res) => {
     let patient = await Patient.create({
         name: req.body.name,
         phone: req.body.phone,
-        password: req.body.password
+        password: req.body.password,
+        service:'phone'
     });
 
     console.log(patient);

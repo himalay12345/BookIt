@@ -3,8 +3,9 @@ const localStrategy = require('passport-local').Strategy;
 const Patient = require('../models/patient');
 
 passport.use(new localStrategy({
-    usernameField:'phone'
-},function(phone,password,done){
+    usernameField:'phone',
+    passReqToCallback:true
+},function(req,phone,password,done){
     Patient.findOne({phone:phone},function(err,user)
     {
         if(err)
@@ -16,6 +17,7 @@ passport.use(new localStrategy({
         if(!user || user.password!=password)
         {
             console.log('Invalid username or password');
+            req.flash('error','Invalid Username/Password');
             return done(null,false);
         }
        
