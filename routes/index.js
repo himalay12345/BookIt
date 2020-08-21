@@ -47,6 +47,7 @@ router.get('/voice-call', homeController.voiceCall);
 router.post('/verify', homeController.verify);
 router.post('/signup', homeController.signUp);
 router.get('/specialist', homeController.Specialist);
+router.get('/doc-register', homeController.docRegister);
 
 
 
