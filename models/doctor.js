@@ -64,29 +64,50 @@ const doctorSchema = mongoose.Schema({
     degree: {
         type: String
     },
-    institutionname: {
-        type: String
-    },
-    from: {
-        type: Number
-    },
-    to: {
-        type: Number
-    },
-    designation: {
-        type: String
-
-    },
     awards: {
-        type: String
+        year: {
+            type: Number
+        },
+        award: {
+            type: String
+        }
 
     },
-    year: {
-        type: Number
+    registrations: {
+        registartion: {
+            type: Number
+        },
+        year: {
+            type: String
+        }
+
     },
-    specialisation: {
+    department: {
+        type: String
+    },
+    services: [{
         type: String
 
+    }],
+
+    specialisation: [{
+        type: String
+
+    }],
+    experience: {
+        institutionname: {
+            type: String
+        },
+        from: {
+            type: Number
+        },
+        to: {
+            type: Number
+        },
+        designation: {
+            type: String
+
+        }
     }
 
 }, { timestamps: true });

@@ -121,3 +121,50 @@ module.exports.profileUpdate = async function(req, res) {
     }
 
 }
+module.exports.doctorProfileUpdate = async function(req, res) {
+
+    try {
+
+
+        let doctor = await Doctor.findById(req.user.id);
+        Doctor.uploadedAvatar(req, res, function(err) {
+            if (err) { console.log('*******Multer Error', err); return; }
+            // patient.name = req.body.name;
+            // patient.dob = req.body.dob;
+            // patient.phone = req.body.phone;
+            // patient.email = req.body.email;
+            // patient.address = req.body.address;
+            // patient.city = req.body.city;
+            // patient.state = req.body.state;
+            // patient.pincode = req.body.pincode;
+            // patient.country = req.body.country;
+            // patient.bloodgroup = req.body.bloodgroup;
+            // patient.gender = req.body.gender;
+
+
+
+            // if (req.file) {
+            //     if (!patient.avatar) {
+            //         patient.avatar = Patient.avatarPath + '/' + req.file.filename;
+            //     } else {
+
+            //         fs.unlinkSync(path.join(__dirname, '..', patient.avatar));
+            //         patient.avatar = Patient.avatarPath + '/' + req.file.filename;
+            //     }
+            // }
+
+            // patient.save();
+            console.log(req.body);
+
+
+        });
+        req.flash('success', 'Profile updated!');
+        return res.redirect('back');
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}

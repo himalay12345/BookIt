@@ -134,7 +134,7 @@
                         <li class="has-submenu ahas-submenu">
                             <a href="#">
                                 <span class="user-img">
-                                    <img class="rounded-circle" src="<%=locals.user.avatar%>" onerrorthis.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                                    <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
                                 </span>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
@@ -187,7 +187,7 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerrorthis.src="/img/profile.png">
+                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
@@ -283,7 +283,7 @@
                                             <div class="form-group">
                                                 <div class="change-avatar">
                                                     <div class="profile-img">
-                                                        <img src="<%=locals.user.avatar%>" ,onerrorthis.src="/img/profile.png" alt="User Image">
+                                                        <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/profile.png"'>
                                                     </div>
                                                     <div class="upload-img">
                                                         <div class="change-photo-btn">
@@ -305,11 +305,11 @@
                                             <div class="form-group">
                                                 <label>Gender</label>
                                                 <select name="gender" class="form-control select">
-                                                    <%if(locals.user.gender == 'Male'){%><option selected>Male</option><%}else{%>
+                                                    <%if(locals.user.gender == 'Male '){%><option selected>Male</option><%}else{%>
                                                     <option>Male</option><%}%>
-                                                    <%if(locals.user.gender == 'Female'){%><option selected>Female</option><%}else{%>
+                                                    <%if(locals.user.gender == 'Female '){%><option selected>Female</option><%}else{%>
                                                     <option>Female</option><%}%>
-                                                    <%if(locals.user.gender == 'Others'){%><option selected>Others</option><%}else{%>
+                                                    <%if(locals.user.gender == 'Others '){%><option selected>Others</option><%}else{%>
                                                     <option>Others</option><%}%>
 													</select>
                                             </div>
@@ -327,21 +327,21 @@
                                             <div class="form-group">
                                                 <label>Blood Group</label>
                                                 <select name="bloodgroup" class="form-control select">
-                                                        <%if(locals.user.bloodgroup == 'A-'){%><option selected>A-</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'A- '){%><option selected>A-</option><%}else{%>
                                                         <option>A-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'A+'){%><option selected>A+</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'A+ '){%><option selected>A+</option><%}else{%>
                                                         <option>A+</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'B-'){%><option selected>B-</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'B- '){%><option selected>B-</option><%}else{%>
                                                         <option>B-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'B-'){%><option selected>B-</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'B- '){%><option selected>B-</option><%}else{%>
                                                         <option>B-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'AB-'){%><option selected>AB-</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'AB- '){%><option selected>AB-</option><%}else{%>
                                                         <option>AB-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'AB+'){%><option selected>AB+</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'AB+ '){%><option selected>AB+</option><%}else{%>
                                                         <option>AB+</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'O-'){%><option selected>O-</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'O- '){%><option selected>O-</option><%}else{%>
                                                         <option>O-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'O+'){%><option selected>O+</option><%}else{%>
+                                                        <%if(locals.user.bloodgroup == 'O+ '){%><option selected>O+</option><%}else{%>
                                                         <option>O+</option><%}%>
 													</select>
                                             </div>
@@ -567,7 +567,7 @@
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({
-            theme: 'metroui',
+            theme: 'metroui ',
             text: '<%=flash.success%>',
             type: 'success',
             layout: 'topRight',
@@ -576,13 +576,13 @@
         <%}%>
         <%if(flash.error && flash.error.length>0){%>
         new Noty({
-            theme: 'metroui',
-            text: '<%=flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
+                    theme: 'metroui',
+                    text: '
+                    <%=flash.error%>
+                    ', type: '
+                    error ', layout: '
+                    topRight ', timeout: 3000 }).show();
+                    <%}%>
     </script>
 
 </body>
