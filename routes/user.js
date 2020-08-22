@@ -14,5 +14,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), userController.createSession);
 router.post('/profile/update', userController.profileUpdate);
+router.post('/reset-password',userController.resetPassword);
+router.post('/change-password',userController.changePassword);
 
 module.exports = router;

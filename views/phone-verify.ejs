@@ -19,7 +19,8 @@
 		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="css/style.css">
-		
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="js/html5shiv.min.js"></script>
@@ -169,6 +170,7 @@
 												<label  for="text" style="margin-left: 5px; font-weight: bold;">OTP</label>
 												<input type="text" name="otp" id="text" style="font-size: 0.9rem;" class="form-control floating" placeholder="Please enter here the 6 digit OTP to verify ">
 												<input type="hidden" name="phone" value="<%=phone%>">
+												<input type="hidden" name="type" value="<%=type%>">
 											</div>
 											<!-- <div class="form-group form-focus">
 												<input type="password" class="form-control floating">
@@ -348,6 +350,26 @@
 		
 		<!-- Custom JS -->
 		<script src="js/script.js"></script>
+		<script>
+			<%if(flash.success && flash.success.length>0){%>
+					new Noty({
+						  theme:'metroui',
+						  text: '<%=flash.success%>',
+						  type:'success',
+						  layout:'topRight',
+						  timeout:3000
+					}).show();
+			<%}%>
+			<%if(flash.error && flash.error.length>0){%>
+					new Noty({
+						  theme:'metroui',
+						  text: '<%=flash.error%>',
+						  type:'error',
+						  layout:'topRight',
+						  timeout:3000
+					}).show();
+			<%}%>
+		</script>
 		
 	</body>
 

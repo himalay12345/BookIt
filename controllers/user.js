@@ -11,7 +11,7 @@ module.exports.create = async(req, res) => {
         service:'phone'
     });
 
-    console.log(patient);
+    req.flash('success','Account created successfully.Please Login!');
     return res.redirect('/login');
 }
 
@@ -24,6 +24,47 @@ module.exports.destroySession = function(req, res) {
     req.logout();
 
     return res.redirect('/');
+}
+
+module.exports.changePassword = async (req, res) => {
+    let patient = await Patient.findOne({phone:req.body.phone});
+    if(req.body.old != patient.password)
+    {
+        req.flash('error','Wrong Old Password!');
+        return res.redirect('back');
+    }
+
+    if(req.body.password != req.body.confirm)
+    {
+        req.flash('error','Passwords do not match!')
+        return res.redirect('back');
+    }
+
+    patient.password = req.body.password;
+    patient.save();
+
+    req.flash('success','Password changed successfully!');
+    return res.redirect('back');
+}
+
+module.exports.resetPassword = async (req, res) => {
+    if(req.body.password != req.body.confirm)
+    {
+        req.flash('error','Passwords do not match!');
+        return res.render('set-password',{
+            title:'Reset-password',
+            phone:req.body.phone
+        })
+    }
+
+    else{
+        let patient = await Patient.findOne({phone:req.body.phone});
+        patient.password = req.body.password;
+        patient.save();
+
+        req.flash('success','Password reset successfully');
+        return res.redirect('/login');
+    }
 }
 module.exports.profileUpdate = async function(req, res) {
 
@@ -40,8 +81,10 @@ module.exports.profileUpdate = async function(req, res) {
             patient.address = req.body.address;
             patient.city = req.body.city;
             patient.state = req.body.state;
+            patient.pincode = req.body.pincode;
             patient.country = req.body.country;
             patient.bloodgroup = req.body.bloodgroup;
+            patient.gender = req.body.gender;
 
 
 
@@ -59,6 +102,7 @@ module.exports.profileUpdate = async function(req, res) {
 
 
         });
+        req.flash('success','Profile updated!');
         return res.redirect('back');
 
 

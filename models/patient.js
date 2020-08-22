@@ -13,6 +13,9 @@ const patientSchema = mongoose.Schema({
     bloodgroup: {
         type: String
     },
+    gender:{
+        type:String
+    },
     address: {
         type: String
     },

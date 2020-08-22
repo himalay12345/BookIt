@@ -66,8 +66,8 @@
 									<li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
 									<li><a href="/appointments">Appointments</a></li>
 									<li><a href="/schedule-timings">Schedule Timing</a></li>
-									<li><a href="/my-patients">Patients List</a></li>
-									<li><a href="/patient-profile">Patients Profile</a></li>
+									<li><a href="/my-patient">Patient List</a></li>
+									<li><a href="/patient-profile">Patient Profile</a></li>
 									<li><a href="/chat-doctor">Chat</a></li>
 									<li><a href="/invoices">Invoices</a></li>
 									<li><a href="/doctor-profile-settings">Profile Settings</a></li>
@@ -124,7 +124,7 @@
 							<li class="has-submenu ahas-submenu">
 								<a href="#">
 									<span class="user-img">
-										<img class="rounded-circle" src="<%=patient.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+										<img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
 									</span>
 									<i class="fas fa-chevron-down"></i>
 								</a>
@@ -134,7 +134,7 @@
 									<li><a href="/booking">Booking</a></li>
 									<li><a href="/checkout">Checkout</a></li>
 									<li><a href="/booking-success">Booking Success</a></li>
-									<li><a href="/patient-dashboard">My Dashboard</a></li>
+									<li><a href="/locals.user-dashboard">My Dashboard</a></li>
 									<li><a href="/favourites">My Favourites</a></li>
 									<li><a href="/chat">Messages</a></li>
 									<li><a href="/profile-settings">Profile Settings</a></li>
@@ -175,19 +175,19 @@
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
 										<a href="#" class="booking-doc-img">
-											<img src="<%=patient.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
+											<img src="<%=locals.user.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
 										</a>
 										<div class="profile-det-info">
 											<h3>
-												<%=patient.name%>
+												<%=locals.user.name%>
 											</h3>
 										   
-											<div class="patient-details">
-												<%if(patient.dob){var newDateObject = new Date();
+											<div class="locals.user-details">
+												<%if(locals.user.dob){var newDateObject = new Date();
 	
 													var newObjectCurrentYear = newDateObject.getFullYear();
 													
-													var userDateObject = patient.dob;
+													var userDateObject = locals.user.dob;
 													
 													var userDateObjectPieces = userDateObject.split("/");
 													
@@ -196,15 +196,15 @@
 													var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
 	
 													%>
-												<h5><i class="fas fa-birthday-cake"></i>
-													<%=patient.dob%> , <%=age%> Years
+												<h5 style="font-size: 0.85rem;"><i class="fas fa-birthday-cake"></i>
+													<%=locals.user.dob%> , <%=age%> Years
 	
 												</h5>
 												<%}%>
-												<%if(patient.city){%>
-												<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i>
-													<%=patient.city%> 
-														<%=patient.state%>
+												<%if(locals.user.city){%>
+												<h5 style="font-size: 0.85rem;" class="mb-0"><i class="fas fa-map-marker-alt"></i>
+													<%=locals.user.city%> 
+														<%=locals.user.state%>
 												</h5>
 												<%}%>
 											</div>
@@ -885,13 +885,13 @@
 							
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-menu">
-									<h2 class="footer-title">For Patients</h2>
+									<h2 class="footer-title">For Patient</h2>
 									<ul>
 										<li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
 										<li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
 										<li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
 										<li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-										<li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+										<li><a href="/locals.user-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
 									</ul>
 								</div>
 								<!-- /Footer Widget -->

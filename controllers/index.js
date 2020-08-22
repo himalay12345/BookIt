@@ -116,6 +116,11 @@ module.exports.doctorRegister = (req, res) => {
         title: 'Register'
     })
 }
+module.exports.docRegister = (req, res) => {
+    return res.render('doc-register', {
+        title: 'Doctor Register'
+    })
+}
 
 module.exports.editBilling = (req, res) => {
     return res.render('edit-billing', {
@@ -189,11 +194,7 @@ module.exports.patientProfile = (req, res) => {
         title: 'Patient Profile'
     })
 }
-module.exports.docRegister = (req, res) => {
-    return res.render('doc-register', {
-        title: 'Doctor Register'
-    })
-}
+
 
 module.exports.privacyPolicy = (req, res) => {
     return res.render('privacy-policy', {
@@ -202,7 +203,7 @@ module.exports.privacyPolicy = (req, res) => {
 }
 
 module.exports.profileSettings = async(req, res) => {
-    let patient = await Patient.findById(req.user.id)
+    let patient = await Patient.findById(req.user.id);
     return res.render('profile-settings', {
         title: 'Profile Settings',
         patient: patient
@@ -220,6 +221,34 @@ module.exports.register = (req, res) => {
 
 module.exports.signUp = async(req, res) => {
 
+    if(req.body.type == 'forgot')
+    {
+        let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+
+
+    if (data.status == 'approved') {
+        return res.render('set-password', {
+            title: 'Reset Pasword',
+            phone:req.body.phone
+        });
+
+    } else {
+        req.flash('error','Wrong Otp');
+        return res.render('phone-verify', {
+            title: 'Phone verification',
+            phone: req.body.phone
+        })
+
+    }
+    }
+
     let data = await client
         .verify
         .services(config.serviceID)
@@ -229,8 +258,6 @@ module.exports.signUp = async(req, res) => {
             code: req.body.otp
         });
 
-    console.log(data);
-
 
     if (data.status == 'approved') {
         return res.render('register', {
@@ -239,6 +266,7 @@ module.exports.signUp = async(req, res) => {
         });
 
     } else {
+        req.flash('error','Wrong Otp');
         return res.render('phone-verify', {
             title: 'Phone verification',
             phone: req.body.phone
@@ -291,16 +319,20 @@ module.exports.voiceCall = (req, res) => {
     })
 }
 
-module.exports.verify = async (req, res) => {
+module.exports.verify = (req, res) => {
 
-    let patient = Patient.findOne({phone:req.body.phone});
-    if(patient)
-    {
-        req.flash('error','Account already linked with this mobile number');
-        return res.redirect('back');
-    }
+    if(req.body.type == undefined){
+    Patient.findOne({phone:req.body.phone},function(err,patient){
+        if(patient)
+        {
+            req.flash('error','Account already linked with this mobile number');
+            return res.redirect('back');
+        }
+    });
+}
+  
     
-else{
+
     client
         .verify
         .services(config.serviceID)
@@ -312,10 +344,11 @@ else{
            
             return res.render('phone-verify', {
                 title: 'Phone verification',
-                phone: req.body.phone
+                phone: req.body.phone,
+                type:req.body.type
             });
         });
 
-    }
+ 
 
 }
