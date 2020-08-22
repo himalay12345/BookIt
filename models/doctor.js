@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
-const AVATAR_PATH = path.join('/uploads/patient/avatars');
+const AVATAR_PATH = path.join('/uploads/doctor/avatars');
 
-const patientSchema = mongoose.Schema({
+const doctorSchema = mongoose.Schema({
     name: {
         type: String
     },
@@ -14,6 +14,9 @@ const patientSchema = mongoose.Schema({
         type: String
     },
     gender: {
+        type: String
+    },
+    type: {
         type: String
     },
     address: {
@@ -46,12 +49,46 @@ const patientSchema = mongoose.Schema({
     password: {
         type: String
     },
-    type: {
-        type: String
-    },
     fbid: {
         type: String
+    },
+    twitterid: {
+        type: String
+    },
+    clinicname: {
+        type: String
+    },
+    clinicaddr: {
+        type: String
+    },
+    degree: {
+        type: String
+    },
+    institutionname: {
+        type: String
+    },
+    from: {
+        type: Number
+    },
+    to: {
+        type: Number
+    },
+    designation: {
+        type: String
+
+    },
+    awards: {
+        type: String
+
+    },
+    year: {
+        type: Number
+    },
+    specialisation: {
+        type: String
+
     }
+
 }, { timestamps: true });
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -63,8 +100,8 @@ let storage = multer.diskStorage({
 });
 
 //static function
-patientSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
-patientSchema.statics.avatarPath = AVATAR_PATH;
+doctorSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
+doctorSchema.statics.avatarPath = AVATAR_PATH;
 
-const Patient = mongoose.model('Patient', patientSchema);
-module.exports = Patient;
+const Doctor = mongoose.model('Doctor', doctorSchema);
+module.exports = Doctor;

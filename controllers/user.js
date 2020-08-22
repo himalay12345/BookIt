@@ -1,4 +1,5 @@
 const Patient = require('../models/patient');
+const Doctor = require('../models/doctor');
 const fs = require('fs');
 const path = require('path');
 
@@ -8,10 +9,23 @@ module.exports.create = async(req, res) => {
         name: req.body.name,
         phone: req.body.phone,
         password: req.body.password,
-        service:'phone'
+        service: 'phone',
+        type: 'Patient'
     });
 
-    req.flash('success','Account created successfully.Please Login!');
+    req.flash('success', 'Account created successfully.Please Login!');
+    return res.redirect('/login');
+}
+module.exports.createDoctor = async(req, res) => {
+    let doctor = await Doctor.create({
+        name: req.body.name,
+        phone: req.body.phone,
+        password: req.body.password,
+        type: 'Doctor',
+        service: 'phone'
+    });
+
+    req.flash('success', 'Account created successfully.Please Login!');
     return res.redirect('/login');
 }
 
@@ -26,43 +40,38 @@ module.exports.destroySession = function(req, res) {
     return res.redirect('/');
 }
 
-module.exports.changePassword = async (req, res) => {
-    let patient = await Patient.findOne({phone:req.body.phone});
-    if(req.body.old != patient.password)
-    {
-        req.flash('error','Wrong Old Password!');
+module.exports.changePassword = async(req, res) => {
+    let patient = await Patient.findOne({ phone: req.body.phone });
+    if (req.body.old != patient.password) {
+        req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
     }
 
-    if(req.body.password != req.body.confirm)
-    {
-        req.flash('error','Passwords do not match!')
+    if (req.body.password != req.body.confirm) {
+        req.flash('error', 'Passwords do not match!')
         return res.redirect('back');
     }
 
     patient.password = req.body.password;
     patient.save();
 
-    req.flash('success','Password changed successfully!');
+    req.flash('success', 'Password changed successfully!');
     return res.redirect('back');
 }
 
-module.exports.resetPassword = async (req, res) => {
-    if(req.body.password != req.body.confirm)
-    {
-        req.flash('error','Passwords do not match!');
-        return res.render('set-password',{
-            title:'Reset-password',
-            phone:req.body.phone
+module.exports.resetPassword = async(req, res) => {
+    if (req.body.password != req.body.confirm) {
+        req.flash('error', 'Passwords do not match!');
+        return res.render('set-password', {
+            title: 'Reset-password',
+            phone: req.body.phone
         })
-    }
-
-    else{
-        let patient = await Patient.findOne({phone:req.body.phone});
+    } else {
+        let patient = await Patient.findOne({ phone: req.body.phone });
         patient.password = req.body.password;
         patient.save();
 
-        req.flash('success','Password reset successfully');
+        req.flash('success', 'Password reset successfully');
         return res.redirect('/login');
     }
 }
@@ -102,7 +111,7 @@ module.exports.profileUpdate = async function(req, res) {
 
 
         });
-        req.flash('success','Profile updated!');
+        req.flash('success', 'Profile updated!');
         return res.redirect('back');
 
 

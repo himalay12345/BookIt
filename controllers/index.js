@@ -1,5 +1,6 @@
 const config = require('../config/twilio');
 const Patient = require("../models/patient");
+const Doctor = require('../models/doctor');
 const client = require('twilio')(config.accountSID, config.authToken);
 
 module.exports.home = (req, res) => {
@@ -220,33 +221,59 @@ module.exports.register = (req, res) => {
 }
 
 module.exports.signUp = async(req, res) => {
-
-    if(req.body.type == 'forgot')
-    {
+    if (req.body.type == 'doctor') {
         let data = await client
-        .verify
-        .services(config.serviceID)
-        .verificationChecks
-        .create({
-            to: `+91${req.body.phone}`,
-            code: req.body.otp
-        });
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
 
 
-    if (data.status == 'approved') {
-        return res.render('set-password', {
-            title: 'Reset Pasword',
-            phone:req.body.phone
-        });
+        if (data.status == 'approved') {
+            return res.render('doctor-register', {
+                title: 'Register',
+                phone: req.body.phone,
+            });
 
-    } else {
-        req.flash('error','Wrong Otp');
-        return res.render('phone-verify', {
-            title: 'Phone verification',
-            phone: req.body.phone
-        })
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                type: req.body.type
+            })
 
+        }
     }
+
+    if (req.body.type == 'forgot') {
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
+
+        if (data.status == 'approved') {
+            return res.render('set-password', {
+                title: 'Reset Pasword',
+                phone: req.body.phone
+            });
+
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone
+            })
+
+        }
     }
 
     let data = await client
@@ -266,7 +293,7 @@ module.exports.signUp = async(req, res) => {
         });
 
     } else {
-        req.flash('error','Wrong Otp');
+        req.flash('error', 'Wrong Otp');
         return res.render('phone-verify', {
             title: 'Phone verification',
             phone: req.body.phone
@@ -321,34 +348,57 @@ module.exports.voiceCall = (req, res) => {
 
 module.exports.verify = (req, res) => {
 
-    if(req.body.type == undefined){
-    Patient.findOne({phone:req.body.phone},function(err,patient){
-        if(patient)
-        {
-            req.flash('error','Account already linked with this mobile number');
-            return res.redirect('back');
-        }
-    });
-}
-  
-    
-
-    client
-        .verify
-        .services(config.serviceID)
-        .verifications
-        .create({
-            to: `+91${req.body.phone}`,
-            channel: 'sms'
-        }).then((data) => {
-
-            return res.render('phone-verify', {
-                title: 'Phone verification',
-                phone: req.body.phone,
-                type:req.body.type
-            });
+    if (req.body.type == undefined) {
+        Patient.findOne({ phone: req.body.phone }, function(err, patient) {
+            if (patient) {
+                req.flash('error', 'Account already linked with this mobile number');
+                return res.redirect('back');
+            }
         });
+        Doctor.findOne({ phone: req.body.phone }, function(err, doctor) {
+            if (doctor) {
+                req.flash('error', 'Account already linked with this mobile number');
+                return res.redirect('back');
+            }
+        });
+    }
 
- 
+    console.log(req.body.flag);
+    if (req.body.flag == 'doctor') {
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: 'sms'
+            }).then((data) => {
+
+                return res.render('phone-verify', {
+                    title: 'Phone verification',
+                    phone: req.body.phone,
+                    type: req.body.flag
+
+                });
+            });
+    } else {
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: 'sms'
+            }).then((data) => {
+
+                return res.render('phone-verify', {
+                    title: 'Phone verification',
+                    phone: req.body.phone,
+                    type: req.body.type
+
+                });
+            });
+    }
+
 
 }

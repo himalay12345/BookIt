@@ -32,8 +32,8 @@
 			<script src="js/html5shiv.min.js"></script>
 			<script src="js/respond.min.js"></script>
         <![endif]-->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
 </head>
 
@@ -85,7 +85,7 @@
                                 <li><a href="/doctor-register">Doctor Register</a></li>
                             </ul>
                         </li>
-                       
+
                         <li class="has-submenu">
                             <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
                             <ul class="submenu">
@@ -126,7 +126,7 @@
                         </div>
                     </li>
 
-                   
+
 
                 </ul>
                 <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
@@ -134,7 +134,7 @@
                         <li class="has-submenu ahas-submenu">
                             <a href="#">
                                 <span class="user-img">
-                                    <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                                    <img class="rounded-circle" src="<%=locals.user.avatar%>" onerrorthis.src="/img/profile.png" width="31" alt="Ryan Taylor">
                                 </span>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
@@ -187,13 +187,13 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
+                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerrorthis.src="/img/profile.png">
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
                                             <%=locals.user.name%>
                                         </h3>
-                                       
+
                                         <div class="locals.user-details">
                                             <%if(locals.user.dob){var newDateObject = new Date();
 
@@ -208,17 +208,18 @@
                                                 var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
 
                                                 %>
-                                            <h5 style="font-size: 0.85rem;"><i class="fas fa-birthday-cake"></i>
-                                                <%=locals.user.dob%> , <%=age%> Years
+                                                <h5 style="font-size: 0.85rem;"><i class="fas fa-birthday-cake"></i>
+                                                    <%=locals.user.dob%> ,
+                                                        <%=age%> Years
 
-                                            </h5>
-                                            <%}%>
-                                            <%if(locals.user.city){%>
-                                            <h5 style="font-size: 0.85rem;"class="mb-0"><i class="fas fa-map-marker-alt"></i>
-                                                <%=locals.user.city%> 
-                                                    <%=locals.user.state%>
-                                            </h5>
-                                            <%}%>
+                                                </h5>
+                                                <%}%>
+                                                    <%if(locals.user.city){%>
+                                                        <h5 style="font-size: 0.85rem;" class="mb-0"><i class="fas fa-map-marker-alt"></i>
+                                                            <%=locals.user.city%>
+                                                                <%=locals.user.state%>
+                                                        </h5>
+                                                        <%}%>
                                         </div>
                                     </div>
                                 </div>
@@ -275,14 +276,14 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <!-- Profile Settings Form -->
+
                                 <form action="/user/profile/update" method="POST" enctype="multipart/form-data">
                                     <div class="row form-row">
                                         <div class="col-12 col-md-12">
                                             <div class="form-group">
                                                 <div class="change-avatar">
                                                     <div class="profile-img">
-                                                        <img src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" alt="User Image">
+                                                        <img src="<%=locals.user.avatar%>" ,onerrorthis.src="/img/profile.png" alt="User Image">
                                                     </div>
                                                     <div class="upload-img">
                                                         <div class="change-photo-btn">
@@ -392,7 +393,7 @@
                                         <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
                                     </div>
                                 </form>
-                                <!-- /Profile Settings Form -->
+
 
                             </div>
                         </div>
@@ -422,7 +423,7 @@
                                     <div class="social-icon">
                                         <ul>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                <a href="<%=locals.user.fbid%>" target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                             </li>
                                             <li>
                                                 <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
@@ -565,22 +566,22 @@
     <script src="js/script.js"></script>
     <script>
         <%if(flash.success && flash.success.length>0){%>
-                new Noty({
-                      theme:'metroui',
-                      text: '<%=flash.success%>',
-                      type:'success',
-                      layout:'topRight',
-                      timeout:3000
-                }).show();
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
         <%}%>
         <%if(flash.error && flash.error.length>0){%>
-                new Noty({
-                      theme:'metroui',
-                      text: '<%=flash.error%>',
-                      type:'error',
-                      layout:'topRight',
-                      timeout:3000
-                }).show();
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
         <%}%>
     </script>
 
