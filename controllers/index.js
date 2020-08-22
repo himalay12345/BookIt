@@ -54,19 +54,19 @@ module.exports.calendar = (req, res) => {
     })
 }
 
-module.exports.changePassword = async (req, res) => {
+module.exports.changePassword = async(req, res) => {
     let patient = await Patient.findById(req.user.id)
     return res.render('change-password', {
         title: 'Change Password',
-        patient:patient
+        patient: patient
     })
 }
 
-module.exports.chat = async (req, res) => {
+module.exports.chat = async(req, res) => {
     let patient = await Patient.findById(req.user.id)
     return res.render('chat', {
         title: 'Chat',
-        patient:patient
+        patient: patient
     })
 }
 
@@ -134,11 +134,11 @@ module.exports.editPrescription = (req, res) => {
     })
 }
 
-module.exports.favourites = async (req, res) => {
+module.exports.favourites = async(req, res) => {
     let patient = await Patient.findById(req.user.id)
     return res.render('favourites', {
         title: 'Favourites',
-        patient:patient
+        patient: patient
     })
 }
 
@@ -181,7 +181,7 @@ module.exports.myPatients = (req, res) => {
     })
 }
 
-module.exports.patientDashboard = async (req, res) => {
+module.exports.patientDashboard = async(req, res) => {
     let patient = await Patient.findById(req.user.id)
     return res.render('patient-dashboard', {
         title: 'Patient Dashboard',
@@ -341,7 +341,7 @@ module.exports.verify = (req, res) => {
             to: `+91${req.body.phone}`,
             channel: 'sms'
         }).then((data) => {
-           
+
             return res.render('phone-verify', {
                 title: 'Phone verification',
                 phone: req.body.phone,
