@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const AVATAR_PATH = path.join('/uploads/patient/avatars');
+const newpath = path.join(__dirname,'..',AVATAR_PATH);
+if(!fs.existsSync(newpath)){
+    fs.mkdirSync(newpath, { recursive: true });
+}
 
 const patientSchema = mongoose.Schema({
     name: {

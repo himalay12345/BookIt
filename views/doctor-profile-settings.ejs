@@ -32,6 +32,8 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -183,7 +185,15 @@
                                         <h3>
                                             <%=locals.user.name%>
                                         </h3>
-
+                                       
+                                        <!-- <h4 style="font-size: 0.9rem;"> <%=locals.user.department%></h4> -->
+                                        <h5 style="font-size: 0.8rem;"><%if(locals.user.education.length == 1){%>
+                                            <%=locals.user.education.degree%>
+                                            <%}%>
+                                            <%if(locals.user.education.length > 1){for(deg of locals.user.education){%>
+                                                <%=deg.degree%>
+                                            <%}}%>
+                                            </h5>
 
                                     </div>
                                 </div>
@@ -299,7 +309,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Email <span class="text-danger">*</span></label>
+                                                <label>Email <span class="text-danger"></span></label>
                                                 <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>">
                                             </div>
                                         </div>
@@ -315,11 +325,11 @@
                                             <div class="form-group">
                                                 <label>Gender</label>
                                                 <select name="gender" class="form-control select">
-                                                    <%if(locals.user.gender == 'Male '){%><option selected>Male</option><%}else{%>
+                                                    <%if(locals.user.gender == 'Male'){%><option selected>Male</option><%}else{%>
                                                     <option>Male</option><%}%>
-                                                    <%if(locals.user.gender == 'Female '){%><option selected>Female</option><%}else{%>
+                                                    <%if(locals.user.gender == 'Female'){%><option selected>Female</option><%}else{%>
                                                     <option>Female</option><%}%>
-                                                    <%if(locals.user.gender == 'Others '){%><option selected>Others</option><%}else{%>
+                                                    <%if(locals.user.gender == 'Others'){%><option selected>Others</option><%}else{%>
                                                     <option>Others</option><%}%>
 													</select>
                                             </div>
@@ -339,15 +349,15 @@
                             <!-- /Basic Information -->
 
                             <!-- About Me -->
-                            <div class="col-12 col-md-12" style="margin-left: -10px;">
+                            <div class="col-12 col-md-6" style="margin-left: -10px;">
                                 <div class="form-group">
                                     <label>Department</label>
                                     <select name="department" class="form-control select">
-									<%if(locals.user.department == 'General Physician '){%><option selected>General Physician</option><%}else{%>
+									<%if(locals.user.department == 'General Physician'){%><option selected>General Physician</option><%}else{%>
 									<option>General Physician</option><%}%>
-									<%if(locals.user.department == 'Ophthalmology '){%><option selected>Ophthalmology</option><%}else{%>
+									<%if(locals.user.department == 'Ophthalmology'){%><option selected>Ophthalmology</option><%}else{%>
 									<option>Ophthalmology</option><%}%>
-									<%if(locals.user.department == 'Dermatology '){%><option selected>Dermatology</option><%}else{%>
+									<%if(locals.user.department == 'Dermatology'){%><option selected>Dermatology</option><%}else{%>
 										<option>Dermatology</option><%}%>
 									<%if(locals.user.department == 'Paediatrics'){%><option selected>Paediatrics</option><%}else{%>
 										<option>Paediatrics</option><%}%>
@@ -361,7 +371,7 @@
 										<option>Cardiologist</option><%}%>	
 									<%if(locals.user.department == 'Dentist'){%><option selected>Dentist</option><%}else{%>
 										<option>Dentist</option><%}%>	
-									<%if(locals.user.department == 'Others '){%><option selected>Others</option><%}else{%>
+									<%if(locals.user.department == 'Others'){%><option selected>Others</option><%}else{%>
 									<option>Others</option><%}%>
 									</select>
                                 </div>
@@ -385,22 +395,7 @@
                                                 <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>">
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Clinic Images</label>
-                                                <!-- <form action="#" class="dropzone"></form> -->
-                                            </div>
-                                            <div class="upload-wrap">
-                                                <div class="upload-images">
-                                                    <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
-                                                    <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-                                                </div>
-                                                <div class="upload-images">
-                                                    <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
-                                                    <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                 
                                     </div>
                                 </div>
                             </div>
@@ -457,12 +452,12 @@
                                     <h4 class="card-title">Services and Specialization</h4>
                                     <div class="form-group">
                                         <label>Services</label>
-                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="Tooth cleaning " id="services">
+                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services">
                                         <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
                                     </div>
                                     <div class="form-group mb-0">
                                         <label>Specialization </label>
-                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="Children Care,Dental Care" id="specialist">
+                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist">
                                         <small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
                                     </div>
                                 </div>
@@ -471,27 +466,71 @@
 
                             <!-- Education -->
                             <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Education</h4>
-                                    <div class="education-info">
-                                        <div class="row form-row education-cont">
-                                            <div class="col-12 col-md-10 col-lg-11">
-                                                <div class="row form-row">
-                                                    <div class="col-12 col-md-8 col-lg-8">
-                                                        <div class="form-group">
-                                                            <label>Degree</label>
-                                                            <input type="text" class="form-control" name="degree" placeholder="Enter Your Highest Qualification" value="<%=locals.user.degree%>">
+								<div class="card-body">
+									<h4 class="card-title">Education</h4>
+									<div class="education-info">
+                                        <%if(locals.user.education == 0){%>
+										<div class="row form-row education-cont">
+											<div class="col-12 col-md-10 col-lg-11">
+												<div class="row form-row">
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Degree</label>
+															<input type="text" name="degree" class="form-control">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>College/Institute</label>
+															<input type="text" name="college" class="form-control">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-4">
+														<div class="form-group">
+															<label>Year of Completion</label>
+															<input type="text" name="yoc" class="form-control">
+														</div> 
+													</div>
+												</div>
+											</div>
+                                        </div>
+                                        <%}else{%>
+                                            <%for(temp of locals.user.education){%> 
+                                                <div class="row form-row education-cont">
+                                                    <div class="col-12 col-md-10 col-lg-11">
+                                                        <div class="row form-row">
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Degree</label>
+                                                                    <input type="text" value="<%=temp.degree%>" class="form-control">
+                                                                </div> 
+                                                            </div>
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>College/Institute</label>
+                                                                    <input type="text"  value="<%=temp.college%>"class="form-control">
+                                                                </div> 
+                                                            </div>
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Year of Completion</label>
+                                                                    <input type="text" value="<%=temp.yoc%>" class="form-control">
+                                                                </div> 
+                                                            </div>
                                                         </div>
                                                     </div>
-
-
+                                                    <div class="col-12 col-md-2 col-lg-1">
+                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                        <a href="/user/delete-education/?id=<%=temp._id%>" class="btn btn-danger a-trash"><i class="far fa-trash-alt"></i></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                                                <%}}%>
+									</div>
+									<div class="add-more">
+										<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+									</div>
+								</div>
+							</div>
                             <!-- /Education -->
 
                             <!-- Experience -->
@@ -499,37 +538,76 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Experience</h4>
                                     <div class="experience-info">
+                                        <%if(locals.user.experience == 0){%>
                                         <div class="row form-row experience-cont">
                                             <div class="col-12 col-md-10 col-lg-11">
                                                 <div class="row form-row">
                                                     <div class="col-12 col-md-6 col-lg-4">
                                                         <div class="form-group">
                                                             <label>Institution Name</label>
-                                                            <input type="text" placeholder="Enter the Name" name="institutionname" class="form-control" value="<%=locals.user.institutionname%>">
+                                                            <input type="text" placeholder="Enter the Name" name="institutionname" class="form-control" value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-4">
                                                         <div class="form-group">
                                                             <label>From</label>
-                                                            <input type="Number" name="from" value="<%=locals.user.from%>" class="form-control">
+                                                            <input type="Number" name="from" value="" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-4">
                                                         <div class="form-group">
                                                             <label>To</label>
-                                                            <input type="Number" name="to" value="<%=locals.user.to%>" class="form-control">
+                                                            <input type="Number" name="to" value="" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-6 col-lg-4">
                                                         <div class="form-group">
                                                             <label>Designation</label>
-                                                            <input type="text" name="designation" class="form-control" value="<%=locals.user.designation%>">
+                                                            <input type="text" name="designation" class="form-control" value="">
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <%}else{%>
+                                            <%for(temp of locals.user.experience){%> 
+                                                <div class="row form-row experience-cont">
+                                                    <div class="col-12 col-md-10 col-lg-11">
+                                                        <div class="row form-row">
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Institution Name</label>
+                                                                    <input type="text" placeholder="Enter the Name"  class="form-control" value="<%=temp.institutionname%>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>From</label>
+                                                                    <input type="Number"  value="<%=temp.from%>" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>To</label>
+                                                                    <input type="Number"  value="<%=temp.to%>" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="form-group">
+                                                                    <label>Designation</label>
+                                                                    <input type="text" class="form-control" value="<%=temp.designation%>">
+        
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-2 col-lg-1">
+                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                        <a href="/user/delete-experience/?id=<%=temp._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
+                                                    </div>
+                                                </div>
+                                                <%}}%>
                                     </div>
                                     <div class="add-more">
                                         <a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
@@ -543,26 +621,49 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Awards</h4>
                                     <div class="awards-info">
+                                        <%if(locals.user.awards.length == 0){%>
                                         <div class="row form-row awards-cont">
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
                                                     <label>Awards</label>
-                                                    <input type="text" class="form-control" name=" awards" placeholder="Enter your Awards" value="<%=locals.user. awards%>">
+                                                    <input type="text" class="form-control" name="award" placeholder="Enter your Awards" value="">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <input type="Number" placeholder="Enter the Year" name="year" value="<%=locals.user.year%>" class="form-control">
+                                                    <input type="Number" placeholder="Enter the Year" name="year" value="" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
+                                        <%}else{%>
+                                            <%for(temp of locals.user.awards){%>
+                                                <div class="row form-row awards-cont">
+                                                    <div class="col-12 col-md-5">
+                                                        <div class="form-group">
+                                                            <label>Awards</label>
+                                                            <input type="text" class="form-control"  placeholder="Enter your Awards" value="<%=temp.award%>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-5">
+                                                        <div class="form-group">
+                                                            <label>Year</label>
+                                                            <input type="Number" placeholder="Enter the Year"  value="<%=temp.year%>" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-2 col-lg-1">
+                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                        <a href="/user/delete-award/?id=<%=temp._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
+                                                    </div>
+                                                </div>
+                                                <%}}%>
                                     </div>
                                     <div class="add-more">
                                         <a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- /Awards -->
 
                             <!-- Memberships -->
@@ -574,20 +675,43 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Registrations</h4>
                                     <div class="registrations-info">
+                                        <%if(locals.user.registrations.length == 0){%>
+                                            <div class="row form-row reg-cont">
+                                                <div class="col-12 col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Registrations</label>
+                                                        <input type="text" name="registration" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Year</label>
+                                                        <input type="text" name="regYear" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <%}else{%>
+                                        <%for(reg of locals.user.registrations){%>
                                         <div class="row form-row reg-cont">
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
                                                     <label>Registrations</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text"  value="<%=reg.registration%>" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
                                                     <label>Year</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text"  value="<%=reg.regYear%>" class="form-control">
                                                 </div>
                                             </div>
+                                            <div class="col-12 col-md-2 col-lg-1">
+                                                <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                <a href="/user/delete-registration/?id=<%=reg._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
+                                            </div>
                                         </div>
+                                        <%}%>
+                                        <%}%>
                                     </div>
                                     <div class="add-more">
                                         <a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
@@ -778,6 +902,27 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui ',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+                    theme: 'metroui',
+                    text: '<%=flash.error%>',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 3000 
+                }).show();
+                    <%}%>
+    </script>
+
 
 </body>
 
