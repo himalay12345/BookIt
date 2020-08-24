@@ -1,6 +1,5 @@
 const config = require('../config/twilio');
-const Patient = require("../models/patient");
-const Doctor = require('../models/doctor');
+const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
 
 module.exports.home = (req, res) => {
@@ -21,7 +20,7 @@ module.exports.addPrescription = (req, res) => {
 }
 module.exports.Specialist = (req, res) => {
     return res.render('specialist', {
-        title: 'Specialist Doctor'
+        title: 'Specialist user'
     })
 }
 
@@ -56,24 +55,24 @@ module.exports.calendar = (req, res) => {
 }
 
 module.exports.changePassword = async(req, res) => {
-    let patient = await Patient.findById(req.user.id)
+    let user = await User.findById(req.user.id)
     return res.render('change-password', {
         title: 'Change Password',
-        patient: patient
+        user: user
     })
 }
 
 module.exports.chat = async(req, res) => {
-    let patient = await Patient.findById(req.user.id)
+    let user = await User.findById(req.user.id)
     return res.render('chat', {
         title: 'Chat',
-        patient: patient
+        user: user
     })
 }
 
 module.exports.chatDoctor = (req, res) => {
     return res.render('chat-doctor', {
-        title: 'Chat Doctor'
+        title: 'Chat user'
     })
 }
 
@@ -96,7 +95,7 @@ module.exports.doctorChangePassword = (req, res) => {
 
 module.exports.doctorDashboard = (req, res) => {
     return res.render('doctor-dashboard', {
-        title: 'Doctor Dashboard'
+        title: 'user Dashboard'
     })
 }
 
@@ -119,7 +118,7 @@ module.exports.doctorRegister = (req, res) => {
 }
 module.exports.docRegister = (req, res) => {
     return res.render('doc-register', {
-        title: 'Doctor Register'
+        title: 'user Register'
     })
 }
 
@@ -136,10 +135,10 @@ module.exports.editPrescription = (req, res) => {
 }
 
 module.exports.favourites = async(req, res) => {
-    let patient = await Patient.findById(req.user.id)
+    let user = await User.findById(req.user.id)
     return res.render('favourites', {
         title: 'Favourites',
-        patient: patient
+        user: user
     })
 }
 
@@ -178,21 +177,21 @@ module.exports.login = (req, res) => {
 
 module.exports.myPatients = (req, res) => {
     return res.render('my-patients', {
-        title: 'My Patients'
+        title: 'My users'
     })
 }
 
 module.exports.patientDashboard = async(req, res) => {
-    let patient = await Patient.findById(req.user.id)
+    let user = await User.findById(req.user.id)
     return res.render('patient-dashboard', {
-        title: 'Patient Dashboard',
-        patient: patient
+        title: 'user Dashboard',
+        user: user
     })
 }
 
 module.exports.patientProfile = (req, res) => {
     return res.render('patient-profile', {
-        title: 'Patient Profile'
+        title: 'user Profile'
     })
 }
 
@@ -204,10 +203,10 @@ module.exports.privacyPolicy = (req, res) => {
 }
 
 module.exports.profileSettings = async(req, res) => {
-    let patient = await Patient.findById(req.user.id);
+    let user = await User.findById(req.user.id);
     return res.render('profile-settings', {
         title: 'Profile Settings',
-        patient: patient
+        user: user
     })
 }
 
@@ -221,33 +220,6 @@ module.exports.register = (req, res) => {
 }
 
 module.exports.signUp = async(req, res) => {
-    if (req.body.type == 'doctor') {
-        let data = await client
-            .verify
-            .services(config.serviceID)
-            .verificationChecks
-            .create({
-                to: `+91${req.body.phone}`,
-                code: req.body.otp
-            });
-
-
-        if (data.status == 'approved') {
-            return res.render('doctor-register', {
-                title: 'Register',
-                phone: req.body.phone,
-            });
-
-        } else {
-            req.flash('error', 'Wrong Otp');
-            return res.render('phone-verify', {
-                title: 'Phone verification',
-                phone: req.body.phone,
-                type: req.body.type
-            })
-
-        }
-    }
 
     if (req.body.type == 'forgot') {
         let data = await client
@@ -349,39 +321,20 @@ module.exports.voiceCall = (req, res) => {
 module.exports.verify = (req, res) => {
 
     if (req.body.type == undefined) {
-        Patient.findOne({ phone: req.body.phone }, function(err, patient) {
-            if (patient) {
+        User.findOne({ phone: req.body.phone }, function(err, user) {
+            if (user) {
                 req.flash('error', 'Account already linked with this mobile number');
                 return res.redirect('back');
             }
         });
-        Doctor.findOne({ phone: req.body.phone }, function(err, doctor) {
-            if (doctor) {
+        User.findOne({ phone: req.body.phone }, function(err, user) {
+            if (user) {
                 req.flash('error', 'Account already linked with this mobile number');
                 return res.redirect('back');
             }
         });
     }
 
-    console.log(req.body.flag);
-    if (req.body.flag == 'doctor') {
-        client
-            .verify
-            .services(config.serviceID)
-            .verifications
-            .create({
-                to: `+91${req.body.phone}`,
-                channel: 'sms'
-            }).then((data) => {
-
-                return res.render('phone-verify', {
-                    title: 'Phone verification',
-                    phone: req.body.phone,
-                    type: req.body.flag
-
-                });
-            });
-    } else {
         client
             .verify
             .services(config.serviceID)
@@ -398,7 +351,7 @@ module.exports.verify = (req, res) => {
 
                 });
             });
-    }
+    
 
 
 }

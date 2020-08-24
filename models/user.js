@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const AVATAR_PATH = path.join('/uploads/doctor/avatars');
+const AVATAR_PATH = path.join('/uploads/user/avatars');
 const newpath = path.join(__dirname,'..',AVATAR_PATH);
 if(!fs.existsSync(newpath)){
     fs.mkdirSync(newpath, { recursive: true });
 }
 
-
-const doctorSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     name: {
         type: String
     },
@@ -20,9 +19,6 @@ const doctorSchema = mongoose.Schema({
         type: String
     },
     gender: {
-        type: String
-    },
-    type: {
         type: String
     },
     address: {
@@ -53,6 +49,9 @@ const doctorSchema = mongoose.Schema({
         type: String
     },
     password: {
+        type: String
+    },
+    type: {
         type: String
     },
     fbid: {
@@ -136,8 +135,8 @@ let storage = multer.diskStorage({
 });
 
 //static function
-doctorSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
-doctorSchema.statics.avatarPath = AVATAR_PATH;
+userSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
+userSchema.statics.avatarPath = AVATAR_PATH;
 
-const Doctor = mongoose.model('Doctor', doctorSchema);
-module.exports = Doctor;
+const User = mongoose.model('User', userSchema);
+module.exports = User;

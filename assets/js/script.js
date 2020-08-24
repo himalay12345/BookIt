@@ -8,6 +8,7 @@ Version      : 1.0
     "use strict";
 	
 	// Stick Sidebar
+
 	
 	if ($(window).width() > 767) {
 		if($('.theiaStickySidebar').length > 0) {
@@ -360,4 +361,6 @@ Version      : 1.0
 	}
 	$(window).scroll(animateElements);
 	
+	
 })(jQuery);
+

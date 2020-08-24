@@ -1,7 +1,7 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const crypto = require('crypto');
-const Patient = require('../models/patient');
+const User = require('../models/user');
 
 
 passport.use(new FacebookStrategy({
@@ -12,7 +12,7 @@ passport.use(new FacebookStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         // console.log(profile);
-        Patient.findOne({ fbid: profile.id }).exec(function(err, patient) {
+        User.findOne({ fbid: profile.id }).exec(function(err, user) {
             if (err) {
                 console.log('Error in facebook passport strategy', err);
                 return;
@@ -20,23 +20,23 @@ passport.use(new FacebookStrategy({
 
             console.log(profile);
 
-            if (patient) {
-                return done(null, patient);
+            if (user) {
+                return done(null, user);
             } 
             else {
-                Patient.create({
+                User.create({
                         fbid: profile.id,
                         name: profile.displayName,
                         email:profile.emails[0].value,
                         password: crypto.randomBytes(20).toString('hex'),
                         avatar: profile.photos[0].value
                     },
-                    function(err, new_patient) {
+                    function(err, new_user) {
                         if (err) {
                             console.log('Error in creating facebook passport strategy', err);
                             return;
                         }
-                        return done(null, new_patient);
+                        return done(null, new_user);
                     });
             }
         });

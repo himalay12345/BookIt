@@ -1,28 +1,16 @@
-const Patient = require('../models/patient');
-const Doctor = require('../models/doctor');
+let User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 
 
+
 module.exports.create = async(req, res) => {
-    let patient = await Patient.create({
+    let user = await User.create({
         name: req.body.name,
         phone: req.body.phone,
         password: req.body.password,
         service: 'phone',
-        type: 'Patient'
-    });
-
-    req.flash('success', 'Account created successfully.Please Login!');
-    return res.redirect('/login');
-}
-module.exports.createDoctor = async(req, res) => {
-    let doctor = await Doctor.create({
-        name: req.body.name,
-        phone: req.body.phone,
-        password: req.body.password,
-        type: 'Doctor',
-        service: 'phone'
+        type: req.body.type
     });
 
     req.flash('success', 'Account created successfully.Please Login!');
@@ -34,6 +22,40 @@ module.exports.createSession = function(req, res) {
     return res.redirect('/');
 }
 
+module.exports.popup = async function(req, res) {
+    let user = await User.findById(req.user.id);
+    console.log(user);
+    if(!user.type)
+    {
+       return res.redirect('/#popup1');
+    }
+
+    else{
+        return res.redirect('/');
+    }
+    
+}
+
+module.exports.updateType = async function(req, res) {
+    console.log(req.body);
+    let user = await User.findOne({_id:req.body.user});
+    console.log(user);
+    user.type = req.body.type;
+    user.save();
+    console.log(user.type);
+    if(user.type == 'user')
+    {
+        return res.redirect('/user-dashboard');
+    }
+
+    if(user.type == 'user')
+    {
+        return res.redirect('/user-dashboard');
+    }
+    
+}
+
+
 module.exports.destroySession = function(req, res) {
     req.logout();
 
@@ -41,8 +63,8 @@ module.exports.destroySession = function(req, res) {
 }
 
 module.exports.changePassword = async(req, res) => {
-    let patient = await Patient.findOne({ phone: req.body.phone });
-    if (req.body.old != patient.password) {
+    let user = await User.findOne({ phone: req.body.phone });
+    if (req.body.old != user.password) {
         req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
     }
@@ -52,8 +74,8 @@ module.exports.changePassword = async(req, res) => {
         return res.redirect('back');
     }
 
-    patient.password = req.body.password;
-    patient.save();
+    user.password = req.body.password;
+    user.save();
 
     req.flash('success', 'Password changed successfully!');
     return res.redirect('back');
@@ -67,9 +89,9 @@ module.exports.resetPassword = async(req, res) => {
             phone: req.body.phone
         })
     } else {
-        let patient = await Patient.findOne({ phone: req.body.phone });
-        patient.password = req.body.password;
-        patient.save();
+        let user = await User.findOne({ phone: req.body.phone });
+        user.password = req.body.password;
+        user.save();
 
         req.flash('success', 'Password reset successfully');
         return res.redirect('/login');
@@ -80,34 +102,34 @@ module.exports.profileUpdate = async function(req, res) {
     try {
 
 
-        let patient = await Patient.findById(req.user.id);
-        Patient.uploadedAvatar(req, res, function(err) {
+        let user = await User.findById(req.user.id);
+        User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
-            patient.name = req.body.name;
-            patient.dob = req.body.dob;
-            patient.phone = req.body.phone;
-            patient.email = req.body.email;
-            patient.address = req.body.address;
-            patient.city = req.body.city;
-            patient.state = req.body.state;
-            patient.pincode = req.body.pincode;
-            patient.country = req.body.country;
-            patient.bloodgroup = req.body.bloodgroup;
-            patient.gender = req.body.gender;
+            user.name = req.body.name;
+            user.dob = req.body.dob;
+            user.phone = req.body.phone;
+            user.email = req.body.email;
+            user.address = req.body.address;
+            user.city = req.body.city;
+            user.state = req.body.state;
+            user.pincode = req.body.pincode;
+            user.country = req.body.country;
+            user.bloodgroup = req.body.bloodgroup;
+            user.gender = req.body.gender;
 
 
 
             if (req.file) {
-                if (!patient.avatar) {
-                    patient.avatar = Patient.avatarPath + '/' + req.file.filename;
+                if (!user.avatar) {
+                    user.avatar = user.avatarPath + '/' + req.file.filename;
                 } else {
 
-                    fs.unlinkSync(path.join(__dirname, '..', patient.avatar));
-                    patient.avatar = Patient.avatarPath + '/' + req.file.filename;
+                    fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    user.avatar = user.avatarPath + '/' + req.file.filename;
                 }
             }
 
-            patient.save();
+            user.save();
 
 
         });
@@ -124,65 +146,65 @@ module.exports.profileUpdate = async function(req, res) {
 
 module.exports.deleteRegistration = async function(req, res)
 {
-    let doctor = await Doctor.findById(req.user.id);
-    doctor.registrations.pull({_id:req.query.id});
-    doctor.save();
+    let user = await User.findById(req.user.id);
+    user.registrations.pull({_id:req.query.id});
+    user.save();
     req.flash('error','Registration deleted!')
     return res.redirect('back');
 }
 module.exports.deleteAward = async function(req, res)
 {
-    let doctor = await Doctor.findById(req.user.id);
-    doctor.awards.pull({_id:req.query.id});
-    doctor.save();
+    let user = await User.findById(req.user.id);
+    user.awards.pull({_id:req.query.id});
+    user.save();
     req.flash('error','Award deleted!')
     return res.redirect('back');
 }
 module.exports.deleteExperience = async function(req, res)
 {
-    let doctor = await Doctor.findById(req.user.id);
-    doctor.experience.pull({_id:req.query.id});
-    doctor.save();
+    let user = await User.findById(req.user.id);
+    user.experience.pull({_id:req.query.id});
+    user.save();
     req.flash('error','Experience deleted!')
     return res.redirect('back');
 }
 module.exports.deleteEducation = async function(req, res)
 {
-    let doctor = await Doctor.findById(req.user.id);
-    doctor.education.pull({_id:req.query.id});
-    doctor.save();
+    let user = await User.findById(req.user.id);
+    user.education.pull({_id:req.query.id});
+    user.save();
     req.flash('error','Education deleted!')
     return res.redirect('back');
 }
 module.exports.doctorProfileUpdate = async function(req, res) {
 
     try {
-        let doctor = await Doctor.findById(req.user.id);
-        Doctor.uploadedAvatar(req, res, function(err) {
+        let user = await User.findById(req.user.id);
+        User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
 
-            doctor.services = req.body.services;
-            doctor.specialisation = req.body.specialisation;
-            doctor.pincode = req.body.pincode;
-            doctor.state = req.body.state;
-            doctor.country = req.body.country;
-            doctor.city = req.body.city;
-            doctor.address = req.body.address;
-            doctor.clinicname = req.body.clinicname;
-            doctor.clinicaddr = req.body.clinicaddr;
-            doctor.department = req.body.department;
-            doctor.name = req.body.name;
-            doctor.email = req.body.email;
-            doctor.phone = req.body.phone;
-            doctor.gender = req.body.gender;
-            doctor.dob = req.body.dob;
+            user.services = req.body.services;
+            user.specialisation = req.body.specialisation;
+            user.pincode = req.body.pincode;
+            user.state = req.body.state;
+            user.country = req.body.country;
+            user.city = req.body.city;
+            user.address = req.body.address;
+            user.clinicname = req.body.clinicname;
+            user.clinicaddr = req.body.clinicaddr;
+            user.department = req.body.department;
+            user.name = req.body.name;
+            user.email = req.body.email;
+            user.phone = req.body.phone;
+            user.gender = req.body.gender;
+            user.dob = req.body.dob;
 
 
             if(typeof(req.body.degree) == 'object')
             {
                 for(let i=0;i<req.body.degree.length;i++)
                 {
-                    doctor.education.push({degree:req.body.degree[i],
+                    user.education.push({degree:req.body.degree[i],
                         college:req.body.college[i],
                         yoc:req.body.yoc[i]
                     });
@@ -192,7 +214,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
            
             if(typeof(req.body.degree) == 'string')
                 {
-                    doctor.education.push({degree:req.body.degree,
+                    user.education.push({degree:req.body.degree,
                     college:req.body.college,
                     yoc:req.body.yoc
                 });
@@ -203,7 +225,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             {
                 for(let i=0;i<req.body.institutionname.length;i++)
                 {
-                    doctor.experience.push({institutionname:req.body.institutionname[i],
+                    user.experience.push({institutionname:req.body.institutionname[i],
                         from:req.body.from[i],
                         to:req.body.to[i],
                         designation:req.body.designation[i]
@@ -214,7 +236,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
            
             if(typeof(req.body.institutionname) == 'string')
                 {
-                    doctor.experience.push({institutionname:req.body.institutionname,
+                    user.experience.push({institutionname:req.body.institutionname,
                     from:req.body.from,
                     to:req.body.to,
                     designation:req.body.designation
@@ -226,14 +248,14 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             {
                 for(let i=0;i<req.body.award.length;i++)
                 {
-                    doctor.awards.push({award:req.body.award[i],year:req.body.year[i]});
+                    user.awards.push({award:req.body.award[i],year:req.body.year[i]});
                 }
             }
             
            
             if(typeof(req.body.award) == 'string')
                 {
-                doctor.awards.push({award:req.body.award,year:req.body.year});
+                user.awards.push({award:req.body.award,year:req.body.year});
                 }
            
 
@@ -242,31 +264,31 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             {
                 for(let i=0;i<req.body.registration.length;i++)
                 {
-                    doctor.registrations.push({registration:req.body.registration[i],regYear:req.body.regYear[i]});
+                    user.registrations.push({registration:req.body.registration[i],regYear:req.body.regYear[i]});
                 }
             }
 
             
                
                if(typeof(req.body.registration) == 'string') {
-                    doctor.registrations.push({registration:req.body.registration,regYear:req.body.regYear});
+                    user.registrations.push({registration:req.body.registration,regYear:req.body.regYear});
                 }
 
            
          
 
             if (req.file) {
-                if (!doctor.avatar) {
-                    doctor.avatar = Doctor.avatarPath + '/' + req.file.filename;
+                if (!user.avatar) {
+                    user.avatar = user.avatarPath + '/' + req.file.filename;
                 } else {
 
-                    fs.unlinkSync(path.join(__dirname, '..', doctor.avatar));
-                    doctor.avatar = Doctor.avatarPath + '/' + req.file.filename;
+                    fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    user.avatar = user.avatarPath + '/' + req.file.filename;
                 }
             }
 
-            doctor.save();
-            console.log(doctor);
+            user.save();
+            console.log(user);
 
 
         });

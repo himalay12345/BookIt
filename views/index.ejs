@@ -147,7 +147,6 @@
                     </li>
                     <%if(locals.user){%>
 
-
                         <%}else{%>
                             <li class="nav-item">
                                 <a class="nav-link header-login" href="/login">login / Signup </a>
@@ -214,9 +213,28 @@
             </nav>
         </header>
         <!-- /Header -->
-
+      
         <!-- Home Banner -->
         <section class="section section-search">
+            <div id="popup1" class="overlay">
+                <div class="popup">
+                    <form action="/user/update-type" method="POST">
+                    <div class="col-12 col-md-12" style="margin-left: -10px;margin-top:30px;">
+                        <div class="form-group">
+                            <label style="color: rgb(138, 138, 138);">Are you a ?</label>
+                            <%if(locals.user){%>
+                            <input type="hidden" name="user" value="<%=locals.user.id%>">
+                            <%}%>
+                            <select name="type" class="form-control select1">
+                                <option value="Doctor">Doctor</option>
+                                <option value="Patient">Patient</option>
+                            </select>
+                        </div>
+                    </div>
+                   <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
+                </form>
+                </div>
+            </div>
             <div class="container-fluid">
                 <div class="banner-wrapper">
                     <div class="banner-header text-center">
@@ -981,7 +999,7 @@
 
     </div>
     <!-- /Main Wrapper -->
-
+    
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
 
@@ -994,6 +1012,8 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+ 
+
 
 </body>
 
