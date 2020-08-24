@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const User = require('../models/user');
 
 
+
 passport.use(new googleStrategy({
         clientID: '728803225175-al2tlmub7iis0rdnnfdkq5tggr919a5o.apps.googleusercontent.com',
         clientSecret: 'wFsBm1QsFDCogvFAHxstSfQh',

@@ -80,6 +80,24 @@ module.exports.changePassword = async(req, res) => {
     req.flash('success', 'Password changed successfully!');
     return res.redirect('back');
 }
+module.exports.docchangePassword = async(req, res) => {
+    let doctor = await Doctor.findOne({ phone: req.body.phone });
+    if (req.body.old != doctor.password) {
+        req.flash('error', 'Wrong Old Password!');
+        return res.redirect('back');
+    }
+
+    if (req.body.password != req.body.confirm) {
+        req.flash('error', 'Passwords do not match!')
+        return res.redirect('back');
+    }
+
+    doctor.password = req.body.password;
+    doctor.save();
+
+    req.flash('success', 'Password changed successfully!');
+    return res.redirect('back');
+}
 
 module.exports.resetPassword = async(req, res) => {
     if (req.body.password != req.body.confirm) {
@@ -241,8 +259,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                     to:req.body.to,
                     designation:req.body.designation
                 });
-                }
-           
+            }
 
             if(typeof(req.body.award) == 'object')
             {
@@ -273,9 +290,16 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                if(typeof(req.body.registration) == 'string') {
                     user.registrations.push({registration:req.body.registration,regYear:req.body.regYear});
                 }
+            
 
-           
-         
+
+
+            if (typeof(req.body.registration) == 'string') {
+                doctor.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
+            }
+
+
+
 
             if (req.file) {
                 if (!user.avatar) {
