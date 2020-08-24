@@ -42,6 +42,7 @@ router.get('schedule-timings', homeController.scheduleTimings);
 router.get('/search', homeController.search);
 router.get('/social-media', homeController.socialMedia);
 router.get('/term-condition', homeController.termCondition);
+router.get('/upload-documents', homeController.uploadDocuments);
 router.get('/video-call', homeController.videoCall);
 router.get('/voice-call', homeController.voiceCall);
 router.post('/verify', homeController.verify);

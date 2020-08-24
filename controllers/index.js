@@ -306,6 +306,13 @@ module.exports.termCondition = (req, res) => {
     })
 }
 
+
+module.exports.uploadDocuments = (req, res) => {
+    return res.render('upload-documents', {
+        title: 'Upload Documents'
+    })
+}
+
 module.exports.videoCall = (req, res) => {
     return res.render('video-call', {
         title: 'Video Call'

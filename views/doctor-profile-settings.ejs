@@ -256,7 +256,7 @@
 
 
                     <div class="col-md-7 col-lg-8 col-xl-9">
-                        <form action="/user/doctor-profile/update" method="POST" enctype="multipart/form-data">
+                        <form action="/user/doctor-profile/update" method="POST" enctype="multipart/form-data" id="edit_form">
                             <!-- Basic Information -->
                             <div class="card">
                                 <div class="card-body">
@@ -271,7 +271,7 @@
                                                     <div class="upload-img">
                                                         <div class="change-photo-btn">
                                                             <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" class="upload" name="avatar">
+                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
                                                         </div>
                                                         <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
                                                     </div>
@@ -454,19 +454,19 @@
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Degree</label>
-                                                                <input type="text" name="degree" class="form-control">
+                                                                <input type="text" name="degree" placeholder="Enter Degree" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>College/Institute</label>
-                                                                <input type="text" name="college" class="form-control">
+                                                                <input type="text" name="college" placeholder="Enter College/Institute" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Year of Completion</label>
-                                                                <input type="text" name="yoc" class="form-control">
+                                                                <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -480,7 +480,7 @@
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>Degree</label>
-                                                                        <input type="text" value="<%=temp.degree%>" class="form-control">
+                                                                        <input type="text"  value="<%=temp.degree%>" class="form-control">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-4">
@@ -523,25 +523,25 @@
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Institution Name</label>
-                                                                <input type="text" placeholder="Enter the Name" name="institutionname" class="form-control" value="">
+                                                                <input type="text"  placeholder="Enter Institution Name" name="institutionname" class="form-control" value="">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>From</label>
-                                                                <input type="Number" name="from" value="" class="form-control">
+                                                                <input type="Number" placeholder="From" name="from" value="" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>To</label>
-                                                                <input type="Number" name="to" value="" class="form-control">
+                                                                <input type="Number" placeholder="To" name="to" value="" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Designation</label>
-                                                                <input type="text" name="designation" class="form-control" value="">
+                                                                <input type="text" placeholder="Designation" name="designation" class="form-control" value="">
 
                                                             </div>
                                                         </div>
@@ -604,13 +604,13 @@
                                                 <div class="col-12 col-md-5">
                                                     <div class="form-group">
                                                         <label>Awards</label>
-                                                        <input type="text" class="form-control" name="award" placeholder="Enter your Awards" value="">
+                                                        <input type="text" class="form-control" name="award" placeholder="Enter Awards" value="">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-5">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="Number" placeholder="Enter the Year" name="year" value="" class="form-control">
+                                                        <input type="text" placeholder="Enter Year" name="year" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -620,13 +620,13 @@
                                                         <div class="col-12 col-md-5">
                                                             <div class="form-group">
                                                                 <label>Awards</label>
-                                                                <input type="text" class="form-control" placeholder="Enter your Awards" value="<%=temp.award%>">
+                                                                <input type="text" class="form-control" placeholder="Enter Awards" value="<%=temp.award%>">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-5">
                                                             <div class="form-group">
                                                                 <label>Year</label>
-                                                                <input type="Number" placeholder="Enter the Year" value="<%=temp.year%>" class="form-control">
+                                                                <input type="text" placeholder="Enter Year" value="<%=temp.year%>" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-2 col-lg-1">
@@ -658,13 +658,13 @@
                                                 <div class="col-12 col-md-5">
                                                     <div class="form-group">
                                                         <label>Registrations</label>
-                                                        <input type="text" name="registration" value="" class="form-control">
+                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-5">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="text" name="regYear" value="" class="form-control">
+                                                        <input type="text" placeholder="Enter Year" name="regYear" value="" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -880,6 +880,11 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+        document.getElementById("imageUpload").onchange = function() {
+        document.getElementById("edit_form").submit();
+        };
+    </script>
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({
