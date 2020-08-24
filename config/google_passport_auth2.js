@@ -30,6 +30,7 @@ passport.use(new googleStrategy({
                         email: profile.emails[0].value,
                         password: crypto.randomBytes(20).toString('hex')
 
+
                     }, function(err, patient)
 
                     {

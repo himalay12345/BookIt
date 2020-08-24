@@ -33,19 +33,19 @@ Version      : 1.0
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>Degree</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="degree" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>College/Institute</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="college" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>Year of Completion</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="yoc" class="form-control">' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -72,25 +72,25 @@ Version      : 1.0
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>Institution Name</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="institutionname" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>From</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="from" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>To</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="to" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-4">' +
             '<div class="form-group">' +
             '<label>Designation</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="designation" class="form-control">' +
             '</div>' +
             '</div>' +
             '</div>' +
@@ -115,13 +115,13 @@ Version      : 1.0
             '<div class="col-12 col-md-5">' +
             '<div class="form-group">' +
             '<label>Awards</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="award" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-5">' +
             '<div class="form-group">' +
             '<label>Year</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="year" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-2">' +
@@ -173,13 +173,13 @@ Version      : 1.0
             '<div class="col-12 col-md-5">' +
             '<div class="form-group">' +
             '<label>Registrations</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="registration" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-5">' +
             '<div class="form-group">' +
             '<label>Year</label>' +
-            '<input type="text" class="form-control">' +
+            '<input type="text" name="regYear"class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-2">' +
