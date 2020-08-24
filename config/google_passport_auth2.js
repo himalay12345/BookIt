@@ -1,5 +1,6 @@
 const passport = require('passport');
 const googleStrategy = require('passport-google-oauth20').Strategy;
+
 const crypto = require('crypto');
 const Patient = require('../models/patient');
 
@@ -13,6 +14,11 @@ passport.use(new googleStrategy({
     function(accessToken, refreshToken, profile, done) {
 
         Patient.findOne({ email: profile.emails[0].value }).exec(function(err, patient) {
+
+
+
+
+
             if (err) {
                 console.log('Error in google passport strategy', err);
                 return;

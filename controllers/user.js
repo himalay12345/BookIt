@@ -58,6 +58,24 @@ module.exports.changePassword = async(req, res) => {
     req.flash('success', 'Password changed successfully!');
     return res.redirect('back');
 }
+module.exports.docchangePassword = async(req, res) => {
+    let doctor = await Doctor.findOne({ phone: req.body.phone });
+    if (req.body.old != doctor.password) {
+        req.flash('error', 'Wrong Old Password!');
+        return res.redirect('back');
+    }
+
+    if (req.body.password != req.body.confirm) {
+        req.flash('error', 'Passwords do not match!')
+        return res.redirect('back');
+    }
+
+    doctor.password = req.body.password;
+    doctor.save();
+
+    req.flash('success', 'Password changed successfully!');
+    return res.redirect('back');
+}
 
 module.exports.resetPassword = async(req, res) => {
     if (req.body.password != req.body.confirm) {
@@ -122,36 +140,32 @@ module.exports.profileUpdate = async function(req, res) {
 
 }
 
-module.exports.deleteRegistration = async function(req, res)
-{
+module.exports.deleteRegistration = async function(req, res) {
     let doctor = await Doctor.findById(req.user.id);
-    doctor.registrations.pull({_id:req.query.id});
+    doctor.registrations.pull({ _id: req.query.id });
     doctor.save();
-    req.flash('error','Registration deleted!')
+    req.flash('error', 'Registration deleted!')
     return res.redirect('back');
 }
-module.exports.deleteAward = async function(req, res)
-{
+module.exports.deleteAward = async function(req, res) {
     let doctor = await Doctor.findById(req.user.id);
-    doctor.awards.pull({_id:req.query.id});
+    doctor.awards.pull({ _id: req.query.id });
     doctor.save();
-    req.flash('error','Award deleted!')
+    req.flash('error', 'Award deleted!')
     return res.redirect('back');
 }
-module.exports.deleteExperience = async function(req, res)
-{
+module.exports.deleteExperience = async function(req, res) {
     let doctor = await Doctor.findById(req.user.id);
-    doctor.experience.pull({_id:req.query.id});
+    doctor.experience.pull({ _id: req.query.id });
     doctor.save();
-    req.flash('error','Experience deleted!')
+    req.flash('error', 'Experience deleted!')
     return res.redirect('back');
 }
-module.exports.deleteEducation = async function(req, res)
-{
+module.exports.deleteEducation = async function(req, res) {
     let doctor = await Doctor.findById(req.user.id);
-    doctor.education.pull({_id:req.query.id});
+    doctor.education.pull({ _id: req.query.id });
     doctor.save();
-    req.flash('error','Education deleted!')
+    req.flash('error', 'Education deleted!')
     return res.redirect('back');
 }
 module.exports.doctorProfileUpdate = async function(req, res) {
@@ -178,82 +192,75 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             doctor.dob = req.body.dob;
 
 
-            if(typeof(req.body.degree) == 'object')
-            {
-                for(let i=0;i<req.body.degree.length;i++)
-                {
-                    doctor.education.push({degree:req.body.degree[i],
-                        college:req.body.college[i],
-                        yoc:req.body.yoc[i]
+            if (typeof(req.body.degree) == 'object') {
+                for (let i = 0; i < req.body.degree.length; i++) {
+                    doctor.education.push({
+                        degree: req.body.degree[i],
+                        college: req.body.college[i],
+                        yoc: req.body.yoc[i]
                     });
                 }
             }
-            
-           
-            if(typeof(req.body.degree) == 'string')
-                {
-                    doctor.education.push({degree:req.body.degree,
-                    college:req.body.college,
-                    yoc:req.body.yoc
-                });
-                }
-           
 
-            if(typeof(req.body.institutionname) == 'object')
-            {
-                for(let i=0;i<req.body.institutionname.length;i++)
-                {
-                    doctor.experience.push({institutionname:req.body.institutionname[i],
-                        from:req.body.from[i],
-                        to:req.body.to[i],
-                        designation:req.body.designation[i]
+
+            if (typeof(req.body.degree) == 'string') {
+                doctor.education.push({
+                    degree: req.body.degree,
+                    college: req.body.college,
+                    yoc: req.body.yoc
+                });
+            }
+
+
+            if (typeof(req.body.institutionname) == 'object') {
+                for (let i = 0; i < req.body.institutionname.length; i++) {
+                    doctor.experience.push({
+                        institutionname: req.body.institutionname[i],
+                        from: req.body.from[i],
+                        to: req.body.to[i],
+                        designation: req.body.designation[i]
                     });
                 }
             }
-            
-           
-            if(typeof(req.body.institutionname) == 'string')
-                {
-                    doctor.experience.push({institutionname:req.body.institutionname,
-                    from:req.body.from,
-                    to:req.body.to,
-                    designation:req.body.designation
+
+
+            if (typeof(req.body.institutionname) == 'string') {
+                doctor.experience.push({
+                    institutionname: req.body.institutionname,
+                    from: req.body.from,
+                    to: req.body.to,
+                    designation: req.body.designation
                 });
-                }
-           
-
-            if(typeof(req.body.award) == 'object')
-            {
-                for(let i=0;i<req.body.award.length;i++)
-                {
-                    doctor.awards.push({award:req.body.award[i],year:req.body.year[i]});
-                }
             }
-            
-           
-            if(typeof(req.body.award) == 'string')
-                {
-                doctor.awards.push({award:req.body.award,year:req.body.year});
-                }
-           
 
-            
-            if(typeof(req.body.registration) == 'object')
-            {
-                for(let i=0;i<req.body.registration.length;i++)
-                {
-                    doctor.registrations.push({registration:req.body.registration[i],regYear:req.body.regYear[i]});
+
+            if (typeof(req.body.award) == 'object') {
+                for (let i = 0; i < req.body.award.length; i++) {
+                    doctor.awards.push({ award: req.body.award[i], year: req.body.year[i] });
                 }
             }
 
-            
-               
-               if(typeof(req.body.registration) == 'string') {
-                    doctor.registrations.push({registration:req.body.registration,regYear:req.body.regYear});
-                }
 
-           
-         
+            if (typeof(req.body.award) == 'string') {
+                doctor.awards.push({ award: req.body.award, year: req.body.year });
+            }
+
+
+
+            if (typeof(req.body.registration) == 'object') {
+                for (let i = 0; i < req.body.registration.length; i++) {
+                    doctor.registrations.push({ registration: req.body.registration[i], regYear: req.body.regYear[i] });
+                }
+            }
+
+
+
+            if (typeof(req.body.registration) == 'string') {
+                doctor.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
+            }
+
+
+
 
             if (req.file) {
                 if (!doctor.avatar) {

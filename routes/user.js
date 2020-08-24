@@ -18,9 +18,10 @@ router.post('/profile/update', userController.profileUpdate);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
 router.post('/change-password', userController.changePassword);
-router.get('/delete-registration',userController.deleteRegistration);
-router.get('/delete-award',userController.deleteAward);
-router.get('/delete-experience',userController.deleteExperience);
-router.get('/delete-education',userController.deleteEducation);
+router.post('/doc-change-password', userController.docchangePassword);
+router.get('/delete-registration', userController.deleteRegistration);
+router.get('/delete-award', userController.deleteAward);
+router.get('/delete-experience', userController.deleteExperience);
+router.get('/delete-education', userController.deleteEducation);
 
 module.exports = router;
