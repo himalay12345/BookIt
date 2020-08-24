@@ -25,34 +25,29 @@ module.exports.createSession = function(req, res) {
 module.exports.popup = async function(req, res) {
     let user = await User.findById(req.user.id);
     console.log(user);
-    if(!user.type)
-    {
-       return res.redirect('/#popup1');
-    }
-
-    else{
+    if (!user.type) {
+        return res.redirect('/#popup1');
+    } else {
         return res.redirect('/');
     }
-    
+
 }
 
 module.exports.updateType = async function(req, res) {
     console.log(req.body);
-    let user = await User.findOne({_id:req.body.user});
+    let user = await User.findOne({ _id: req.body.user });
     console.log(user);
     user.type = req.body.type;
     user.save();
     console.log(user.type);
-    if(user.type == 'user')
-    {
-        return res.redirect('/user-dashboard');
+    if (user.type == 'Doctor') {
+        return res.redirect('/doctor-dashboard');
     }
 
-    if(user.type == 'user')
-    {
-        return res.redirect('/user-dashboard');
+    if (user.type == 'Patient') {
+        return res.redirect('/patient-dashboard');
     }
-    
+
 }
 
 
@@ -81,8 +76,8 @@ module.exports.changePassword = async(req, res) => {
     return res.redirect('back');
 }
 module.exports.docchangePassword = async(req, res) => {
-    let doctor = await Doctor.findOne({ phone: req.body.phone });
-    if (req.body.old != doctor.password) {
+    let user = await User.findOne({ phone: req.body.phone });
+    if (req.body.old != user.password) {
         req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
     }
@@ -92,8 +87,8 @@ module.exports.docchangePassword = async(req, res) => {
         return res.redirect('back');
     }
 
-    doctor.password = req.body.password;
-    doctor.save();
+    user.password = req.body.password;
+    user.save();
 
     req.flash('success', 'Password changed successfully!');
     return res.redirect('back');
@@ -162,36 +157,32 @@ module.exports.profileUpdate = async function(req, res) {
 
 }
 
-module.exports.deleteRegistration = async function(req, res)
-{
+module.exports.deleteRegistration = async function(req, res) {
     let user = await User.findById(req.user.id);
-    user.registrations.pull({_id:req.query.id});
+    user.registrations.pull({ _id: req.query.id });
     user.save();
-    req.flash('error','Registration deleted!')
+    req.flash('error', 'Registration deleted!')
     return res.redirect('back');
 }
-module.exports.deleteAward = async function(req, res)
-{
+module.exports.deleteAward = async function(req, res) {
     let user = await User.findById(req.user.id);
-    user.awards.pull({_id:req.query.id});
+    user.awards.pull({ _id: req.query.id });
     user.save();
-    req.flash('error','Award deleted!')
+    req.flash('error', 'Award deleted!')
     return res.redirect('back');
 }
-module.exports.deleteExperience = async function(req, res)
-{
+module.exports.deleteExperience = async function(req, res) {
     let user = await User.findById(req.user.id);
-    user.experience.pull({_id:req.query.id});
+    user.experience.pull({ _id: req.query.id });
     user.save();
-    req.flash('error','Experience deleted!')
+    req.flash('error', 'Experience deleted!')
     return res.redirect('back');
 }
-module.exports.deleteEducation = async function(req, res)
-{
+module.exports.deleteEducation = async function(req, res) {
     let user = await User.findById(req.user.id);
-    user.education.pull({_id:req.query.id});
+    user.education.pull({ _id: req.query.id });
     user.save();
-    req.flash('error','Education deleted!')
+    req.flash('error', 'Education deleted!')
     return res.redirect('back');
 }
 module.exports.doctorProfileUpdate = async function(req, res) {
@@ -218,84 +209,77 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.dob = req.body.dob;
 
 
-            if(typeof(req.body.degree) == 'object')
-            {
-                for(let i=0;i<req.body.degree.length;i++)
-                {
-                    user.education.push({degree:req.body.degree[i],
-                        college:req.body.college[i],
-                        yoc:req.body.yoc[i]
+            if (typeof(req.body.degree) == 'object') {
+                for (let i = 0; i < req.body.degree.length; i++) {
+                    user.education.push({
+                        degree: req.body.degree[i],
+                        college: req.body.college[i],
+                        yoc: req.body.yoc[i]
                     });
                 }
             }
-            
-           
-            if(typeof(req.body.degree) == 'string')
-                {
-                    user.education.push({degree:req.body.degree,
-                    college:req.body.college,
-                    yoc:req.body.yoc
-                });
-                }
-           
 
-            if(typeof(req.body.institutionname) == 'object')
-            {
-                for(let i=0;i<req.body.institutionname.length;i++)
-                {
-                    user.experience.push({institutionname:req.body.institutionname[i],
-                        from:req.body.from[i],
-                        to:req.body.to[i],
-                        designation:req.body.designation[i]
+
+            if (typeof(req.body.degree) == 'string') {
+                user.education.push({
+                    degree: req.body.degree,
+                    college: req.body.college,
+                    yoc: req.body.yoc
+                });
+            }
+
+
+            if (typeof(req.body.institutionname) == 'object') {
+                for (let i = 0; i < req.body.institutionname.length; i++) {
+                    user.experience.push({
+                        institutionname: req.body.institutionname[i],
+                        from: req.body.from[i],
+                        to: req.body.to[i],
+                        designation: req.body.designation[i]
                     });
                 }
             }
-            
-           
-            if(typeof(req.body.institutionname) == 'string')
-                {
-                    user.experience.push({institutionname:req.body.institutionname,
-                    from:req.body.from,
-                    to:req.body.to,
-                    designation:req.body.designation
+
+
+            if (typeof(req.body.institutionname) == 'string') {
+                user.experience.push({
+                    institutionname: req.body.institutionname,
+                    from: req.body.from,
+                    to: req.body.to,
+                    designation: req.body.designation
                 });
             }
 
-            if(typeof(req.body.award) == 'object')
-            {
-                for(let i=0;i<req.body.award.length;i++)
-                {
-                    user.awards.push({award:req.body.award[i],year:req.body.year[i]});
-                }
-            }
-            
-           
-            if(typeof(req.body.award) == 'string')
-                {
-                user.awards.push({award:req.body.award,year:req.body.year});
-                }
-           
-
-            
-            if(typeof(req.body.registration) == 'object')
-            {
-                for(let i=0;i<req.body.registration.length;i++)
-                {
-                    user.registrations.push({registration:req.body.registration[i],regYear:req.body.regYear[i]});
+            if (typeof(req.body.award) == 'object') {
+                for (let i = 0; i < req.body.award.length; i++) {
+                    user.awards.push({ award: req.body.award[i], year: req.body.year[i] });
                 }
             }
 
-            
-               
-               if(typeof(req.body.registration) == 'string') {
-                    user.registrations.push({registration:req.body.registration,regYear:req.body.regYear});
+
+            if (typeof(req.body.award) == 'string') {
+                user.awards.push({ award: req.body.award, year: req.body.year });
+            }
+
+
+
+            if (typeof(req.body.registration) == 'object') {
+                for (let i = 0; i < req.body.registration.length; i++) {
+                    user.registrations.push({ registration: req.body.registration[i], regYear: req.body.regYear[i] });
                 }
-            
+            }
 
 
 
             if (typeof(req.body.registration) == 'string') {
-                doctor.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
+                user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
+            }
+
+
+
+
+            if (typeof(req.body.registration) == 'string') {
+                user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
             }
 
 

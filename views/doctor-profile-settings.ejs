@@ -447,7 +447,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Education</h4>
                                     <div class="education-info">
-                                        <%if(locals.user.education == 0){%>
+                                        <%if(locals.user.education.length == 0){%>
                                             <div class="row form-row education-cont">
                                                 <div class="col-12 col-md-10 col-lg-11">
                                                     <div class="row form-row">
@@ -516,7 +516,7 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Experience</h4>
                                     <div class="experience-info">
-                                        <%if(locals.user.experience == 0){%>
+                                        <%if(locals.user.experience.length == 0){%>
                                             <div class="row form-row experience-cont">
                                                 <div class="col-12 col-md-10 col-lg-11">
                                                     <div class="row form-row">

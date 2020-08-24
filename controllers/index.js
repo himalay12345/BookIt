@@ -327,31 +327,26 @@ module.exports.verify = (req, res) => {
                 return res.redirect('back');
             }
         });
-        User.findOne({ phone: req.body.phone }, function(err, user) {
-            if (user) {
-                req.flash('error', 'Account already linked with this mobile number');
-                return res.redirect('back');
-            }
-        });
     }
 
-        client
-            .verify
-            .services(config.serviceID)
-            .verifications
-            .create({
-                to: `+91${req.body.phone}`,
-                channel: 'sms'
-            }).then((data) => {
 
-                return res.render('phone-verify', {
-                    title: 'Phone verification',
-                    phone: req.body.phone,
-                    type: req.body.type
+    client
+        .verify
+        .services(config.serviceID)
+        .verifications
+        .create({
+            to: `+91${req.body.phone}`,
+            channel: 'sms'
+        }).then((data) => {
 
-                });
+            return res.render('phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                type: req.body.type
+
             });
-    
+        });
+
 
 
 }
