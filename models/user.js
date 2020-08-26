@@ -67,6 +67,22 @@ const userSchema = mongoose.Schema({
 
     twitter: {
         type: String
+
+    },
+    idproof: {
+        type: String
+    },
+    idproofname: {
+        type: String
+    },
+    degreeproof: {
+        type: String
+    },
+    degreephoto: {
+        type: String
+    },
+    clinicaddr: {
+        type: String
     },
     clinicname: {
         type: String
@@ -144,6 +160,8 @@ let storage = multer.diskStorage({
 
 //static function
 userSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
+// userSchema.statics.uploadedIDProof = multer({ storage: storage }).single('idproof');
+// userSchema.statics.uploadedDegree = multer({ storage: storage }).single('degreeproof');
 userSchema.statics.avatarPath = AVATAR_PATH;
 
 const User = mongoose.model('User', userSchema);

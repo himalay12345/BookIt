@@ -17,6 +17,7 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -251,38 +252,122 @@
                         <!-- /Profile Sidebar -->
 
                     </div>
+                   
                     <div class="col-md-7 col-lg-8 col-xl-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-6">
+                        <%if(locals.user.idproof){%>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <%}%>
+                        <form action="/user/upload-id" method="POST" enctype="multipart/form-data" id="edit_form">
+                            <!-- Basic Information -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Verify Identity Proof</h4>
+                                    <div class="row form-row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Identity Proof</label>
+                                                <select name="idproofname" class="form-control">
+                                                    <%if(locals.user.idproofname == 'Aadhaar card'){%><option selected>Aadhaar card</option><%}else{%>
+                                                    <option>Aadhaar card</option><%}%>
+                                                    <%if(locals.user.idproofname == 'PAN card'){%><option selected>PAN card</option><%}else{%>
+                                                    <option>PAN card</option><%}%>
+                                                    <%if(locals.user.idproofname == 'Driving license'){%><option selected>Driving license</option><%}else{%>
+                                                    <option>Driving license</option><%}%>
+                                                    <%if(locals.user.idproofname == 'Birth certificate'){%><option selected>Birth certificate</option><%}else{%>
+                                                    <option>Birth certificate</option><%}%>
+                                                    <%if(locals.user.idproofname == 'Transfer/School leaving/Matriculation Certificate'){%><option selected>Transfer/School leaving/Matriculation Certificate</option><%}else{%>
+                                                    <option>Transfer/School leaving/Matriculation Certificate</option><%}%>
+                                                    <%if(locals.user.idproofname == 'Ration card'){%><option selected>Ration card</option><%}else{%>
+                                                    <option>Ration card</option><%}%>
+                                                    <%if(locals.user.idproofname == 'Indian passport'){%><option selected>Indian passport</option><%}else{%>
+                                                    <option>Indian passport</option><%}%>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 ml-lg-5">
+                                            <div class="form-group">
+                                                <div class="change-avatar">
+                                                    <div class="profile-img">
+                                                        <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'"  alt="User Image">
+                                                    </div>
+                                                    <div class="upload-img">
+                                                        <div class="change-photo-btn">
+                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                        </div>
+                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                        <!-- Change Password Form -->
-                                        <form action="/user/doc-change-password" method="POST">
+                                </div>
+                            </div>
+                            </form>
+                            <%if(locals.user.degreephoto){%>
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <%}%>
+                            <form  action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form1">
+                            <div class="card">
+                                <div class="card-body">
+                                  
+                                    <h4 class="card-title">Verify Educational Degree</h4>
+                                    <h4 class="card-title"></h4>
+                                    <div class="row form-row">
+                                        <div class="col-sm-12 col-md-6">
                                             <div class="form-group">
-                                                <label>Old Password</label>
-                                                <input type="password" name="old" class="form-control">
-                                                <input type="hidden" name="phone" value="<%=locals.user.phone%>">
+                                                <label>Degree</label>
+                                                <select name="degreeproof" class="form-control">
+                                                    <%if(locals.user.degreeproof == 'MBBS – Bachelor of Medicine, Bachelor of Surgery'){%><option selected>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}else{%>
+                                                    <option>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}%>
+                                                    <%if(locals.user.degreeproof == 'BDS – Bachelor of Dental Surgery'){%><option selected>BDS – Bachelor of Dental Surgery</option><%}else{%>
+                                                    <option>BDS – Bachelor of Dental Surgery</option><%}%>
+                                                    <%if(locals.user.degreeproof == 'BAMS – Bachelor of Ayurvedic Medicine and Surgery'){%><option selected>BAMS – Bachelor of Ayurvedic Medicine and Surgery</option><%}else{%>
+                                                    <option>BAMS – Bachelor of Ayurvedic Medicine and Surgery</option><%}%>
+                                                    <%if(locals.user.degreeproof == 'BUMS – Bachelor of Unani Medicine and Surgery'){%><option selected>BUMS – Bachelor of Unani Medicine and Surgery</option><%}else{%>
+                                                    <option>BUMS – Bachelor of Unani Medicine and Surgery</option><%}%>
+                                                    <%if(locals.user.degreeproof == 'BHMS – Bachelor of Homeopathy Medicine and Surgery'){%><option selected>Bachelor of Homeopathy Medicine and Surgery</option><%}else{%>
+                                                    <option>BHMS – Bachelor of Homeopathy Medicine and Surgery</option><%}%>
+                                                    <%if(locals.user.degreeproof == 'BYNS- Bachelor of Yoga and Naturopathy Sciences'){%><option selected>BYNS- Bachelor of Yoga and Naturopathy Sciences</option><%}else{%>
+                                                    <option>BYNS- Bachelor of Yoga and Naturopathy Sciences</option><%}%>
+                                                    <%if(locals.user.degreeproof == 'B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry'){%><option selected>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}else{%>
+                                                    <option>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}%>
+                                                    </select>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4 ml-lg-5">
                                             <div class="form-group">
-                                                <label>New Password</label>
-                                                <input type="password" name="password" class="form-control">
+                                                <div class="change-avatar">
+                                                    <div class="profile-img">
+                                                        <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                                    </div>
+                                                    <div class="upload-img">
+                                                        <div class="change-photo-btn">
+                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                            <input type="file" class="upload" name="avatar" id="imageUpload1">
+                                                        </div>
+                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Confirm Password</label>
-                                                <input type="password" name="confirm" class="form-control">
-                                            </div>
-                                            <div class="submit-section">
-                                                <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                            </div>
-                                        </form>
-                                        <!-- /Change Password Form -->
+                                        </div>
+                                        
 
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </form>
                 </div>
             </div>
 
@@ -291,6 +376,7 @@
 
         <!-- Footer -->
         <footer class="footer">
+         
 
             <!-- Footer Top -->
             <div class="footer-top">
@@ -439,9 +525,23 @@
     <!-- Sticky Sidebar JS -->
     <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
     <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <!-- <script src="plugins/select2/js/select2.min.js"></script> -->
+
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+   
+    <script>
+        document.getElementById("imageUpload").onchange = function() {
+        document.getElementById("edit_form").submit();
+        };
+    </script>
+     <script>
+        document.getElementById("imageUpload1").onchange = function() {
+        document.getElementById("edit_form1").submit();
+        };
+    </script>
+   
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({

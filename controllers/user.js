@@ -75,6 +75,7 @@ module.exports.changePassword = async(req, res) => {
     req.flash('success', 'Password changed successfully!');
     return res.redirect('back');
 }
+
 module.exports.docchangePassword = async(req, res) => {
     let user = await User.findOne({ phone: req.body.phone });
     if (req.body.old != user.password) {
@@ -110,6 +111,54 @@ module.exports.resetPassword = async(req, res) => {
         return res.redirect('/login');
     }
 }
+
+module.exports.uploadId = async function(req, res)
+{
+    let user = await User.findById(req.user.id);
+    
+    User.uploadedAvatar(req, res, function(err) {
+        console.log(req.file);
+        user.idproofname = req.body.idproofname;
+        if (req.file) {
+            if (!user.idproof) {
+                user.idproof = User.avatarPath + '/' + req.file.filename;
+            } else {
+
+                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                user.idproof = User.avatarPath + '/' + req.file.filename;
+            }
+        }
+
+        user.save();
+        // console.log(user);
+    });
+    return res.redirect('back');
+
+}
+module.exports.uploadDegree = async function(req, res)
+{
+    let user = await User.findById(req.user.id);
+    
+    User.uploadedAvatar(req, res, function(err) {
+        console.log(req.file);
+        user.degreeproof = req.body.degreeproof;
+        if (req.file) {
+            if (!user.degreephoto) {
+                user.degreephoto = User.avatarPath + '/' + req.file.filename;
+            } else {
+
+                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                user.degreephoto = User.avatarPath + '/' + req.file.filename;
+            }
+        }
+
+        user.save();
+        // console.log(user);
+    });
+    return res.redirect('back');
+
+}
+
 module.exports.profileUpdate = async function(req, res) {
 
     try {
@@ -134,11 +183,11 @@ module.exports.profileUpdate = async function(req, res) {
 
             if (req.file) {
                 if (!user.avatar) {
-                    user.avatar = user.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
                 } else {
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    user.avatar = user.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
             }
 
@@ -234,7 +283,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             }
 
 
-            if (typeof(req.body.degree) == 'string') {
+            if (typeof(req.body.degree) == 'string' && req.body.degree != '') {
                 user.education.push({
                     degree: req.body.degree,
                     college: req.body.college,
@@ -255,7 +304,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             }
 
 
-            if (typeof(req.body.institutionname) == 'string') {
+            if (typeof(req.body.institutionname) == 'string' && req.body.institutionname != '') {
                 user.experience.push({
                     institutionname: req.body.institutionname,
                     from: req.body.from,
@@ -271,7 +320,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             }
 
 
-            if (typeof(req.body.award) == 'string') {
+            if (typeof(req.body.award) == 'string' && req.body.award != '') {
                 user.awards.push({ award: req.body.award, year: req.body.year });
             }
 
@@ -285,14 +334,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
 
 
-            if (typeof(req.body.registration) == 'string') {
-                user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
-            }
-
-
-
-
-            if (typeof(req.body.registration) == 'string') {
+            if (typeof(req.body.registration) == 'string' && req.body.registration != '') {
                 user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
             }
 
@@ -301,11 +343,11 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
             if (req.file) {
                 if (!user.avatar) {
-                    user.avatar = user.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
                 } else {
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    user.avatar = user.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
             }
 
