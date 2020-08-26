@@ -20,6 +20,7 @@ router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
 router.post('/change-password', userController.changePassword);
 router.post('/doc-change-password', userController.docchangePassword);
+router.post('/doc-social', userController.socialMedia);
 router.get('/delete-registration', userController.deleteRegistration);
 router.get('/delete-award', userController.deleteAward);
 router.get('/delete-experience', userController.deleteExperience);

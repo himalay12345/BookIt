@@ -283,55 +283,47 @@
                             <div class="card-body">
 
                                 <!-- Social Form -->
-                                <form>
+                                <form action="/user/doc-social" method="POST">
                                     <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
+                                        <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+
+                                            <div class="form-group col-md-4">
                                                 <label>Facebook URL</label>
-                                                <input type="text" class="form-control">
+
+                                                <input type="text" name="facebook" class="form-control">
+
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                <a href="<%=locals.user.facebook%> " target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
+                                        <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                            <div class="form-group col-md-4">
                                                 <label>Twitter URL</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="twitter" class="form-control">
+
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                <a href="<%=locals.user.twitter%> " target="_blank"><i class="fab fa-twitter"></i> </a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
+                                        <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                            <div class="form-group col-md-4">
                                                 <label>Instagram URL</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="instagram" class="form-control">
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                <a href="<%=locals.user.instagram%> " target="_blank"><i class="fab fa-instagram"></i> </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
-                                                <label>Pinterest URL</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
-                                                <label>Linkedin URL</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-8">
-                                            <div class="form-group">
-                                                <label>Youtube URL</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
+
+
+
                                     <div class="submit-section">
                                         <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
                                     </div>

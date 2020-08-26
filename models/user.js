@@ -3,8 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const AVATAR_PATH = path.join('/uploads/user/avatars');
-const newpath = path.join(__dirname,'..',AVATAR_PATH);
-if(!fs.existsSync(newpath)){
+const newpath = path.join(__dirname, '..', AVATAR_PATH);
+if (!fs.existsSync(newpath)) {
     fs.mkdirSync(newpath, { recursive: true });
 }
 
@@ -57,7 +57,15 @@ const userSchema = mongoose.Schema({
     fbid: {
         type: String
     },
-    twitterid: {
+    facebook: {
+        type: String
+    },
+    instagram: {
+        type: String
+
+    },
+
+    twitter: {
         type: String
     },
     clinicname: {
@@ -66,17 +74,17 @@ const userSchema = mongoose.Schema({
     clinicaddr: {
         type: String
     },
-  education: [{
-    degree: {
-        type: String
-    },
-    college:{
-        type:String
-    },
-    yoc:{
-        type:String
-    }
-  }],
+    education: [{
+        degree: {
+            type: String
+        },
+        college: {
+            type: String
+        },
+        yoc: {
+            type: String
+        }
+    }],
 
     awards: [{
         year: {
@@ -87,7 +95,7 @@ const userSchema = mongoose.Schema({
         }
 
     }],
-    registrations:[{
+    registrations: [{
         registration: {
             type: String
         },
