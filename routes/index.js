@@ -38,7 +38,7 @@ router.get('/privacy-policy', homeController.privacyPolicy);
 router.get('/profile-settings', homeController.profileSettings);
 router.get('/register', homeController.register);
 router.get('/reviews', homeController.reviews);
-router.get('schedule-timings', homeController.scheduleTimings);
+router.get('/schedule-timings', homeController.scheduleTimings);
 router.get('/search', homeController.search);
 router.get('/social-media', homeController.socialMedia);
 router.get('/term-condition', homeController.termCondition);

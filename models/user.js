@@ -57,17 +57,11 @@ const userSchema = mongoose.Schema({
     fbid: {
         type: String
     },
-    facebook: {
+    twitterid: {
         type: String
     },
-    instagram: {
+    clinicname: {
         type: String
-
-    },
-
-    twitter: {
-        type: String
-
     },
     idproof: {
         type: String
@@ -81,11 +75,14 @@ const userSchema = mongoose.Schema({
     degreephoto: {
         type: String
     },
-    clinicaddr: {
-        type: String
+    verifyid: {
+        type: Boolean
     },
-    clinicname: {
-        type: String
+    verifydegree: {
+        type: Boolean
+    },
+    terms: {
+        type: Boolean
     },
     clinicaddr: {
         type: String

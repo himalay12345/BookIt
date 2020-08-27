@@ -325,35 +325,54 @@ module.exports.voiceCall = (req, res) => {
     })
 }
 
-module.exports.verify = (req, res) => {
+module.exports.verify = async(req, res) => {
 
-    if (req.body.type == undefined) {
-        User.findOne({ phone: req.body.phone }, function(err, user) {
-            if (user) {
-                req.flash('error', 'Account already linked with this mobile number');
-                return res.redirect('back');
-            }
-        });
-    }
+    if (req.body.type == 'forgot') {
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.query.service
+            }).then((data) => {
 
+                return res.render('phone-verify', {
+                    title: 'Phone verification',
+                    phone: req.body.phone,
+                    type: req.body.type
 
-    client
-        .verify
-        .services(config.serviceID)
-        .verifications
-        .create({
-            to: `+91${req.body.phone}`,
-            channel: 'sms'
-        }).then((data) => {
-
-            return res.render('phone-verify', {
-                title: 'Phone verification',
-                phone: req.body.phone,
-                type: req.body.type
-
+                });
             });
-        });
+
+    } else {
 
 
+        let user = await User.findOne({ phone: req.body.phone });
+
+        if (user) {
+            req.flash('error', 'Account already linked with this mobile number');
+            return res.redirect('back');
+        } else {
+
+            client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then((data) => {
+
+                    return res.render('phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        type: req.body.type
+
+                    });
+                });
+
+        }
+    }
 
 }
