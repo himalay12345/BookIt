@@ -6,6 +6,7 @@ router.use('/user', require('./user'));
 const homeController = require('../controllers/index');
 
 router.get('/', homeController.home);
+router.get('/account-setting', homeController.accountSetting);
 router.get('/add-billing', homeController.addBilling);
 router.get('/add-prescription', homeController.addPrescription);
 router.get('/appointments', homeController.appointments);
@@ -38,7 +39,7 @@ router.get('/privacy-policy', homeController.privacyPolicy);
 router.get('/profile-settings', homeController.profileSettings);
 router.get('/register', homeController.register);
 router.get('/reviews', homeController.reviews);
-router.get('schedule-timings', homeController.scheduleTimings);
+router.get('/schedule-timings', homeController.scheduleTimings);
 router.get('/search', homeController.search);
 router.get('/social-media', homeController.socialMedia);
 router.get('/term-condition', homeController.termCondition);

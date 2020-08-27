@@ -18,6 +18,14 @@ module.exports.addPrescription = (req, res) => {
         title: 'Add Prescription'
     })
 }
+
+module.exports.accountSetting = (req, res) => {
+    return res.render('account-setting', {
+        title: 'Account Settings'
+    })
+}
+
+
 module.exports.Specialist = (req, res) => {
     return res.render('specialist', {
         title: 'Specialist user'
@@ -37,7 +45,7 @@ module.exports.blankPage = (req, res) => {
 }
 
 module.exports.booking = (req, res) => {
-    return res.render('booking', {
+    return res.render('step-process', {
         title: 'Booking'
     })
 }
@@ -325,25 +333,17 @@ module.exports.voiceCall = (req, res) => {
     })
 }
 
-module.exports.verify = (req, res) => {
+module.exports.verify = async (req, res) => {
 
-    if (req.body.type == undefined) {
-        User.findOne({ phone: req.body.phone }, function(err, user) {
-            if (user) {
-                req.flash('error', 'Account already linked with this mobile number');
-                return res.redirect('back');
-            }
-        });
-    }
-
-
-    client
+    if(req.body.type == 'forgot')
+    {
+        client
         .verify
         .services(config.serviceID)
         .verifications
         .create({
             to: `+91${req.body.phone}`,
-            channel: 'sms'
+            channel: req.query.service
         }).then((data) => {
 
             return res.render('phone-verify', {
@@ -354,6 +354,38 @@ module.exports.verify = (req, res) => {
             });
         });
 
+    }
 
+    else{
+
+
+       let user = await User.findOne({ phone: req.body.phone });
+      
+        if (user) {
+            req.flash('error', 'Account already linked with this mobile number');
+            return res.redirect('back');
+        }
+
+    else{
+
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.query.service
+            }).then((data) => {
+
+                return res.render('phone-verify', {
+                    title: 'Phone verification',
+                    phone: req.body.phone,
+                    type: req.body.type
+
+                });
+            });
+
+    }
+}
 
 }

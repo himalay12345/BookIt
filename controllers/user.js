@@ -158,6 +158,12 @@ module.exports.uploadDegree = async function(req, res)
     return res.redirect('back');
 
 }
+module.exports.acceptAgreement = async (req ,res) => {
+    let user = await User.findById(req.user.id);
+    user.terms = true;
+    user.save();
+    return res.redirect('/account-setting');
+}
 
 module.exports.profileUpdate = async function(req, res) {
 

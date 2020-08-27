@@ -75,6 +75,15 @@ const userSchema = mongoose.Schema({
     degreephoto:{
         type:String
     },
+    verifyid:{
+        type:Boolean
+    },
+    verifydegree:{
+        type:Boolean
+    },
+    terms:{
+        type:Boolean
+    },
     clinicaddr: {
         type: String
     },

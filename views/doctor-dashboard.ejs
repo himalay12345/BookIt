@@ -114,7 +114,7 @@
         <div class="breadcrumb-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="col-md-12 col-12">
+                    <div class="col-md-6 col-12" style="margin-bottom: 15px;">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
@@ -123,6 +123,21 @@
                         </nav>
                         <h2 class="breadcrumb-title">Dashboard</h2>
                     </div>
+                    <!-- <%if(!locals.user.verifyid && !locals.user.verifydegree){%>
+                    <div class="col-md-6 col-12 text-md-right">
+                        <a href="/booking" style="color: #ff1d58;font-size:1rem;font-weight: bold;background-color: white; padding: 8px 60px; border-radius: 5px;">Activate Booking Service</a>
+                    </div>
+                    <%}%> -->
+                    <!-- <%if(!locals.user.verifyid && !locals.user.verifydegree){%>
+                        <div class="col-md-6 col-12 text-md-right">
+                            <a href="/upload-documents" style="color: #ff1d58;font-size:1rem;font-weight: bold;background-color: white; padding: 8px 60px; border-radius: 5px;">Activate Booking Service</a>
+                        </div>   
+                        <%}%> -->
+                        <%if(locals.user.terms == true){%>
+                            <div class="col-md-6 col-12 text-md-right">
+                                <a href="/upload-documents" style="color: #ff1d58;font-size:1rem;font-weight: bold;color:white;background-color:rgb(0, 143, 24); padding: 8px 40px; border-radius: 5px;"><i class="fas fa-check mr-3"></i>Booking Service Activated</a>
+                            </div>   
+                            <%}%>
                 </div>
             </div>
         </div>
@@ -218,6 +233,14 @@
                                                 <span>Upload Documents</span>
                                             </a>
                                         </li>
+                                        <%if(locals.user.terms == true){%>
+                                        <li>
+                                            <a href="/account-setting">
+                                                <i class="fas fa-id-card"></i>
+                                                <span>Add Master Account</span>
+                                            </a>
+                                        </li>
+                                        <%}%>
                                         <li>
                                             <a href="/social-media">
                                                 <i class="fas fa-share-alt"></i>
