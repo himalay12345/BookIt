@@ -167,20 +167,30 @@ Version      : 1.0
             '<div class="col-12 col-md-6">' +
             '<div class="form-group">' +
             '<label>Start Time</label>' +
-            '<select class="form-control">' +
+            '<select class="form-control" name="start">' +
             '<option>12.00 am</option>' +
-            '<option>12.30 am</option>' +
             '<option>1.00 am</option>' +
+            '<option>2.00 am</option>' +
             '<option>3.00 am</option>' +
+            '<option>4.00 am</option>' +
             '<option>5.00 am</option>' +
+            '<option>6.00 am</option>' +
             '<option>7.00 am</option>' +
+            '<option>8.00 am</option>' +
             '<option>9.00 am</option>' +
+            '<option>10.00 am</option>' +
             '<option>11.00 am</option>' +
+            '<option>12.00 pm</option>' +
             '<option>1.00 pm</option>' +
+            '<option>2.00 pm</option>' +
             '<option>3.00 pm</option>' +
+            '<option>4.00 pm</option>' +
             '<option>5.00 pm</option>' +
+            '<option>6.00 pm</option>' +
             '<option>7.00 pm</option>' +
+            '<option>8.00 pm</option>' +
             '<option>9.00 pm</option>' +
+            '<option>10.00 pm</option>' +
             '<option>11.00 pm</option>' +
             '</select>' +
             '</select>' +
@@ -189,20 +199,30 @@ Version      : 1.0
             '<div class="col-12 col-md-6">' +
             '<div class="form-group">' +
             '<label>End Time</label>' +
-            '<select class="form-control">' +
+            '<select class="form-control" name="end">' +
             '<option>12.00 am</option>' +
-            '<option>12.30 am</option>' +
             '<option>1.00 am</option>' +
+            '<option>2.00 am</option>' +
             '<option>3.00 am</option>' +
+            '<option>4.00 am</option>' +
             '<option>5.00 am</option>' +
+            '<option>6.00 am</option>' +
             '<option>7.00 am</option>' +
+            '<option>8.00 am</option>' +
             '<option>9.00 am</option>' +
+            '<option>10.00 am</option>' +
             '<option>11.00 am</option>' +
+            '<option>12.00 pm</option>' +
             '<option>1.00 pm</option>' +
+            '<option>2.00 pm</option>' +
             '<option>3.00 pm</option>' +
+            '<option>4.00 pm</option>' +
             '<option>5.00 pm</option>' +
+            '<option>6.00 pm</option>' +
             '<option>7.00 pm</option>' +
+            '<option>8.00 pm</option>' +
             '<option>9.00 pm</option>' +
+            '<option>10.00 pm</option>' +
             '<option>11.00 pm</option>' +
             '</select>' +
             '</div>' +

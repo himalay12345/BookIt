@@ -99,6 +99,17 @@ const userSchema = mongoose.Schema({
     clinicaddr: {
         type: String
     },
+    schedule_time: [{
+        start: [{
+            type: String
+        }],
+        end: [{
+            type: String
+        }],
+        day: {
+            type: String
+        }
+    }],
     education: [{
         degree: {
             type: String
