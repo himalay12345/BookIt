@@ -72,6 +72,18 @@ const userSchema = mongoose.Schema({
     degreeproof: {
         type: String
     },
+    verifyid: {
+        type: Boolean
+    },
+    verifydegree: {
+        type: Boolean
+    },
+    terms: {
+        type: Boolean
+    },
+    clinicaddr: {
+        type: String
+    },
     degreephoto: {
         type: String
     },

@@ -254,6 +254,14 @@
                     </div>
                    
                     <div class="col-md-7 col-lg-8 col-xl-9">
+                        <%if(!locals.user.idproof){%>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Note!</strong> Please verify your documents to start your <a href="#" class="alert-link">online booking appointment services.</a>.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <%}%>
                         <%if(locals.user.idproof){%>
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
                             <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>

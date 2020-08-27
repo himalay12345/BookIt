@@ -20,9 +20,15 @@ router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
 router.post('/change-password', userController.changePassword);
 router.post('/doc-change-password', userController.docchangePassword);
+<<<<<<< HEAD
 router.post('/doc-social', userController.socialMedia);
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-degree', userController.uploadDegree);
+=======
+router.post('/upload-id',userController.uploadId);
+router.post('/upload-degree',userController.uploadDegree);
+router.post('/accept-agreement',userController.acceptAgreement);
+>>>>>>> 1a59c3bd8724f36a83dd3a148aae962024c4f1d1
 router.get('/delete-registration', userController.deleteRegistration);
 router.get('/delete-award', userController.deleteAward);
 router.get('/delete-experience', userController.deleteExperience);

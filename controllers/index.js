@@ -18,6 +18,14 @@ module.exports.addPrescription = (req, res) => {
         title: 'Add Prescription'
     })
 }
+
+module.exports.accountSetting = (req, res) => {
+    return res.render('account-setting', {
+        title: 'Account Settings'
+    })
+}
+
+
 module.exports.Specialist = (req, res) => {
     return res.render('specialist', {
         title: 'Specialist user'
@@ -37,7 +45,7 @@ module.exports.blankPage = (req, res) => {
 }
 
 module.exports.booking = (req, res) => {
-    return res.render('booking', {
+    return res.render('step-process', {
         title: 'Booking'
     })
 }
