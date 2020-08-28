@@ -3,8 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const AVATAR_PATH = path.join('/uploads/user/avatars');
-const newpath = path.join(__dirname,'..',AVATAR_PATH);
-if(!fs.existsSync(newpath)){
+const newpath = path.join(__dirname, '..', AVATAR_PATH);
+if (!fs.existsSync(newpath)) {
     fs.mkdirSync(newpath, { recursive: true });
 }
 
@@ -63,41 +63,64 @@ const userSchema = mongoose.Schema({
     clinicname: {
         type: String
     },
-    idproof:{
-        type:String
+    idproof: {
+        type: String
     },
-    idproofname:{
-        type:String
+    idproofname: {
+        type: String
     },
-    degreeproof:{
-        type:String
+    degreeproof: {
+        type: String
     },
-    degreephoto:{
-        type:String
+    verifyid: {
+        type: Boolean
     },
-    verifyid:{
-        type:Boolean
+    verifydegree: {
+        type: Boolean
     },
-    verifydegree:{
-        type:Boolean
-    },
-    terms:{
-        type:Boolean
+    terms: {
+        type: Boolean
     },
     clinicaddr: {
         type: String
     },
-  education: [{
-    degree: {
+    degreephoto: {
         type: String
     },
-    college:{
-        type:String
+    verifyid: {
+        type: Boolean
     },
-    yoc:{
-        type:String
-    }
-  }],
+    verifydegree: {
+        type: Boolean
+    },
+    terms: {
+        type: Boolean
+    },
+    clinicaddr: {
+        type: String
+    },
+    schedule_time: [{
+        start: [{
+            type: String
+        }],
+        end: [{
+            type: String
+        }],
+        day: {
+            type: String
+        }
+    }],
+    education: [{
+        degree: {
+            type: String
+        },
+        college: {
+            type: String
+        },
+        yoc: {
+            type: String
+        }
+    }],
 
     awards: [{
         year: {
@@ -108,7 +131,7 @@ const userSchema = mongoose.Schema({
         }
 
     }],
-    registrations:[{
+    registrations: [{
         registration: {
             type: String
         },

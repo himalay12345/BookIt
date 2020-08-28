@@ -57,6 +57,34 @@ module.exports.destroySession = function(req, res) {
     return res.redirect('/');
 }
 
+module.exports.setScheduleTiming = async function(req, res) {
+    console.log(req.body);
+    let user = await User.findById(req.user.id);
+    if (typeof(req.body.start) == 'string') {
+        user.schedule_time.push({
+            start: req.body.start,
+            end: req.body.end,
+            day: req.body.day
+        })
+    }
+
+    if (typeof(req.body.start) == 'object') {
+        for (let i = 0; i < req.body.start.length; i++) {
+            user.schedule_time.push({
+                start: req.body.start[i],
+                end: req.body.end[0]
+            })
+        }
+        user.schedule_time.push({ day: req.body.day });
+    }
+
+
+    user.save();
+    console.log(user);
+
+    return res.redirect('back');
+}
+
 module.exports.changePassword = async(req, res) => {
     let user = await User.findOne({ phone: req.body.phone });
     if (req.body.old != user.password) {
@@ -112,10 +140,9 @@ module.exports.resetPassword = async(req, res) => {
     }
 }
 
-module.exports.uploadId = async function(req, res)
-{
+module.exports.uploadId = async function(req, res) {
     let user = await User.findById(req.user.id);
-    
+
     User.uploadedAvatar(req, res, function(err) {
         console.log(req.file);
         user.idproofname = req.body.idproofname;
@@ -135,10 +162,9 @@ module.exports.uploadId = async function(req, res)
     return res.redirect('back');
 
 }
-module.exports.uploadDegree = async function(req, res)
-{
+module.exports.uploadDegree = async function(req, res) {
     let user = await User.findById(req.user.id);
-    
+
     User.uploadedAvatar(req, res, function(err) {
         console.log(req.file);
         user.degreeproof = req.body.degreeproof;
@@ -158,7 +184,7 @@ module.exports.uploadDegree = async function(req, res)
     return res.redirect('back');
 
 }
-module.exports.acceptAgreement = async (req ,res) => {
+module.exports.acceptAgreement = async(req, res) => {
     let user = await User.findById(req.user.id);
     user.terms = true;
     user.save();
@@ -209,6 +235,20 @@ module.exports.profileUpdate = async function(req, res) {
         console.log('Error', err);
         return;
     }
+
+}
+module.exports.socialMedia = async function(req, res) {
+    let user = await User.findById(req.user.id)
+    user.facebook = req.body.facebook,
+        user.instagram = req.body.instagram,
+        user.twitter = req.body.twitter
+    user.save();
+
+
+
+    req.flash('success', 'social media updated.');
+    return res.redirect('back');
+
 
 }
 

@@ -250,7 +250,8 @@ module.exports.signUp = async(req, res) => {
             req.flash('error', 'Wrong Otp');
             return res.render('phone-verify', {
                 title: 'Phone verification',
-                phone: req.body.phone
+                phone: req.body.phone,
+                type: req.body.type
             })
 
         }
@@ -269,14 +270,16 @@ module.exports.signUp = async(req, res) => {
     if (data.status == 'approved') {
         return res.render('register', {
             title: 'Register',
-            phone: req.body.phone
+            phone: req.body.phone,
+            type: req.body.type
         });
 
     } else {
         req.flash('error', 'Wrong Otp');
         return res.render('phone-verify', {
             title: 'Phone verification',
-            phone: req.body.phone
+            phone: req.body.phone,
+            type: req.body.type
         })
 
     }
@@ -290,9 +293,18 @@ module.exports.reviews = (req, res) => {
     })
 }
 
-module.exports.scheduleTimings = (req, res) => {
+module.exports.scheduleTimings = async(req, res) => {
+    let user = await (await User.findById(req.user.id)).populate('schedule_time');
+    // .populate({
+    //     path: 'schedule_time',
+    //     populate: {
+    //         path: 'start',
+    //     }
+    // });
+    console.log(user);
     return res.render('schedule-timings', {
-        title: 'Schedule Timings'
+        title: 'Schedule Timings',
+        user: user
     })
 }
 
@@ -333,41 +345,9 @@ module.exports.voiceCall = (req, res) => {
     })
 }
 
-module.exports.verify = async (req, res) => {
+module.exports.verify = async(req, res) => {
 
-    if(req.body.type == 'forgot')
-    {
-        client
-        .verify
-        .services(config.serviceID)
-        .verifications
-        .create({
-            to: `+91${req.body.phone}`,
-            channel: req.query.service
-        }).then((data) => {
-
-            return res.render('phone-verify', {
-                title: 'Phone verification',
-                phone: req.body.phone,
-                type: req.body.type
-
-            });
-        });
-
-    }
-
-    else{
-
-
-       let user = await User.findOne({ phone: req.body.phone });
-      
-        if (user) {
-            req.flash('error', 'Account already linked with this mobile number');
-            return res.redirect('back');
-        }
-
-    else{
-
+    if (req.body.type == 'forgot') {
         client
             .verify
             .services(config.serviceID)
@@ -385,7 +365,34 @@ module.exports.verify = async (req, res) => {
                 });
             });
 
+    } else {
+
+
+        let user = await User.findOne({ phone: req.body.phone });
+
+        if (user) {
+            req.flash('error', 'Account already linked with this mobile number');
+            return res.redirect('back');
+        } else {
+
+            client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then((data) => {
+                    // console.log(data);
+                    return res.render('phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        type: req.body.type
+
+                    });
+                });
+
+        }
     }
-}
 
 }
