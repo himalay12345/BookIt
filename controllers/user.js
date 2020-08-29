@@ -57,8 +57,45 @@ module.exports.destroySession = function(req, res) {
     return res.redirect('/');
 }
 
+
+module.exports.setBookingFee = async function(req, res) {
+    let user = await User.findById(req.user.id);
+    user.booking_fee = req.body.fee;
+    user.save();
+
+    return res.redirect('back');
+}
+module.exports.updateClinic = function(req, res) {
+  User.uploadedAvatar(req, res, function(err) {
+    if (err) { console.log('*******Multer Error', err); return; }
+
+    console.log(req.file);
+  });
+
+    return res.redirect('back');
+}
+
+module.exports.updateSchedule = async function(req, res) {
+   
+    
+    if((!req.body.start) ||(!req.body.end))
+    {
+        let user = await User.findById(req.user.id);
+        user.schedule_time.pull({ _id: req.body.id });
+        user.save();
+        return res.redirect('back');
+    }
+      let day = await  User.update({'schedule_time._id': req.body.id}, {'$set': {
+        'schedule_time.$.start': req.body.start,
+        'schedule_time.$.end': req.body.end
+    }});
+    return res.redirect('back');
+   
+}
+
+
 module.exports.setScheduleTiming = async function(req, res) {
-    console.log(req.body);
+ 
     let user = await User.findById(req.user.id);
     if (typeof(req.body.start) == 'string') {
         user.schedule_time.push({
@@ -69,18 +106,19 @@ module.exports.setScheduleTiming = async function(req, res) {
     }
 
     if (typeof(req.body.start) == 'object') {
-        for (let i = 0; i < req.body.start.length; i++) {
-            user.schedule_time.push({
-                start: req.body.start[i],
-                end: req.body.end[0]
-            })
-        }
-        user.schedule_time.push({ day: req.body.day });
+        // for (let i = 0; i < req.body.start.length; i++) {
+            // user.schedule_time.start.push(req.body.start[i]);
+            // user.schedule_time.end.push(req.body.end[0]);
+            user.schedule_time.push(req.body);
+
+        // }
+        // user.schedule_time.push({ day: req.body.day });
     }
+  
 
 
     user.save();
-    console.log(user);
+   
 
     return res.redirect('back');
 }
@@ -211,6 +249,8 @@ module.exports.profileUpdate = async function(req, res) {
             user.bloodgroup = req.body.bloodgroup;
             user.gender = req.body.gender;
 
+           
+
 
 
             if (req.file) {
@@ -267,6 +307,18 @@ module.exports.deleteEducation = async function(req, res) {
     req.flash('error', 'Education deleted!')
     return res.redirect('back');
 }
+module.exports.deleteClinicPhoto = async function(req, res) {
+    let user = await User.findById(req.user.id);
+    user.clinicphoto.pull(req.query.path);
+    user.save();
+
+    fs.unlinkSync(path.join(__dirname, '..', req.query.path));
+
+    req.flash('error', 'Clinic photo deleted!')
+    return res.redirect('back');
+}
+
+
 module.exports.doctorProfileUpdate = async function(req, res) {
 
     try {
@@ -292,6 +344,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.facebook = req.body.facebook;
             user.instagram = req.body.instagram;
             user.twitter = req.body.twitter;
+
+           
 
 
             if (typeof(req.body.degree) == 'object') {
@@ -360,21 +414,28 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                 user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
             }
 
+            
 
 
-
-            if (req.file) {
+            if (req.files['avatar']) {
                 if (!user.avatar) {
-                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 } else {
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' +  req.files['avatar'][0].filename;
                 }
             }
+            if (req.files['clinicphoto']) {
+                for(let i=0;i<req.files['clinicphoto'].length;i++)
+                    {
+                        user.clinicphoto.push(User.avatarPath + '/' + req.files['clinicphoto'][i].filename);
+                    }
+                }
+            
 
             user.save();
-            console.log(user);
+            // console.log(user);
 
 
         });

@@ -301,7 +301,7 @@
 									</select>
                                 </div>
                             </div>
-                            <div class="col-md-7 col-lg-12 col-xl-9" style="margin-left: -10px; padding-top: 10px;">
+                            <div class="col-md-12 col-lg-12 col-xl-12" style="margin-left: -10px; padding-top: 10px;">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Social Media</h4>
@@ -311,7 +311,7 @@
                                         <div class="row">
                                             <div class="col-md-12 col-lg-12" style="display: inline-flex;">
 
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-6">
                                                     <label>Facebook URL</label>
 
                                                     <input type="text" name="facebook" value="<%=locals.user.facebook%>" class="form-control">
@@ -324,37 +324,36 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-lg-12" style="display: inline-flex;">
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-6">
                                                     <label>Twitter URL</label>
-                                                    <input type="text" name="twitter" class="form-control">
+                                                    <input type="text" value="<%=locals.user.twitter%>" name="twitter" class="form-control">
 
                                                 </div>
                                                 <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
-                                                    <a href="<%=locals.user.twitter%> " target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                    <a href="<%=locals.user.twitter%>" target="_blank"><i class="fab fa-twitter"></i> </a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 col-lg-12" style="display: inline-flex;">
-                                                <div class="form-group col-md-4">
+                                                <div class="form-group col-md-6">
                                                     <label>Instagram URL</label>
-                                                    <input type="text" name="instagram" class="form-control">
+                                                    <input type="text" name="instagram" value="<%=locals.user.instagram%>" class="form-control">
                                                 </div>
                                                 <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
-                                                    <a href="<%=locals.user.instagram%> " target="_blank"><i class="fab fa-instagram"></i> </a>
+                                                    <a href="<%=locals.user.instagram%>" target="_blank"><i class="fab fa-instagram"></i> </a>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-                        </form>
+    
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
                         <!-- /Social Form -->
 
-                        </div>
-                        </div>
-                        </div>
+                  
                         <!-- /About Me -->
 
                         <!-- Clinic Info -->
@@ -376,6 +375,38 @@
                                     </div>
 
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Clinic Images</label>
+                                            <div class="col-md-12">
+                                              <div class="upload-container col-md-12" style="margin-left: -15px;">
+                                                <div class="border-container">
+                                                  <div class="icons fa-4x text-center" >
+                                                    <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                                                    <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                                                    <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
+                                                  </div>
+                                                  <input type="file" id="file-upload" name="clinicphoto" multiple>
+                                                  <p class="text-center" style="margin-top: -20px;">Drag and drop files here, or 
+                                                    <a href="#" id="file-browser">browse</a> your computer.</p>
+                                                </div>
+                                           
+                                            </div>
+                                          </div>                                    
+                                        </div>
+                                       
+                                    <div class="upload-wrap" style="overflow-x: auto;">
+                                        <%var i=0%>
+                                        <%for(photo of locals.user.clinicphoto){%>
+                                        <div class="upload-images mr-4">
+                                            <img src="<%=photo%>" style="width: 120px;">
+                                            <a href="/user/delete-clinic-photo/?path=<%=photo%>&index=<%=i%>" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+                                            <%i++%>
+                                        </div>
+                                        <%}%>
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                         <!-- /Clinic Info -->
@@ -880,6 +911,13 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+        $("#file-upload").css("opacity", "0");
+    
+            $("#file-browser").click(function(e) {
+              e.preventDefault();
+              $("#file-upload").trigger("click");
+            });</script>
     <script>
         document.getElementById("imageUpload").onchange = function() {
             document.getElementById("edit_form").submit();

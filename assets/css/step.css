@@ -112,7 +112,7 @@ body {
   position: relative;
   z-index: 99; }
 
-.container {
+.container1 {
   width: 1400px;
   margin: 0 auto;
   background: #fff; }
@@ -495,7 +495,7 @@ input.error {
     font-weight: bold; }
 
 @media screen and (max-width: 1024px) {
-  .container {
+  .container1 {
     width: calc(100% - 40px);
     max-width: 100%; }
 
