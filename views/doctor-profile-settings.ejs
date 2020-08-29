@@ -373,10 +373,43 @@
                                                 <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>">
                                             </div>
                                         </div>
-
+    
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Clinic Images</label>
+                                                <div class="col-md-12">
+                                                  <div class="upload-container col-md-12" style="margin-left: -15px;">
+                                                    <div class="border-container">
+                                                      <div class="icons fa-4x text-center" >
+                                                        <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                                                        <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                                                        <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
+                                                      </div>
+                                                      <input type="file" id="file-upload" name="clinicphoto" multiple>
+                                                      <p class="text-center" style="margin-top: -20px;">Drag and drop files here, or 
+                                                        <a href="#" id="file-browser">browse</a> your computer.</p>
+                                                    </div>
+                                               
+                                                </div>
+                                              </div>                                    
+                                            </div>
+                                           
+                                        <div class="upload-wrap" style="overflow-x: auto;">
+                                            <%var i=0%>
+                                            <%for(photo of locals.user.clinicphoto){%>
+                                            <div class="upload-images mr-4">
+                                                <img src="<%=photo%>" style="width: 120px;">
+                                                <a href="/user/delete-clinic-photo/?path=<%=photo%>&index=<%=i%>" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+                                                <%i++%>
+                                            </div>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
+                            
                             <!-- /Clinic Info -->
 
                             <!-- Contact Details -->
@@ -879,6 +912,13 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+        $("#file-upload").css("opacity", "0");
+    
+            $("#file-browser").click(function(e) {
+              e.preventDefault();
+              $("#file-upload").trigger("click");
+            });</script>
     <script>
         document.getElementById("imageUpload").onchange = function() {
         document.getElementById("edit_form").submit();

@@ -96,16 +96,19 @@ const userSchema = mongoose.Schema({
     terms: {
         type: Boolean
     },
-    clinicaddr: {
+    clinicphoto: [{
         type: String
+    }],
+    booking_fee:{
+        type:String
     },
     schedule_time: [{
-        start: [{
-            type: String
-        }],
-        end: [{
-            type: String
-        }],
+        start: {
+            type: Object
+        },
+        end: {
+            type: Object
+        },
         day: {
             type: String
         }
@@ -179,7 +182,12 @@ let storage = multer.diskStorage({
 });
 
 //static function
-userSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
+userSchema.statics.uploadedAvatar = multer({ storage: storage }).fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'clinicphoto', maxCount: 10 }
+  ]);
+
+
 // userSchema.statics.uploadedIDProof = multer({ storage: storage }).single('idproof');
 // userSchema.statics.uploadedDegree = multer({ storage: storage }).single('degreeproof');
 userSchema.statics.avatarPath = AVATAR_PATH;

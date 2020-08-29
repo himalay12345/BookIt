@@ -8,6 +8,7 @@ const homeController = require('../controllers/index');
 router.get('/', homeController.home);
 router.get('/account-setting', homeController.accountSetting);
 router.get('/add-billing', homeController.addBilling);
+
 router.get('/add-prescription', homeController.addPrescription);
 router.get('/appointments', homeController.appointments);
 router.get('/blank-page', homeController.blankPage);

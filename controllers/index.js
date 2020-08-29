@@ -294,14 +294,8 @@ module.exports.reviews = (req, res) => {
 }
 
 module.exports.scheduleTimings = async(req, res) => {
-    let user = await (await User.findById(req.user.id)).populate('schedule_time');
-    // .populate({
-    //     path: 'schedule_time',
-    //     populate: {
-    //         path: 'start',
-    //     }
-    // });
-    console.log(user);
+    let user = await User.findById(req.user.id).populate('schedule_time');
+
     return res.render('schedule-timings', {
         title: 'Schedule Timings',
         user: user
