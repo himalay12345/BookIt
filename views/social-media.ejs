@@ -134,21 +134,23 @@
                     <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img">
-									<img class="rounded-circle" src="img/doctors/doctor-thumb-02.jpg" width="31" alt="Darren Elder">
+                                    
+                                    <img src="<%=locals.user.avatar%>"onerror='this.src="/img/profile.png"' width="31" alt="User Image">
 								</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
-                                    <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
                                 </div>
                                 <div class="user-text">
-                                    <h6>Darren Elder</h6>
+                                    <h6>
+                                        <%=locals.user.name%>
+                                    </h6>
                                     <p class="text-muted mb-0">Doctor</p>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="/doctor-dashboard">Dashboard</a>
-                            <a class="dropdown-item" href="/doctor-profile-settings">Profile Settings</a>
+
                             <a class="dropdown-item" href="/login">Logout</a>
                         </div>
                     </li>
@@ -189,13 +191,17 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                        <img src="<%=locals.user.avatar%>"onerror='this.src="/img/profile.png"' alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
-                                        <h3>Dr. Darren Elder</h3>
+                                        <h3>Dr.
+                                            <%=locals.user.name%>
+                                        </h3>
 
                                         <div class="patient-details">
-                                            <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+                                            <h5 class="mb-0">
+                                                <%=locals.user.department%>
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -283,50 +289,50 @@
                             <div class="card-body">
 
                                 <!-- Social Form -->
-                                <form action="/user/doc-social" method="POST">
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-12" style="display: inline-flex;">
 
-                                            <div class="form-group col-md-4">
-                                                <label>Facebook URL</label>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12" style="display: inline-flex;">
 
-                                                <input type="text" name="facebook" class="form-control">
+                                        <div class="form-group col-md-4">
+                                            <label>Facebook URL</label>
 
-                                            </div>
-                                            <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
-                                                <a href="<%=locals.user.facebook%> " target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                            </div>
+                                            <input type="text" name="facebook" class="form-control">
+
+                                        </div>
+                                        <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                            <a href="<%=locals.user.facebook%> " target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-12" style="display: inline-flex;">
-                                            <div class="form-group col-md-4">
-                                                <label>Twitter URL</label>
-                                                <input type="text" name="twitter" class="form-control">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                        <div class="form-group col-md-4">
+                                            <label>Twitter URL</label>
+                                            <input type="text" name="twitter" class="form-control">
 
-                                            </div>
-                                            <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
-                                                <a href="<%=locals.user.twitter%> " target="_blank"><i class="fab fa-twitter"></i> </a>
-                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                            <a href="<%=locals.user.twitter%> " target="_blank"><i class="fab fa-twitter"></i> </a>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-12" style="display: inline-flex;">
-                                            <div class="form-group col-md-4">
-                                                <label>Instagram URL</label>
-                                                <input type="text" name="instagram" class="form-control">
-                                            </div>
-                                            <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
-                                                <a href="<%=locals.user.instagram%> " target="_blank"><i class="fab fa-instagram"></i> </a>
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                        <div class="form-group col-md-4">
+                                            <label>Instagram URL</label>
+                                            <input type="text" name="instagram" class="form-control">
+                                        </div>
+                                        <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                            <a href="<%=locals.user.instagram%> " target="_blank"><i class="fab fa-instagram"></i> </a>
                                         </div>
                                     </div>
+                                </div>
 
 
 
-                                    <div class="submit-section">
-                                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                    </div>
+                                <div class="submit-section">
+                                    <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                                </div>
                                 </form>
                                 <!-- /Social Form -->
 

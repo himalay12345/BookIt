@@ -23,7 +23,7 @@ router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
 router.post('/change-password', userController.changePassword);
 router.post('/doc-change-password', userController.docchangePassword);
-router.post('/doc-social', userController.socialMedia);
+
 router.post('/upload-id', userController.uploadId);
 router.post('/update-clinic', userController.updateClinic);
 router.post('/upload-degree', userController.uploadDegree);

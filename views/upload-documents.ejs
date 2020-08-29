@@ -110,22 +110,23 @@
                     <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img">
-									<img class="rounded-circle" src="img/doctors/doctor-thumb-02.jpg" width="31" alt="Darren Elder">
+                                <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31px" alt="User Image">
 								</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
-                                    <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
                                 </div>
                                 <div class="user-text">
-                                    <h6>Darren Elder</h6>
+                                    <h6>Dr.
+                                        <%=locals.user.name%>
+                                    </h6>
                                     <p class="text-muted mb-0">Doctor</p>
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="/doctor-dashboard">Dashboard</a>
-                            <a class="dropdown-item" href="/doctor-profile-settings">Profile Settings</a>
-                            <a class="dropdown-item" href="/login">Logout</a>
+
+                            <a class="dropdown-item" href="/user/logout">Logout</a>
                         </div>
                     </li>
                     <!-- /User Menu -->
@@ -164,13 +165,16 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"'  alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
-                                        <h3>Dr. Darren Elder</h3>
+                                        <h3>Dr.
+                                            <%=locals.user.name%> r</h3>
 
                                         <div class="patient-details">
-                                            <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
+                                            <h5 class="mb-0">
+                                                <%=locals.user.department%>
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -184,67 +188,15 @@
                                                 <span>Dashboard</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/appointments">
-                                                <i class="fas fa-calendar-check"></i>
-                                                <span>Appointments</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/my-patients">
-                                                <i class="fas fa-user-injured"></i>
-                                                <span>My Patients</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/schedule-timings">
-                                                <i class="fas fa-hourglass-start"></i>
-                                                <span>Schedule Timings</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/invoices">
-                                                <i class="fas fa-file-invoice"></i>
-                                                <span>Invoices</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/reviews">
-                                                <i class="fas fa-star"></i>
-                                                <span>Reviews</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/chat-doctor">
-                                                <i class="fas fa-comments"></i>
-                                                <span>Message</span>
-                                                <small class="unread-msg">23</small>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/doctor-profile-settings">
-                                                <i class="fas fa-user-cog"></i>
-                                                <span>Profile Settings</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/social-media">
-                                                <i class="fas fa-share-alt"></i>
-                                                <span>Social Media</span>
-                                            </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="/doctor-change-password">
-                                                <i class="fas fa-lock"></i>
-                                                <span>Change Password</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/index-2">
-                                                <i class="fas fa-sign-out-alt"></i>
-                                                <span>Logout</span>
-                                            </a>
-                                        </li>
+
+
+
+
+
+
+
+
+
                                     </ul>
                                 </nav>
                             </div>
@@ -252,34 +204,34 @@
                         <!-- /Profile Sidebar -->
 
                     </div>
-                   
+
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <%if(!locals.user.idproof){%>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Note!</strong> Please verify your documents to start your <a href="#" class="alert-link">online booking appointment services.</a>.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Note!</strong> Please verify your documents to start your <a href="#" class="alert-link">online booking appointment services.</a>.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                        </div>
-                        <%}%>
-                        <%if(locals.user.idproof){%>
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            </div>
+                            <%}%>
+                                <%if(locals.user.idproof){%>
+                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                        <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                        </div>
-                        <%}%>
-                        <form action="/user/upload-id" method="POST" enctype="multipart/form-data" id="edit_form">
-                            <!-- Basic Information -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Verify Identity Proof</h4>
-                                    <div class="row form-row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Identity Proof</label>
-                                                <select name="idproofname" class="form-control">
+                                    </div>
+                                    <%}%>
+                                        <form action="/user/upload-id" method="POST" enctype="multipart/form-data" id="edit_form">
+                                            <!-- Basic Information -->
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title">Verify Identity Proof</h4>
+                                                    <div class="row form-row">
+                                                        <div class="col-sm-12 col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Identity Proof</label>
+                                                                <select name="idproofname" class="form-control">
                                                     <%if(locals.user.idproofname == 'Aadhaar card'){%><option selected>Aadhaar card</option><%}else{%>
                                                     <option>Aadhaar card</option><%}%>
                                                     <%if(locals.user.idproofname == 'PAN card'){%><option selected>PAN card</option><%}else{%>
@@ -295,48 +247,48 @@
                                                     <%if(locals.user.idproofname == 'Indian passport'){%><option selected>Indian passport</option><%}else{%>
                                                     <option>Indian passport</option><%}%>
                                                     </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 ml-lg-5">
-                                            <div class="form-group">
-                                                <div class="change-avatar">
-                                                    <div class="profile-img">
-                                                        <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'"  alt="User Image">
-                                                    </div>
-                                                    <div class="upload-img">
-                                                        <div class="change-photo-btn">
-                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                            </div>
                                                         </div>
-                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                        <div class="col-md-4 ml-lg-5">
+                                                            <div class="form-group">
+                                                                <div class="change-avatar">
+                                                                    <div class="profile-img">
+                                                                        <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                                                    </div>
+                                                                    <div class="upload-img">
+                                                                        <div class="change-photo-btn">
+                                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                                        </div>
+                                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            </form>
-                            <%if(locals.user.degreephoto){%>
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        </form>
+                                        <%if(locals.user.degreephoto){%>
+                                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                                <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                            </div>
-                            <%}%>
-                            <form  action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form1">
-                            <div class="card">
-                                <div class="card-body">
-                                  
-                                    <h4 class="card-title">Verify Educational Degree</h4>
-                                    <h4 class="card-title"></h4>
-                                    <div class="row form-row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group">
-                                                <label>Degree</label>
-                                                <select name="degreeproof" class="form-control">
+                                            </div>
+                                            <%}%>
+                                                <form action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form1">
+                                                    <div class="card">
+                                                        <div class="card-body">
+
+                                                            <h4 class="card-title">Verify Educational Degree</h4>
+                                                            <h4 class="card-title"></h4>
+                                                            <div class="row form-row">
+                                                                <div class="col-sm-12 col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Degree</label>
+                                                                        <select name="degreeproof" class="form-control">
                                                     <%if(locals.user.degreeproof == 'MBBS – Bachelor of Medicine, Bachelor of Surgery'){%><option selected>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}else{%>
                                                     <option>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}%>
                                                     <%if(locals.user.degreeproof == 'BDS – Bachelor of Dental Surgery'){%><option selected>BDS – Bachelor of Dental Surgery</option><%}else{%>
@@ -352,224 +304,224 @@
                                                     <%if(locals.user.degreeproof == 'B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry'){%><option selected>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}else{%>
                                                     <option>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}%>
                                                     </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 ml-lg-5">
-                                            <div class="form-group">
-                                                <div class="change-avatar">
-                                                    <div class="profile-img">
-                                                        <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
-                                                    </div>
-                                                    <div class="upload-img">
-                                                        <div class="change-photo-btn">
-                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" class="upload" name="avatar" id="imageUpload1">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 ml-lg-5">
+                                                                    <div class="form-group">
+                                                                        <div class="change-avatar">
+                                                                            <div class="profile-img">
+                                                                                <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                                                            </div>
+                                                                            <div class="upload-img">
+                                                                                <div class="change-photo-btn">
+                                                                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                                    <input type="file" class="upload" name="avatar" id="imageUpload1">
+                                                                                </div>
+                                                                                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
                                                         </div>
-                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                </div>
-            </div>
-
-        </div>
-        <!-- /Page Content -->
-
-        <!-- Footer -->
-        <footer class="footer">
-         
-
-            <!-- Footer Top -->
-            <div class="footer-top">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-about">
-                                <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
-                                </div>
-                                <div class="footer-about-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <div class="social-icon">
-                                        <ul>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
-                                <ul>
-                                    <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                                    <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                    <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                    <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-                                </ul>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Doctors</h2>
-                                <ul>
-                                    <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-                                    <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                                    <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                    <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                    <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-                                </ul>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-contact">
-                                <h2 class="footer-title">Contact Us</h2>
-                                <div class="footer-contact-info">
-                                    <div class="footer-address">
-                                        <span><i class="fas fa-map-marker-alt"></i></span>
-                                        <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
-                                    </div>
-                                    <p>
-                                        <i class="fas fa-phone-alt"></i> +1 315 369 5943
-                                    </p>
-                                    <p class="mb-0">
-                                        <i class="fas fa-envelope"></i> doccure@example.com
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
+                                                </form>
                     </div>
                 </div>
+
             </div>
-            <!-- /Footer Top -->
+            <!-- /Page Content -->
 
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="container-fluid">
+            <!-- Footer -->
+            <footer class="footer">
 
-                    <!-- Copyright -->
-                    <div class="copyright">
+
+                <!-- Footer Top -->
+                <div class="footer-top">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="copyright-text">
-                                    <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
+                            <div class="col-lg-3 col-md-6">
 
-                                <!-- Copyright Menu -->
-                                <div class="copyright-menu">
-                                    <ul class="policy-menu">
-                                        <li><a href="/term-condition">Terms and Conditions</a></li>
-                                        <li><a href="/privacy-policy">Policy</a></li>
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-about">
+                                    <div class="footer-logo">
+                                        <img src="img/footer-logo.png" alt="logo">
+                                    </div>
+                                    <div class="footer-about-content">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                        <div class="social-icon">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">For Patients</h2>
+                                    <ul>
+                                        <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
+                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                        <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                                        <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
+                                        <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                     </ul>
                                 </div>
-                                <!-- /Copyright Menu -->
+                                <!-- /Footer Widget -->
 
                             </div>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">For Doctors</h2>
+                                    <ul>
+                                        <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
+                                        <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
+                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                        <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                                        <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-contact">
+                                    <h2 class="footer-title">Contact Us</h2>
+                                    <div class="footer-contact-info">
+                                        <div class="footer-address">
+                                            <span><i class="fas fa-map-marker-alt"></i></span>
+                                            <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
+                                        </div>
+                                        <p>
+                                            <i class="fas fa-phone-alt"></i> +1 315 369 5943
+                                        </p>
+                                        <p class="mb-0">
+                                            <i class="fas fa-envelope"></i> doccure@example.com
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
                         </div>
                     </div>
-                    <!-- /Copyright -->
-
                 </div>
-            </div>
-            <!-- /Footer Bottom -->
+                <!-- /Footer Top -->
 
-        </footer>
-        <!-- /Footer -->
+                <!-- Footer Bottom -->
+                <div class="footer-bottom">
+                    <div class="container-fluid">
 
-    </div>
-    <!-- /Main Wrapper -->
+                        <!-- Copyright -->
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="copyright-text">
+                                        <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
 
-    <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+                                    <!-- Copyright Menu -->
+                                    <div class="copyright-menu">
+                                        <ul class="policy-menu">
+                                            <li><a href="/term-condition">Terms and Conditions</a></li>
+                                            <li><a href="/privacy-policy">Policy</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /Copyright Menu -->
 
-    <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Copyright -->
 
-    <!-- Sticky Sidebar JS -->
-    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
-    <!-- <script src="plugins/select2/js/select2.min.js"></script> -->
+                    </div>
+                </div>
+                <!-- /Footer Bottom -->
+
+            </footer>
+            <!-- /Footer -->
+
+        </div>
+        <!-- /Main Wrapper -->
+
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Sticky Sidebar JS -->
+        <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+        <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+        <!-- <script src="plugins/select2/js/select2.min.js"></script> -->
 
 
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
-   
-    <script>
-        document.getElementById("imageUpload").onchange = function() {
-        document.getElementById("edit_form").submit();
-        };
-    </script>
-     <script>
-        document.getElementById("imageUpload1").onchange = function() {
-        document.getElementById("edit_form1").submit();
-        };
-    </script>
-   
-    <script>
-        <%if(flash.success && flash.success.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.success%>',
-            type: 'success',
-            layout: 'topRight',
-            timeout: 1500
-        }).show();
-        <%}%>
-        <%if(flash.error && flash.error.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
-    </script>
+        <!-- Custom JS -->
+        <script src="js/script.js"></script>
+
+        <script>
+            document.getElementById("imageUpload").onchange = function() {
+                document.getElementById("edit_form").submit();
+            };
+        </script>
+        <script>
+            document.getElementById("imageUpload1").onchange = function() {
+                document.getElementById("edit_form1").submit();
+            };
+        </script>
+
+        <script>
+            <%if(flash.success && flash.success.length>0){%>
+            new Noty({
+                theme: 'metroui',
+                text: '<%=flash.success%>',
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+            <%}%>
+            <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                theme: 'metroui',
+                text: '<%=flash.error%>',
+                type: 'error',
+                layout: 'topRight',
+                timeout: 3000
+            }).show();
+            <%}%>
+        </script>
 
 </body>
 

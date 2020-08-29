@@ -277,20 +277,7 @@ module.exports.profileUpdate = async function(req, res) {
     }
 
 }
-module.exports.socialMedia = async function(req, res) {
-    let user = await User.findById(req.user.id)
-    user.facebook = req.body.facebook,
-        user.instagram = req.body.instagram,
-        user.twitter = req.body.twitter
-    user.save();
 
-
-
-    req.flash('success', 'social media updated.');
-    return res.redirect('back');
-
-
-}
 
 module.exports.deleteRegistration = async function(req, res) {
     let user = await User.findById(req.user.id);
@@ -354,6 +341,9 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.phone = req.body.phone;
             user.gender = req.body.gender;
             user.dob = req.body.dob;
+            user.facebook = req.body.facebook;
+            user.instagram = req.body.instagram;
+            user.twitter = req.body.twitter;
 
            
 

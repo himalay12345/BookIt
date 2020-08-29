@@ -57,7 +57,13 @@ const userSchema = mongoose.Schema({
     fbid: {
         type: String
     },
-    twitterid: {
+    twitter: {
+        type: String
+    },
+    facebook: {
+        type: String
+    },
+    instagram: {
         type: String
     },
     clinicname: {
