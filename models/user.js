@@ -105,11 +105,29 @@ const userSchema = mongoose.Schema({
     approve: {
         type: Boolean
     },
+    bank: {
+        bankname: {
+            type: String
+        },
+        accountholdername: {
+            type: String
+        },
+        accountnumber: {
+            type: String
+        },
+        ifsccode: {
+            type: String
+        },
+
+    },
+    terms: {
+        type: Boolean
+    },
     clinicphoto: [{
         type: String
     }],
-    booking_fee:{
-        type:String
+    booking_fee: {
+        type: String
     },
     schedule_time: [{
         start: {
@@ -194,7 +212,7 @@ let storage = multer.diskStorage({
 userSchema.statics.uploadedAvatar = multer({ storage: storage }).fields([
     { name: 'avatar', maxCount: 1 },
     { name: 'clinicphoto', maxCount: 10 }
-  ]);
+]);
 
 
 // userSchema.statics.uploadedIDProof = multer({ storage: storage }).single('idproof');

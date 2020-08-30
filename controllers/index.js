@@ -43,9 +43,13 @@ module.exports.blankPage = (req, res) => {
         title: 'Blank'
     })
 }
-
+module.exports.bankDetails = (req, res) => {
+    return res.render('bank-details', {
+        title: 'Bank Details'
+    })
+}
 module.exports.booking = (req, res) => {
-    return res.render('step-process', {
+    return res.render('booking', {
         title: 'Booking'
     })
 }
