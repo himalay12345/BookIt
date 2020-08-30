@@ -17,10 +17,15 @@
 
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <!-- <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
 
     <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/style1.css">
+
     <link rel="stylesheet" href="css/style.css">
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -153,10 +158,112 @@
                             </li>
                             <%}%>
                 </ul>
+                <ul class="nav user-menu">
+
+                    <!-- Notifications -->
+                    <li class="nav-item dropdown noti-dropdown">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="far fa-bell" style="color: black; margin-left: 15px;"></i> <span class="badge badge-pill">1</span>
+                        </a>
+                        <div class="dropdown-menu notifications">
+                            <div class="topnav-dropdown-header">
+                                <span class="notification-title">Notifications</span>
+                                <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                            </div>
+                            <div class="noti-content">
+                                <ul class="notification-list">
+                                    <%if(locals.user.approve == true){%>
+
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span></p>
+                                                    <p class="noti-time"><span class="notification-time"></span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <%}%>
+                                    <!-- <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="/img/patients/patient1.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
+                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="/img/patients/patient2.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
+                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="/img/patients/patient3.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
+                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <div class="topnav-dropdown-footer">
+                                <a href="#">View all Notifications</a>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- /Notifications -->
+    
+                    <!-- User Menu -->
+                    <!-- <li class="nav-item dropdown has-arrow">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <span class="user-img"><img class="rounded-circle" src="/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="user-header">
+                                <div class="avatar avatar-sm">
+                                    <img src="/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                </div>
+                                <div class="user-text">
+                                    <h6>Ryan Taylor</h6>
+                                    <p class="text-muted mb-0">Administrator</p>
+                                </div>
+                            </div>
+                            <a class="dropdown-item" href="/profile">My Profile</a>
+                            <a class="dropdown-item" href="/settings">Settings</a>
+                            <a class="dropdown-item" href="/login">Logout</a>
+                        </div>
+                    </li> -->
+                    <!-- /User Menu -->
+    
+                </ul>
                 <%if(locals.user){%>
                     <%if(locals.user.type == 'Doctor'){%>
                         <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
                             <ul class="main-nav amain-nav">
+                                
                                 <li class="has-submenu ahas-submenu">
                                     <a href="#">
                                         <span class="user-img">
@@ -215,7 +322,7 @@
         <!-- /Header -->
       
         <!-- Home Banner -->
-        <section class="section section-search">
+        <section class="section section-search" style="margin-top: 100px;">
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <form action="/user/update-type" method="POST">
@@ -1011,6 +1118,7 @@
     <script src="js/slick.js"></script>
 
     <!-- Custom JS -->
+    <script src="/js/script1.js"></script>
     <script src="js/script.js"></script>
  
 

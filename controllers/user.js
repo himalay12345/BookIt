@@ -65,15 +65,7 @@ module.exports.setBookingFee = async function(req, res) {
 
     return res.redirect('back');
 }
-module.exports.updateClinic = function(req, res) {
-  User.uploadedAvatar(req, res, function(err) {
-    if (err) { console.log('*******Multer Error', err); return; }
 
-    console.log(req.file);
-  });
-
-    return res.redirect('back');
-}
 
 module.exports.updateSchedule = async function(req, res) {
    
@@ -182,16 +174,22 @@ module.exports.uploadId = async function(req, res) {
     let user = await User.findById(req.user.id);
 
     User.uploadedAvatar(req, res, function(err) {
-        console.log(req.file);
+        // console.log(req.file);
         user.idproofname = req.body.idproofname;
-        if (req.file) {
+        if (req.files['avatar']) {
             if (!user.idproof) {
-                user.idproof = User.avatarPath + '/' + req.file.filename;
+                user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
+            
             } else {
 
-                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                user.idproof = User.avatarPath + '/' + req.file.filename;
+                fs.unlinkSync(path.join(__dirname, '..', user.idproof));
+                user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
             }
+        }
+
+        if(user.degreeproof)
+        {
+            user.request = true;
         }
 
         user.save();
@@ -204,16 +202,21 @@ module.exports.uploadDegree = async function(req, res) {
     let user = await User.findById(req.user.id);
 
     User.uploadedAvatar(req, res, function(err) {
-        console.log(req.file);
+        // console.log(req.files);
         user.degreeproof = req.body.degreeproof;
-        if (req.file) {
+        if (req.files['avatar']) {
             if (!user.degreephoto) {
-                user.degreephoto = User.avatarPath + '/' + req.file.filename;
+                user.degreephoto = User.avatarPath + '/' + req.files['avatar'][0].filename;
             } else {
 
-                fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                user.degreephoto = User.avatarPath + '/' + req.file.filename;
+                fs.unlinkSync(path.join(__dirname, '..', user.degreephoto));
+                user.degreephoto = User.avatarPath + '/' + req.files['avatar'][0].filename;
             }
+        }
+
+        if(user.idproof)
+        {
+            user.request = true;
         }
 
         user.save();
@@ -253,13 +256,13 @@ module.exports.profileUpdate = async function(req, res) {
 
 
 
-            if (req.file) {
+            if (req.files['avatar']) {
                 if (!user.avatar) {
-                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 } else {
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 }
             }
 

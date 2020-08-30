@@ -1,6 +1,25 @@
+const User = require('../models/user');
+
 module.exports.appointmentList = (req, res) => {
     return res.render('a-appointment-list', {
         title: 'Appointment List'
+    })
+}
+module.exports.applicationRequest = async (req, res) => {
+    let user = await User.find({request:true});
+    return res.render('a-application-request', {
+        title: 'Application Request',
+        user:user
+    })
+}
+module.exports.approveDocuments = async (req, res) => {
+    let users = await User.findById(req.body.id);
+    let user = await User.find({request:true});
+    users.approve = true;
+    users.save();
+    return res.render('a-application-request', {
+        title: 'Application Request',
+        user:user
     })
 }
 module.exports.blankPage = (req, res) => {
@@ -98,9 +117,11 @@ module.exports.patientList = (req, res) => {
         title: 'Patient List'
     })
 }
-module.exports.profile = (req, res) => {
+module.exports.profile = async (req, res) => {
+    let user = await User.findById(req.query.id);
     return res.render('a-profile', {
-        title: 'Profile'
+        title: 'Profile',
+        user:user
     })
 }
 module.exports.register = (req, res) => {

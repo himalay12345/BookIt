@@ -101,6 +101,13 @@ module.exports.doctorChangePassword = (req, res) => {
     })
 }
 
+module.exports.doctorTermsAndCondition = (req, res) => {
+    return res.render('doctor-terms-and-condition', {
+        title: 'Terms And Condition'
+    })
+}
+
+
 module.exports.doctorDashboard = (req, res) => {
     return res.render('doctor-dashboard', {
         title: 'user Dashboard'

@@ -87,6 +87,9 @@ const userSchema = mongoose.Schema({
     terms: {
         type: Boolean
     },
+    request: {
+        type: Boolean
+    },
     clinicaddr: {
         type: String
     },
@@ -99,7 +102,7 @@ const userSchema = mongoose.Schema({
     verifydegree: {
         type: Boolean
     },
-    terms: {
+    approve: {
         type: Boolean
     },
     clinicphoto: [{
