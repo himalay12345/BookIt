@@ -17,12 +17,13 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', { failur
 router.post('/profile/update', userController.profileUpdate);
 router.post('/update-type', userController.updateType);
 router.post('/set-schedule-timing', userController.setScheduleTiming);
-router.post('/update-schedule',userController.updateSchedule);
-router.post('/set-booking-fee',userController.setBookingFee);
+router.post('/update-schedule', userController.updateSchedule);
+router.post('/set-booking-fee', userController.setBookingFee);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
 router.post('/change-password', userController.changePassword);
 router.post('/doc-change-password', userController.docchangePassword);
+router.post('/bank-details', userController.bankDetails);
 
 router.post('/upload-id', userController.uploadId);
 router.post('/update-clinic', userController.updateClinic);
@@ -32,6 +33,6 @@ router.get('/delete-registration', userController.deleteRegistration);
 router.get('/delete-award', userController.deleteAward);
 router.get('/delete-experience', userController.deleteExperience);
 router.get('/delete-education', userController.deleteEducation);
-router.get('/delete-clinic-photo',userController.deleteClinicPhoto);
+router.get('/delete-clinic-photo', userController.deleteClinicPhoto);
 
 module.exports = router;

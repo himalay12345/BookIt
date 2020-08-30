@@ -65,37 +65,72 @@ module.exports.setBookingFee = async function(req, res) {
 
     return res.redirect('back');
 }
-module.exports.updateClinic = function(req, res) {
-  User.uploadedAvatar(req, res, function(err) {
-    if (err) { console.log('*******Multer Error', err); return; }
+module.exports.bankDetails = async function(req, res) {
+    if (!req.body.bankname) {
+        req.flash('error', 'Please Fill all the  fields');
+        return res.redirect('back');
+    }
+    if (!req.body.accountnumber) {
+        req.flash('error', 'Please Fill all the  fields');
+        return res.redirect('back');
+    }
+    if (!req.body.accountholdername) {
+        req.flash('error', 'Please Fill all the  fields');
+        return res.redirect('back');
+    }
+    if (!req.body.ifsccode) {
+        req.flash('error', 'Please Fill all the  fields');
+        return res.redirect('back');
+    }
+    let user = await User.findById(req.user.id);
+    user.bank = {
+            bankname: req.body.bankname,
+            accountnumber: req.body.accountnumber,
+            accountholdername: req.body.accountholdername,
+            ifsccode: req.body.ifsccode
+        }
+        // user.bankname = req.body.bankname;
+        // user.accountnumber = req.body.accountnumber;
+        // user.accountholdername = req.body.accountholdername;
+        // user.ifsccode = req.body.ifsccode;
+    console.log(req.body);
+    user.save();
 
-    console.log(req.file);
-  });
+    req.flash('success', 'Bank Detials Updated');
+    return res.redirect('back');
+}
+module.exports.updateClinic = function(req, res) {
+    User.uploadedAvatar(req, res, function(err) {
+        if (err) { console.log('*******Multer Error', err); return; }
+
+        console.log(req.file);
+    });
 
     return res.redirect('back');
 }
 
 module.exports.updateSchedule = async function(req, res) {
-   
-    
-    if((!req.body.start) ||(!req.body.end))
-    {
+
+
+    if ((!req.body.start) || (!req.body.end)) {
         let user = await User.findById(req.user.id);
         user.schedule_time.pull({ _id: req.body.id });
         user.save();
         return res.redirect('back');
     }
-      let day = await  User.update({'schedule_time._id': req.body.id}, {'$set': {
-        'schedule_time.$.start': req.body.start,
-        'schedule_time.$.end': req.body.end
-    }});
+    let day = await User.update({ 'schedule_time._id': req.body.id }, {
+        '$set': {
+            'schedule_time.$.start': req.body.start,
+            'schedule_time.$.end': req.body.end
+        }
+    });
     return res.redirect('back');
-   
+
 }
 
 
 module.exports.setScheduleTiming = async function(req, res) {
- 
+
     let user = await User.findById(req.user.id);
     if (typeof(req.body.start) == 'string') {
         user.schedule_time.push({
@@ -107,18 +142,18 @@ module.exports.setScheduleTiming = async function(req, res) {
 
     if (typeof(req.body.start) == 'object') {
         // for (let i = 0; i < req.body.start.length; i++) {
-            // user.schedule_time.start.push(req.body.start[i]);
-            // user.schedule_time.end.push(req.body.end[0]);
-            user.schedule_time.push(req.body);
+        // user.schedule_time.start.push(req.body.start[i]);
+        // user.schedule_time.end.push(req.body.end[0]);
+        user.schedule_time.push(req.body);
 
         // }
         // user.schedule_time.push({ day: req.body.day });
     }
-  
+
 
 
     user.save();
-   
+
 
     return res.redirect('back');
 }
@@ -249,7 +284,7 @@ module.exports.profileUpdate = async function(req, res) {
             user.bloodgroup = req.body.bloodgroup;
             user.gender = req.body.gender;
 
-           
+
 
 
 
@@ -345,7 +380,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.instagram = req.body.instagram;
             user.twitter = req.body.twitter;
 
-           
+
 
 
             if (typeof(req.body.degree) == 'object') {
@@ -414,7 +449,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                 user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
             }
 
-            
+
 
 
             if (req.files['avatar']) {
@@ -423,16 +458,15 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                 } else {
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    user.avatar = User.avatarPath + '/' +  req.files['avatar'][0].filename;
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 }
             }
             if (req.files['clinicphoto']) {
-                for(let i=0;i<req.files['clinicphoto'].length;i++)
-                    {
-                        user.clinicphoto.push(User.avatarPath + '/' + req.files['clinicphoto'][i].filename);
-                    }
+                for (let i = 0; i < req.files['clinicphoto'].length; i++) {
+                    user.clinicphoto.push(User.avatarPath + '/' + req.files['clinicphoto'][i].filename);
                 }
-            
+            }
+
 
             user.save();
             // console.log(user);

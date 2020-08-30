@@ -179,6 +179,20 @@
                                                 <span>Dashboard</span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="/upload-documents">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Upload Document</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/bank-details">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Bank Details</span>
+
+                                            </a>
+                                        </li>
+
 
 
 
@@ -345,394 +359,394 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                     </div>
-                                    
+
                                 </div>
                             </div>
-                            
-                        <!-- /Social Form -->
 
-                  
-                        <!-- /About Me -->
+                            <!-- /Social Form -->
 
-                        <!-- Clinic Info -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Clinic Info</h4>
-                                <div class="row form-row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Clinic Name</label>
-                                            <input type="text" placeholder="Enter the Name" name="clinicname" class="form-control" value="<%=locals.user.clinicname%>">
+
+                            <!-- /About Me -->
+
+                            <!-- Clinic Info -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Clinic Info</h4>
+                                    <div class="row form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Clinic Name</label>
+                                                <input type="text" placeholder="Enter the Name" name="clinicname" class="form-control" value="<%=locals.user.clinicname%>">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Clinic Address</label>
-                                            <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Clinic Address</label>
+                                                <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Clinic Images</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Clinic Images</label>
                                             <div class="col-md-12">
-                                              <div class="upload-container col-md-12" style="margin-left: -15px;">
-                                                <div class="border-container">
-                                                  <div class="icons fa-4x text-center" >
-                                                    <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
-                                                    <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
-                                                    <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
-                                                  </div>
-                                                  <input type="file" id="file-upload" name="clinicphoto" multiple>
-                                                  <p class="text-center" style="margin-top: -20px;">Drag and drop files here, or 
-                                                    <a href="#" id="file-browser">browse</a> your computer.</p>
-                                                </div>
-                                           
-                                            </div>
-                                          </div>                                    
-                                        </div>
-                                       
-                                    <div class="upload-wrap" style="overflow-x: auto;">
-                                        <%var i=0%>
-                                        <%for(photo of locals.user.clinicphoto){%>
-                                        <div class="upload-images mr-4">
-                                            <img src="<%=photo%>" style="width: 120px;">
-                                            <a href="/user/delete-clinic-photo/?path=<%=photo%>&index=<%=i%>" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-                                            <%i++%>
-                                        </div>
-                                        <%}%>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <!-- /Clinic Info -->
-
-                        <!-- Contact Details -->
-                        <div class="card contact-card">
-                            <div class="card-body">
-                                <h4 class="card-title">Contact Details</h4>
-                                <div class="row form-row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.address%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">City</label>
-                                            <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.city%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">State / Province</label>
-                                            <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.state%>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Country</label>
-                                            <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.country%>">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label">Postal Code</label>
-                                            <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.pincode%>">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Contact Details -->
-
-                        <!-- Pricing -->
-                        <!-- /Pricing -->
-
-                        <!-- Services and Specialization -->
-                        <div class="card services-card">
-                            <div class="card-body">
-                                <h4 class="card-title">Services and Specialization</h4>
-                                <div class="form-group">
-                                    <label>Services</label>
-                                    <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services">
-                                    <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
-                                </div>
-                                <div class="form-group mb-0">
-                                    <label>Specialization </label>
-                                    <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist">
-                                    <small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Services and Specialization -->
-
-                        <!-- Education -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Education</h4>
-                                <div class="education-info">
-                                    <%if(locals.user.education.length == 0){%>
-                                        <div class="row form-row education-cont">
-                                            <div class="col-12 col-md-10 col-lg-11">
-                                                <div class="row form-row">
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>Degree</label>
-                                                            <input type="text" name="degree" placeholder="Enter Degree" class="form-control">
+                                                <div class="upload-container col-md-12" style="margin-left: -15px;">
+                                                    <div class="border-container">
+                                                        <div class="icons fa-4x text-center">
+                                                            <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                                                            <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                                                            <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                                         </div>
+                                                        <input type="file" id="file-upload" name="clinicphoto" multiple>
+                                                        <p class="text-center" style="margin-top: -20px;">Drag and drop files here, or
+                                                            <a href="#" id="file-browser">browse</a> your computer.</p>
                                                     </div>
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>College/Institute</label>
-                                                            <input type="text" name="college" placeholder="Enter College/Institute" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>Year of Completion</label>
-                                                            <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control">
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                        <%}else{%>
-                                            <%for(temp of locals.user.education){%>
-                                                <div class="row form-row education-cont">
-                                                    <div class="col-12 col-md-10 col-lg-11">
-                                                        <div class="row form-row">
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Degree</label>
-                                                                    <input type="text" value="<%=temp.degree%>" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>College/Institute</label>
-                                                                    <input type="text" value="<%=temp.college%>" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Year of Completion</label>
-                                                                    <input type="text" value="<%=temp.yoc%>" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-2 col-lg-1">
-                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                                                        <a href="/user/delete-education/?id=<%=temp._id%>" class="btn btn-danger a-trash"><i class="far fa-trash-alt"></i></a>
-                                                    </div>
-                                                </div>
-                                                <%}}%>
-                                </div>
-                                <div class="add-more">
-                                    <a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Education -->
 
-                        <!-- Experience -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Experience</h4>
-                                <div class="experience-info">
-                                    <%if(locals.user.experience.length == 0){%>
-                                        <div class="row form-row experience-cont">
-                                            <div class="col-12 col-md-10 col-lg-11">
-                                                <div class="row form-row">
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>Institution Name</label>
-                                                            <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="">
-                                                        </div>
+                                        <div class="upload-wrap" style="overflow-x: auto;">
+                                            <%var i=0%>
+                                                <%for(photo of locals.user.clinicphoto){%>
+                                                    <div class="upload-images mr-4">
+                                                        <img src="<%=photo%>" style="width: 120px;">
+                                                        <a href="/user/delete-clinic-photo/?path=<%=photo%>&index=<%=i%>" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+                                                        <%i++%>
                                                     </div>
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>From</label>
-                                                            <input type="Number" placeholder="From" name="from" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>To</label>
-                                                            <input type="Number" placeholder="To" name="to" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-6 col-lg-4">
-                                                        <div class="form-group">
-                                                            <label>Designation</label>
-                                                            <input type="text" placeholder="Designation" name="designation" class="form-control" value="">
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%}else{%>
-                                            <%for(temp of locals.user.experience){%>
-                                                <div class="row form-row experience-cont">
-                                                    <div class="col-12 col-md-10 col-lg-11">
-                                                        <div class="row form-row">
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Institution Name</label>
-                                                                    <input type="text" placeholder="Enter the Name" class="form-control" value="<%=temp.institutionname%>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>From</label>
-                                                                    <input type="Number" value="<%=temp.from%>" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>To</label>
-                                                                    <input type="Number" value="<%=temp.to%>" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12 col-md-6 col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label>Designation</label>
-                                                                    <input type="text" class="form-control" value="<%=temp.designation%>">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-2 col-lg-1">
-                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                                                        <a href="/user/delete-experience/?id=<%=temp._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
-                                                    </div>
-                                                </div>
-                                                <%}}%>
-                                </div>
-                                <div class="add-more">
-                                    <a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Experience -->
-
-                        <!-- Awards -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Awards</h4>
-                                <div class="awards-info">
-                                    <%if(locals.user.awards.length == 0){%>
-                                        <div class="row form-row awards-cont">
-                                            <div class="col-12 col-md-5">
-                                                <div class="form-group">
-                                                    <label>Awards</label>
-                                                    <input type="text" class="form-control" name="award" placeholder="Enter Awards" value="">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-5">
-                                                <div class="form-group">
-                                                    <label>Year</label>
-                                                    <input type="text" placeholder="Enter Year" name="year" value="" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%}else{%>
-                                            <%for(temp of locals.user.awards){%>
-                                                <div class="row form-row awards-cont">
-                                                    <div class="col-12 col-md-5">
-                                                        <div class="form-group">
-                                                            <label>Awards</label>
-                                                            <input type="text" class="form-control" placeholder="Enter Awards" value="<%=temp.award%>">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-5">
-                                                        <div class="form-group">
-                                                            <label>Year</label>
-                                                            <input type="text" placeholder="Enter Year" value="<%=temp.year%>" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-2 col-lg-1">
-                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                                                        <a href="/user/delete-award/?id=<%=temp._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
-                                                    </div>
-                                                </div>
-                                                <%}}%>
-                                </div>
-                                <div class="add-more">
-                                    <a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- /Awards -->
-
-                        <!-- Memberships -->
-
-                        <!-- /Memberships -->
-
-                        <!-- Registrations -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Registrations</h4>
-                                <div class="registrations-info">
-                                    <%if(locals.user.registrations.length == 0){%>
-                                        <div class="row form-row reg-cont">
-                                            <div class="col-12 col-md-5">
-                                                <div class="form-group">
-                                                    <label>Registrations</label>
-                                                    <input type="text" placeholder="Enter Registrations" name="registration" value="" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-5">
-                                                <div class="form-group">
-                                                    <label>Year</label>
-                                                    <input type="text" placeholder="Enter Year" name="regYear" value="" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%}else{%>
-                                            <%for(reg of locals.user.registrations){%>
-                                                <div class="row form-row reg-cont">
-                                                    <div class="col-12 col-md-5">
-                                                        <div class="form-group">
-                                                            <label>Registrations</label>
-                                                            <input type="text" value="<%=reg.registration%>" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-5">
-                                                        <div class="form-group">
-                                                            <label>Year</label>
-                                                            <input type="text" value="<%=reg.regYear%>" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 col-md-2 col-lg-1">
-                                                        <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                                                        <a href="/user/delete-registration/?id=<%=reg._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
-                                                    </div>
-                                                </div>
-                                                <%}%>
                                                     <%}%>
-                                </div>
-                                <div class="add-more">
-                                    <a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <!-- /Registrations -->
+                            <!-- /Clinic Info -->
 
-                        <div class="submit-section submit-btn-bottom">
-                            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                        </div>
+                            <!-- Contact Details -->
+                            <div class="card contact-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Contact Details</h4>
+                                    <div class="row form-row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.address%>">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">City</label>
+                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.city%>">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">State / Province</label>
+                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.state%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Country</label>
+                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.country%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Postal Code</label>
+                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.pincode%>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Contact Details -->
+
+                            <!-- Pricing -->
+                            <!-- /Pricing -->
+
+                            <!-- Services and Specialization -->
+                            <div class="card services-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Services and Specialization</h4>
+                                    <div class="form-group">
+                                        <label>Services</label>
+                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services">
+                                        <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label>Specialization </label>
+                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist">
+                                        <small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Services and Specialization -->
+
+                            <!-- Education -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Education</h4>
+                                    <div class="education-info">
+                                        <%if(locals.user.education.length == 0){%>
+                                            <div class="row form-row education-cont">
+                                                <div class="col-12 col-md-10 col-lg-11">
+                                                    <div class="row form-row">
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Degree</label>
+                                                                <input type="text" name="degree" placeholder="Enter Degree" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>College/Institute</label>
+                                                                <input type="text" name="college" placeholder="Enter College/Institute" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Year of Completion</label>
+                                                                <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%}else{%>
+                                                <%for(temp of locals.user.education){%>
+                                                    <div class="row form-row education-cont">
+                                                        <div class="col-12 col-md-10 col-lg-11">
+                                                            <div class="row form-row">
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Degree</label>
+                                                                        <input type="text" value="<%=temp.degree%>" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>College/Institute</label>
+                                                                        <input type="text" value="<%=temp.college%>" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Year of Completion</label>
+                                                                        <input type="text" value="<%=temp.yoc%>" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-2 col-lg-1">
+                                                            <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                            <a href="/user/delete-education/?id=<%=temp._id%>" class="btn btn-danger a-trash"><i class="far fa-trash-alt"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <%}}%>
+                                    </div>
+                                    <div class="add-more">
+                                        <a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Education -->
+
+                            <!-- Experience -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Experience</h4>
+                                    <div class="experience-info">
+                                        <%if(locals.user.experience.length == 0){%>
+                                            <div class="row form-row experience-cont">
+                                                <div class="col-12 col-md-10 col-lg-11">
+                                                    <div class="row form-row">
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Institution Name</label>
+                                                                <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>From</label>
+                                                                <input type="Number" placeholder="From" name="from" value="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>To</label>
+                                                                <input type="Number" placeholder="To" name="to" value="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Designation</label>
+                                                                <input type="text" placeholder="Designation" name="designation" class="form-control" value="">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%}else{%>
+                                                <%for(temp of locals.user.experience){%>
+                                                    <div class="row form-row experience-cont">
+                                                        <div class="col-12 col-md-10 col-lg-11">
+                                                            <div class="row form-row">
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Institution Name</label>
+                                                                        <input type="text" placeholder="Enter the Name" class="form-control" value="<%=temp.institutionname%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>From</label>
+                                                                        <input type="Number" value="<%=temp.from%>" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>To</label>
+                                                                        <input type="Number" value="<%=temp.to%>" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                    <div class="form-group">
+                                                                        <label>Designation</label>
+                                                                        <input type="text" class="form-control" value="<%=temp.designation%>">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-2 col-lg-1">
+                                                            <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                            <a href="/user/delete-experience/?id=<%=temp._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <%}}%>
+                                    </div>
+                                    <div class="add-more">
+                                        <a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Experience -->
+
+                            <!-- Awards -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Awards</h4>
+                                    <div class="awards-info">
+                                        <%if(locals.user.awards.length == 0){%>
+                                            <div class="row form-row awards-cont">
+                                                <div class="col-12 col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Awards</label>
+                                                        <input type="text" class="form-control" name="award" placeholder="Enter Awards" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Year</label>
+                                                        <input type="text" placeholder="Enter Year" name="year" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%}else{%>
+                                                <%for(temp of locals.user.awards){%>
+                                                    <div class="row form-row awards-cont">
+                                                        <div class="col-12 col-md-5">
+                                                            <div class="form-group">
+                                                                <label>Awards</label>
+                                                                <input type="text" class="form-control" placeholder="Enter Awards" value="<%=temp.award%>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-5">
+                                                            <div class="form-group">
+                                                                <label>Year</label>
+                                                                <input type="text" placeholder="Enter Year" value="<%=temp.year%>" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-2 col-lg-1">
+                                                            <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                            <a href="/user/delete-award/?id=<%=temp._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <%}}%>
+                                    </div>
+                                    <div class="add-more">
+                                        <a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- /Awards -->
+
+                            <!-- Memberships -->
+
+                            <!-- /Memberships -->
+
+                            <!-- Registrations -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Registrations</h4>
+                                    <div class="registrations-info">
+                                        <%if(locals.user.registrations.length == 0){%>
+                                            <div class="row form-row reg-cont">
+                                                <div class="col-12 col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Registrations</label>
+                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-5">
+                                                    <div class="form-group">
+                                                        <label>Year</label>
+                                                        <input type="text" placeholder="Enter Year" name="regYear" value="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%}else{%>
+                                                <%for(reg of locals.user.registrations){%>
+                                                    <div class="row form-row reg-cont">
+                                                        <div class="col-12 col-md-5">
+                                                            <div class="form-group">
+                                                                <label>Registrations</label>
+                                                                <input type="text" value="<%=reg.registration%>" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-5">
+                                                            <div class="form-group">
+                                                                <label>Year</label>
+                                                                <input type="text" value="<%=reg.regYear%>" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-2 col-lg-1">
+                                                            <label class="d-md-block d-sm-none d-none">&nbsp;</label>
+                                                            <a href="/user/delete-registration/?id=<%=reg._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+                                                        <%}%>
+                                    </div>
+                                    <div class="add-more">
+                                        <a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Registrations -->
+
+                            <div class="submit-section submit-btn-bottom">
+                                <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                            </div>
                         </form>
                     </div>
 
@@ -913,11 +927,12 @@
     <script src="js/script.js"></script>
     <script>
         $("#file-upload").css("opacity", "0");
-    
-            $("#file-browser").click(function(e) {
-              e.preventDefault();
-              $("#file-upload").trigger("click");
-            });</script>
+
+        $("#file-browser").click(function(e) {
+            e.preventDefault();
+            $("#file-upload").trigger("click");
+        });
+    </script>
     <script>
         document.getElementById("imageUpload").onchange = function() {
             document.getElementById("edit_form").submit();
