@@ -21,24 +21,27 @@ const userSchema = mongoose.Schema({
     gender: {
         type: String
     },
-    address: {
-        type: String
+    contacts: {
+        address: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        state: {
+            type: String
+        },
+        pincode: {
+            type: Number
+        },
+        service: {
+            type: String
+        },
+        country: {
+            type: String
+        },
     },
-    city: {
-        type: String
-    },
-    state: {
-        type: String
-    },
-    pincode: {
-        type: Number
-    },
-    service: {
-        type: String
-    },
-    country: {
-        type: String
-    },
+
     avatar: {
         type: String
     },

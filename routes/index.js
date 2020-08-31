@@ -21,7 +21,7 @@ router.get('/chat-doctor', homeController.chatDoctor);
 router.get('/checkout', homeController.checkout);
 router.get('/components', homeController.components);
 router.get('/doctor-change-password', homeController.doctorChangePassword);
-router.get('/doctor-terms-and-condition',homeController.doctorTermsAndCondition);
+router.get('/doctor-terms-and-condition', homeController.doctorTermsAndCondition);
 router.get('/doctor-dashboard', homeController.doctorDashboard);
 router.get('/doctor-profile', homeController.doctorProfile);
 router.get('/doctor-profile-settings', homeController.doctorProfileSettings);
@@ -54,6 +54,7 @@ router.post('/signup', homeController.signUp);
 router.get('/specialist', homeController.Specialist);
 router.get('/doc-register', homeController.docRegister);
 router.get('/bank-details', homeController.bankDetails);
+router.get('/doctors', homeController.Doctors);
 
 
 

@@ -48,6 +48,11 @@ module.exports.bankDetails = (req, res) => {
         title: 'Bank Details'
     })
 }
+module.exports.Doctors = (req, res) => {
+    return res.render('doctors', {
+        title: 'Doctors'
+    })
+}
 module.exports.booking = (req, res) => {
     return res.render('booking', {
         title: 'Booking'

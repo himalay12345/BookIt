@@ -69,7 +69,7 @@
                             <a href="index-2">Home</a>
                         </li>
 
-                      
+
                         <li class="has-submenu">
                             <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
                             <ul class="submenu">
@@ -105,33 +105,33 @@
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
                                 <%if(locals.user.type == 'Patient'){%>
-                                <ul class="submenu">
-                                    <li><a href="/search">Search Doctor</a></li>
-                                    <li><a href="/booking">Booking</a></li>
-                                    <li><a href="/checkout">Checkout</a></li>
-                                    <li><a href="/booking-success">Booking Success</a></li>
-                                    <li><a href="/patient-dashboard">My Dashboard</a></li>
-                                    <li><a href="/favourites">My Favourites</a></li>
-                                    <li><a href="/chat">Messages</a></li>
-                                    <li><a href="/profile-settings">Profile Settings</a></li>
-                                    <li><a href="/change-password">Change Password</a></li>
-                                    <li><a href="/user/logout">Logout</a></li>
-                                </ul>
-                                <%}%>
-                                <%if(locals.user.type == 'Doctor'){%>
                                     <ul class="submenu">
-                                        <li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
-                                        <li><a href="/appointments">Appointments</a></li>
-                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
-                                        <li><a href="/my-patients">Patients List</a></li>
-                                        <li><a href="/patient-profile">Patients Profile</a></li>
-                                        <li><a href="/chat-doctor">Chat</a></li>
-                                        <li><a href="/invoices">Invoices</a></li>
-                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
-                                        <li><a href="/reviews">Reviews</a></li>
+                                        <li><a href="/search">Search Doctor</a></li>
+                                        <li><a href="/booking">Booking</a></li>
+                                        <li><a href="/checkout">Checkout</a></li>
+                                        <li><a href="/booking-success">Booking Success</a></li>
+                                        <li><a href="/patient-dashboard">My Dashboard</a></li>
+                                        <li><a href="/favourites">My Favourites</a></li>
+                                        <li><a href="/chat">Messages</a></li>
+                                        <li><a href="/profile-settings">Profile Settings</a></li>
+                                        <li><a href="/change-password">Change Password</a></li>
                                         <li><a href="/user/logout">Logout</a></li>
                                     </ul>
-                                <%}%>
+                                    <%}%>
+                                        <%if(locals.user.type == 'Doctor'){%>
+                                            <ul class="submenu">
+                                                <li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
+                                                <li><a href="/appointments">Appointments</a></li>
+                                                <li><a href="/schedule-timings">Schedule Timing</a></li>
+                                                <li><a href="/my-patients">Patients List</a></li>
+                                                <li><a href="/patient-profile">Patients Profile</a></li>
+                                                <li><a href="/chat-doctor">Chat</a></li>
+                                                <li><a href="/invoices">Invoices</a></li>
+                                                <li><a href="/doctor-profile-settings">Profile Settings</a></li>
+                                                <li><a href="/reviews">Reviews</a></li>
+                                                <li><a href="/user/logout">Logout</a></li>
+                                            </ul>
+                                            <%}%>
                             </li>
                             <%}else{%>
                                 <li class="login-link">
@@ -159,37 +159,38 @@
                             <%}%>
                 </ul>
                 <%if(locals.user){%>
-                <ul class="nav user-menu">
+                    <ul class="nav user-menu">
 
-                    <!-- Notifications -->
-                    <li class="nav-item dropdown noti-dropdown">
-                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            <i class="far fa-bell" style="color: black; margin-left: 15px;"></i> <span class="badge badge-pill">1</span>
-                        </a>
-                        <div class="dropdown-menu notifications">
-                            <div class="topnav-dropdown-header">
-                                <span class="notification-title">Notifications</span>
-                                <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-                            </div>
-                            <div class="noti-content">
-                                <ul class="notification-list">
-                                    <%if(locals.user.approve == true){%>
+                        <!-- Notifications -->
+                        <li class="nav-item dropdown noti-dropdown">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <i class="far fa-bell" style="color: black; margin-left: 15px;"></i> <span class="badge badge-pill">1</span>
+                            </a>
+                            <div class="dropdown-menu notifications">
+                                <div class="topnav-dropdown-header">
+                                    <span class="notification-title">Notifications</span>
+                                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                                </div>
+                                <div class="noti-content">
+                                    <ul class="notification-list">
+                                        <%if(locals.user.approve == true){%>
 
-                                    <li class="notification-message">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
                                                         <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
                                                     </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span></p>
-                                                    <p class="noti-time"><span class="notification-time"></span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <%}%>
-                                    <!-- <li class="notification-message">
+                                                        <div class="media-body">
+                                                            <p class="noti-details"><span class="noti-title"></span>
+                                                                <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span></p>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <%}%>
+                                                <!-- <li class="notification-message">
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
@@ -228,17 +229,17 @@
                                             </div>
                                         </a>
                                     </li> -->
-                                </ul>
+                                    </ul>
+                                </div>
+                                <div class="topnav-dropdown-footer">
+                                    <a href="#">View all Notifications</a>
+                                </div>
                             </div>
-                            <div class="topnav-dropdown-footer">
-                                <a href="#">View all Notifications</a>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- /Notifications -->
-    
-                    <!-- User Menu -->
-                    <!-- <li class="nav-item dropdown has-arrow">
+                        </li>
+                        <!-- /Notifications -->
+
+                        <!-- User Menu -->
+                        <!-- <li class="nav-item dropdown has-arrow">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
                         </a>
@@ -257,91 +258,91 @@
                             <a class="dropdown-item" href="/login">Logout</a>
                         </div>
                     </li> -->
-                    <!-- /User Menu -->
-    
-                </ul>
-                <%}%>
-                <%if(locals.user){%>
-                    <%if(locals.user.type == 'Doctor'){%>
-                        <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
-                            <ul class="main-nav amain-nav">
-                                
-                                <li class="has-submenu ahas-submenu">
-                                    <a href="#">
-                                        <span class="user-img">
-										<img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-									</span>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </a>
+                        <!-- /User Menu -->
 
-                                    <ul class="submenu asubmenu">
-                                        <li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
-                                        <li><a href="/appointments">Appointments</a></li>
-                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
-                                        <li><a href="/my-patients">Patients List</a></li>
-                                        <li><a href="/patient-profile">Patients Profile</a></li>
-                                        <li><a href="/chat-doctor">Chat</a></li>
-                                        <li><a href="/invoices">Invoices</a></li>
-                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
-                                        <li><a href="/reviews">Reviews</a></li>
-                                        <li><a href="/doctor-register">Doctor Register</a></li>
-                                        <li><a href="/user/logout">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <%}%>
-                            <%if(locals.user.type == 'Patient'){%>
+                    </ul>
+                    <%}%>
+                        <%if(locals.user){%>
+                            <%if(locals.user.type == 'Doctor'){%>
                                 <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
                                     <ul class="main-nav amain-nav">
+
                                         <li class="has-submenu ahas-submenu">
                                             <a href="#">
                                                 <span class="user-img">
-                                            <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-                                        </span>
+										<img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+									</span>
                                                 <i class="fas fa-chevron-down"></i>
                                             </a>
 
                                             <ul class="submenu asubmenu">
-                                                <li><a href="/search">Search Doctor</a></li>
-                                                <li><a href="/booking">Booking</a></li>
-                                                <li><a href="/checkout">Checkout</a></li>
-                                                <li><a href="/booking-success">Booking Success</a></li>
-                                                <li><a href="/patient-dashboard">My Dashboard</a></li>
-                                                <li><a href="/favourites">My Favourites</a></li>
-                                                <li><a href="/chat">Messages</a></li>
-                                                <li><a href="/profile-settings">Profile Settings</a></li>
-                                                <li><a href="/change-password">Change Password</a></li>
+                                                <li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
+                                                <li><a href="/appointments">Appointments</a></li>
+                                                <li><a href="/schedule-timings">Schedule Timing</a></li>
+                                                <li><a href="/my-patients">Patients List</a></li>
+                                                <li><a href="/patient-profile">Patients Profile</a></li>
+                                                <li><a href="/chat-doctor">Chat</a></li>
+                                                <li><a href="/invoices">Invoices</a></li>
+                                                <li><a href="/doctor-profile-settings">Profile Settings</a></li>
+                                                <li><a href="/reviews">Reviews</a></li>
+                                                <li><a href="/doctor-register">Doctor Register</a></li>
                                                 <li><a href="/user/logout">Logout</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </div>
                                 <%}%>
-                                    <%}%>
+                                    <%if(locals.user.type == 'Patient'){%>
+                                        <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                                            <ul class="main-nav amain-nav">
+                                                <li class="has-submenu ahas-submenu">
+                                                    <a href="#">
+                                                        <span class="user-img">
+                                            <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                                        </span>
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </a>
+
+                                                    <ul class="submenu asubmenu">
+                                                        <li><a href="/search">Search Doctor</a></li>
+                                                        <li><a href="/booking">Booking</a></li>
+                                                        <li><a href="/checkout">Checkout</a></li>
+                                                        <li><a href="/booking-success">Booking Success</a></li>
+                                                        <li><a href="/patient-dashboard">My Dashboard</a></li>
+                                                        <li><a href="/favourites">My Favourites</a></li>
+                                                        <li><a href="/chat">Messages</a></li>
+                                                        <li><a href="/profile-settings">Profile Settings</a></li>
+                                                        <li><a href="/change-password">Change Password</a></li>
+                                                        <li><a href="/user/logout">Logout</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <%}%>
+                                            <%}%>
             </nav>
         </header>
         <!-- /Header -->
-      
+
         <!-- Home Banner -->
         <section class="section section-search" style="margin-top: 100px;">
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <form action="/user/update-type" method="POST">
-                    <div class="col-12 col-md-12" style="margin-left: -10px;margin-top:30px;">
-                        <div class="form-group">
-                            <label style="color: rgb(138, 138, 138);">Are you a ?</label>
-                            <%if(locals.user){%>
-                            <input type="hidden" name="user" value="<%=locals.user.id%>">
-                            <%}%>
-                            <select name="type" class="form-control select1">
+                        <div class="col-12 col-md-12" style="margin-left: -10px;margin-top:30px;">
+                            <div class="form-group">
+                                <label style="color: rgb(138, 138, 138);">Are you a ?</label>
+                                <%if(locals.user){%>
+                                    <input type="hidden" name="user" value="<%=locals.user.id%>">
+                                    <%}%>
+                                        <select name="type" class="form-control select1">
                                 <option value="Doctor">Doctor</option>
                                 <option value="Patient">Patient</option>
                             </select>
+                            </div>
                         </div>
-                    </div>
-                   <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
-                </form>
+                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
+                    </form>
                 </div>
             </div>
             <div class="container-fluid">
@@ -1108,7 +1109,7 @@
 
     </div>
     <!-- /Main Wrapper -->
-    
+
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
 
@@ -1122,7 +1123,7 @@
     <!-- Custom JS -->
     <script src="/js/script1.js"></script>
     <script src="js/script.js"></script>
- 
+
 
 
 </body>
