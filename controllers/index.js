@@ -229,6 +229,13 @@ module.exports.profileSettings = async(req, res) => {
     })
 }
 
+module.exports.previewProfile = async(req, res) => {
+    // let user = await User.findById(req.user.id);
+    return res.render('preview-profile', {
+        title: 'Preview Profile'
+    })
+}
+
 module.exports.register = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/')

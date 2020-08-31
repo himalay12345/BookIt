@@ -39,6 +39,7 @@ router.get('/patient-dashboard', homeController.patientDashboard);
 router.get('/patient-profile', homeController.patientProfile);
 router.get('/privacy-policy', homeController.privacyPolicy);
 router.get('/profile-settings', homeController.profileSettings);
+router.get('/preview-profile', homeController.previewProfile);
 router.get('/register', homeController.register);
 router.get('/reviews', homeController.reviews);
 router.get('/schedule-timings', homeController.scheduleTimings);

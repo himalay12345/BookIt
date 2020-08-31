@@ -161,7 +161,34 @@
 
         <!-- Page Content -->
         <div class="bg_color_1">
+           
 			<div class="container mt-5">
+                <%if(locals.user.schedule_time == ''){%>  
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong>Note!</strong> Please select your schedule time before accepting terms and condition.<a href="#" class="alert-link">.</a>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <%}%>
+
+                    <%if(locals.user.approve != true){%>  
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Note!</strong> Your document is not verified yet. Please wait for your document to be verified.<a href="#" class="alert-link">.</a>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <%}%>
+                   
+                <%if(locals.user.bank == '{}'){%>
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong>Note!</strong> Please add your bank account before accepting terms and condition.<a href="#" class="alert-link">.</a>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <%}%>
 				<div class="main_title">
 					<h1>Agreement of Online Booking Services</h1>
 					<p>Scheduling automation you and your invitees will actually enjoy. </p>
@@ -210,7 +237,11 @@ User-accounts registered by bots or other automated methods are not permitted.
                 <input type="checkbox" checked onchange="document.getElementById('sendNewSms').disabled = !this.checked;" class="mt-5 mr-2"><b>I <%=locals.user.name%>  have read and agree to the terms of the DOCCURE Online Booking Agreement.</b>
                 <form action="/user/accept-agreement" method="POST">
                     <div class="submit-section text-center" style="margin-bottom: 100px; margin-top: 50px;">
-                        <input type="submit" id="sendNewSms" value="Continue" class="btn btn-primary submit-btn w-25">
+                        <%if(locals.user.schedule_time == '' || locals.user.bank == '{}'|| locals.user.approve != true){%>
+                        <input type="submit" id="sendNewSms" disabled value="Continue" style="cursor:no-drop;" class="btn btn-primary submit-btn w-25">
+                        <%}else{%>
+                            <input type="submit" id="sendNewSms" value="Continue" class="btn btn-primary submit-btn w-25">
+                            <%}%>
                         <input type="hidden" name="checked" value="true">
                     </div>
                 </form>

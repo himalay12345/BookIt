@@ -68,27 +68,6 @@
                         </li>
 
 
-                        <li class="has-submenu">
-                            <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
-                                <li><a href="/voice-call">Voice Call</a></li>
-                                <li><a href="/video-call">Video Call</a></li>
-                                <li><a href="/search">Search Doctors</a></li>
-                                <li><a href="/calendar">Calendar</a></li>
-                                <li><a href="/components">Components</a></li>
-                                <li class="has-submenu">
-                                    <a href="/invoices">Invoices</a>
-                                    <ul class="submenu">
-                                        <li><a href="/invoices">Invoices</a></li>
-                                        <li><a href="/invoice-view">Invoice View</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="/blank-page">Starter Page</a></li>
-                                <li><a href="/login">Login</a></li>
-                                <li><a href="/register">Register</a></li>
-                                <li><a href="/forgot-password">Forgot Password</a></li>
-                            </ul>
-                        </li>
 
                         <li class="login-link">
                             <a href="/login">Login / Signup</a>
@@ -144,10 +123,10 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Change Password</li>
+                                <li class="breadcrumb-item active" aria-current="page">Bank Details</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Change Password</h2>
+                        <h2 class="breadcrumb-title">Bank Details</h2>
                     </div>
                 </div>
             </div>
@@ -168,8 +147,8 @@
                                         <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"'  alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
-                                        <h3>
-                                            <%=locals.user.name%></h3>
+                                        <h3>Dr.
+                                            <%=locals.user.name%> r</h3>
 
                                         <div class="patient-details">
                                             <h5 class="mb-0">
@@ -234,133 +213,204 @@
 
                     </div>
 
-                    <div class="col-md-7 col-lg-8 col-xl-9">
-                        <%if(!locals.user.idproof){%>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Note!</strong> Please verify your documents to start your <a href="#" class="alert-link">online booking appointment services.</a>.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <%}%>
-                                <%if(locals.user.idproof && locals.user.degreephoto){%>
-                                    <%if(locals.user.approve == true){%>
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <%}else{%>
-                                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                            <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-
-                                        <%}%>
-                              
-                                    <%}%>
-                                        <form action="/user/upload-id" method="POST" enctype="multipart/form-data" id="edit_form">
-                                            <!-- Basic Information -->
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Verify Identity Proof</h4>
-                                                    <div class="row form-row">
-                                                        <div class="col-sm-12 col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Identity Proof</label>
-                                                                <select name="idproofname" class="form-control">
-                                                    <%if(locals.user.idproofname == 'Aadhaar card'){%><option selected>Aadhaar card</option><%}else{%>
-                                                    <option>Aadhaar card</option><%}%>
-                                                    <%if(locals.user.idproofname == 'PAN card'){%><option selected>PAN card</option><%}else{%>
-                                                    <option>PAN card</option><%}%>
-                                                    <%if(locals.user.idproofname == 'Driving license'){%><option selected>Driving license</option><%}else{%>
-                                                    <option>Driving license</option><%}%>
-                                                    <%if(locals.user.idproofname == 'Birth certificate'){%><option selected>Birth certificate</option><%}else{%>
-                                                    <option>Birth certificate</option><%}%>
-                                                    <%if(locals.user.idproofname == 'Transfer/School leaving/Matriculation Certificate'){%><option selected>Transfer/School leaving/Matriculation Certificate</option><%}else{%>
-                                                    <option>Transfer/School leaving/Matriculation Certificate</option><%}%>
-                                                    <%if(locals.user.idproofname == 'Ration card'){%><option selected>Ration card</option><%}else{%>
-                                                    <option>Ration card</option><%}%>
-                                                    <%if(locals.user.idproofname == 'Indian passport'){%><option selected>Indian passport</option><%}else{%>
-                                                    <option>Indian passport</option><%}%>
-                                                    </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 ml-lg-5">
-                                                            <div class="form-group">
-                                                                <div class="change-avatar">
-                                                                    <div class="profile-img">
-                                                                        <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
-                                                                    </div>
-                                                                    <div class="upload-img">
-                                                                        <div class="change-photo-btn">
-                                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
-                                                                        </div>
-                                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </form>
-                                                <form action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form1">
+                    <div class="col-md-10 col-lg-8 col-xl-9" style="margin-top: -50px;">
+                                    <div class="content">
+                                        <div class="container">
+                            
+                                        
+                                            <!-- Doctor Details Tab -->
+                                            <div class="row">
+                                                <div class="col-lg-12">
                                                     <div class="card">
                                                         <div class="card-body">
-
-                                                            <h4 class="card-title">Verify Educational Degree</h4>
-                                                            <h4 class="card-title"></h4>
-                                                            <div class="row form-row">
-                                                                <div class="col-sm-12 col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Degree</label>
-                                                                        <select name="degreeproof" class="form-control">
-                                                    <%if(locals.user.degreeproof == 'MBBS – Bachelor of Medicine, Bachelor of Surgery'){%><option selected>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}else{%>
-                                                    <option>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}%>
-                                                    <%if(locals.user.degreeproof == 'BDS – Bachelor of Dental Surgery'){%><option selected>BDS – Bachelor of Dental Surgery</option><%}else{%>
-                                                    <option>BDS – Bachelor of Dental Surgery</option><%}%>
-                                                    <%if(locals.user.degreeproof == 'BAMS – Bachelor of Ayurvedic Medicine and Surgery'){%><option selected>BAMS – Bachelor of Ayurvedic Medicine and Surgery</option><%}else{%>
-                                                    <option>BAMS – Bachelor of Ayurvedic Medicine and Surgery</option><%}%>
-                                                    <%if(locals.user.degreeproof == 'BUMS – Bachelor of Unani Medicine and Surgery'){%><option selected>BUMS – Bachelor of Unani Medicine and Surgery</option><%}else{%>
-                                                    <option>BUMS – Bachelor of Unani Medicine and Surgery</option><%}%>
-                                                    <%if(locals.user.degreeproof == 'BHMS – Bachelor of Homeopathy Medicine and Surgery'){%><option selected>Bachelor of Homeopathy Medicine and Surgery</option><%}else{%>
-                                                    <option>BHMS – Bachelor of Homeopathy Medicine and Surgery</option><%}%>
-                                                    <%if(locals.user.degreeproof == 'BYNS- Bachelor of Yoga and Naturopathy Sciences'){%><option selected>BYNS- Bachelor of Yoga and Naturopathy Sciences</option><%}else{%>
-                                                    <option>BYNS- Bachelor of Yoga and Naturopathy Sciences</option><%}%>
-                                                    <%if(locals.user.degreeproof == 'B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry'){%><option selected>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}else{%>
-                                                    <option>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}%>
-                                                    </select>
+                                                            <h5 class="card-title d-flex justify-content-between">
+                                                                <span>Personal Details</span> 
+                                                                <!-- <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a> -->
+                                                            </h5>
+                                                            <%if(locals.user.name != ''){%>
+                                                            <div class="row">
+                                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                                                                <p class="col-sm-10"><%=locals.user.name%></p>
+                                                            </div>
+                                                            <%}%>
+                                                            <%if(locals.user.education  != ''){%>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
+                                                                     <p class="text-muted text-sm-right mb-0 mb-sm-3">Education</p>
+                                                                 </div>
+                                                                 <div class="col-md-4 ml-n3">
+                                                                    <%for(temp of locals.user.education){%>
+                                                                    <p class="col-sm-10"><span><%=temp.degree%> </span><span><%=temp.yoc%></span></p>
+                                                                    <%}%>
+                                                                </div>
+                                                            </div>
+                                                            <%}%>
+                                                            <%if(locals.user.experience != ''){%>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                         <p class="text-muted text-sm-right mb-0 mb-sm-3">Experience</p>
+                                                                     </div>
+                                                                     <div class="col-md-4 ml-n3">
+                                                                        <%for(temp of locals.user.experience){%>
+                                                                        <p class="col-sm-10"><span><%=temp.institutionname%> </span><span><%=temp.from%> </span><span><%=temp.to%></span></p>
+                                                                        <%}%>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-4 ml-lg-5">
-                                                                    <div class="form-group">
-                                                                        <div class="change-avatar">
-                                                                            <div class="profile-img">
-                                                                                <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
-                                                                            </div>
-                                                                            <div class="upload-img">
-                                                                                <div class="change-photo-btn">
-                                                                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                                                    <input type="file" class="upload" name="avatar" id="imageUpload1">
-                                                                                </div>
-                                                                                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                                            </div>
+                                                                <%}%>
+                                                                <%if(locals.user.awards != ''){%>
+                                                                    <div class="row">
+                                                                        <div class="col-md-2">
+                                                                             <p class="text-muted text-sm-right mb-0 mb-sm-3">Awards</p>
+                                                                         </div>
+                                                                         <div class="col-md-4 ml-n3">
+                                                                            <%for(temp of locals.user.awards){%>
+                                                                            <p class="col-sm-10"><span><%=temp.award%> </span><span><%=temp.year%> </span></p>
+                                                                            <%}%>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-
-
+                                                                    <%}%>
+                                                            <%if(locals.user.department != ''){%>
+                                                            <div class="row">
+                                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Department</p>
+                                                                <p class="col-sm-10"><%=locals.user.department%></p>
                                                             </div>
+                                                            <%}%>
+                                                            <%if(locals.user.city != ''){%>
+                                                            <div class="row">
+                                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">City</p>
+                                                                <p class="col-sm-10"><%=locals.user.city%></p>
+                                                            </div>
+                                                            <%}%>
+                                                            <%if(locals.user.state != ''){%>
+                                                            <div class="row">
+                                                                <p class="col-sm-2 text-muted text-sm-right mb-0">State</p>
+                                                                <p class="col-sm-10 mb-0"><%=locals.user.state%>
+                                                                </p>
+                                                            </div>
+                                                            <%}%>
+                                                            <%if(locals.user.clinicname != ''){%>
+                                                                <div class="row">
+                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Clinic Name</p>
+                                                                    <p class="col-sm-10 mb-0"><%=locals.user.clinicname%>
+                                                                    </p>
+                                                                </div>
+                                                                <%}%>
+                                                            <%if(locals.user.clinicaddr != ''){%>
+                                                                <div class="row">
+                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Clinic Address</p>
+                                                                    <p class="col-sm-10 mb-0"><%=locals.user.clinicaddr%>
+                                                                    </p>
+                                                                </div>
+                                                                <%}%>
+                                                            <%if(locals.user.clinicphoto != ''){%>
+                                                                <div class="row mt-3">
+                                                                    <div class="col-md-2">
+                                                                        <p class="text-muted text-sm-right mb-0">Clinic Photo</p>
+                                                                    </div>
+                                                                    <div class="col-md-10 ml-n2" style="display: inline-flex;overflow-x: auto;">
+                                                                        <%for(temp of locals.user.clinicphoto){%>
+                                                                           <img src="<%=temp%>" style="height: 100px;width: 100px;margin-left: 10px;">
+                                                                        <%}%>
+                                                                    </p>
+                                                                </div>
+                                                                <%}%>
+                                                            <%if(locals.user.specialisation != ''){%>
+                                                                <div class="row">
+                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Specialisation</p>
+                                                                    <p class="col-sm-10 mb-0"><%=locals.user.specialisation%>
+                                                                    </p>
+                                                                </div>
+                                                                <%}%>
+                                                            <%if(locals.user.services != ''){%>
+                                                                <div class="row">
+                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Services</p>
+                                                                    <p class="col-sm-10 mb-0"><%=locals.user.services%>
+                                                                    </p>
+                                                                </div>
+                                                                <%}%>
                                                         </div>
                                                     </div>
-                                                </form>
-                    </div>
+                                                    
+                                                </div>
+        
+                                            
+                                            </div>
+                                            <!-- /Doctor Details Tab -->
+                            
+                                        </div>
+                                    </div>
+                             </div>
+                             <div class="container-fluid">
+                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                    <strong>Note!</strong> Please fill all the fields so that your profile should look informative to the patients<a href="#" class="alert-link">.</a>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><span>Update Profile</span><span class="ml-5"style="font-size:0.7rem;text-decoration:underline;"><a href="/doctor-profile-settings">Profile Settings</a></span></h5>
+                                       
+                                        <ul>
+                                             <%if(locals.user.name == ''){%>
+                                                <li> Name</li>
+                                                <%}%>
+                                            
+                                             <%if(locals.user.education == ''){%>
+                                                <li>Education</li>
+                                            <%}%>
+                                       
+                                         <%if(locals.user.experience == ''){%>
+                                            <li>Experience</li>
+                                        <%}%>
+                                  
+                                   <%if(locals.user.awards == ''){%>
+                                    <li>  Awards </li> 
+                                    <%}%>
+                               
+                                <%if(locals.user.department == ''){%>
+                                    <li> Department</li>
+                                <%}%>
+                            
+                            <%if(locals.user.city == ''){%>
+                                <li>  City</li>
+                            <%}%>
+                       
+                        <%if(locals.user.state == ''){%>
+                            <li> State </li>
+                        <%}%>
+                   
+
+                    <%if(locals.user.clinicname == ''){%>
+                        <li> Clinic Name </li>
+                    <%}%>
+               
+
+                <%if(locals.user.clinicaddr == ''){%>
+                    <li> Clinic Address</li>
+                <%}%>
+            
+
+           <%if(locals.user.clinicphoto == ''){%>
+            <li> Clinic Photo</li>
+            <%}%>
+        
+        <%if(locals.user.specialisation == ''){%>
+            <li> Specialisation</li>
+        <%}%>
+    
+   <%if(locals.user.services == ''){%>
+    <li> Services</li>
+    <%}%>
+
+
+                                        </ul>
+                                          
+                                            
+                                    
+                                      </div>
+                                      </div>
+                             </div>
                 </div>
 
             </div>

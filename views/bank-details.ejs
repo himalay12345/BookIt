@@ -167,7 +167,36 @@
                                                 <span>Dashboard</span>
                                             </a>
                                         </li>
-
+                                        <li>
+                                            <a href="/upload-documents">
+                                                <i class="fas fa-file"></i>
+                                                <span>Upload Documents</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/schedule-timings">
+                                                <i class="fas fa-hourglass-start"></i>
+                                                <span>Schedule Timings</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/bank-details">
+                                                <i class="fas fa-university"></i>
+                                                <span>Add Bank Account</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/preview-profile">
+                                                <i class="fas fa-id-badge"></i>
+                                                <span>Preview profile</span>
+                                            </a>
+                                        </li>
+                                         <li>
+                                            <a href="/doctor-terms-and-condition">
+                                                <i class="fas fa-id-card"></i>
+                                                <span>Terms and Conditions</span>
+                                            </a>
+                                        </li>
 
 
 
@@ -210,7 +239,47 @@
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
                                                                 <label>Bank Name</label>
-                                                                <input type="text" placeholder="Enter the Bank Name" name="bankname" value="<%=locals.user.bank.bankname%>" class="form-control">
+                                                                <!-- <input type="text" placeholder="Enter the Bank Name" name="bankname" value="<%=locals.user.bank.bankname%>" class="form-control"> -->
+                                                                <select name="bankname" class="form-control" required>
+                                                                    <option selected="selected" value="0">--Select --</option>
+                                                                    <option value="1">ALLAHABAD BANK </option>
+                                                                    <option value="2">ANDHRA BANK</option>
+                                                                    <option value="3">AXIS BANK</option>
+                                                                    <option value="29">STATE BANK OF INDIA</option>
+                                                                    <option value="4">BANK OF BARODA</option>
+                                                                    <option value="29">UCO BANK</option>
+                                                                    <option value="29">UNION BANK OF INDIA</option>
+                                                                    <option value="5">BANK OF INDIA</option>
+                                                                    <option value="20">BANDHAN BANK LIMITED</option>
+                                                                    <option value="7">CANARA BANK</option>
+                                                                    <option value="32">GRAMIN VIKASH BANK</option>
+                                                                    <option value="8">CORPORATION BANK</option>
+                                                                    <option value="9">INDIAN BANK</option>
+                                                                    <option value="10">INDIAN OVERSEAS BANK</option>
+                                                                    <option value="11">ORIENTAL BANK OF COMMERCE</option>
+                                                                    <option value="12">PUNJAB AND SIND BANK</option>
+                                                                    <option value="13">PUNJAB NATIONAL BANK</option>
+                                                                    <option value="14">RESERVE BANK OF INDIA</option>
+                                                                    <option value="15">SOUTH INDIAN BANK</option>
+                                                                    <option value="16">UNITED BANK OF INDIA</option>
+                                                                    <option value="17">CENTRAL BANK OF INDIA</option>
+                                                                    <option value="18">VIJAYA BANK</option>
+                                                                    <option value="19">DENA BANK</option>
+                                                                    <option value="21">BHARATIYA MAHILA BANK LIMITED</option>
+                                                                    <option value="22">FEDERAL BANK LTD </option>
+                                                                    <option value="23">HDFC BANK LTD</option>
+                                                                    <option value="24">ICICI BANK LTD</option>
+                                                                    <option value="25">IDBI BANK LTD</option>
+                                                                    <option value="66">PAYTM BANK</option>
+                                                                    <option value="29">FINO PAYMENT BANK</option>
+                                                                    <option value="26">INDUSIND BANK LTD</option>
+                                                                    <option value="27">KARNATAKA BANK LTD</option>
+                                                                    <option value="28">KOTAK MAHINDRA BANK</option>
+                                                                    <option value="30">YES BANK LTD</option>
+                                                                    <option value="31">SYNDICATE BANK</option>
+                                                                    <option value="5">BANK OF INDIA</option>
+                                                                    <option value="6">BANK OF MAHARASHTRA</option>
+                                                                  </select>
                                                             </div>
                                                         </div>
 

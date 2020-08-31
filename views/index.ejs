@@ -158,6 +158,7 @@
                             </li>
                             <%}%>
                 </ul>
+                <%if(locals.user){%>
                 <ul class="nav user-menu">
 
                     <!-- Notifications -->
@@ -259,6 +260,7 @@
                     <!-- /User Menu -->
     
                 </ul>
+                <%}%>
                 <%if(locals.user){%>
                     <%if(locals.user.type == 'Doctor'){%>
                         <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
