@@ -222,7 +222,7 @@ module.exports.uploadId = async function(req, res) {
         if (req.files['avatar']) {
             if (!user.idproof) {
                 user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
-            
+
             } else {
 
                 fs.unlinkSync(path.join(__dirname, '..', user.idproof));
@@ -230,8 +230,7 @@ module.exports.uploadId = async function(req, res) {
             }
         }
 
-        if(user.degreeproof)
-        {
+        if (user.degreeproof) {
             user.request = true;
         }
 
@@ -257,8 +256,7 @@ module.exports.uploadDegree = async function(req, res) {
             }
         }
 
-        if(user.idproof)
-        {
+        if (user.idproof) {
             user.request = true;
         }
 
@@ -374,11 +372,11 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
             user.services = req.body.services;
             user.specialisation = req.body.specialisation;
-            user.pincode = req.body.pincode;
-            user.state = req.body.state;
-            user.country = req.body.country;
-            user.city = req.body.city;
-            user.address = req.body.address;
+            // user.pincode = req.body.pincode;
+            // user.state = req.body.state;
+            // user.country = req.body.country;
+            // user.city = req.body.city;
+            // user.address = req.body.address;
             user.clinicname = req.body.clinicname;
             user.clinicaddr = req.body.clinicaddr;
             user.department = req.body.department;
@@ -390,6 +388,13 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.facebook = req.body.facebook;
             user.instagram = req.body.instagram;
             user.twitter = req.body.twitter;
+            user.contacts = {
+                address: req.body.address,
+                city: req.body.city,
+                state: req.body.state,
+                pincode: req.body.pincode,
+                country: req.body.country
+            };
 
 
 
