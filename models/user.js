@@ -46,7 +46,7 @@ const userSchema = mongoose.Schema({
         type: String
     },
     phone: {
-        type: Number
+        type: String
     },
     email: {
         type: String
@@ -125,6 +125,9 @@ const userSchema = mongoose.Schema({
     },
     terms: {
         type: Boolean
+    },
+    biodata: {
+        type: String
     },
     clinicphoto: [{
         type: String

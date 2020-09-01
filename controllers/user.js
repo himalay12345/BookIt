@@ -388,6 +388,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.facebook = req.body.facebook;
             user.instagram = req.body.instagram;
             user.twitter = req.body.twitter;
+            user.biodata = req.body.biodata;
             user.contacts = {
                 address: req.body.address,
                 city: req.body.city,
