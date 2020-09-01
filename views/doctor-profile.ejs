@@ -9,25 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
 
     <!-- Fancybox CSS -->
-    <link rel="stylesheet" href="plugins/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -49,13 +49,13 @@
                         </span>
                     </a>
                     <a href="/index-2" class="navbar-brand logo">
-                        <img src="img/logo.png" class="img-fluid" alt="Logo">
+                        <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
                         <a href="/index-2" class="menu-logo">
-                            <img src="img/logo.png" class="img-fluid" alt="Logo">
+                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
                             <i class="fas fa-times"></i>
@@ -115,12 +115,56 @@
                         <div class="doctor-widget">
                             <div class="doc-info-left">
                                 <div class="doctor-img">
-                                    <img src="img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+                                    <img src="<%=doctor.avatar%>" class="img-fluid" alt="User Image">
                                 </div>
                                 <div class="doc-info-cont">
                                     <h4 class="doc-name">Dr. Darren Elder</h4>
-                                    <p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-                                    <p class="doc-department"><img src="img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</p>
+                                    <p class="doc-speciality">
+                                        <% for(degrees of doctor.education){ %>
+                                            <%=degrees.degree.toUpperCase() %>&nbsp&nbsp&nbsp
+                                                <% } %>
+                                    </p>
+                                    <p class="doc-department">
+                                        <% if(doctor.department== "General Physician"){ %>
+
+                                            <img src="/img/specialities/physical.jfif" class="img-fluid" alt="Speciality">
+                                            <% } %>
+
+                                                <% if(doctor.department== "Ophthalmology"){ %>
+
+                                                    <img src="/img/specialities/eye.png" class="img-fluid" alt="Speciality">
+                                                    <% } %>
+                                                        <% if(doctor.department== "Dermatology"){ %>
+
+                                                            <img src="/img/specialities/hair.jpg" class="img-fluid" alt="Speciality">
+                                                            <% } %>
+                                                                <% if(doctor.department== "Paediatrics"){ %>
+
+                                                                    <img src="/img/specialities/child.jpg" class="img-fluid" alt="Speciality">
+                                                                    <% } %>
+                                                                        <% if(doctor.department== "Urology"){ %>
+
+                                                                            <img src="/img/specialities/brain.png" class="img-fluid" alt="Speciality">
+                                                                            <% } %>
+                                                                                <% if(doctor.department== "Neurology"){ %>
+
+                                                                                    <img src="/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
+                                                                                    <% } %>
+                                                                                        <% if(doctor.department== "Orthopedic"){ %>
+
+                                                                                            <img src="/img/specialities/specialities.png" class="img-fluid" alt="Speciality">
+                                                                                            <% } %>
+                                                                                                <% if(doctor.department== "Cardiologist"){ %>
+
+                                                                                                    <img src="/img/specialities/heart.jpg" class="img-fluid" alt="Speciality">
+                                                                                                    <% } %>
+                                                                                                        <% if(doctor.department== "Dentist"){ %>
+
+                                                                                                            <img src="/img/specialities/teeth.png" class="img-fluid" alt="Speciality">
+                                                                                                            <% } %>
+                                                                                                                <%=doctor.department%>
+
+                                    </p>
                                     <div class="rating">
                                         <i class="fas fa-star filled"></i>
                                         <i class="fas fa-star filled"></i>
@@ -129,19 +173,27 @@
                                         <i class="fas fa-star"></i>
                                         <span class="d-inline-block average-rating">(35)</span>
                                     </div>
+
                                     <div class="clinic-details">
-                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA - <a href="javascript:void(0);">Get Directions</a></p>
+                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                            <%=doctor.contacts.city%>
+                                                <%=doctor.contacts.country%> - <a href="javascript:void(0);">Get Directions</a></p>
                                         <ul class="clinic-gallery">
-                                            <li>
-                                                <a href="/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                    <img src="img/features/feature-01.jpg" alt="Feature">
-                                                </a>
-                                            </li>
+                                            <%for(doctorsclinic of doctor.clinicphoto){%>
+                                                <li>
+                                                    <a href="<%=doctorsclinic%>" data-fancybox="gallery">
+                                                        <img src="<%=doctorsclinic%> " alt="Feature" height="50px">
+                                                    </a>
+                                                </li>
+                                                <%}%>
 
                                         </ul>
                                     </div>
                                     <div class="clinic-services">
-                                        <span>Dental Fillings</span>
+                                        <%var service = doctor.services.toString().split(',')%>
+                                            <%for(temp of service){%>
+                                                <span><%=temp%></span>
+                                                <%}%>
 
                                     </div>
                                 </div>
@@ -149,10 +201,15 @@
                             <div class="doc-info-right">
                                 <div class="clini-infos">
                                     <ul>
-                                        <li><i class="far fa-thumbs-up"></i> 99%</li>
-                                        <li><i class="far fa-comment"></i> 35 Feedback</li>
-                                        <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                        <li><i class="far fa-money-bill-alt"></i> $100 per hour </li>
+                                        <li><i class="far fa-thumbs-up"></i> 0</li>
+                                        <li><i class="far fa-comment"></i> 0</li>
+                                        <li><i class="fas fa-map-marker-alt"></i>
+                                            <%=doctor.contacts.city%>
+                                                <%=doctor.contacts.state%>
+                                        </li>
+                                        <li><i class="far fa-money-bill-alt"></i>RS
+                                            <%=doctor.booking_fee%>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="doctor-action">
@@ -223,30 +280,25 @@
                                             <h4 class="widget-title">Education</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#" class="name">American Dental Medical University</a>
-                                                                <div>BDS</div>
-                                                                <span class="time">1998 - 2003</span>
+                                                    <% for(temp of doctor.education){ %>
+                                                        <li>
+                                                            <div class="experience-user">
+                                                                <div class="before-circle"></div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#" class="name">American Dental Medical University</a>
-                                                                <div>MDS</div>
-                                                                <span class="time">2003 - 2005</span>
+                                                            <div class="experience-content">
+                                                                <div class="timeline-content">
+                                                                    <a href="" class="name">
+                                                                        <%=temp.college  %>
+                                                                    </a>
+                                                                    <div>
+                                                                        <%=temp.degree.toUpperCase()%>
+                                                                    </div>
+                                                                    <span class="time"><%=temp.yoc%> </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
+                                                        </li>
+                                                        <% } %>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -257,39 +309,22 @@
                                             <h4 class="widget-title">Work & Experience</h4>
                                             <div class="experience-box">
                                                 <ul class="experience-list">
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#" class="name">Glowing Smiles Family Dental Clinic</a>
-                                                                <span class="time">2010 - Present (5 years)</span>
+                                                    <% for(hemp of doctor.experience){ %>
+                                                        <li>
+                                                            <div class="experience-user">
+                                                                <div class="before-circle"></div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#" class="name">Comfort Care Dental Clinic</a>
-                                                                <span class="time">2007 - 2010 (3 years)</span>
+                                                            <div class="experience-content">
+                                                                <div class="timeline-content">
+                                                                    <a href="#" class="name">
+                                                                        <%=hemp.institutionname  %>
+                                                                    </a>
+                                                                    <span class="time"><%=hemp.from %>-<%=hemp.to %>  </span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="experience-user">
-                                                            <div class="before-circle"></div>
-                                                        </div>
-                                                        <div class="experience-content">
-                                                            <div class="timeline-content">
-                                                                <a href="#" class="name">Dream Smile Dental Practice</a>
-                                                                <span class="time">2005 - 2007 (2 years)</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
+                                                        </li>
+                                                        <% } %>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -398,23 +433,23 @@
                                                     <h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286 Sundown Lane, Austin, Texas 78749, USA <br><a href="/javascript:void(0);">Get Directions</a></h5>
                                                     <ul>
                                                         <li>
-                                                            <a href="/img/features/feature-01.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-01.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-01.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-01.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/img/features/feature-02.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-02.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-02.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-02.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/img/features/feature-03.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-03.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-03.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-03.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/img/features/feature-04.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-04.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-04.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-04.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -477,23 +512,23 @@
                                                     <p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883 University Street, Seattle, Texas Washington, 98155 <br><a href="/javascript:void(0);">Get Directions</a></p>
                                                     <ul>
                                                         <li>
-                                                            <a href="/img/features/feature-01.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-01.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-01.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-01.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/img/features/feature-02.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-02.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-02.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-02.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/img/features/feature-03.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-03.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-03.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-03.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="/img/features/feature-04.jpg" data-fancybox="gallery2">
-                                                                <img src="img/features/feature-04.jpg" alt="Feature Image">
+                                                            <a href="//img/features/feature-04.jpg" data-fancybox="gallery2">
+                                                                <img src="/img/features/feature-04.jpg" alt="Feature Image">
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -550,7 +585,7 @@
                                         <!-- Comment List -->
                                         <li>
                                             <div class="comment">
-                                                <img class="avatar avatar-sm rounded-circle" alt="User Image" src="img/patients/patient.jpg">
+                                                <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient.jpg">
                                                 <div class="comment-body">
                                                     <div class="meta-data">
                                                         <span class="comment-author">Richard Wilson</span>
@@ -588,7 +623,7 @@
                                             <ul class="comments-reply">
                                                 <li>
                                                     <div class="comment">
-                                                        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="img/patients/patient1.jpg">
+                                                        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient1.jpg">
                                                         <div class="comment-body">
                                                             <div class="meta-data">
                                                                 <span class="comment-author">Charlene Reed</span>
@@ -630,7 +665,7 @@
                                         <!-- Comment List -->
                                         <li>
                                             <div class="comment">
-                                                <img class="avatar avatar-sm rounded-circle" alt="User Image" src="img/patients/patient2.jpg">
+                                                <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient2.jpg">
                                                 <div class="comment-body">
                                                     <div class="meta-data">
                                                         <span class="comment-author">Travis Trimble</span>
@@ -829,7 +864,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -967,7 +1002,7 @@
                         <div class="call-wrapper">
                             <div class="call-inner">
                                 <div class="call-user">
-                                    <img alt="User Image" src="img/doctors/doctor-thumb-02.jpg" class="call-avatar">
+                                    <img alt="User Image" src="/img/doctors/doctor-thumb-02.jpg" class="call-avatar">
                                     <h4>Dr. Darren Elder</h4>
                                     <span>Connecting...</span>
                                 </div>
@@ -997,7 +1032,7 @@
                         <div class="call-wrapper">
                             <div class="call-inner">
                                 <div class="call-user">
-                                    <img class="call-avatar" src="img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                    <img class="call-avatar" src="/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                                     <h4>Dr. Darren Elder</h4>
                                     <span>Calling ...</span>
                                 </div>
@@ -1017,17 +1052,17 @@
     <!-- Video Call Modal -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Fancybox JS -->
-    <script src="plugins/fancybox/jquery.fancybox.min.js"></script>
+    <script src="/plugins/fancybox/jquery.fancybox.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
 
 </body>
 
