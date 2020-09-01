@@ -209,68 +209,70 @@
                         <!-- Doctor Widget -->
                         <div class="card">
                             <div class="card-body">
-                                <div class="doctor-widget">
-                                    <div class="doc-info-left">
-                                        <div class="doctor-img">
-                                            <a href="/doctor-profile">
-                                                <img src="img/doctors/doctor-thumb-01.jpg" class="img-fluid" onerror='this.src="/img/profile.png"' alt="User Image">
-                                            </a>
-                                        </div>
-                                        <div class="doc-info-cont">
-                                            <h4 class="doc-name">
+                                <%for(doctor of doctors){%>
+                                    <div class="doctor-widget">
+                                        <div class="doc-info-left">
+                                            <div class="doctor-img">
                                                 <a href="/doctor-profile">
-                                                    <%=locals.user.name%>
-                                                </a>
-                                            </h4>
-                                            <p class="doc-speciality">
-                                                <%=locals.user.department%>
-                                                    <%=locals.user.specialisation%>
-                                            </p>
-                                            <h5 class="doc-department"><img src="img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(17)</span>
+                                                <img src="<%=doctor.avatar%>" class="img-fluid" onerror='this.src="/img/profile.png"' alt="User Image">
+                                            </a>
                                             </div>
-                                            <div class="clinic-details">
-                                                <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
-                                                    <%=locals.user.address%>
+                                            <div class="doc-info-cont">
+                                                <h4 class="doc-name">
+                                                    <a href="/doctor-profile">
+                                                        <%=doctor.name%>
+                                                    </a>
+                                                </h4>
+                                                <p class="doc-speciality">
+                                                    <%=doctor.department%>
+
                                                 </p>
-                                                <ul class="clinic-gallery">
+                                                <h5 class="doc-department"><img src="img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+                                                <div class="rating">
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <span class="d-inline-block average-rating">(17)</span>
+                                                </div>
+                                                <div class="clinic-details">
+                                                    <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                                        <%=doctor.address%>
+                                                    </p>
+                                                    <ul class="clinic-gallery">
 
-                                                    <li>
-                                                        <a href="/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                            <img src="img/features/feature-01.jpg" alt="Feature">
-                                                        </a>
-                                                    </li>
+                                                        <li>
+                                                            <a href="/img/features/feature-01.jpg" data-fancybox="gallery">
+                                                                <img src="img/features/feature-01.jpg" alt="Feature">
+                                                            </a>
+                                                        </li>
 
 
+                                                    </ul>
+                                                </div>
+                                                <div class="clinic-services">
+                                                    <span>Dental Fillings</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="doc-info-right">
+                                            <div class="clini-infos">
+                                                <ul>
+                                                    <li><i class="far fa-thumbs-up"></i> 98%</li>
+                                                    <li><i class="far fa-comment"></i> 17 Feedback</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
+                                                    <li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
                                                 </ul>
                                             </div>
-                                            <div class="clinic-services">
-                                                <span>Dental Fillings</span>
-
+                                            <div class="clinic-booking">
+                                                <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a>
+                                                <a class="apt-btn" href="booking">Book Appointment</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="doc-info-right">
-                                        <div class="clini-infos">
-                                            <ul>
-                                                <li><i class="far fa-thumbs-up"></i> 98%</li>
-                                                <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
-                                            </ul>
-                                        </div>
-                                        <div class="clinic-booking">
-                                            <a class="view-pro-btn" href="doctor-profile">View Profile</a>
-                                            <a class="apt-btn" href="booking">Book Appointment</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <%}%>
                             </div>
                         </div>
                         <!-- /Doctor Widget -->
@@ -291,9 +293,9 @@
 
                         <!-- /Doctor Widget -->
 
-                        <div class="load-more text-center">
+                        <!-- <div class="load-more text-center">
                             <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

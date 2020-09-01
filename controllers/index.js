@@ -48,9 +48,11 @@ module.exports.bankDetails = (req, res) => {
         title: 'Bank Details'
     })
 }
-module.exports.Doctors = (req, res) => {
+module.exports.Doctors = async(req, res) => {
+    let doctors = await User.find({ terms: true });
     return res.render('doctors', {
-        title: 'Doctors'
+        title: 'Doctors',
+        doctors: doctors
     })
 }
 module.exports.booking = (req, res) => {
@@ -123,9 +125,13 @@ module.exports.doctorDashboard = (req, res) => {
     })
 }
 
-module.exports.doctorProfile = (req, res) => {
+module.exports.doctorProfile = async(req, res) => {
+    console.log(req.query.id);
+    let doctor = await User.findById(req.query.id);
+
     return res.render('doctor-profile', {
-        title: 'Profile'
+        title: 'Profile',
+        doctor: doctor
     })
 }
 

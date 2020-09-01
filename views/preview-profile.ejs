@@ -191,7 +191,7 @@
                                                 <span>Preview profile</span>
                                             </a>
                                         </li>
-                                         <li>
+                                        <li>
                                             <a href="/doctor-terms-and-condition">
                                                 <i class="fas fa-id-card"></i>
                                                 <span>Terms and Conditions</span>
@@ -214,396 +214,411 @@
                     </div>
 
                     <div class="col-md-10 col-lg-8 col-xl-9" style="margin-top: -50px;">
-                                    <div class="content">
-                                        <div class="container">
-                            
-                                        
-                                            <!-- Doctor Details Tab -->
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title d-flex justify-content-between">
-                                                                <span>Personal Details</span> 
-                                                                <!-- <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a> -->
-                                                            </h5>
-                                                            <%if(locals.user.name != ''){%>
-                                                            <div class="row">
-                                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
-                                                                <p class="col-sm-10"><%=locals.user.name%></p>
-                                                            </div>
-                                                            <%}%>
-                                                            <%if(locals.user.education  != ''){%>
+                        <div class="content">
+                            <div class="container">
+
+
+                                <!-- Doctor Details Tab -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title d-flex justify-content-between">
+                                                    <span>Personal Details</span>
+                                                    <!-- <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a> -->
+                                                </h5>
+                                                <%if(locals.user.name != ''){%>
+                                                    <div class="row">
+                                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                                                        <p class="col-sm-10">
+                                                            <%=locals.user.name%>
+                                                        </p>
+                                                    </div>
+                                                    <%}%>
+                                                        <%if(locals.user.education  != ''){%>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                     <p class="text-muted text-sm-right mb-0 mb-sm-3">Education</p>
-                                                                 </div>
-                                                                 <div class="col-md-4 ml-n3">
+                                                                    <p class="text-muted text-sm-right mb-0 mb-sm-3">Education</p>
+                                                                </div>
+                                                                <div class="col-md-4 ml-n3">
                                                                     <%for(temp of locals.user.education){%>
-                                                                    <p class="col-sm-10"><span><%=temp.degree%> </span><span><%=temp.yoc%></span></p>
-                                                                    <%}%>
+                                                                        <p class="col-sm-10"><span><%=temp.degree%> </span><span><%=temp.yoc%></span></p>
+                                                                        <%}%>
                                                                 </div>
                                                             </div>
                                                             <%}%>
-                                                            <%if(locals.user.experience != ''){%>
-                                                                <div class="row">
-                                                                    <div class="col-md-2">
-                                                                         <p class="text-muted text-sm-right mb-0 mb-sm-3">Experience</p>
-                                                                     </div>
-                                                                     <div class="col-md-4 ml-n3">
-                                                                        <%for(temp of locals.user.experience){%>
-                                                                        <p class="col-sm-10"><span><%=temp.institutionname%> </span><span><%=temp.from%> </span><span><%=temp.to%></span></p>
-                                                                        <%}%>
-                                                                    </div>
-                                                                </div>
-                                                                <%}%>
-                                                                <%if(locals.user.awards != ''){%>
+                                                                <%if(locals.user.experience != ''){%>
                                                                     <div class="row">
                                                                         <div class="col-md-2">
-                                                                             <p class="text-muted text-sm-right mb-0 mb-sm-3">Awards</p>
-                                                                         </div>
-                                                                         <div class="col-md-4 ml-n3">
-                                                                            <%for(temp of locals.user.awards){%>
-                                                                            <p class="col-sm-10"><span><%=temp.award%> </span><span><%=temp.year%> </span></p>
-                                                                            <%}%>
+                                                                            <p class="text-muted text-sm-right mb-0 mb-sm-3">Experience</p>
+                                                                        </div>
+                                                                        <div class="col-md-4 ml-n3">
+                                                                            <%for(temp of locals.user.experience){%>
+                                                                                <p class="col-sm-10"><span><%=temp.institutionname%> </span><span><%=temp.from%> </span><span><%=temp.to%></span></p>
+                                                                                <%}%>
                                                                         </div>
                                                                     </div>
                                                                     <%}%>
-                                                            <%if(locals.user.department != ''){%>
-                                                            <div class="row">
-                                                                <p class="text-muted text-sm-right mb-0 mb-sm-3">Department</p>
-                                                                <p class="col-sm-10"><%=locals.user.department%></p>
-                                                            </div>
-                                                            <%}%>
-                                                            <%if(locals.user.city != ''){%>
-                                                            <div class="row">
-                                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">City</p>
-                                                                <p class="col-sm-10"><%=locals.user.city%></p>
-                                                            </div>
-                                                            <%}%>
-                                                            <%if(locals.user.state != ''){%>
-                                                            <div class="row">
-                                                                <p class="col-sm-2 text-muted text-sm-right mb-0">State</p>
-                                                                <p class="col-sm-10 mb-0"><%=locals.user.state%>
-                                                                </p>
-                                                            </div>
-                                                            <%}%>
-                                                            <%if(locals.user.clinicname != ''){%>
-                                                                <div class="row">
-                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Clinic Name</p>
-                                                                    <p class="col-sm-10 mb-0"><%=locals.user.clinicname%>
-                                                                    </p>
-                                                                </div>
-                                                                <%}%>
-                                                            <%if(locals.user.clinicaddr != ''){%>
-                                                                <div class="row">
-                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Clinic Address</p>
-                                                                    <p class="col-sm-10 mb-0"><%=locals.user.clinicaddr%>
-                                                                    </p>
-                                                                </div>
-                                                                <%}%>
-                                                            <%if(locals.user.clinicphoto != ''){%>
-                                                                <div class="row mt-3">
-                                                                    <div class="col-md-2">
-                                                                        <p class="text-muted text-sm-right mb-0">Clinic Photo</p>
-                                                                    </div>
-                                                                    <div class="col-md-10 ml-n2" style="display: inline-flex;overflow-x: auto;">
-                                                                        <%for(temp of locals.user.clinicphoto){%>
-                                                                           <img src="<%=temp%>" style="height: 100px;width: 100px;margin-left: 10px;">
-                                                                        <%}%>
-                                                                    </p>
-                                                                </div>
-                                                                <%}%>
-                                                            <%if(locals.user.specialisation != ''){%>
-                                                                <div class="row">
-                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Specialisation</p>
-                                                                    <p class="col-sm-10 mb-0"><%=locals.user.specialisation%>
-                                                                    </p>
-                                                                </div>
-                                                                <%}%>
-                                                            <%if(locals.user.services != ''){%>
-                                                                <div class="row">
-                                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Services</p>
-                                                                    <p class="col-sm-10 mb-0"><%=locals.user.services%>
-                                                                    </p>
-                                                                </div>
-                                                                <%}%>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-        
-                                            
+                                                                        <%if(locals.user.awards != ''){%>
+                                                                            <div class="row">
+                                                                                <div class="col-md-2">
+                                                                                    <p class="text-muted text-sm-right mb-0 mb-sm-3">Awards</p>
+                                                                                </div>
+                                                                                <div class="col-md-4 ml-n3">
+                                                                                    <%for(temp of locals.user.awards){%>
+                                                                                        <p class="col-sm-10"><span><%=temp.award%> </span><span><%=temp.year%> </span></p>
+                                                                                        <%}%>
+                                                                                </div>
+                                                                            </div>
+                                                                            <%}%>
+                                                                                <%if(locals.user.department != ''){%>
+                                                                                    <div class="row">
+                                                                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Department</p>
+                                                                                        <p class="col-sm-10">
+                                                                                            <%=locals.user.department%>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <%}%>
+                                                                                        <%if(locals.user.city != ''){%>
+                                                                                            <div class="row">
+                                                                                                <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">City</p>
+                                                                                                <p class="col-sm-10">
+                                                                                                    <%=locals.user.contacts.city%>
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <%}%>
+                                                                                                <%if(locals.user.state != ''){%>
+                                                                                                    <div class="row">
+                                                                                                        <p class="col-sm-2 text-muted text-sm-right mb-0">State</p>
+                                                                                                        <p class="col-sm-10 mb-0">
+                                                                                                            <%=locals.user.contacts.state%>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                    <%}%>
+                                                                                                        <%if(locals.user.clinicname != ''){%>
+                                                                                                            <div class="row">
+                                                                                                                <p class="col-sm-2 text-muted text-sm-right mb-0">Clinic Name</p>
+                                                                                                                <p class="col-sm-10 mb-0">
+                                                                                                                    <%=locals.user.clinicname%>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <%}%>
+                                                                                                                <%if(locals.user.clinicaddr != ''){%>
+                                                                                                                    <div class="row">
+                                                                                                                        <p class="col-sm-2 text-muted text-sm-right mb-0">Clinic Address</p>
+                                                                                                                        <p class="col-sm-10 mb-0">
+                                                                                                                            <%=locals.user.clinicaddr%>
+                                                                                                                        </p>
+                                                                                                                    </div>
+                                                                                                                    <%}%>
+                                                                                                                        <%if(locals.user.clinicphoto != ''){%>
+                                                                                                                            <div class="row mt-3">
+                                                                                                                                <div class="col-md-2">
+                                                                                                                                    <p class="text-muted text-sm-right mb-0">Clinic Photo</p>
+                                                                                                                                </div>
+                                                                                                                                <div class="col-md-10 ml-n2" style="display: inline-flex;overflow-x: auto;">
+                                                                                                                                    <%for(temp of locals.user.clinicphoto){%>
+                                                                                                                                        <img src="<%=temp%>" style="height: 100px;width: 100px;margin-left: 10px;">
+                                                                                                                                        <%}%>
+                                                                                                                                            </p>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                            <%}%>
+                                                                                                                                <%if(locals.user.specialisation != ''){%>
+                                                                                                                                    <div class="row">
+                                                                                                                                        <p class="col-sm-2 text-muted text-sm-right mb-0">Specialisation</p>
+                                                                                                                                        <p class="col-sm-10 mb-0">
+                                                                                                                                            <%=locals.user.specialisation%>
+                                                                                                                                        </p>
+                                                                                                                                    </div>
+                                                                                                                                    <%}%>
+                                                                                                                                        <%if(locals.user.services != ''){%>
+                                                                                                                                            <div class="row">
+                                                                                                                                                <p class="col-sm-2 text-muted text-sm-right mb-0">Services</p>
+                                                                                                                                                <p class="col-sm-10 mb-0">
+                                                                                                                                                    <%=locals.user.services%>
+                                                                                                                                                </p>
+                                                                                                                                            </div>
+                                                                                                                                            <%}%>
+
                                             </div>
-                                            <!-- /Doctor Details Tab -->
-                            
+
                                         </div>
+
+
                                     </div>
-                             </div>
-                             <div class="container-fluid">
-                                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                    <strong>Note!</strong> Please fill all the fields so that your profile should look informative to the patients<a href="#" class="alert-link">.</a>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <!-- /Doctor Details Tab -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong>Note!</strong> Please fill all the fields so that your profile should look informative to the patients<a href="#" class="alert-link">.</a>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><span>Update Profile</span><span class="ml-5"style="font-size:0.7rem;text-decoration:underline;"><a href="/doctor-profile-settings">Profile Settings</a></span></h5>
-                                       
-                                        <ul>
-                                             <%if(locals.user.name == ''){%>
-                                                <li> Name</li>
-                                                <%}%>
-                                            
-                                             <%if(locals.user.education == ''){%>
-                                                <li>Education</li>
-                                            <%}%>
-                                       
-                                         <%if(locals.user.experience == ''){%>
-                                            <li>Experience</li>
-                                        <%}%>
-                                  
-                                   <%if(locals.user.awards == ''){%>
-                                    <li>  Awards </li> 
-                                    <%}%>
-                               
-                                <%if(locals.user.department == ''){%>
-                                    <li> Department</li>
-                                <%}%>
-                            
-                            <%if(locals.user.city == ''){%>
-                                <li>  City</li>
-                            <%}%>
-                       
-                        <%if(locals.user.state == ''){%>
-                            <li> State </li>
-                        <%}%>
-                   
+                            </div>
+                            <%if(locals.user.name && locals.user.education && locals.user.experience &&locals.user.awards &&locals.user.department&&locals.user.city&&locals.user.state&&locals.user.clinicname&&locals.user.clinicaddr&&locals.user.clinicphoto&&locals.user.specialisation&&locals.user.services){%>
+                                <%}else{%>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><span>Update Profile</span><span class="ml-5" style="font-size:0.7rem;text-decoration:underline;"><a href="/doctor-profile-settings">Profile Settings</a></span></h5>
 
-                    <%if(locals.user.clinicname == ''){%>
-                        <li> Clinic Name </li>
-                    <%}%>
-               
-
-                <%if(locals.user.clinicaddr == ''){%>
-                    <li> Clinic Address</li>
-                <%}%>
-            
-
-           <%if(locals.user.clinicphoto == ''){%>
-            <li> Clinic Photo</li>
-            <%}%>
-        
-        <%if(locals.user.specialisation == ''){%>
-            <li> Specialisation</li>
-        <%}%>
-    
-   <%if(locals.user.services == ''){%>
-    <li> Services</li>
-    <%}%>
-
-
-                                        </ul>
-                                          
-                                            
-                                    
-                                      </div>
-                                      </div>
-                             </div>
-                </div>
-
-            </div>
-            <!-- /Page Content -->
-
-            <!-- Footer -->
-            <footer class="footer">
-
-
-                <!-- Footer Top -->
-                <div class="footer-top">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-about">
-                                    <div class="footer-logo">
-                                        <img src="img/footer-logo.png" alt="logo">
-                                    </div>
-                                    <div class="footer-about-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <div class="social-icon">
                                             <ul>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-                                                </li>
+                                                <%if(locals.user.name == ''){%>
+                                                    <li> Name</li>
+                                                    <%}%>
+
+                                                        <%if(locals.user.education == ''){%>
+                                                            <li>Education</li>
+                                                            <%}%>
+
+                                                                <%if(locals.user.experience == ''){%>
+                                                                    <li>Experience</li>
+                                                                    <%}%>
+
+                                                                        <%if(locals.user.awards == ''){%>
+                                                                            <li> Awards </li>
+                                                                            <%}%>
+
+                                                                                <%if(locals.user.department == ''){%>
+                                                                                    <li> Department</li>
+                                                                                    <%}%>
+
+                                                                                        <%if(locals.user.city == ''){%>
+                                                                                            <li> City</li>
+                                                                                            <%}%>
+
+                                                                                                <%if(locals.user.state == ''){%>
+                                                                                                    <li> State </li>
+                                                                                                    <%}%>
+
+
+                                                                                                        <%if(locals.user.clinicname == ''){%>
+                                                                                                            <li> Clinic Name </li>
+                                                                                                            <%}%>
+
+
+                                                                                                                <%if(locals.user.clinicaddr == ''){%>
+                                                                                                                    <li> Clinic Address</li>
+                                                                                                                    <%}%>
+
+
+                                                                                                                        <%if(locals.user.clinicphoto == ''){%>
+                                                                                                                            <li> Clinic Photo</li>
+                                                                                                                            <%}%>
+
+                                                                                                                                <%if(locals.user.specialisation == ''){%>
+                                                                                                                                    <li> Specialisation</li>
+                                                                                                                                    <%}%>
+
+                                                                                                                                        <%if(locals.user.services == ''){%>
+                                                                                                                                            <li> Services</li>
+                                                                                                                                            <%}%>
+
+
+                                            </ul>
+
+
+
+                                        </div>
+                                    </div>
+                                    <%}%>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /Page Content -->
+
+                <!-- Footer -->
+                <footer class="footer">
+
+
+                    <!-- Footer Top -->
+                    <div class="footer-top">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6">
+
+                                    <!-- Footer Widget -->
+                                    <div class="footer-widget footer-about">
+                                        <div class="footer-logo">
+                                            <img src="img/footer-logo.png" alt="logo">
+                                        </div>
+                                        <div class="footer-about-content">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                            <div class="social-icon">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Footer Widget -->
+
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+
+                                    <!-- Footer Widget -->
+                                    <div class="footer-widget footer-menu">
+                                        <h2 class="footer-title">For Patients</h2>
+                                        <ul>
+                                            <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
+                                            <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                            <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                                            <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
+                                            <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /Footer Widget -->
+
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+
+                                    <!-- Footer Widget -->
+                                    <div class="footer-widget footer-menu">
+                                        <h2 class="footer-title">For Doctors</h2>
+                                        <ul>
+                                            <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
+                                            <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
+                                            <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                            <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                                            <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /Footer Widget -->
+
+                                </div>
+
+                                <div class="col-lg-3 col-md-6">
+
+                                    <!-- Footer Widget -->
+                                    <div class="footer-widget footer-contact">
+                                        <h2 class="footer-title">Contact Us</h2>
+                                        <div class="footer-contact-info">
+                                            <div class="footer-address">
+                                                <span><i class="fas fa-map-marker-alt"></i></span>
+                                                <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
+                                            </div>
+                                            <p>
+                                                <i class="fas fa-phone-alt"></i> +1 315 369 5943
+                                            </p>
+                                            <p class="mb-0">
+                                                <i class="fas fa-envelope"></i> doccure@example.com
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- /Footer Widget -->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Footer Top -->
+
+                    <!-- Footer Bottom -->
+                    <div class="footer-bottom">
+                        <div class="container-fluid">
+
+                            <!-- Copyright -->
+                            <div class="copyright">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                        <div class="copyright-text">
+                                            <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+
+                                        <!-- Copyright Menu -->
+                                        <div class="copyright-menu">
+                                            <ul class="policy-menu">
+                                                <li><a href="/term-condition">Terms and Conditions</a></li>
+                                                <li><a href="/privacy-policy">Policy</a></li>
                                             </ul>
                                         </div>
+                                        <!-- /Copyright Menu -->
+
                                     </div>
                                 </div>
-                                <!-- /Footer Widget -->
-
                             </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">For Patients</h2>
-                                    <ul>
-                                        <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                        <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                        <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                        <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">For Doctors</h2>
-                                    <ul>
-                                        <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-                                        <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                        <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                        <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-contact">
-                                    <h2 class="footer-title">Contact Us</h2>
-                                    <div class="footer-contact-info">
-                                        <div class="footer-address">
-                                            <span><i class="fas fa-map-marker-alt"></i></span>
-                                            <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
-                                        </div>
-                                        <p>
-                                            <i class="fas fa-phone-alt"></i> +1 315 369 5943
-                                        </p>
-                                        <p class="mb-0">
-                                            <i class="fas fa-envelope"></i> doccure@example.com
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
+                            <!-- /Copyright -->
 
                         </div>
                     </div>
-                </div>
-                <!-- /Footer Top -->
+                    <!-- /Footer Bottom -->
 
-                <!-- Footer Bottom -->
-                <div class="footer-bottom">
-                    <div class="container-fluid">
+                </footer>
+                <!-- /Footer -->
 
-                        <!-- Copyright -->
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="copyright-text">
-                                        <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6">
+            </div>
+            <!-- /Main Wrapper -->
 
-                                    <!-- Copyright Menu -->
-                                    <div class="copyright-menu">
-                                        <ul class="policy-menu">
-                                            <li><a href="/term-condition">Terms and Conditions</a></li>
-                                            <li><a href="/privacy-policy">Policy</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- /Copyright Menu -->
+            <!-- jQuery -->
+            <script src="js/jquery.min.js"></script>
 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Copyright -->
+            <!-- Bootstrap Core JS -->
+            <script src="js/popper.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
 
-                    </div>
-                </div>
-                <!-- /Footer Bottom -->
-
-            </footer>
-            <!-- /Footer -->
-
-        </div>
-        <!-- /Main Wrapper -->
-
-        <!-- jQuery -->
-        <script src="js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JS -->
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-
-        <!-- Sticky Sidebar JS -->
-        <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-        <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
-        <!-- <script src="plugins/select2/js/select2.min.js"></script> -->
+            <!-- Sticky Sidebar JS -->
+            <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+            <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+            <!-- <script src="plugins/select2/js/select2.min.js"></script> -->
 
 
-        <!-- Custom JS -->
-        <script src="js/script.js"></script>
+            <!-- Custom JS -->
+            <script src="js/script.js"></script>
 
-        <script>
-            document.getElementById("imageUpload").onchange = function() {
-                document.getElementById("edit_form").submit();
-            };
-        </script>
-        <script>
-            document.getElementById("imageUpload1").onchange = function() {
-                document.getElementById("edit_form1").submit();
-            };
-        </script>
+            <script>
+                document.getElementById("imageUpload").onchange = function() {
+                    document.getElementById("edit_form").submit();
+                };
+            </script>
+            <script>
+                document.getElementById("imageUpload1").onchange = function() {
+                    document.getElementById("edit_form1").submit();
+                };
+            </script>
 
-        <script>
-            <%if(flash.success && flash.success.length>0){%>
-            new Noty({
-                theme: 'metroui',
-                text: '<%=flash.success%>',
-                type: 'success',
-                layout: 'topRight',
-                timeout: 1500
-            }).show();
-            <%}%>
-            <%if(flash.error && flash.error.length>0){%>
-            new Noty({
-                theme: 'metroui',
-                text: '<%=flash.error%>',
-                type: 'error',
-                layout: 'topRight',
-                timeout: 3000
-            }).show();
-            <%}%>
-        </script>
+            <script>
+                <%if(flash.success && flash.success.length>0){%>
+                new Noty({
+                    theme: 'metroui',
+                    text: '<%=flash.success%>',
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+                <%}%>
+                <%if(flash.error && flash.error.length>0){%>
+                new Noty({
+                    theme: 'metroui',
+                    text: '<%=flash.error%>',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 3000
+                }).show();
+                <%}%>
+            </script>
 
 </body>
 
