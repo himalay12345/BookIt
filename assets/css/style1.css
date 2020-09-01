@@ -1460,7 +1460,7 @@ button.bg-danger:hover {
 }
 .user-menu.nav > li > a:hover,
 .user-menu.nav > li > a:focus {
-	background-color: rgba(0, 0, 0, 0.2);
+	/* background-color: rgba(0, 0, 0, 0.2); */
 }
 .user-menu.nav > li > a:hover i,
 .user-menu.nav > li > a:focus i {
@@ -1492,7 +1492,7 @@ button.bg-danger:hover {
     padding: 10px 15px;
 }
 .user-menu .dropdown-menu .dropdown-item:hover {
-	color: #fff;
+	/* color: #fff; */
     background: #00d0f1;
 }
 .header .dropdown-menu > li > a:focus,
@@ -2166,7 +2166,7 @@ html.menu-opened body {
 	border-radius: 2px;
 }
 .notifications .media a:hover {
-	background-color: #fafafa;
+	/* background-color: #fafafa; */
 }
 .notifications .media > .avatar {
 	margin-right: 10px;

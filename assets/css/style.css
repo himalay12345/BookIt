@@ -1880,7 +1880,7 @@ button.bg-danger:hover {
 }
 .user-menu.nav > li > a:hover,
 .user-menu.nav > li > a:focus {
-	background-color: rgba(0, 0, 0, 0.2);
+	/* background-color: rgba(0, 0, 0, 0.2); */
 }
 .user-menu.nav > li > a:hover i,
 .user-menu.nav > li > a:focus i {
@@ -6882,7 +6882,7 @@ html.menu-opened body {
   
 
   .notifications{
-	left:-180px;
+	left:-280px;
 	top:70px;
   }
   h1 {

@@ -51,8 +51,11 @@
                         <span></span>
                         </span>
                     </a>
-                    <a href="/index-2" class="navbar-brand logo">
+                    <!-- <a href="/index-2" class="navbar-brand logo">
                         <img src="img/logo.png" class="img-fluid" alt="Logo">
+                    </a> -->
+                    <a href="/admin/index" class="logo logo-small">
+                        <img src="/img/logo.png" alt="Logo" width="30" height="30">
                     </a>
                 </div>
                 <div class="main-menu-wrapper">
@@ -150,14 +153,14 @@
                             <p class="contact-info-header"> +1 315 369 5943</p>
                         </div>
                     </li>
-                    <%if(locals.user){%>
+            <%if(locals.user){%>
 
-                        <%}else{%>
-                            <li class="nav-item">
-                                <a class="nav-link header-login" href="/login">login / Signup </a>
-                            </li>
-                            <%}%>
-                </ul>
+                <%}else{%>
+                    <li class="nav-item">
+                        <a class="nav-link header-login" href="/login">login / Signup </a>
+                    </li>
+                <%}%>
+                    </ul>
                 <%if(locals.user){%>
                     <ul class="nav user-menu">
 
@@ -262,64 +265,61 @@
 
                     </ul>
                     <%}%>
-                        <%if(locals.user){%>
-                            <%if(locals.user.type == 'Doctor'){%>
-                                <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
-                                    <ul class="main-nav amain-nav">
+                <%if(locals.user){%>
+                    <%if(locals.user.type == 'Doctor'){%>
+                        <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                            <ul class="main-nav amain-nav">
 
-                                        <li class="has-submenu ahas-submenu">
-                                            <a href="#">
-                                                <span class="user-img">
-										<img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-									</span>
-                                                <i class="fas fa-chevron-down"></i>
-                                            </a>
+                                <li class="has-submenu ahas-submenu">
+                                    <a href="#">
+                                        <span class="user-img">
+                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                            </span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
 
-                                            <ul class="submenu asubmenu">
-                                                <li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
-                                                <li><a href="/appointments">Appointments</a></li>
-                                                <li><a href="/schedule-timings">Schedule Timing</a></li>
-                                                <li><a href="/my-patients">Patients List</a></li>
-                                                <li><a href="/patient-profile">Patients Profile</a></li>
-                                                <li><a href="/chat-doctor">Chat</a></li>
-                                                <li><a href="/invoices">Invoices</a></li>
-                                                <li><a href="/doctor-profile-settings">Profile Settings</a></li>
-                                                <li><a href="/reviews">Reviews</a></li>
-                                                <li><a href="/doctor-register">Doctor Register</a></li>
-                                                <li><a href="/user/logout">Logout</a></li>
-                                            </ul>
-                                        </li>
+                                    <ul class="submenu asubmenu">
+                                        <li><a href="/doctor-dashboard">My Dashboard</a></li>
+                                        <li><a href="/appointments">Appointments</a></li>
+                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
+                                        <li><a href="/chat-doctor">Chat</a></li>
+                                        
+                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
+                                        
+                                        <li><a href="/user/logout">Logout</a></li>
                                     </ul>
-                                </div>
-                                <%}%>
-                                    <%if(locals.user.type == 'Patient'){%>
-                                        <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
-                                            <ul class="main-nav amain-nav">
-                                                <li class="has-submenu ahas-submenu">
-                                                    <a href="#">
-                                                        <span class="user-img">
-                                            <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-                                        </span>
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    <%}%>
+                <%if(locals.user.type == 'Patient'){%>
+                    <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                        <ul class="main-nav amain-nav">
+                            <li class="has-submenu ahas-submenu">
+                                <a href="#">
+                                    <span class="user-img">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                    </span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
 
-                                                    <ul class="submenu asubmenu">
-                                                        <li><a href="/search">Search Doctor</a></li>
-                                                        <li><a href="/booking">Booking</a></li>
-                                                        <li><a href="/checkout">Checkout</a></li>
-                                                        <li><a href="/booking-success">Booking Success</a></li>
-                                                        <li><a href="/patient-dashboard">My Dashboard</a></li>
-                                                        <li><a href="/favourites">My Favourites</a></li>
-                                                        <li><a href="/chat">Messages</a></li>
-                                                        <li><a href="/profile-settings">Profile Settings</a></li>
-                                                        <li><a href="/change-password">Change Password</a></li>
-                                                        <li><a href="/user/logout">Logout</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <%}%>
-                                            <%}%>
+                                <ul class="submenu asubmenu">
+                                    <li><a href="/search">Search Doctor</a></li>
+                                    <li><a href="/booking">Booking</a></li>
+                                    <li><a href="/checkout">Checkout</a></li>
+                                    <li><a href="/booking-success">Booking Success</a></li>
+                                    <li><a href="/patient-dashboard">My Dashboard</a></li>
+                                    <li><a href="/favourites">My Favourites</a></li>
+                                    <li><a href="/chat">Messages</a></li>
+                                    <li><a href="/profile-settings">Profile Settings</a></li>
+                                    <li><a href="/change-password">Change Password</a></li>
+                                    <li><a href="/user/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                <%}%>
             </nav>
         </header>
         <!-- /Header -->
