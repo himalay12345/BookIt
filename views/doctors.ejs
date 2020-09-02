@@ -196,7 +196,7 @@
                                     </div>
                                 </div>
                                 <div class="btn-search">
-                                    <button type="button" class="btn btn-block">Search</button>
+                                    <button type="button" class="btn btn-block">Doctors</button>
                                 </div>
                             </div>
                         </div>
@@ -213,13 +213,13 @@
                                     <div class="doctor-widget">
                                         <div class="doc-info-left">
                                             <div class="doctor-img">
-                                                <a href="/doctor-profile">
+                                                <a href="doctor-profile/?id=<%=doctor._id%>">
                                                 <img src="<%=doctor.avatar%>" class="img-fluid" onerror='this.src="/img/profile.png"' alt="User Image">
                                             </a>
                                             </div>
                                             <div class="doc-info-cont">
                                                 <h4 class="doc-name">
-                                                    <a href="/doctor-profile">
+                                                    <a href="doctor-profile/?id=<%=doctor._id%>">
                                                         <%=doctor.name%>
                                                     </a>
                                                 </h4>
@@ -227,7 +227,47 @@
                                                     <%=doctor.department%>
 
                                                 </p>
-                                                <h5 class="doc-department"><img src="img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+                                                <p class="doc-department">
+                                                    <% if(doctor.department== "General Physician"){ %>
+
+                                                        <img src="/img/specialities/physical.jfif" class="img-fluid" alt="Speciality">
+                                                        <% } %>
+
+                                                            <% if(doctor.department== "Ophthalmology"){ %>
+
+                                                                <img src="/img/specialities/eye.png" class="img-fluid" alt="Speciality">
+                                                                <% } %>
+                                                                    <% if(doctor.department== "Dermatology"){ %>
+
+                                                                        <img src="/img/specialities/hair.jpg" class="img-fluid" alt="Speciality">
+                                                                        <% } %>
+                                                                            <% if(doctor.department== "Paediatrics"){ %>
+
+                                                                                <img src="/img/specialities/child.jpg" class="img-fluid" alt="Speciality">
+                                                                                <% } %>
+                                                                                    <% if(doctor.department== "Urology"){ %>
+
+                                                                                        <img src="/img/specialities/brain.png" class="img-fluid" alt="Speciality">
+                                                                                        <% } %>
+                                                                                            <% if(doctor.department== "Neurology"){ %>
+
+                                                                                                <img src="/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
+                                                                                                <% } %>
+                                                                                                    <% if(doctor.department== "Orthopedic"){ %>
+
+                                                                                                        <img src="/img/specialities/specialities.png" class="img-fluid" alt="Speciality">
+                                                                                                        <% } %>
+                                                                                                            <% if(doctor.department== "Cardiologist"){ %>
+
+                                                                                                                <img src="/img/specialities/heart.jpg" class="img-fluid" alt="Speciality">
+                                                                                                                <% } %>
+                                                                                                                    <% if(doctor.department== "Dentist"){ %>
+
+                                                                                                                        <img src="/img/specialities/teeth.png" class="img-fluid" alt="Speciality">
+                                                                                                                        <% } %>
+                                                                                                                            <%=doctor.department%>
+
+                                                </p>
                                                 <div class="rating">
                                                     <i class="fas fa-star filled"></i>
                                                     <i class="fas fa-star filled"></i>
@@ -238,21 +278,26 @@
                                                 </div>
                                                 <div class="clinic-details">
                                                     <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
-                                                        <%=doctor.address%>
+                                                        <%=doctor.contacts.city%>
+                                                            <%=doctor.contacts.country%>
                                                     </p>
                                                     <ul class="clinic-gallery">
-
-                                                        <li>
-                                                            <a href="/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                                <img src="img/features/feature-01.jpg" alt="Feature">
-                                                            </a>
-                                                        </li>
+                                                        <%for(doctorsclinic of doctor.clinicphoto){%>
+                                                            <li>
+                                                                <a href="<%=doctorsclinic%>" data-fancybox="gallery">
+                                                                    <img src="<%=doctorsclinic%> " alt="Feature" height="50px">
+                                                                </a>
+                                                            </li>
+                                                            <%}%>
 
 
                                                     </ul>
                                                 </div>
                                                 <div class="clinic-services">
-                                                    <span>Dental Fillings</span>
+                                                    <%var service = doctor.services.toString().split(',')%>
+                                                        <%for(temp of service){%>
+                                                            <span><%=temp%></span>
+                                                            <%}%>
 
                                                 </div>
                                             </div>
@@ -260,15 +305,34 @@
                                         <div class="doc-info-right">
                                             <div class="clini-infos">
                                                 <ul>
-                                                    <li><i class="far fa-thumbs-up"></i> 98%</li>
-                                                    <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                                    <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-                                                    <li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
+                                                    <li><i class="far fa-thumbs-up"></i> 0</li>
+                                                    <li><i class="far fa-comment"></i> 0</li>
+                                                    <li><i class="fas fa-map-marker-alt"></i>
+                                                        <%=doctor.contacts.city%>
+                                                            <%=doctor.contacts.state%>
+                                                    </li>
+                                                    <li><i class="far fa-money-bill-alt"></i>RS
+                                                        <%=doctor.booking_fee%>
+                                                    </li>
                                                 </ul>
+                                            </div>
+                                            <div class="doctor-action">
+                                                <a href="javascript:void(0)" class="btn btn-white fav-btn">
+                                                    <i class="far fa-bookmark"></i>
+                                                </a>
+                                                <a href="/chat" class="btn btn-white msg-btn">
+                                                    <i class="far fa-comment-alt"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+                                                    <i class="fas fa-phone"></i>
+                                                </a>
+                                                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+                                                    <i class="fas fa-video"></i>
+                                                </a>
                                             </div>
                                             <div class="clinic-booking">
                                                 <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a>
-                                                <a class="apt-btn" href="booking">Book Appointment</a>
+                                                <a class="apt-btn" href="/login">Book Appointment</a>
                                             </div>
                                         </div>
                                     </div>

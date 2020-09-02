@@ -169,7 +169,8 @@
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
-                                            <%=locals.user.name%></h3>
+                                            <%=locals.user.name%>
+                                        </h3>
 
                                         <div class="patient-details">
                                             <h5 class="mb-0">
@@ -186,6 +187,12 @@
                                             <a href="/doctor-dashboard">
                                                 <i class="fas fa-columns"></i>
                                                 <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/doctor-profile-settings">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Profile Information</span>
                                             </a>
                                         </li>
                                         <li>
@@ -212,7 +219,7 @@
                                                 <span>Preview profile</span>
                                             </a>
                                         </li>
-                                         <li>
+                                        <li>
                                             <a href="/doctor-terms-and-condition">
                                                 <i class="fas fa-id-card"></i>
                                                 <span>Terms and Conditions</span>
@@ -246,32 +253,32 @@
                                 <%if(locals.user.idproof && locals.user.degreephoto){%>
                                     <%if(locals.user.approve == true){%>
                                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
-                                    </div>
-                                    <%}else{%>
-                                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                            <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        </div>
+                                        <%}else{%>
+                                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                                <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
-                                        </div>
+                                            </div>
 
-                                        <%}%>
-                              
-                                    <%}%>
-                                        <form action="/user/upload-id" method="POST" enctype="multipart/form-data" id="edit_form">
-                                            <!-- Basic Information -->
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Verify Identity Proof</h4>
-                                                    <div class="row form-row">
-                                                        <div class="col-sm-12 col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Identity Proof</label>
-                                                                <select name="idproofname" class="form-control">
+                                            <%}%>
+
+                                                <%}%>
+                                                    <form action="/user/upload-id" method="POST" enctype="multipart/form-data" id="edit_form">
+                                                        <!-- Basic Information -->
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">Verify Identity Proof</h4>
+                                                                <div class="row form-row">
+                                                                    <div class="col-sm-12 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>Identity Proof</label>
+                                                                            <select name="idproofname" class="form-control">
                                                     <%if(locals.user.idproofname == 'Aadhaar card'){%><option selected>Aadhaar card</option><%}else{%>
                                                     <option>Aadhaar card</option><%}%>
                                                     <%if(locals.user.idproofname == 'PAN card'){%><option selected>PAN card</option><%}else{%>
@@ -287,40 +294,40 @@
                                                     <%if(locals.user.idproofname == 'Indian passport'){%><option selected>Indian passport</option><%}else{%>
                                                     <option>Indian passport</option><%}%>
                                                     </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 ml-lg-5">
-                                                            <div class="form-group">
-                                                                <div class="change-avatar">
-                                                                    <div class="profile-img">
-                                                                        <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
-                                                                    </div>
-                                                                    <div class="upload-img">
-                                                                        <div class="change-photo-btn">
-                                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
                                                                         </div>
-                                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                    </div>
+                                                                    <div class="col-md-4 ml-lg-5">
+                                                                        <div class="form-group">
+                                                                            <div class="change-avatar">
+                                                                                <div class="profile-img">
+                                                                                    <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                                                                </div>
+                                                                                <div class="upload-img">
+                                                                                    <div class="change-photo-btn">
+                                                                                        <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                                        <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                                                    </div>
+                                                                                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
+                                                    <form action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form1">
+                                                        <div class="card">
+                                                            <div class="card-body">
 
-                                                </div>
-                                            </div>
-                                        </form>
-                                                <form action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form1">
-                                                    <div class="card">
-                                                        <div class="card-body">
-
-                                                            <h4 class="card-title">Verify Educational Degree</h4>
-                                                            <h4 class="card-title"></h4>
-                                                            <div class="row form-row">
-                                                                <div class="col-sm-12 col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Degree</label>
-                                                                        <select name="degreeproof" class="form-control">
+                                                                <h4 class="card-title">Verify Educational Degree</h4>
+                                                                <h4 class="card-title"></h4>
+                                                                <div class="row form-row">
+                                                                    <div class="col-sm-12 col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label>Degree</label>
+                                                                            <select name="degreeproof" class="form-control">
                                                     <%if(locals.user.degreeproof == 'MBBS – Bachelor of Medicine, Bachelor of Surgery'){%><option selected>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}else{%>
                                                     <option>MBBS – Bachelor of Medicine, Bachelor of Surgery</option><%}%>
                                                     <%if(locals.user.degreeproof == 'BDS – Bachelor of Dental Surgery'){%><option selected>BDS – Bachelor of Dental Surgery</option><%}else{%>
@@ -336,30 +343,30 @@
                                                     <%if(locals.user.degreeproof == 'B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry'){%><option selected>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}else{%>
                                                     <option>B.V.Sc & AH- Bachelor of Veterinary Sciences and Animal Husbandry</option><%}%>
                                                     </select>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-4 ml-lg-5">
-                                                                    <div class="form-group">
-                                                                        <div class="change-avatar">
-                                                                            <div class="profile-img">
-                                                                                <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
-                                                                            </div>
-                                                                            <div class="upload-img">
-                                                                                <div class="change-photo-btn">
-                                                                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                                                    <input type="file" class="upload" name="avatar" id="imageUpload1">
+                                                                    <div class="col-md-4 ml-lg-5">
+                                                                        <div class="form-group">
+                                                                            <div class="change-avatar">
+                                                                                <div class="profile-img">
+                                                                                    <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
                                                                                 </div>
-                                                                                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                                <div class="upload-img">
+                                                                                    <div class="change-photo-btn">
+                                                                                        <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                                        <input type="file" class="upload" name="avatar" id="imageUpload1">
+                                                                                    </div>
+                                                                                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
+
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
                     </div>
                 </div>
 

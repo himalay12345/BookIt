@@ -179,18 +179,6 @@
                                                 <span>Dashboard</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/upload-documents">
-                                                <i class="fas fa-file"></i>
-                                                <span>Upload Documents</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/bank-details">
-                                                <i class="fas fa-university"></i>
-                                                <span>Add Bank Account</span>
-                                            </a>
-                                        </li>
 
 
 
@@ -199,12 +187,9 @@
 
 
 
-                                        <li>
-                                            <a href="/doctor-change-password">
-                                                <i class="fas fa-lock"></i>
-                                                <span>Change Password</span>
-                                            </a>
-                                        </li>
+
+
+
 
                                     </ul>
                                 </nav>
@@ -283,6 +268,14 @@
                                                 <label>Date of Birth</label>
                                                 <div class="cal-icon">
                                                     <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label>Add Biodata</label>
+                                                <div class="">
+                                                    <input type="textarea" placeholder="Write something about yourself." name="biodata" class="form-control" value="<%=locals.user.biodata%>" style="height: 100px;">
                                                 </div>
                                             </div>
                                         </div>
