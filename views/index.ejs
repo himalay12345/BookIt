@@ -10,27 +10,27 @@
     <title>Doccure</title>
 
     <!-- Favicons -->
-    <link type="image/x-icon" href="img/favicon.png" rel="icon">
+    <link type="image/x-icon" href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
 
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
-    <!-- <link rel="stylesheet" href="/css/font-awesome.min.css"> -->
+    <!-- <link rel="stylesheet" href="//css/font-awesome.min.css"> -->
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/css/style1.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -51,17 +51,15 @@
                         <span></span>
                         </span>
                     </a>
-                    <!-- <a href="/index-2" class="navbar-brand logo">
-                        <img src="img/logo.png" class="img-fluid" alt="Logo">
-                    </a> -->
-                    <a href="/admin/index" class="logo logo-small">
-                        <img src="/img/logo.png" alt="Logo" width="30" height="30">
+                    <a href="/index-2" class="navbar-brand logo">
+                        <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
+                    
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
                         <a href="/index-2" class="menu-logo">
-                            <img src="img/logo.png" class="img-fluid" alt="Logo">
+                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
                             <i class="fas fa-times"></i>
@@ -100,7 +98,7 @@
                             <li class="has-submenu hideme">
                                 <a href="#">
                                     <span class="user-img">
-												<img class="rounded-circle" src="img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+												<img class="rounded-circle" src="/img/patients/patient.jpg" width="31" alt="Ryan Taylor">
 											</span>
                                     <span style="margin-left: 8px;">
 												<%=locals.user.name%>
@@ -157,7 +155,7 @@
 
                 <%}else{%>
                     <li class="nav-item">
-                        <a class="nav-link header-login" href="/login">login / Signup </a>
+                        <a class="nav-link header-login" href="/login">Login </a>
                     </li>
                 <%}%>
                     </ul>
@@ -165,7 +163,7 @@
                     <ul class="nav user-menu">
 
                         <!-- Notifications -->
-                        <li class="nav-item dropdown noti-dropdown">
+                        <li class="nav-item dropdown noti-dropdown bell">
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                 <i class="far fa-bell" style="color: black; margin-left: 15px;"></i> <span class="badge badge-pill">1</span>
                             </a>
@@ -201,7 +199,7 @@
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="/img/patients/patient1.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient1.jpg">
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
@@ -214,7 +212,7 @@
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="/img/patients/patient2.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient2.jpg">
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
@@ -227,7 +225,7 @@
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="/img/patients/patient3.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient3.jpg">
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
@@ -246,11 +244,11 @@
                         <!-- /Notifications -->
 
                         <!-- User Menu -->
-                        <!-- <li class="nav-item dropdown has-arrow">
+                        <li class="nav-item dropdown has-arrow">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img"><img class="rounded-circle" src="/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
                         </a>
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu profile-drop">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
                                     <img src="/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
@@ -264,14 +262,15 @@
                             <a class="dropdown-item" href="/settings">Settings</a>
                             <a class="dropdown-item" href="/login">Logout</a>
                         </div>
-                    </li> -->
+                    </li>
                         <!-- /User Menu -->
 
                     </ul>
                     <%}%>
-                <%if(locals.user){%>
+                    
+                <!-- <%if(locals.user){%>
                     <%if(locals.user.type == 'Doctor'){%>
-                        <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                        <div class="hideinphone" style="margin-left: 25px;">
                             <ul class="main-nav amain-nav">
 
                                 <li class="has-submenu ahas-submenu">
@@ -282,7 +281,7 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </a>
 
-                                    <ul class="submenu asubmenu">
+                                    <ul class="submenu asubmenun phoneul">
                                         <li><a href="/doctor-dashboard">My Dashboard</a></li>
                                         <li><a href="/appointments">Appointments</a></li>
                                         <li><a href="/schedule-timings">Schedule Timing</a></li>
@@ -302,7 +301,7 @@
                             <li class="has-submenu ahas-submenu">
                                 <a href="#">
                                     <span class="user-img">
-                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
                     </span>
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
@@ -323,7 +322,7 @@
                         </ul>
                     </div>
                     <%}%>
-                <%}%>
+                <%}%> -->
             </nav>
         </header>
         <!-- /Header -->
@@ -392,7 +391,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/physical.jfif" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/physical.jfif" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>General Physician</p>
@@ -402,7 +401,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/eye.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/eye.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Ophthalmology</p>
@@ -412,7 +411,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/hair.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/hair.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Dermatology</p>
@@ -422,7 +421,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/child.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/child.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Paediatrics</p>
@@ -434,7 +433,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/urology.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/urology.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Urology</p>
@@ -447,7 +446,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/brain.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/brain.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Neurology</p>
@@ -460,7 +459,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/bone.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/bone.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Orthopedic</p>
@@ -473,7 +472,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/heart.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/heart.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Cardiologist</p>
@@ -486,7 +485,7 @@
                             <a href="/specialist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="img/specialities/teeth.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="/img/specialities/teeth.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Dentist</p>
@@ -526,7 +525,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-01.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-01.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -574,7 +573,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-02.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-02.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -622,7 +621,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-03.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-03.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -670,7 +669,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-04.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-04.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -718,7 +717,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-05.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-05.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -766,7 +765,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-06.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-06.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -814,7 +813,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-07.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-07.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -862,7 +861,7 @@
                             <div class="profile-widget">
                                 <div class="doc-img">
                                     <a href="/doctor-profile">
-                                        <img class="img-fluid" alt="User Image" src="img/doctors/doctor-08.jpg">
+                                        <img class="img-fluid" alt="User Image" src="/img/doctors/doctor-08.jpg">
                                     </a>
                                     <a href="javascript:void(0)" class="fav-btn">
                                         <i class="far fa-bookmark"></i>
@@ -918,7 +917,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5 features-img">
-                        <img src="img/features/feature.png" class="img-fluid" alt="Feature">
+                        <img src="/img/features/feature.png" class="img-fluid" alt="Feature">
                     </div>
                     <div class="col-md-7">
                         <div class="section-header">
@@ -928,42 +927,42 @@
                         <div class="features-slider slider">
                             <!-- Slider Item -->
                             <div class="feature-item text-center">
-                                <img src="img/features/feature-01.jpg" class="img-fluid" alt="Feature">
+                                <img src="/img/features/feature-01.jpg" class="img-fluid" alt="Feature">
                                 <p>Patient Ward</p>
                             </div>
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
                             <div class="feature-item text-center">
-                                <img src="img/features/feature-02.jpg" class="img-fluid" alt="Feature">
+                                <img src="/img/features/feature-02.jpg" class="img-fluid" alt="Feature">
                                 <p>Test Room</p>
                             </div>
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
                             <div class="feature-item text-center">
-                                <img src="img/features/feature-03.jpg" class="img-fluid" alt="Feature">
+                                <img src="/img/features/feature-03.jpg" class="img-fluid" alt="Feature">
                                 <p>ICU</p>
                             </div>
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
                             <div class="feature-item text-center">
-                                <img src="img/features/feature-04.jpg" class="img-fluid" alt="Feature">
+                                <img src="/img/features/feature-04.jpg" class="img-fluid" alt="Feature">
                                 <p>Laboratory</p>
                             </div>
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
                             <div class="feature-item text-center">
-                                <img src="img/features/feature-05.jpg" class="img-fluid" alt="Feature">
+                                <img src="/img/features/feature-05.jpg" class="img-fluid" alt="Feature">
                                 <p>Operation</p>
                             </div>
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
                             <div class="feature-item text-center">
-                                <img src="img/features/feature-06.jpg" class="img-fluid" alt="Feature">
+                                <img src="/img/features/feature-06.jpg" class="img-fluid" alt="Feature">
                                 <p>Medical</p>
                             </div>
                             <!-- /Slider Item -->
@@ -986,7 +985,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -1115,18 +1114,18 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Slick JS -->
-    <script src="js/slick.js"></script>
+    <script src="/js/slick.js"></script>
 
     <!-- Custom JS -->
     <script src="/js/script1.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
 
 
 
