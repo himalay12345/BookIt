@@ -118,7 +118,9 @@
                                     <img src="<%=doctor.avatar%>" class="img-fluid" alt="User Image">
                                 </div>
                                 <div class="doc-info-cont">
-                                    <h4 class="doc-name">Dr. Darren Elder</h4>
+                                    <h4 class="doc-name">Dr.
+                                        <%=doctor.name%>
+                                    </h4>
                                     <p class="doc-speciality">
                                         <% for(degrees of doctor.education){ %>
                                             <%=degrees.degree.toUpperCase() %>&nbsp&nbsp&nbsp
