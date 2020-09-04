@@ -325,26 +325,36 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h2 class="table-avatar">
-                                                        <a href="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-                                                        <a href="/admin/profile">Dr. Ruby Perrin</a>
-                                                    </h2>
-                                                </td>
-                                                <td>Dental</td>
+                                            <% for(doctor of doctors) {%>
+                                                <tr>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="/admin/profile/?id=<%=doctor._id  %>" class=" avatar avatar-sm mr-2 "><img class="avatar-img rounded-circle " src="<%=doctor.avatar%> " onerror="src='/img/doctors/doctor-01.jpg'" alt="User Image"></a>
+                                                            <a href="/admin/profile/?id=<%=doctor._id %> ">
+                                                                <%=doctor.name%>
+                                                            </a>
+                                                        </h2>
+                                                    </td>
+                                                    <td>
+                                                        <%=doctor.department%>
+                                                    </td>
 
-                                                <td>14<br><small>02.59 AM</small></td>
+                                                    <td>
+                                                        <%=doctor.createdAt.toDateString()%><br></td>
 
-                                                <td>$3100.00</td>
 
-                                                <td>
-                                                    <div class="status-toggle">
-                                                        <input type="checkbox" id="status_1" class="check" checked>
-                                                        <label for="status_1" class="checktoggle">checkbox</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        <%=doctor.schedule_time%>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="status-toggle">
+                                                            <input type="checkbox" id="status_1" class="check" checked>
+                                                            <label for="status_1" class="checktoggle">checkbox</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
 
 
 
