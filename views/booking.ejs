@@ -394,7 +394,7 @@
                                                 </li>
                                                 <% var today = new Date();%>
                                                 <%var k=0%>
-                                                <%for(var i=0;i<3;i++){%>
+                                                <%for(var i=0;i<1;i++){%>
                                                         <%var dd = String(today.getDate()).padStart(2, '0');
                                                         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                         var yyyy = today.getFullYear();
@@ -409,21 +409,13 @@
                                                             <%if(k==0){%>
                                                             <span>Today</span>
                                                             <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
-                                                            <%k++;continue;}%>
-                                                            <%if(k==1){%>
-                                                                <span>Tomorrow</span>
-                                                                <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
-                                                                <%k++;continue;}else{%>
-                                                                    <span><%=dayOfWeek%></span>  
-                                                                <%}%>
-                                                     
-                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                            <%k++;}%>
                                                           
                                                         </li>
 
                                                         <%}%>
                                                     
-                                                        <%for(var i=0;i<3;i++){%>
+                                                        <%for(var i=0;i<1;i++){%>
                                                                 <%var dd = String(today.getDate()).padStart(2, '0');
                                                                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                                 var yyyy = today.getFullYear();
@@ -433,9 +425,12 @@
                                                                 var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
                                                                 var date = new Date(res);
                                                                 today=date;%>
+                                                              
                                                                 <li id="li1" style="display: none;">
+                                                                    <%if(k==1){%>
                                                                     <span><%=dayOfWeek%></span>
                                                                     <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                    <%k++;}%>
                                                                 </li>
         
                                                                 <%}%>
