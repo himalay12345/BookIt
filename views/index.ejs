@@ -151,7 +151,7 @@
                             <p class="contact-info-header"> +1 315 369 5943</p>
                         </div>
                     </li>
-            <%if(locals.user){%>
+                    <%if(locals.user){%>
 
                 <%}else{%>
                     <li class="nav-item">
@@ -273,9 +273,9 @@
                         <div class="hideinphone" style="margin-left: 25px;">
                             <ul class="main-nav amain-nav">
 
-                                <li class="has-submenu ahas-submenu">
-                                    <a href="#">
-                                        <span class="user-img">
+                                        <li class="has-submenu ahas-submenu">
+                                            <a href="#">
+                                                <span class="user-img">
                                 <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
                             </span>
                                         <i class="fas fa-chevron-down"></i>
@@ -388,7 +388,7 @@
                     <div class="col-md-11">
                         <!-- Slider -->
                         <div class="specialities-slider slider">
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=General Physician">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/physical.jfif" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -398,7 +398,7 @@
                                     <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Common health issues</p>
                                 </div>
                             </a>
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Ophthalmology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/eye.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -408,7 +408,7 @@
                                     <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">For Eye Care</p>
                                 </div>
                             </a>
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Dermatology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/hair.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -418,7 +418,7 @@
                                     <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Common hair issues</p>
                                 </div>
                             </a>
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Paediatrics">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/child.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -430,7 +430,7 @@
                             </a>
 
                             <!-- Slider Item -->
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Urology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/urology.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -443,7 +443,7 @@
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Neurology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/brain.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -456,7 +456,7 @@
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Orthopedic">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/bone.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -469,7 +469,7 @@
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Cardiologist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/heart.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -482,7 +482,7 @@
                             <!-- /Slider Item -->
 
                             <!-- Slider Item -->
-                            <a href="/specialist">
+                            <a href="/specialist/?dep=Dentist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
                                         <img src="/img/specialities/teeth.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
@@ -520,6 +520,7 @@
                     </div>
                     <div class="col-lg-8">
                         <div class="doctor-slider slider">
+                            <%for(doctor of doctors){%>
 
                             <!-- Doctor Widget -->
                             <div class="profile-widget">
@@ -881,29 +882,52 @@
                                         <i class="fas fa-star"></i>
                                         <span class="d-inline-block average-rating">(49)</span>
                                     </div>
-                                    <ul class="available-info">
-                                        <li>
-                                            <i class="fas fa-map-marker-alt"></i> California, USA
-                                        </li>
-                                        <li>
-                                            <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                                        </li>
-                                        <li>
-                                            <i class="far fa-money-bill-alt"></i> $100 - $400
-                                            <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="row row-sm">
-                                        <div class="col-6">
-                                            <a href="/doctor-profile" class="btn view-btn">View Profile</a>
+                                    <div class="pro-content">
+                                        <h3 class="title">
+                                            <a href="/doctor-profile/?id=<%=doctor._id%>">Dr.<%=doctor.name%></a>
+                                            <i class="fas fa-check-circle verified"></i>
+                                        </h3>
+                                        <p class="speciality">
+                                            <%=doctor.department%>
+
+                                        </p>
+                                        <div class="rating">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <span class="d-inline-block average-rating">(17)</span>
                                         </div>
-                                        <div class="col-6">
-                                            <a href="/booking" class="btn book-btn">Book Now</a>
+                                        <ul class="available-info">
+                                            <li>
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                <%=doctor.contacts.city%>
+                                                    <%=doctor.contacts.state%>
+                                            </li>
+                                            <li>
+                                                <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                                            </li>
+                                            <li>
+                                                <i class="far fa-money-bill-alt"></i>
+                                                <%=doctor.booking_fee%>
+                                                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                                            </li>
+                                        </ul>
+                                        <div class="row row-sm">
+                                            <div class="col-6">
+                                                <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn">View Profile</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="/booking" class="btn book-btn">Book Now</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Doctor Widget -->
+                                <% } %>
+                                    <!-- /Doctor Widget -->
+
+                                    <!-- Doctor Widget -->
 
                         </div>
                     </div>

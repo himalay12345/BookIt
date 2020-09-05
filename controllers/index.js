@@ -2,9 +2,12 @@ const config = require('../config/twilio');
 const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
 
-module.exports.home = (req, res) => {
+
+module.exports.home = async(req, res) => {
+    let doctors = await User.find({ type: "Doctor" });
     return res.render('index', {
-        title: 'Home'
+        title: 'Home',
+        doctors: doctors
     })
 }
 
@@ -26,10 +29,18 @@ module.exports.accountSetting = (req, res) => {
 }
 
 
-module.exports.Specialist = (req, res) => {
+
+module.exports.Specialist = async function(req, res) {
+
+
+
+    let doctors = await User.find({ department: req.query.dept });
+
+
     return res.render('specialist', {
-        title: 'Specialist user'
-    })
+        doctors: doctors
+    });
+
 }
 
 module.exports.appointments = (req, res) => {

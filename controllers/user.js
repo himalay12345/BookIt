@@ -49,7 +49,21 @@ module.exports.updateType = async function(req, res) {
     }
 
 }
+module.exports.Filter = async function(req, res) {
+    console.log(req.body);
+    let doctors = [];
+    if (req.body.gender_type) {
+        doctors = await User.find({ gender: req.body.gender_type });
+    }
+    if (typeof(req.body.select_specialist) == 'string') {
+        doctors = await User.find({ department: req.body.specialist });
+    }
 
+    return res.render('search', {
+        doctors: doctors
+    });
+
+}
 
 module.exports.destroySession = function(req, res) {
     req.logout();

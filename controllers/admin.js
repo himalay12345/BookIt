@@ -5,21 +5,21 @@ module.exports.appointmentList = (req, res) => {
         title: 'Appointment List'
     })
 }
-module.exports.applicationRequest = async (req, res) => {
-    let user = await User.find({request:true});
+module.exports.applicationRequest = async(req, res) => {
+    let user = await User.find({ request: true });
     return res.render('a-application-request', {
         title: 'Application Request',
-        user:user
+        user: user
     })
 }
-module.exports.approveDocuments = async (req, res) => {
+module.exports.approveDocuments = async(req, res) => {
     let users = await User.findById(req.body.id);
-    let user = await User.find({request:true});
+    let user = await User.find({ request: true });
     users.approve = true;
     users.save();
     return res.render('a-application-request', {
         title: 'Application Request',
-        user:user
+        user: user
     })
 }
 module.exports.blankPage = (req, res) => {
@@ -37,9 +37,13 @@ module.exports.dataTables = (req, res) => {
         title: 'Data Tables'
     })
 }
-module.exports.doctorList = (req, res) => {
+module.exports.doctorList = async(req, res) => {
+
+    let user = await User.find({ type: "Doctor" });
     return res.render('a-doctor-list', {
-        title: 'Doctor List'
+        title: 'Doctor List',
+
+        doctors: user
     })
 }
 module.exports.error404 = (req, res) => {
@@ -82,9 +86,13 @@ module.exports.formVertical = (req, res) => {
         title: 'Form Vertical'
     })
 }
-module.exports.index = (req, res) => {
+module.exports.index = async(req, res) => {
+    let doctors = await User.find({ type: "Doctor" });
+    let patients = await User.find({ type: "Patient" });
     return res.render('a-index', {
-        title: 'Index List'
+        title: 'Index List',
+        doctors: doctors,
+        patients: patients
     })
 }
 module.exports.formValidation = (req, res) => {
@@ -112,16 +120,18 @@ module.exports.login = (req, res) => {
         title: 'Login '
     })
 }
-module.exports.patientList = (req, res) => {
+module.exports.patientList = async(req, res) => {
+    let user = await User.find({ type: "Patient" });
     return res.render('a-patient-list', {
-        title: 'Patient List'
+        title: 'Patient List',
+        patients: user
     })
 }
-module.exports.profile = async (req, res) => {
+module.exports.profile = async(req, res) => {
     let user = await User.findById(req.query.id);
     return res.render('a-profile', {
         title: 'Profile',
-        user:user
+        user: user
     })
 }
 module.exports.register = (req, res) => {
