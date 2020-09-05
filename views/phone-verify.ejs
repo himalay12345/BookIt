@@ -192,9 +192,13 @@
 
 
                                     <form id="myform" method="POST" action="/verify/?service=call">
-                                        <input type="hidden" name="phone" value="<%=phone%>"></form>
+                                        <input type="hidden" name="phone" value="<%=phone%>">
+                                        <input type="hidden" name="type" value="<%=type%>">
+                                    </form>
                                     <form id="myform1" method="POST" action="/verify/?service=sms">
-                                        <input type="hidden" name="phone" value="<%=phone%>"></form>
+                                        <input type="hidden" name="phone" value="<%=phone%>">
+                                        <input type="hidden" name="type" value="<%=type%>">
+                                    </form>
 
 
                                     <!-- /Register Form -->

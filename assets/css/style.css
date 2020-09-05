@@ -64,6 +64,23 @@ Version      : 1.0
 	url(../fonts/MaterialIcons-Regular.woff) format('woff'),
 	url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
+.header{
+	position: relative;
+}
+
+.bell{
+	position: absolute;
+    right: 104%;
+}
+
+
+.profile-drop{
+	position: absolute;
+   left: -115px;
+ top: 71px;
+
+}
+
 .material-icons {
 	font-family: 'Material Icons';
 	font-weight: normal;
@@ -1680,7 +1697,9 @@ button.bg-danger:hover {
 	justify-content: space-between;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: space-between;
-    position: relative;
+	position: fixed;
+	width: 100%;
+	z-index: 500;
 	height: 85px;
 	padding: 0 30px;
 	margin-bottom: 0;
@@ -1690,6 +1709,9 @@ button.bg-danger:hover {
 	display: -ms-flexbox;
 	display: flex;
 	list-style: none;
+	position: absolute;
+    left: 25%;
+    top: 0;
 	margin: 0;
 	padding: 0;
 }
@@ -1768,6 +1790,8 @@ button.bg-danger:hover {
 	margin-bottom: 0;
 }
 .header-navbar-rht {
+	position: absolute;
+    right: 25%;
     margin: 0;
 	margin-left: auto;
 	padding: 0;
@@ -1866,9 +1890,10 @@ button.bg-danger:hover {
 	transform: rotate(-135deg);
 }
 .user-menu {
+	position: absolute;
+    right: 0%;
     float: right;
     margin: 0;
-    position: relative;
     z-index: 99;
 }
 .user-menu.nav > li > a {
@@ -3463,11 +3488,12 @@ html.menu-opened body {
     width: 100%;
 }
 .day-slot li {
+	cursor: pointer;
     float: left;
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
-    width: 14.28%;
+    width: 30%;
 }
 .day-slot li span {
     display: block;
@@ -3512,11 +3538,13 @@ html.menu-opened body {
     padding: 0;
 }
 .time-slot li {
+	cursor: pointer;
     float: left;
     padding-left: 5px;
     padding-right: 5px;
-    width: 14.28%;
+    width: 30%;
 }
+
 .time-slot li .timing {
     background-color: #e9e9e9;
     border: 1px solid #e9e9e9;
@@ -5762,6 +5790,11 @@ html.menu-opened body {
 	}
 }
 @media (min-width: 992px) {
+	.user-menu{
+		display: block;
+	}
+
+
 	.main-nav > li {
 		margin-right: 30px;
 	}
@@ -5970,6 +6003,9 @@ html.menu-opened body {
 		padding: 0;
 		-ms-flex-direction: column;
 		flex-direction: column;
+	
+			position: static;
+	
 		padding-left: 0;
 		margin-bottom: 0;
 		list-style: none;
@@ -6161,8 +6197,15 @@ html.menu-opened body {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
+	.main-nav{
+		position: static;
+	}
 }
 @media only screen and (max-width: 767.98px) {
+	
+	.main-nav{
+		position: static;
+	}
 	body {
 		font-size: 0.875rem;
 	}
@@ -6545,7 +6588,7 @@ html.menu-opened body {
 	}
 	.header-nav {
 		padding-left: 15px;
-		padding-right: 15px;
+		padding-right: 80px;
 	}
 	.header-navbar-rht {
 		display: none;
@@ -6567,9 +6610,73 @@ html.menu-opened body {
 		width: 100%;
 		text-align: center;
 		margin-right: 0;
+		margin-left: -20px;
 	}
 	.navbar-brand.logo img {
+		margin-top: 10px;
 		height: 40px;
+		width:110px;
+	}
+
+	.header-navbar-rht{
+		display: block;
+	}
+
+	.header-login{
+		display: block;
+		position: absolute;
+		width:80px;
+		font-size: 0.5rem;
+	}
+
+	.main-nav{
+		position: static;
+	}
+
+	.bell{
+		position: absolute;
+		right: 100%;
+	}
+
+	.hideinphone{
+		position: absolute;
+		right: 0%;
+	}
+	
+	
+
+	.profile-drop{
+		position: absolute;
+	    left: -115px;
+    top: 73px;
+
+	}
+
+	
+	.phoneul{
+		position: absolute;
+		top:75px;
+		width: 220px;
+		right: 0%;
+		border:1px solid lightgrey;
+		/* padding-bottom: 20px; */
+		/* padding-top: 20px; */
+	}
+	.phoneul li a{
+		background-color: white;
+		color: black;
+	}
+
+	
+
+	.arrow{
+		display: none;
+	}
+
+	.user-menu{
+		position: absolute;
+		right: 0%;
+		top: 10px;
 	}
 	.search-box form {
 		display: block;
@@ -6606,37 +6713,61 @@ html.menu-opened body {
 		font-size: 1.125rem;
 	}
 	.booking-schedule.schedule-widget {
-		overflow-x: auto;
+		/* overflow-x: auto; */
 	}
 	.booking-schedule.schedule-widget > div {
-		width: 730px;
+		/* width: 730px; */
 	}
 	.booking-schedule .day-slot ul {
-		display: -webkit-box;
+		/* display: -webkit-box;
 		display: -ms-flexbox;
-		display: flex;
+		display: flex; */
 	}
 	.booking-schedule .day-slot li {
-		-ms-flex: 0 0 100px;
+		/* -ms-flex: 0 0 100px;
 		flex: 0 0 100px;
-		width: 100px;
+		width: 100px; */
 	}
 	.booking-schedule .time-slot ul {
-		display: -webkit-box;
+		/* display: -webkit-box;
 		display: -ms-flexbox;
-		display: flex;
+		display: flex; */
 	}
 	.booking-schedule .time-slot li {
-		-ms-flex: 0 0 100px;
+		/* -ms-flex: 0 0 90px;
 		flex: 0 0 100px;
-		width: 100px;
+		width: 100px; */
 	}
 	.booking-schedule .time-slot li .timing span {
 		display: inline-block;
 	}
-	.booking-schedule .day-slot li.right-arrow {
-		right: -20px;
+	.day-slot li.left-arrow {
+		left: -10px;
+		padding: 0;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		width: 20px !important;
+		transform: translateY(-50%);
 	}
+	.booking-schedule .day-slot li.right-arrow {
+		right: 0px;
+	}
+
+	.time-slot li {
+		float: left;
+		padding-left: 5px;
+		padding-right: 5px;
+		width: 100%;
+	}
+	.day-slot li {
+		float: left;
+		padding-left: 5px;
+		padding-right: 5px;
+		text-align: center;
+		width: 100%;
+	}
+	
 	.booking-doc-info .booking-doc-img {
 		width: 70px;
 	}
@@ -6690,6 +6821,12 @@ html.menu-opened body {
 }
 
 @media only screen and (max-width:479px) {
+	.hideinphone{
+		position: absolute;
+		right: -5%;
+	}
+
+	
 	.section-search {
 		min-height: 410px;
 		padding: 30px 15px;
@@ -6882,8 +7019,8 @@ html.menu-opened body {
   
 
   .notifications{
-	left:-280px;
-	top:70px;
+	left: -199px;	
+	top:72px;
   }
   h1 {
 	color: #130f40;
@@ -7047,4 +7184,18 @@ html.menu-opened body {
 }
 .noti-time {
     margin: 0;
+}
+
+
+.displayFlex{
+	display: flex !important;
+}
+
+.displayBlock{
+	display: block !important;
+}
+
+
+.displayNone{
+	display: none !important;
 }

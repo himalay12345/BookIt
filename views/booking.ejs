@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -46,13 +46,13 @@
                         </span>
                     </a>
                     <a href="/index-2" class="navbar-brand logo">
-                        <img src="img/logo.png" class="img-fluid" alt="Logo">
+                        <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
                         <a href="/index-2" class="menu-logo">
-                            <img src="img/logo.png" class="img-fluid" alt="Logo">
+                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
                             <i class="fas fa-times"></i>
@@ -165,11 +165,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="booking-doc-info">
-                                    <a href="/doctor-profile" class="booking-doc-img">
-                                        <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                    <a href="/doctor-profile/?id=<%=doctor._id%>" class="booking-doc-img">
+                                        <img src="<%=doctor.avatar%>" alt="User Image">
                                     </a>
                                     <div class="booking-info">
-                                        <h4><a href="/doctor-profile">Dr. Darren Elder</a></h4>
+                                        <h4><a href="/doctor-profile/?id=<%=doctor._id%>"><%=doctor.name%></a></h4>
                                         <div class="rating">
                                             <i class="fas fa-star filled"></i>
                                             <i class="fas fa-star filled"></i>
@@ -178,7 +178,7 @@
                                             <i class="fas fa-star"></i>
                                             <span class="d-inline-block average-rating">35</span>
                                         </div>
-                                        <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+                                        <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%>, <%=doctor.contacts.state%></p>
                                     </div>
                                 </div>
                             </div>
@@ -190,46 +190,385 @@
                             <!-- Schedule Header -->
                             <div class="schedule-header">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class=" col-sm-12 col-md-12">
 
                                         <!-- Day Slot -->
                                         <div class="day-slot">
                                             <ul>
                                                 <li class="left-arrow">
-                                                    <a href="#">
+                                                    <a data-count = '0' onclick="prevSlide()" id="prevslide">
                                                         <i class="fa fa-chevron-left"></i>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <span>Mon</span>
-                                                    <span class="slot-date">11 Nov <small class="slot-year">2019</small></span>
+                                                <% var today = new Date();%>
+                                                <%var k=0%>
+                                                <%for(var i=0;i<3;i++){%>
+                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy = today.getFullYear();
+                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek = weekday[today.getDay()];
+                                                        
+                                                        var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                        var date = new Date(res);
+                                                        today=date;%>
+                                                        
+                                                        <li id="li0">
+                                                            <%if(k==0){%>
+                                                            <span>Today</span>
+                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                            <%k++;continue;}%>
+                                                            <%if(k==1){%>
+                                                                <span>Tomorrow</span>
+                                                                <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                <%k++;continue;}else{%>
+                                                                    <span><%=dayOfWeek%></span>  
+                                                                <%}%>
+                                                     
+                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                          
+                                                        </li>
+
+                                                        <%}%>
+                                                    
+                                                        <%for(var i=0;i<3;i++){%>
+                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                var yyyy = today.getFullYear();
+                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                
+                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                var date = new Date(res);
+                                                                today=date;%>
+                                                                <li id="li1" style="display: none;">
+                                                                    <span><%=dayOfWeek%></span>
+                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                </li>
+        
+                                                                <%}%>
+                                                                <%for(var i=0;i<3;i++){%>
+                                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                    var yyyy = today.getFullYear();
+                                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                    var dayOfWeek = weekday[today.getDay()];
+                                                               
+                                                                    var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                    var date = new Date(res);
+                                                                    today=date;%>
+                                                                    <li id="li2" style="display: none;">
+                                                                        <span><%=dayOfWeek%></span>
+                                                                        <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                    </li>
+            
+                                                                    <%}%>
+
+                                                                    <%for(var i=0;i<3;i++){%>
+                                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                        var yyyy = today.getFullYear();
+                                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                        var dayOfWeek = weekday[today.getDay()];
+                                                            
+                                                                        var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                        var date = new Date(res);
+                                                                        today=date;%>
+                                                                        <li id="li3" style="display: none;">
+                                                                            <span><%=dayOfWeek%></span>
+                                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                        </li>
+                
+                                                                        <%}%>
+                                                                        <%for(var i=0;i<3;i++){%>
+                                                                            <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                            var yyyy = today.getFullYear();
+                                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                            var dayOfWeek = weekday[today.getDay()];
+                                                                           
+                                                                            var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                            var date = new Date(res);
+                                                                            today=date;%>
+                                                                            <li id="li4" style="display: none;">
+                                                                                <span><%=dayOfWeek%></span>
+                                                                                <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                            </li>
+                    
+                                                                            <%}%>
+                                                                            <%for(var i=0;i<3;i++){%>
+                                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                var yyyy = today.getFullYear();
+                                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                                
+                                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                var date = new Date(res);
+                                                                                today=date;%>
+                                                                                <li id="li5" style="display: none;">
+                                                                                    <span><%=dayOfWeek%></span>
+                                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                </li>
+                        
+                                                                                <%}%>
+                                                                                <%for(var i=0;i<3;i++){%>
+                                                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                    var yyyy = today.getFullYear();
+                                                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                    var dayOfWeek = weekday[today.getDay()];
+                                                                                   
+                                                                                    var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                    var date = new Date(res);
+                                                                                    today=date;%>
+                                                                                    <li id="li6" style="display: none;">
+                                                                                        <span><%=dayOfWeek%></span>
+                                                                                        <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                    </li>
+                            
+                                                                                    <%}%>
+                                                                                    <%for(var i=0;i<3;i++){%>
+                                                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                        var yyyy = today.getFullYear();
+                                                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                        var dayOfWeek = weekday[today.getDay()];
+                                                                                     
+                                                                                        var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                        var date = new Date(res);
+                                                                                        today=date;%>
+                                                                                        <li id="li7" style="display: none;">
+                                                                                            <span><%=dayOfWeek%></span>
+                                                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                        </li>
+                                
+                                                                                        <%}%>
+                                                                                        <%for(var i=0;i<3;i++){%>
+                                                                                            <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                            var yyyy = today.getFullYear();
+                                                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                            var dayOfWeek = weekday[today.getDay()];
+                                                                                        
+                                                                                            var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                            var date = new Date(res);
+                                                                                            today=date;%>
+                                                                                            <li id="li8" style="display: none;">
+                                                                                                <span><%=dayOfWeek%></span>
+                                                                                                <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                            </li>
+                                    
+                                                                                            <%}%>
+                                                                                            <%for(var i=0;i<3;i++){%>
+                                                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                                var yyyy = today.getFullYear();
+                                                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                                              
+                                                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                                var date = new Date(res);
+                                                                                                today=date;%>
+                                                                                                <li id="li9" style="display: none;">
+                                                                                                    <span><%=dayOfWeek%></span>
+                                                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                                </li>
+                                        
+                                                                                                <%}%>
+
+                                             
+                                               
+                                                
+                                               <li class="right-arrow">
+                                                    <a data-count = '0' onclick="nextSlide()" id="nextslide">
+                                                        <i class="fa fa-chevron-right"></i>
+                                                    </a>
                                                 </li>
-                                                <li>
-                                                    <span>Tue</span>
-                                                    <span class="slot-date">12 Nov <small class="slot-year">2019</small></span>
+                                            </ul>
+                                            <ul style="display: none;">
+                                                <li class="left-arrow">
+                                                    <a data-count = '0' onclick="prevSlide()" id="prevslide">
+                                                        <i class="fa fa-chevron-left"></i>
+                                                    </a>
                                                 </li>
-                                                <li>
-                                                    <span>Wed</span>
-                                                    <span class="slot-date">13 Nov <small class="slot-year">2019</small></span>
-                                                </li>
-                                                <li>
-                                                    <span>Thu</span>
-                                                    <span class="slot-date">14 Nov <small class="slot-year">2019</small></span>
-                                                </li>
-                                                <li>
-                                                    <span>Fri</span>
-                                                    <span class="slot-date">15 Nov <small class="slot-year">2019</small></span>
-                                                </li>
-                                                <li>
-                                                    <span>Sat</span>
-                                                    <span class="slot-date">16 Nov <small class="slot-year">2019</small></span>
-                                                </li>
-                                                <li>
-                                                    <span>Sun</span>
-                                                    <span class="slot-date">17 Nov <small class="slot-year">2019</small></span>
-                                                </li>
-                                                <li class="right-arrow">
-                                                    <a href="#">
+                                                <% var today = new Date();%>
+                                                <%var k=0%>
+                                                <%for(var i=0;i<1;i++){%>
+                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy = today.getFullYear();
+                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek = weekday[today.getDay()];
+                                                        
+                                                        var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                        var date = new Date(res);
+                                                        today=date;%>
+                                                        
+                                                        <li id="li0">
+                                                            <%if(k==0){%>
+                                                            <span>Today</span>
+                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                            <%k++;}%>
+                                                          
+                                                        </li>
+
+                                                        <%}%>
+                                                    
+                                                        <%for(var i=0;i<1;i++){%>
+                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                var yyyy = today.getFullYear();
+                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                
+                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                var date = new Date(res);
+                                                                today=date;%>
+                                                              
+                                                                <li id="li1" style="display: none;">
+                                                                    <%if(k==1){%>
+                                                                    <span><%=dayOfWeek%></span>
+                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                    <%k++;}%>
+                                                                </li>
+        
+                                                                <%}%>
+                                                                <%for(var i=0;i<3;i++){%>
+                                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                    var yyyy = today.getFullYear();
+                                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                    var dayOfWeek = weekday[today.getDay()];
+                                                               
+                                                                    var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                    var date = new Date(res);
+                                                                    today=date;%>
+                                                                    <li id="li2" style="display: none;">
+                                                                        <span><%=dayOfWeek%></span>
+                                                                        <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                    </li>
+            
+                                                                    <%}%>
+
+                                                                    <%for(var i=0;i<3;i++){%>
+                                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                        var yyyy = today.getFullYear();
+                                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                        var dayOfWeek = weekday[today.getDay()];
+                                                            
+                                                                        var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                        var date = new Date(res);
+                                                                        today=date;%>
+                                                                        <li id="li3" style="display: none;">
+                                                                            <span><%=dayOfWeek%></span>
+                                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                        </li>
+                
+                                                                        <%}%>
+                                                                        <%for(var i=0;i<3;i++){%>
+                                                                            <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                            var yyyy = today.getFullYear();
+                                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                            var dayOfWeek = weekday[today.getDay()];
+                                                                           
+                                                                            var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                            var date = new Date(res);
+                                                                            today=date;%>
+                                                                            <li id="li4" style="display: none;">
+                                                                                <span><%=dayOfWeek%></span>
+                                                                                <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                            </li>
+                    
+                                                                            <%}%>
+                                                                            <%for(var i=0;i<3;i++){%>
+                                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                var yyyy = today.getFullYear();
+                                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                                
+                                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                var date = new Date(res);
+                                                                                today=date;%>
+                                                                                <li id="li5" style="display: none;">
+                                                                                    <span><%=dayOfWeek%></span>
+                                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                </li>
+                        
+                                                                                <%}%>
+                                                                                <%for(var i=0;i<3;i++){%>
+                                                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                    var yyyy = today.getFullYear();
+                                                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                    var dayOfWeek = weekday[today.getDay()];
+                                                                                   
+                                                                                    var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                    var date = new Date(res);
+                                                                                    today=date;%>
+                                                                                    <li id="li6" style="display: none;">
+                                                                                        <span><%=dayOfWeek%></span>
+                                                                                        <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                    </li>
+                            
+                                                                                    <%}%>
+                                                                                    <%for(var i=0;i<3;i++){%>
+                                                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                        var yyyy = today.getFullYear();
+                                                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                        var dayOfWeek = weekday[today.getDay()];
+                                                                                     
+                                                                                        var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                        var date = new Date(res);
+                                                                                        today=date;%>
+                                                                                        <li id="li7" style="display: none;">
+                                                                                            <span><%=dayOfWeek%></span>
+                                                                                            <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                        </li>
+                                
+                                                                                        <%}%>
+                                                                                        <%for(var i=0;i<3;i++){%>
+                                                                                            <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                            var yyyy = today.getFullYear();
+                                                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                            var dayOfWeek = weekday[today.getDay()];
+                                                                                        
+                                                                                            var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                            var date = new Date(res);
+                                                                                            today=date;%>
+                                                                                            <li id="li8" style="display: none;">
+                                                                                                <span><%=dayOfWeek%></span>
+                                                                                                <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                            </li>
+                                    
+                                                                                            <%}%>
+                                                                                            <%for(var i=0;i<3;i++){%>
+                                                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                                var yyyy = today.getFullYear();
+                                                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                                              
+                                                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                                var date = new Date(res);
+                                                                                                today=date;%>
+                                                                                                <li id="li9" style="display: none;">
+                                                                                                    <span><%=dayOfWeek%></span>
+                                                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                                </li>
+                                        
+                                                                                                <%}%>
+
+                                             
+                                               
+                                                
+                                               <li class="right-arrow">
+                                                    <a data-count = '0' onclick="nextSlide()" id="nextslide">
                                                         <i class="fa fa-chevron-right"></i>
                                                     </a>
                                                 </li>
@@ -241,96 +580,431 @@
                                 </div>
                             </div>
                             <!-- /Schedule Header -->
+                            <%var n1,n2,n3,n4,n5,n6,n7%>
+                           <%var today = new Date();%>
+                            <%for(var i=1;i<=7;i++){%>
+                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                var yyyy = today.getFullYear();
+                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                var dayOfWeek = weekday[today.getDay()];
+                                if(i == 1)
+                                {
+                                    n1=dayOfWeek.toUpperCase();
+                                    console.log(n1);
+                                }
+                                if(i == 2)
+                                {
+                                    n2=dayOfWeek.toUpperCase();
+                                    console.log(n2);
+                                }
+                                if(i == 3)
+                                {
+                                    n3=dayOfWeek.toUpperCase();
+                                    console.log(n3);
+                                }
+                                if(i == 4)
+                                {
+                                    n4=dayOfWeek.toUpperCase();
+                                    console.log(n4);
+                                }
+                                if(i == 5)
+                                {
+                                    n5=dayOfWeek.toUpperCase();
+                                    console.log(n5);
+                                }
+                                if(i == 6)
+                                {
+                                    n6=dayOfWeek.toUpperCase();
+                                    console.log(n6);
+                                }
+                                if(i == 7)
+                                {
+                                    n7=dayOfWeek.toUpperCase();
+                                    console.log(n7);
+                                }
+                                
+                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                var date = new Date(res);
+                                today=date;%>
+                               
 
+                                <%}%>
                             <!-- Schedule Content -->
                             <div class="schedule-cont">
                                 <div class="row">
                                     <div class="col-md-12">
 
                                         <!-- Time Slot -->
-                                        <div class="time-slot">
-                                            <ul class="clearfix">
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
+                                        <div class="time-slot" id="slots">
+                                            <ul class="clearfix" style="display: flex;">
+                                                <%var d1,d2,d3,d4,d5,d6,d7,count;%>
+                                                <%for(time of doctor.schedule_time){%>
+                                                   
+                                                        <%var i = time.day.toUpperCase();%>
+                                        
+
+                                                <%if(n1 == i){%>
+                                                    <%d1=time;}%>
+
+                                                      
+                                                <%if(n2 == i){%>
+                                                    <%d2=time;}%>
+
+                                                       
+                                            <%if(n3 == i){%>
+                                                <%d3=time;}%>
+
+                                                
+                                            <%if(n4 == i){%>
+                                                <%d4=time;}%>
+
+                                                 
+                                            <%if(n5 == i){%>
+                                                <%d5=time;}%>
+
+                                                  
+                                            <%if(n6 == i){%>
+                                                <%d6=time;}%>
+
+                                        <%if(n7 == i){%>
+                                            <%d7=time;}%>
+
+                                                <%}%>
+                                           
+            
+                                            <%var z=0;%>
+                                                <%if(d1 != undefined){%>
+                                        <li id="d1">
+                                            
+                                            <%if(typeof(d1.start) == 'string'){%>
+                                                <a class="timing" onclick="showSeats('<%=z%>')">
+                                                    <span><%=d1.start.toUpperCase()%></span> -  <span><%=d1.end.toUpperCase()%></span>
+                                                </a>
+                                                <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                    <%z++%>
+                                                    <%for(var j= 1;j<=d1.max_count;j++){%>
+                                                       
+                                                       
+                                                                <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                    <span><%=j%></span>
+                                                                </a>
+                                                               
+                                                        
+                                                        
+                                                            <%}%>
+                                                        </div>
+                                                <%}else{
+                                                    for(let i=0;i<d1.start.length;i++){%>
+                                                    <a class="timing" onclick="showSeats('<%=z%>')">
+                                                        <span><%=d1.start[i].toUpperCase()%></span> -  <span><%=d1.end[i].toUpperCase()%></span>
                                                     </a>
-                                                    <a class="timing" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                                    <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                        <%z++%>
+                                                        <%for(var j= 1;j<=d1.max_count;j++){%>
+                                                           
+                                                           
+                                                                    <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                        <span><%=j%></span>
+                                                                    </a>
+                                                                   
+                                                            
+                                                            
+                                                                <%}%>
+                                                            </div>
+                                                    <%}}%>
                                                 </li>
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                                <%}else{%>
+                                                    <li id="d1">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
+                                                <%if(d2 != undefined){%>
+                                                
+                                                <li id="d2">
+                                                    <%if(typeof(d2.start) == 'string'){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d2.start.toUpperCase()%></span> -  <span><%=d2.end.toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d2.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}else{
+                                                            for(let i=0;i<d2.start.length;i++){%>
+                                                        <a class="timing" href="#" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d2.start[i].toUpperCase()%></span> -  <span><%=d2.end[i].toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d2.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                    <%}}%>
                                                 </li>
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                                <%}else{%>
+                                                    <li id="d2">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
+                                                <%if(d3 != undefined){%>
+                                                <li id="d3">
+                                                    
+                                                    <%if(typeof(d3.start) == 'string'){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d3.start.toUpperCase()%></span> -  <span><%=d3.end.toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d3.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}else{
+                                                            for(let i=0;i<d3.start.length;i++){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d3.start[i].toUpperCase()%></span> -  <span><%=d3.end[i].toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d3.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}}%>
+                                                        
+                                                   
                                                 </li>
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                               
+                                                <%}else{%>
+                                                    <li id="d3">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
+                                                <%if(d4 != undefined){%>
+                                                <li style="display: none;" id="d4">
+                                                    <%if(typeof(d4.start) == 'string'){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d4.start.toUpperCase()%></span> -  <span><%=d4.end.toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d4.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}else{
+                                                            for(let i=0;i<d4.start.length;i++){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d4.start[i].toUpperCase()%></span> -  <span><%=d4.end[i].toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d4.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}}%>
                                                 </li>
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing selected" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                                <%}else{%>
+                                                    <li style="display: none;" id="d4">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
+                                                <%if(d5 != undefined){%>
+                                                <li style="display: none;" id="d5">
+                                                    <%if(typeof(d5.start) == 'string'){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d5.start.toUpperCase()%></span> -  <span><%=d5.end.toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d5.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}else{
+                                                            for(let i=0;i<d5.start.length;i++){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d5.start[i].toUpperCase()%></span> -  <span><%=d5.end[i].toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d5.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}}%>
+                                                   
                                                 </li>
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                                <%}else{%>
+                                                    <li style="display: none;" id="d5">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
+                                                <%if(d6 != undefined){%>
+                                                <li style="display: none;" id="d6">
+                                                    <%if(typeof(d6.start) == 'string'){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d6.start.toUpperCase()%></span> -  <span><%=d6.end.toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d6.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}else{
+                                                            for(let i=0;i<d6.start.length;i++){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d6.start[i].toUpperCase()%></span> -  <span><%=d6.end[i].toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d6.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}}%>
+                                                   
                                                 </li>
-                                                <li>
-                                                    <a class="timing" href="#">
-                                                        <span>9:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>10:00</span> <span>AM</span>
-                                                    </a>
-                                                    <a class="timing" href="#">
-                                                        <span>11:00</span> <span>AM</span>
-                                                    </a>
+                                                <%}else{%>
+                                                    <li style="display: none;" id="d6">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
+                                                <%if(d7 != undefined){%>
+                                                    
+                                                <li style="display: none;" id="d7">
+                                                    <%if(typeof(d7.start) == 'string'){%>
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            <span><%=d7.start.toUpperCase()%></span> -  <span><%=d7.end.toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d7.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}else{
+                                                            for(let i=0;i<d7.start.length;i++){%>
+                                                                
+                                                        <a class="timing" onclick="showSeats('<%=z%>')">
+                                                            
+                                                            <span><%=d7.start[i].toUpperCase()%></span> -  <span><%=d7.end[i].toUpperCase()%></span>
+                                                        </a>
+                                                        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+                                                            <%z++%>
+                                                            <%for(var j= 1;j<=d7.max_count;j++){%>
+                                                               
+                                                               
+                                                                        <a class="timing" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                            <span><%=j%></span>
+                                                                        </a>
+                                                                       
+                                                                
+                                                                
+                                                                    <%}%>
+                                                                </div>
+                                                        <%}}%>
+                                                   
                                                 </li>
+                                                <%}else{%>
+                                                    <li style="display: none;" id="d7">
+                                                        <a class="timing" href="#">
+                                                        Not Available
+                                                        </a>
+                                                    </li><%}%>
                                             </ul>
                                         </div>
                                         <!-- /Time Slot -->
-
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -364,7 +1038,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -493,14 +1167,239 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+        function showSeats(i)
+        {
+            var seats = document.querySelectorAll('#seats');
+           
+            console.log(i);
+            seats[i].classList.toggle('displayFlex');
+           
+        }
+
+        function nextSlide()
+        {
+            let c= $('#nextslide').data('count');
+            if(c>=8){
+                $('#nextslide').css('display','none');
+                return;
+            }
+            if(c>=0)
+            {
+                $('#prevslide').css('display','block');
+            }
+
+           
+            let n1 = (c*3)+3+1;
+            if(n1 > 7)
+            {
+                n1=n1%7;
+                if(n1==0)
+                {
+                    n1=7;
+                }
+            }
+            let n2 = n1+1;
+            if(n2 > 7)
+            {
+                n2=n2%7;
+                if(n2==0)
+                {
+                    n2=7;
+                }
+            }
+            let n3 = n2+1;
+            if(n3 > 7)
+            {
+                n3=n3%7;
+                if(n3==0)
+                {
+                    n3=7;
+                }
+            }
+            let p1 = n1-1;
+            if(p1<=0)
+            {
+                p1=7;
+            }
+            let p2 = p1-1;
+            if(p2<=0)
+            {
+                p2=7;
+            }
+            let p3 = p2-1;
+            if(p3<=0)
+            {
+                p3=7;
+            }
+       
+
+            let d1 = $('#d'+n1);
+            let d2 = $('#d'+n2);
+            let d3 = $('#d'+n3);
+            let d4 = $('#d'+p1);
+            let d5 = $('#d'+p2);
+            let d6 = $('#d'+p3);
+            console.log(n1,n2,n3,p1,p2,p3)
+            d4.removeClass('displayBlock');
+            d4.addClass('displayNone');
+            d5.removeClass('displayBlock');
+            d5.addClass('displayNone');
+            d6.removeClass('displayBlock');
+            d6.addClass('displayNone');
+            d1.removeClass('displayNone');
+            $('.clearfix li:nth-child('+n1+')').css("order", '1');
+            d1.addClass('displayBlock');
+            d2.removeClass('displayNone');
+            $('.clearfix li:nth-child('+n2+')').css("order", '2');
+            d2.addClass('displayBlock');
+            d3.removeClass('displayNone');
+            $('.clearfix li:nth-child('+n3+')').css("order", '3');
+            d3.addClass('displayBlock');
+
+
+           
+            console.log(c);
+         
+        
+            let d = c+1;
+            let next = document.querySelectorAll('#li'+d);
+            let prev =  document.querySelectorAll('#li'+c);
+            
+            for(temp of prev)
+            {
+                temp.classList.add('displayNone');
+            }
+            for(temp1 of next)
+            {
+                temp1.classList.remove('displayNone');
+                temp1.classList.add('displayBlock');
+            }
+            $('#nextslide').data('count',c+1); 
+
+        }
+        function prevSlide()
+        {
+            var c= $('#nextslide').data('count');
+            if(c<=0)
+            {
+                $('#prevslide').css('display','none');
+                return;
+            }
+            var d = c-1;
+            console.log(d);
+            if(d<=8)
+            {
+                $('#nextslide').css('display','block');
+            }
+
+            let n1 = (d*3)+3+1;
+            if(n1 > 7)
+            {
+                n1=n1%7;
+                if(n1==0)
+                {
+                    n1=7;
+                }
+            }
+            let n2 = n1+1;
+            if(n2 > 7)
+            {
+                n2=n2%7;
+                if(n2==0)
+                {
+                    n2=7;
+                }
+            }
+            let n3 = n2+1;
+            if(n3 > 7)
+            {
+                n3=n3%7;
+                if(n3==0)
+                {
+                    n3=7;
+                }
+            }
+            let p1 = n1-1;
+            if(p1<=0)
+            {
+                p1=7;
+            }
+            let p2 = p1-1;
+            if(p2<=0)
+            {
+                p2=7;
+            }
+            let p3 = p2-1;
+            if(p3<=0)
+            {
+                p3=7;
+            }
+       
+
+            let d4 = $('#d'+n1);
+            let d5 = $('#d'+n2);
+            let d6 = $('#d'+n3);
+            let d1 = $('#d'+p1);
+            let d2 = $('#d'+p2);
+            let d3 = $('#d'+p3);
+            console.log(n1,n2,n3,p1,p2,p3)
+            d4.removeClass('displayBlock');
+            d4.addClass('displayNone');
+            d5.removeClass('displayBlock');
+            d5.addClass('displayNone');
+            d6.removeClass('displayBlock');
+            d6.addClass('displayNone');
+            d1.removeClass('displayNone');
+            $('.clearfix li:nth-child('+p1+')').css("order", '3');
+            d1.addClass('displayBlock');
+            d2.removeClass('displayNone');
+            $('.clearfix li:nth-child('+p2+')').css("order", '2');
+            d2.addClass('displayBlock');
+            d3.removeClass('displayNone');
+            $('.clearfix li:nth-child('+p3+')').css("order", '1');
+            d3.addClass('displayBlock');
+
+            
+            
+           
+            // var c= $('#prevslide').data('count');
+           
+            var next = document.querySelectorAll('#li'+c);
+            var prev =  document.querySelectorAll('#li'+d);
+            for(temp of next)
+            {
+                temp.classList.add('displayNone');
+            }
+            for(temp1 of prev)
+            {
+                temp1.classList.remove('displayNone');
+                temp1.classList.add('displayBlock');
+            }
+            // $('#prevslide').data('count',d); 
+            $('#nextslide').data('count',d); 
+
+        }
+       
+    </script>
+    <script>
+        var timing = document.querySelectorAll('#checkme');
+        console.log(timing)
+            for(let i=0;i<timing.length;i++){
+                timing[i].addEventListener('click',function()
+                {
+                    timing[i].classList.toggle('selected');
+                })
+            }
+    </script>
 
 </body>
 
