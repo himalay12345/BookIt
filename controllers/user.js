@@ -53,7 +53,10 @@ module.exports.Filter = async function(req, res) {
     console.log(req.body);
     let doctors = [];
     if (req.body.gender_type) {
-        doctors = await User.find({ gender: req.body.gender_type });
+        doctors = await User.find({
+            gender: req.body.gender_type,
+            type: "Doctor"
+        });
     }
     if (typeof(req.body.select_specialist) == 'string') {
         doctors = await User.find({ department: req.body.specialist });

@@ -34,7 +34,10 @@ module.exports.Specialist = async function(req, res) {
 
 
 
-    let doctors = await User.find({ department: req.query.dept });
+    let doctors = await User.find({
+        department: req.query.dep,
+        type: "Doctor"
+    });
 
 
     return res.render('specialist', {
