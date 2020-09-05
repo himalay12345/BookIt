@@ -3488,11 +3488,12 @@ html.menu-opened body {
     width: 100%;
 }
 .day-slot li {
+	cursor: pointer;
     float: left;
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
-    width: 14.28%;
+    width: 30%;
 }
 .day-slot li span {
     display: block;
@@ -3537,11 +3538,13 @@ html.menu-opened body {
     padding: 0;
 }
 .time-slot li {
+	cursor: pointer;
     float: left;
     padding-left: 5px;
     padding-right: 5px;
-    width: 14.28%;
+    width: 30%;
 }
+
 .time-slot li .timing {
     background-color: #e9e9e9;
     border: 1px solid #e9e9e9;
@@ -6710,37 +6713,61 @@ html.menu-opened body {
 		font-size: 1.125rem;
 	}
 	.booking-schedule.schedule-widget {
-		overflow-x: auto;
+		/* overflow-x: auto; */
 	}
 	.booking-schedule.schedule-widget > div {
-		width: 730px;
+		/* width: 730px; */
 	}
 	.booking-schedule .day-slot ul {
-		display: -webkit-box;
+		/* display: -webkit-box;
 		display: -ms-flexbox;
-		display: flex;
+		display: flex; */
 	}
 	.booking-schedule .day-slot li {
-		-ms-flex: 0 0 100px;
+		/* -ms-flex: 0 0 100px;
 		flex: 0 0 100px;
-		width: 100px;
+		width: 100px; */
 	}
 	.booking-schedule .time-slot ul {
-		display: -webkit-box;
+		/* display: -webkit-box;
 		display: -ms-flexbox;
-		display: flex;
+		display: flex; */
 	}
 	.booking-schedule .time-slot li {
-		-ms-flex: 0 0 100px;
+		/* -ms-flex: 0 0 90px;
 		flex: 0 0 100px;
-		width: 100px;
+		width: 100px; */
 	}
 	.booking-schedule .time-slot li .timing span {
 		display: inline-block;
 	}
-	.booking-schedule .day-slot li.right-arrow {
-		right: -20px;
+	.day-slot li.left-arrow {
+		left: -10px;
+		padding: 0;
+		position: absolute;
+		text-align: center;
+		top: 50%;
+		width: 20px !important;
+		transform: translateY(-50%);
 	}
+	.booking-schedule .day-slot li.right-arrow {
+		right: 0px;
+	}
+
+	.time-slot li {
+		float: left;
+		padding-left: 5px;
+		padding-right: 5px;
+		width: 100%;
+	}
+	.day-slot li {
+		float: left;
+		padding-left: 5px;
+		padding-right: 5px;
+		text-align: center;
+		width: 100%;
+	}
+	
 	.booking-doc-info .booking-doc-img {
 		width: 70px;
 	}
@@ -7159,3 +7186,16 @@ html.menu-opened body {
     margin: 0;
 }
 
+
+.displayFlex{
+	display: flex !important;
+}
+
+.displayBlock{
+	display: block !important;
+}
+
+
+.displayNone{
+	display: none !important;
+}

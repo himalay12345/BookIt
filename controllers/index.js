@@ -55,9 +55,11 @@ module.exports.Doctors = async(req, res) => {
         doctors: doctors
     })
 }
-module.exports.booking = (req, res) => {
+module.exports.booking = async (req, res) => {
+    let doctor = await User.findById(req.query.id);
     return res.render('booking', {
-        title: 'Booking'
+        title: 'Booking',
+        doctor:doctor
     })
 }
 
@@ -259,6 +261,7 @@ module.exports.register = (req, res) => {
 module.exports.signUp = async(req, res) => {
 
     if (req.body.type == 'forgot') {
+        console.log(req.body.type)
         let data = await client
             .verify
             .services(config.serviceID)
@@ -286,6 +289,9 @@ module.exports.signUp = async(req, res) => {
         }
     }
 
+    else{
+        console.log('hiii')
+
     let data = await client
         .verify
         .services(config.serviceID)
@@ -312,6 +318,8 @@ module.exports.signUp = async(req, res) => {
         })
 
     }
+
+}
 
 
 }
@@ -371,6 +379,7 @@ module.exports.voiceCall = (req, res) => {
 module.exports.verify = async(req, res) => {
 
     if (req.body.type == 'forgot') {
+        console.log(req.body.type)
         client
             .verify
             .services(config.serviceID)
@@ -390,7 +399,7 @@ module.exports.verify = async(req, res) => {
 
     } else {
 
-
+        console.log('hii')
         let user = await User.findOne({ phone: req.body.phone });
 
         if (user) {

@@ -444,7 +444,7 @@
                                         <!-- /Clinic Content -->
 
                                         <!-- Clinic Timing -->
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="clinic-timing">
                                                 <div>
                                                     <p class="timings-days">
@@ -696,8 +696,7 @@
                                                                     <%for(time of doctor.schedule_time){%>
                                                                         <%var n1 = time.day.toUpperCase();%>
                                                                             <%var n2 = dayOfWeek.toUpperCase();%>
-                                                                                <%console.log(n1)%>
-                                                                                    <%console.log(n2)%>
+                                                                                
 
                                                                                         <%if(n1 == n2){%>
                                                                                             <%d1=time;}%>
@@ -709,7 +708,7 @@
                                                                                                         <%}else{%>
                                                                                                             <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
 
-                                                                                                            <span class="time"><%=d1%></span>
+                                                                                                            <span class="time"><%=d1.start%><%=d1.end%></span>
                                                                                                             <%}%>
 
                                                             </div>

@@ -142,10 +142,14 @@ const userSchema = mongoose.Schema({
         end: {
             type: Object
         },
+        max_count: {
+            type: Number
+        },
         day: {
             type: String
         }
     }],
+   
     education: [{
         degree: {
             type: String

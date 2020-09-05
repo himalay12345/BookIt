@@ -61,6 +61,7 @@ module.exports.destroySession = function(req, res) {
 module.exports.setBookingFee = async function(req, res) {
     let user = await User.findById(req.user.id);
     user.booking_fee = req.body.fee;
+    user.max_count = req.body.max_count;
     user.save();
 
     return res.redirect('back');
@@ -132,11 +133,16 @@ module.exports.updateSchedule = async function(req, res) {
 module.exports.setScheduleTiming = async function(req, res) {
 
     let user = await User.findById(req.user.id);
+   
+   
+
+   
     if (typeof(req.body.start) == 'string') {
         user.schedule_time.push({
             start: req.body.start,
             end: req.body.end,
-            day: req.body.day
+            day: req.body.day,
+            max_count:req.body.max_count
         })
     }
 
@@ -153,6 +159,7 @@ module.exports.setScheduleTiming = async function(req, res) {
 
 
     user.save();
+    console.log(user);
 
 
     return res.redirect('back');
@@ -270,7 +277,7 @@ module.exports.acceptAgreement = async(req, res) => {
     let user = await User.findById(req.user.id);
     user.terms = true;
     user.save();
-    return res.redirect('/account-setting');
+    return res.redirect('/doctors');
 }
 
 module.exports.profileUpdate = async function(req, res) {
