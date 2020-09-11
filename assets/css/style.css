@@ -67,6 +67,10 @@
     right: 104%;
 }
 
+#inclinic {
+    padding: 0px 100px;
+}
+
 .header {
     position: relative;
 }
@@ -1806,6 +1810,8 @@ button.bg-danger:hover {
 
 .slick-slide img {
     display: block;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
 }
 
 .slick-slide.slick-loading img {
@@ -7862,6 +7868,9 @@ html.menu-opened body {
         /* -ms-flex: 0 0 90px;
 		flex: 0 0 100px;
 		width: 100px; */
+    }
+    #inclinic {
+        padding: 0px 0px;
     }
     .booking-schedule .time-slot li .timing span {
         display: inline-block;
