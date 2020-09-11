@@ -25,7 +25,8 @@ router.post('/change-password', userController.changePassword);
 router.post('/doc-change-password', userController.docchangePassword);
 router.post('/bank-details', userController.bankDetails);
 router.post('/filter', userController.Filter);
-
+router.post('/book-appointment',userController.bookAppointment);
+router.post('/payment',userController.payment);
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-degree', userController.uploadDegree);
 router.post('/accept-agreement', userController.acceptAgreement);

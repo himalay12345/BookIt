@@ -143,10 +143,16 @@ const userSchema = mongoose.Schema({
             type: Object
         },
         max_count: {
-            type: Number
+            type: Object
         },
         day: {
             type: String
+        },
+        available:{
+            type: Object
+        },
+        booked:{
+            type: Object
         }
     }],
    

@@ -207,17 +207,19 @@
                     <div class="col-md-12 col-lg-8 col-xl-9">
 
                         <!-- Doctor Widget -->
-                        <div class="card">
+                        <div class="card" id="doctorsm">
                             <div class="card-body">
                                 <%for(doctor of doctors){%>
                                     <div class="doctor-widget">
                                         <div class="doc-info-left">
                                             <div class="doctor-img">
                                                 <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                <img src="<%=doctor.avatar%>" class="img-fluid" onerror='this.src="/img/profile.png"' alt="User Image">
+                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;"onerror='this.src="/img/profile.png"' alt="User Image">
                                             </a>
                                             </div>
                                             <div class="doc-info-cont">
+                                                <div id="depinline" style="display: inline-flex;">
+                                                    <div style="margin-right: 40px;">
                                                 <h4 class="doc-name">
                                                     <a href="doctor-profile/?id=<%=doctor._id%>">
                                                         <%=doctor.name%>
@@ -227,6 +229,8 @@
                                                     <%=doctor.department%>
 
                                                 </p>
+                                                </div>
+                                                <div>
                                                 <p class="doc-department">
                                                     <% if(doctor.department== "General Physician"){ %>
 
@@ -276,12 +280,15 @@
                                                     <i class="fas fa-star"></i>
                                                     <span class="d-inline-block average-rating">(17)</span>
                                                 </div>
+                                                </div>
+                                            </div>
                                                 <div class="clinic-details">
-                                                    <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                                    <!-- <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
                                                         <%=doctor.contacts.city%>
                                                             <%=doctor.contacts.country%>
-                                                    </p>
-                                                    <ul class="clinic-gallery">
+                                                    </p> -->
+                                            
+                                                    <ul class="clinic-gallery" style="margin-top: 15px;">
                                                         <%for(doctorsclinic of doctor.clinicphoto){%>
                                                             <li>
                                                                 <a href="<%=doctorsclinic%>" data-fancybox="gallery">
@@ -304,11 +311,13 @@
                                         </div>
                                         <div class="doc-info-right">
                                             <div class="clini-infos">
-                                                <ul>
-                                                    <li><i class="far fa-thumbs-up"></i> 0</li>
+                                                <ul style="display: inline-flex;">
+                                                    <li style="margin-right: 30px;"><i class="far fa-thumbs-up"></i> 0</li>
                                                     <li><i class="far fa-comment"></i> 0</li>
+                                                </ul>
+                                                <ul>
                                                     <li><i class="fas fa-map-marker-alt"></i>
-                                                        <%=doctor.contacts.city%>
+                                                        <%=doctor.contacts.city%>&nbsp;&nbsp;
                                                             <%=doctor.contacts.state%>
                                                     </li>
                                                     <li><i class="far fa-money-bill-alt"></i>RS

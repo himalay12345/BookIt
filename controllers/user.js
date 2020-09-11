@@ -74,6 +74,101 @@ module.exports.destroySession = function(req, res) {
     return res.redirect('/');
 }
 
+module.exports.payment = async (req, res) => {
+      let user = await User.findById(req.body.doctorid);
+
+      if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
+      {
+        let available =  [];
+        let booked =  [];
+        let k = req.body.slotindex;
+        let i = req.body.available.split(',');
+        let a = parseInt(i[k]);
+        a =a-1;
+        for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+            {
+                if(temp == k)
+                {
+                    available.push(a);
+                    continue;
+                }
+                var temp1 = parseInt(i[temp]);
+                available.push(temp1);
+            }
+    let j = req.body.booked.split(',');
+    let b = parseInt(j[k]);
+    b = b+1;
+    // console.log(user.schedule_time[req.body.dayindex].start.length);
+    for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+    {
+        if(temp == req.body.slotindex)
+        {
+            booked.push(b);
+            continue;
+        }
+        var temp1 = parseInt(j[temp]);
+        booked.push(temp1);
+    }
+    let day = await User.update({ 'schedule_time._id': req.body.id }, {
+        '$set': {
+            'schedule_time.$.booked': booked,
+            'schedule_time.$.available': available,
+            
+        }
+    });
+    return res.render('booking-success',{
+        doctor:user,
+        seat:b,
+        slotindex:req.body.slotindex,
+        dayindex:req.body.dayindex
+    });
+
+    }
+
+    if(typeof(user.schedule_time[req.body.dayindex].start) == 'string')
+    {
+        var k1 = parseInt(req.body.booked);
+        k1+=1;
+        var k2 = parseInt(req.body.available);
+        k2-=1;
+
+        
+     let day = await User.update({ 'schedule_time._id': req.body.id }, {
+        '$set': {
+            'schedule_time.$.booked': k1,
+            'schedule_time.$.available': k2,
+            
+        }
+    });
+
+    return res.render('booking-success',{
+        doctor:user,
+        seat:k1,
+        slotindex:req.body.slotindex,
+        dayindex:req.body.dayindex
+    });
+
+    }
+     
+
+  
+   
+}
+
+module.exports.bookAppointment = async (req, res) => {
+    console.log(req.body);
+    let doctor = await User.findById(req.body.doctorid);
+
+    return res.render('checkout',{
+        booked:req.body.booked,
+        available:req.body.available,
+        slotindex:req.body.slotindex,
+        dayindex:req.body.dayindex,
+        id:req.body.id,
+        doctor:doctor
+
+    })
+}
 
 module.exports.setBookingFee = async function(req, res) {
     let user = await User.findById(req.user.id);
@@ -139,9 +234,15 @@ module.exports.updateSchedule = async function(req, res) {
     let day = await User.update({ 'schedule_time._id': req.body.id }, {
         '$set': {
             'schedule_time.$.start': req.body.start,
-            'schedule_time.$.end': req.body.end
+            'schedule_time.$.end': req.body.end,
+            'schedule_time.$.max_count': req.body.max_count,
+            'schedule_time.$.available': req.body.max_count
         }
     });
+
+  
+
+
     return res.redirect('back');
 
 }
@@ -159,18 +260,22 @@ module.exports.setScheduleTiming = async function(req, res) {
             start: req.body.start,
             end: req.body.end,
             day: req.body.day,
-            max_count:req.body.max_count
+            max_count:req.body.max_count,
+            available:req.body.max_count,
+            booked:0
         })
     }
 
     if (typeof(req.body.start) == 'object') {
-        // for (let i = 0; i < req.body.start.length; i++) {
-        // user.schedule_time.start.push(req.body.start[i]);
-        // user.schedule_time.end.push(req.body.end[0]);
-        user.schedule_time.push(req.body);
-
-        // }
-        // user.schedule_time.push({ day: req.body.day });
+        user.schedule_time.push({ 
+            day: req.body.day,
+            start:req.body.start,
+            end:req.body.end,
+            max_count:req.body.max_count,
+            available:req.body.max_count,
+            booked:['0','0']
+        } );
+        
     }
 
 

@@ -67,6 +67,9 @@ Version      : 1.0
 .header{
 	position: relative;
 }
+.booking-doc-img{
+	width: 10% !important;
+}
 
 .bell{
 	position: absolute;
@@ -845,7 +848,7 @@ button.bg-danger:hover {
     margin-bottom: 1.875rem;
 }
 .card-body {
-	padding: 1.5rem;
+	/* padding: 1.5rem; */
 }
 .card-title {
     margin-bottom: 15px;
@@ -2916,9 +2919,9 @@ html.menu-opened body {
 }
 .doc-info-right {
     margin-left: auto;
-    -ms-flex: 0 0 200px;
-    flex: 0 0 200px;
-    max-width: 200px;
+    -ms-flex: 0 0 300px;
+    flex: 0 0 300px;
+    max-width: 300px;
 }
 .doctor-img {
     -ms-flex: 0 0 150px;
@@ -3051,7 +3054,8 @@ html.menu-opened body {
 	color: #fff;
 }
 .clinic-booking a.apt-btn {
-    background-color: #20c0f3;
+	background-color: #20c0f3;
+	height: 45px;
     color: #fff;
 }
 .clinic-booking a.apt-btn:hover, .clinic-booking a.apt-btn:focus {
@@ -3561,7 +3565,7 @@ html.menu-opened body {
     background-color: #fff;
 }
 .time-slot li .timing:last-child {
-	margin-bottom: 0;
+	margin-bottom: 10px;
 }
 .time-slot li .timing.selected {
 	background-color: #42c0fb;
@@ -6505,7 +6509,7 @@ html.menu-opened body {
 		display: none;
 	}
 	.doctor-img {
-		margin: 0 auto 20px;
+		margin: 0 auto -5px;
 	}
 	.doctor-action {
 		justify-content: center;
@@ -6578,8 +6582,17 @@ html.menu-opened body {
 		margin-bottom: 0.9375rem;
 	}
 	.card-body {
-		padding: 1.25rem;
+		/* padding: 1.25rem; */
 	}
+	.clinic-gallery{
+		display: none;
+	}
+	.clini-infos{
+		margin-top: -20px;
+	}
+
+	
+	
 	.card-header {
 		padding: .75rem 1.25rem;
 	}
@@ -6618,8 +6631,32 @@ html.menu-opened body {
 		width:110px;
 	}
 
+	#md{
+		display: none !important;
+	}
+
+	#sm{
+		display:block !important;
+	}
+
+	.search-filter{
+		display: none;
+	}
+
+	#doctorsm{
+		margin-top: 20px;
+	}
+
+	.doc-info-cont
+	{
+		margin-top: -20px;
+	}
+
 	.header-navbar-rht{
 		display: block;
+	}
+	.booking-doc-img{
+		width: 40% !important;
 	}
 
 	.header-login{
@@ -7198,4 +7235,8 @@ html.menu-opened body {
 
 .displayNone{
 	display: none !important;
+}
+
+#sm{
+	display: none;
 }

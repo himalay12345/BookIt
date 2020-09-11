@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -46,13 +46,13 @@
                         </span>
                     </a>
                     <a href="/index-2" class="navbar-brand logo">
-                        <img src="img/logo.png" class="img-fluid" alt="Logo">
+                        <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
                         <a href="/index-2" class="menu-logo">
-                            <img src="img/logo.png" class="img-fluid" alt="Logo">
+                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
                             <i class="fas fa-times"></i>
@@ -137,9 +137,15 @@
                             <div class="card-body">
 
                                 <!-- Checkout Form -->
-                                <form action="https://dreamguys.co.in/demo/doccure/booking-success">
+                                <form action="/user/payment" method="POST">
 
                                     <!-- Personal Information -->
+                                    <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <input type="hidden" name="booked" value="<%=booked%>">
+                                    <input type="hidden" name="available" value="<%=available%>">
+                                    <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                    <input type="hidden" name="dayindex" value="<%=dayindex%>">
                                     <div class="info-widget">
                                         <h4 class="card-title">Personal Information</h4>
                                         <div class="row">
@@ -263,10 +269,10 @@
                                 <!-- Booking Doctor Info -->
                                 <div class="booking-doc-info">
                                     <a href="/doctor-profile" class="booking-doc-img">
-                                        <img src="img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                        <img src="<%=doctor.avatar%>" alt="User Image">
                                     </a>
                                     <div class="booking-info">
-                                        <h4><a href="/doctor-profile">Dr. Darren Elder</a></h4>
+                                        <h4><a href="/doctor-profile"><%=doctor.name%></a></h4>
                                         <div class="rating">
                                             <i class="fas fa-star filled"></i>
                                             <i class="fas fa-star filled"></i>
@@ -276,28 +282,39 @@
                                             <span class="d-inline-block average-rating">35</span>
                                         </div>
                                         <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%>, <%=doctor.contacts.state%></p>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Booking Doctor Info -->
 
                                 <div class="booking-summary">
+                                    <%var today = new Date();%>
+                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                        var yyyy = today.getFullYear();
+                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                        var dayOfWeek = weekday[today.getDay()];%>
                                     <div class="booking-item-wrap">
                                         <ul class="booking-date">
-                                            <li>Date <span>16 Nov 2019</span></li>
-                                            <li>Time <span>10:00 AM</span></li>
+                                            <li>Date <span><%=dd%>-<%=mm%>-<%=yyyy%></span></li>
+                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                                <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
+
+                                           <%}else{%>
+                                            <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
+                                            <%}%>
+                                            <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
                                         </ul>
                                         <ul class="booking-fee">
-                                            <li>Consulting Fee <span>$100</span></li>
-                                            <li>Booking Fee <span>$10</span></li>
-                                            <li>Video Call <span>$50</span></li>
+                                            <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
+                                            <!-- <li>G.S.T <span>Rs 10</span></li> -->
                                         </ul>
                                         <div class="booking-total">
                                             <ul class="booking-total-list">
                                                 <li>
                                                     <span>Total</span>
-                                                    <span class="total-cost">$160</span>
+                                                    <span class="total-cost">Rs <%=doctor.booking_fee%></span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -327,7 +344,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -456,18 +473,18 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Sticky Sidebar JS -->
-    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
 
 </body>
 
