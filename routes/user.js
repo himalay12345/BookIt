@@ -27,6 +27,8 @@ router.post('/bank-details', userController.bankDetails);
 router.post('/filter', userController.Filter);
 router.post('/book-appointment',userController.bookAppointment);
 router.post('/payment',userController.payment);
+router.get('/add-favourite', userController.addFavourite);
+
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-degree', userController.uploadDegree);
 router.post('/accept-agreement', userController.acceptAgreement);

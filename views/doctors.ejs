@@ -12,28 +12,28 @@
     <link href="img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
 
     <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
 
     <!-- Select2 CSS -->
-    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
 
     <!-- Fancybox CSS -->
-    <link rel="stylesheet" href="plugins/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -326,18 +326,33 @@
                                                 </ul>
                                             </div>
                                             <div class="doctor-action">
-                                                <a href="javascript:void(0)" class="btn btn-white fav-btn">
-                                                    <i class="far fa-bookmark"></i>
-                                                </a>
-                                                <a href="/chat" class="btn btn-white msg-btn">
-                                                    <i class="far fa-comment-alt"></i>
-                                                </a>
-                                                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-                                                    <i class="fas fa-phone"></i>
-                                                </a>
-                                                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-                                                    <i class="fas fa-video"></i>
-                                                </a>
+                                                <%var flag = false;%>
+                                                    <%for(fav of locals.user.favourites){
+                                                        
+                                                       
+                                                    if(fav.toString() == doctor._id)flag = true;%>
+
+                                                        <%}%>
+
+                                                            <%if(flag){%>
+                                                                <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn" style="background-color: red;">
+                                                                    <i class="far fa-bookmark" style="color:white;"></i>
+                                                                </a>
+                                                                <%}else{%>
+                                                                    <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn">
+                                                                        <i class="far fa-bookmark"></i>
+                                                                    </a>
+                                                                    <%}%>
+
+                                                                        <a href="/chat" class="btn btn-white msg-btn">
+                                                                            <i class="far fa-comment-alt"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+                                                                            <i class="fas fa-phone"></i>
+                                                                        </a>
+                                                                        <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+                                                                            <i class="fas fa-video"></i>
+                                                                        </a>
                                             </div>
                                             <div class="clinic-booking">
                                                 <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a>
@@ -348,25 +363,8 @@
                                     <%}%>
                             </div>
                         </div>
-                        <!-- /Doctor Widget -->
 
-                        <!-- Doctor Widget -->
-
-                        <!-- /Doctor Widget -->
-
-                        <!-- Doctor Widget -->
-
-                        <!-- /Doctor Widget -->
-
-                        <!-- Doctor Widget -->
-
-                        <!-- /Doctor Widget -->
-
-                        <!-- Doctor Widget -->
-
-                        <!-- /Doctor Widget -->
-
-                        <!-- <div class="load-more text-center">
+                        <div class="load-more text-center">
                             <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
                         </div> -->
                     </div>
@@ -380,13 +378,12 @@
         <!-- Footer -->
         <footer class="footer">
 
-            <!-- Footer Top -->
             <div class="footer-top">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
 
-                            <!-- Footer Widget -->
+
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
                                     <img src="img/footer-logo.png" alt="logo">
@@ -414,13 +411,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- /Footer Widget -->
 
                         </div>
 
                         <div class="col-lg-3 col-md-6">
 
-                            <!-- Footer Widget -->
+
                             <div class="footer-widget footer-menu">
                                 <h2 class="footer-title">For Patients</h2>
                                 <ul>
@@ -431,13 +427,13 @@
                                     <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                 </ul>
                             </div>
-                            <!-- /Footer Widget -->
+
 
                         </div>
 
                         <div class="col-lg-3 col-md-6">
 
-                            <!-- Footer Widget -->
+
                             <div class="footer-widget footer-menu">
                                 <h2 class="footer-title">For Doctors</h2>
                                 <ul>
@@ -448,13 +444,13 @@
                                     <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
                                 </ul>
                             </div>
-                            <!-- /Footer Widget -->
+
 
                         </div>
 
                         <div class="col-lg-3 col-md-6">
 
-                            <!-- Footer Widget -->
+
                             <div class="footer-widget footer-contact">
                                 <h2 class="footer-title">Contact Us</h2>
                                 <div class="footer-contact-info">
@@ -470,20 +466,19 @@
                                     </p>
                                 </div>
                             </div>
-                            <!-- /Footer Widget -->
+
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            <!-- /Footer Top -->
 
-            <!-- Footer Bottom -->
+
             <div class="footer-bottom">
                 <div class="container-fluid">
 
-                    <!-- Copyright -->
+
                     <div class="copyright">
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
@@ -493,56 +488,54 @@
                             </div>
                             <div class="col-md-6 col-lg-6">
 
-                                <!-- Copyright Menu -->
+
                                 <div class="copyright-menu">
                                     <ul class="policy-menu">
                                         <li><a href="/term-condition">Terms and Conditions</a></li>
                                         <li><a href="/privacy-policy">Policy</a></li>
                                     </ul>
                                 </div>
-                                <!-- /Copyright Menu -->
 
                             </div>
                         </div>
                     </div>
-                    <!-- /Copyright -->
+
 
                 </div>
             </div>
-            <!-- /Footer Bottom -->
+
 
         </footer>
-        <!-- /Footer -->
+
 
     </div>
-    <!-- /Main Wrapper -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
-    <!-- Sticky Sidebar JS -->
-    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
-    <!-- Select2 JS -->
-    <script src="plugins/select2/js/select2.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
-    <!-- Datetimepicker JS -->
-    <script src="js/moment.min.js"></script>
-    <script src="js/bootstrap-datetimepicker.min.js"></script>
 
-    <!-- Fancybox JS -->
-    <script src="plugins/fancybox/jquery.fancybox.min.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
+
+    <script src="/plugins/select2/js/select2.min.js"></script>
+
+
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+
+    <script src="/plugins/fancybox/jquery.fancybox.min.js"></script>
+
+
+    <script src="/js/script.js"></script>
 
 </body>
 
-<!-- doccure/search  30 Nov 2019 04:12:16 GMT -->
+
 
 </html>

@@ -16,6 +16,11 @@ module.exports.addBilling = (req, res) => {
         title: 'Add Billing'
     })
 }
+module.exports.consult = (req, res) => {
+    return res.render('consult', {
+        title: 'Consult'
+    })
+}
 module.exports.addPrescription = (req, res) => {
     return res.render('add-prescription', {
         title: 'Add Prescription'
@@ -69,7 +74,7 @@ module.exports.Doctors = async(req, res) => {
         doctors: doctors
     })
 }
-module.exports.booking = async (req, res) => {
+module.exports.booking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     var today = new Date();
     today.setDate(today.getDate() - 1)
@@ -101,7 +106,7 @@ module.exports.booking = async (req, res) => {
     
     return res.render('booking', {
         title: 'Booking',
-        doctor:doctor
+        doctor: doctor
     })
 }
 
@@ -209,10 +214,13 @@ module.exports.editPrescription = (req, res) => {
 }
 
 module.exports.favourites = async(req, res) => {
-    let user = await User.findById(req.user.id)
+    let doctors = await User.findById(req.user.id).populate({
+        path: 'favourites',
+        populate: { path: 'user' }
+    });
     return res.render('favourites', {
         title: 'Favourites',
-        user: user
+        doctors: doctors
     })
 }
 
@@ -329,39 +337,37 @@ module.exports.signUp = async(req, res) => {
             })
 
         }
-    }
-
-    else{
+    } else {
         console.log('hiii')
 
-    let data = await client
-        .verify
-        .services(config.serviceID)
-        .verificationChecks
-        .create({
-            to: `+91${req.body.phone}`,
-            code: req.body.otp
-        });
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
 
 
-    if (data.status == 'approved') {
-        return res.render('register', {
-            title: 'Register',
-            phone: req.body.phone,
-            type: req.body.type
-        });
+        if (data.status == 'approved') {
+            return res.render('register', {
+                title: 'Register',
+                phone: req.body.phone,
+                type: req.body.type
+            });
 
-    } else {
-        req.flash('error', 'Wrong Otp');
-        return res.render('phone-verify', {
-            title: 'Phone verification',
-            phone: req.body.phone,
-            type: req.body.type
-        })
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                type: req.body.type
+            })
+
+        }
 
     }
-
-}
 
 
 }
