@@ -6606,7 +6606,7 @@ html.menu-opened body {
     display: none;
     top: 0;
     border: 3px solid transparent;
-z}
+}
 
 .call-users ul li a:hover .call-mute {
     display: block;
@@ -7703,8 +7703,9 @@ z}
 	.navbar-brand.logo {
 		width: 100%;
 		text-align: center;
-		margin-right: 0;
-		margin-left: -20px;
+        margin-right: 0;
+        margin-top: -30px;
+		margin-left: 35px;
 	}
 	.navbar-brand.logo img {
 		margin-top: 10px;
@@ -7759,7 +7760,7 @@ z}
 
 	.bell{
 		position: absolute;
-		right: 100%;
+		right: 5%;
 	}
 
 	.hideinphone{
