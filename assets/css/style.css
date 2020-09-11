@@ -6631,6 +6631,12 @@ html.menu-opened body {
 		width:110px;
 	}
 
+	#nots-warn{
+		margin-left: 15px;
+		font-size: 0.6rem!important;
+
+	}
+
 	#md{
 		display: none !important;
 	}

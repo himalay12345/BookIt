@@ -347,6 +347,8 @@ for(let i=0;i<timing.length;i++){
 
 
         var dummy = '<input type="hidden" name="id" value="'+data1+'"id="inputid"><input type="hidden" name="booked" value="'+data2+'" id="inputid"><input type="hidden" name="available" value="'+data3+'" id="inputid"><input type="hidden" name="slotindex" value="'+data4+'" id="inputid"><input type="hidden" name="dayindex" value="'+data5+'" id="inputid">';
-        timing[i].innerHTML += dummy;  
+        timing[i].innerHTML += dummy;
+
+         $('#submit_btn').prop("disabled", false);  
     })
 }

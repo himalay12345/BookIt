@@ -71,6 +71,34 @@ module.exports.Doctors = async(req, res) => {
 }
 module.exports.booking = async (req, res) => {
     let doctor = await User.findById(req.query.id);
+    var today = new Date();
+    today.setDate(today.getDate() - 1)
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+        var dayOfWeek = weekday[today.getDay()].toUpperCase(); 
+        // var result = today.setTime(today.getTime() - (1 * 24 * 60 * 60 * 1000));
+        // var date = new Date(res);
+        
+
+        for(temp of doctor.schedule_time)
+        {
+            if(temp.day.toUpperCase() == dayOfWeek )
+            {
+                if(typeof(temp.booked)=='string')
+                {
+                    temp.booked = 0;
+                }
+
+                else{
+                    temp.booked = [0,0];
+                }
+            }
+        }
+
+        doctor.save();
+    
     return res.render('booking', {
         title: 'Booking',
         doctor:doctor

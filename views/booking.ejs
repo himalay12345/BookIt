@@ -603,7 +603,7 @@
                                                                 <!-- <span><%=j%></span> -->
                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                             </a>
-                                                            <%}else{console.log(color,j)%>
+                                                            <%}else{%>
                                                                 <a class="timing" data-id="<%=d1.id%>"  data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t1%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                         <span><%=j%></span>
                                                                     </a>
@@ -628,7 +628,7 @@
                                                                     <!-- <span><%=j%></span> -->
                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                 </a>
-                                                                <%}else{console.log(color,j)%>
+                                                                <%}else{%>
                                                                     <a class="timing" data-id="<%=d1.id%>"  data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t1%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -659,11 +659,11 @@
                                                             <%for(var j= 1;j<=d2.max_count;j++){%>
                                                                
                                                                 <%if(j<=color){%>
-                                                                    <a class="timing" style="width: 50px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
+                                                                    <a class="timing" style="width: 50px; color: white; background-color: red; height:40px;margin-left: 5px;cursor:no-drop" id="checkme">
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d2.id%>"  data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t2%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -689,7 +689,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d2.id%>"  data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t2%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -724,7 +724,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d3.id%>"  data-booked="<%=d3.booked%>" data-available="<%=d3.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t3%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -749,7 +749,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d3.id%>"  data-booked="<%=d3.booked%>" data-available="<%=d3.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t3%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -786,7 +786,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d4.id%>"  data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t4%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -811,7 +811,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d4.id%>"  data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t4%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -846,7 +846,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d5.id%>"  data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t5%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -872,7 +872,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d5.id%>"  data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t5%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -909,7 +909,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d6.id%>"  data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t6%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -935,7 +935,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d6.id%>"  data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t6%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -972,7 +972,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d7.id%>"  data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t7%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -1000,7 +1000,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d7.id%>"  data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t7%>" data-doctor-id = "<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                 <span><%=j%></span>
                                                                             </a>
@@ -1078,7 +1078,7 @@
                                                                 <!-- <span><%=j%></span> -->
                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                             </a>
-                                                            <%}else{console.log(color,j)%>
+                                                            <%}else{%>
                                                                 <a class="timing" data-id="<%=d1.id%>"  data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t1%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                         <span><%=j%></span>
                                                                     </a>
@@ -1105,7 +1105,7 @@
                                                                 <!-- <span><%=j%></span> -->
                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                             </a>
-                                                            <%}else{console.log(color,j)%>
+                                                            <%}else{%>
                                                                 <a class="timing" data-id="<%=d1.id%>"  data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t1%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                         <span><%=j%></span>
                                                                     </a>
@@ -1143,7 +1143,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d2.id%>"  data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t2%>" data-doctor-id = "<%=doctor._id%>" style="display:flex;width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1169,7 +1169,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d2.id%>"  data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t2%>" data-doctor-id = "<%=doctor._id%>" style="display:flex;width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1204,7 +1204,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d3.id%>"  data-booked="<%=d3.booked%>" data-available="<%=d3.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t3%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1230,7 +1230,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d3.id%>"  data-booked="<%=d3.booked%>" data-available="<%=d3.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t3%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1266,7 +1266,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d4.id%>"  data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t4%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1296,7 +1296,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d4.id%>"  data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t4%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1332,7 +1332,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d5.id%>"  data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t5%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1359,7 +1359,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d5.id%>"  data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t5%>" data-doctor-id = "<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1393,7 +1393,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing"  data-id="<%=d6.id%>"  data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t6%>" data-doctor-id = "<%=doctor._id%>"style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1421,7 +1421,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing"  data-id="<%=d6.id%>"  data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t6%>" data-doctor-id = "<%=doctor._id%>"style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1457,7 +1457,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d7.id%>"  data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t7%>" data-doctor-id = "<%=doctor._id%>"style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1486,7 +1486,7 @@
                                                                         <!-- <span><%=j%></span> -->
                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                     </a>
-                                                                    <%}else{console.log(color,j)%>
+                                                                    <%}else{%>
                                                                         <a class="timing" data-id="<%=d7.id%>"  data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index = "<%=i%>" data-day-index = "<%=t7%>" data-doctor-id = "<%=doctor._id%>"style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                             <span><%=j%></span>
                                                                         </a>
@@ -1522,8 +1522,9 @@
 
                         <!-- Submit Section -->
                         <div class="submit-section proceed-btn text-right">
-                            
-                            <button type="submit" class="btn btn-primary submit-btn">Proceed to Pay</button>
+                            <button type="submit" id="submit_btn" class="btn btn-primary submit-btn" disabled>Proceed to Pay</button>
+                           
+                           
                         </div>
                         <!-- /Submit Section -->
 
