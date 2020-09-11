@@ -17,6 +17,7 @@ router.get('/booking-success', homeController.bookingSuccess);
 router.get('/calendar', homeController.calendar);
 router.get('/change-password', homeController.changePassword);
 router.get('/chat', homeController.chat);
+router.get('/consult', homeController.consult);
 router.get('/chat-doctor', homeController.chatDoctor);
 router.get('/checkout', homeController.checkout);
 router.get('/components', homeController.components);

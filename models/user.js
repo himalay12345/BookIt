@@ -41,6 +41,9 @@ const userSchema = mongoose.Schema({
             type: String
         },
     },
+    favourites: [{
+        type: mongoose.Schema.Types.ObjectId
+    }],
 
     avatar: {
         type: String
@@ -149,7 +152,7 @@ const userSchema = mongoose.Schema({
             type: String
         }
     }],
-   
+
     education: [{
         degree: {
             type: String

@@ -16,6 +16,13 @@ module.exports.create = async(req, res) => {
     req.flash('success', 'Account created successfully.Please Login!');
     return res.redirect('/login');
 }
+module.exports.addFavourite = async(req, res) => {
+    let patient = await User.findById(
+        req.user.id);
+    patient.favourites.push(req.query.id);
+    patient.save();
+    return res.redirect('back');
+}
 
 module.exports.createSession = function(req, res) {
     //Todo Later
@@ -150,16 +157,16 @@ module.exports.updateSchedule = async function(req, res) {
 module.exports.setScheduleTiming = async function(req, res) {
 
     let user = await User.findById(req.user.id);
-   
-   
 
-   
+
+
+
     if (typeof(req.body.start) == 'string') {
         user.schedule_time.push({
             start: req.body.start,
             end: req.body.end,
             day: req.body.day,
-            max_count:req.body.max_count
+            max_count: req.body.max_count
         })
     }
 
