@@ -41,29 +41,92 @@
 38. Responsive
 */
 
-
-
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900');
 @font-face {
-	font-family: 'Material Icons';
-	font-style: normal;
-	font-weight: 400;
-	src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
-	src: local('Material Icons'),
-	local('MaterialIcons-Regular'),
-	url(../fonts/MaterialIcons-Regular.html) format('woff2'),
-	url(../fonts/MaterialIcons-Regular.woff) format('woff'),
-	url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
-}
-.header{
-	position: relative;
-}
-.booking-doc-img{
-	width: 10% !important;
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/MaterialIcons-Regular.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.html) format('woff2'), url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
-.bell{
-	position: absolute;
+.font-li {
+    font-size: 1rem;
+    padding: 0px 10px;
+}
+
+.carda {
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 210px 210px 80px;
+    grid-template-areas: "image" "text" "stats";
+    font-family: roboto;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+
+.carda-image {
+    grid-area: image;
+    background: url("img/specialities/brain.jpg");
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+}
+
+.carda-text {
+    grid-area: text;
+    margin: 25px;
+}
+
+.carda-text .date {
+    color: rgb(225, 7, 110);
+    font-size: 15px;
+}
+
+.carda-text p {
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.carda-text h2 {
+    margin-top: 0px;
+}
+
+.carda-stats {
+    grid-area: stats
+}
+
+.across {
+    margin: -3px 20px 12px 116px;
+    font-size: 18px;
+    color: #787887;
+    line-height: 1rem;
+    font-family: cursive;
+}
+
+.spec-heading {
+    margin: 38px 0px 0px 98px;
+    padding: 0px 15px 18px 25px;
+}
+
+.behave {
+    margin-left: 150px;
+}
+
+.header {
+    position: relative;
+}
+
+.booking-doc-img {
+    width: 10% !important;
+}
+
+.bell {
+    position: absolute;
     right: 104%;
 }
 
@@ -73,6 +136,14 @@
 
 .header {
     position: relative;
+}
+
+#ulmd {
+    width: 33%;
+}
+
+.font-li {
+    font-size: 0.8rem;
 }
 
 .bell {
@@ -202,6 +273,11 @@ input[type=password] {
 .btn.focus,
 .btn:focus {
     box-shadow: inherit;
+}
+
+#max {
+    margin-top: 50px;
+    padding: 9px 25px 5px;
 }
 
 .form-control {
@@ -1029,7 +1105,7 @@ button.bg-danger:hover {
 }
 
 .card-body {
-	/* padding: 1.5rem; */
+    /* padding: 1.5rem; */
 }
 
 .card-title {
@@ -1607,6 +1683,10 @@ button.bg-danger:hover {
 
 .modal {
     -webkit-overflow-scrolling: touch;
+}
+
+#lex {
+    padding: 0px 10px;
 }
 
 .modal-footer.text-center {
@@ -2194,6 +2274,7 @@ button.bg-danger:hover {
 
 .header-navbar-rht li:last-child {
     padding-right: 0px;
+    margin-right: -50px;
 }
 
 .header-navbar-rht li .dropdown-menu {
@@ -3664,8 +3745,8 @@ html.menu-opened body {
 }
 
 .clinic-booking a.apt-btn {
-	background-color: #20c0f3;
-	height: 45px;
+    background-color: #20c0f3;
+    height: 45px;
     color: #fff;
 }
 
@@ -4276,7 +4357,7 @@ html.menu-opened body {
 }
 
 .time-slot li .timing:last-child {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .time-slot li .timing.selected {
@@ -7293,564 +7374,583 @@ html.menu-opened body {
 }
 
 @media only screen and (max-width: 767.98px) {
-	
-	.main-nav{
-		position: static;
-	}
-	body {
-		font-size: 0.875rem;
-	}
-	h1, .h1 {
-		font-size: 2rem;
-	}
-	h2, .h2 {
-		font-size: 1.75rem;
-	}
-	h3, .h3 {
-		font-size: 1.375rem;
-	}
-	h4, .h4 {
-		font-size: 1rem;
-	}
-	h5, .h5 {
-		font-size: 0.875rem;
-	}
-	h6, .h6 {
-		font-size: 0.75rem;
-	}
-	.content {
-		padding: 15px 0 0;
-	}
-	.account-page .content {
-		padding: 15px 0;
-	}
-	.container-fluid {
-		padding-left: 15px;
-		padding-right: 15px;
-	}	
-	.card {
-		margin-bottom: 20px;
-	}
-	.profile-sidebar {
-		margin-bottom: 20px;
-	}
-	.appointment-tab {
-		margin-bottom: 20px;
-	}
-	.features-slider .slick-dots, .features-img img {
-		text-align: center;
-		margin: 0 auto;
-	}
-	.doctor-slider {
-		margin-top: 25px;
-	}
-	.breadcrumb-bar {
-		height: auto;
-	}
-	.login-right {
-		margin: 0 15px;
-		padding: 15px;
-	}
-	.chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-name, 
-	.chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-last-chat {
-		max-width: 250px;
-	}
-	.chat-window .chat-cont-right .chat-header .media .media-body {
-		display: none;
-	}
-	.banner-wrapper .banner-header h1 {
-		font-size: 2rem;
-	}
-	.banner-wrapper .banner-header p {
-		font-size: 1rem;
-	}
-	.section-header h2 {
-		font-size: 1.875rem;
-	}
-	.section-header .sub-title {
-		font-size: 0.875rem;
-	}
-	.speicality-item p {
-		font-size: 0.875rem;
-	}
-	.section-header p {
-		font-size: 0.9375rem;
-	}
-	.footer-title {
-		font-size: 1.125rem;
-	}
-	.search-box {
-		max-width: 535px;
-		margin: 0 auto;
-	}
-	.search-box form {
-		-ms-flex-direction: column;
-		flex-direction: column;
-		word-wrap: break-word;
-		background-clip: border-box;
-	}
-	.search-box .search-location {
-		-ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-		width: 100%;
-	}
-	.search-box .search-info {
-		-ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-		width: 100%;
-	}
-	.search-box .search-btn {
-		-ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-		min-height: 46px;
-		width: 100%;
-	}
-	.search-box .search-btn span {
-		display: inline-block;
-		margin-left: 5px;
-		text-transform: uppercase;
-	}
-	.section-search {
-		background: #f9f9f9;
-	}
-	.day-slot li span {
-		font-size: 16px;
-		text-transform: unset;
-	}
-	.time-slot li .timing span {
-		display: block;
-	}
-	.submit-section.proceed-btn {
-		margin-bottom: 20px;
-	}
-	.day-slot li small.slot-year {
-		display: none;
-	}
-	.success-cont h3 {
-		font-size: 22px;
-	}
-	.view-inv-btn {
-		font-size: 14px;
-		padding: 10px 30px;
-	}
-	.invoice-info.invoice-info2 {
-		text-align: left;
-	}
-	.invoice-item .invoice-details {
-		text-align: left;
-	}
-	.section-search, .section-doctor, .section-features {
-		padding: 50px 0;
-	}
-	.slick-next {
-		right: -10px;
-	}
-	.slick-prev {
-		left: -10px;
-	}
-	.specialities-slider .slick-slide {
-		margin-right: 15px;
-	}
-	.about-content a {
-		padding: 12px 20px;
-	}
-	.submit-section .submit-btn {
-		padding: 10px 20px;
-		font-size: 15px;
-		min-width: 105px;
-	}
-	.policy-menu {
-		margin-top: 10px;
-		text-align: left;
-	}
-	.booking-doc-info .booking-doc-img {
-		width: 75px;
-	}
-	.booking-doc-info .booking-doc-img img {
-		height: 75px;
-		width: 75px;
-	}
-	.btn.btn-danger.trash {
-		margin-bottom: 20px;
-	}
-	.nav-tabs.nav-tabs-bottom > li > a.active, .nav-tabs.nav-tabs-bottom > li > a.active:hover, .nav-tabs.nav-tabs-bottom > li > a.active:focus {
-		background-color: #f5f5f5;
-	}	
-	.nav-tabs.nav-justified {
-		border-bottom: 1px solid #ddd;
-	}
-	.nav-tabs.nav-justified > li > a.active,
-	.nav-tabs.nav-justified > li > a.active:hover,
-	.nav-tabs.nav-justified > li > a.active:focus {
-		border-color: transparent transparent transparent #20c0f3;
-		border-left-width: 2px;
-	}
-	.nav-tabs {
-		border-bottom: 0;
-		position: relative;
-		background-color: #fff;
-		padding: 5px 0;
-		border: 1px solid #ddd;
-		border-radius: 3px;
-	}
-	.nav-tabs .nav-item {
-		margin-bottom: 0;
-	}
-	.nav-tabs > li > a {
-		border-width: 2px;
-		border-left-color: transparent;
-	}
-	.nav-tabs .nav-link {
-		border-width: 2px;
-	}
-	.nav-tabs > li > a:hover,
-	.nav-tabs > li > a:focus {
-		background-color: #fafafa;
-	}
-	.nav-tabs .nav-item.show .nav-link,
-	.nav-tabs .nav-link.active,
-	.nav-tabs > li > a.active,
-	.nav-tabs > li > a.active:hover,
-	.nav-tabs > li > a.active:focus {
-		border-color: transparent transparent transparent #20c0f3 !important;
-		border-left-width: 2px;
-	}
-	.nav-tabs > li.open:not(.active) > a,
-	.nav-tabs > li.open:not(.active) > a:hover,
-	.nav-tabs > li.open:not(.active) > a:focus {
-		background-color: #fafafa;
-	}
-	.nav-tabs.nav-tabs-solid {
-		padding: 5px;
-	}
-	.nav-tabs.nav-tabs-solid.nav-tabs-rounded {
-		border-radius: 5px;
-	}
-	.nav-tabs.nav-tabs-solid > li > a {
-		border-left-width: 0!important;
-	}
-	.nav-tabs-justified {
-		border-bottom: 1px solid #ddd;
-	}
-	.nav-tabs-justified > li > a.active,
-	.nav-tabs-justified > li > a.active:hover,
-	.nav-tabs-justified > li > a.active:focus {
-		border-width: 0 0 0 2px;
-		border-left-color: #20c0f3;
-	}
-	.review-listing > ul li .comment .comment-body .meta-data span.comment-date {
-		margin-bottom: 5px;
-	}
-	.review-listing > ul li .comment .comment-body .meta-data .review-count {
-		position: unset;
-	}
-	.my-video ul li {
-		width: 50px;
-	}
-	.call-users ul li {
-		width: 50px;
-	}
-	.call-mute {
-		font-size: 20px;
-		height: 50px;
-		line-height: 50px;
-		width: 50px;
-	}
-	.call-duration {
-		font-size: 24px;
-	}
-	.voice-call-avatar .call-avatar {
-		height: 100px;
-		width: 100px;
-	}
-	.user-tabs {
-		margin-top: 1.5rem;
-	}
-	.user-tabs .nav-tabs > li > a {
-		border-left: 2px solid transparent;
-		border-bottom: 0;
-		padding: .5rem 1rem;
-	}
-	.user-tabs .nav-tabs.nav-tabs-bottom > li > a.active, 
-	.user-tabs .nav-tabs.nav-tabs-bottom > li > a.active:hover, 
-	.user-tabs .nav-tabs.nav-tabs-bottom > li > a.active:focus {
-		border-left-width: 2px;
-		color: #20c0f3;
-	}
-	.doctor-widget {
-		-ms-flex-direction: column;
-		flex-direction: column;
-		text-align: center;
-	}
-	.doc-info-right {
-		margin-left: 0;
-		-ms-flex: 0 0 100%;
-		flex: 0 0 100%;
-		max-width: 100%;
-	}
-	.doc-info-left {
-		-ms-flex-direction: column;
-		flex-direction: column;
-	}
-	.clinic-services {
-		display: none;
-	}
-	.doctor-img {
-		margin: 0 auto -5px;
-	}
-	.doctor-action {
-		justify-content: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
-	}
-	.row.row-grid > div {
-		-ms-flex: 0 0 50%;
-		flex: 0 0 50%;
-		max-width: 50%;
-	}
-	.breadcrumb-bar .breadcrumb-title {
-		font-size: 18px;
-	}
-	.dash-widget h6 {
-		font-size: 15px;
-	}
-	.dash-widget h3 {
-		font-size: 20px;
-	}
-	.dash-widget p {
-		font-size: 13px;
-	}
-	.doctor-widget .doc-name {
-		font-size: 18px;
-	}
-	.exp-title, .booking-total ul li span, .booking-total ul li .total-cost {
-		font-size: 14px;
-	}
-	.invoice-item .customer-text {
-		font-size: 16px;
-	}
-	.call-wrapper {
-		height: calc(100vh - 115px);
-	}
-	.appointment-tab .nav-tabs {
-		padding: 1.5rem;
-	}
-	.submit-btn-bottom {
-		margin-bottom: 20px;
-	}
-	.service-list ul li {
-		width: 50%;
-	}
+    .main-nav {
+        position: static;
+    }
+    body {
+        font-size: 0.875rem;
+    }
+    h1,
+    .h1 {
+        font-size: 2rem;
+    }
+    h2,
+    .h2 {
+        font-size: 1.75rem;
+    }
+    h3,
+    .h3 {
+        font-size: 1.375rem;
+    }
+    h4,
+    .h4 {
+        font-size: 1rem;
+    }
+    h5,
+    .h5 {
+        font-size: 0.875rem;
+    }
+    h6,
+    .h6 {
+        font-size: 0.75rem;
+    }
+    .content {
+        padding: 15px 0 0;
+    }
+    .account-page .content {
+        padding: 15px 0;
+    }
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .card {
+        margin-bottom: 20px;
+    }
+    .profile-sidebar {
+        margin-bottom: 20px;
+    }
+    .appointment-tab {
+        margin-bottom: 20px;
+    }
+    .features-slider .slick-dots,
+    .features-img img {
+        text-align: center;
+        margin: 0 auto;
+    }
+    .doctor-slider {
+        margin-top: 25px;
+    }
+    .breadcrumb-bar {
+        height: auto;
+    }
+    .login-right {
+        margin: 0 15px;
+        padding: 15px;
+    }
+    .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-name,
+    .chat-cont-left .chat-users-list a.media .media-body>div:first-child .user-last-chat {
+        max-width: 250px;
+    }
+    .chat-window .chat-cont-right .chat-header .media .media-body {
+        display: none;
+    }
+    .banner-wrapper .banner-header h1 {
+        font-size: 2rem;
+    }
+    .banner-wrapper .banner-header p {
+        font-size: 1rem;
+    }
+    .section-header h2 {
+        font-size: 1.875rem;
+    }
+    .section-header .sub-title {
+        font-size: 0.875rem;
+    }
+    #take {
+        font-size: inherit;
+    }
+    .speicality-item p {
+        font-size: 0.875rem;
+    }
+    #btn {
+        margin-top: 55px;
+    }
+    #rom {
+        margin: 0 -16px;
+        padding: 12px 16px;
+    }
+    #rock {
+        padding-left: 28px;
+    }
+    #pex {
+        line-height: 1.2;
+        margin: 0px 2px 10px 7px;
+        padding: 33px 0px 0px 10px;
+        font-size: 24px;
+    }
+    #private {
+        font-size: 14px;
+        font-family: Camphor, sans-serif;
+        font-weight: 400;
+    }
+    .section-header p {
+        font-size: 0.9375rem;
+    }
+    .footer-title {
+        font-size: 1.125rem;
+    }
+    .search-box {
+        max-width: 535px;
+        margin: 0 auto;
+    }
+    .search-box form {
+        -ms-flex-direction: column;
+        flex-direction: column;
+        word-wrap: break-word;
+        background-clip: border-box;
+    }
+    .search-box .search-location {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    .search-box .search-info {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    .search-box .search-btn {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        min-height: 46px;
+        width: 100%;
+    }
+    .search-box .search-btn span {
+        display: inline-block;
+        margin-left: 5px;
+        text-transform: uppercase;
+    }
+    .section-search {
+        background: #f9f9f9;
+    }
+    .day-slot li span {
+        font-size: 16px;
+        text-transform: unset;
+    }
+    .time-slot li .timing span {
+        display: block;
+    }
+    .submit-section.proceed-btn {
+        margin-bottom: 20px;
+    }
+    .day-slot li small.slot-year {
+        display: none;
+    }
+    .success-cont h3 {
+        font-size: 22px;
+    }
+    .view-inv-btn {
+        font-size: 14px;
+        padding: 10px 30px;
+    }
+    .invoice-info.invoice-info2 {
+        text-align: left;
+    }
+    .invoice-item .invoice-details {
+        text-align: left;
+    }
+    .section-search,
+    .section-doctor,
+    .section-features {
+        padding: 50px 0;
+    }
+    .slick-next {
+        right: -10px;
+    }
+    .slick-prev {
+        left: -10px;
+    }
+    .specialities-slider .slick-slide {
+        margin-right: 15px;
+    }
+    .about-content a {
+        padding: 12px 20px;
+    }
+    .submit-section .submit-btn {
+        padding: 10px 20px;
+        font-size: 15px;
+        min-width: 105px;
+    }
+    .policy-menu {
+        margin-top: 10px;
+        text-align: left;
+    }
+    .booking-doc-info .booking-doc-img {
+        width: 75px;
+    }
+    .booking-doc-info .booking-doc-img img {
+        height: 75px;
+        width: 75px;
+    }
+    .btn.btn-danger.trash {
+        margin-bottom: 20px;
+    }
+    .nav-tabs.nav-tabs-bottom>li>a.active,
+    .nav-tabs.nav-tabs-bottom>li>a.active:hover,
+    .nav-tabs.nav-tabs-bottom>li>a.active:focus {
+        background-color: #f5f5f5;
+    }
+    .nav-tabs.nav-justified {
+        border-bottom: 1px solid #ddd;
+    }
+    .nav-tabs.nav-justified>li>a.active,
+    .nav-tabs.nav-justified>li>a.active:hover,
+    .nav-tabs.nav-justified>li>a.active:focus {
+        border-color: transparent transparent transparent #20c0f3;
+        border-left-width: 2px;
+    }
+    .nav-tabs {
+        border-bottom: 0;
+        position: relative;
+        background-color: #fff;
+        padding: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+    .nav-tabs .nav-item {
+        margin-bottom: 0;
+    }
+    .nav-tabs>li>a {
+        border-width: 2px;
+        border-left-color: transparent;
+    }
+    .nav-tabs .nav-link {
+        border-width: 2px;
+    }
+    .nav-tabs>li>a:hover,
+    .nav-tabs>li>a:focus {
+        background-color: #fafafa;
+    }
+    .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active,
+    .nav-tabs>li>a.active,
+    .nav-tabs>li>a.active:hover,
+    .nav-tabs>li>a.active:focus {
+        border-color: transparent transparent transparent #20c0f3 !important;
+        border-left-width: 2px;
+    }
+    .nav-tabs>li.open:not(.active)>a,
+    .nav-tabs>li.open:not(.active)>a:hover,
+    .nav-tabs>li.open:not(.active)>a:focus {
+        background-color: #fafafa;
+    }
+    .nav-tabs.nav-tabs-solid {
+        padding: 5px;
+    }
+    .nav-tabs.nav-tabs-solid.nav-tabs-rounded {
+        border-radius: 5px;
+    }
+    .nav-tabs.nav-tabs-solid>li>a {
+        border-left-width: 0!important;
+    }
+    .nav-tabs-justified {
+        border-bottom: 1px solid #ddd;
+    }
+    .nav-tabs-justified>li>a.active,
+    .nav-tabs-justified>li>a.active:hover,
+    .nav-tabs-justified>li>a.active:focus {
+        border-width: 0 0 0 2px;
+        border-left-color: #20c0f3;
+    }
+    .review-listing>ul li .comment .comment-body .meta-data span.comment-date {
+        margin-bottom: 5px;
+    }
+    .review-listing>ul li .comment .comment-body .meta-data .review-count {
+        position: unset;
+    }
+    .my-video ul li {
+        width: 50px;
+    }
+    .call-users ul li {
+        width: 50px;
+    }
+    .call-mute {
+        font-size: 20px;
+        height: 50px;
+        line-height: 50px;
+        width: 50px;
+    }
+    .call-duration {
+        font-size: 24px;
+    }
+    .voice-call-avatar .call-avatar {
+        height: 100px;
+        width: 100px;
+    }
+    .user-tabs {
+        margin-top: 1.5rem;
+    }
+    .user-tabs .nav-tabs>li>a {
+        border-left: 2px solid transparent;
+        border-bottom: 0;
+        padding: .5rem 1rem;
+    }
+    .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active,
+    .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active:hover,
+    .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active:focus {
+        border-left-width: 2px;
+        color: #20c0f3;
+    }
+    .doctor-widget {
+        -ms-flex-direction: column;
+        flex-direction: column;
+        text-align: center;
+    }
+    .doc-info-right {
+        margin-left: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .doc-info-left {
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    .clinic-services {
+        display: none;
+    }
+    .doctor-img {
+        margin: 0 auto -5px;
+    }
+    .doctor-action {
+        justify-content: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+    }
+    .row.row-grid>div {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .breadcrumb-bar .breadcrumb-title {
+        font-size: 18px;
+    }
+    .dash-widget h6 {
+        font-size: 15px;
+    }
+    .dash-widget h3 {
+        font-size: 20px;
+    }
+    .dash-widget p {
+        font-size: 13px;
+    }
+    .doctor-widget .doc-name {
+        font-size: 18px;
+    }
+    .exp-title,
+    .booking-total ul li span,
+    .booking-total ul li .total-cost {
+        font-size: 14px;
+    }
+    .invoice-item .customer-text {
+        font-size: 16px;
+    }
+    .call-wrapper {
+        height: calc(100vh - 115px);
+    }
+    .appointment-tab .nav-tabs {
+        padding: 1.5rem;
+    }
+    .submit-btn-bottom {
+        margin-bottom: 20px;
+    }
+    .service-list ul li {
+        width: 50%;
+    }
 }
 
 @media only screen and (max-width: 575.98px) {
-	body {
-		font-size: 0.8125rem;
-	}
-	h1, .h1 {
-		font-size: 1.75rem;
-	}
-	h2, .h2 {
-		font-size: 1.5rem;
-	}
-	h3, .h3 {
-		font-size: 1.25rem;
-	}
-	h4, .h4 {
-		font-size: 1rem;
-	}
-	h5, .h5 {
-		font-size: 0.875rem;
-	}
-	h6, .h6 {
-		font-size: 0.75rem;
-	}
-	.card {
-		margin-bottom: 0.9375rem;
-	}
-	.card-body {
-		/* padding: 1.25rem; */
-	}
-	.clinic-gallery{
-		display: none;
-	}
-	.clini-infos{
-		margin-top: -20px;
-	}
-
-	
-	
-	.card-header {
-		padding: .75rem 1.25rem;
-	}
-	.card-footer {
-		padding: .75rem 1.25rem;
-	}
-	.header-nav {
-		padding-left: 15px;
-		padding-right: 80px;
-	}
-	.header-navbar-rht {
-		display: none;
-	}
-	.main-nav li.login-link {
-		display: block;
-	}
-	.navbar-header {
-		width: 100%;
-	}
-	#mobile_btn {
-		left: 0;
-		margin-right: 0;
-		padding: 0 15px;
-		position: absolute;
-		z-index: 99;
-	}
-	.navbar-brand.logo {
-		width: 100%;
-		text-align: center;
+    body {
+        font-size: 0.8125rem;
+    }
+    h1,
+    .h1 {
+        font-size: 1.75rem;
+    }
+    h2,
+    .h2 {
+        font-size: 1.5rem;
+    }
+    h3,
+    .h3 {
+        font-size: 1.25rem;
+    }
+    h4,
+    .h4 {
+        font-size: 1rem;
+    }
+    h5,
+    .h5 {
+        font-size: 0.875rem;
+    }
+    h6,
+    .h6 {
+        font-size: 0.75rem;
+    }
+    .card {
+        margin-bottom: 0.9375rem;
+    }
+    .card-body {
+        /* padding: 1.25rem; */
+    }
+    .clinic-gallery {
+        display: none;
+    }
+    .clini-infos {
+        margin-top: -20px;
+    }
+    .card-header {
+        padding: .75rem 1.25rem;
+    }
+    .card-footer {
+        padding: .75rem 1.25rem;
+    }
+    .header-nav {
+        padding-left: 15px;
+        padding-right: 80px;
+    }
+    .header-navbar-rht {
+        display: none;
+    }
+    .main-nav li.login-link {
+        display: block;
+    }
+    .navbar-header {
+        width: 100%;
+    }
+    #mobile_btn {
+        left: 0;
+        margin-right: 0;
+        padding: 0 15px;
+        position: absolute;
+        z-index: 99;
+    }
+    .navbar-brand.logo {
+        width: 100%;
+        text-align: center;
         margin-right: 0;
         margin-top: -30px;
-		margin-left: 35px;
-	}
-	.navbar-brand.logo img {
-		margin-top: 10px;
-		height: 40px;
-		width:110px;
-	}
-
-	#nots-warn{
-		margin-left: 15px;
-		font-size: 0.6rem!important;
-
-	}
-
-	#md{
-		display: none !important;
-	}
-
-	#sm{
-		display:block !important;
-	}
-
-	.search-filter{
-		display: none;
-	}
-
-	#doctorsm{
-		margin-top: 20px;
-	}
-
-	.doc-info-cont
-	{
-		margin-top: -20px;
-	}
-
-	.header-navbar-rht{
-		display: block;
-	}
-	.booking-doc-img{
-		width: 40% !important;
-	}
-
-	.header-login{
-		display: block;
-		position: absolute;
-		width:80px;
-		font-size: 0.5rem;
-	}
-
-	.main-nav{
-		position: static;
-	}
-
-	.bell{
-		position: absolute;
-		right: 5%;
-	}
-
-	.hideinphone{
-		position: absolute;
-		right: 0%;
-	}
-	
-	
-
-	.profile-drop{
-		position: absolute;
-	    left: -115px;
-    top: 73px;
-
-	}
-
-	
-	.phoneul{
-		position: absolute;
-		top:75px;
-		width: 220px;
-		right: 0%;
-		border:1px solid lightgrey;
-		/* padding-bottom: 20px; */
-		/* padding-top: 20px; */
-	}
-	.phoneul li a{
-		background-color: white;
-		color: black;
-	}
-
-	
-
-	.arrow{
-		display: none;
-	}
-
-	.user-menu{
-		position: absolute;
-		right: 0%;
-		top: 10px;
-	}
-	.search-box form {
-		display: block;
-	}
-	.search-box .search-location {
-		width: 100%;
-		-ms-flex: none;
-		flex: none;
-	}
-	.search-box .search-info {
-		width: 100%;
-		-ms-flex: none;
-		flex: none;
-	}
-	.banner-wrapper .banner-header h1 {
-		font-size: 28px;
-	}
-	.slick-next {
-		right: 0px;
-	}
-	.section-header h2 {
-		font-size: 1.5rem;
-	}
-	.section-header .sub-title {
-		font-size: 0.875rem;
-	}
-	.speicality-item p {
-		font-size: 0.875rem;
-	}
-	.section-header p {
-		font-size: 0.9375rem;
-	}
-	.footer-title {
-		font-size: 1.125rem;
-	}
-	.booking-schedule.schedule-widget {
-		/* overflow-x: auto; */
-	}
-	.booking-schedule.schedule-widget > div {
-		/* width: 730px; */
-	}
-	.booking-schedule .day-slot ul {
-		/* display: -webkit-box;
+        margin-left: 35px;
+    }
+    .navbar-brand.logo img {
+        margin-top: 18px;
+        height: 40px;
+        width: 110px;
+        margin-left: 10px;
+        padding-right: 0px;
+        ;
+    }
+    #nots-warn {
+        margin-left: 15px;
+        font-size: 0.6rem!important;
+    }
+    #md {
+        display: none !important;
+    }
+    #sm {
+        display: block !important;
+    }
+    .search-filter {
+        display: none;
+    }
+    #doctorsm {
+        margin-top: 20px;
+    }
+    .doc-info-cont {
+        margin-top: -20px;
+    }
+    .header-navbar-rht {
+        display: block;
+    }
+    .booking-doc-img {
+        width: 40% !important;
+    }
+    .header-login {
+        display: block;
+        position: absolute;
+        width: 80px;
+        font-size: 0.5rem;
+    }
+    .main-nav {
+        position: static;
+    }
+    .bell {
+        position: absolute;
+        right: 5%;
+    }
+    .hideinphone {
+        position: absolute;
+        right: 0%;
+    }
+    .profile-drop {
+        position: absolute;
+        left: -115px;
+        top: 73px;
+    }
+    .phoneul {
+        position: absolute;
+        top: 75px;
+        width: 220px;
+        right: 0%;
+        border: 1px solid lightgrey;
+        /* padding-bottom: 20px; */
+        /* padding-top: 20px; */
+    }
+    .phoneul li a {
+        background-color: white;
+        color: black;
+    }
+    .arrow {
+        display: none;
+    }
+    .user-menu {
+        position: absolute;
+        right: 0%;
+        top: 10px;
+    }
+    .search-box form {
+        display: block;
+    }
+    .search-box .search-location {
+        width: 100%;
+        -ms-flex: none;
+        flex: none;
+    }
+    .search-box .search-info {
+        width: 100%;
+        -ms-flex: none;
+        flex: none;
+    }
+    .banner-wrapper .banner-header h1 {
+        font-size: 28px;
+    }
+    .slick-next {
+        right: 0px;
+    }
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    .section-header .sub-title {
+        font-size: 0.875rem;
+    }
+    .speicality-item p {
+        font-size: 0.875rem;
+    }
+    .section-header p {
+        font-size: 0.9375rem;
+    }
+    .footer-title {
+        font-size: 1.125rem;
+    }
+    .booking-schedule.schedule-widget {
+        /* overflow-x: auto; */
+    }
+    .booking-schedule.schedule-widget>div {
+        /* width: 730px; */
+    }
+    .booking-schedule .day-slot ul {
+        /* display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex; */
     }
@@ -7868,6 +7968,10 @@ html.menu-opened body {
         /* -ms-flex: 0 0 90px;
 		flex: 0 0 100px;
 		width: 100px; */
+    }
+    .behave {
+        /* padding: 0px; */
+        margin: 0;
     }
     #inclinic {
         padding: 0px 0px;
@@ -7893,12 +7997,30 @@ html.menu-opened body {
         padding-right: 5px;
         width: 100%;
     }
+    .font-li {
+        padding: 0px 0px;
+    }
+    .description {
+        margin-top: 0px !important;
+    }
+    .spec-heading {
+        margin: 14px 3px -2px 3px;
+        padding: 0px 15px 18px 25px;
+        font-size: 24px;
+    }
     .day-slot li {
         float: left;
         padding-left: 5px;
         padding-right: 5px;
         text-align: center;
         width: 100%;
+    }
+    .across {
+        margin: -12px 0px 0px 27px;
+        font-size: 14px;
+        color: #787887;
+        line-height: 1rem;
+        font-family: cursive;
     }
     .booking-doc-info .booking-doc-img {
         width: 70px;
@@ -8392,14 +8514,15 @@ h1 {
     display: flex !important;
 }
 
-
-.displayNone{
-	display: none !important;
+.displayNone {
+    display: none !important;
 }
 
-#sm{
-	display: none;
+#sm {
+    display: none;
 }
+
+
 /* control image height */
 
 .card-img-top-250 {
