@@ -393,7 +393,7 @@
                                 <li class="breadcrumb-item active" aria-current="page"><a href="/settings">Settings</a></li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Change Password</h2>
+                        <h2 class="breadcrumb-title">Notification Settings</h2>
                     </div>
                 </div>
             </div>
@@ -412,42 +412,119 @@
                     
                     <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
                         <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
-                            <li><a href="/doctor-change-password"><b>Change Password</b></a></li>
-                            <li><a href="/notification-settings">Notification Settings</a></li>
+                            <li><a href="/doctor-change-password">Change Password</a></li>
+                            <li><a href="/notification-settings"></a><b>Notification Settings</b></li>
                             <li><a href="/active-device">Active Devices</a></li>
                             <li><a href="/delete-account">Delete Account</a></li>
                             <li><a href="/user/logout" style="color: red;">Logout</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-10 col-lg-8 col-xl-9 settings-content change-pass-content" style="margin-left:-15px;border-left: 0.5px solid lighgrey;">
-                        <div class="card change-pass-card" style="border-radius: 0;border:0;">
+                    <div class="col-md-10 col-lg-10 col-xl-10 settings-content change-pass-content" style="margin-left:-20px;border-left: 0.5px solid lighgrey;">
+                        <div class="card change-pass-card" style="border-radius: 0;order:0;">
                             <div class="card-body" style="padding: 2.2rem;">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-6">
-
+                                    <div class="col-md-12 col-lg-12">
+                                        <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Email Settings</h3>
+                                        <p style="margin-top: 30px;font-size: 0.9rem;margin-bottom: 30px;">You are currently receiving all promotional communications on <b><%=locals.user.email%> </b><a href="#">(Change)</a></p>
                                         <!-- Change Password Form -->
                                         <form action="/user/doc-change-password" method="POST">
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">Old Password</label>
-                                                <input type="password" name="old" class="form-control" style="min-height: 0px!important;">
-                                                <input type="hidden" name="phone" value="<%=locals.user.phone%>">
+                                            <div class="col-md-3 nots-span" style="display: inline-flex;">
+                                                <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                <span><b><p style="margin-top: -5px;">I want to receive:</p></b>
+                                                    <p style="margin-top: -10px; font-size: 0.8rem;">You can disable these at any time</p></span>
+                                                
                                             </div>
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">New Password</label>
-                                                <input type="password" name="password" class="form-control" style="min-height: 0px!important;">
+                                            <div class="col-md-5 nots-span" style="display: inline-flex; flex-direction: column;">
+                                                <div style="display:inline-flex; margin-bottom: 30px;">
+                                             <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                <span><b><p style="margin-top: -5px;">Announcements</p></b>
+                                                    <p style="margin-top: -10px; font-size: 0.8rem;">Most important updates on new and exciting products. Sent around once in a month.</p></span></br>
+                                                    </div>
+                                                    <div style="display:inline-flex;margin-bottom: 30px;">
+                                                    <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                    <span><b><p style="margin-top: -5px;">Savings</p></b>
+                                                        <p style="margin-top: -10px; font-size: 0.8rem;">Get exclusive discounts and offers to save money on your healthcare bill. Sent usually once in 15 days.</p></span>
+                                                    </div>
+                                                    <div style="display:inline-flex;margin-bottom: 30px;">
+                                                        <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                        <span><b><p style="margin-top: -5px;">Feedback</p></b>
+                                                            <p style="margin-top: -10px; font-size: 0.8rem;">Get beta invitations, surveys and feedback forms, for sharing your suggestions. Sent once in a month.</p></span>
+                                                        </div>
+                                                
                                             </div>
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">Confirm Password</label>
-                                                <input type="password" name="confirm" class="form-control"style="min-height: 0px!important;">
+                                            <div class="col-md-3 nots-span" style="display: inline-flex; flex-direction: column;">
+                                                <div style="display:inline-flex; margin-bottom: 30px;">
+                                             <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                <span><b><p style="margin-top: -5px;">Health Tips</p></b>
+                                                    <p style="margin-top: -10px; font-size: 0.8rem;">Get the most insightful health tips and articles from verified doctors. Sent 1-2 times per week.</p></span></br>
+                                                    </div>
+                                                    <div style="display:inline-flex;margin-bottom: 30px;">
+                                                    <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                    <span><b><p style="margin-top: -5px;">Informational</p></b>
+                                                        <p style="margin-top: -10px; font-size: 0.8rem;">Get to know what's the latest through our newsletters, product updates and more! Sent once in a week.</p></span>
+                                                    </div>
+                                                    
+                                                
                                             </div>
-                                            <div class="submit-section">
-                                                <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                                           
+                                        <!-- /Change Password Form -->
+
+                                    </div>
+                                    <div class="col-md-12 col-lg-12"style="border-bottom: 1px solid grey;">
+                                        <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">SMS Settings</h3>
+                                        <p style="margin-top: 30px;font-size: 0.9rem;margin-bottom: 30px;">You are currently receiving all promotional communications on <b>+91<%=locals.user.phone%> </b><a href="#">(Change)</a></p>
+                                        <!-- Change Password Form -->
+                                            <div class="col-md-3 nots-span" style="display: inline-flex;">
+                                                <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                <span><b><p style="margin-top: -5px;">I want to receive:</p></b>
+                                                    <p style="margin-top: -10px; font-size: 0.8rem;">You can disable these at any time</p></span>
+                                                
                                             </div>
+                                            <div class="col-md-5 nots-span" style="display: inline-flex; flex-direction: column;">
+                                                <div style="display:inline-flex; margin-bottom: 30px;">
+                                             <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                <span><b><p style="margin-top: -5px;">Announcements</p></b>
+                                                    <p style="margin-top: -10px; font-size: 0.8rem;">Most important updates on new and exciting products. Sent around once in a month.</p></span></br>
+                                                    </div>
+                                                    <div style="display:inline-flex;margin-bottom: 30px;">
+                                                    <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                    <span><b><p style="margin-top: -5px;">Savings</p></b>
+                                                        <p style="margin-top: -10px; font-size: 0.8rem;">Get exclusive discounts and offers to save money on your healthcare bill. Sent usually once in 15 days.</p></span>
+                                                    </div>
+                                                    <div style="display:inline-flex;margin-bottom: 30px;">
+                                                        <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                        <span><b><p style="margin-top: -5px;">Feedback</p></b>
+                                                            <p style="margin-top: -10px; font-size: 0.8rem;">Get beta invitations, surveys and feedback forms, for sharing your suggestions. Sent once in a month.</p></span>
+                                                        </div>
+                                                
+                                            </div>
+                                            <div class="col-md-3 nots-span" style="display: inline-flex; flex-direction: column;">
+                                                <div style="display:inline-flex; margin-bottom: 30px;">
+                                             <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                <span><b><p style="margin-top: -5px;">Health Tips</p></b>
+                                                    <p style="margin-top: -10px; font-size: 0.8rem;">Get the most insightful health tips and articles from verified doctors. Sent 1-2 times per week.</p></span></br>
+                                                    </div>
+                                                    <div style="display:inline-flex;margin-bottom: 30px;">
+                                                    <span style="margin-right: 15px;"><input type="checkbox" class="form-check" checked></span>
+                                                    <span><b><p style="margin-top: -5px;">Informational</p></b>
+                                                        <p style="margin-top: -10px; font-size: 0.8rem;">Get to know what's the latest through our newsletters, product updates and more! Sent once in a week.</p></span>
+                                                    </div>
+                                                    
+                                                
+                                            </div>
+                                           
                                         </form>
                                         <!-- /Change Password Form -->
 
                                     </div>
+
+                                   
                                 </div>
+                               
+                            </div>
+                            <input type="radio" style="margin-top:20px;margin-left: 20px;"><span style="font-size: 0.9rem;margin-top: -15px;margin-left: 45px;">I want to unsubscribe entirely</span>
+                            <div class="submit-section">
+                                <button type="submit" class="btn btn-primary submit-btn" style="margin-top: 50px;margin-left: 50px;margin-bottom: 50px;">Submit</button>
                             </div>
                         </div>
                     </div>

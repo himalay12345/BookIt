@@ -31,6 +31,7 @@
 
 
     <!-- Main CSS -->
+        <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
@@ -51,6 +52,7 @@
         <!-- Header -->
         <header class="header">
             <nav class="navbar navbar-expand-lg header-nav">
+                <div id="stylenavbar">
                 <div class="navbar-header">
                     <a id="mobile_btn" href="javascript:void(0);">
                         <span class="bar-icon">
@@ -59,29 +61,83 @@
                         <span></span>
                         </span>
                     </a>
-                    <a href="/index-2" class="navbar-brand logo">
-                        <img src="img/logo.png" class="img-fluid" alt="Logo">
+                    <a href="/" class="navbar-brand logo">
+                        <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
+
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
-                        <a href="/index-2" class="menu-logo">
-                            <img src="img/logo.png" class="img-fluid" alt="Logo">
+                        <a href="/" class="menu-logo">
+                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
                             <i class="fas fa-times"></i>
                         </a>
                     </div>
                     <ul class="main-nav">
-                        <li>
-                            <a href="/index-2">Home</a>
+                        <li class="active" style="display: none;">
+                            <a href="index" style="font-size: 1.5rem;">Home</a>
+                            
+                        </li>
+                        <li class="mdlist">
+                            <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
+                            <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
                         </li>
 
-
-
-                        <li class="login-link">
-                            <a href="/login">Login / Signup</a>
+                        <li class="smlist" style="display: none;">
+                            <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
                         </li>
+                        <li class="smlist" style="display: none;">
+                            <a><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
+                        </li>
+                        <li class="smlist" style="display: none;">
+                            <a><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
+                        </li>
+
+                        <li class="mdlist">
+                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Consult</a>
+                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Consult with best doctors</a>
+                        </li>
+                        <li class="mdlist">
+                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Diagonistics</a>
+                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book tests and checkups</a>
+                        </li>
+                       
+
+
+
+                        <li class="has-submenu" style="display: none;">
+                            <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
+                            <ul class="submenu">
+                                <li><a href="/voice-call">Voice Call</a></li>
+                                <li><a href="/video-call">Video Call</a></li>
+                                <li><a href="/consult">consult</a></li>
+                                <li><a href="/search">Search Doctors</a></li>
+                                <li><a href="/calendar">Calendar</a></li>
+                                <li><a href="/components">Components</a></li>
+                                <li class="has-submenu">
+                                    <a href="invoices">Invoices</a>
+                                    <ul class="submenu">
+                                        <li><a href="/invoices">Invoices</a></li>
+                                        <li><a href="/invoice-view">Invoice View</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/blank-page">Starter Page</a></li>
+                                <li><a href="/login">Login</a></li>
+                                <li><a href="/register">Register</a></li>
+                                <li><a href="/forgot-password">Forgot Password</a></li>
+                            </ul>
+                        </li>
+
+                        <%if(locals.user){%>
+
+
+                            <%}else{%>
+                                <li class="login-link">
+                                    <a href="/login">Login / Signup</a>
+                                </li>
+                                <%}%>
                     </ul>
                 </div>
                 <ul class="nav header-navbar-rht">
@@ -94,34 +150,251 @@
                             <p class="contact-info-header"> +1 315 369 5943</p>
                         </div>
                     </li>
+                    <%if(locals.user){%>
 
+                        <%}else{%>
+                            <li class="nav-item">
+                                <a class="nav-link header-login" href="/login">Login </a>
+                            </li>
+                            <%}%>
                 </ul>
-                <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
-                    <ul class="main-nav amain-nav">
-                        <li class="has-submenu ahas-submenu">
-                            <a href="#">
-                                <span class="user-img">
-								<img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-							</span>
-                                <i class="fas fa-chevron-down"></i>
+                <%if(locals.user){%>
+                    <ul class="nav user-menu mt-md-3">
+
+                        <!-- Notifications -->
+                        <li class="nav-item dropdown noti-dropdown bell">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <i class="far fa-bell" style="color: black; "></i> <span class="badge badge-pill">1</span>
                             </a>
+                            <div class="dropdown-menu notifications">
+                                <div class="topnav-dropdown-header">
+                                    <span class="notification-title">Notifications</span>
+                                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                                </div>
+                                <div class="noti-content">
+                                    <ul class="notification-list">
+                                        <%if(locals.user.approve == true){%>
 
-                            <ul class="submenu asubmenu">
-
-
-
-
-                                <li><a href="/user/logout">Logout</a></li>
-                            </ul>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <%}%>
+                                                <!-- <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient1.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
+                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient2.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $215 for his <span class="noti-title">appointment</span></p>
+                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient3.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
+                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li> -->
+                                    </ul>
+                                </div>
+                                <div class="topnav-dropdown-footer">
+                                    <a href="#">View all Notifications</a>
+                                </div>
+                            </div>
                         </li>
+                        <!-- /Notifications -->
+
+                        <!-- User Menu -->
+                        <%if(locals.user.type == 'Doctor'){%>
+                            <li class="nav-item dropdown has-arrow">
+                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" width="31" alt="Ryan Taylor"></span>
+                                </a>
+                                <div class="dropdown-menu profile-drop">
+                                    <div class="user-header">
+                                        <div class="avatar avatar-sm">
+                                            <img src="<%=locals.user.avatar%> " alt="User Image" class="avatar-img rounded-circle">
+                                        </div>
+                                        <div class="user-text">
+                                            <h6>Dr.
+                                                <%=locals.user.name%>
+                                            </h6>
+                                            <p class="text-muted mb-0">Doctor</p>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="/profile">My Profile</a>
+                                    <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                    <a class="dropdown-item" href="/appointments">Appointments</a>
+                                    <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+
+                                    <a class="dropdown-item" href="/settings">Settings</a>
+                                    <a class="dropdown-item" href="/user/logout">Logout</a>
+                                </div>
+                            </li>
+                            <%}%>
+                                <%if(locals.user.type == 'Patient'){%>
+                                    <li class="nav-item dropdown has-arrow">
+                                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " width="31" alt="Ryan Taylor"></span>
+                                        </a>
+                                        <div class="dropdown-menu profile-drop">
+                                            <div class="user-header">
+                                                <div class="avatar avatar-sm">
+                                                    <img src="<%=locals.user.avatar%>" alt="User Image" class="avatar-img rounded-circle">
+                                                </div>
+                                                <div class="user-text">
+                                                    <h6>
+                                                        <%=locals.user.name%>
+                                                    </h6>
+                                                    <p class="text-muted mb-0">Patient</p>
+                                                </div>
+                                            </div>
+
+                                            <a class="dropdown-item" href="/profile">My Profile</a>
+                                            <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
+                                            <a class="dropdown-item" href="/chat">Messages</a>
+                                            <a class="dropdown-item" href="/favourites">My Favourites</a>
+                                            <a class="dropdown-item" href="/settings">Settings</a>
+                                            <a class="dropdown-item" href="/user/logout">Logout</a>
+                                        </div>
+                                    </li>
+                                    <%}%>
+
+                                        <!-- /User Menu -->
+
                     </ul>
+                    <%}%>
+
+                        <!-- <%if(locals.user){%>
+                    <%if(locals.user.type == 'Doctor'){%>
+                        <div class="hideinphone" style="margin-left: 25px;">
+                            <ul class="main-nav amain-nav">
+
+                                        <li class="has-submenu ahas-submenu">
+                                            <a href="#">
+                                                <span class="user-img">
+                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                            </span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+
+                                    <ul class="submenu asubmenun phoneul">
+                                        <li><a href="/doctor-dashboard">My Dashboard</a></li>
+                                        <li><a href="/appointments">Appointments</a></li>
+                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
+                                        <li><a href="/chat-doctor">Chat</a></li>
+                                        
+                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
+                                        
+                                        <li><a href="/user/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    <%}%>
+                <%if(locals.user.type == 'Patient'){%>
+                    <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                        <ul class="main-nav amain-nav">
+                            <li class="has-submenu ahas-submenu">
+                                <a href="#">
+                                    <span class="user-img">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
+                    </span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+
+                                <ul class="submenu asubmenu">
+                                    <li><a href="/search">Search Doctor</a></li>
+                                    <li><a href="/booking">Booking</a></li>
+                                    <li><a href="/checkout">Checkout</a></li>
+                                    <li><a href="/booking-success">Booking Success</a></li>
+                                    <li><a href="/patient-dashboard">My Dashboard</a></li>
+                                    <li><a href="/favourites">My Favourites</a></li>
+                                    <li><a href="/chat">Messages</a></li>
+                                    <li><a href="/profile-settings">Profile Settings</a></li>
+                                    <li><a href="/change-password">Change Password</a></li>
+                                    <li><a href="/user/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                <%}%> -->
                 </div>
             </nav>
         </header>
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar ">
+        <div class="breadcrumb-bar " style=" margin-top: 20px;">
             <div class="container-fluid ">
                 <div class="row align-items-center ">
                     <div class="col-md-12 col-12 ">
@@ -140,69 +413,15 @@
 
         <!-- Page Content -->
         <div class="content ">
-            <div class="container-fluid ">
+            <div class="container-fluid" style="padding: 0px 30px;">
 
                 <div class="row ">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar ">
-
-                        <!-- Profile Sidebar -->
-                        <div class="profile-sidebar ">
-                            <div class="widget-profile pro-widget-content ">
-                                <div class="profile-info-widget ">
-                                    <a href="# " class="booking-doc-img ">
-											<img src="<%=locals.user.avatar%>"onerror='this.src="/img/profile.png"' alt="User Image">
-                                    </a>
-                                    <div class="profile-det-info">
-                                        <h3>
-                                            <%=locals.user.name%>
-                                        </h3>
-
-                                        <!-- <h4 style="font-size: 0.9rem;"> <%=locals.user.department%></h4> -->
-                                        <h5 style="font-size: 0.8rem;">
-                                            <%if(locals.user.education.length == 1){%>
-                                                <%=locals.user.education.degree%>
-                                                    <%}%>
-                                                        <%if(locals.user.education.length > 1){for(deg of locals.user.education){%>
-                                                            <%=deg.degree%>
-                                                                <%}}%>
-                                        </h5>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashboard-widget">
-                                <nav class="dashboard-menu">
-                                    <ul>
-                                        <li>
-                                            <a href="/doctor-dashboard">
-                                                <i class="fas fa-columns"></i>
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
+                  
 
 
-
-
-
-
-
-
-
-
-
-
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <!-- /Profile Sidebar -->
-
-                    </div>
-
-
-                    <div class="col-md-7 col-lg-8 col-xl-9">
+                    <div class="col-md-12 col-lg-12 col-xl-12">
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <strong>Note!</strong> Please fill all the fields if you want to start online <a href="#" class="alert-link">booking appointment service.</a>
+                            <strong>Note!</strong> Please fill all the required fields if you want to start online <a href="#" class="alert-link">booking appointment service.</a>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -229,31 +448,31 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label> Name <span class="text-danger">*</span></label>
-                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>">
+                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>" required>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Email <span class="text-danger"></span></label>
-                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>">
+                                                <label>Email <span class="text-danger">*</span></label>
+                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>" required>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Mobile Number <span class="text-danger">*</span></label>
-                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control">
+                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
+                                        <div class="col-12 col-md-4">
                                             <div class="form-group">
-                                                <label>Gender</label>
-                                                <select name="gender" class="form-control select">
+                                                <label>Gender <span class="text-danger">*</span></label>
+                                                <select name="gender" class="form-control select" required>
                                                     <%if(locals.user.gender == 'Male'){%><option selected>Male</option><%}else{%>
                                                     <option>Male</option><%}%>
                                                     <%if(locals.user.gender == 'Female'){%><option selected>Female</option><%}else{%>
@@ -263,11 +482,11 @@
 													</select>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
+                                        <div class="col-12 col-md-4">
                                             <div class="form-group">
-                                                <label>Date of Birth</label>
+                                                <label>Date of Birth<span class="text-danger">*</span></label>
                                                 <div class="cal-icon">
-                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>">
+                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -286,10 +505,10 @@
                             <!-- /Basic Information -->
 
                             <!-- About Me -->
-                            <div class="col-12 col-md-6" style="margin-left: -10px;">
+                            <div class="col-12 col-md-4" style="margin-left: -10px;">
                                 <div class="form-group">
-                                    <label>Department</label>
-                                    <select name="department" class="form-control select">
+                                    <label>Department<span class="text-danger">*</span></label>
+                                    <select name="department" class="form-control select" required>
 									<%if(locals.user.department == 'General Physician'){%><option selected>General Physician</option><%}else{%>
 									<option>General Physician</option><%}%>
 									<%if(locals.user.department == 'Ophthalmology'){%><option selected>Ophthalmology</option><%}else{%>
@@ -371,18 +590,18 @@
                             <!-- Clinic Info -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Clinic Info</h4>
+                                    <h4 class="card-title">Clinic Info<span class="text-danger">*</span></h4>
                                     <div class="row form-row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Clinic Name</label>
-                                                <input type="text" placeholder="Enter the Name" name="clinicname" class="form-control" value="<%=locals.user.clinicname%>">
+                                                <input type="text" placeholder="Enter the Name" name="clinicname" class="form-control" value="<%=locals.user.clinicname%>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Clinic Address</label>
-                                                <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>">
+                                                <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>" required>
                                             </div>
                                         </div>
 
@@ -426,38 +645,38 @@
                             <!-- Contact Details -->
                             <div class="card contact-card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Contact Details</h4>
+                                    <h4 class="card-title">Contact Details<span class="text-danger">*</span></h4>
                                     <div class="row form-row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.contacts.address%>">
+                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.contacts.address%>" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">City</label>
-                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>">
+                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">State / Province</label>
-                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>">
+                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Country</label>
-                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.contacts.country%>">
+                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.contacts.country%>" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Postal Code</label>
-                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>">
+                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -471,15 +690,15 @@
                             <!-- Services and Specialization -->
                             <div class="card services-card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Services and Specialization</h4>
+                                    <h4 class="card-title">Services and Specialization<span class="text-danger">*</span></h4>
                                     <div class="form-group">
                                         <label>Services</label>
-                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services">
+                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services" required>
                                         <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
                                     </div>
                                     <div class="form-group mb-0">
                                         <label>Specialization </label>
-                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist">
+                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist" required>
                                         <small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
                                     </div>
                                 </div>
@@ -489,7 +708,7 @@
                             <!-- Education -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Education</h4>
+                                    <h4 class="card-title">Education<span class="text-danger">*</span></h4>
                                     <div class="education-info">
                                         <%if(locals.user.education.length == 0){%>
                                             <div class="row form-row education-cont">
@@ -498,19 +717,19 @@
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Degree</label>
-                                                                <input type="text" name="degree" placeholder="Enter Degree" class="form-control">
+                                                                <input type="text" name="degree" placeholder="Enter Degree" class="form-control" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>College/Institute</label>
-                                                                <input type="text" name="college" placeholder="Enter College/Institute" class="form-control">
+                                                                <input type="text" name="college" placeholder="Enter College/Institute" class="form-control" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Year of Completion</label>
-                                                                <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control">
+                                                                <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -524,19 +743,19 @@
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>Degree</label>
-                                                                        <input type="text" value="<%=temp.degree%>" class="form-control">
+                                                                        <input type="text" value="<%=temp.degree%>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>College/Institute</label>
-                                                                        <input type="text" value="<%=temp.college%>" class="form-control">
+                                                                        <input type="text" value="<%=temp.college%>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>Year of Completion</label>
-                                                                        <input type="text" value="<%=temp.yoc%>" class="form-control">
+                                                                        <input type="text" value="<%=temp.yoc%>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -558,7 +777,7 @@
                             <!-- Experience -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Experience</h4>
+                                    <h4 class="card-title">Experience<span class="text-danger">*</span></h4>
                                     <div class="experience-info">
                                         <%if(locals.user.experience.length == 0){%>
                                             <div class="row form-row experience-cont">
@@ -567,25 +786,25 @@
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Institution Name</label>
-                                                                <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="">
+                                                                <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>From</label>
-                                                                <input type="Number" placeholder="From" name="from" value="" class="form-control">
+                                                                <input type="Number" placeholder="From" name="from" value="" class="form-control" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>To</label>
-                                                                <input type="Number" placeholder="To" name="to" value="" class="form-control">
+                                                                <input type="Number" placeholder="To" name="to" value="" class="form-control" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Designation</label>
-                                                                <input type="text" placeholder="Designation" name="designation" class="form-control" value="">
+                                                                <input type="text" placeholder="Designation" name="designation" class="form-control" value="" required>
 
                                                             </div>
                                                         </div>
@@ -695,20 +914,20 @@
                             <!-- Registrations -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Registrations</h4>
+                                    <h4 class="card-title">Registrations <span class="text-danger">*</span></h4>
                                     <div class="registrations-info">
                                         <%if(locals.user.registrations.length == 0){%>
                                             <div class="row form-row reg-cont">
                                                 <div class="col-12 col-md-5">
                                                     <div class="form-group">
                                                         <label>Registrations</label>
-                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="" class="form-control">
+                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="" class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-5">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="text" placeholder="Enter Year" name="regYear" value="" class="form-control">
+                                                        <input type="text" placeholder="Enter Year" name="regYear" value="" class="form-control" required>
                                                     </div>
                                                 </div>
                                             </div>

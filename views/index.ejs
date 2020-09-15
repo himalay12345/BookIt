@@ -9,23 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>Doccure</title>
 
-    <!-- Favicons -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <!------ Include the above in your HEAD tag ---------->
-
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <link type="image/x-icon" href="/img/favicon.png" rel="icon">
-
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <!-- Favicons-->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -34,29 +18,11 @@
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
 
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
-    <!-- <link rel="stylesheet" href="//css/font-awesome.min.css"> -->
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/css/style1.css">
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
-    <!------ Include the above in your HEAD tag ---------->
-
-
-
-
     <link rel="stylesheet" href="/css/style.css">
-    <!-- <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-			<script src="/js/html5shiv.min.js"></script>
-			<script src="/js/respond.min.js"></script>
-		<![endif]-->
+  
 
 </head>
 
@@ -68,6 +34,7 @@
         <!-- Header -->
         <header class="header">
             <nav class="navbar navbar-expand-lg header-nav">
+                <div id="stylenavbar">
                 <div class="navbar-header">
                     <a id="mobile_btn" href="javascript:void(0);">
                         <span class="bar-icon">
@@ -76,14 +43,14 @@
                         <span></span>
                         </span>
                     </a>
-                    <a href="/index-2" class="navbar-brand logo">
+                    <a href="/" class="navbar-brand logo">
                         <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
 
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
-                        <a href="/index-2" class="menu-logo">
+                        <a href="/" class="menu-logo">
                             <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -91,12 +58,38 @@
                         </a>
                     </div>
                     <ul class="main-nav">
-                        <li class="active">
-                            <a href="index-2">Home</a>
+                        <li class="active" style="display: none;">
+                            <a href="index" style="font-size: 1.5rem;">Home</a>
+                            
+                        </li>
+                        <li class="mdlist">
+                            <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
+                            <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
                         </li>
 
+                        <li class="smlist" style="display: none;">
+                            <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
+                        </li>
+                        <li class="smlist" style="display: none;">
+                            <a><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
+                        </li>
+                        <li class="smlist" style="display: none;">
+                            <a><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
+                        </li>
 
-                        <li class="has-submenu">
+                        <li class="mdlist">
+                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Consult</a>
+                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Consult with best doctors</a>
+                        </li>
+                        <li class="mdlist">
+                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Diagonistics</a>
+                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book tests and checkups</a>
+                        </li>
+                       
+
+
+
+                        <li class="has-submenu" style="display: none;">
                             <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
                             <ul class="submenu">
                                 <li><a href="/voice-call">Voice Call</a></li>
@@ -148,7 +141,7 @@
                             <%}%>
                 </ul>
                 <%if(locals.user){%>
-                    <ul class="nav user-menu">
+                    <ul class="nav user-menu mt-md-3">
 
                         <!-- Notifications -->
                         <li class="nav-item dropdown noti-dropdown bell">
@@ -172,9 +165,39 @@
                                                     </span>
                                                         <div class="media-body">
                                                             <a href="/doctor-terms-and-condition">
-                                                                <p class="noti-details"><span class="noti-title"></span>
-
-                                                                    <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
                                                                 </p>
                                                             </a>
                                                             <p class="noti-time"><span class="notification-time"></span></p>
@@ -249,7 +272,7 @@
                                             <p class="text-muted mb-0">Doctor</p>
                                         </div>
                                     </div>
-                                    <a class="dropdown-item" href="/profile">My Profile</a>
+                                    <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
                                     <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
                                     <a class="dropdown-item" href="/appointments">Appointments</a>
                                     <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
@@ -347,12 +370,13 @@
                     </div>
                     <%}%>
                 <%}%> -->
+                </div>
             </nav>
         </header>
         <!-- /Header -->
 
         <!-- Home Banner -->
-        <section class="section section-search" style="margin-top: 150px;">
+        <section class="section section-search" style="margin-top: 20px;">
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <form action="/user/update-type" method="POST">
@@ -398,7 +422,7 @@
                 </div>
             </div>
         </section>
-        <!-- /Home Banner -->
+        <!-- / Banner -->
 
         <!-- Clinic and Specialities -->
         <section class="section section-specialities">
@@ -594,7 +618,7 @@
 
 
         <!-- Popular Section -->
-        <section class="section section-doctor">
+        <section class="section section-doctor" style="background-color: white;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4">

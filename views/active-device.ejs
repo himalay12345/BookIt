@@ -393,7 +393,7 @@
                                 <li class="breadcrumb-item active" aria-current="page"><a href="/settings">Settings</a></li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Change Password</h2>
+                        <h2 class="breadcrumb-title">Active Devices</h2>
                     </div>
                 </div>
             </div>
@@ -412,43 +412,35 @@
                     
                     <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
                         <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
-                            <li><a href="/doctor-change-password"><b>Change Password</b></a></li>
+                            <li><a href="/doctor-change-password">Change Password</a></li>
                             <li><a href="/notification-settings">Notification Settings</a></li>
-                            <li><a href="/active-device">Active Devices</a></li>
+                            <li><a href="/active-device"><b>Active Devices</b></a></li>
                             <li><a href="/delete-account">Delete Account</a></li>
                             <li><a href="/user/logout" style="color: red;">Logout</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-10 col-lg-8 col-xl-9 settings-content change-pass-content" style="margin-left:-15px;border-left: 0.5px solid lighgrey;">
+                    <div class="col-md-10 col-lg-10 col-xl-10 settings-content change-pass-content" style="margin-left:-20px;border-left: 0.5px solid lighgrey;">
                         <div class="card change-pass-card" style="border-radius: 0;border:0;">
                             <div class="card-body" style="padding: 2.2rem;">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-6">
-
+                                    <div class="col-md-12 col-lg-12">
+                                        <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Delete Account</h3>
+                                        <p style="margin-top: 30px;font-size: 0.9rem;margin-bottom: 30px;">Are you sure? This will permanently delete your Practo account.</p>
+                                        <p style="margin-top: -20px;font-size: 0.9rem;margin-bottom: 30px;">Once the deletion process begins, you won't be able to reactivate your account or retrieve any data or information.</p>
                                         <!-- Change Password Form -->
-                                        <form action="/user/doc-change-password" method="POST">
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">Old Password</label>
-                                                <input type="password" name="old" class="form-control" style="min-height: 0px!important;">
-                                                <input type="hidden" name="phone" value="<%=locals.user.phone%>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">New Password</label>
-                                                <input type="password" name="password" class="form-control" style="min-height: 0px!important;">
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">Confirm Password</label>
-                                                <input type="password" name="confirm" class="form-control"style="min-height: 0px!important;">
-                                            </div>
-                                            <div class="submit-section">
-                                                <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                            </div>
-                                        </form>
+                                       
                                         <!-- /Change Password Form -->
 
                                     </div>
+                                    <div class="col-md-12 col-lg-12" style="padding:8px 0px;border-top: 1px solid grey; border-bottom: 1px solid grey;">
+                                        <p style="font-size: 0.9rem;font-weight: bold;margin-left: 10px;margin-top: 5px;">Delete My Account</p>
+                                        </div>
+                                    
+                                   
                                 </div>
+                               
                             </div>
+                            
                         </div>
                     </div>
                 </div>

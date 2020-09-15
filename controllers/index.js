@@ -33,6 +33,13 @@ module.exports.accountSetting = (req, res) => {
     })
 }
 
+module.exports.activeDevice = (req, res) => {
+    return res.render('active-device', {
+        title: 'Account Settings'
+    })
+}
+
+
 
 
 module.exports.Specialist = async function(req, res) {
@@ -155,6 +162,12 @@ module.exports.components = (req, res) => {
     })
 }
 
+module.exports.deleteAccount = (req, res) => {
+    return res.render('delete-acount', {
+        title: 'Delete Account'
+    })
+}
+
 module.exports.doctorChangePassword = (req, res) => {
     return res.render('doctor-change-password', {
         title: 'Change Password'
@@ -263,6 +276,12 @@ module.exports.myPatients = (req, res) => {
     })
 }
 
+module.exports.notificationSettings = (req, res) => {
+    return res.render('notification-settings', {
+        title: 'Notifications Settings'
+    })
+}
+
 module.exports.patientDashboard = async(req, res) => {
     let user = await User.findById(req.user.id)
     return res.render('patient-dashboard', {
@@ -305,6 +324,13 @@ module.exports.register = (req, res) => {
     }
     return res.render('phone-login', {
         title: 'Register'
+    })
+}
+
+module.exports.settings = (req, res) =>
+{
+    return res.render('settings', {
+        title: 'Settings'
     })
 }
 

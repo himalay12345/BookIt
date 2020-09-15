@@ -58,13 +58,32 @@
 .header{
 	position: relative;
 }
+
+.nots-span span p{
+font-size: 0.9rem;
+
+}
+
+.settings-content{
+    padding-left: 20px;
+}
+
+.settings>ul>li{
+    padding:8px;
+    font-size: 0.95rem;
+}
+
+.stylenavbar{
+    position:relative;
+    display: inline-flex;
+}
 .booking-doc-img{
 	width: 10% !important;
 }
 
 .bell{
 	position: absolute;
-    right: 104%;
+    margin-right: 30px;
 }
 
 #inclinic {
@@ -75,6 +94,10 @@
     position: relative;
 }
 
+#hero{
+    display: none;
+}
+
 .bell {
     position: absolute;
     right: 104%;
@@ -83,7 +106,7 @@
 .profile-drop {
     position: absolute;
     left: -115px;
-    top: 71px;
+    top: 67px;
 }
 
 .material-icons {
@@ -2079,9 +2102,9 @@ button.bg-danger:hover {
     display: flex;
     list-style: none;
     position: absolute;
-    left: 25%;
-    top: 0;
-    margin: 0;
+    left: 20%;
+    top: 50px;
+    /* margin-top: 50px; */
     padding: 0;
 }
 
@@ -2100,6 +2123,11 @@ button.bg-danger:hover {
     transition: all .35s ease;
     width: 100%;
     border-top: 1px solid #f0f0f0;
+}
+
+.main-nav>li{
+    margin-top: -50px;
+
 }
 
 .main-nav>li .submenu>li.has-submenu>a::after {
@@ -2173,7 +2201,8 @@ button.bg-danger:hover {
 
 .header-navbar-rht {
     position: absolute;
-    right: 25%;
+    right: 23%;
+    top: 25px;
     margin: 0;
     margin-left: auto;
     padding: 0;
@@ -2248,6 +2277,9 @@ button.bg-danger:hover {
 
 .header-navbar-rht li a.header-login {
     border: 2px solid #09e5ab;
+    margin-left: 220px;
+    width: 150px;
+    position: absolute;
     border-radius: 4px;
     padding: 10px 15px !important;
     text-align: center;
@@ -2287,6 +2319,7 @@ button.bg-danger:hover {
 
 .user-menu {
     position: absolute;
+    top: 0px;
     right: 0%;
     float: right;
     margin: 0;
@@ -7093,7 +7126,7 @@ html.menu-opened body {
         padding: 0;
         -ms-flex-direction: column;
         flex-direction: column;
-        position: static;
+        /* position: static; */
         padding-left: 0;
         margin-bottom: 0;
         list-style: none;
@@ -7145,7 +7178,7 @@ html.menu-opened body {
     }
     .main-menu-wrapper {
         order: 3;
-        width: 260px;
+        width: 317px;
         position: fixed;
         top: 0;
         bottom: 0;
@@ -7153,7 +7186,7 @@ html.menu-opened body {
         overflow-x: hidden;
         overflow-y: auto;
         z-index: 1060;
-        transform: translateX(-260px);
+        transform: translateX(-317px);
         transition: all 0.4s;
         background-color: #15558d;
     }
@@ -7287,16 +7320,81 @@ html.menu-opened body {
         flex: 0 0 100%;
         max-width: 100%;
     }
-    .main-nav {
-        position: static;
+    
+    .menu-header{
+        height: 84px;
     }
+    .header-navbar-rht li a.header-login
+    {
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+
+    .main-nav{
+        position: static;
+        left: 0%;
+    }
+
+    .mdlist{
+        display: none;
+    }
+  
+    .smlist{
+        display: block !important;
+    }
+
+    .main-menu-wrapper {
+        order: 3;
+        width: 500px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        z-index: 1060;
+        transform: translateX(-500px);
+        transition: all 0.4s;
+        background-color: #15558d;
+    }
+    
+
+    .main-nav>li>a {
+        line-height: 1.5;
+        padding: 15px 20px !important;
+        color: #fff;
+        /* font-size: 25px; */
+        font-weight: 500;
+    }
+
+    .main-nav>li>a>span {
+        
+        color: #fff;
+        font-size: 1.1rem;
+     
+    }
+    .main-nav>li>a>b {
+        
+        color: #fff;
+        font-size: 1.4rem;
+     
+    }
+
+    .main-nav>li {
+        margin-top: 0px;
+    }
+    /* .main-nav {
+        position: absolute !important;
+    } */
 }
 
 @media only screen and (max-width: 767.98px) {
 	
-	.main-nav{
-		position: static;
-	}
+	/* .main-nav{
+        position: absolute !important;
+    } */
+    
+  
 	body {
 		font-size: 0.875rem;
 	}
@@ -7688,14 +7786,26 @@ html.menu-opened body {
 	}
 	.header-nav {
 		padding-left: 15px;
-		padding-right: 80px;
+        padding-right: 80px;
+        height: 62px;
 	}
 	.header-navbar-rht {
-		display: none;
-	}
+        display: none;
+    }
+    
+    .main-nav{
+        position: static;
+        left: 0%;
+    }
 	.main-nav li.login-link {
 		display: block;
-	}
+    }
+    
+    .main-nav>li{
+        margin-top: 0;
+    
+    }
+
 	.navbar-header {
 		width: 100%;
 	}
@@ -7714,10 +7824,20 @@ html.menu-opened body {
 		margin-left: 35px;
 	}
 	.navbar-brand.logo img {
-		margin-top: 10px;
-		height: 40px;
-		width:110px;
-	}
+        margin-top: 35px;
+        margin-left: 15px;
+        height: 40px;
+        width: 110px;
+    }
+
+    .header-navbar-rht li a.header-login
+    {
+        width:80px;
+        height: 40px;
+        margin-left: 20px;
+        margin-top: -20px;
+    }
+	
 
 	#nots-warn{
 		margin-left: 15px;
@@ -7758,15 +7878,14 @@ html.menu-opened body {
 		position: absolute;
 		width:80px;
 		font-size: 0.5rem;
-	}
-
-	.main-nav{
-		position: static;
-	}
+    }
+    
+   
 
 	.bell{
 		position: absolute;
-		right: 5%;
+        right: 62%;
+   
 	}
 
 	.hideinphone{
@@ -7778,10 +7897,18 @@ html.menu-opened body {
 
 	.profile-drop{
 		position: absolute;
-	    left: -115px;
-    top: 73px;
+	    left: -116px;
+    top: 60px;
 
-	}
+    }
+    
+  
+
+    /* #hero{
+        display: block;
+    } */
+
+
 
 	
 	.phoneul{
@@ -7796,8 +7923,15 @@ html.menu-opened body {
 	.phoneul li a{
 		background-color: white;
 		color: black;
-	}
-
+    }
+    
+    .mdlist{
+        display: none;
+    }
+  
+    .smlist{
+        display: block !important;
+    }
 	
 
 	.arrow{
@@ -7805,9 +7939,10 @@ html.menu-opened body {
 	}
 
 	.user-menu{
-		position: absolute;
-		right: 0%;
-		top: 10px;
+        position: absolute;
+        right: 0%;
+        top: 0px;
+        
 	}
 	.search-box form {
 		display: block;
@@ -7842,35 +7977,88 @@ html.menu-opened body {
 	}
 	.footer-title {
 		font-size: 1.125rem;
-	}
-	.booking-schedule.schedule-widget {
-		/* overflow-x: auto; */
-	}
-	.booking-schedule.schedule-widget > div {
-		/* width: 730px; */
-	}
-	.booking-schedule .day-slot ul {
-		/* display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex; */
     }
-    .booking-schedule .day-slot li {
-        /* -ms-flex: 0 0 100px;
-		flex: 0 0 100px;
-		width: 100px; */
+    
+    .notifications{
+        width: 317px;
+        left: -191px;
+        top: 61px !important;
     }
-    .booking-schedule .time-slot ul {
-        /* display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex; */
+
+      .main-nav>li>a>span {
+        
+        color: #fff;
+        font-size: 0.7rem;
+     
     }
-    .booking-schedule .time-slot li {
-        /* -ms-flex: 0 0 90px;
-		flex: 0 0 100px;
-		width: 100px; */
+    .main-nav>li>a>b {
+        
+        color: #fff;
+        font-size: 1rem;
+     
     }
+
     #inclinic {
         padding: 0px 0px;
+    }
+
+    .setting-bread{
+        margin-top: 0px !important;
+    }
+
+    .setting-bread h2{
+        margin-bottom: 10px !important;
+    }
+
+    .settings-content{
+        display: none;
+    }
+
+    .change-pass-content
+    {
+        display: block;
+    }
+
+    .pass-setting{
+        display:none;
+    }
+
+    .change-pass-card{
+        width: 115%;
+    margin-left: -15px;
+    }
+    .settings{
+        margin-left: 0 !important;
+        border-top: 1px solid lightgrey;
+        margin-top: 10px;
+    }
+   
+    .settings-header{
+        margin-top: -12px !important;
+        padding-left: 10px;
+        width:100% !important;
+    }
+
+    .settings>ul>li{
+        padding:15px;
+    }
+
+    .main-menu-wrapper {
+        order: 3;
+        width: 320px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        z-index: 1060;
+        transform: translateX(-320px);
+        transition: all 0.4s;
+        background-color: #15558d;
+    }
+    .menu-header{
+        height: 60px;
     }
     .booking-schedule .time-slot li .timing span {
         display: inline-block;
@@ -8204,8 +8392,47 @@ h1 {
     opacity: 0.55;
 }
 
+/* ------------------------------------------- */
+
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: 'Mada', sans-serif;
+    font-size: 1rem;
+    height: 100%;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Mada', sans-serif;
+    margin-top: 0;
+}
+
+a:hover,
+a:active,
+a:focus {
+    outline: none;
+    text-decoration: none;
+    color: #00d0f1;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
 .notifications {
     padding: 0;
+    left: -185px;
+    top: 69px;
 }
 
 .notifications .notification-time {
@@ -8215,7 +8442,7 @@ h1 {
 }
 
 .notifications .media {
-    margin-top: 0;
+    margin-top: -22px;
     border-bottom: 1px solid #f5f5f5;
 }
 
@@ -8285,7 +8512,7 @@ h1 {
 
 .noti-details {
     color: #989c9e;
-    margin-bottom: 0;
+    margin-top: -20px;
 }
 
 .noti-title {
@@ -8406,3 +8633,6 @@ h1 {
     max-height: 250px !important;
     overflow: hidden !important;
 }
+
+
+
