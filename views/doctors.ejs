@@ -210,7 +210,7 @@
                         <div class="card" id="doctorsm">
                             <div class="card-body">
                                 <%for(doctor of doctors){%>
-                                    <div class="doctor-widget">
+                                    <div class="doctor-widget pb-4 mb-2 pt-2" style="border-bottom: 1px solid lightgrey;">
                                         <div class="doc-info-left">
                                             <div class="doctor-img">
                                                 <a href="doctor-profile/?id=<%=doctor._id%>">
@@ -220,74 +220,74 @@
                                             <div class="doc-info-cont">
                                                 <div id="depinline" style="display: inline-flex;">
                                                     <div style="margin-right: 40px;">
-                                                <h4 class="doc-name">
-                                                    <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                        <%=doctor.name%>
-                                                    </a>
-                                                </h4>
-                                                <p class="doc-speciality">
-                                                    <%=doctor.department%>
+                                                        <h4 class="doc-name">
+                                                            <a href="doctor-profile/?id=<%=doctor._id%>">
+                                                                <%=doctor.name%>
+                                                            </a>
+                                                        </h4>
+                                                        <p class="doc-speciality">
+                                                            <%=doctor.department%>
 
-                                                </p>
-                                                </div>
-                                                <div>
-                                                <p class="doc-department">
-                                                    <% if(doctor.department== "General Physician"){ %>
+                                                        </p>
+                                                    </div>
+                                                    <div>
+                                                        <p class="doc-department">
+                                                            <% if(doctor.department== "General Physician"){ %>
 
-                                                        <img src="/img/specialities/physical.jfif" class="img-fluid" alt="Speciality">
-                                                        <% } %>
-
-                                                            <% if(doctor.department== "Ophthalmology"){ %>
-
-                                                                <img src="/img/specialities/eye.png" class="img-fluid" alt="Speciality">
+                                                                <img src="/img/specialities/physical.jfif" class="img-fluid" alt="Speciality">
                                                                 <% } %>
-                                                                    <% if(doctor.department== "Dermatology"){ %>
 
-                                                                        <img src="/img/specialities/hair.jpg" class="img-fluid" alt="Speciality">
+                                                                    <% if(doctor.department== "Ophthalmology"){ %>
+
+                                                                        <img src="/img/specialities/eye.png" class="img-fluid" alt="Speciality">
                                                                         <% } %>
-                                                                            <% if(doctor.department== "Paediatrics"){ %>
+                                                                            <% if(doctor.department== "Dermatology"){ %>
 
-                                                                                <img src="/img/specialities/child.jpg" class="img-fluid" alt="Speciality">
+                                                                                <img src="/img/specialities/hair.jpg" class="img-fluid" alt="Speciality">
                                                                                 <% } %>
-                                                                                    <% if(doctor.department== "Urology"){ %>
+                                                                                    <% if(doctor.department== "Paediatrics"){ %>
 
-                                                                                        <img src="/img/specialities/brain.png" class="img-fluid" alt="Speciality">
+                                                                                        <img src="/img/specialities/child.jpg" class="img-fluid" alt="Speciality">
                                                                                         <% } %>
-                                                                                            <% if(doctor.department== "Neurology"){ %>
+                                                                                            <% if(doctor.department== "Urology"){ %>
 
-                                                                                                <img src="/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
+                                                                                                <img src="/img/specialities/brain.png" class="img-fluid" alt="Speciality">
                                                                                                 <% } %>
-                                                                                                    <% if(doctor.department== "Orthopedic"){ %>
+                                                                                                    <% if(doctor.department== "Neurology"){ %>
 
-                                                                                                        <img src="/img/specialities/specialities.png" class="img-fluid" alt="Speciality">
+                                                                                                        <img src="/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
                                                                                                         <% } %>
-                                                                                                            <% if(doctor.department== "Cardiologist"){ %>
+                                                                                                            <% if(doctor.department== "Orthopedic"){ %>
 
-                                                                                                                <img src="/img/specialities/heart.jpg" class="img-fluid" alt="Speciality">
+                                                                                                                <img src="/img/specialities/specialities.png" class="img-fluid" alt="Speciality">
                                                                                                                 <% } %>
-                                                                                                                    <% if(doctor.department== "Dentist"){ %>
+                                                                                                                    <% if(doctor.department== "Cardiologist"){ %>
 
-                                                                                                                        <img src="/img/specialities/teeth.png" class="img-fluid" alt="Speciality">
+                                                                                                                        <img src="/img/specialities/heart.jpg" class="img-fluid" alt="Speciality">
                                                                                                                         <% } %>
-                                                                                                                            <%=doctor.department%>
+                                                                                                                            <% if(doctor.department== "Dentist"){ %>
 
-                                                </p>
-                                                <div class="rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <span class="d-inline-block average-rating">(17)</span>
+                                                                                                                                <img src="/img/specialities/teeth.png" class="img-fluid" alt="Speciality">
+                                                                                                                                <% } %>
+                                                                                                                                    <%=doctor.department%>
+
+                                                        </p>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <span class="d-inline-block average-rating">(17)</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                </div>
-                                            </div>
                                                 <div class="clinic-details">
                                                     <!-- <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
                                                         <%=doctor.contacts.city%>
                                                             <%=doctor.contacts.country%>
                                                     </p> -->
-                                            
+
                                                     <ul class="clinic-gallery" style="margin-top: 15px;">
                                                         <%for(doctorsclinic of doctor.clinicphoto){%>
                                                             <li>
@@ -327,32 +327,34 @@
                                             </div>
                                             <div class="doctor-action">
                                                 <%var flag = false;%>
-                                                    <%for(fav of locals.user.favourites){
+                                                    <%if(locals.user){%>
+                                                        <%for(fav of locals.user.favourites){
                                                         
                                                        
                                                     if(fav.toString() == doctor._id)flag = true;%>
 
-                                                        <%}%>
+                                                            <%}%>
+                                                                <%}%>
 
-                                                            <%if(flag){%>
-                                                                <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn" style="background-color: red;">
-                                                                    <i class="far fa-bookmark" style="color:white;"></i>
-                                                                </a>
-                                                                <%}else{%>
-                                                                    <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn">
-                                                                        <i class="far fa-bookmark"></i>
-                                                                    </a>
-                                                                    <%}%>
+                                                                    <%if(flag){%>
+                                                                        <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn" style="background-color: red;">
+                                                                            <i class="far fa-bookmark" style="color:white;"></i>
+                                                                        </a>
+                                                                        <%}else{%>
+                                                                            <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn">
+                                                                                <i class="far fa-bookmark"></i>
+                                                                            </a>
+                                                                            <%}%>
 
-                                                                        <a href="/chat" class="btn btn-white msg-btn">
-                                                                            <i class="far fa-comment-alt"></i>
-                                                                        </a>
-                                                                        <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-                                                                            <i class="fas fa-phone"></i>
-                                                                        </a>
-                                                                        <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-                                                                            <i class="fas fa-video"></i>
-                                                                        </a>
+                                                                                <a href="/chat" class="btn btn-white msg-btn">
+                                                                                    <i class="far fa-comment-alt"></i>
+                                                                                </a>
+                                                                                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+                                                                                    <i class="fas fa-phone"></i>
+                                                                                </a>
+                                                                                <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
+                                                                                    <i class="fas fa-video"></i>
+                                                                                </a>
                                             </div>
                                             <div class="clinic-booking">
                                                 <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a>
