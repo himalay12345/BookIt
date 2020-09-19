@@ -62,14 +62,35 @@
 
 .carda {
     display: grid;
-    grid-template-columns: 300px;
-    grid-template-rows: 210px 210px 80px;
+    grid-template-columns: 245px;
+    grid-template-rows: 146px 176px 67px;
     grid-template-areas: "image" "text" "stats";
     font-family: roboto;
     border-radius: 18px;
     background: white;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
     text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.bdoctor-slider .slick-slide {
+    width: 500px !important;
+}
+
+.cardm {
+    width: auto !important;
+    display: grid;
+    grid-template-columns: 245px;
+    grid-template-rows: 146px 176px 67px;
+    grid-template-areas: "image" "text" "stats";
+    font-family: roboto;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+    text-align: center;
+    transition: 0.5s ease;
+    cursor: pointer;
 }
 
 .nots-span span p{
@@ -110,7 +131,6 @@ font-size: 0.9rem;
 }
 .carda-image {
     grid-area: image;
-    background: url("img/specialities/brain.jpg");
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     background-size: cover;
@@ -118,11 +138,10 @@ font-size: 0.9rem;
 
 .carda-text {
     grid-area: text;
-    margin: 25px;
+    /* margin: 25px; */
 }
 
 .carda-text .date {
-    color: rgb(225, 7, 110);
     font-size: 15px;
 }
 
@@ -137,20 +156,63 @@ font-size: 0.9rem;
 }
 
 .carda-stats {
-    grid-area: stats
+    grid-area: stats;
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    grid-template-rows: 1fr;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: #1565c0;
 }
 
-.across {
-    margin: -3px 20px 12px 116px;
-    font-size: 18px;
-    color: #787887;
-    line-height: 1rem;
-    font-family: cursive;
+.carda-stats .stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    color: white;
+}
+
+.carda-stats .type {
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+}
+
+.carda-stats .value {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.carda-stats .border {
+    border-left: 1px solid rgb(172, 26, 87);
+    border-right: 1px solid rgb(172, 26, 87);
+}
+
+.carda-stats .value sup {
+    font-size: 12px;
+}
+
+.carda:hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px;
+}
+
+.acrossm {
+    margin-top: -17px !important;
+    margin-left: -136px !important;
+    margin-right: -110px;
+    font-size: 15px;
+    font-family: ui-rounded;
+    text-align: center !important;
 }
 
 .spec-heading {
-    margin: 38px 0px 0px 98px;
-    padding: 0px 15px 18px 25px;
+    margin: 68px 3px -2px -15px;
+    padding: 11px 15px 18px 35px;
+    font-size: 28px !important;
+    text-align: center;
 }
 
 .behave {
@@ -3160,6 +3222,13 @@ html.menu-opened body {
     display: block;
     margin-left: 0;
     padding: 10px;
+    width: 280px;
+}
+
+.adoctor-slider .slick-slide {
+    display: block;
+    margin-left: 0;
+    padding: 51px 30px!important;
     width: 280px;
 }
 
@@ -7589,11 +7658,14 @@ html.menu-opened body {
         margin-top: 55px;
     }
     #rom {
-        margin: 0 -16px;
+        margin: 12px -16px;
         padding: 12px 16px;
     }
     #rock {
-        padding-left: 28px;
+        padding-left: 23px;
+        padding-bottom: 29px;
+        margin-top: -16px;
+        margin-bottom: 12px;
     }
     #pex {
         line-height: 1.2;
@@ -7884,7 +7956,7 @@ html.menu-opened body {
 
 @media only screen and (max-width: 575.98px) {
     body {
-        font-size: 0.8125rem;
+        font-size: 2rem;
     }
     h1,
     .h1 {
@@ -7927,6 +7999,65 @@ html.menu-opened body {
     }
     .card-footer {
         padding: .75rem 1.25rem;
+    }
+    .slick-arrow {
+        display: none !important;
+    }
+    .acrossm {
+        margin-top: -15px !important;
+        margin-left: -71px !important;
+        text-align: 0px !important;
+        padding-top: 0px !important;
+        padding-left: 0px !important;
+        font-size: 14px !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .mslide {
+        margin-top: -50px !important;
+        margin-left: -91px !important;
+        width: 329px !important;
+    }
+    .pt2 {
+        margin: -9px !important;
+        height: 107px !important;
+    }
+    .pb2 {
+        font-size: 19px !important;
+        margin-bottom: 10px !important;
+        padding-left: 12px !important;
+        margin-top: 12px !important;
+        font-family: unset !important;
+    }
+    .price {
+        padding-left: 18px;
+        margin-top: -11px;
+        font-size: 17px;
+        font-family: none;
+    }
+    .offers {}
+    .now {
+        font-size: 16px !important;
+        font-family: Camphor, Helvetica, Arial, sans-serif!important;
+        box-sizing: border-box !important;
+        padding-left: 15px !important;
+        margin-top: -11px !important;
+        ;
+    }
+    .log {
+        padding-left: 22px !important;
+        padding-right: 24px !important;
+    }
+    .slick-prev {
+        left: -7px;
+    }
+    .slick-next {
+        right: 32px !important;
+    }
+    .roll {
+        margin-top: -63px;
+        width: 252%;
+        margin-left: -100px;
+        height: 90%;
     }
     .header-nav {
         padding-left: 15px;
@@ -8036,6 +8167,16 @@ html.menu-opened body {
         border: 1px solid lightgrey;
         /* padding-bottom: 20px; */
         /* padding-top: 20px; */
+    }
+    #max {
+        margin-top: 43px;
+        padding: 3px 20px 1px;
+        margin-bottom: -17px;
+    }
+    .mcontaine {
+        padding-left: 114px !important;
+        margin-top: -123px !important;
+        padding-right: 107px !important;
     }
     .phoneul li a {
         background-color: white;
@@ -8286,8 +8427,9 @@ html.menu-opened body {
         margin-top: 0px !important;
     }
     .spec-heading {
-        margin: 14px 3px -2px 3px;
-        padding: 0px 15px 18px 25px;
+        text-align: end;
+        margin: 83px -69px -2px -147px !important;
+        padding: 11px 15px 18px 52px !important;
         font-size: 24px;
     }
     .day-slot li {
