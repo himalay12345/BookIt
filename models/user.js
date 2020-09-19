@@ -90,13 +90,21 @@ const userSchema = mongoose.Schema({
     verifydegree: {
         type: Boolean
     },
-    terms: {
+
+    step1:{
         type: Boolean
     },
-    request: {
+     step2:{
         type: Boolean
     },
+    step3:{
+        type: Boolean
+    },
+   
     clinicaddr: {
+        type: String
+    },
+    cliniccity: {
         type: String
     },
     degreephoto: {
@@ -180,15 +188,18 @@ const userSchema = mongoose.Schema({
         }
 
     }],
-    registrations: [{
+    registrations: {
         registration: {
             type: String
         },
         regYear: {
             type: String
+        },
+        regCouncil:{
+            type: String
         }
 
-    }],
+    },
     department: {
         type: String
     },

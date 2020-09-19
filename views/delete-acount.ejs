@@ -425,7 +425,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12">
                                         <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Delete Account</h3>
-                                        <p style="margin-top: 30px;font-size: 0.9rem;margin-bottom: 30px;">Are you sure? This will permanently delete your Practo account.</p>
+                                        <p style="margin-top: 30px;font-size: 0.9rem;margin-bottom: 30px;">Are you sure? This will permanently delete your Doccure account.</p>
                                         <p style="margin-top: -20px;font-size: 0.9rem;margin-bottom: 30px;">Once the deletion process begins, you won't be able to reactivate your account or retrieve any data or information.</p>
                                         <!-- Change Password Form -->
                                        
@@ -433,7 +433,7 @@
 
                                     </div>
                                     <div class="col-md-12 col-lg-12" style="padding:8px 0px;border-top: 1px solid grey; border-bottom: 1px solid grey;">
-                                        <p style="font-size: 0.9rem;color:red;font-weight: bold;margin-left: 10px;margin-top: 5px;">Delete My Account</p>
+                                        <p style="font-size: 0.9rem;color:red;font-weight: bold;margin-left: 10px;margin-top: 5px;cursor: pointer;" onclick="$('#options').toggleClass('displayBlock');">Delete My Account</p>
                                         </div>
                                     
                                    
@@ -442,6 +442,18 @@
                             </div>
                             
                         </div>
+                        <div style="display: none;" id="options">
+                            <p style="font-size: 1rem;margin-left:40px;margin-top: -20px;font-weight: bold;">Why are you leaving Doccure?</p>
+                               <p style="font-size: 1rem;margin-left:40px;"> Help us serve you better, tell us why you are deleting your account.</p>
+                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio"></span><span>I have another Doccure account</span></br>
+                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio"></span><span>I don't find Doccure useful</span></br>
+                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio"></span><span>Others</span></br>
+                               <!-- <span><input type=""></span><span>I received too many notifications, emails and messages from Practo</span> -->
+                               <div class="submit-section">
+                                <button type="submit" class="btn btn-primary submit-btn" style="margin-bottom:50px;">Save Changes</button>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

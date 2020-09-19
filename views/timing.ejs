@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/schedule-timings  30 Nov 2019 04:12:09 GMT -->
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -17,21 +17,21 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
-
-    <!-- Select2 CSS -->
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src=js/html5shiv.min.js"></script>
-			<script src=js/respond.min.js"></script>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
 		<![endif]-->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
 </head>
 
 <body>
@@ -384,504 +384,456 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-md-12 col-12">
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Schedule Timings</li>
-                            </ol>
-                        </nav>
-                        <h2 class="breadcrumb-title">Schedule Timings</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        <div class="content">
-            <div class="container-fluid">
+        <div class="col-md-12 col-lg-12 col-xl-12 setting-bread pzero" style="margin-left:-15px;border-left: 0.5px solid lighgrey;margin-top: 20px;">
+        <div class="card" style="border-radius: 0;border:0;">
+        <div class="card-body" style="padding:0rem;">
+        <div class="row position-relative pzero">
+            <div class="col-md-12" style="height: 40px;background-color: rgb(248, 248, 248);">
+                <p style="margin-top: 10px;margin-left: 150px;font-weight: bold;">Step 1/3</p>
+            </div>
+            <div class="col-md-12" style="margin-left: -15px;">
+            <div class="col-md-4" style="border-top: 5px solid blueviolet;width: 110%;"> 
+            </div>
+        </div>
+        <div class="col-md-8 m-50" style="margin-left: 150px;margin-top: 30px;">
+            <form action="/fees">
+             
+                <h2 style="font-size: 1.5rem;margin-top: 20px;font-weight: 700;">Set Timings</h2>
+                
+                <div class="col-md-10 col-lg-10 col-xl-10" style="margin-left: -20px;margin-top: 25px;">
 
-                <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Schedule Timings</h4>
+                                    <div class="profile-box">
+                                        <div class="row">
 
-                        <!-- Profile Sidebar -->
-                        <div class="profile-sidebar">
-                            <div class="widget-profile pro-widget-content">
-                                <div class="profile-info-widget">
-                                    <a href="#" class="booking-doc-img">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"'  alt="User Image">
-                                    </a>
-                                    <div class="profile-det-info">
-                                        <h3>Dr.
-                                            <%=locals.user.name  %>
-                                        </h3>
-
-                                        <div class="patient-details">
-                                            <h5 class="mb-0">
-                                                <%=locals.user.department%>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashboard-widget">
-                                <nav class="dashboard-menu">
-                                    <ul>
-                                        <li>
-                                            <a href="/schedule-timings">
-                                                <i class="fas fa-hourglass-start"></i>
-                                                <span>Schedule Timings</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/bank-details">
-                                                <i class="fas fa-university"></i>
-                                                <span>Add Bank Account</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <!-- /Profile Sidebar -->
-
-                    </div>
-
-                    <div class="col-md-7 col-lg-8 col-xl-9">
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Schedule Timings</h4>
-                                        <div class="profile-box">
-                                            <div class="row">
-
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Timing Slot Duration</label>
-                                                        <select class="select form-control">
-																<option>1 Hour</option>
-																
-                                                                <option>2 Hour</option>
-															</select>
-                                                    </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Timing Slot Duration</label>
+                                                    <select class="select form-control">
+                                                            <option>1 Hour</option>
+                                                            
+                                                            <option>2 Hour</option>
+                                                        </select>
                                                 </div>
-                                                
-                                             
-                                           
-
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card schedule-widget mb-0">
+                                            
+                                         
+                                       
 
-                                                        <!-- Schedule Header -->
-                                                        <div class="schedule-header">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card schedule-widget mb-0">
 
-                                                            <!-- Schedule Nav -->
-                                                            <div class="schedule-nav">
-                                                                <ul class="nav nav-tabs nav-justified">
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link active" data-toggle="tab" href="#slot_sunday">Sunday</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tab" href="#slot_monday">Monday</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tab" href="#slot_tuesday">Tuesday</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tab" href="#slot_wednesday">Wednesday</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tab" href="#slot_thursday">Thursday</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tab" href="#slot_friday">Friday</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tab" href="#slot_saturday">Saturday</a>
-                                                                    </li>
-                                                                </ul>
+                                                    <!-- Schedule Header -->
+                                                    <div class="schedule-header">
+
+                                                        <!-- Schedule Nav -->
+                                                        <div class="schedule-nav">
+                                                            <ul class="nav nav-tabs nav-justified">
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link active" data-toggle="tab" href="#slot_sunday">Sunday</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#slot_monday">Monday</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#slot_tuesday">Tuesday</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#slot_wednesday">Wednesday</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#slot_thursday">Thursday</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#slot_friday">Friday</a>
+                                                                </li>
+                                                                <li class="nav-item">
+                                                                    <a class="nav-link" data-toggle="tab" href="#slot_saturday">Saturday</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- /Schedule Nav -->
+
+                                                    </div>
+                                                    <!-- /Schedule Header -->
+
+                                                    <!-- Schedule Content -->
+                                                    <div class="tab-content schedule-cont">
+
+                                                <!-- Sunday Slot -->
+                                                
+                                                    <div id="slot_sunday" class="tab-pane fade show active">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'sunday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="sunday" href="#add_time_slot_sunday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
+                                                            <h4 class="card-title d-flex justify-content-between">
+                                                                <span>Time Slots</span>
+                                                                <a class="edit-link" data-toggle="modal" href="#edit_time_slot_sunday"><i class="fa fa-edit mr-1"></i>Edit</a>
+                                                            </h4>
+
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
+                                                                    <div class="doc-slot-list">
+                                                                        <!-- 8:00 pm - 11:30 pm -->
+                                                                        <%=temp.start%> -  <%=temp.end%>
+                                                                        <a href="javascript:void(0)" class="delete_schedule">
+                                                                            <i class="fa fa-times"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                <%}else{%>
+                                    
+                                                                    <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <%}%>
+                                                                <%}%>
                                                             </div>
-                                                            <!-- /Schedule Nav -->
-
-                                                        </div>
-                                                        <!-- /Schedule Header -->
-
-                                                        <!-- Schedule Content -->
-                                                        <div class="tab-content schedule-cont">
-
-                                                    <!-- Sunday Slot -->
-                                                    
-                                                        <div id="slot_sunday" class="tab-pane fade show active">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'sunday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
                                                             <%}%>
-                                                            <%if(!flag){%>
+                                                    </div>
+                                                    <!-- /Sunday Slot -->
+
+                                                    <!-- Monday Slot -->
+                                                    <div id="slot_monday" class="tab-pane fade">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'monday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="monday" href="#add_time_slot_monday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
                                                             <h4 class="card-title d-flex justify-content-between">
                                                                 <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="sunday" href="#add_time_slot_sunday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                                <a class="edit-link" data-toggle="modal" href="#edit_time_slot_monday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                             </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_sunday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                </h4>
 
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <%}else{%>
-                                        
-                                                                        <%for(let i=0;i<temp.start.length;i++){%>
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
                                                                     <div class="doc-slot-list">
                                                                         <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                        <%=temp.start%> -  <%=temp.end%>
                                                                         <a href="javascript:void(0)" class="delete_schedule">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <%}%>
-                                                                    <%}%>
+                                                                <%}else{%>
+                                    
+                                                                <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <%}%>
-                                                        </div>
-                                                        <!-- /Sunday Slot -->
-
-                                                        <!-- Monday Slot -->
-                                                        <div id="slot_monday" class="tab-pane fade">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'monday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
+                                                                <%}%>
+                                                            </div>
                                                             <%}%>
-                                                            <%if(!flag){%>
+                                                    </div>
+                                                    <!-- /Monday Slot -->
+
+                                                    <!-- Tuesday Slot -->
+                                                    <div id="slot_tuesday" class="tab-pane fade">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'tuesday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="tuesday" href="#add_time_slot_tuesday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
                                                             <h4 class="card-title d-flex justify-content-between">
                                                                 <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="monday" href="#add_time_slot_monday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                                <a class="edit-link" data-toggle="modal" href="#edit_time_slot_tuesday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                             </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_monday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                </h4>
 
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <%}else{%>
-                                        
-                                                                    <%for(let i=0;i<temp.start.length;i++){%>
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
                                                                     <div class="doc-slot-list">
                                                                         <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                        <%=temp.start%> -  <%=temp.end%>
                                                                         <a href="javascript:void(0)" class="delete_schedule">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <%}%>
-                                                                    <%}%>
+                                                                <%}else{%>
+                                    
+                                                                <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <%}%>
-                                                        </div>
-                                                        <!-- /Monday Slot -->
-
-                                                        <!-- Tuesday Slot -->
-                                                        <div id="slot_tuesday" class="tab-pane fade">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'tuesday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
+                                                                <%}%>
+                                                            </div>
                                                             <%}%>
-                                                            <%if(!flag){%>
+                                                    </div>
+                                                    <!-- /Tuesday Slot -->
+
+                                                    <!-- Wednesday Slot -->
+                                                    <div id="slot_wednesday" class="tab-pane fade">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'wednesday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="wednesday" href="#add_time_slot_wednesday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
                                                             <h4 class="card-title d-flex justify-content-between">
                                                                 <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="tuesday" href="#add_time_slot_tuesday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                                <a class="edit-link" data-toggle="modal" href="#edit_time_slot_wednesday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                             </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_tuesday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                </h4>
 
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <%}else{%>
-                                        
-                                                                    <%for(let i=0;i<temp.start.length;i++){%>
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
                                                                     <div class="doc-slot-list">
                                                                         <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                        <%=temp.start%> -  <%=temp.end%>
                                                                         <a href="javascript:void(0)" class="delete_schedule">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <%}%>
-                                                                    <%}%>
+                                                                <%}else{%>
+                                    
+                                                                <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <%}%>
-                                                        </div>
-                                                        <!-- /Tuesday Slot -->
-
-                                                        <!-- Wednesday Slot -->
-                                                        <div id="slot_wednesday" class="tab-pane fade">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'wednesday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
+                                                                <%}%>
+                                                            </div>
                                                             <%}%>
-                                                            <%if(!flag){%>
+                                                    </div>
+                                                    <!-- /Wednesday Slot -->
+
+                                                    <!-- Thursday Slot -->
+                                                    <div id="slot_thursday" class="tab-pane fade">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'thursday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="thursday" href="#add_time_slot_thursday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
                                                             <h4 class="card-title d-flex justify-content-between">
                                                                 <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="wednesday" href="#add_time_slot_wednesday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                                <a class="edit-link" data-toggle="modal" href="#edit_time_slot_thursday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                             </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_wednesday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                </h4>
 
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <%}else{%>
-                                        
-                                                                    <%for(let i=0;i<temp.start.length;i++){%>
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
                                                                     <div class="doc-slot-list">
                                                                         <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                        <%=temp.start%> -  <%=temp.end%>
                                                                         <a href="javascript:void(0)" class="delete_schedule">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <%}%>
-                                                                    <%}%>
+                                                                <%}else{%>
+                                    
+                                                                <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <%}%>
-                                                        </div>
-                                                        <!-- /Wednesday Slot -->
-
-                                                        <!-- Thursday Slot -->
-                                                        <div id="slot_thursday" class="tab-pane fade">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'thursday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
+                                                                <%}%>
+                                                            </div>
                                                             <%}%>
-                                                            <%if(!flag){%>
+                                                    </div>
+                                                    <!-- /Thursday Slot -->
+
+                                                    <!-- Friday Slot -->
+                                                    <div id="slot_friday" class="tab-pane fade">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'friday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="friday" href="#add_time_slot_friday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
+                                                            <%var today = new Date();%>
+                                                            <%var dd = String(today.getDate()).padStart(2, '0');
+                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                            var yyyy = today.getFullYear();
+                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                            var dayOfWeek = weekday[today.getDay()];%>
+                                                            
+                                                            
                                                             <h4 class="card-title d-flex justify-content-between">
                                                                 <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="thursday" href="#add_time_slot_thursday"><i class="fa fa-plus-circle"></i> Add Slot</a>
-                                                            </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_thursday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                </h4>
-
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
+                                                                <%if(typeof(temp.booking)=='string'){%>
+                                                                    <%if(dayOfWeek.toUpperCase() == temp.day.toUpperCase() && temp.booked != 0){%>
+                                                                        <p style="font-size:0.9rem;" id="nots-warn">*** You are not allowed to make changes on the current day of booking.</p>
+                                                                    
+                                                                        <%}else{%>
+                                                                            <a class="edit-link" data-toggle="modal" href="#edit_time_slot_friday"><i class="fa fa-edit mr-1"></i>Edit</a>
+                                                                        <%}%>
+                                                                    
                                                                     <%}else{%>
-                                        
-                                                                    <%for(let i=0;i<temp.start.length;i++){%>
-                                                                    <div class="doc-slot-list">
-                                                                        <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
-                                                                        <a href="javascript:void(0)" class="delete_schedule">
-                                                                            <i class="fa fa-times"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                    <%}%>
-                                                                    <%}%>
-                                                                </div>
-                                                                <%}%>
-                                                        </div>
-                                                        <!-- /Thursday Slot -->
-
-                                                        <!-- Friday Slot -->
-                                                        <div id="slot_friday" class="tab-pane fade">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'friday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
-                                                            <%}%>
-                                                            <%if(!flag){%>
-                                                            <h4 class="card-title d-flex justify-content-between">
-                                                                <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="friday" href="#add_time_slot_friday"><i class="fa fa-plus-circle"></i> Add Slot</a>
-                                                            </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <%var today = new Date();%>
-                                                                <%var dd = String(today.getDate()).padStart(2, '0');
-                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                                                var yyyy = today.getFullYear();
-                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                                                var dayOfWeek = weekday[today.getDay()];%>
-                                                                
-                                                                
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <%if(typeof(temp.booking)=='string'){%>
-                                                                        <%if(dayOfWeek.toUpperCase() == temp.day.toUpperCase() && temp.booked != 0){%>
-                                                                            <p style="font-size:0.9rem;" id="nots-warn">*** You are not allowed to make changes on the current day of booking.</p>
+                                                                        <%if(dayOfWeek.toUpperCase() == temp.day.toUpperCase() && temp.booked != [0,0]){console.log(temp.booked)%>
+                                                                            <p style="font-size:0.8rem;" id="nots-warn">*** You are not allowed to make changes if the booking is started on the current day.</p>
                                                                         
                                                                             <%}else{%>
                                                                                 <a class="edit-link" data-toggle="modal" href="#edit_time_slot_friday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                                             <%}%>
-                                                                        
-                                                                        <%}else{%>
-                                                                            <%if(dayOfWeek.toUpperCase() == temp.day.toUpperCase() && temp.booked != [0,0]){console.log(temp.booked)%>
-                                                                                <p style="font-size:0.8rem;" id="nots-warn">*** You are not allowed to make changes if the booking is started on the current day.</p>
-                                                                            
-                                                                                <%}else{%>
-                                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_friday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                                <%}%>
-                                                                            <%}%>
-                                                                   
-                                                                </h4>
+                                                                        <%}%>
+                                                               
+                                                            </h4>
 
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <%}else{%>
-                                        
-                                                                    <%for(let i=0;i<temp.start.length;i++){%>
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
                                                                     <div class="doc-slot-list">
                                                                         <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                        <%=temp.start%> -  <%=temp.end%>
                                                                         <a href="javascript:void(0)" class="delete_schedule">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <%}%>
-                                                                    <%}%>
+                                                                <%}else{%>
+                                    
+                                                                <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <%}%>
-                                                        </div>
-                                                        <!-- /Friday Slot -->
-
-                                                        <!-- Saturday Slot -->
-                                                        <div id="slot_saturday" class="tab-pane fade">
-                                                            <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
-                                                                if(day.day == 'saturday'){
-                                                                flag=true;
-                                                                temp=day;
-                                                            }%>
+                                                                <%}%>
+                                                            </div>
                                                             <%}%>
-                                                            <%if(!flag){%>
+                                                    </div>
+                                                    <!-- /Friday Slot -->
+
+                                                    <!-- Saturday Slot -->
+                                                    <div id="slot_saturday" class="tab-pane fade">
+                                                        <%var flag = false;var temp;%>
+                                                        <%for(day of user.schedule_time){
+                                                            if(day.day == 'saturday'){
+                                                            flag=true;
+                                                            temp=day;
+                                                        }%>
+                                                        <%}%>
+                                                        <%if(!flag){%>
+                                                        <h4 class="card-title d-flex justify-content-between">
+                                                            <span>Time Slots</span>
+                                                            <a class="edit-link" data-toggle="modal" data-id="saturday" href="#add_time_slot_saturday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                        </h4>
+                                                        <p class="text-muted mb-0">Not Available</p>
+                                                        <%}else{%>
                                                             <h4 class="card-title d-flex justify-content-between">
                                                                 <span>Time Slots</span>
-                                                                <a class="edit-link" data-toggle="modal" data-id="saturday" href="#add_time_slot_saturday"><i class="fa fa-plus-circle"></i> Add Slot</a>
+                                                                <a class="edit-link" data-toggle="modal" href="#edit_time_slot_saturday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                             </h4>
-                                                            <p class="text-muted mb-0">Not Available</p>
-                                                            <%}else{%>
-                                                                <h4 class="card-title d-flex justify-content-between">
-                                                                    <span>Time Slots</span>
-                                                                    <a class="edit-link" data-toggle="modal" href="#edit_time_slot_saturday"><i class="fa fa-edit mr-1"></i>Edit</a>
-                                                                </h4>
 
-                                                                <!-- Slot List -->
-                                                                <div class="doc-times">
-                                                                    <%if(typeof(temp.start) == 'string' ){%>
-                                                                        <div class="doc-slot-list">
-                                                                            <!-- 8:00 pm - 11:30 pm -->
-                                                                            <%=temp.start%> -  <%=temp.end%>
-                                                                            <a href="javascript:void(0)" class="delete_schedule">
-                                                                                <i class="fa fa-times"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    <%}else{%>
-                                        
-                                                                    <%for(let i=0;i<temp.start.length;i++){%>
+                                                            <!-- Slot List -->
+                                                            <div class="doc-times">
+                                                                <%if(typeof(temp.start) == 'string' ){%>
                                                                     <div class="doc-slot-list">
                                                                         <!-- 8:00 pm - 11:30 pm -->
-                                                                        <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                        <%=temp.start%> -  <%=temp.end%>
                                                                         <a href="javascript:void(0)" class="delete_schedule">
                                                                             <i class="fa fa-times"></i>
                                                                         </a>
                                                                     </div>
-                                                                    <%}%>
-                                                                    <%}%>
+                                                                <%}else{%>
+                                    
+                                                                <%for(let i=0;i<temp.start.length;i++){%>
+                                                                <div class="doc-slot-list">
+                                                                    <!-- 8:00 pm - 11:30 pm -->
+                                                                    <%=temp.start[i]%> -  <%=temp.end[i]%>
+                                                                    <a href="javascript:void(0)" class="delete_schedule">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </a>
                                                                 </div>
                                                                 <%}%>
-                                                        </div>
-                                                        <!-- /Saturday Slot -->
-
-                                                        </div>
-                                                        <!-- /Schedule Content -->
+                                                                <%}%>
+                                                            </div>
+                                                            <%}%>
+                                                    </div>
+                                                    <!-- /Saturday Slot -->
 
                                                     </div>
+                                                    <!-- /Schedule Content -->
+
                                                 </div>
                                             </div>
                                         </div>
@@ -889,51 +841,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Set Booking Appointment Charges</h4>
-                                        <div class="profile-box">
-                                            <div class="row">
-                                                <form action="/user/set-booking-fee" method="POST">
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="col-md-12 col-sm-12" style="margin-left: -15px;">
-                                                    <div class="form-group">
-                                                        <label for="booking">Booking Fee (In rupees)</label></br>
-                                                        <input type="text" name="fee" class="form-control" value="<%=locals.user.booking_fee%>" id="booking" placeholder="Enter the booking fee">
-                                                        </div>
-                                                
-                                                          
-                                                    </div>
-                                                        <div class="submit-section submit-btn-bottom">
-                                                            <button type="submit" class="btn btn-primary submit-btn">Sumbit</button>
-                                                        </div>
-                                                        </div>
-                                                    </form>
-                                                
-                                                </div>
-                                                </div>
-                                                </div>
-                                                </div>
-                                                </div>
-                        </div>
-
-
                     </div>
+                    
+                    <div class="submit-section submit-btn-bottom" style="margin-top: 0px;display: inline-flex;height: 40px;">
+                        <a href="/steps" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="color:white;border-radius: 5px;width: 100px;left:8%;margin-top: -5px;">Back</a>
+                    </div>
+                    <div class="submit-section submit-btn-bottom" style="margin-top: 0px;display: inline-flex;;height: 40px;">
+                        <button type="submit" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="border-radius: 5px;width: 100px;right:5%;margin-top: -5px;">Next</button>
+                    </div>
+
                 </div>
-
-            </div>
-
+                </form>
         </div>
-        <!-- /Page Content -->
+        <div class="col-md-3" style="margin-left:-50px;margin-top:10px;">
+            <div class="note" style="margin-left:-20px">
+                <i class="fas fa-lightbulb" style="color:#6DBCAE;font-size: 0.8rem;"></i>
+                <p style="font-size: 0.8rem; color: #439485;font-weight: 700;">Correct operating hours will help patients in booking appointments only during your availability.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
 
-        <!-- Footer -->
         <footer class="footer">
 
             <!-- Footer Top -->
             <div class="footer-top">
-                <div class="container-fluid">
+                <div class="container-fluid" >
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
 
@@ -1066,10 +1001,8 @@
         <!-- /Footer -->
 
     </div>
-    <!-- /Main Wrapper -->
-
-    <!-- Add Time Slot Modal -->
-
+          <!-- Add Time Slot Modal -->
+    
     <div class="modal fade custom-modal" id="add_time_slot_sunday">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1081,6 +1014,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1256,6 +1190,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1430,6 +1365,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1604,6 +1540,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1778,6 +1715,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1952,6 +1890,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2126,6 +2065,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/user/set-schedule-timing" method="POST">
+                         <input type="hidden" name="flag" value="true">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -5445,23 +5385,27 @@
 </div>
 </div>
     <!-- /Edit Time Slot Modal -->
+        
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+       
+    <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js "></script>
+    <script src="js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js "></script>
-    <script src="js/bootstrap.min.js "></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Sticky Sidebar JS -->
-    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js "></script>
-    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js "></script>
-
-    <!-- Select2 JS -->
-    <script src="plugins/select2/js/select2.min.js "></script>
+    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <script src="plugins/select2/js/select2.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/script.js "></script>
+    <script src="js/script.js"></script>
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({
@@ -5482,8 +5426,9 @@
         }).show();
         <%}%>
     </script>
+
 </body>
 
-<!-- doccure/schedule-timings  30 Nov 2019 04:12:09 GMT -->
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 </html>

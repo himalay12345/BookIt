@@ -394,7 +394,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar " style=" margin-top: 20px;">
+        <div class="breadcrumb-bar setting-bread" style=" margin-top: 20px;">
             <div class="container-fluid ">
                 <div class="row align-items-center ">
                     <div class="col-md-12 col-12 ">
@@ -419,7 +419,7 @@
                   
 
 
-                    <div class="col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-md-12 col-lg-12 col-xl-12" style="padding: 0px 0px!important;">
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
                             <strong>Note!</strong> Please fill all the required fields if you want to start online <a href="#" class="alert-link">booking appointment service.</a>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -439,7 +439,7 @@
                                                         <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
                                                     </div>
                                                     <div class="upload-img">
-                                                        <div class="change-photo-btn">
+                                                        <div class="change-photo-btn upload-sm-btn">
                                                             <span><i class="fa fa-upload"></i> Upload Photo</span>
                                                             <input type="file" class="upload" name="avatar" id="imageUpload">
                                                         </div>
@@ -540,38 +540,38 @@
                                         <!-- Social Form -->
 
                                         <div class="row">
-                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                            <div class="col-md-12 col-lg-12 col-sm-12" style="display: inline-flex;padding: 0px 0px !important;">
 
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-6 col-sm-12">
                                                     <label>Facebook URL</label>
 
                                                     <input type="text" name="facebook" value="<%=locals.user.facebook%>" class="form-control">
 
                                                 </div>
-                                                <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                <div class="col-md-6 col-sm-2 social-sm" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
                                                     <a href="<%=locals.user.facebook%>" target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;padding: 0px 0px !important;">
                                                 <div class="form-group col-md-6">
                                                     <label>Twitter URL</label>
                                                     <input type="text" value="<%=locals.user.twitter%>" name="twitter" class="form-control">
 
                                                 </div>
-                                                <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
-                                                    <a href="<%=locals.user.twitter%>" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                <div class="col-md-6 social-sm" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                    <a href="<%=locals.user.twitter%>" target="_blank"><i class="fab fa-twitter"></i></a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;">
+                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;padding: 0px 0px !important;">
                                                 <div class="form-group col-md-6">
                                                     <label>Instagram URL</label>
                                                     <input type="text" name="instagram" value="<%=locals.user.instagram%>" class="form-control">
                                                 </div>
-                                                <div class="col-md-6" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                <div class="col-md-6 social-sm" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
                                                     <a href="<%=locals.user.instagram%>" target="_blank"><i class="fab fa-instagram"></i> </a>
                                                 </div>
                                             </div>
@@ -606,10 +606,10 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="padding: 0px 0px !important; margin-left: 15px;">
                                         <div class="form-group">
                                             <label>Clinic Images</label>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12" style="padding: 0px 0px !important;">
                                                 <div class="upload-container col-md-12" style="margin-left: -15px;">
                                                     <div class="border-container">
                                                         <div class="icons fa-4x text-center">
@@ -618,7 +618,7 @@
                                                             <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
                                                         </div>
                                                         <input type="file" id="file-upload" name="clinicphoto" multiple>
-                                                        <p class="text-center" style="margin-top: -20px;">Drag and drop files here, or
+                                                        <p class="text-center" style="margin-top: -20px;font-size: 0.9rem;">Drag and drop files here, or
                                                             <a href="#" id="file-browser">browse</a> your computer.</p>
                                                     </div>
 
@@ -789,13 +789,13 @@
                                                                 <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="" required>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                        <div class="col-12 col-md-6 col-lg-2">
                                                             <div class="form-group">
                                                                 <label>From</label>
                                                                 <input type="Number" placeholder="From" name="from" value="" class="form-control" required>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                        <div class="col-12 col-md-6 col-lg-2">
                                                             <div class="form-group">
                                                                 <label>To</label>
                                                                 <input type="Number" placeholder="To" name="to" value="" class="form-control" required>
@@ -822,13 +822,13 @@
                                                                         <input type="text" placeholder="Enter the Name" class="form-control" value="<%=temp.institutionname%>">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-2">
                                                                     <div class="form-group">
                                                                         <label>From</label>
                                                                         <input type="Number" value="<%=temp.from%>" class="form-control">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-2">
                                                                     <div class="form-group">
                                                                         <label>To</label>
                                                                         <input type="Number" value="<%=temp.to%>" class="form-control">
@@ -912,57 +912,42 @@
                             <!-- /Memberships -->
 
                             <!-- Registrations -->
-                            <div class="card">
+                         <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Registrations <span class="text-danger">*</span></h4>
                                     <div class="registrations-info">
-                                        <%if(locals.user.registrations.length == 0){%>
+                                       
                                             <div class="row form-row reg-cont">
-                                                <div class="col-12 col-md-5">
+                                                <div class="col-12 col-md-4">
                                                     <div class="form-group">
                                                         <label>Registrations</label>
-                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="" class="form-control" required>
+                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="<%=locals.user.registrations.registration%>" class="form-control" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-md-5">
+                                                <div class="col-12 col-md-4">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="text" placeholder="Enter Year" name="regYear" value="" class="form-control" required>
+                                                        <input type="text" placeholder="Enter Year" name="regYear" value="<%=locals.user.registrations.regYear%>" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Year</label>
+                                                        <input type="text" placeholder="Enter Registration Council" name="regCouncil" value="<%=locals.user.registrations.regCouncil%>" class="form-control" required>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <%}else{%>
-                                                <%for(reg of locals.user.registrations){%>
-                                                    <div class="row form-row reg-cont">
-                                                        <div class="col-12 col-md-5">
-                                                            <div class="form-group">
-                                                                <label>Registrations</label>
-                                                                <input type="text" value="<%=reg.registration%>" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-5">
-                                                            <div class="form-group">
-                                                                <label>Year</label>
-                                                                <input type="text" value="<%=reg.regYear%>" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-md-2 col-lg-1">
-                                                            <label class="d-md-block d-sm-none d-none">&nbsp;</label>
-                                                            <a href="/user/delete-registration/?id=<%=reg._id%>" class="btn btn-danger atrash"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <%}%>
-                                                        <%}%>
+                                                   
                                     </div>
-                                    <div class="add-more">
+                                    <!-- <div class="add-more">
                                         <a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <!-- /Registrations -->
 
                             <div class="submit-section submit-btn-bottom">
-                                <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                                <button type="submit" id="submit_button" class="btn btn-primary submit-btn">Save Changes</button>
                             </div>
                         </form>
                     </div>
@@ -1154,7 +1139,23 @@
         document.getElementById("imageUpload").onchange = function() {
             document.getElementById("edit_form").submit();
         };
+        var submit_button = document.getElementById("submit_button");
+
+        submit_button.addEventListener("click", function(e) {
+        var required = document.querySelectorAll("input[required]");
+        
+        required.forEach(function(element) {
+            if(element.value.trim() == "") {
+            element.style.borderColor = "red";
+            } else {
+            element.style.borderColor = "";
+            }
+  });
+
+});
+   
     </script>
+    
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({

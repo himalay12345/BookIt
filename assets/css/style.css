@@ -51,6 +51,10 @@
     src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.html) format('woff2'), url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
+.red-border{
+    border: 1px solid red;
+}
+
 .font-li {
     font-size: 1rem;
     padding: 0px 10px;
@@ -86,9 +90,19 @@ font-size: 0.9rem;
     position:relative;
     display: inline-flex;
 }
-.booking-doc-img{
-	width: 10% !important;
+
+.note{
+    min-height:100px;
+    height: auto;
+    width:320px;
+    border:1px solid #6DBCAE;
+    background-color: #DCF5F4;
+    border-radius:5px;
+    margin-top: 30px;
+    padding: 8px;
+    margin-left: 200px;
 }
+
 
 .bell{
 	position: absolute;
@@ -147,8 +161,12 @@ font-size: 0.9rem;
     position: relative;
 }
 
-.booking-doc-img {
-    width: 10% !important;
+.black{
+    color:black!important;
+}
+
+.grey{
+    color: grey !important;
 }
 
 .bell {
@@ -838,6 +856,7 @@ button.bg-danger:hover {
 
 .btn-danger {
     background-color: #ff0100;
+    margin-bottom: 10px;
     border: 1px solid #ff0100;
 }
 
@@ -5967,6 +5986,7 @@ html.menu-opened body {
     font-size: 14px;
     font-weight: normal;
     margin-right: 2px;
+    margin-bottom: 5px;
     padding: 11px 15px;
     border-radius: 0;
 }
@@ -8004,6 +8024,10 @@ html.menu-opened body {
     top: 60px;
 
     }
+
+    .note{
+        display: none;
+    }
     .phoneul {
         position: absolute;
         top: 75px;
@@ -8106,6 +8130,14 @@ html.menu-opened body {
         padding: 0px 0px;
     }
 
+    .social-sm{
+        display:none !important;
+    }
+
+    .upload-sm-btn{
+        width:125px !important;
+    }
+
     .setting-bread{
         margin-top: 0px !important;
     }
@@ -8147,6 +8179,68 @@ html.menu-opened body {
         padding:15px;
     }
 
+    .mstep{
+        padding-left: 10px;
+        margin-top: -30px;
+        margin-bottom: 50px;
+    }
+
+    .minput{
+        width: 220px;
+    }
+
+    .mdept{
+        width: 109%;
+    }
+
+    .btwidth{
+        width:300px !important;
+    }
+
+    .cmleft{
+        margin-left: -45px !important;
+    }
+
+    .gmargin{
+        margin-left: -45px !important;
+    }
+
+    .gwidth{
+        width:120%;
+    }
+
+    .bmargin{
+        margin-left: -35px !important;
+    }
+
+    .malert{
+        margin-left: 21px;
+    }
+
+    .pzero{
+        padding-right: 0px !important;
+    }
+
+    .mzero{
+        margin-left: 0px !important;
+    }
+
+    .m-50{
+        margin-left: 28px !important;
+    }
+
+    .m-55{
+        margin-left: 33px !important;
+    }
+
+    .m-13{
+         margin-left: 13px !important;
+    }
+
+    .p-10{
+        padding:0px 10px;
+        margin-top: 0px !important;
+    }
     .main-menu-wrapper {
         order: 3;
         width: 320px;

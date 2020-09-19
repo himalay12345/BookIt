@@ -75,13 +75,13 @@ Version      : 1.0
             '<input type="text" name="institutionname" placeholder="Enter Institution Name" class="form-control">' +
             '</div>' +
             '</div>' +
-            '<div class="col-12 col-md-6 col-lg-4">' +
+            '<div class="col-12 col-md-6 col-lg-2">' +
             '<div class="form-group">' +
             '<label>From</label>' +
             '<input type="text" placeholder="From" name="from" class="form-control">' +
             '</div>' +
             '</div>' +
-            '<div class="col-12 col-md-6 col-lg-4">' +
+            '<div class="col-12 col-md-6 col-lg-2">' +
             '<div class="form-group">' +
             '<label>To</label>' +
             '<input type="text" placeholder="To" name="to" class="form-control">' +

@@ -161,18 +161,8 @@
                             <div class="dashboard-widget">
                                 <nav class="dashboard-menu">
                                     <ul>
-                                        <li>
-                                            <a href="/doctor-dashboard">
-                                                <i class="fas fa-columns"></i>
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/upload-documents">
-                                                <i class="fas fa-file"></i>
-                                                <span>Upload Documents</span>
-                                            </a>
-                                        </li>
+                                       
+                                      
                                         <li>
                                             <a href="/schedule-timings">
                                                 <i class="fas fa-hourglass-start"></i>
@@ -185,25 +175,6 @@
                                                 <span>Add Bank Account</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/preview-profile">
-                                                <i class="fas fa-id-badge"></i>
-                                                <span>Preview profile</span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a href="/doctor-terms-and-condition">
-                                                <i class="fas fa-id-card"></i>
-                                                <span>Terms and Conditions</span>
-                                            </a>
-                                        </li>
-
-
-
-
-
-
-
 
                                     </ul>
                                 </nav>
@@ -214,22 +185,7 @@
                     </div>
 
                     <div class="col-md-10 col-lg-8 col-xl-9">
-                        <%if(!locals.user.idproof){%>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Note!</strong> Please verify your documents to start your <a href="#" class="alert-link">online booking appointment services.</a>.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <%}%>
-                                <%if(locals.user.idproof){%>
-                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                        <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                    </div>
-                                    <%}%>
+                        
                                         <form action="/user/bank-details" method="POST">
                                             <!-- Basic Information -->
                                             <div class="card">

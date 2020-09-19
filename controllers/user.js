@@ -16,6 +16,62 @@ module.exports.create = async(req, res) => {
     req.flash('success', 'Account created successfully.Please Login!');
     return res.redirect('/login');
 }
+
+module.exports.updateProfile = async(req, res) => {
+    console.log(req.body);
+    let doctor = await User.findById(req.body.id);
+    doctor.name = req.body.name;
+    doctor.department = req.body.department;
+    doctor.gender = req.body.gender;
+    doctor.contacts.city = req.body.city;
+    doctor.save();
+
+
+
+    return res.redirect('/medical-registration');
+}
+
+module.exports.updateMedicalRegistration = async(req, res) => {
+    console.log(req.body);
+    let doctor = await User.findById(req.body.id);
+    doctor.registrations.registration = req.body.registration;
+    doctor.registrations.regYear = req.body.regYear;
+    doctor.registrations.regCouncil = req.body.regCouncil;
+   
+    doctor.save();
+
+    return res.redirect('/educational');
+}
+
+module.exports.updateEducation = async(req, res) => {
+    console.log(req.body);
+    let doctor = await User.findById(req.body.id);
+    doctor.education.push(req.body);
+    
+   
+    doctor.save();
+    console.log(doctor);
+
+    return res.redirect('/establishment');
+}
+
+
+module.exports.updateEstablishment = async(req, res) => {
+    console.log(req.body);
+    let doctor = await User.findById(req.body.id);
+    doctor.clinicname = req.body.clinicname;
+    doctor.clinicaddr = req.body.clinicaddr;
+    doctor.cliniccity = req.body.cliniccity;
+    doctor.contacts.city = req.body.city;
+    doctor.step1 = true;
+    
+   
+    doctor.save();
+    console.log(doctor);
+
+    return res.redirect('/steps');
+}
+
 module.exports.addFavourite = async(req, res) => {
     let patient = await User.findById(
         req.user.id);
@@ -25,8 +81,27 @@ module.exports.addFavourite = async(req, res) => {
 }
 
 module.exports.createSession = function(req, res) {
+
+    if(req.user.type == 'Doctor')
+    {
+
+         if(req.user.approve == true)
+    {
+        
+        return res.redirect('/doctor-dashboard');
+    }
+
+    else{
+        return res.redirect('/steps');
+    }
+    }
+
+    else{
+        return res.redirect('/patient-dashboard');
+    }
+
     //Todo Later
-    return res.redirect('/');
+  
 }
 
 module.exports.popup = async function(req, res) {
@@ -35,7 +110,23 @@ module.exports.popup = async function(req, res) {
     if (!user.type) {
         return res.redirect('/#popup1');
     } else {
-        return res.redirect('/');
+
+         if(req.user.type == 'Doctor')
+    {
+        if(req.user.approve == true)
+        {
+            
+            return res.redirect('/doctor-dashboard');
+        }
+    
+        else{
+            return res.redirect('/steps');
+        }
+    }
+
+    else{
+        return res.redirect('/patient-dashboard');
+    }
     }
 
 }
@@ -48,7 +139,7 @@ module.exports.updateType = async function(req, res) {
     user.save();
     console.log(user.type);
     if (user.type == 'Doctor') {
-        return res.redirect('/doctor-dashboard');
+        return res.redirect('/steps');
     }
 
     if (user.type == 'Patient') {
@@ -180,10 +271,18 @@ module.exports.bookAppointment = async (req, res) => {
 module.exports.setBookingFee = async function(req, res) {
     let user = await User.findById(req.user.id);
     user.booking_fee = req.body.fee;
-    user.max_count = req.body.max_count;
     user.save();
 
-    return res.redirect('back');
+    if(req.body.flag == 'true')
+    {
+        return res.redirect('/terms');
+    }
+
+    else{
+        return res.redirect('back');
+
+    }
+
 }
 module.exports.bankDetails = async function(req, res) {
     if (!req.body.bankname) {
@@ -247,10 +346,8 @@ module.exports.updateSchedule = async function(req, res) {
         }
     });
 
-  
 
-
-    return res.redirect('back');
+        return res.redirect('back');
 
 }
 
@@ -288,11 +385,13 @@ module.exports.setScheduleTiming = async function(req, res) {
 
 
     user.save();
-    console.log(user);
+    console.log(req.body);
+  
+        return res.redirect('back');
 
+    }
 
-    return res.redirect('back');
-}
+    
 
 module.exports.changePassword = async(req, res) => {
     let user = await User.findOne({ phone: req.body.phone });
@@ -376,12 +475,42 @@ module.exports.uploadId = async function(req, res) {
     return res.redirect('back');
 
 }
+
+module.exports.uploadIdProof = async function(req, res) {
+    let user = await User.findById(req.user.id);
+
+    User.uploadedAvatar(req, res, function(err) {
+        
+        user.idproofname = req.body.idproofname;
+        if (req.files['avatar']) {
+            if (!user.idproof) {
+                console.log('hii');
+                user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
+
+            } else {
+                console.log('hello');
+                fs.unlinkSync(path.join(__dirname, '..', user.idproof));
+                user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
+            }
+        }
+
+        if (user.degreeproof) {
+            user.request = true;
+        }
+
+        user.save();
+        
+    });
+
+    console.log(req.body);
+    return res.redirect('/medical-proof');
+
+}
 module.exports.uploadDegree = async function(req, res) {
     let user = await User.findById(req.user.id);
 
     User.uploadedAvatar(req, res, function(err) {
-        // console.log(req.files);
-        user.degreeproof = req.body.degreeproof;
+        
         if (req.files['avatar']) {
             if (!user.degreephoto) {
                 user.degreephoto = User.avatarPath + '/' + req.files['avatar'][0].filename;
@@ -393,20 +522,20 @@ module.exports.uploadDegree = async function(req, res) {
         }
 
         if (user.idproof) {
-            user.request = true;
+            user.step2 = true;
         }
 
         user.save();
-        // console.log(user);
+        
     });
-    return res.redirect('back');
+    return res.redirect('/steps');
 
 }
 module.exports.acceptAgreement = async(req, res) => {
     let user = await User.findById(req.user.id);
-    user.terms = true;
+    user.step3 = true;
     user.save();
-    return res.redirect('/doctors');
+    return res.redirect('/steps');
 }
 
 module.exports.profileUpdate = async function(req, res) {
@@ -590,17 +719,17 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
 
 
-            if (typeof(req.body.registration) == 'object') {
-                for (let i = 0; i < req.body.registration.length; i++) {
-                    user.registrations.push({ registration: req.body.registration[i], regYear: req.body.regYear[i] });
-                }
-            }
+            // if (typeof(req.body.registration) == 'object') {
+            //     for (let i = 0; i < req.body.registration.length; i++) {
+            //         user.registrations.push({ registration: req.body.registration[i], regYear: req.body.regYear[i] });
+            //     }
+            // }
 
 
 
-            if (typeof(req.body.registration) == 'string' && req.body.registration != '') {
-                user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
-            }
+            // if (typeof(req.body.registration) == 'string' && req.body.registration != '') {
+            //     user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
+            // }
 
 
 

@@ -263,7 +263,7 @@
                                 <div class="dropdown-menu profile-drop">
                                     <div class="user-header">
                                         <div class="avatar avatar-sm">
-                                            <img src="<%=locals.user.avatar%> " alt="User Image" class="avatar-img rounded-circle">
+                                            <img src="<%=locals.user.avatar%>" onerror='this.src="/img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
                                         </div>
                                         <div class="user-text">
                                             <h6>Dr.
@@ -274,8 +274,13 @@
                                     </div>
                                     <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
                                     <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                    <a class="dropdown-item" href="/appointments">Appointments</a>
+                                    <a class="dropdown-item" href="/chat">Messages</a>
                                     <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+                                    <a class="dropdown-item" href="/appointments">Appointments</a>
+                                    <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                    <a class="dropdown-item" href="/invoices">Invoices</a>
+                                    <a class="dropdown-item" href="/review">Review</a>
+                                    
 
                                     <a class="dropdown-item" href="/settings">Settings</a>
                                     <a class="dropdown-item" href="/user/logout">Logout</a>
@@ -285,12 +290,12 @@
                                 <%if(locals.user.type == 'Patient'){%>
                                     <li class="nav-item dropdown has-arrow">
                                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " width="31" alt="Ryan Taylor"></span>
+                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
                                         </a>
                                         <div class="dropdown-menu profile-drop">
                                             <div class="user-header">
                                                 <div class="avatar avatar-sm">
-                                                    <img src="<%=locals.user.avatar%>" alt="User Image" class="avatar-img rounded-circle">
+                                                    <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
                                                 </div>
                                                 <div class="user-text">
                                                     <h6>
@@ -300,7 +305,7 @@
                                                 </div>
                                             </div>
 
-                                            <a class="dropdown-item" href="/profile">My Profile</a>
+                                            <a class="dropdown-item" href="/profile-settings">My Profile</a>
                                             <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
                                             <a class="dropdown-item" href="/chat">Messages</a>
                                             <a class="dropdown-item" href="/favourites">My Favourites</a>
@@ -380,7 +385,7 @@
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <form action="/user/update-type" method="POST">
-                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;">
+                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
                             <div class="form-">
                                 <label style="color: rgb(138, 138, 138);">Are you a ?</label>
                                 <%if(locals.user){%>

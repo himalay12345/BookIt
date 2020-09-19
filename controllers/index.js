@@ -75,7 +75,7 @@ module.exports.bankDetails = (req, res) => {
     })
 }
 module.exports.Doctors = async(req, res) => {
-    let doctors = await User.find({ terms: true });
+    let doctors = await User.find({ approve: true });
     return res.render('doctors', {
         title: 'Doctors',
         doctors: doctors
@@ -225,6 +225,18 @@ module.exports.editPrescription = (req, res) => {
         title: 'Edit prescription'
     })
 }
+module.exports.establishment = (req, res) => {
+    return res.render('establishment', {
+        title: 'Establishment Details'
+    })
+}
+
+
+module.exports.educational = (req, res) => {
+    return res.render('educational', {
+        title: 'Educational Qualification'
+    })
+}
 
 module.exports.favourites = async(req, res) => {
     let doctors = await User.findById(req.user.id).populate({
@@ -234,6 +246,12 @@ module.exports.favourites = async(req, res) => {
     return res.render('favourites', {
         title: 'Favourites',
         doctors: doctors
+    })
+}
+
+module.exports.fees = (req, res) => {
+    return res.render('fees', {
+        title: 'Booking Fees'
     })
 }
 
@@ -260,6 +278,11 @@ module.exports.invoices = (req, res) => {
         title: 'Invoices'
     })
 }
+module.exports.idProof = (req, res) => {
+    return res.render('identity-proof', {
+        title: 'ID Proof'
+    })
+}
 
 module.exports.login = (req, res) => {
     if (req.isAuthenticated()) {
@@ -273,6 +296,18 @@ module.exports.login = (req, res) => {
 module.exports.myPatients = (req, res) => {
     return res.render('my-patients', {
         title: 'My users'
+    })
+}
+
+module.exports.medicalRegistration = (req, res) => {
+    return res.render('medical-registration', {
+        title: 'Medical Registration'
+    })
+}
+
+module.exports.medicalProof = (req, res) => {
+    return res.render('medical-proof', {
+        title: 'Medical Proof'
     })
 }
 
@@ -310,6 +345,13 @@ module.exports.profileSettings = async(req, res) => {
         user: user
     })
 }
+module.exports.profileInfo = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    return res.render('profile-info', {
+        title: 'Profile Settings',
+        user: user
+    })
+}
 
 module.exports.previewProfile = async(req, res) => {
     // let user = await User.findById(req.user.id);
@@ -324,6 +366,17 @@ module.exports.register = (req, res) => {
     }
     return res.render('phone-login', {
         title: 'Register'
+    })
+}
+
+module.exports.steps = (req, res) =>
+{
+    if(req.user.approve == true)
+    {
+        return res.redirect('/doctor-dashboard');
+    }
+    return res.render('steps', {
+        title: 'Profile Information'
     })
 }
 
@@ -428,6 +481,20 @@ module.exports.socialMedia = (req, res) => {
 module.exports.termCondition = (req, res) => {
     return res.render('term-condition', {
         title: 'Term Condition'
+    })
+}
+
+
+module.exports.terms = (req, res) => {
+    return res.render('terms', {
+        title: 'Term Condition'
+    })
+}
+
+
+module.exports.timing = (req, res) => {
+    return res.render('timing', {
+        title: 'Timings'
     })
 }
 

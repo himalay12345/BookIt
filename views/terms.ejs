@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/profile-settings  30 Nov 2019 04:12:18 GMT -->
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -18,23 +19,18 @@
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
 
-    <!-- Datetimepicker CSS -->
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-
-    <!-- Select2 CSS -->
-    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 			<script src="js/html5shiv.min.js"></script>
 			<script src="js/respond.min.js"></script>
-        <![endif]-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+		<![endif]-->
 
 </head>
 
@@ -275,7 +271,7 @@
                                 <div class="dropdown-menu profile-drop">
                                     <div class="user-header">
                                         <div class="avatar avatar-sm">
-                                            <img src="<%=locals.user.avatar%>" onerror='this.src="/img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
+                                            <img src="<%=locals.user.avatar%> " alt="User Image" class="avatar-img rounded-circle">
                                         </div>
                                         <div class="user-text">
                                             <h6>Dr.
@@ -284,7 +280,7 @@
                                             <p class="text-muted mb-0">Doctor</p>
                                         </div>
                                     </div>
-                                    <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
+                                    <a class="dropdown-item" href="/profile">My Profile</a>
                                     <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
                                     <a class="dropdown-item" href="/appointments">Appointments</a>
                                     <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
@@ -297,12 +293,12 @@
                                 <%if(locals.user.type == 'Patient'){%>
                                     <li class="nav-item dropdown has-arrow">
                                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
+                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " width="31" alt="Ryan Taylor"></span>
                                         </a>
                                         <div class="dropdown-menu profile-drop">
                                             <div class="user-header">
                                                 <div class="avatar avatar-sm">
-                                                    <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
+                                                    <img src="<%=locals.user.avatar%>" alt="User Image" class="avatar-img rounded-circle">
                                                 </div>
                                                 <div class="user-text">
                                                     <h6>
@@ -312,7 +308,7 @@
                                                 </div>
                                             </div>
 
-                                            <a class="dropdown-item" href="/profile-settings">My Profile</a>
+                                            <a class="dropdown-item" href="/profile">My Profile</a>
                                             <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
                                             <a class="dropdown-item" href="/chat">Messages</a>
                                             <a class="dropdown-item" href="/favourites">My Favourites</a>
@@ -388,162 +384,106 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-md-12 col-12">
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
-                            </ol>
-                        </nav>
-                        <h2 class="breadcrumb-title">Profile Settings</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-
-                    <!-- Profile Sidebar -->
-                    
-                    <!-- /Profile Sidebar -->
-
-                    <div class="col-md-12 col-lg-12 col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-
-
-                                <form action="/user/profile/update" id="edit_form" method="POST" enctype="multipart/form-data">
-                                    <div class="row form-row">
-                                        <div class="col-12 col-md-12">
-                                            <div class="form-group">
-                                                <div class="change-avatar">
-                                                    <div class="profile-img">
-                                                        <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/profile.png"'>
-                                                    </div>
-                                                    <div class="upload-img">
-                                                        <div class="change-photo-btn">
-                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                            <input type="file" class="upload" id="imageUpload" name="avatar">
-                                                        </div>
-                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label> Name</label>
-                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Gender</label>
-                                                <select name="gender" class="form-control select">
-                                                    <%if(locals.user.gender == 'Male '){%><option selected>Male</option><%}else{%>
-                                                    <option>Male</option><%}%>
-                                                    <%if(locals.user.gender == 'Female '){%><option selected>Female</option><%}else{%>
-                                                    <option>Female</option><%}%>
-                                                    <%if(locals.user.gender == 'Others '){%><option selected>Others</option><%}else{%>
-                                                    <option>Others</option><%}%>
-													</select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Date of Birth</label>
-                                                <div class="cal-icon">
-                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Blood Group</label>
-                                                <select name="bloodgroup" class="form-control select">
-                                                        <%if(locals.user.bloodgroup == 'A- '){%><option selected>A-</option><%}else{%>
-                                                        <option>A-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'A+ '){%><option selected>A+</option><%}else{%>
-                                                        <option>A+</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'B- '){%><option selected>B-</option><%}else{%>
-                                                        <option>B-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'B- '){%><option selected>B-</option><%}else{%>
-                                                        <option>B-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'AB- '){%><option selected>AB-</option><%}else{%>
-                                                        <option>AB-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'AB+ '){%><option selected>AB+</option><%}else{%>
-                                                        <option>AB+</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'O- '){%><option selected>O-</option><%}else{%>
-                                                        <option>O-</option><%}%>
-                                                        <%if(locals.user.bloodgroup == 'O+ '){%><option selected>O+</option><%}else{%>
-                                                        <option>O+</option><%}%>
-													</select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Email ID</label>
-                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Mobile</label>
-                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.address%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.city%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>State</label>
-                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.state%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Pin Code</label>
-                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.pincode%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group">
-                                                <label>Country</label>
-                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.country%>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="submit-section">
-                                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                    </div>
-                                </form>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-12 col-lg-12 col-xl-12 setting-bread pzero" style="margin-left:-15px;border-left: 0.5px solid lighgrey;margin-top: 20px;">
+        <div class="card" style="border-radius: 0;border:0;">
+        <div class="card-body" style="padding:0rem;">
+        <div class="row position-relative pzero">
+            <div class="col-md-12" style="height: 40px;background-color: rgb(248, 248, 248);">
+                <p style="margin-top: 10px;margin-left: 150px;font-weight: bold;">Step 3/3</p>
             </div>
-
+            <div class="col-md-12" style="margin-left: -5px;">
+            <div class="col-md-12" style="border-top: 5px solid blueviolet;"> 
+            </div>
         </div>
+        <div class="col-md-10 col-lg-10 m-13" style="margin-left: 150px;margin-top: 30px;">
+            <form action="/user/accept-agreement" method="POST">
+               
+                <h2 style="font-size: 1.5rem;margin-top: 20px;font-weight: 700;">Terms And Condition</h2>
+                
+                <div class="bg_color_1">
+           
+                    <div class="container mt-5">
+                     
+                        <div class="main_title">
+                            <h1>Agreement of Online Booking Services</h1>
+                            <p>Scheduling automation you and your invitees will actually enjoy. </p>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-lg-12">
+                            
+                                <h6 class="add_bottom_15">Provision of the Services by DOCCURE.</h6>
+                                <p>Your use of the Services is at your sole risk. The Services are provided on an "as is" and "as available" basis.</p><br>
+                                <p>DOCCURE reserves the right (but has no obligation) to pre-screen, review, flag, filter, modify, refuse or remove any or all content or user-account from any of the Services / Features at DOCCURE’s sole discretion. 
+                You understand that by using the Services/ features YOU may be exposed to content that YOU may find offensive, indecent or objectionable and that, in this respect, YOU use the Services/ features  at your own risk.</p><br>
+                                <p>DOCCURE doesn't warrant that,</p>
+                                <ul class="bullets">
+                                  <li> Services will meet your requirements or expectations.</li>
+                                  <li>Services will be delivered uninterrupted, timely, secure, or error-free.</li>
+                                  <li>Results that may be obtained from the use of the Services will be accurate or reliable based on listings. </li>
+                                  <li>Any errors in the Services will be corrected.</li>
+                                </ul><br><br>
+                                <p>You understand and agree that, DOCCURE shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to any loss of profit, loss of goodwill, loss of business reputation, loss of data, or other intangible loss, resulting from: </p>
+                                <ul class="bullets">
+                                      <li> the use or the inability to use the Services; </li>
+                                      <li>any changes which DOCCURE may make to the Services / Features, or any permanent or temporary cessation in the provision of the Services / Listings / Features;</li>
+                                      <li> unauthorized access to or alteration of your infos or data;  </li>
+                                      <li>the deletion of, corruption of, or failure to store, any content and other communications data/ info maintained or transmitted by or through the use of the Services/ features; (v) or any other matter relating to the Services/listings/features.</li>
+                                </ul>
+                                 <p>
+                         Technical support from DOCCURE is provided on a best-effort basis and only by e-mail.<br><br>You understand that DOCCURE can use third parties (e.g., Cloud hosting partners) to provide the necessary resources (e.g., hardware, software, networking, Cloud services, etc.) to run the Services.<br><br>DOCCURE may stop, remove, modify, or add (permanently or temporarily) Services (or features within Services) at DOCCURE’s sole discretion. <br><br>
+        Any new, changed, or removed features are subject to the Terms of Service. Continued use of the Services after any such changes constitute <strong>YOUR consent</strong> to the changes.                 
+                        Use of the Services/ FEATURES by YOU.<br>For certain services/ Features, DOCCURE may offer or require YOU to <strong>register</strong> for a user-account. You ensure that all registration information YOU provide will always be valid, correct, and up-to-date. <br>YOU are responsible for maintaining the security of your user-account and password / Log-in credentials. 
+        User-accounts registered by bots or other automated methods are not permitted.
+                        
+                        <br>For certain services, DOCCURE may offer to upload your personal profile photo. You are responsible to NOT upload an abusive photo, to not infringe on any copyrights or trademarks, and to not use a design which other DOCCURE users may deem offensive / objectionable.
+        
+                        <br>For certain services / features, DOCCURE may offer to define a personal URL (web address). YOU understand that DOCCURE can rename or reject your personal URL, e.g., if you intentionally or unintentionally interfere with other registered users or because your personal URL is deemed offensive.
+                        <br>You agree that YOU will not impersonate another person.
+                        <br>YOU agree that you will not engage in any activity that interferes with or disrupts the Services / features (or the servers and networks which are connected to the Services).
+                        <br>You agree that you will not reproduce, duplicate, copy, sell, trade or resell the Services / features for any purpose without the express written permission by DOCCURE.
+                        <br>You agree that YOU are solely responsible for (and that DOCCURE has no responsibility to you or to any third party for) any breach of your obligations under the Terms of Service and for the consequences (including any loss or damage which DOCCURE may suffer) of any such breach.
+                        <br><br>Modifications to the Prices / subscription fees
+                        <br><br>Prices / subscription fess, of all Services / features  are <strong>subject to change</strong>. If they change / applicable, the changes do not affect running subscriptions but will take effect only for any subsequent subscription period you choose to purchase/ subscribe.
+                        <br>DOCCURE is not liable to you or to any third party for any price / SUBSCRIPTION FEES change.
+                        <br><br>**On Every appointment made through DOCCURE there will be a 10% charges deducted as a interest and will be redirected to your account.
+                        <br>
+                        
+                        </p>
+                        <input type="checkbox" checked onchange="document.getElementById('sendNewSms').disabled = !this.checked;" class="mt-5 mr-2"><b>I <%=locals.user.name%>  have read and agree to the terms of the DOCCURE Online Booking Agreement.</b></br>
+                        <!-- <form action="/user/accept-agreement" method="POST"> -->
+                            <div class="submit-section submit-btn-bottom" style="margin-top: 5px;display: inline-flex;height: 40px;">
+                                <a href="/fees" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="color:white;border-radius: 5px;width: 100px;left:8%;bottom:0%;">Back</a>
+                            </div>
+                            <div class="submit-section text-center" style="margin-bottom: 100px; margin-top: 15px;display: inline-flex;">
+                             
+                                
+                            
+                                    <input type="submit" id="sendNewSms" value="Next" class="btn btn-primary submit-btn w-25 position-absolute" style="border-radius: 5px;right: 8%;bottom:0%;">
+                                  
+                                <input type="hidden" name="checked" value="true">
+                            </div>
+                        <!-- </form> -->
+                            </div>
+                        
+                            
+              
+                        </div>
+                        <!--/row-->
+                        
+                    </div>
+                    <!--/container-->
+                </div>
+                </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
         <!-- /Page Content -->
 
         <!-- Footer -->
@@ -551,7 +491,7 @@
 
             <!-- Footer Top -->
             <div class="footer-top">
-                <div class="container-fluid">
+                <div class="container-fluid" >
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
 
@@ -565,7 +505,7 @@
                                     <div class="social-icon">
                                         <ul>
                                             <li>
-                                                <a href="<%=locals.user.fbid%>" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                             </li>
                                             <li>
                                                 <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
@@ -591,13 +531,13 @@
 
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patient</h2>
+                                <h2 class="footer-title">For Patients</h2>
                                 <ul>
                                     <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
                                     <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
                                     <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
                                     <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="/locals.user-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+                                    <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -693,13 +633,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Select2 JS -->
-    <script src="plugins/select2/js/select2.min.js"></script>
-
-    <!-- Datetimepicker JS -->
-    <script src="js/moment.min.js"></script>
-    <script src="js/bootstrap-datetimepicker.min.js"></script>
-
     <!-- Sticky Sidebar JS -->
     <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
     <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
@@ -707,33 +640,28 @@
     <!-- Custom JS -->
     <script src="js/script.js"></script>
     <script>
-        document.getElementById("imageUpload").onchange = function() {
-            document.getElementById("edit_form").submit();
-        };
-    </script>
-    <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({
-            theme: 'metroui ',
+            theme: 'metroui',
             text: '<%=flash.success%>',
             type: 'success',
             layout: 'topRight',
-            timeout: 3000
+            timeout: 1500
         }).show();
         <%}%>
         <%if(flash.error && flash.error.length>0){%>
         new Noty({
-                    theme: 'metroui',
-                    text: '
-                    <%=flash.error%>
-                    ', type: '
-                    error ', layout: '
-                    topRight ', timeout: 3000 }).show();
-                    <%}%>
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
     </script>
 
 </body>
 
-<!-- doccure/profile-settings  30 Nov 2019 04:12:18 GMT -->
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 </html>

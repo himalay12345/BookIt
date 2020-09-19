@@ -6,7 +6,7 @@ module.exports.appointmentList = (req, res) => {
     })
 }
 module.exports.applicationRequest = async(req, res) => {
-    let user = await User.find({ request: true });
+    let user = await User.find({ step3: true });
     return res.render('a-application-request', {
         title: 'Application Request',
         user: user
@@ -14,7 +14,7 @@ module.exports.applicationRequest = async(req, res) => {
 }
 module.exports.approveDocuments = async(req, res) => {
     let users = await User.findById(req.body.id);
-    let user = await User.find({ request: true });
+    let user = await User.find({ step3: true });
     users.approve = true;
     users.save();
     return res.render('a-application-request', {
