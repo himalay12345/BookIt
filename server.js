@@ -13,7 +13,7 @@ const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 // const twilio = require('./config/twilio');
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static('./assets'));
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -33,7 +33,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (5000 * 60 * 100)
+        maxAge: (20000 * 60 * 100)
     },
     store: new MongoStore({
         mongooseConnection: db,

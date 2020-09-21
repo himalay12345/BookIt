@@ -58,9 +58,18 @@ module.exports.Specialist = async function(req, res) {
 
 }
 
-module.exports.appointments = (req, res) => {
+module.exports.appointments =async (req, res) => {
+
+    let patients = await User.findById(req.user.id).populate({
+        path: 'patients',
+        populate: { 
+            path: 'pid',
+            populate: { path: 'user', }
+         }
+    });
     return res.render('appointments', {
-        title: 'Appointments'
+        title: 'Appointments',
+        allpatients:patients
     })
 }
 
@@ -181,9 +190,17 @@ module.exports.doctorTermsAndCondition = (req, res) => {
 }
 
 
-module.exports.doctorDashboard = (req, res) => {
+module.exports.doctorDashboard = async(req, res) => {
+    let patients = await User.findById(req.user.id).populate({
+        path: 'patients',
+        populate: { 
+            path: 'pid',
+            populate: { path: 'user', }
+         }
+    });
     return res.render('doctor-dashboard', {
-        title: 'user Dashboard'
+        title: 'My Dashboard',
+        allpatients:patients
     })
 }
 
@@ -273,9 +290,17 @@ module.exports.invoiceView = (req, res) => {
     })
 }
 
-module.exports.invoices = (req, res) => {
+module.exports.invoices = async (req, res) => {
+    let patients = await User.findById(req.user.id).populate({
+        path: 'patients',
+        populate: { 
+            path: 'pid',
+            populate: { path: 'user', }
+         }
+    });
     return res.render('invoices', {
-        title: 'Invoices'
+        title: 'Invoices',
+        allpatients:patients
     })
 }
 module.exports.idProof = (req, res) => {
@@ -293,9 +318,17 @@ module.exports.login = (req, res) => {
     })
 }
 
-module.exports.myPatients = (req, res) => {
+module.exports.myPatients = async (req, res) => {
+    let patients = await User.findById(req.user.id).populate({
+        path: 'patients',
+        populate: { 
+            path: 'pid',
+            populate: { path: 'user', }
+         }
+    });
     return res.render('my-patients', {
-        title: 'My users'
+        title: 'My users',
+        allpatients:patients
     })
 }
 
@@ -318,9 +351,24 @@ module.exports.notificationSettings = (req, res) => {
 }
 
 module.exports.patientDashboard = async(req, res) => {
-    let user = await User.findById(req.user.id)
+    let user = await User.findById(req.user.id);
+    let doctors = await User.findById(req.user.id).populate({
+        path: 'doctors',
+        populate: { 
+            path: 'did',
+            populate: { path: 'user', }
+         }
+    });
     return res.render('patient-dashboard', {
         title: 'user Dashboard',
+        user: user,
+        alldoctors:doctors
+    })
+}
+module.exports.pay = async(req, res) => {
+    
+    return res.render('pay', {
+        title: 'Payment',
         user: user
     })
 }
@@ -371,10 +419,10 @@ module.exports.register = (req, res) => {
 
 module.exports.steps = (req, res) =>
 {
-    if(req.user.approve == true)
-    {
-        return res.redirect('/doctor-dashboard');
-    }
+    // if(req.user.approve == true)
+    // {
+    //     return res.redirect('/doctor-dashboard');
+    // }
     return res.render('steps', {
         title: 'Profile Information'
     })
@@ -416,7 +464,58 @@ module.exports.signUp = async(req, res) => {
             })
 
         }
-    } else {
+    }
+    
+    if (req.body.type == 'book') {
+        console.log(req.body.type)
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
+
+        if (data.status == 'approved') {
+            let doctor = await User.findById(req.body.doctorid);
+            return res.render('checkout', {
+                title: 'Phone verification',
+                flag: 'login',
+                phone: req.body.phone,
+                type: req.body.type,
+                booked:req.body.booked,
+                available:req.body.available,
+                slotindex:req.body.slotindex,
+                dayindex:req.body.dayindex,
+                id:req.body.id,
+                doctor:doctor
+
+
+            });
+
+        } else {
+            req.flash('error', 'Wrong Otp');
+            let doctor = await User.findById(req.body.doctorid);
+            return res.render('checkout', {
+                title: 'Phone verification',
+                flag: true,
+                phone: req.body.phone,
+                type: req.body.type,
+                booked:req.body.booked,
+                available:req.body.available,
+                slotindex:req.body.slotindex,
+                dayindex:req.body.dayindex,
+                id:req.body.id,
+                doctor:doctor
+
+
+            });
+
+        }
+    }
+    else {
         console.log('hiii')
 
         let data = await client
@@ -539,33 +638,67 @@ module.exports.verify = async(req, res) => {
             });
 
     } else {
-
-        console.log('hii')
-        let user = await User.findOne({ phone: req.body.phone });
-
-        if (user) {
-            req.flash('error', 'Account already linked with this mobile number');
-            return res.redirect('back');
-        } else {
-
+        if (req.body.type == 'book') {
             client
-                .verify
-                .services(config.serviceID)
-                .verifications
-                .create({
-                    to: `+91${req.body.phone}`,
-                    channel: req.query.service
-                }).then((data) => {
-                    // console.log(data);
-                    return res.render('phone-verify', {
-                        title: 'Phone verification',
-                        phone: req.body.phone,
-                        type: req.body.type
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.query.service
+            }).then(async(data) => {
+                
+                let doctor = await User.findById(req.body.doctorid);
+                return res.render('checkout', {
+                    title: 'Phone verification',
+                    flag:true,
+                    phone: req.body.phone,
+                    type: req.body.type,
+                    booked:req.body.booked,
+                    available:req.body.available,
+                    slotindex:req.body.slotindex,
+                    dayindex:req.body.dayindex,
+                    id:req.body.id,
+                    doctor:doctor
 
-                    });
+
                 });
+            });
+
 
         }
+
+        else
+        {
+            console.log('hii')
+            let user = await User.findOne({ phone: req.body.phone });
+    
+            if (user) {
+                req.flash('error', 'Account already linked with this mobile number');
+                return res.redirect('back');
+            } else {
+    
+                client
+                    .verify
+                    .services(config.serviceID)
+                    .verifications
+                    .create({
+                        to: `+91${req.body.phone}`,
+                        channel: req.query.service
+                    }).then((data) => {
+                        // console.log(data);
+                        return res.render('phone-verify', {
+                            title: 'Phone verification',
+                            phone: req.body.phone,
+                            type: req.body.type
+    
+                        });
+                    });
+    
+            }
+        }
+
+   
     }
 
 }

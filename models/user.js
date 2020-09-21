@@ -100,6 +100,73 @@ const userSchema = mongoose.Schema({
     step3:{
         type: Boolean
     },
+
+    doctors:[{
+        did:{
+            type: mongoose.Schema.Types.ObjectId
+        },
+        time:{
+            type:String
+        },
+        date:{
+            type:String
+        },
+        day:{
+            type:String
+        },
+        fee:{
+            type:String
+        },
+        type:{
+            type:String
+        },
+        count:{
+            type:String
+        },
+        name:{
+            type:String
+        },
+        email:{
+            type:String
+        },
+        phone:{
+            type:String
+        }
+    }],
+
+    patients:[{
+        pid:{
+            type: mongoose.Schema.Types.ObjectId
+        },
+        time:{
+            type:String
+        },
+        date:{
+            type:String
+        },
+        day:{
+            type:String
+        },
+        fee:{
+            type:String
+        },
+        type:{
+            type:String
+        },
+        count:{
+            type:String
+        },
+        name:{
+            type:String
+        },
+        email:{
+            type:String
+        },
+        phone:{
+            type:String
+        },
+        createdAt: { type: Date, default: Date.now }
+    }],
    
     clinicaddr: {
         type: String

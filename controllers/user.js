@@ -18,13 +18,28 @@ module.exports.create = async(req, res) => {
 }
 
 module.exports.updateProfile = async(req, res) => {
-    console.log(req.body);
-    let doctor = await User.findById(req.body.id);
+
+    let doctor = await User.findById(req.user.id);
+    User.uploadedAvatar(req, res, function(err) {
+        if (err) { console.log('*******Multer Error', err); return; }
     doctor.name = req.body.name;
     doctor.department = req.body.department;
     doctor.gender = req.body.gender;
     doctor.contacts.city = req.body.city;
+
+    if (req.files['avatar']) {
+        if (!doctor.avatar) {
+            doctor.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+        } else {
+
+            fs.unlinkSync(path.join(__dirname, '..', doctor.avatar));
+            doctor.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+        }
+    }
     doctor.save();
+
+
+    });
 
 
 
@@ -80,7 +95,25 @@ module.exports.addFavourite = async(req, res) => {
     return res.redirect('back');
 }
 
-module.exports.createSession = function(req, res) {
+module.exports.createSession =async function(req, res) {
+
+    console.log(req.body);
+    if(req.body.flag == 'true')
+    {
+      
+        let doctor = await User.findById(req.body.doctorid);
+        return res.render('checkout',{
+            booked:req.body.booked,
+            available:req.body.available,
+            slotindex:req.body.slotindex,
+            dayindex:req.body.dayindex,
+            id:req.body.id,
+            doctor:doctor
+    
+        });
+    }
+
+    else{
 
     if(req.user.type == 'Doctor')
     {
@@ -100,6 +133,8 @@ module.exports.createSession = function(req, res) {
         return res.redirect('/patient-dashboard');
     }
 
+
+}
     //Todo Later
   
 }
@@ -166,6 +201,32 @@ module.exports.Filter = async function(req, res) {
 
 }
 
+module.exports.confirmPay = async function(req, res) {
+
+let user = await User.findById(req.user.id);
+if(req.body.type == 'own')
+{
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.phone = req.body.phone;
+    user.save();
+}
+
+let doctor = await User.findById(req.body.doctorid);
+return res.render('pay',{
+    booked:req.body.booked,
+    available:req.body.available,
+    slotindex:req.body.slotindex,
+    dayindex:req.body.dayindex,
+    id:req.body.id,
+    doctor:doctor,
+    type:req.body.type
+
+})
+
+}
+
+
 module.exports.destroySession = function(req, res) {
     req.logout();
 
@@ -174,6 +235,9 @@ module.exports.destroySession = function(req, res) {
 
 module.exports.payment = async (req, res) => {
       let user = await User.findById(req.body.doctorid);
+      let patient = await User.findById(req.user.id); 
+      console.log(req.body);
+      
 
       if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
       {
@@ -194,7 +258,8 @@ module.exports.payment = async (req, res) => {
                 available.push(temp1);
             }
     let j = req.body.booked.split(',');
-    let b = parseInt(j[k]);
+    let bd = user.schedule_time[req.body.dayindex].booked[req.body.slotindex];
+    let b = parseInt(bd);
     b = b+1;
     // console.log(user.schedule_time[req.body.dayindex].start.length);
     for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
@@ -214,6 +279,34 @@ module.exports.payment = async (req, res) => {
             
         }
     });
+    user.patients.push({
+        pid:req.body.pid,
+        name:req.body.name,
+        email:req.body.email,
+        phone:req.body.phone,
+        time:req.body.time,
+        date:req.body.date,
+        day:req.body.day,
+        fee:req.body.fee,
+        type:req.body.type,
+        seat:b
+
+    });
+    patient.doctors.push({
+        did:req.body.doctorid,
+        name:req.body.name,
+        email:req.body.email,
+        phone:req.body.phone,
+        time:req.body.time,
+        date:req.body.date,
+        day:req.body.day,
+        fee:req.body.fee,
+        type:req.body.type,
+        seat:b
+
+    });
+    user.save();
+    patient.save();
     return res.render('booking-success',{
         doctor:user,
         seat:b,
@@ -225,7 +318,8 @@ module.exports.payment = async (req, res) => {
 
     if(typeof(user.schedule_time[req.body.dayindex].start) == 'string')
     {
-        var k1 = parseInt(req.body.booked);
+        let bd1 = user.schedule_time[req.body.dayindex].booked;
+        let k1 = parseInt(bd1);
         k1+=1;
         var k2 = parseInt(req.body.available);
         k2-=1;
@@ -238,6 +332,34 @@ module.exports.payment = async (req, res) => {
             
         }
     });
+    user.patients.push({
+        pid:req.body.pid,
+        name:req.body.name,
+        email:req.body.email,
+        phone:req.body.phone,
+        time:req.body.time,
+        date:req.body.date,
+        day:req.body.day,
+        fee:req.body.fee,
+        type:req.body.type,
+        seat:k1
+
+    });
+    patient.doctors.push({
+        did:req.body.doctorid,
+        name:req.body.name,
+        email:req.body.email,
+        phone:req.body.phone,
+        time:req.body.time,
+        date:req.body.date,
+        day:req.body.day,
+        fee:req.body.fee,
+        type:req.body.type,
+        seat:k1
+
+    });
+    user.save();
+    patient.save();
 
     return res.render('booking-success',{
         doctor:user,
@@ -247,6 +369,8 @@ module.exports.payment = async (req, res) => {
     });
 
     }
+
+    console.log(req.body);
      
 
   
@@ -257,15 +381,33 @@ module.exports.bookAppointment = async (req, res) => {
     console.log(req.body);
     let doctor = await User.findById(req.body.doctorid);
 
-    return res.render('checkout',{
+    if (req.isAuthenticated()) {
+
+        return res.render('checkout',{
+            booked:req.body.booked,
+            available:req.body.available,
+            slotindex:req.body.slotindex,
+            dayindex:req.body.dayindex,
+            id:req.body.id,
+            doctor:doctor,
+            flag:true
+    
+        })
+    }
+
+    else{
+
+    return res.render('login',{
         booked:req.body.booked,
         available:req.body.available,
         slotindex:req.body.slotindex,
         dayindex:req.body.dayindex,
         id:req.body.id,
-        doctor:doctor
+        doctor:doctor,
+        flag:true
 
-    })
+    });
+}
 }
 
 module.exports.setBookingFee = async function(req, res) {

@@ -210,38 +210,58 @@
 
                     </div>
                     <div class="col-md-7 col-lg-8 col-xl-9">
-                        <h2 class="text-center mt-5">No Patients Available !</h2>
+                       
 
-                        <!-- <div class="row row-grid">
+                     <div class="row row-grid">
+                        <%if(allpatients.patients == ''){%>
+                            <h2 class="text-center mt-5">No Patients Available !</h2>
+                            <%}else{%>
+                            <%for(patient of allpatients.patients){%>
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card widget-profile pat-widget-profile">
                                     <div class="card-body">
                                         <div class="pro-widget-content">
                                             <div class="profile-info-widget">
                                                 <a href="/patient-profile" class="booking-doc-img">
-                                                    <img src="img/patients/patient.jpg" alt="User Image">
+                                                    <img src="<%=patient.pid.avatar%>" alt="User Image">
                                                 </a>
                                                 <div class="profile-det-info">
-                                                    <h3><a href="/patient-profile">Richard Wilson</a></h3>
+                                                    <h3><a href="/patient-profile"><%=patient.name%></a></h3>
 
                                                     <div class="patient-details">
                                                         <h5><b>Patient ID :</b> P0016</h5>
-                                                        <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Alabama, USA</h5>
+                                                        <%if(patient.pid.contacts.city){%><h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> <%=patient.pid.contacts.city%></h5><%}%>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="patient-info">
                                             <ul>
-                                                <li>Phone <span>+1 952 001 8563</span></li>
-                                                <li>Age <span>38 Years, Male</span></li>
-                                                <li>Blood Group <span>AB+</span></li>
+                                                <li>Phone <span>+91 <%=patient.phone%></span></li>
+                                                <%var newDateObject = new Date();
+
+                                                    var newObjectCurrentYear = newDateObject.getFullYear();
+                                                    
+                                                    var userDateObject = patient.pid.dob;
+                                                    
+                                                    var userDateObjectPieces = userDateObject.split("/");
+                                                    
+                                                    var userObjectYear = userDateObjectPieces[2];
+                                                    
+                                                    var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
+    
+                                                    %>
+                                               
+                                                <%if(patient.pid.dob){%><li>Age <span><%=age%>Years,<%=patient.pid.gender%></span></li><%}%>
+                                                <%if(patient.pid.bloodgroup){%><li>Blood Group <span><%=patient.pid.bloodgroup%></span></li><%}%>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                            <%}%>
+                            <%}%>
+<!-- 
                             <div class="col-md-6 col-lg-4 col-xl-3">
                                 <div class="card widget-profile pat-widget-profile">
                                     <div class="card-body">
@@ -551,9 +571,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                        </div> -->
+                        </div>
 
                     </div>
                 </div>

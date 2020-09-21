@@ -455,6 +455,12 @@
                                             </a>
                                         </li>
                                         <li>
+                                            <a href="/my-patients">
+                                                <i class="fas fa-edit"></i>
+                                                <span>Other Appointments</span>
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a href="/favourites">
                                                 <i class="fas fa-bookmark"></i>
                                                 <span>Favourites</span>
@@ -515,19 +521,20 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            <%for(doctor of alldoctors.doctors){%>
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-01.jpg" alt="User Image">
+                                                                        <a href="/doctor-profile/?id=<%=doctor.did._id%>" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="<%=doctor.did.avatar%>" alt="User Image">
                                                                         </a>
-                                                                        <a href="/doctor-profile">Dr. Ruby Perrin <span>Dental</span></a>
+                                                                        <a href="/doctor-profile/?id=<%=doctor.did._id%>"><%=doctor.did.name%> <span><%=doctor.did.department%></span></a>
                                                                     </h2>
                                                                 </td>
-                                                                <td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-                                                                <td>12 Nov 2019</td>
-                                                                <td>$160</td>
-                                                                <td>16 Nov 2019</td>
+                                                                <td><%=doctor.date%> <span class="d-block text-info"></span><%=doctor.time%></td>
+                                                                <td><%=doctor.date%></td>
+                                                                <td>Rs<%=doctor.fee%></td>
+                                                                <td><%=doctor.date%></td>
                                                                 <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
@@ -540,7 +547,8 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
+                                                            <%}%>
+                                                            <!-- <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
                                                                         <a href="/doctor-profile" class="avatar avatar-sm mr-2">
@@ -764,7 +772,7 @@
                                                                         </a>
                                                                     </div>
                                                                 </td>
-                                                            </tr>
+                                                            </tr> -->
                                                         </tbody>
                                                     </table>
                                                 </div>

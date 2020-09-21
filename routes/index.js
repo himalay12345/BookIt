@@ -13,14 +13,14 @@ router.get('/active-device',passport.checkAuthentication, homeController.activeD
 router.get('/add-prescription',passport.checkAuthentication, homeController.addPrescription);
 router.get('/appointments',passport.checkAuthentication, homeController.appointments);
 router.get('/blank-page',passport.checkAuthentication, homeController.blankPage);
-router.get('/booking', homeController.booking);
+router.get('/booking',homeController.booking);
 router.get('/booking-success', homeController.bookingSuccess);
 router.get('/calendar', homeController.calendar);
 router.get('/change-password',passport.checkAuthentication, homeController.changePassword);
 router.get('/chat',passport.checkAuthentication, homeController.chat);
 router.get('/consult', homeController.consult);
 router.get('/chat-doctor',passport.checkAuthentication, homeController.chatDoctor);
-router.get('/checkout', homeController.checkout);
+router.get('/checkout',passport.checkAuthentication,homeController.checkout);
 router.get('/components', homeController.components);
 router.get('/delete-account',passport.checkAuthentication, homeController.deleteAccount);
 router.get('/doctor-change-password',passport.checkAuthentication, homeController.doctorChangePassword);
@@ -45,6 +45,7 @@ router.get('/my-patients',passport.checkAuthentication, homeController.myPatient
 router.get('/medical-registration',passport.checkAuthentication, homeController.medicalRegistration);
 router.get('/medical-proof',passport.checkAuthentication, homeController.medicalProof);
 router.get('/notification-settings',passport.checkAuthentication, homeController.notificationSettings);
+router.get('/pay',homeController.pay);
 router.get('/patient-dashboard',passport.checkAuthentication, homeController.patientDashboard);
 router.get('/patient-profile',passport.checkAuthentication, homeController.patientProfile);
 router.get('/privacy-policy', homeController.privacyPolicy);

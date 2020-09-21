@@ -421,7 +421,7 @@
 
                     <div class="col-md-12 col-lg-12 col-xl-12" style="padding: 0px 0px!important;">
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <strong>Note!</strong> Please fill all the required fields if you want to start online <a href="#" class="alert-link">booking appointment service.</a>
+                            <strong>Note!</strong> Please fill all the  fields if you want to start online <a href="#" class="alert-link">booking appointment service.</a>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -450,29 +450,29 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label> Name <span class="text-danger">*</span></label>
-                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>" required>
+                                                <label> Name <span class="text-danger"></span></label>
+                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>" >
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Email <span class="text-danger">*</span></label>
-                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>" required>
+                                                <label>Email <span class="text-danger"></span></label>
+                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>" >
                                             </div>
                                         </div>
 
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Mobile Number <span class="text-danger">*</span></label>
-                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control" required>
+                                                <label>Mobile Number <span class="text-danger"></span></label>
+                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control" >
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4">
                                             <div class="form-group">
-                                                <label>Gender <span class="text-danger">*</span></label>
-                                                <select name="gender" class="form-control select" required>
+                                                <label>Gender <span class="text-danger"></span></label>
+                                                <select name="gender" class="form-control select" >
                                                     <%if(locals.user.gender == 'Male'){%><option selected>Male</option><%}else{%>
                                                     <option>Male</option><%}%>
                                                     <%if(locals.user.gender == 'Female'){%><option selected>Female</option><%}else{%>
@@ -484,9 +484,9 @@
                                         </div>
                                         <div class="col-12 col-md-4">
                                             <div class="form-group">
-                                                <label>Date of Birth<span class="text-danger">*</span></label>
+                                                <label>Date of Birth<span class="text-danger"></span></label>
                                                 <div class="cal-icon">
-                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>" required>
+                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>" >
                                                 </div>
                                             </div>
                                         </div>
@@ -507,8 +507,8 @@
                             <!-- About Me -->
                             <div class="col-12 col-md-4" style="margin-left: -10px;">
                                 <div class="form-group">
-                                    <label>Department<span class="text-danger">*</span></label>
-                                    <select name="department" class="form-control select" required>
+                                    <label>Department<span class="text-danger"></span></label>
+                                    <select name="department" class="form-control select" >
 									<%if(locals.user.department == 'General Physician'){%><option selected>General Physician</option><%}else{%>
 									<option>General Physician</option><%}%>
 									<%if(locals.user.department == 'Ophthalmology'){%><option selected>Ophthalmology</option><%}else{%>
@@ -590,18 +590,18 @@
                             <!-- Clinic Info -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Clinic Info<span class="text-danger">*</span></h4>
+                                    <h4 class="card-title">Clinic Info<span class="text-danger"></span></h4>
                                     <div class="row form-row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Clinic Name</label>
-                                                <input type="text" placeholder="Enter the Name" name="clinicname" class="form-control" value="<%=locals.user.clinicname%>" required>
+                                                <input type="text" placeholder="Enter the Name" name="clinicname" class="form-control" value="<%=locals.user.clinicname%>" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Clinic Address</label>
-                                                <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>" required>
+                                                <input type="text" placeholder="Enter the Address" name="clinicaddr" class="form-control" value="<%=locals.user.clinicaddr%>" >
                                             </div>
                                         </div>
 
@@ -627,6 +627,14 @@
                                         </div>
 
                                         <div class="upload-wrap" style="overflow-x: auto;">
+                                     
+                                            <div class="upload-images mr-4 gallery" style="display:inline-flex;">
+                                              
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div class="upload-wrap" style="overflow-x: auto;margin-top: 10px;">
                                             <%var i=0%>
                                                 <%for(photo of locals.user.clinicphoto){%>
                                                     <div class="upload-images mr-4">
@@ -645,38 +653,38 @@
                             <!-- Contact Details -->
                             <div class="card contact-card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Contact Details<span class="text-danger">*</span></h4>
+                                    <h4 class="card-title">Contact Details<span class="text-danger"></span></h4>
                                     <div class="row form-row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.contacts.address%>" required>
+                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.contacts.address%>" >
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">City</label>
-                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
+                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" >
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">State / Province</label>
-                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>" required>
+                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Country</label>
-                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.contacts.country%>" required>
+                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.contacts.country%>" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Postal Code</label>
-                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>" required>
+                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>" >
                                             </div>
                                         </div>
                                     </div>
@@ -690,15 +698,15 @@
                             <!-- Services and Specialization -->
                             <div class="card services-card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Services and Specialization<span class="text-danger">*</span></h4>
+                                    <h4 class="card-title">Services and Specialization<span class="text-danger"></span></h4>
                                     <div class="form-group">
                                         <label>Services</label>
-                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services" required>
+                                        <input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="<%=locals.user.services%>" id="services" >
                                         <small class="form-text text-muted">Note : Type & Press enter to add new services</small>
                                     </div>
                                     <div class="form-group mb-0">
                                         <label>Specialization </label>
-                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist" required>
+                                        <input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialisation" value="<%=locals.user.specialisation%>" id="specialist" >
                                         <small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
                                     </div>
                                 </div>
@@ -708,7 +716,7 @@
                             <!-- Education -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Education<span class="text-danger">*</span></h4>
+                                    <h4 class="card-title">Education<span class="text-danger"></span></h4>
                                     <div class="education-info">
                                         <%if(locals.user.education.length == 0){%>
                                             <div class="row form-row education-cont">
@@ -717,19 +725,19 @@
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Degree</label>
-                                                                <input type="text" name="degree" placeholder="Enter Degree" class="form-control" required>
+                                                                <input type="text" name="degree" placeholder="Enter Degree" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>College/Institute</label>
-                                                                <input type="text" name="college" placeholder="Enter College/Institute" class="form-control" required>
+                                                                <input type="text" name="college" placeholder="Enter College/Institute" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Year of Completion</label>
-                                                                <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control" required>
+                                                                <input type="text" name="yoc" placeholder="Enter Year of Completion" class="form-control" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -743,19 +751,19 @@
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>Degree</label>
-                                                                        <input type="text" value="<%=temp.degree%>" class="form-control" required>
+                                                                        <input type="text" value="<%=temp.degree%>" class="form-control" >
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>College/Institute</label>
-                                                                        <input type="text" value="<%=temp.college%>" class="form-control" required>
+                                                                        <input type="text" value="<%=temp.college%>" class="form-control" >
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-4">
                                                                     <div class="form-group">
                                                                         <label>Year of Completion</label>
-                                                                        <input type="text" value="<%=temp.yoc%>" class="form-control" required>
+                                                                        <input type="text" value="<%=temp.yoc%>" class="form-control" >
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -777,7 +785,7 @@
                             <!-- Experience -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Experience<span class="text-danger">*</span></h4>
+                                    <h4 class="card-title">Experience<span class="text-danger"></span></h4>
                                     <div class="experience-info">
                                         <%if(locals.user.experience.length == 0){%>
                                             <div class="row form-row experience-cont">
@@ -786,25 +794,25 @@
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Institution Name</label>
-                                                                <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="" required>
+                                                                <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-2">
                                                             <div class="form-group">
                                                                 <label>From</label>
-                                                                <input type="Number" placeholder="From" name="from" value="" class="form-control" required>
+                                                                <input type="Number" placeholder="From" name="from" value="" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-2">
                                                             <div class="form-group">
                                                                 <label>To</label>
-                                                                <input type="Number" placeholder="To" name="to" value="" class="form-control" required>
+                                                                <input type="Number" placeholder="To" name="to" value="" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-4">
                                                             <div class="form-group">
                                                                 <label>Designation</label>
-                                                                <input type="text" placeholder="Designation" name="designation" class="form-control" value="" required>
+                                                                <input type="text" placeholder="Designation" name="designation" class="form-control" value="" >
 
                                                             </div>
                                                         </div>
@@ -914,26 +922,26 @@
                             <!-- Registrations -->
                          <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Registrations <span class="text-danger">*</span></h4>
+                                    <h4 class="card-title">Registrations <span class="text-danger"></span></h4>
                                     <div class="registrations-info">
                                        
                                             <div class="row form-row reg-cont">
                                                 <div class="col-12 col-md-4">
                                                     <div class="form-group">
                                                         <label>Registrations</label>
-                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="<%=locals.user.registrations.registration%>" class="form-control" required>
+                                                        <input type="text" placeholder="Enter Registrations" name="registration" value="<%=locals.user.registrations.registration%>" class="form-control" >
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-4">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="text" placeholder="Enter Year" name="regYear" value="<%=locals.user.registrations.regYear%>" class="form-control" required>
+                                                        <input type="text" placeholder="Enter Year" name="regYear" value="<%=locals.user.registrations.regYear%>" class="form-control" >
                                                     </div>
                                                 </div>
                                                  <div class="col-12 col-md-4">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="text" placeholder="Enter Registration Council" name="regCouncil" value="<%=locals.user.registrations.regCouncil%>" class="form-control" required>
+                                                        <input type="text" placeholder="Enter Registration Council" name="regCouncil" value="<%=locals.user.registrations.regCouncil%>" class="form-control" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -1128,6 +1136,32 @@
     <!-- Custom JS -->
     <script src="js/script.js"></script>
     <script>
+       $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#file-upload').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+});
+    </script>
+    <script>
         $("#file-upload").css("opacity", "0");
 
         $("#file-browser").click(function(e) {
@@ -1142,9 +1176,9 @@
         var submit_button = document.getElementById("submit_button");
 
         submit_button.addEventListener("click", function(e) {
-        var required = document.querySelectorAll("input[required]");
+        var  = document.querySelectorAll("input[]");
         
-        required.forEach(function(element) {
+        .forEach(function(element) {
             if(element.value.trim() == "") {
             element.style.borderColor = "red";
             } else {

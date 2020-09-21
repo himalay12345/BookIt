@@ -423,15 +423,31 @@
                                 <%}%>
 
                                 <div class="row mstep">
-                                    <%if(locals.user.step1!= true){%>
+                                    <%if(!locals.user.step1!= true){%>
                                     <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;">
 
                                         <!-- Change Password Form -->
-                                        <form action="/user/update-profile" method="POST">
+                                        <form action="/user/update-profile" enctype="multipart/form-data" method="POST">
                                             <input type="hidden" name="id" value="<%=locals.user.id%>">
                                            <h2 style="font-size: 1.6rem;margin-top: 20px;">Hello Dr.<%=locals.user.name%>! Lets build your dedicated profile.</h2>
                                            <p style="margin-top: 20px;">Section A : Profile Details</p>
                                            <div class="col-md-10 col-sm-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="change-avatar">
+                                                        <div class="profile-img">
+                                                            <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="/img/profile.png"' alt="User Image">
+                                                        </div>
+                                                        <div class="upload-img">
+                                                            <div class="change-photo-btn upload-sm-btn">
+                                                                <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                            </div>
+                                                            <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group" style="margin-left: -15px;">
                                                 <label style="font-size: 0.85rem;"> Name <span class="text-danger"></span></label>
                                                 <div class="col-md-4" style="margin-left: -15px;">
@@ -708,6 +724,19 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+        document.getElementById("imageUpload").onchange = function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("image").src = e.target.result;
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+};
+    </script>
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({

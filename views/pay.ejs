@@ -139,7 +139,7 @@
                             <div class="card-body">
 
                                 <!-- Checkout Form -->
-                                <!-- <form action="/user/payment" method="POST" style="width: 100%;" > -->
+                      
 
                                     <!-- Personal Information -->
                                     <input type="hidden" name="doctorid" value="<%=doctor._id%>">
@@ -152,106 +152,87 @@
                                    
                                     <div class="info-widget">
                                         <h4 class="card-title">Patient Details</h4>
-                                        <div class="row">
-                                            <div class="col-md-11 col-11" style="border:1px solid lightgrey;border-radius:5px;padding:8px;margin-left:15px;margin-bottom: 15px;">
-                                                <div class="form-group" style="margin-bottom: 0px !important;">
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: 15px;" checked  onchange="display1();"><span><%=locals.user.name%></span></br>
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: -10px;" onchange="display();"><span>Someone Else</span>
-                                                </div>
+                                        
+                                        <div class="row" id="ownp">
+                                            <!-- <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about <%=locals.user.name%></h5> -->
+
+                                        <div class="col-md-12 col-sm-12">
+                                                
+                                            <div class="form-group card-label">
+                                                <label>Name</label>
+                                                <%if(locals.user){%>
+                                                <input class="form-control" type="text" value="<%=locals.user.name%>" required>
+                                                <%}else{%>
+                                                    <input class="form-control" type="text">
+
+                                                <%}%>
                                             </div>
                                         </div>
-                                        <div class="row" id="ownp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about <%=locals.user.name%></h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                <input type="hidden" name="type" value="own">
-                                                <div class="col-md-12 col-sm-12">                                                
-                                                    <div class="form-group card-label">
-                                                        <label>Name</label>
-                                                        <%if(locals.user){%>
-                                                        <input class="form-control" type="text" name="name" value="<%=locals.user.name%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="name">
-
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Email</label>
-                                                        <%if(locals.user){%>
-                                                        <input class="form-control" type="email" name="email" value="<%=locals.user.email%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="email" name="email">
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Phone</label>
-                                                        <%if(locals.user){%>
-                                                        <input class="form-control" type="text" name="phone" value="<%=locals.user.phone%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="phone">
-                                                        <%}%>
-
-                                                    </div>
-                                                </div>
-                                                <div class="submit-section mt-4">
-                                                    <button type="submit" class="btn btn-primary submit-btn">Confirm and Pay</button>
-                                                </div>
-                                            </form>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Email</label>
+                                                <%if(locals.user){%>
+                                                <input class="form-control" type="email" value="<%=locals.user.email%>" required>
+                                                <%}else{%>
+                                                    <input class="form-control" type="email">
+                                                <%}%>
+                                            </div>
                                         </div>
-                                        <div class="row displayNone" id="patientp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                <input type="hidden" name="type" value="other">
-                                                <div class="col-md-12 col-sm-12">
-                                                        
-                                                    <div class="form-group card-label">
-                                                        <label>Patients Full Name</label>
-                                                            <input class="form-control" type="text" name="pname" placeholder="Enter patient name" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Patient Email</label>
-                                                            <input class="form-control" type="email" name="pemail" placeholder="Enter patient email" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Phone</label>
-                                                            <input class="form-control" type="text" name="pphone" placeholder="Enter patient phone" required>
-                                                    </div>
-                                                </div>
-                                                <div class="submit-section mt-4">
-                                                    <button type="submit" class="btn btn-primary submit-btn">Confirm and Pay</button>
-                                                </div>
-                                            </form>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Phone</label>
+                                                <%if(locals.user){%>
+                                                <input class="form-control" type="text" value="<%=locals.user.phone%>" required>
+                                                <%}else{%>
+                                                    <input class="form-control" type="text">
+                                                <%}%>
+
+                                            </div>
                                         </div>
+                                        </div>
+                                     
                                        
                                     </div>
-                                   
+                                    
                                
                                     
                                     
                                   
                             
                                     <!-- /Personal Information -->
+                                    <%var day,time,date,fee%>
+                                     <%var today = new Date();%>
+                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                        var yyyy = today.getFullYear();
+                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                        var dayOfWeek = weekday[today.getDay()];%>
+                                    <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                       <%time = doctor.schedule_time[dayindex].start.toUpperCase()%>
 
-                                    <div class="payment-widget" style="display: none;">
+                                   <%}else{%>
+                                    <%time = doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%>
+                                    <%}%>
+                                    <% day = doctor.schedule_time[dayindex].day%>
+                                    <% fee =doctor.booking_fee%>
+                                    <%date = dd +'-'+mm+'-'+yyyy%>
+                                <form action="/user/payment" method="POST">
+                                    <input type="hidden" name="type" value="<%=type%>">
+                                    <input type="hidden" name="day" value="<%=day%>">
+                                    <input type="hidden" name="date" value="<%=date%>">
+                                    <input type="hidden" name="fee" value="<%=fee%>">
+                                    <input type="hidden" name="time" value="<%=time%>">
+                                    <input type="hidden" name="pid" value="<%=locals.user.id%>">
+                                    <input type="hidden" name="name" value="<%=locals.user.name%>">
+                                    <input type="hidden" name="email" value="<%=locals.user.email%>">
+                                    <input type="hidden" name="phone" value="<%=locals.user.phone%>">
+                                    <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                                    <input type="hidden" name="id" value="<%=id%>">
+                                    <input type="hidden" name="booked" value="<%=booked%>">
+                                    <input type="hidden" name="available" value="<%=available%>">
+                                    <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                    <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                    <div class="payment-widget">
                                         <h4 class="card-title">Payment Method</h4>
 
                                         <!-- Credit Card Payment -->
@@ -322,7 +303,7 @@
                                         <!-- /Submit Section -->
 
                                     </div>
-                                <!-- </form> -->
+                                </form>
                                 <!-- /Checkout Form -->
 
                             </div>

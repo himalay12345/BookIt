@@ -205,7 +205,7 @@
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <h2 class="text-center" style="margin-top: 100px;">No Invoices Available !</h2>
 
-                        <!-- <div class="card card-table">
+                     <div class="card card-table">
                             <div class="card-body">
 
                                
@@ -221,6 +221,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%for(patients of allpatients.patients){%>
                                             <tr>
                                                 <td>
                                                     <a href="/invoice-view">#INV-0010</a>
@@ -228,13 +229,13 @@
                                                 <td>
                                                     <h2 class="table-avatar">
                                                         <a href="/patient-profile" class="avatar avatar-sm mr-2">
-                                                            <img class="avatar-img rounded-circle" src="/img/patients/patient.jpg" alt="User Image">
+                                                            <img class="avatar-img rounded-circle" src="<%=patients.pid.avatar%>" alt="User Image">
                                                         </a>
-                                                        <a href="/patient-profile">Richard Wilson <span>#PT0016</span></a>
+                                                        <a href="/patient-profile"><%=patients.name%> <span>#PT0016</span></a>
                                                     </h2>
                                                 </td>
-                                                <td>$450</td>
-                                                <td>14 Nov 2019</td>
+                                                <td>Rs <%=patients.fee%></td>
+                                                <td><%=patients.date%></td>
                                                 <td class="text-right">
                                                     <div class="table-action">
                                                         <a href="/invoice-view" class="btn btn-sm bg-info-light">
@@ -246,7 +247,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <%}%>
+                                            <!-- <tr>
                                                 <td>
                                                     <a href="/invoice-view">#INV-0009</a>
                                                 </td>
@@ -470,13 +472,13 @@
                                                         </a>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>
                                 
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
 

@@ -20,6 +20,7 @@ router.post('/update-profile',userController.updateProfile);
 router.post('/update-medical-registration',userController.updateMedicalRegistration);
 router.post('/update-education',userController.updateEducation);
 router.post('/update-establishment',userController.updateEstablishment);
+router.post('/confirm-pay',userController.confirmPay);
 router.post('/set-schedule-timing', userController.setScheduleTiming);
 router.post('/update-schedule', userController.updateSchedule);
 

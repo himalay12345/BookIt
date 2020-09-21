@@ -501,13 +501,35 @@
                                             <div class="col-md-12 col-lg-4">
                                                 <div class="dash-widget dct-border-rht">
                                                     <div class="circle-bar circle-bar1">
-                                                        <div class="circle-graph1" data-percent="5">
+                                                        <div class="circle-graph1" data-percent="<%=allpatients.patients.length%>">
                                                             <img src="img/icon-01.png" class="img-fluid" alt="patient">
                                                         </div>
                                                     </div>
+                                                    <%var today = new Date();%>
+                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];
+                                                    var n1  = dd +'-'+mm+'-'+yyyy%> %>
+                                                    <%var count = 0;%>
+                                                    <%for(patients of allpatients.patients){%>
+                                                        <%var today = patients.createdAt;%>
+                                                        <%var dd1 = String(today.getDate()).padStart(2, '0');
+                                                        var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy1 = today.getFullYear();
+                                                        var weekday1 = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek1 = weekday[today.getDay()];
+                                                        var n2 = dd1 +'-'+mm1+'-'+yyyy1%>
+                                                        <%if(n1 == n2){%>
+                                                            <%console.log(n1,n2)%>
+                                                           <%count++;%>
+                                                        <%}%>
+                                                       
+                                                    <%}%>
                                                     <div class="dash-widget-info">
                                                         <h6>Total Patient</h6>
-                                                        <h3>0</h3>
+                                                        <h3><%=allpatients.patients.length%></h3>
                                                         <p class="text-muted">Till Today</p>
                                                     </div>
                                                 </div>
@@ -516,14 +538,14 @@
                                             <div class="col-md-12 col-lg-4">
                                                 <div class="dash-widget dct-border-rht">
                                                     <div class="circle-bar circle-bar2">
-                                                        <div class="circle-graph2" data-percent="5">
+                                                        <div class="circle-graph2" data-percent="<%=count%>">
                                                             <img src="img/icon-02.png" class="img-fluid" alt="Patient">
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
                                                         <h6>Today Patient</h6>
-                                                        <h3>0</h3>
-                                                        <p class="text-muted">06, Nov 2019</p>
+                                                        <h3><%=count%></h3>
+                                                        <p class="text-muted"><%=dd%>-<%=mm%>-<%=yyyy%></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -531,14 +553,14 @@
                                             <div class="col-md-12 col-lg-4">
                                                 <div class="dash-widget">
                                                     <div class="circle-bar circle-bar3">
-                                                        <div class="circle-graph3" data-percent="5">
+                                                        <div class="circle-graph3" data-percent="<%=allpatients.patients.length%>">
                                                             <img src="img/icon-03.png" class="img-fluid" alt="Patient">
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
-                                                        <h6>Appoinments</h6>
-                                                        <h3>0</h3>
-                                                        <p class="text-muted">06, Apr 2019</p>
+                                                        <h6>Appointments</h6>
+                                                        <h3><%=allpatients.patients.length%></h3>
+                                                        <p class="text-muted"><%=dd%>-<%=mm%>-<%=yyyy%></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -563,8 +585,10 @@
                                         </li>
                                     </ul>
                                     <!-- /Appointment Tab -->
-                                    <h2 class="text-center mt-4">No Appointment Available !</h2>
-                                    <!-- <div class="tab-content">
+                                    <%if(allpatients.patients == ''){%>
+                                        <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
+                                        <%}else{%>
+                             <div class="tab-content">
 
                                        
                                         <div class="tab-pane show active" id="upcoming-appointments">
@@ -583,17 +607,18 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                <%for(patients of allpatients.patients){%>
                                                                 <tr>
                                                                     <td>
                                                                         <h2 class="table-avatar">
-                                                                            <a href="/patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="img/patients/patient.jpg" alt="User Image"></a>
-                                                                            <a href="/patient-profile">Richard Wilson <span>#PT0016</span></a>
+                                                                            <a href="/patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=patients.pid.avatar%>" alt="User Image"></a>
+                                                                            <a href="/patient-profile"><%=patients.name%> <span>#PT0016</span></a>
                                                                         </h2>
                                                                     </td>
-                                                                    <td>11 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
+                                                                    <td><%=patients.date%><span class="d-block text-info"><%=patients.time%></span></td>
                                                                     <td>General</td>
                                                                     <td>New Patient</td>
-                                                                    <td class="text-center">$150</td>
+                                                                    <td class="text-center">Rs<%=patients.fee%></td>
                                                                     <td class="text-right">
                                                                         <div class="table-action">
                                                                             <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
@@ -609,7 +634,8 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
+                                                                <%}%>
+                                                                <!-- <tr>
                                                                     <td>
                                                                         <h2 class="table-avatar">
                                                                             <a href="/patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="img/patients/patient1.jpg" alt="User Image"></a>
@@ -917,7 +943,7 @@
                                                                             </a>
                                                                         </div>
                                                                     </td>
-                                                                </tr>
+                                                                </tr> -->
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -926,7 +952,8 @@
                                         </div>
                                       
 
-                                    </div> -->
+                                    </div> 
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
