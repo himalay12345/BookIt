@@ -51,7 +51,7 @@
     src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.html) format('woff2'), url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
-.red-border{
+.red-border {
     border: 1px solid red;
 }
 
@@ -78,6 +78,10 @@
     width: 500px !important;
 }
 
+.slick-silders .slick-slide {
+    width: 359px !important;
+}
+
 .cardm {
     width: auto !important;
     display: grid;
@@ -93,42 +97,41 @@
     cursor: pointer;
 }
 
-.nots-span span p{
-font-size: 0.9rem;
-
+.nots-span span p {
+    font-size: 0.9rem;
 }
 
-.settings-content{
+.settings-content {
     padding-left: 20px;
 }
 
-.settings>ul>li{
-    padding:8px;
+.settings>ul>li {
+    padding: 8px;
     font-size: 0.95rem;
 }
 
-.stylenavbar{
-    position:relative;
+.stylenavbar {
+    position: relative;
     display: inline-flex;
 }
 
-.note{
-    min-height:100px;
+.note {
+    min-height: 100px;
     height: auto;
-    width:320px;
-    border:1px solid #6DBCAE;
+    width: 320px;
+    border: 1px solid #6DBCAE;
     background-color: #DCF5F4;
-    border-radius:5px;
+    border-radius: 5px;
     margin-top: 30px;
     padding: 8px;
     margin-left: 200px;
 }
 
-
-.bell{
-	position: absolute;
+.bell {
+    position: absolute;
     margin-right: 30px;
 }
+
 .carda-image {
     grid-area: image;
     border-top-left-radius: 15px;
@@ -223,11 +226,11 @@ font-size: 0.9rem;
     position: relative;
 }
 
-.black{
-    color:black!important;
+.black {
+    color: black!important;
 }
 
-.grey{
+.grey {
     color: grey !important;
 }
 
@@ -244,9 +247,10 @@ font-size: 0.9rem;
     position: relative;
 }
 
-#hero{
+#hero {
     display: none;
 }
+
 #ulmd {
     width: 33%;
 }
@@ -2292,9 +2296,8 @@ button.bg-danger:hover {
     border-top: 1px solid #f0f0f0;
 }
 
-.main-nav>li{
+.main-nav>li {
     margin-top: -50px;
-
 }
 
 .main-nav>li .submenu>li.has-submenu>a::after {
@@ -7496,29 +7499,23 @@ html.menu-opened body {
         flex: 0 0 100%;
         max-width: 100%;
     }
-    
-    .menu-header{
+    .menu-header {
         height: 84px;
     }
-    .header-navbar-rht li a.header-login
-    {
+    .header-navbar-rht li a.header-login {
         margin-left: 30px;
         margin-top: 30px;
     }
-
-    .main-nav{
+    .main-nav {
         position: static;
         left: 0%;
     }
-
-    .mdlist{
+    .mdlist {
         display: none;
     }
-  
-    .smlist{
+    .smlist {
         display: block !important;
     }
-
     .main-menu-wrapper {
         order: 3;
         width: 500px;
@@ -7533,8 +7530,6 @@ html.menu-opened body {
         transition: all 0.4s;
         background-color: #15558d;
     }
-    
-
     .main-nav>li>a {
         line-height: 1.5;
         padding: 15px 20px !important;
@@ -7542,20 +7537,14 @@ html.menu-opened body {
         /* font-size: 25px; */
         font-weight: 500;
     }
-
     .main-nav>li>a>span {
-        
         color: #fff;
         font-size: 1.1rem;
-     
     }
     .main-nav>li>a>b {
-        
         color: #fff;
         font-size: 1.4rem;
-     
     }
-
     .main-nav>li {
         margin-top: 0px;
     }
@@ -8064,12 +8053,10 @@ html.menu-opened body {
         padding-right: 80px;
         height: 62px;
     }
-    .main-nav>li{
+    .main-nav>li {
         margin-top: 0;
-    
     }
-
-    .main-nav{
+    .main-nav {
         position: static;
         left: 0%;
     }
@@ -8102,9 +8089,8 @@ html.menu-opened body {
         height: 40px;
         width: 110px;
     }
-    .header-navbar-rht li a.header-login
-    {
-        width:80px;
+    .header-navbar-rht li a.header-login {
+        width: 80px;
         height: 40px;
         margin-left: 20px;
         margin-top: -20px;
@@ -8140,7 +8126,6 @@ html.menu-opened body {
         width: 80px;
         font-size: 0.5rem;
     }
-   
     .bell {
         position: absolute;
         right: 62%;
@@ -8149,14 +8134,12 @@ html.menu-opened body {
         position: absolute;
         right: 0%;
     }
-    .profile-drop{
-		position: absolute;
-	    left: -116px;
-    top: 60px;
-
+    .profile-drop {
+        position: absolute;
+        left: -116px;
+        top: 60px;
     }
-
-    .note{
+    .note {
         display: none;
     }
     .phoneul {
@@ -8182,15 +8165,12 @@ html.menu-opened body {
         background-color: white;
         color: black;
     }
-        
-    .mdlist{
+    .mdlist {
         display: none;
     }
-  
-    .smlist{
+    .smlist {
         display: block !important;
     }
-	
     .arrow {
         display: none;
     }
@@ -8244,24 +8224,18 @@ html.menu-opened body {
 		display: -ms-flexbox;
 		display: flex; */
     }
-    
-    .notifications{
+    .notifications {
         width: 317px;
         left: -191px;
         top: 61px !important;
     }
-
-      .main-nav>li>a>span {
-        
+    .main-nav>li>a>span {
         color: #fff;
         font-size: 0.7rem;
-     
     }
     .main-nav>li>a>b {
-        
         color: #fff;
         font-size: 1rem;
-     
     }
     .behave {
         /* padding: 0px; */
@@ -8270,116 +8244,90 @@ html.menu-opened body {
     #inclinic {
         padding: 0px 0px;
     }
-
-    .social-sm{
-        display:none !important;
+    .social-sm {
+        display: none !important;
     }
-
-    .upload-sm-btn{
-        width:125px !important;
+    .upload-sm-btn {
+        width: 125px !important;
     }
-
-    .setting-bread{
+    .setting-bread {
         margin-top: 0px !important;
     }
-
-    .setting-bread h2{
+    .setting-bread h2 {
         margin-bottom: 10px !important;
     }
-
-    .settings-content{
+    .settings-content {
         display: none;
     }
-
-    .change-pass-content
-    {
+    .change-pass-content {
         display: block;
     }
-
-    .pass-setting{
-        display:none;
+    .pass-setting {
+        display: none;
     }
-
-    .change-pass-card{
+    .change-pass-card {
         width: 115%;
-    margin-left: -15px;
+        margin-left: -15px;
     }
-    .settings{
+    .settings {
         margin-left: 0 !important;
         border-top: 1px solid lightgrey;
         margin-top: 10px;
     }
-   
-    .settings-header{
+    .settings-header {
         margin-top: -12px !important;
         padding-left: 10px;
-        width:100% !important;
+        width: 100% !important;
     }
-
-    .settings>ul>li{
-        padding:15px;
+    .settings>ul>li {
+        padding: 15px;
     }
-
-    .mstep{
+    .mstep {
         padding-left: 10px;
         margin-top: -30px;
         margin-bottom: 50px;
     }
-
-    .minput{
+    .minput {
         width: 220px;
     }
-
-    .mdept{
+    .mdept {
         width: 109%;
     }
-
-    .btwidth{
-        width:300px !important;
+    .btwidth {
+        width: 300px !important;
     }
-
-    .cmleft{
+    .cmleft {
         margin-left: -45px !important;
     }
-
-    .gmargin{
+    .gmargin {
         margin-left: -45px !important;
     }
-
-    .gwidth{
-        width:120%;
+    .gwidth {
+        width: 120%;
     }
-
-    .bmargin{
+    .bmargin {
         margin-left: -35px !important;
     }
-
-    .malert{
+    .malert {
         margin-left: 21px;
     }
-
-    .pzero{
+    .pzero {
         padding-right: 0px !important;
     }
-
-    .mzero{
+    .mzero {
         margin-left: 0px !important;
     }
-
-    .m-50{
+    .m-50 {
         margin-left: 28px !important;
     }
-
-    .m-55{
+    .m-55 {
         margin-left: 33px !important;
     }
-
-    .m-13{
-         margin-left: 13px !important;
+    .m-13 {
+        margin-left: 13px !important;
     }
-
-    .p-10{
-        padding:0px 10px;
+    .p-10 {
+        padding: 0px 10px;
         margin-top: 0px !important;
     }
     .main-menu-wrapper {
@@ -8396,7 +8344,7 @@ html.menu-opened body {
         transition: all 0.4s;
         background-color: #15558d;
     }
-    .menu-header{
+    .menu-header {
         height: 60px;
     }
     .booking-schedule .time-slot li .timing span {
@@ -8750,8 +8698,8 @@ h1 {
     opacity: 0.55;
 }
 
-/* ------------------------------------------- */
 
+/* ------------------------------------------- */
 
 body {
     background-color: #f8f9fa;
