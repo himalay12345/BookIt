@@ -55,8 +55,16 @@
     border: 1px solid red;
 }
 
-.gallery img{
-    margin-right:5px;
+.consult-specilities {
+    display: none;
+}
+
+.gallery img {
+    margin-right: 5px;
+}
+
+lthenex {
+    display: none;
 }
 
 .font-li {
@@ -76,6 +84,18 @@
     text-align: center;
     transition: 0.5s ease;
     cursor: pointer;
+}
+
+.top-speciality-cards {
+    width: 176px;
+    left: 439px;
+    right: 15px;
+    /* margin-left: -16px; */
+    border: 2px solid black;
+    position: relative;
+    height: 69px;
+    padding: 13px;
+    border-radius: 17px;
 }
 
 .bdoctor-slider .slick-slide {
@@ -136,11 +156,39 @@
     margin-right: 30px;
 }
 
+.offers {
+    display: none;
+}
+
 .carda-image {
     grid-area: image;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     background-size: cover;
+}
+
+.consulations {
+    display: block;
+}
+
+.consulation {
+    display: none;
+}
+
+.lommy {
+    display: block;
+}
+
+.lommies {
+    display: none;
+}
+
+.inclinicm {
+    display: none;
+}
+
+.inclinics {
+    display: block;
 }
 
 .carda-text {
@@ -187,6 +235,14 @@
     color: white;
 }
 
+.ammie {
+    display: block;
+}
+
+.health-concerns {
+    display: none;
+}
+
 .carda-stats .value {
     font-size: 22px;
     font-weight: 500;
@@ -216,7 +272,7 @@
 }
 
 .spec-heading {
-    margin: 68px 3px -2px -15px;
+    margin: 68px 3px -2px 97px;
     padding: 11px 15px 18px 35px;
     font-size: 28px !important;
     text-align: center;
@@ -7651,8 +7707,11 @@ html.menu-opened body {
         margin-top: 55px;
     }
     #rom {
-        margin: 12px -16px;
-        padding: 12px 16px;
+        margin: 12px -16px -33px;
+        padding: 12px 16px 0px;
+    }
+    .rule {
+        display: none;
     }
     #rock {
         padding-left: 23px;
@@ -7975,6 +8034,18 @@ html.menu-opened body {
     .h6 {
         font-size: 0.75rem;
     }
+    .specilities-consult {
+        font-size: 22px;
+        margin-left: 21px;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+    .consult-specilities {
+        display: block;
+    }
+    .health-concerns {
+        display: block;
+    }
     .card {
         margin-bottom: 0.9375rem;
     }
@@ -7989,6 +8060,22 @@ html.menu-opened body {
     }
     .card-header {
         padding: .75rem 1.25rem;
+    }
+    .cardx {
+        width: 67% !important;
+        margin-left: 77px !important;
+        display: inline-block;
+    }
+    .prices {
+        font-size: 15px !important;
+        color: #787887 !important;
+        margin-top: 7px !important;
+        padding-right: 11px !important;
+    }
+    .cardx-image {
+        grid-area: image;
+        border-radius: 15px !important;
+        background-size: cover;
     }
     .card-footer {
         padding: .75rem 1.25rem;
@@ -8010,6 +8097,11 @@ html.menu-opened body {
         margin-left: -91px !important;
         width: 329px !important;
     }
+    .nslide {
+        margin-top: -50px !important;
+        margin-left: -91px !important;
+        width: 500px !important;
+    }
     .pt2 {
         margin: -9px !important;
         height: 107px !important;
@@ -8027,7 +8119,58 @@ html.menu-opened body {
         font-size: 17px;
         font-family: none;
     }
-    .offers {}
+    .cardmy {
+        width: 271px !important;
+    }
+    .lommy {
+        display: none;
+    }
+    .lommies {
+        display: block;
+    }
+    .cardy {
+        width: 65% !important;
+        height: 90px!important;
+        display: grid;
+        grid-template-columns: 245px;
+        grid-template-rows: 146px 176px 67px;
+        grid-template-areas: "image" "text" "stats";
+        font-family: roboto;
+        border-radius: 4px;
+        background: white;
+        text-align: center;
+        transition: 0.5s ease;
+        cursor: pointer;
+    }
+    .offers {
+        display: block;
+    }
+    .offers-going {
+        margin-bottom: 20px;
+        display: inline-flex;
+    }
+    .consulations {
+        display: none;
+    }
+    .consulation {
+        display: block;
+    }
+    .thenex {
+        display: none !important;
+    }
+    .cardox {
+        width: 62% !important;
+        display: inline-block;
+        border-radius: 18px;
+        background: white;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+        text-align: center;
+        transition: 0.5s ease;
+        cursor: pointer;
+        height: 167px;
+        margin-left: 78px;
+        margin-bottom: 36px;
+    }
     .now {
         font-size: 16px !important;
         font-family: Camphor, Helvetica, Arial, sans-serif!important;
@@ -8045,6 +8188,9 @@ html.menu-opened body {
     }
     .slick-next {
         right: 32px !important;
+    }
+    .specialities-slider .slick-dots {
+        display: none !important;
     }
     .roll {
         margin-top: -63px;
@@ -8391,6 +8537,16 @@ html.menu-opened body {
         text-align: center;
         width: 100%;
     }
+    .lthenex {
+        display: none;
+        margin-top: -76px !important;
+    }
+    .inclinicm {
+        display: block;
+    }
+    .inclinics {
+        display: none;
+    }
     .across {
         margin: -12px 0px 0px 27px;
         font-size: 14px;
@@ -8467,7 +8623,10 @@ html.menu-opened body {
         height: 120px;
     }
     .speicality-img img {
-        width: 50px;
+        width: 118px !important;
+    }
+    .ammie {
+        display: none;
     }
     .clinic-booking a.view-pro-btn {
         width: 100%;

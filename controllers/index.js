@@ -58,18 +58,18 @@ module.exports.Specialist = async function(req, res) {
 
 }
 
-module.exports.appointments =async (req, res) => {
+module.exports.appointments = async(req, res) => {
 
     let patients = await User.findById(req.user.id).populate({
         path: 'patients',
-        populate: { 
+        populate: {
             path: 'pid',
             populate: { path: 'user', }
-         }
+        }
     });
     return res.render('appointments', {
         title: 'Appointments',
-        allpatients:patients
+        allpatients: patients
     })
 }
 
@@ -94,32 +94,27 @@ module.exports.booking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     var today = new Date();
     today.setDate(today.getDate() - 1)
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-        var dayOfWeek = weekday[today.getDay()].toUpperCase(); 
-        // var result = today.setTime(today.getTime() - (1 * 24 * 60 * 60 * 1000));
-        // var date = new Date(res);
-        
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    // var result = today.setTime(today.getTime() - (1 * 24 * 60 * 60 * 1000));
+    // var date = new Date(res);
 
-        for(temp of doctor.schedule_time)
-        {
-            if(temp.day.toUpperCase() == dayOfWeek )
-            {
-                if(typeof(temp.booked)=='string')
-                {
-                    temp.booked = 0;
-                }
 
-                else{
-                    temp.booked = [0,0];
-                }
+    for (temp of doctor.schedule_time) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+            if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
+            } else {
+                temp.booked = [0, 0];
             }
         }
+    }
 
-        doctor.save();
-    
+    doctor.save();
+
     return res.render('booking', {
         title: 'Booking',
         doctor: doctor
@@ -159,6 +154,11 @@ module.exports.chatDoctor = (req, res) => {
         title: 'Chat user'
     })
 }
+module.exports.test = (req, res) => {
+    return res.render('test', {
+        title: 'Test User'
+    })
+}
 
 module.exports.checkout = (req, res) => {
     return res.render('checkout', {
@@ -193,14 +193,14 @@ module.exports.doctorTermsAndCondition = (req, res) => {
 module.exports.doctorDashboard = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'patients',
-        populate: { 
+        populate: {
             path: 'pid',
             populate: { path: 'user', }
-         }
+        }
     });
     return res.render('doctor-dashboard', {
         title: 'My Dashboard',
-        allpatients:patients
+        allpatients: patients
     })
 }
 
@@ -290,17 +290,17 @@ module.exports.invoiceView = (req, res) => {
     })
 }
 
-module.exports.invoices = async (req, res) => {
+module.exports.invoices = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'patients',
-        populate: { 
+        populate: {
             path: 'pid',
             populate: { path: 'user', }
-         }
+        }
     });
     return res.render('invoices', {
         title: 'Invoices',
-        allpatients:patients
+        allpatients: patients
     })
 }
 module.exports.idProof = (req, res) => {
@@ -318,17 +318,17 @@ module.exports.login = (req, res) => {
     })
 }
 
-module.exports.myPatients = async (req, res) => {
+module.exports.myPatients = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'patients',
-        populate: { 
+        populate: {
             path: 'pid',
             populate: { path: 'user', }
-         }
+        }
     });
     return res.render('my-patients', {
         title: 'My users',
-        allpatients:patients
+        allpatients: patients
     })
 }
 
@@ -354,19 +354,19 @@ module.exports.patientDashboard = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
         path: 'doctors',
-        populate: { 
+        populate: {
             path: 'did',
             populate: { path: 'user', }
-         }
+        }
     });
     return res.render('patient-dashboard', {
         title: 'user Dashboard',
         user: user,
-        alldoctors:doctors
+        alldoctors: doctors
     })
 }
 module.exports.pay = async(req, res) => {
-    
+
     return res.render('pay', {
         title: 'Payment',
         user: user
@@ -417,8 +417,7 @@ module.exports.register = (req, res) => {
     })
 }
 
-module.exports.steps = (req, res) =>
-{
+module.exports.steps = (req, res) => {
     // if(req.user.approve == true)
     // {
     //     return res.redirect('/doctor-dashboard');
@@ -428,8 +427,7 @@ module.exports.steps = (req, res) =>
     })
 }
 
-module.exports.settings = (req, res) =>
-{
+module.exports.settings = (req, res) => {
     return res.render('settings', {
         title: 'Settings'
     })
@@ -465,7 +463,7 @@ module.exports.signUp = async(req, res) => {
 
         }
     }
-    
+
     if (req.body.type == 'book') {
         console.log(req.body.type)
         let data = await client
@@ -485,12 +483,12 @@ module.exports.signUp = async(req, res) => {
                 flag: 'login',
                 phone: req.body.phone,
                 type: req.body.type,
-                booked:req.body.booked,
-                available:req.body.available,
-                slotindex:req.body.slotindex,
-                dayindex:req.body.dayindex,
-                id:req.body.id,
-                doctor:doctor
+                booked: req.body.booked,
+                available: req.body.available,
+                slotindex: req.body.slotindex,
+                dayindex: req.body.dayindex,
+                id: req.body.id,
+                doctor: doctor
 
 
             });
@@ -503,19 +501,18 @@ module.exports.signUp = async(req, res) => {
                 flag: true,
                 phone: req.body.phone,
                 type: req.body.type,
-                booked:req.body.booked,
-                available:req.body.available,
-                slotindex:req.body.slotindex,
-                dayindex:req.body.dayindex,
-                id:req.body.id,
-                doctor:doctor
+                booked: req.body.booked,
+                available: req.body.available,
+                slotindex: req.body.slotindex,
+                dayindex: req.body.dayindex,
+                id: req.body.id,
+                doctor: doctor
 
 
             });
 
         }
-    }
-    else {
+    } else {
         console.log('hiii')
 
         let data = await client
@@ -640,44 +637,41 @@ module.exports.verify = async(req, res) => {
     } else {
         if (req.body.type == 'book') {
             client
-            .verify
-            .services(config.serviceID)
-            .verifications
-            .create({
-                to: `+91${req.body.phone}`,
-                channel: req.query.service
-            }).then(async(data) => {
-                
-                let doctor = await User.findById(req.body.doctorid);
-                return res.render('checkout', {
-                    title: 'Phone verification',
-                    flag:true,
-                    phone: req.body.phone,
-                    type: req.body.type,
-                    booked:req.body.booked,
-                    available:req.body.available,
-                    slotindex:req.body.slotindex,
-                    dayindex:req.body.dayindex,
-                    id:req.body.id,
-                    doctor:doctor
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then(async(data) => {
+
+                    let doctor = await User.findById(req.body.doctorid);
+                    return res.render('checkout', {
+                        title: 'Phone verification',
+                        flag: true,
+                        phone: req.body.phone,
+                        type: req.body.type,
+                        booked: req.body.booked,
+                        available: req.body.available,
+                        slotindex: req.body.slotindex,
+                        dayindex: req.body.dayindex,
+                        id: req.body.id,
+                        doctor: doctor
 
 
+                    });
                 });
-            });
 
 
-        }
-
-        else
-        {
+        } else {
             console.log('hii')
             let user = await User.findOne({ phone: req.body.phone });
-    
+
             if (user) {
                 req.flash('error', 'Account already linked with this mobile number');
                 return res.redirect('back');
             } else {
-    
+
                 client
                     .verify
                     .services(config.serviceID)
@@ -691,14 +685,14 @@ module.exports.verify = async(req, res) => {
                             title: 'Phone verification',
                             phone: req.body.phone,
                             type: req.body.type
-    
+
                         });
                     });
-    
+
             }
         }
 
-   
+
     }
 
 }
