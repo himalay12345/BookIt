@@ -159,6 +159,11 @@ module.exports.test = (req, res) => {
         title: 'Test User'
     })
 }
+module.exports.test1 = (req, res) => {
+    return res.render('test1', {
+        title: 'Test1 User'
+    })
+}
 
 module.exports.checkout = (req, res) => {
     return res.render('checkout', {

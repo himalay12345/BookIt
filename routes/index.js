@@ -20,6 +20,7 @@ router.get('/change-password', passport.checkAuthentication, homeController.chan
 router.get('/chat', passport.checkAuthentication, homeController.chat);
 router.get('/consult', homeController.consult);
 router.get('/test', homeController.test);
+router.get('/test1', homeController.test1);
 
 router.get('/chat-doctor', passport.checkAuthentication, homeController.chatDoctor);
 router.get('/checkout', passport.checkAuthentication, homeController.checkout);
