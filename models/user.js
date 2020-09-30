@@ -100,8 +100,48 @@ const userSchema = mongoose.Schema({
     step3:{
         type: Boolean
     },
+    step4:{
+        type: Boolean
+    },
 
+    payments:[{
+        payment_id:{
+            type:String
+        },
+        order_id:{
+            type:String
+        },
+        signature:{
+            type:String
+        }
+    }],
+    prescriptions:[{
+        type:String
+    }], 
+    medical_records:[{
+        type:String
+    }],
+    refresh_flag:{
+        type:Boolean
+    },
+
+   others:[{
+    name : {
+        type:String
+    },
+    email :{
+        type:String
+    } ,
+    phone : 
+    {
+        type:String
+    }
+
+   }],
     doctors:[{
+        payment_id:{
+            type:String
+        },
         did:{
             type: mongoose.Schema.Types.ObjectId
         },
@@ -123,18 +163,32 @@ const userSchema = mongoose.Schema({
         count:{
             type:String
         },
+        slotindex:{
+            type:String
+        },
+        dayindex:{
+            type:String
+        },
         name:{
             type:String
         },
         email:{
             type:String
         },
+        cancel:{
+            type:Boolean
+        },
         phone:{
             type:String
-        }
+        },
+        createdAt: { type: Date, default: Date.now }
     }],
 
     patients:[{
+        payment_id:{
+            type:String
+        },
+        
         pid:{
             type: mongoose.Schema.Types.ObjectId
         },
@@ -149,6 +203,9 @@ const userSchema = mongoose.Schema({
         },
         fee:{
             type:String
+        },
+        cancel:{
+            type:Boolean
         },
         type:{
             type:String
@@ -183,8 +240,14 @@ const userSchema = mongoose.Schema({
     verifydegree: {
         type: Boolean
     },
-    approve: {
+    approve1: {
         type: Boolean
+    },
+    approve2: {
+        type: Boolean
+    },
+    accountid:{
+        type:String
     },
     bank: {
         bankname: {

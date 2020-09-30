@@ -1,6 +1,8 @@
 const config = require('../config/twilio');
 const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
+const shortid = require('shortid');
+const Razorpay = require('razorpay');
 
 
 module.exports.home = async(req, res) => {
@@ -36,6 +38,12 @@ module.exports.accountSetting = (req, res) => {
 module.exports.activeDevice = (req, res) => {
     return res.render('active-device', {
         title: 'Account Settings'
+    })
+}
+
+module.exports.addBank = (req, res) => {
+    return res.render('add-bank', {
+        title: 'Add Bank Details'
     })
 }
 
@@ -84,7 +92,7 @@ module.exports.bankDetails = (req, res) => {
     })
 }
 module.exports.Doctors = async(req, res) => {
-    let doctors = await User.find({ approve: true });
+    let doctors = await User.find({ approve1: true,approve2:true });
     return res.render('doctors', {
         title: 'Doctors',
         doctors: doctors
@@ -99,8 +107,7 @@ module.exports.booking = async(req, res) => {
         var yyyy = today.getFullYear();
         var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
         var dayOfWeek = weekday[today.getDay()].toUpperCase(); 
-        // var result = today.setTime(today.getTime() - (1 * 24 * 60 * 60 * 1000));
-        // var date = new Date(res);
+      console.log(dayOfWeek);
         
 
         for(temp of doctor.schedule_time)
@@ -284,9 +291,15 @@ module.exports.home2 = (req, res) => {
     })
 }
 
-module.exports.invoiceView = (req, res) => {
+module.exports.invoiceView = async (req, res) => {
+
+    let doctor = await User.findById(req.query.id);
     return res.render('invoice-view', {
-        title: 'Invoice View'
+        title: 'Invoice View',
+        doctor:doctor,
+        order:req.query.order,
+        date:req.query.date,
+        fee:req.query.fee
     })
 }
 
@@ -344,9 +357,77 @@ module.exports.medicalProof = (req, res) => {
     })
 }
 
+module.exports.medicalRecords = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let doctors = await User.findById(req.user.id).populate({
+        path: 'doctors',
+        populate: { 
+            path: 'did',
+            populate: { path: 'user' }
+         }
+    });
+    return res.render('medical-record', {
+        title: 'My Medical Records',
+        user: user,
+        alldoctors:doctors
+    })
+}
+
+module.exports.myBilling = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let doctors = await User.findById(req.user.id).populate({
+        path: 'doctors',
+        populate: { 
+            path: 'did',
+            populate: { path: 'user' }
+         }
+    });
+    return res.render('my-billing', {
+        title: 'My Billings',
+        user: user,
+        alldoctors:doctors
+    })
+}
+
+
+module.exports.myAppointments = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let doctors = await User.findById(req.user.id).populate({
+        path: 'doctors',
+        populate: { 
+            path: 'did',
+            populate: { path: 'user' }
+         }
+    });
+    return res.render('my-appointments', {
+        title: 'My Appointments',
+        user: user,
+        alldoctors:doctors
+    })
+}
+
 module.exports.notificationSettings = (req, res) => {
     return res.render('notification-settings', {
         title: 'Notifications Settings'
+    })
+}
+
+
+module.exports.otherPatients = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let patients = await User.findById(req.user.id).populate({
+        path: 'others',
+        populate: { 
+            path: 'doctors',
+            populate: { 
+                path: 'did',
+                populate: { path: 'user' } }
+         }
+    });
+    return res.render('other-patients', {
+        title: 'user Dashboard',
+        user: user,
+        otherpatients:patients
     })
 }
 
@@ -356,8 +437,9 @@ module.exports.patientDashboard = async(req, res) => {
         path: 'doctors',
         populate: { 
             path: 'did',
-            populate: { path: 'user', }
-         }
+            populate: { path: 'user' }
+         } 
+       
     });
     return res.render('patient-dashboard', {
         title: 'user Dashboard',
@@ -365,7 +447,80 @@ module.exports.patientDashboard = async(req, res) => {
         alldoctors:doctors
     })
 }
+
+
+module.exports.razorPay = async (req, res) => {
+    const razorpay = new Razorpay({
+        key_id: 'rzp_test_KPgD2YFDnBI7Ib',
+        key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ'
+      });
+    
+    const payment_capture = 1;
+    const amount = 499;
+    const currency = 'INR';
+    const response = await razorpay.orders.create({
+        amount:amount*100,
+        currency,
+        receipt: shortid.generate(),
+        payment_capture
+    });
+
+    console.log(response);
+    var options = {
+        "key": "rzp_test_KPgD2YFDnBI7Ib", 
+        "amount": response.amount, 
+        "currency": response.currency,
+        "name": "Book It",
+        "description": "Procced to pay your booking fee.",
+        "image": "/img/logo.png",
+        "order_id": response.id, 
+        "handler": function (response){
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature)
+        },
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9999999999"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+        rzp1.open();
+       
+
+}
+
+
+module.exports.refund = async (req, res) => {
+    return res.render('refund',{
+        title:'Refund'
+    });
+}
+
+module.exports.prescription= async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let doctors = await User.findById(req.user.id).populate({
+        path: 'doctors',
+        populate: { 
+            path: 'did',
+            populate: { path: 'user' }
+         }
+    });
+    return res.render('prescription', {
+        title: 'My Prescription',
+        user: user,
+        alldoctors:doctors
+    })
+}
 module.exports.pay = async(req, res) => {
+    let user = await User.findById(req.user.id)
     
     return res.render('pay', {
         title: 'Payment',
@@ -373,9 +528,19 @@ module.exports.pay = async(req, res) => {
     })
 }
 
-module.exports.patientProfile = (req, res) => {
+module.exports.patientProfile = async(req, res) => {
+    let user = await User.findById(req.query.pid).populate({
+        path: 'doctors',
+        populate: { 
+            path: 'did',
+            populate: { path: 'user' }
+         }
+    });
+    let doctor = await User.findById(req.query.doctorid);
     return res.render('patient-profile', {
-        title: 'user Profile'
+        title: 'Patient Profile',
+        user1:user,
+        doctor:doctor
     })
 }
 

@@ -23,7 +23,8 @@ router.post('/update-establishment',userController.updateEstablishment);
 router.post('/confirm-pay',userController.confirmPay);
 router.post('/set-schedule-timing', userController.setScheduleTiming);
 router.post('/update-schedule', userController.updateSchedule);
-
+router.post('/verify-payment',userController.verifyPayment);
+router.post('/payments/:id/refund',userController.refund)
 router.post('/set-booking-fee', userController.setBookingFee);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
