@@ -414,7 +414,7 @@
                 <div class="row">
 
                     <!-- Profile Sidebar -->
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar no-show-mobile">
                         <div class="profile-sidebar">
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
@@ -505,7 +505,7 @@
                     </div>
                     <!-- / Profile Sidebar -->
 
-                    <div class="col-md-7 col-lg-8 col-xl-9">
+                    <div class="col-md-7 col-lg-8 col-xl-9" style="min-height: 400px;">
                         <%if(locals.user.medical_records == ''){%>
                             <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Medical Records Available !</span></h2>
                             <%}else{%>

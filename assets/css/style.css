@@ -55,6 +55,10 @@
     border: 1px solid red;
 }
 
+.sscreen{
+    display:none;
+}
+
 .consult-specilities {
     display: none;
 }
@@ -267,6 +271,16 @@ lthenex {
     font-size: 14px;
     font-weight: 300;
     color: white;
+}
+
+.chng a{
+    margin-top: -10px !important;
+    margin-left: -18px;
+}
+
+.chng-time{
+
+margin-top: -10px !important;
 }
 
 .ammie {
@@ -7214,6 +7228,8 @@ html.menu-opened body {
     .doctor-img {
         margin: 0 auto -5px;
     }
+
+
     
     .doctor-action {
         justify-content: center;
@@ -7326,9 +7342,11 @@ html.menu-opened body {
     .card {
         margin-bottom: 0.9375rem;
     }
+
+
     
-    .card-body {
-        /* padding: 1.25rem; */
+    .doctor-img img{
+       height:110px;
     }
     
     .clinic-gallery {
@@ -7443,9 +7461,26 @@ html.menu-opened body {
         transition: 0.5s ease;
         cursor: pointer;
     }
+
+    .no-show-mobile{
+        display:none;
+    }
+
+    .plr0{
+        padding-left: 0!important;
+        padding-right: 0!important;
+    }
+
+    #mal{
+        border:none;
+    }
     
     .offers {
         display: block;
+    }
+
+    .sscreen{
+        display:block;
     }
     
     .offers-going {
@@ -7718,19 +7753,7 @@ html.menu-opened body {
         font-size: 1.125rem;
     }
     
-    .booking-schedule.schedule-widget {
-        /* overflow-x: auto; */
-    }
-    
-    .booking-schedule.schedule-widget>div {
-        /* width: 730px; */
-    }
-    
-    .booking-schedule .day-slot ul {
-        /* display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex; */
-    }
+   
     
     .notifications {
         width: 317px;
@@ -7767,6 +7790,21 @@ html.menu-opened body {
     
     .setting-bread {
         margin-top: 0px !important;
+    }
+
+    .setting-top{
+        padding-top: 80px !important;
+    }
+
+    .lscreen{
+    display:none !important;
+    }
+
+    .new_tab2{
+        
+    margin-top: 124px !important;
+    margin-bottom: 50px !important;
+
     }
     
     .setting-bread h2 {
@@ -7868,6 +7906,12 @@ html.menu-opened body {
         padding: 0px 10px;
         margin-top: 0px !important;
     }
+
+    .sidebar-overlay {
+        z-index: 0 !important;
+    }
+
+
     
     .main-menu-wrapper {
         order: 3;
@@ -8420,8 +8464,10 @@ input:-webkit-autofill:focus {
 }
 .noti-details {
     color: #989c9e;
-    margin-top: -20px;
+    margin-top: 0px;
 }
+
+
 .noti-title {
     color: #333;
 }
@@ -8438,6 +8484,8 @@ input:-webkit-autofill:focus {
 }
 .notifications ul.notification-list>li {
     margin-top: 0;
+    padding-top: 5px;
+    margin-bottom: 12px;
     border-bottom: 1px solid #f5f5f5;
 }
 .notifications ul.notification-list>li:last-child {
