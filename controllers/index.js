@@ -7,31 +7,28 @@ const Razorpay = require('razorpay');
 
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
-    if(req.isAuthenticated())
-    {
+    if (req.isAuthenticated()) {
         let patient = await User.findById(req.user.id).populate({
             path: 'notification',
             populate: {
                 path: 'did',
-                sort:{createdAt:-1},
+                sort: { createdAt: -1 },
                 populate: { path: 'user', }
             }
         });
-    
+
         return res.render('index', {
             title: 'Home',
             doctors: doctors,
-            patient:patient
+            patient: patient
         })
-    }
-
-    else{
+    } else {
         return res.render('index', {
             title: 'Home',
             doctors: doctors
         })
     }
-   
+
 }
 
 module.exports.addBilling = (req, res) => {
@@ -102,7 +99,7 @@ module.exports.appointments = async(req, res) => {
     })
 }
 
-module.exports.appointmentDetail = async (req, res) => {
+module.exports.appointmentDetail = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'doctors',
         populate: {
@@ -112,8 +109,8 @@ module.exports.appointmentDetail = async (req, res) => {
     });
     return res.render('appointment-detail', {
         title: 'Apppointment Details',
-        user:patients,
-        i:req.query.index
+        user: patients,
+        i: req.query.index
     })
 }
 
@@ -154,15 +151,16 @@ module.exports.booking = async(req, res) => {
                 temp.booked = [0, 0];
             }
         }
-    
 
 
-    doctor.save();
 
-    return res.render('booking', {
-        title: 'Booking',
-        doctor: doctor
-    })
+        doctor.save();
+
+        return res.render('booking', {
+            title: 'Booking',
+            doctor: doctor
+        })
+    }
 }
 
 
