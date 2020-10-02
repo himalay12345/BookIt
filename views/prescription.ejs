@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- doccure/locals.user-dashboard  30 Nov 2019 04:12:16 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -21,9 +21,6 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
-
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -400,10 +397,10 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><a href="/settings">Settings</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Settings</h2>
+                        <h2 class="breadcrumb-title">Dashboard</h2>
                     </div>
                 </div>
             </div>
@@ -411,57 +408,402 @@
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        <div class="container settings-header col-md-12" style="width:95.5%;height:60px;border-bottom:0.5px solid lightgrey;background-color: white;margin-top: 10px;margin-bottom: -30px;border-radius: 0;">
-            <h3 style="font-size: 1rem;font-weight: bold;"><a href="/settings">Settings</a></h3>
-        </div>
         <div class="content">
-           
             <div class="container-fluid">
 
                 <div class="row">
-                    
-                    <div class="col-md-2 settings" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
-                        <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
-                            <li><a href="/doctor-change-password">Change Password</a></li>
-                            <li><a href="/notification-settings">Notification Settings</a></li>
-                            <li><a href="/active-device">Active Devices</a></li>
-                            <li><a href="/delete-account">Delete Account</a></li>
-                            <li><a href="/user/logout" style="color: red;">Logout</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-10 col-lg-8 col-xl-9 settings-content" style="margin-left:-15px;border-left: 0.5px solid lighgrey;">
-                        <div class="card" style="border-radius: 0;border:0;">
-                            <div class="card-body" style="padding: 2.2rem;">
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-6">
 
-                                        <!-- Change Password Form -->
-                                        <form action="/user/doc-change-password" method="POST">
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">Old Password</label>
-                                                <input type="password" name="old" class="form-control" style="min-height: 0px!important;">
-                                                <input type="hidden" name="phone" value="<%=locals.user.phone%>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">New Password</label>
-                                                <input type="password" name="password" class="form-control" style="min-height: 0px!important;">
-                                            </div>
-                                            <div class="form-group">
-                                                <label style="font-size: 0.9rem; font-weight: 500;">Confirm Password</label>
-                                                <input type="password" name="confirm" class="form-control"style="min-height: 0px!important;">
-                                            </div>
-                                            <div class="submit-section">
-                                                <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                            </div>
-                                        </form>
-                                        <!-- /Change Password Form -->
+                    <!-- Profile Sidebar -->
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                        <div class="profile-sidebar">
+                            <div class="widget-profile pro-widget-content">
+                                <div class="profile-info-widget">
+                                    <a href="#" class="booking-doc-img">
+                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
+                                    </a>
+                                    <div class="profile-det-info">
+                                        <h3>
+                                            <%=locals.user.name%>
+                                        </h3>
+                                       
+                                        <div class="locals.user-details">
+                                            <%if(locals.user.dob){var newDateObject = new Date();
 
+                                                var newObjectCurrentYear = newDateObject.getFullYear();
+                                                
+                                                var userDateObject = locals.user.dob;
+                                                
+                                                var userDateObjectPieces = userDateObject.split("/");
+                                                
+                                                var userObjectYear = userDateObjectPieces[2];
+                                                
+                                                var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
+
+                                                %>
+                                            <h5 style="font-size: 0.85rem;"><i class="fas fa-birthday-cake"></i>
+                                                <%=locals.user.dob%> , <%=age%> Years
+
+                                            </h5>
+                                            <%}%>
+                                            <%if(locals.user.city){%>
+                                            <h5 class="mb-0" style="font-size: 0.85rem;"><i class="fas fa-map-marker-alt"></i>
+                                                <%=locals.user.city%> 
+                                                    <%=locals.user.state%>
+                                            </h5>
+                                            <%}%>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="dashboard-widget">
+                                <nav class="dashboard-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="/patient-dashboard">
+                                                <i class="fas fa-columns"></i>
+                                                <span>My Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/my-appointments">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>My Appointments</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="/prescription">
+                                                <i class="fas fa-newspaper"></i>
+                                                <span>My prescriptions</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/medical-records">
+                                                <i class="fas fa-medkit"></i>
+                                                <span>My Medical records</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/my-billing">
+                                                <i class="fas fa-credit-card"></i>
+                                                <span>My Billings</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/other-patients">
+                                                <i class="fas fa-edit"></i>
+                                                <span>Other Appointments</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/favourites">
+                                                <i class="fas fa-bookmark"></i>
+                                                <span>Favourites</span>
+                                            </a>
+                                        </li>
+                                       
+                                       
+                                       
+                                    </ul>
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
+                    <!-- / Profile Sidebar -->
+
+                    <div class="col-md-7 col-lg-8 col-xl-9">
+                        
+                        <%if(locals.user.prescriptions == ''){%>
+                            <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Prescriptions Available !</span></h2>
+                            <%}else{%>
+                        <div class="card">
+                            <div class="card-body pt-0">
+
+                                <!-- Tab Menu -->
+                                <nav class="user-tabs mb-4">
+                                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+                                        <li class="nav-item">
+                                            <a class="nav-link active pall-10" href="#pat_prescriptions" data-toggle="tab">Prescriptions</a>
+                                        </li>
+                                       
+                                    </ul>
+                                </nav>
+                                <!-- /Tab Menu -->
+
+                                <!-- Tab Content -->
+                                <div class="tab-content pt-0">
+
+                                    <!-- Appointment Tab -->
+                                   
+                                    <!-- /Appointment Tab -->
+
+                                    <!-- Prescription Tab -->
+                                    
+                                    <div class="tab-content" id="pat_prescriptions show active">
+                                        <nav class="user-tabs mb-4 new_tab" style="margin-top: -40px;height: 50px !important;padding:0px !important;">
+                                            <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active pall" id="mpbtn" data-toggle="tab" style="padding:10px !important;cursor: pointer;">My Prescriptions</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link pall" id="opbtn" data-toggle="tab" style="padding:10px !important;cursor: pointer;">My Other Patients Prescriptions</a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </nav>
+                                        <div class="card card-table mb-0" id="mpl">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-center mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Date </th>
+                                                                <th>Name</th>
+                                                                <th>Created by </th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>14 Nov 2019</td>
+                                                                <td>Prescription 1</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-01.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Ruby Perrin <span>Dental</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13 Nov 2019</td>
+                                                                <td>Prescription 2</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Darren Elder <span>Dental</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12 Nov 2019</td>
+                                                                <td>Prescription 3</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-03.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Deborah Angel <span>Cardiology</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11 Nov 2019</td>
+                                                                <td>Prescription 4</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-04.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Sofia Brient <span>Urology</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10 Nov 2019</td>
+                                                                <td>Prescription 5</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-05.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Marvin Campbell <span>Dental</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9 Nov 2019</td>
+                                                                <td>Prescription 6</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-06.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Katharine Berthold <span>Orthopaedics</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8 Nov 2019</td>
+                                                                <td>Prescription 7</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-07.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Linda Tobin <span>Neurology</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7 Nov 2019</td>
+                                                                <td>Prescription 8</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-08.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Paul Richard <span>Dermatology</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6 Nov 2019</td>
+                                                                <td>Prescription 9</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-09.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. John Gibbs <span>Dental</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5 Nov 2019</td>
+                                                                <td>Prescription 10</td>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="img/doctors/doctor-thumb-10.jpg" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile">Dr. Olga Barlow <span>Dental</span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="displayNone" id="opl">ppp</div>
+                                    </div>
+                                   
+                                    <!-- /Prescription Tab -->
+
+                
+                                </div>
+                                <!-- Tab Content -->
+
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -512,13 +854,13 @@
 
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
+                                <h2 class="footer-title">For Patient</h2>
                                 <ul>
                                     <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
                                     <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
                                     <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
                                     <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+                                    <li><a href="/locals.user-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -620,29 +962,28 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
-    <script>
-        <%if(flash.success && flash.success.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.success%>',
-            type: 'success',
-            layout: 'topRight',
-            timeout: 1500
-        }).show();
-        <%}%>
-        <%if(flash.error && flash.error.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
-    </script>
 
 </body>
+<script>
+        var mpbtn = document.getElementById('mpbtn');
+        var opbtn = document.getElementById('opbtn');
+        var mpl = document.getElementById('mpl');
+        var opl = document.getElementById('opl');
+        opbtn.addEventListener('click',function()
+        {
+            
+            mpl.classList.add('displayNone');
+            opl.classList.remove('displayNone');
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+        })
+        mpbtn.addEventListener('click',function()
+        {
+            opl.classList.add('displayNone');
+            mpl.classList.remove('displayNone');
+
+        }) 
+</script>
+
+<!-- doccure/locals.user-dashboard  30 Nov 2019 04:12:16 GMT -->
 
 </html>

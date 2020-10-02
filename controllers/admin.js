@@ -6,7 +6,7 @@ module.exports.appointmentList = (req, res) => {
     })
 }
 module.exports.applicationRequest = async(req, res) => {
-    let user = await User.find({ step3: true });
+    let user = await User.find({ step4: true });
     return res.render('a-application-request', {
         title: 'Application Request',
         user: user
@@ -14,13 +14,57 @@ module.exports.applicationRequest = async(req, res) => {
 }
 module.exports.approveDocuments = async(req, res) => {
     let users = await User.findById(req.body.id);
-    let user = await User.find({ step3: true });
-    users.approve = true;
+    let user = await User.find({ step4: true });
+    users.approve1 = true;
     users.save();
-    return res.render('a-application-request', {
-        title: 'Application Request',
-        user: user
-    })
+    if(users.approve2 == true)
+    {
+        return res.render('a-application-request', {
+            title: 'Application Request',
+            user: user
+        })
+    }
+
+    else{
+        return res.render('a-profile', {
+            title: 'Profile',
+            user: users
+        })
+    }
+}
+
+module.exports.approveBank = async(req, res) => {
+    let users = await User.findById(req.body.id);
+    let user = await User.find({ step4: true });
+
+    if(req.body.accountid == req.body.reaccountid)
+    {
+        users.accountid = req.body.accountid;
+        users.approve2 = true;
+        users.save();
+        if(users.approve1 == true)
+        {
+            return res.render('a-application-request', {
+                title: 'Application Request',
+                user: user
+            })
+        }
+
+        else{
+            return res.render('a-profile', {
+                title: 'Profile',
+                user: users
+            })
+        }
+     }
+     else{
+        req.flash('error', 'AccountId Donot match');
+        return res.render('a-profile', {
+            title: 'Profile',
+            user: users
+        })
+     }
+    
 }
 module.exports.blankPage = (req, res) => {
     return res.render('a-blank-page', {

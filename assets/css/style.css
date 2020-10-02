@@ -137,6 +137,27 @@ lthenex {
 .nots-span span p {
     font-size: 0.9rem;
 }
+.new_tab2{
+    border:none !important;
+    background-color: lightgrey;
+    height: 50px !important;
+    color: white!important;
+    
+}
+
+.new_tab1 .nav-tabs.nav-tabs-bottom>li>a:hover{
+   
+    background-color: rgb(160, 154, 154);
+    height: 50px !important;
+    color: white!important;
+    
+}
+
+
+
+.pall-10{
+    padding: 10px !important;
+}
 
 .settings-content {
     padding-left: 20px;
@@ -7363,6 +7384,11 @@ html.menu-opened body {
         margin-top: -50px !important;
         margin-left: -91px !important;
         width: 329px !important;
+    }
+
+    .no-file{
+        margin-top: 20px !important;
+        margin-bottom: 50px !important;
     }
     
     .nslide {

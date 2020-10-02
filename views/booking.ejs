@@ -37,6 +37,7 @@
         <!-- Header -->
         <header class="header">
             <nav class="navbar navbar-expand-lg header-nav">
+                <div id="stylenavbar">
                 <div class="navbar-header">
                     <a id="mobile_btn" href="javascript:void(0);">
                         <span class="bar-icon">
@@ -45,13 +46,14 @@
                         <span></span>
                         </span>
                     </a>
-                    <a href="/index-2" class="navbar-brand logo">
+                    <a href="/" class="navbar-brand logo">
                         <img src="/img/logo.png" class="img-fluid" alt="Logo">
                     </a>
+
                 </div>
                 <div class="main-menu-wrapper">
                     <div class="menu-header">
-                        <a href="/index-2" class="menu-logo">
+                        <a href="/" class="menu-logo">
                             <img src="/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                         <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -59,49 +61,48 @@
                         </a>
                     </div>
                     <ul class="main-nav">
-                        <li>
-                            <a href="/index-2">Home</a>
+                        <li class="active" style="display: none;">
+                            <a href="index" style="font-size: 1.5rem;">Home</a>
+                            
                         </li>
-                        <li class="has-submenu">
-                            <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
-                                <li><a href="/doctor-dashboard">Doctor Dashboard</a></li>
-                                <li><a href="/appointments">Appointments</a></li>
-                                <li><a href="/schedule-timings">Schedule Timing</a></li>
-                                <li><a href="/my-patients">Patients List</a></li>
-                                <li><a href="/patient-profile">Patients Profile</a></li>
-                                <li><a href="/chat-doctor">Chat</a></li>
-                                <li><a href="/invoices">Invoices</a></li>
-                                <li><a href="/doctor-profile-settings">Profile Settings</a></li>
-                                <li><a href="/reviews">Reviews</a></li>
-                                <li><a href="/doctor-register">Doctor Register</a></li>
-                            </ul>
+                        <li class="mdlist">
+                            <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
+                            <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
                         </li>
-                        <li class="has-submenu active">
-                            <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
-                                <li><a href="/search">Search Doctor</a></li>
-                                <li><a href="/doctor-profile">Doctor Profile</a></li>
-                                <li class="active"><a href="/booking">Booking</a></li>
-                                <li><a href="/checkout">Checkout</a></li>
-                                <li><a href="/booking-success">Booking Success</a></li>
-                                <li><a href="/patient-dashboard">Patient Dashboard</a></li>
-                                <li><a href="/favourites">Favourites</a></li>
-                                <li><a href="/chat">Chat</a></li>
-                                <li><a href="/profile-settings">Profile Settings</a></li>
-                                <li><a href="/change-password">Change Password</a></li>
-                            </ul>
+
+                        <li class="smlist" style="display: none;">
+                            <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
                         </li>
-                        <li class="has-submenu">
+                        <li class="smlist" style="display: none;">
+                            <a><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
+                        </li>
+                        <li class="smlist" style="display: none;">
+                            <a><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
+                        </li>
+
+                        <li class="mdlist">
+                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Consult</a>
+                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Consult with best doctors</a>
+                        </li>
+                        <li class="mdlist">
+                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Diagonistics</a>
+                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book tests and checkups</a>
+                        </li>
+                       
+
+
+
+                        <li class="has-submenu" style="display: none;">
                             <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
                             <ul class="submenu">
                                 <li><a href="/voice-call">Voice Call</a></li>
                                 <li><a href="/video-call">Video Call</a></li>
+                                <li><a href="/consult">consult</a></li>
                                 <li><a href="/search">Search Doctors</a></li>
                                 <li><a href="/calendar">Calendar</a></li>
                                 <li><a href="/components">Components</a></li>
                                 <li class="has-submenu">
-                                    <a href="/invoices">Invoices</a>
+                                    <a href="invoices">Invoices</a>
                                     <ul class="submenu">
                                         <li><a href="/invoices">Invoices</a></li>
                                         <li><a href="/invoice-view">Invoice View</a></li>
@@ -114,9 +115,14 @@
                             </ul>
                         </li>
 
-                        <li class="login-link">
-                            <a href="/login">Login / Signup</a>
-                        </li>
+                        <%if(locals.user){%>
+
+
+                            <%}else{%>
+                                <li class="login-link">
+                                    <a href="/login">Login / Signup</a>
+                                </li>
+                                <%}%>
                     </ul>
                 </div>
                 <ul class="nav header-navbar-rht">
@@ -129,10 +135,255 @@
                             <p class="contact-info-header"> +1 315 369 5943</p>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link header-login" href="/login">login / Signup </a>
-                    </li>
+                    <%if(locals.user){%>
+
+                        <%}else{%>
+                            <li class="nav-item">
+                                <a class="nav-link header-login" href="/login">Login </a>
+                            </li>
+                            <%}%>
                 </ul>
+                <%if(locals.user){%>
+                    <ul class="nav user-menu mt-md-3">
+
+                        <!-- Notifications -->
+                        <li class="nav-item dropdown noti-dropdown bell">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <i class="far fa-bell" style="color: black; "></i> <span class="badge badge-pill">1</span>
+                            </a>
+                            <div class="dropdown-menu notifications">
+                                <div class="topnav-dropdown-header">
+                                    <span class="notification-title">Notifications</span>
+                                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                                </div>
+                                <div class="noti-content">
+                                    <ul class="notification-list">
+                                        <%if(locals.user.approve == true){%>
+
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li class="notification-message">
+                                                <a href="#">
+                                                    <div class="media">
+                                                        <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                        <div class="media-body">
+                                                            <a href="/doctor-terms-and-condition">
+                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                </p>
+                                                            </a>
+                                                            <p class="noti-time"><span class="notification-time"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <%}%>
+                                                <!-- <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient1.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
+                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient2.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $215 for his <span class="noti-title">appointment</span></p>
+                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient3.jpg">
+                                                    </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
+                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li> -->
+                                    </ul>
+                                </div>
+                                <div class="topnav-dropdown-footer">
+                                    <a href="#">View all Notifications</a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- /Notifications -->
+
+                        <!-- User Menu -->
+                        <%if(locals.user.type == 'Doctor'){%>
+                            <li class="nav-item dropdown has-arrow">
+                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" width="31" alt="Ryan Taylor"></span>
+                                </a>
+                                <div class="dropdown-menu profile-drop">
+                                    <div class="user-header">
+                                        <div class="avatar avatar-sm">
+                                            <img src="<%=locals.user.avatar%>" onerror='this.src="/img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
+                                        </div>
+                                        <div class="user-text">
+                                            <h6>Dr.
+                                                <%=locals.user.name%>
+                                            </h6>
+                                            <p class="text-muted mb-0">Doctor</p>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
+                                    <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                    <a class="dropdown-item" href="/chat">Messages</a>
+                                    <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+                                    <a class="dropdown-item" href="/appointments">Appointments</a>
+                                    <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                    <a class="dropdown-item" href="/invoices">Invoices</a>
+                                    <a class="dropdown-item" href="/review">Review</a>
+                                    
+
+                                    <a class="dropdown-item" href="/settings">Settings</a>
+                                    <a class="dropdown-item" href="/user/logout">Logout</a>
+                                </div>
+                            </li>
+                            <%}%>
+                                <%if(locals.user.type == 'Patient'){%>
+                                    <li class="nav-item dropdown has-arrow">
+                                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
+                                        </a>
+                                        <div class="dropdown-menu profile-drop">
+                                            <div class="user-header">
+                                                <div class="avatar avatar-sm">
+                                                    <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
+                                                </div>
+                                                <div class="user-text">
+                                                    <h6>
+                                                        <%=locals.user.name%>
+                                                    </h6>
+                                                    <p class="text-muted mb-0">Patient</p>
+                                                </div>
+                                            </div>
+
+                                            <a class="dropdown-item" href="/profile-settings">My Profile</a>
+                                            <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
+                                            <a class="dropdown-item" href="/prescription">My Prescriptions</a>
+                                            <a class="dropdown-item" href="/medical-records">My Medical records</a>
+                                            <a class="dropdown-item" href="/my-billing">My Billings</a>
+                                            <a class="dropdown-item" href="/favourites">My Favourites</a>
+                                            <a class="dropdown-item" href="/other-patients">Other Patient Appointment</a>
+                                            <a class="dropdown-item" href="/chat">Messages</a>
+                                         
+                                            <a class="dropdown-item" href="/settings">Settings</a>
+                                            <a class="dropdown-item" href="/user/logout">Logout</a>
+                                        </div>
+                                    </li>
+                                    <%}%>
+
+                                        <!-- /User Menu -->
+
+                    </ul>
+                    <%}%>
+
+                        <!-- <%if(locals.user){%>
+                    <%if(locals.user.type == 'Doctor'){%>
+                        <div class="hideinphone" style="margin-left: 25px;">
+                            <ul class="main-nav amain-nav">
+
+                                        <li class="has-submenu ahas-submenu">
+                                            <a href="#">
+                                                <span class="user-img">
+                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                            </span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+
+                                    <ul class="submenu asubmenun phoneul">
+                                        <li><a href="/doctor-dashboard">My Dashboard</a></li>
+                                        <li><a href="/appointments">Appointments</a></li>
+                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
+                                        <li><a href="/chat-doctor">Chat</a></li>
+                                        
+                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
+                                        
+                                        <li><a href="/user/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    <%}%>
+                <%if(locals.user.type == 'Patient'){%>
+                    <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                        <ul class="main-nav amain-nav">
+                            <li class="has-submenu ahas-submenu">
+                                <a href="#">
+                                    <span class="user-img">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
+                    </span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+
+                                <ul class="submenu asubmenu">
+                                    <li><a href="/search">Search Doctor</a></li>
+                                    <li><a href="/booking">Booking</a></li>
+                                    <li><a href="/checkout">Checkout</a></li>
+                                    <li><a href="/booking-success">Booking Success</a></li>
+                                    <li><a href="/patient-dashboard">My Dashboard</a></li>
+                                    <li><a href="/favourites">My Favourites</a></li>
+                                    <li><a href="/chat">Messages</a></li>
+                                    <li><a href="/profile-settings">Profile Settings</a></li>
+                                    <li><a href="/change-password">Change Password</a></li>
+                                    <li><a href="/user/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <%}%>
+                <%}%> -->
+                </div>
             </nav>
         </header>
         <!-- /Header -->
@@ -584,7 +835,7 @@
                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                             <%z++%>
                                                                                                                                                                                 <%var color = parseInt(d1.booked);%>
-                                                                                                                                                                                    <%for(var j= 1;j<=d1.max_count;j++){%>
+                                                                                                                                                                                    <%for(var j= 1;j<=d1.available;j++){%>
 
 
                                                                                                                                                                                         <%if(j<=color){%>
@@ -609,7 +860,7 @@
                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                         <%var color = parseInt(d1.booked[i]);%>
-                                                                                                                                                                                            <%for(var j= 1;j<=d1.max_count[i];j++){%>
+                                                                                                                                                                                            <%for(var j= 1;j<=d1.available[i];j++){%>
 
 
                                                                                                                                                                                                 <%if(j<=color){%>
@@ -646,7 +897,7 @@
                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                             <%var color = parseInt(d2.booked);%>
-                                                                                                                                                                                                <%for(var j= 1;j<=d2.max_count;j++){%>
+                                                                                                                                                                                                <%for(var j= 1;j<=d2.available;j++){%>
 
                                                                                                                                                                                                     <%if(j<=color){%>
                                                                                                                                                                                                         <a class="timing" style="width: 50px; color: white; background-color: red; height:40px;margin-left: 5px;cursor:no-drop" id="checkme">
@@ -671,7 +922,7 @@
                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                     <%var color = parseInt(d2.booked[i]);%>
-                                                                                                                                                                                                        <%for(var j= 1;j<=d2.max_count[i];j++){%>
+                                                                                                                                                                                                        <%for(var j= 1;j<=d2.available[i];j++){%>
 
 
                                                                                                                                                                                                             <%if(j<=color){%>
@@ -707,7 +958,7 @@
                                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                         <%var color = parseInt(d3.booked);%>
-                                                                                                                                                                                                            <%for(var j= 1;j<=d3.max_count;j++){%>
+                                                                                                                                                                                                            <%for(var j= 1;j<=d3.available;j++){%>
 
 
                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -732,7 +983,7 @@
                                                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                 <%var color = parseInt(d3.booked[i]);%>
-                                                                                                                                                                                                                    <%for(var j= 1;j<=d3.max_count[i];j++){%>
+                                                                                                                                                                                                                    <%for(var j= 1;j<=d3.available[i];j++){%>
 
 
                                                                                                                                                                                                                         <%if(j<=color){%>
@@ -771,7 +1022,7 @@
                                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                     <%var color = parseInt(d4.booked);%>
-                                                                                                                                                                                                                        <%for(var j= 1;j<=d4.max_count;j++){%>
+                                                                                                                                                                                                                        <%for(var j= 1;j<=d4.available;j++){%>
 
 
                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -796,7 +1047,7 @@
                                                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                             <%var color = parseInt(d4.booked[i]);%>
-                                                                                                                                                                                                                                <%for(var j= 1;j<=d4.max_count[i];j++){%>
+                                                                                                                                                                                                                                <%for(var j= 1;j<=d4.available[i];j++){%>
 
 
                                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -832,7 +1083,7 @@
                                                                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                 <%var color = parseInt(d5.booked);%>
-                                                                                                                                                                                                                                    <%for(var j= 1;j<=d5.max_count;j++){%>
+                                                                                                                                                                                                                                    <%for(var j= 1;j<=d5.available;j++){%>
 
 
                                                                                                                                                                                                                                         <%if(j<=color){%>
@@ -858,7 +1109,7 @@
                                                                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                                         <%var color = parseInt(d5.booked[i]);%>
-                                                                                                                                                                                                                                            <%for(var j= 1;j<=d5.max_count[i];j++){%>
+                                                                                                                                                                                                                                            <%for(var j= 1;j<=d5.available[i];j++){%>
 
 
                                                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -895,7 +1146,7 @@
                                                                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                                             <%var color = parseInt(d6.booked);%>
-                                                                                                                                                                                                                                                <%for(var j= 1;j<=d6.max_count;j++){%>
+                                                                                                                                                                                                                                                <%for(var j= 1;j<=d6.available;j++){%>
 
 
 
@@ -922,7 +1173,7 @@
                                                                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                                                     <%var color = parseInt(d6.booked[i]);%>
-                                                                                                                                                                                                                                                        <%for(var j= 1;j<=d6.max_count[i];j++){%>
+                                                                                                                                                                                                                                                        <%for(var j= 1;j<=d6.available[i];j++){%>
 
 
                                                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -960,7 +1211,7 @@
                                                                                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                                                         <%var color = parseInt(d7.booked);%>
-                                                                                                                                                                                                                                                            <%for(var j= 1;j<=d7.max_count;j++){%>
+                                                                                                                                                                                                                                                            <%for(var j= 1;j<=d7.available;j++){%>
 
 
                                                                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -989,7 +1240,7 @@
                                                                                                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                                                 <%var color = parseInt(d7.booked[i]);%>
-                                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d7.max_count[i];j++){%>
+                                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d7.available[i];j++){%>
 
 
                                                                                                                                                                                                                                                                         <%if(j<=color){%>
@@ -1061,7 +1312,7 @@
                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction:row;flex-wrap: wrap;">
                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                         <%var color = parseInt(d1.booked);%>
-                                                                                                                                                                                            <%for(var j= 1;j<=d1.max_count;j++){%>
+                                                                                                                                                                                            <%for(var j= 1;j<=d1.available;j++){%>
 
                                                                                                                                                                                                 <%if(j<=color){%>
                                                                                                                                                                                                     <a class="timing" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;"
@@ -1088,7 +1339,7 @@
                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                 <%var color = parseInt(d1.booked[i]);%>
 
-                                                                                                                                                                                                    <%for(var j= 1;j<=d1.max_count[i];j++){%>
+                                                                                                                                                                                                    <%for(var j= 1;j<=d1.available[i];j++){%>
 
 
                                                                                                                                                                                                         <%if(j<=color){%>
@@ -1128,7 +1379,7 @@
                                                                                                                                                                             <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                     <%var color = parseInt(d2.booked);%>
-                                                                                                                                                                                        <%for(var j= 1;j<=d2.max_count;j++){%>
+                                                                                                                                                                                        <%for(var j= 1;j<=d2.available;j++){%>
 
 
                                                                                                                                                                                             <%if(j<=color){%>
@@ -1155,7 +1406,7 @@
                                                                                                                                                                                     <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                             <%var color = parseInt(d2.booked[i]);%>
-                                                                                                                                                                                                <%for(var j= 1;j<=d2.max_count[i];j++){%>
+                                                                                                                                                                                                <%for(var j= 1;j<=d2.available[i];j++){%>
 
                                                                                                                                                                                                     <%if(j<=color){%>
                                                                                                                                                                                                         <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
@@ -1191,7 +1442,7 @@
                                                                                                                                                                                         <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                 <%var color = parseInt(d3.booked);%>
-                                                                                                                                                                                                    <%for(var j= 1;j<=d3.max_count;j++){%>
+                                                                                                                                                                                                    <%for(var j= 1;j<=d3.available;j++){%>
 
                                                                                                                                                                                                         <%if(j<=color){%>
                                                                                                                                                                                                             <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
@@ -1217,7 +1468,7 @@
                                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                         <%var color = parseInt(d3.booked[i]);%>
-                                                                                                                                                                                                            <%for(var j= 1;j<=d3.max_count[i];j++){%>
+                                                                                                                                                                                                            <%for(var j= 1;j<=d3.available[i];j++){%>
 
                                                                                                                                                                                                                 <%if(j<=color){%>
                                                                                                                                                                                                                     <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
@@ -1255,7 +1506,7 @@
                                                                                                                                                                                                     <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                             <%var color = parseInt(d4.booked);%>
-                                                                                                                                                                                                                <%for(var j= 1;j<=d4.max_count;j++){%>
+                                                                                                                                                                                                                <%for(var j= 1;j<=d4.available;j++){%>
                                                                                                                                                                                                                     <%if(j<=color){%>
                                                                                                                                                                                                                         <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
 
@@ -1283,7 +1534,7 @@
                                                                                                                                                                                                             <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                     <%var color = parseInt(d4.booked[i]);%>
-                                                                                                                                                                                                                        <%for(var j= 1;j<=d4.max_count[i];j++){%>
+                                                                                                                                                                                                                        <%for(var j= 1;j<=d4.available[i];j++){%>
 
 
                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -1321,7 +1572,7 @@
                                                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                         <%var color = parseInt(d5.booked);%>
-                                                                                                                                                                                                                            <%for(var j= 1;j<=d5.max_count;j++){%>
+                                                                                                                                                                                                                            <%for(var j= 1;j<=d5.available;j++){%>
 
                                                                                                                                                                                                                                 <%if(j<=color){%>
                                                                                                                                                                                                                                     <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
@@ -1347,7 +1598,7 @@
                                                                                                                                                                                                                         <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                 <%var color = parseInt(d5.booked[i]);%>
-                                                                                                                                                                                                                                    <%for(var j= 1;j<=d5.max_count[i];j++){%>
+                                                                                                                                                                                                                                    <%for(var j= 1;j<=d5.available[i];j++){%>
 
 
                                                                                                                                                                                                                                         <%if(j<=color){%>
@@ -1384,7 +1635,7 @@
                                                                                                                                                                                                                             <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                                     <%var color = parseInt(d6.booked);%>
-                                                                                                                                                                                                                                        <%for(var j= 1;j<=d6.max_count;j++){%>
+                                                                                                                                                                                                                                        <%for(var j= 1;j<=d6.available;j++){%>
                                                                                                                                                                                                                                             <%if(j<=color){%>
                                                                                                                                                                                                                                                 <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
 
@@ -1410,7 +1661,7 @@
                                                                                                                                                                                                                                     <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                                             <%var color = parseInt(d6.booked[i]);%>
-                                                                                                                                                                                                                                                <%for(var j= 1;j<=d6.max_count[i];j++){%>
+                                                                                                                                                                                                                                                <%for(var j= 1;j<=d6.available[i];j++){%>
 
 
                                                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -1448,7 +1699,7 @@
                                                                                                                                                                                                                                         <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                                 <%var color = parseInt(d7.booked);%>
-                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d7.max_count;j++){%>
+                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d7.available;j++){%>
 
                                                                                                                                                                                                                                                         <%if(j<=color){%>
                                                                                                                                                                                                                                                             <a class="timing" style="width: 40px; color: white; background-color: red; height:40px;margin-left: 5px;" id="checkme">
@@ -1476,7 +1727,7 @@
                                                                                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                                                         <%var color = parseInt(d7.booked[i]);%>
-                                                                                                                                                                                                                                                            <%for(var j= 1;j<=d7.max_count[i];j++){%>
+                                                                                                                                                                                                                                                            <%for(var j= 1;j<=d7.available[i];j++){%>
 
 
                                                                                                                                                                                                                                                                 <%if(j<=color){%>

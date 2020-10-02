@@ -11,8 +11,10 @@ const passportFacebook = require('./config/passport-facebook-oauth-strategy');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
+const bodyParser = require('body-parser');
 // const twilio = require('./config/twilio');
 
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static('./assets'));

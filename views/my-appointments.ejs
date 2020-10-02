@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- doccure/locals.user-dashboard  30 Nov 2019 04:12:16 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -21,9 +21,6 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
-
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -393,210 +390,300 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-    
+        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Dashboard</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        
-        <div class="content setting-bread" style="padding:0px !important;margin-top: 20px;">
-           
-            <div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
+        <div class="content">
+            <div class="container-fluid">
 
                 <div class="row">
-                    
-                    <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
-                        <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
-                            <li style="border-bottom: 1px solid black;font-weight: 700;"><a href="/doctor-profile-settings">My profile</a></li>
-                            <li style="border-bottom: 1px solid black;font-weight: 700;"><a href="/settings">Settings</a></li>
-                            <li style="border-bottom: 1px solid black;"><a href="/user/logout" style="color: red;">Logout</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-10 col-lg-10 col-xl-10 settings-content change-pass-content" style="margin-left:-15px;border-left: 0.5px solid lighgrey;">
-                        <div class="card" style="border-radius: 0;border:0;">
-                            <div class="card-body" style="padding:0rem;">
-                                <%if(locals.user.approve == true){%>
-                                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 15px;">
-                                    <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <%}else{%>
-                                <%if(locals.user.step4==true){%>
-                                <div class="alert alert-info alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
-                                    <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <%}%>
-                                <%}%>
 
-                                <div class="row mstep">
-                                    <%if(locals.user.step1!= true){%>
-                                    <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;">
+                    <!-- Profile Sidebar -->
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                        <div class="profile-sidebar">
+                            <div class="widget-profile pro-widget-content">
+                                <div class="profile-info-widget">
+                                    <a href="#" class="booking-doc-img">
+                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
+                                    </a>
+                                    <div class="profile-det-info">
+                                        <h3>
+                                            <%=locals.user.name%>
+                                        </h3>
+                                       
+                                        <div class="locals.user-details">
+                                            <%if(locals.user.dob){var newDateObject = new Date();
 
-                                        <!-- Change Password Form -->
-                                        <form action="/user/update-profile" enctype="multipart/form-data" method="POST">
-                                            <input type="hidden" name="id" value="<%=locals.user.id%>">
-                                           <h2 style="font-size: 1.6rem;margin-top: 20px;">Hello Dr.<%=locals.user.name%>! Lets build your dedicated profile.</h2>
-                                           <p style="margin-top: 20px;">Section A : Profile Details</p>
-                                           <div class="col-md-10 col-sm-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="change-avatar">
-                                                        <div class="profile-img">
-                                                            <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="/img/profile.png"' alt="User Image">
-                                                        </div>
-                                                        <div class="upload-img">
-                                                            <div class="change-photo-btn upload-sm-btn">
-                                                                <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                                <input type="file" class="upload" name="avatar" id="imageUpload">
-                                                            </div>
-                                                            <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="margin-left: -15px;">
-                                                <label style="font-size: 0.85rem;"> Name <span class="text-danger"></span></label>
-                                                <div class="col-md-4" style="margin-left: -15px;">
-                                                    <p style="border:1px solid lightgrey;width:95px;padding: 10px;">Dr./Mr./Ms.</p>
-                                                </div>
-                                                <div class="col-md-8" style="margin-top: -62px;margin-left: 75px;">
-                                                    <input type="text" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;" placeholder="Enter Your Name" name="name" class="form-control minput" value="<%=locals.user.name%>" required>
+                                                var newObjectCurrentYear = newDateObject.getFullYear();
+                                                
+                                                var userDateObject = locals.user.dob;
+                                                
+                                                var userDateObjectPieces = userDateObject.split("/");
+                                                
+                                                var userObjectYear = userDateObjectPieces[2];
+                                                
+                                                var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
 
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-11" style="margin-left: -30px;">
-                                                <div class="form-group">
-                                                    <label style="font-size: 0.85rem;">Specialisation<span class="text-danger"></span></label>
-                                                    <select name="department" class="form-control mdept select" required>
-                                                    <%if(locals.user.department == 'General Physician'){%><option selected>General Physician</option><%}else{%>
-                                                    <option>General Physician</option><%}%>
-                                                    <%if(locals.user.department == 'Ophthalmology'){%><option selected>Ophthalmology</option><%}else{%>
-                                                    <option>Ophthalmology</option><%}%>
-                                                    <%if(locals.user.department == 'Dermatology'){%><option selected>Dermatology</option><%}else{%>
-                                                        <option>Dermatology</option><%}%>
-                                                    <%if(locals.user.department == 'Paediatrics'){%><option selected>Paediatrics</option><%}else{%>
-                                                        <option>Paediatrics</option><%}%>
-                                                    <%if(locals.user.department == 'Urology'){%><option selected>Urology</option><%}else{%>
-                                                        <option>Urology</option><%}%>	
-                                                    <%if(locals.user.department == 'Neurology'){%><option selected>Neurology</option><%}else{%>
-                                                        <option>Neurology</option><%}%>	
-                                                    <%if(locals.user.department == 'Orthopedic'){%><option selected>Orthopedic</option><%}else{%>
-                                                        <option>Orthopedic</option><%}%>
-                                                    <%if(locals.user.department == 'Cardiologist'){%><option selected>Cardiologist</option><%}else{%>
-                                                        <option>Cardiologist</option><%}%>	
-                                                    <%if(locals.user.department == 'Dentist'){%><option selected>Dentist</option><%}else{%>
-                                                        <option>Dentist</option><%}%>	
-                                                    <%if(locals.user.department == 'Others'){%><option selected>Others</option><%}else{%>
-                                                    <option>Others</option><%}%>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 gmargin" style="margin-left: -30px;display: inline-flex;">
-                                                <div class="form-group col-sm-12">
-                                                    <label style="font-size: 0.85rem;">Gender <span class="text-danger"></span></label>
-                                                    <select name="gender" class="form-control select gwidth" required>
-                                                        <%if(locals.user.gender == 'Male'){%><option selected>Male</option><%}else{%>
-                                                        <option>Male</option><%}%>
-                                                        <%if(locals.user.gender == 'Female'){%><option selected>Female</option><%}else{%>
-                                                        <option>Female</option><%}%>
-                                                        <%if(locals.user.gender == 'Others'){%><option selected>Others</option><%}else{%>
-                                                        <option>Others</option><%}%>
-                                                        </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 cmleft" style="display: inline-flex;margin-left: -50px;">
-                                                <div class="form-group col-sm-12">
-                                                    <label class="control-label">City</label>
-                                                    <input type="text" class="form-control gwidth" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
-                                                </div>
-                                            </div>
-                                            <div class="submit-section submit-btn-bottom" style="margin-top: 25px;">
-                                                <button type="submit" id="submit_button" class="btn btn-primary submit-btn bmargin btwidth" style="border-radius: 5px;width: 360px;margin-left: -90px;">Continue</button>
-                                            </div>
-                                        </div>
-                                        </form>
-                                        <!-- /Change Password Form -->
+                                                %>
+                                            <h5 style="font-size: 0.85rem;"><i class="fas fa-birthday-cake"></i>
+                                                <%=locals.user.dob%> , <%=age%> Years
 
-                                    </div>
-                                    <%}else{%>
-                                    <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;padding-right: 100px">
-                                        <%if(locals.user.approve == true){%>
-                                            <h2 style="font-size: 1.6rem;margin-top: 20px;">Welcome Dr.<%=locals.user.name%> on Doccure!</h2>
-                                            <p style="margin-top:0px;">Your profile is now live and the patients are on the way to book the appointments.</p>
-                                            <%}else{%>
-                                        <h2 style="font-size: 1.6rem;margin-top: 20px;">Great Progress!</h2>
-                                        <p style="margin-top:0px;">Your profile is just few steps away from getting live.</p>
-                                        <%}%>
-                                        <p  style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section A : Profile Details</p>
-                                        <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors basic details, medical registration, educational qualification, establishment details.</p>
-                                        <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                        <span style="font-size: 0.9rem;"><a href="/profile-info">Change</a></span>
-
-                                        <p  style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section B : Profile Verification</p>
-                                        <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors identity proof, Registration proof.</p>
-                                        <%if(locals.user.step2==true){%>
-                                        <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                        <span style="font-size: 0.9rem;"><a href="/id-proof">Change</a></span>
-                                        <%}else{%>
-                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
-                                            <a href="/id-proof" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>                                        
-                                        </div>
-                                        <%}%>
-                                        <%if(locals.user.step2==true){%>
-                                        
-                                        <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section C : Start getting patients</p>
-                                        <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees, Terms & Condition.</p>
-                                        <%if(locals.user.step3==true){%>
-                                        <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                        <span style="font-size: 0.9rem;"><a href="/timing">Change</a></span>
-                                        <%}else{%>
-
-                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
-                                            <a href="/timing" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>                                        
-                                        </div>
-                                        <%}%>
-                                        <%}else{%>
-
-                                        <p  style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section C : Start getting patients</p>
-                                        <p  style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees ,Terms & Condition.</p>
-                                        
-                                        <%}%>
-                                        <%if(locals.user.step3==true){%>
-                                        
-                                            <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section D : Add Bank Details</p>
-                                            <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
-                                            <%if(locals.user.step4==true){%>
-                                            <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                            <span style="font-size: 0.9rem;"><a href="/add-bank">Change</a></span>
-                                            <%}else{%>
-    
-                                            <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
-                                                <a href="/add-bank" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>                                        
-                                            </div>
+                                            </h5>
                                             <%}%>
-                                            <%}else{%>
-    
-                                            <p  style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section D : Add Bank Details</p>
-                                            <p  style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
-                                            
+                                            <%if(locals.user.city){%>
+                                            <h5 class="mb-0" style="font-size: 0.85rem;"><i class="fas fa-map-marker-alt"></i>
+                                                <%=locals.user.city%> 
+                                                    <%=locals.user.state%>
+                                            </h5>
                                             <%}%>
-
-                                        
-                                    </div>
-                                    
-                                    <%}%>
-                                    <div class="col-md-6 pass-setting" style="height:100vh;background-image:url('/img/doctor.jpg');background-size: cover;background-repeat: no-repeat;margin-top: 0px;margin-left: -30px;">
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="dashboard-widget">
+                                <nav class="dashboard-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="/patient-dashboard">
+                                                <i class="fas fa-columns"></i>
+                                                <span>My Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="/my-appointments">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>My Appointments</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/prescription">
+                                                <i class="fas fa-newspaper"></i>
+                                                <span>My prescriptions</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/medical-records">
+                                                <i class="fas fa-medkit"></i>
+                                                <span>My Medical records</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/my-billing">
+                                                <i class="fas fa-credit-card"></i>
+                                                <span>My Billings</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/other-patients">
+                                                <i class="fas fa-edit"></i>
+                                                <span>Other Appointments</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/favourites">
+                                                <i class="fas fa-bookmark"></i>
+                                                <span>Favourites</span>
+                                            </a>
+                                        </li>
+                                       
+                                       
+                                       
+                                    </ul>
+                                </nav>
+                            </div>
+
                         </div>
                     </div>
+                    <!-- / Profile Sidebar -->
+
+                    <div class="col-md-7 col-lg-8 col-xl-9">
+                         <%if(alldoctors.doctors == ''){%>
+                        <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
+                        <%}else{%>
+                        <div class="card">
+                            <div class="card-body pt-0">
+
+                                <!-- Tab Menu -->
+                                <nav class="user-tabs mb-4" style="height: 50px!important;">
+                                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified" style="height: 50px !important;padding:0px !important;">
+                                        <li class="nav-item">
+                                            <a class="nav-link active pall-10" href="#pat_appointments" data-toggle="tab">Appointments</a>
+                                        </li>
+                                       
+                                    </ul>
+                                </nav>
+                               
+                                <!-- /Tab Menu -->
+
+                                <!-- Tab Content -->
+                                <div class="tab-content pt-0">
+
+                                    <!-- Appointment Tab -->
+                                    <div id="pat_appointments" class="tab-pane fade show active">
+                                        <nav class="user-tabs mb-4 new_tab1" style="margin-top: -25px;height: 50px !important;padding:0px !important;">
+                                            <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+                                                <li class="nav-item">
+                                                    <a class="nav-link pall-10" id="mabtn"  style="padding:10px !important;cursor:pointer;">My Appointments</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link pall-10" id="oabtn" style="padding:10px !important;cursor: pointer;">My Other Patients Appointments</a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </nav>
+                                        <div class="card card-table mb-0" id="mal">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-center mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Doctor</th>
+                                                                <th>Appt Date</th>
+                                                                <th>Booking Date</th>
+                                                                <th>Amount</th>
+                                                                <th>Follow Up</th>
+                                                                <th>Status</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
+                                                                <%if(alldoctors.doctors[i].type == 'other'){continue;%>
+                                                                    <%}%>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].did.avatar%>" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>"><%=alldoctors.doctors[i].did.name%> <span><%=alldoctors.doctors[i].did.department%></span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
+                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].createdAt.toLocaleTimeString()%></td>
+                                                                <td>Rs<%=alldoctors.doctors[i].fee%></td>
+                                                                <td><%=alldoctors.doctors[i].date%></td>
+                                                                <%if(alldoctors.doctors[i].cancel == true){%>
+                                                                    <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                  <%}else{%>
+                                                                    <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                    <%}%>
+                                                            
+                                                                
+                                                                
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                   
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card card-table mb-0 displayNone" id="oal">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-center mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Doctor</th>
+                                                                <th>Appt Date</th>
+                                                                <th>Booking Date</th>
+                                                                <th>Amount</th>
+                                                                <th>Follow Up</th>
+                                                                <th>Status</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
+                                                                <%if(alldoctors.doctors[i].type == 'own'){continue;%>
+                                                                    <%}%>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].did.avatar%>" alt="User Image">
+                                                                        </a>
+                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>"><%=alldoctors.doctors[i].did.name%> <span><%=alldoctors.doctors[i].did.department%></span></a>
+                                                                    </h2>
+                                                                </td>
+                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
+                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].createdAt.toLocaleTimeString()%></td>
+                                                                <td>Rs<%=alldoctors.doctors[i].fee%></td>
+                                                                <td><%=alldoctors.doctors[i].date%></td>
+                                                                <%if(alldoctors.doctors[i].cancel == true){%>
+                                                                    <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                  <%}else{%>
+                                                                    <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                    <%}%>
+                                                                <td class="text-right">
+                                                                    <div class="table-action">
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                                                                            <i class="fas fa-print"></i> Print
+                                                                        </a>
+                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                            <i class="far fa-eye"></i> View
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                                           
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Appointment Tab -->
+
+                                    <!-- Prescription Tab -->
+                                    
+                                   
+                                    <!-- /Prescription Tab -->
+
+                                    <!-- Medical Records Tab -->
+                                  
+                                    <!-- /Medical Records Tab -->
+
+                                    <!-- Billing Tab -->
+                                 
+                                    <!-- /Billing Tab -->
+
+                                </div>
+                                <!-- Tab Content -->
+
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
                 </div>
+
             </div>
 
         </div>
@@ -607,7 +694,7 @@
 
             <!-- Footer Top -->
             <div class="footer-top">
-                <div class="container-fluid" >
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
 
@@ -647,13 +734,13 @@
 
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
+                                <h2 class="footer-title">For Patient</h2>
                                 <ul>
                                     <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
                                     <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
                                     <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
                                     <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+                                    <li><a href="/locals.user-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -756,41 +843,34 @@
     <!-- Custom JS -->
     <script src="js/script.js"></script>
     <script>
-        document.getElementById("imageUpload").onchange = function () {
-        var reader = new FileReader();
+        var oabtn = document.getElementById('oabtn');
+        var mabtn = document.getElementById('mabtn');
+        var oal = document.getElementById('oal');
+        var mal = document.getElementById('mal'); 
+      
+        
+        oabtn.addEventListener('click',function()
+        {
+            oabtn.classList.add('new_tab2');
+            mabtn.classList.remove('new_tab2');
+            mal.classList.add('displayNone');
+            oal.classList.remove('displayNone');
 
-        reader.onload = function (e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("image").src = e.target.result;
-        };
+        })
+        mabtn.addEventListener('click',function()
+        {
+            mabtn.classList.add('new_tab2');
+            oabtn.classList.remove('new_tab2');
+            oal.classList.add('displayNone');
+            mal.classList.remove('displayNone');
 
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
-};
-    </script>
-    <script>
-        <%if(flash.success && flash.success.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.success%>',
-            type: 'success',
-            layout: 'topRight',
-            timeout: 1500
-        }).show();
-        <%}%>
-        <%if(flash.error && flash.error.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
+        })
+       
+        
     </script>
 
 </body>
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- doccure/locals.user-dashboard  30 Nov 2019 04:12:16 GMT -->
 
 </html>

@@ -22,6 +22,8 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
     <!--[if lt IE 9]>
 			<script src="/js/html5shiv.min.js"></script>
@@ -341,6 +343,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#password_tab">Documents</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#bank_tab">Bank Details</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="tab-content profile-tab-cont">
@@ -511,7 +516,67 @@
                                                         </a>
                                                     </div>
                                                     <input type="hidden" name="id" value="<%=user._id%>">
-                                                    <%if(user.approve == true){%>
+                                                    <%if(user.approve1 == true){%>
+                                                        <button class="btn btn-success" style="margin-left: 500px; width: 200px;" type="submit" disabled>Approved</button>
+                                                        <%}else{%>
+                                                            <button class="btn btn-primary" style="margin-left: 500px; width: 200px;" type="submit">Approve Application</button>
+                                                            <%}%>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="bank_tab" class="tab-pane fade">
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Review Bank Details</h5>
+                                        <form action="/admin/approve-bank" method="POST">
+                                            <div class="row">
+                                                <div class="col-md-10 col-lg-6">
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.accountholdername%>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Bank Name</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.bankname%>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Bank Account Number</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.accountnumber%>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Bank IFSC Code</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.ifsccode%>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Enter the Account ID</label>
+                                                            <input type="text" class="form-control" name="accountid" value="<%=user.accountid%>" placeholder="Enter account id" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Renter the Account ID</label>
+                                                            <input type="text" class="form-control" name="reaccountid" value="<%=user.accountid%>" placeholder="Renter account id" required>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                   
+                                                    <input type="hidden" name="id" value="<%=user._id%>">
+                                                    <%if(user.approve2 == true){%>
                                                         <button class="btn btn-success" style="margin-left: 500px; width: 200px;" type="submit" disabled>Approved</button>
                                                         <%}else{%>
                                                             <button class="btn btn-primary" style="margin-left: 500px; width: 200px;" type="submit">Approve Application</button>
@@ -547,6 +612,26 @@
 
     <!-- Custom JS -->
     <script src="/js/script1.js"></script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
 
 </body>
 
