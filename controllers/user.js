@@ -7,6 +7,8 @@ const config = require('../config/twilio');
 const client = require('twilio')(config.accountSID, config.authToken);
 const crypto = require('crypto');
 const request = require('request');
+const appointmentAlert = require('../mailers/appointment-alert');
+const appointmentCancelAlert = require('../mailers/appointment-cancel');
 
 
 
@@ -242,8 +244,7 @@ module.exports.confirmPay = async function(req, res) {
             const amount = doctor.booking_fee;
             const currency = 'INR';
             const vendor_amount = amount-(amount*0.1);
-            console.log(doctor.accountid);
-            console.log(vendor_amount);
+            
             const response = await razorpay.orders.create({
                 amount:amount*100,
                 currency,
@@ -288,8 +289,7 @@ module.exports.confirmPay = async function(req, res) {
             user.refresh_flag = true;
             user.save();
 
-            console.log(req.body);
-            console.log(user);
+          
             return res.render('pay',{
                 response:response,
                 amount:response.amount,
@@ -323,28 +323,13 @@ module.exports.destroySession = function(req, res) {
 module.exports.refund = async function(req, res) {
 
     try{
-                console.log(req.body);
+        console.log(req.body);
                 let user = await User.findById(req.body.doctorid);
                 let user1 = await User.findById(req.user.id);
                 
 
                 if(req.body.flag == 'yes')
                 {
-                    // request({
-                    //     method: 'POST',
-                    //     "speed":"optimum",
-                    //     url: 'https://rzp_test_KPgD2YFDnBI7Ib:dlb3M9b3nEWXU6TYSzRlDhTJ@api.razorpay.com/v1/payments/'+req.body.id+'/refund',
-                    //     }, function (error, response, body) {
-                    //     console.log('Status:', response.statusCode);
-                    //     console.log('Headers:', JSON.stringify(response.headers));
-                    //     console.log('Response:', body);
-
-                    //     if(response.payment_id&&response.id)
-                    //     {
-                    //         user1.doctors[req.body.index].cancel = true;
-                    //         user1.save();
-                    //     }
-                    //     });
 
                     const razorpay1 = new Razorpay({
                         key_id: 'rzp_test_KPgD2YFDnBI7Ib',
@@ -412,9 +397,34 @@ module.exports.refund = async function(req, res) {
                             user.save();
 
                         }
+                        user1.notification.push({
+                            type:'appointment-cancel',
+                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time + ' . ',
+                            flag:true,
+                            did:req.body.doctorid
+                        });
                         
                         
                         user1.save();
+                        
+                        client.messages 
+                        .create({ 
+                            body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
+                            from: 'whatsapp:+14155238886',       
+                            to: 'whatsapp:+91'+req.body.phone 
+                        }) 
+                        .then(message => console.log(message.sid)) 
+                        .done();
+
+                        client.messages
+                        .create({
+                            body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
+                            from: '+12019755459',
+                            statusCallback: 'http://postb.in/1234abcd',
+                            to: '+91'+req.body.phone
+                        })
+                        .then(message => console.log(message.sid));
+                        appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
                         
                         return res.render('refund',{
                             doctor:user,
@@ -594,17 +604,35 @@ module.exports.verifyPayment = async(req, res) => {
         payment_id:req.body.razorpay_payment_id,
         order_id:req.body.razorpay_order_id,
         signature:req.body.razorpay_signature
-    })
+    });
+    patient.notification.push({
+        type:'appointment-success',
+        message:'Your Apointment is confirmed with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time + ' . ',
+        flag:true,
+        did:req.query.doctorid
+    });
       user.save();
       patient.save();
+     
+
+    //   client.messages 
+    //   .create({ 
+    //     body: 'CONFIRMED Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name + ' . ' + user.clinicname + ', ' + user.cliniccity + ','  + user.clinicaddr + ', Ph: +91' + user.phone + 'Please show this SMS at the clinic front-desk before your appointment.',
+    //     from: 'whatsapp:+14155238886',       
+    //      to: 'whatsapp:+91'+req.query.phone 
+    //    }) 
+    //   .then(message => console.log(message.sid)) 
+    //   .done();
+
       client.messages
       .create({
-         body: 'CONFIRMED Appointment for '+req.query.date+' at '+req.query.time+ ' with Dr. ' +user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+         body: 'CONFIRMED Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
          from: '+12019755459',
          statusCallback: 'http://postb.in/1234abcd',
          to: '+91'+req.query.phone
        })
       .then(message => console.log(message.sid));
+      appointmentAlert.newAlert(req.query.date,req.query.time,req.query.email,user,patient);
      
  
     
@@ -613,6 +641,7 @@ module.exports.verifyPayment = async(req, res) => {
           seat:b,
           slotindex:req.query.slotindex,
           dayindex:req.query.dayindex,
+          date:req.query.date,
           user:patient
       });
   
@@ -713,18 +742,35 @@ module.exports.verifyPayment = async(req, res) => {
         payment_id:req.body.razorpay_payment_id,
         order_id:req.body.razorpay_order_id,
         signature:req.body.razorpay_signature
-    })
+    });
+    patient.notification.push({
+        type:'appointment-success',
+        message:'Your Apointment is confirmed with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time + ' . ',
+        flag:true,
+        did:req.query.doctorid
+    });
       
       user.save();
       patient.save();
+     
+    //  client.messages 
+    //   .create({ 
+    //     body: 'CONFIRMED Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name + ' . ' + user.clinicname + ', ' + user.cliniccity + ','  + user.clinicaddr + ', Ph: +91' + user.phone + 'Please show this SMS at the clinic front-desk before your appointment.',
+    //     from: 'whatsapp:+14155238886',       
+    //      to: 'whatsapp:+91'+req.query.phone 
+    //    }) 
+    //   .then(message => console.log(message.sid)) 
+    //   .done();
+
       client.messages
       .create({
-         body: 'CONFIRMED Appointment for '+req.query.date+' at'+req.query.time+ 'with Dr. ' +user.name+ '. ' +user.clinicname+ ', ' +user.cliniccity+ ','  +user.clinicaddr+ ', Ph: +91' +user.phone+ 'Please show this SMS at the clinic front-desk before your appointment.',
+         body: 'CONFIRMED Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
          from: '+12019755459',
          statusCallback: 'http://postb.in/1234abcd',
-         to: req.query.phone
+         to: '+91'+req.query.phone
        })
       .then(message => console.log(message.sid));
+      appointmentAlert.newAlert(req.query.date,req.query.time,req.query.email,user,patient);
       
     
       return res.render('booking-success',{
@@ -732,6 +778,7 @@ module.exports.verifyPayment = async(req, res) => {
           seat:k1,
           slotindex:req.query.slotindex,
           dayindex:req.query.dayindex,
+          date:req.query.date,
           user:patient
       });
   
@@ -970,7 +1017,7 @@ module.exports.payment = async (req, res) => {
 }
 
 module.exports.bookAppointment = async (req, res) => {
-    console.log(req.body);
+  
 
     let doctor = await User.findById(req.body.doctorid);
 

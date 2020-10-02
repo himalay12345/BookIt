@@ -7,10 +7,31 @@ const Razorpay = require('razorpay');
 
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
-    return res.render('index', {
-        title: 'Home',
-        doctors: doctors
-    })
+    if(req.isAuthenticated())
+    {
+        let patient = await User.findById(req.user.id).populate({
+            path: 'notification',
+            populate: {
+                path: 'did',
+                sort:{createdAt:-1},
+                populate: { path: 'user', }
+            }
+        });
+    
+        return res.render('index', {
+            title: 'Home',
+            doctors: doctors,
+            patient:patient
+        })
+    }
+
+    else{
+        return res.render('index', {
+            title: 'Home',
+            doctors: doctors
+        })
+    }
+   
 }
 
 module.exports.addBilling = (req, res) => {
@@ -81,6 +102,21 @@ module.exports.appointments = async(req, res) => {
     })
 }
 
+module.exports.appointmentDetail = async (req, res) => {
+    let patients = await User.findById(req.user.id).populate({
+        path: 'doctors',
+        populate: {
+            path: 'did',
+            populate: { path: 'user', }
+        }
+    });
+    return res.render('appointment-detail', {
+        title: 'Apppointment Details',
+        user:patients,
+        i:req.query.index
+    })
+}
+
 module.exports.blankPage = (req, res) => {
     return res.render('blank-page', {
         title: 'Blank'
@@ -124,7 +160,7 @@ module.exports.booking = async(req, res) => {
                 }
             }
         }
-    }
+    
 
     doctor.save();
 
@@ -452,7 +488,7 @@ module.exports.patientDashboard = async(req, res) => {
          } 
        
     });
-    return res.render('patient-dashboard', {
+    return res.render('my-appointments', {
         title: 'user Dashboard',
         user: user,
         alldoctors: doctors

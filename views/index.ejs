@@ -153,9 +153,9 @@
                                         <span class="notification-title">Notifications</span>
                                         <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
                                     </div>
-                                    <div class="noti-content">
+                                    <div class="noti-content" style="padding-top:10px ;">
                                         <ul class="notification-list">
-                                            <%if(locals.user.approve == true){%>
+                                            <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
 
                                                 <li class="notification-message">
                                                     <a href="#">
@@ -163,91 +163,38 @@
                                                             <span class="avatar avatar-sm">
                                                         <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
                                                     </span>
-                                                            <div class="media-body">
+                                                            <div class="media-body chng">
                                                                 <a href="/doctor-terms-and-condition">
                                                                     <p class="noti-details"><span class="noti-title"></span>
                                                                         <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
                                                                     </p>
                                                                 </a>
-                                                                <p class="noti-time"><span class="notification-time"></span></p>
+                                                                <p class="noti-time chng-time"><span class="notification-time">6 mins ago</span></p>
                                                             </div>
                                                         </div>
                                                     </a>
                                                 </li>
-                                                <li class="notification-message">
-                                                    <a href="#">
-                                                        <div class="media">
-                                                            <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
-                                                    </span>
-                                                            <div class="media-body">
-                                                                <a href="/doctor-terms-and-condition">
-                                                                    <p class="noti-details"><span class="noti-title"></span>
-                                                                        <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
-                                                                    </p>
-                                                                </a>
-                                                                <p class="noti-time"><span class="notification-time"></span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="notification-message">
-                                                    <a href="#">
-                                                        <div class="media">
-                                                            <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
-                                                    </span>
-                                                            <div class="media-body">
-                                                                <a href="/doctor-terms-and-condition">
-                                                                    <p class="noti-details"><span class="noti-title"></span>
-                                                                        <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
-                                                                    </p>
-                                                                </a>
-                                                                <p class="noti-time"><span class="notification-time"></span></p>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
+                                               
                                                 <%}%>
-                                                    <!-- <li class="notification-message">
-                                        <a href="#">
+                                <%for(let i = patient.notification.length-1;i>=0;i--){%>
+                                    <li class="notification-message">
+                                        <a href="/doctor-profile/?id=<%=patient.notification[i].did._id%>">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient1.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=patient.notification[i].did.avatar%>">
                                                     </span>
                                                 <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
-                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                                    <p class="noti-details"><span class="noti-title"><%=patient.notification[i].message%></p>
+                                                        <%var a = patient.notification[i].createdAt.toLocaleTimeString();%>
+                                                        <%var b = (new Date()).toLocaleTimeString();%>
+                                                        <%var c = b-a;%>
+                                                    <p class="noti-time"><span class="notification-time"><%=c%> mins ago</span></p>
                                                 </div>
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="notification-message">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient2.jpg">
-                                                    </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $215 for his <span class="noti-title">appointment</span></p>
-                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient3.jpg">
-                                                    </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
-                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li> -->
+                                    <%}%>
+                                   
                                         </ul>
                                     </div>
                                     <div class="topnav-dropdown-footer">
@@ -361,7 +308,7 @@
                             <li class="has-submenu ahas-submenu">
                                 <a href="#">
                                     <span class="user-img">
-                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
                     </span>
                                     <i class="fas fa-chevron-down"></i>
                                 </a>

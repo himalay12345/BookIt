@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="noti-content">
                                     <ul class="notification-list">
-                                        <%if(locals.user.approve == true){%>
+                                        <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
 
                                             <li class="notification-message">
                                                 <a href="#">
@@ -397,10 +397,10 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item active" aria-current="page">My Appointments</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Dashboard</h2>
+                        <h2 class="breadcrumb-title">Appointments</h2>
                     </div>
                 </div>
             </div>
@@ -414,7 +414,7 @@
                 <div class="row">
 
                     <!-- Profile Sidebar -->
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar no-show-mobile">
                         <div class="profile-sidebar">
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
@@ -516,13 +516,16 @@
                         <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
                         <%}else{%>
                         <div class="card">
-                            <div class="card-body pt-0">
+                            <div class="card-body pt-0 plr0">
 
                                 <!-- Tab Menu -->
-                                <nav class="user-tabs mb-4" style="height: 50px!important;">
-                                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified" style="height: 50px !important;padding:0px !important;">
+                                <nav class="user-tabs mb-4" style="height: 100px!important;">
+                                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified" style="height: 100px !important;padding:0px !important;">
                                         <li class="nav-item">
-                                            <a class="nav-link active pall-10" href="#pat_appointments" data-toggle="tab">Appointments</a>
+                                            <a class="nav-link active pall-10" href="#pat_appointments" data-toggle="tab">My Appointments</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link pall-10" href="#pat_other_appointments" data-toggle="tab">Other Patient Appointments</a>
                                         </li>
                                        
                                     </ul>
@@ -535,19 +538,40 @@
 
                                     <!-- Appointment Tab -->
                                     <div id="pat_appointments" class="tab-pane fade show active">
-                                        <nav class="user-tabs mb-4 new_tab1" style="margin-top: -25px;height: 50px !important;padding:0px !important;">
-                                            <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-                                                <li class="nav-item">
-                                                    <a class="nav-link pall-10" id="mabtn"  style="padding:10px !important;cursor:pointer;">My Appointments</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link pall-10" id="oabtn" style="padding:10px !important;cursor: pointer;">My Other Patients Appointments</a>
-                                                </li>
-                                                
-                                            </ul>
-                                        </nav>
-                                        <div class="card card-table mb-0" id="mal">
-                                            <div class="card-body">
+                                        <div class="card card-table mb-0">
+                                            <div class="card-body sscreen" style="margin-top: 0px;">
+                                                <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
+                                                    <%if(alldoctors.doctors[i].type == 'other'){continue;%>
+                                                        <%}%>
+                                                <div class="card-contents" style="height: 200px;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
+                                                    <div class="top-part" style="height: 130px;display:flex;flex-direction: row;">
+                                                        <div class="top-img" style="width: 25%;height:100%;padding-top:5px;padding-left: 4px;">
+                                                            <img src="<%=alldoctors.doctors[i].did.avatar%>"style="height:50px;width:50px;border-radius:50%;">
+                                                        </div>
+                                                        <div class="top-content" style="width: 75%;height:100%;padding:5px;">
+                                                            <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
+                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=alldoctors.doctors[i].date%>, <%=alldoctors.doctors[i].time%> </h5>
+                                                            <h5 style="font-weight: 0.9rem;font-weight: 700;"><%=alldoctors.doctors[i].did.clinicname%></h5>
+                                                            <%if(alldoctors.doctors[i].cancel == true){%>
+                                                                <h5><span class="badge badge-pill bg-danger-light">Cancelled</span></h5>
+                                                              <%}else{%>
+                                                                <h5><span class="badge badge-pill bg-success-light">Confirm</span></h5>
+                                                                <%}%>
+                                                            
+
+                                                        </div>
+                                                    </div>
+                                                     <div class="bottom-part" style="height: 50px;display: flex;justify-content: space-around;">
+                                                        <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 40px;">Book Again</a>
+                                                        <a  href="/appointment-detail/?index=<%=i%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;font-weight: bold;height: 40px;text-align: center6;">View</a>
+                                                        <%if(alldoctors.doctors[i].cancel != true){%>
+                                                        <a  href="" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;color:red;font-weight: bold;height: 40px;">Cancel</a>
+                                                            <%}%>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                            </div>
+                                            <div class="card-body lscreen">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover table-center mb-0">
                                                         <thead>
@@ -604,8 +628,44 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card card-table mb-0 displayNone" id="oal">
-                                            <div class="card-body">
+                                    </div>
+                                    <!-- /Appointment Tab -->
+                                    <div id="pat_other_appointments" class="tab-pane fade">
+                                        
+                                        <div class="card card-table mb-0">
+                                            <div class="card-body sscreen" style="margin-top: 0px;">
+                                                <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
+                                                    <%if(alldoctors.doctors[i].type == 'own'){continue;%>
+                                                        <%}%>
+                                                <div class="card-contents" style="height: 200px;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
+                                                    <div class="top-part" style="height: 130px;display:flex;flex-direction: row;">
+                                                        <div class="top-img" style="width: 25%;height:100%;padding-top:5px;padding-left: 4px;">
+                                                            <img src="<%=alldoctors.doctors[i].did.avatar%>"style="height:50px;width:50px;border-radius:50%;">
+                                                        </div>
+                                                        <div class="top-content" style="width: 75%;height:100%;padding:5px;">
+                                                            <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
+                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=alldoctors.doctors[i].date%>, <%=alldoctors.doctors[i].time%> </h5>
+                                                            <h5 style="font-weight: 0.9rem;font-weight: 700;"><%=alldoctors.doctors[i].did.clinicname%></h5>
+                                                            <%if(alldoctors.doctors[i].cancel == true){%>
+                                                                <h5><span class="badge badge-pill bg-danger-light">Cancelled</span></h5>
+                                                              <%}else{%>
+                                                                <h5><span class="badge badge-pill bg-success-light">Confirm</span></h5>
+                                                                <%}%>
+                                                            
+
+                                                        </div>
+                                                    </div>
+                                                     <div class="bottom-part" style="height: 50px;display: flex;justify-content: space-around;">
+                                                        <a  href="" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 40px;">Book Again</a>
+                                                        <a  href="/appointment-detail/?index=<%=i%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;font-weight: bold;height: 40px;">View</a>
+                                                        <%if(alldoctors.doctors[i].cancel != true){%>
+                                                        <a  href="" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;color:red;font-weight: bold;height: 40px;">Cancel</a>
+                                                            <%}%>
+                                                    </div>
+                                                </div>
+                                                <%}%>
+                                            </div>
+                                            <div class="card-body lscreen">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover table-center mb-0">
                                                         <thead>
@@ -660,8 +720,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /Appointment Tab -->
-
                                     <!-- Prescription Tab -->
                                     
                                    
@@ -842,7 +900,7 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
-    <script>
+    <!-- <script>
         var oabtn = document.getElementById('oabtn');
         var mabtn = document.getElementById('mabtn');
         var oal = document.getElementById('oal');
@@ -867,7 +925,7 @@
         })
        
         
-    </script>
+    </script> -->
 
 </body>
 

@@ -13,6 +13,7 @@ router.get('/add-bank',passport.checkAuthentication,homeController.addBank);
 router.get('/active-device',passport.checkAuthentication, homeController.activeDevice);
 router.get('/add-prescription',passport.checkAuthentication, homeController.addPrescription);
 router.get('/appointments',passport.checkAuthentication, homeController.appointments);
+router.get('/appointment-detail',passport.checkAuthentication, homeController.appointmentDetail);
 router.get('/blank-page',passport.checkAuthentication, homeController.blankPage);
 router.get('/booking',homeController.booking);
 router.get('/booking-success', homeController.bookingSuccess);

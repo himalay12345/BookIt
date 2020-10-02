@@ -414,7 +414,7 @@
                 <div class="row">
 
                     <!-- Profile Sidebar -->
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar no-show-mobile">
                         <div class="profile-sidebar">
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
@@ -505,19 +505,19 @@
                     </div>
                     <!-- / Profile Sidebar -->
 
-                    <div class="col-md-7 col-lg-8 col-xl-9">
+                    <div class="col-md-7 col-lg-8 col-xl-9 plr0">
                       
                         <%if(alldoctors.doctors == ''){%>
                             <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Billings Available !</span></h2>
                             <%}else{%>
                         <div class="card">
-                            <div class="card-body pt-0">
+                            <div class="card-body pt-0 plr0">
 
                                 <!-- Tab Menu -->
                                 <nav class="user-tabs mb-4">
                                     <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
                                         <li class="nav-item">
-                                            <a class="nav-link active pall-10" href="#pat_billing" data-toggle="tab">Billing</a>
+                                            <a class="nav-link active pall-10" href="#pat_billing" data-toggle="tab">My Billings</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -540,18 +540,79 @@
 
                                     <!-- Billing Tab -->
                                     <div id="pat_billing show active" class="tab-content">
-                                        <nav class="user-tabs mb-4 new_tab" style="margin-top: -40px;height: 50px !important;padding:0px !important;">
-                                            <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" href="" id="mbbtn" data-toggle="tab" style="padding:10px !important;">My Bilings</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="" data-toggle="tab" id="obbtn" style="padding:10px !important;">My Other Patients Billings</a>
-                                                </li>
+                                        <div class="card-body sscreen" style="margin-top: -30px;">
+                                            <%var c=1%>
+                                            <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
+                                                <div id="popup1" class="overlay">
+                                                    <div class="popup">
+                                                        <form action="/user/payments/<%=alldoctors.payments[i].payment_id%>/refund" method="POST">
+                                                            <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                                                <div class="form-group">
+                                                                    <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
+                                                                        <input type="hidden" name="id" value="<%=alldoctors.payments[i].payment_id%>">
+                                                                        <input type="hidden" name="doctorid" value="<%=alldoctors.doctors[i].did._id%>">
+                                                                        <input type="hidden" name="slotindex" value="<%=alldoctors.doctors[i].slotindex%>">
+                                                                        <input type="hidden" name="dayindex" value="<%=alldoctors.doctors[i].dayindex%>">
+                                                                        <input type="hidden" name="index" value="<%=i%>">
+                                                                        <input type="hidden" name="bid" value="<%=alldoctors.doctors[i]._id%>">
+                                                                        <input type="hidden" name="time" value="<%=alldoctors.doctors[i].time%>">
+                                                                        <input type="hidden" name="date" value="<%=alldoctors.doctors[i].date%>">
+                                                                        <input type="hidden" name="phone" value="<%=alldoctors.doctors[i].phone%>">
+                                                                        <input type="hidden" name="email" value="<%=alldoctors.doctors[i].email%>">
+                                                                        <input type="hidden" name="fee" value="<%=alldoctors.doctors[i].fee%>">
+                                                                            <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                                            <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                                                </select>
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                                 
-                                            </ul>
-                                        </nav>
-                                        <div class="card card-table mb-0" id="mbl">
+                                            <div class="card-contents" style="height: 200px;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
+                                                <div class="head-part" style="height: 40px;border-bottom: 1px solid lightgrey;">
+                                                    <h2 style="text-align: center;">
+                                                        #INV-000<%=c++%>
+                                                    </h2>
+                                                </div>
+                                                <div class="top-part" style="height: 110px;display:flex;flex-direction: row;">
+                                                    <div class="top-img" style="width: 25%;height:100%;padding-top:10px;padding-left: 4px;">
+                                                        <img src="<%=alldoctors.doctors[i].did.avatar%>"style="height:50px;width:50px;border-radius:50%;">
+                                                    </div>
+                                                    <div class="top-content" style="width: 75%;height:100%;padding:10px;">
+                                                        <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
+                                                        <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=alldoctors.doctors[i].date%>, <%=alldoctors.doctors[i].time%> </h5>
+                                                        <h5 style="font-size: 1rem;font-weight: 700;">Rs <%=alldoctors.doctors[i].fee%>
+                                                            <%if(alldoctors.doctors[i].cancel == true){%>
+                                                                <span class="badge badge-pill bg-danger-light" style="margin-left: 20px;">Cancelled</span>
+                                                              <%}else{%>
+                                                                <span class="badge badge-pill bg-success-light" style="margin-left: 20px;">Confirm</span>
+                                                                <%}%>
+                                                        </h5>
+                                                        
+                                                        
+
+                                                    </div>
+                                                </div>
+                                                <div class="bottom-part table-action" >
+                                                    <%if(alldoctors.doctors[i].cancel == true){%>
+                                                        <a href="#" class="btn btn-sm bg-danger" style="color: white;width: 100%;">
+
+                                                            <i class="fas fa-print"></i> Cancellled
+                                                        </a>
+                                                      <%}else{%>
+                                                     
+                                                          <a href="#popup1" class="btn btn-sm bg-danger-light" style="width: 100%;">
+
+                                                            <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        </a>
+                                                        <%}%>
+                                                                                                </div>
+                                            </div>
+                                            <%}%>
+                                        </div>
+                                        <div class="card card-table mb-0 lscreen">
                                             <div class="card-body">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover table-center mb-0">
@@ -567,15 +628,14 @@
                                                         <tbody>
                                                             <%var c=0;%>
                                                             <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
-                                                                <%if(alldoctors.doctors[i].type == 'other'){continue;%>
-                                                                    <%}%>
+                                                                
                                                                 <%c++;%>
 
-                                                                <div id="popup1" class="overlay">
+                                                                <div id="popup2" class="overlay">
                                                                     <div class="popup">
                                                                         <form action="/user/payments/<%=alldoctors.payments[i].payment_id%>/refund" method="POST">
                                                                             <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
-                                                                                <div class="form-">
+                                                                                <div class="form-group">
                                                                                     <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
                                                                                         <input type="hidden" name="id" value="<%=alldoctors.payments[i].payment_id%>">
                                                                                         <input type="hidden" name="doctorid" value="<%=alldoctors.doctors[i].did._id%>">
@@ -583,7 +643,10 @@
                                                                                         <input type="hidden" name="dayindex" value="<%=alldoctors.doctors[i].dayindex%>">
                                                                                         <input type="hidden" name="index" value="<%=i%>">
                                                                                         <input type="hidden" name="bid" value="<%=alldoctors.doctors[i]._id%>">
-
+                                                                                        <input type="hidden" name="time" value="<%=alldoctors.doctors[i].time%>">
+                                                                                        <input type="hidden" name="date" value="<%=alldoctors.doctors[i].date%>">
+                                                                                        <input type="hidden" name="phone" value="<%=alldoctors.doctors[i].phone%>">
+                                                                                        <input type="hidden" name="email" value="<%=alldoctors.doctors[i].email%>">
                                                                                         <input type="hidden" name="fee" value="<%=alldoctors.doctors[i].fee%>">
                                                                                             <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
                                                                                             <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
@@ -624,7 +687,7 @@
                                                                         </a>
                                                                       <%}else{%>
                                                                      
-                                                                          <a href="#popup1" class="btn btn-sm bg-danger-light">
+                                                                          <a href="#popup2" class="btn btn-sm bg-danger-light">
 
                                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                         </a>
@@ -639,94 +702,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card card-table mb-0 displayNone" id="obl">
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover table-center mb-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Invoice No</th>
-                                                                <th>Doctor</th>
-                                                                <th>Amount</th>
-                                                                <th>Paid On</th>
-                                                                <th class="text-center">Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <%var c=0;%>
-                                                            <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
-                                                                <%if(alldoctors.doctors[i].type == 'own'){continue;%>
-                                                                    <%}%>
-                                                                <%c++;%>
-
-                                                                <div id="popup1" class="overlay">
-                                                                    <div class="popup">
-                                                                        <form action="/user/payments/<%=alldoctors.payments[i].payment_id%>/refund" method="POST">
-                                                                            <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
-                                                                                <div class="form-">
-                                                                                    <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
-                                                                                        <input type="hidden" name="id" value="<%=alldoctors.payments[i].payment_id%>">
-                                                                                        <input type="hidden" name="doctorid" value="<%=alldoctors.doctors[i].did._id%>">
-                                                                                        <input type="hidden" name="slotindex" value="<%=alldoctors.doctors[i].slotindex%>">
-                                                                                        <input type="hidden" name="dayindex" value="<%=alldoctors.doctors[i].dayindex%>">
-                                                                                        <input type="hidden" name="index" value="<%=i%>">
-                                                                                        <input type="hidden" name="bid" value="<%=alldoctors.doctors[i]._id%>">
-
-                                                                                        <input type="hidden" name="fee" value="<%=alldoctors.doctors[i].fee%>">
-                                                                                            <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
-                                                                                            <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
-                                                                                </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="/invoice-view">#INV-000<%=c%></a>
-                                                                </td>
-                                                                <td>
-                                                                    <h2 class="table-avatar">
-                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>" class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].did.avatar%>" alt="User Image">
-                                                                        </a>
-                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>"><%=alldoctors.doctors[i].did.name%><span><%=alldoctors.doctors[i].did.department%></span></a>
-                                                                    </h2>
-                                                                </td>
-                                                                <td>Rs<%=alldoctors.doctors[i].fee%></td>
-                                                                <td><%=alldoctors.doctors[i].date%><span class="d-block text-info"></span><%=alldoctors.doctors[i].createdAt.toLocaleTimeString()%></td>
-                                                                <td class="text-right">
-                                                                    
-                                                                    <div class="table-action">
-                                                                        <%if(alldoctors.doctors[i].cancel != true){%>
-                                                                            <a href="/invoice-view" class="btn btn-sm bg-info-light">
-                                                                                <i class="far fa-eye"></i> View
-                                                                            </a>
-                                                                            <%}%>
-                                                                        
-                                                                      <%if(alldoctors.doctors[i].cancel == true){%>
-                                                                        <a href="#" class="btn btn-sm bg-danger" style="color: white;">
-
-                                                                            <i class="fas fa-print"></i> Cancellled
-                                                                        </a>
-                                                                      <%}else{%>
-                                                                     
-                                                                          <a href="#popup1" class="btn btn-sm bg-danger-light">
-
-                                                                            <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        </a>
-                                                                        <%}%>
-                                                                
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <%}%>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                     <!-- /Billing Tab -->
 
@@ -897,25 +873,7 @@
 
     <!-- Custom JS -->
     <script src="/js/script.js"></script>
-    <script>
-        var mbbtn = document.getElementById('mbbtn');
-        var obbtn = document.getElementById('obbtn');
-        var mbl = document.getElementById('mbl');
-        var obl = document.getElementById('obl'); 
-        obbtn.addEventListener('click',function()
-        {
-            mbl.classList.add('displayNone');
-            obl.classList.remove('displayNone');
-
-        })
-        mbbtn.addEventListener('click',function()
-        {
-            obl.classList.add('displayNone');
-            mbl.classList.remove('displayNone');
-
-        })
-        
-    </script>
+  
 
 </body>
 

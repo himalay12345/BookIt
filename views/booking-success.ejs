@@ -389,7 +389,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar setting-top">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -420,14 +420,15 @@
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
                                     <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                        <p>Appointment booked with <strong><%=doctor.name%></strong><br> on <strong><%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
+                                        <p>Appointment booked with <strong><%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
 
                                    <%}else{%>
-                                    <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
+                                    <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
                                     <%}%>
                                     <p>Your Booking Number alloted is <%=seat%></p>
                                     <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.Show the message at the clinic's front-desk.</p>
-                                   
+                                   <a href="/doctors" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                   <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
                                 </div>
                             </div>
                         </div>

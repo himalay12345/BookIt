@@ -78,6 +78,22 @@ const userSchema = mongoose.Schema({
     idproof: {
         type: String
     },
+    notification:[{
+        type:{
+            type:String
+        },
+        message:{
+            type:String
+        },
+        flag:{
+            type:Boolean
+        },
+        did:{
+            type: mongoose.Schema.Types.ObjectId 
+        },
+        createdAt: { type: Date, default: Date.now }
+
+    }],
     idproofname: {
         type: String
     },
