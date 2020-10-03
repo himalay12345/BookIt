@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+<!-- doccure/doctor-dashboard  30 Nov 2019 04:12:03 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -9,24 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="/img/favicon.png" rel="icon">
+    <link href="img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="/js/html5shiv.min.js"></script>
-			<script src="/js/respond.min.js"></script>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -391,18 +390,20 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar"  style="padding: 10px 0px !important;margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="col-md-12 col-12">
+                    <div class="col-md-6 col-12" style="margin-bottom: 15px;">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Checkout</h2>
+                        <h2 class="breadcrumb-title">Dashboard</h2>
                     </div>
+                   
+                   
                 </div>
             </div>
         </div>
@@ -410,227 +411,156 @@
 
         <!-- Page Content -->
         <div class="content">
-            <div class="container">
+            <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-7">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 
-                               
-                                    
+                        <!-- Profile Sidebar -->
+                        <div class="profile-sidebar">
+                            <div class="widget-profile pro-widget-content">
+                                <div class="profile-info-widget">
+                                    <a href="#" class="booking-doc-img" style="width: 100% !important;background-color: transparent;">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
+                                    </a>
+                                    <div class="profile-det-info">
+                                        <h3>
+                                            <%=locals.user.name%>
+                                        </h3>
 
-                                   
-                                    <div class="info-widget">
-                                        <h4 class="card-title">Patient Details</h4>
-                                        <div class="row">
-                                            <div class="col-md-11 col-11" style="border:1px solid lightgrey;border-radius:5px;padding:8px;margin-left:15px;margin-bottom: 15px;">
-                                                <div class="form-group" style="margin-bottom: 0px !important;">
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: 15px;" checked  onchange="display1();"><span><%=locals.user.name%></span></br>
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: -10px;" onchange="display();"><span>Someone Else</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" id="ownp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about <%=locals.user.name%></h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="type" value="own">
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                
-                                                <div class="col-md-12 col-sm-12">                                                
-                                                    <div class="form-group card-label">
-                                                        <label>Name</label>
-                                                        <%if(locals.user.name){%>
-                                                        <input class="form-control" type="text" name="name" value="<%=locals.user.name%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="name">
+                                        <!-- <h4 style="font-size: 0.9rem;"> <%=locals.user.department%></h4> -->
+                                      
 
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Email</label>
-                                                        <%if(locals.user.email){%>
-                                                        <input class="form-control" type="email" name="email" value="<%=locals.user.email%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="email" name="email">
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Phone</label>
-                                                        <%if(locals.user.phone){%>
-                                                        <input class="form-control" type="text" name="phone" value="<%=locals.user.phone%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="phone">
-                                                        <%}%>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Address</label>
-                                                        <%if(locals.user.contacts.address){%>
-                                                        <input class="form-control" type="text" name="address" value="<%=locals.user.contacts.address%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="address">
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Age</label>
-                                                        <%if(locals.user.age){%>
-                                                            <input class="form-control" type="number" name="age" value="<%=locals.user.age%>" required>
-                                                            <%}else{%>
-                                                                <input class="form-control" type="number" name="age">
-                                                                <%}%>
-                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="submit-section mt-4">
-                                                    <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Procced to checkout</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="row displayNone" id="patientp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                <input type="hidden" name="type" value="other">
-                                                <div class="col-md-12 col-sm-12">
-                                                        
-                                                    <div class="form-group card-label">
-                                                        <label>Patients Full Name</label>
-                                                            <input class="form-control" type="text" name="pname" placeholder="Enter patient name" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Patient Email</label>
-                                                            <input class="form-control" type="email" name="pemail" placeholder="Enter patient email" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Phone</label>
-                                                            <input class="form-control" type="text" name="pphone" placeholder="Enter patient phone" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Address</label>
-                                                            <input class="form-control" type="text" name="paddress" placeholder="Enter patient address" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Age</label>
-                                                            <input class="form-control" type="text" name="page" placeholder="Enter patient age" required>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="submit-section mt-4" style="margin-left: 10px !important;">
-                                                    <button type="submit" class="btn btn-primary submit-btn ml-4">Procced to checkout</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                       
                                     </div>
-                                   
-                               
-                                    
-                                    
-                                  
-                            
-                                    <!-- /Personal Information -->
+                                </div>
+                            </div>
+                            <div class="dashboard-widget">
+                                <nav class="dashboard-menu">
+                                    <ul>
+                                        <li class="active">
+                                            <a href="/doctor-dashboard">
+                                                <i class="fas fa-columns"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </li>
+                                       
 
-                                   
-                                <!-- /Checkout Form -->
 
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
+                        <!-- /Profile Sidebar -->
 
                     </div>
 
-                    <div class="col-md-5 col-lg-4 theiaStickySidebar">
+                    <div class="col-md-7 col-lg-8 col-xl-9">
 
-                        <!-- Booking Summary -->
-                        <div class="card booking-card">
-                            <div class="card-header">
-                                <h4 class="card-title">Booking Appointment</h4>
-                            </div>
-                            <div class="card-body">
+                      
 
-                                <!-- Booking Doctor Info -->
-                                <div class="booking-doc-info">
-                                    <a href="/doctor-profile" class="booking-doc-img">
-                                        <img src="<%=doctor.avatar%>" alt="User Image">
-                                    </a>
-                                    <div class="booking-info">
-                                        <h4><a href="/doctor-profile"><%=doctor.name%></a></h4>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">35</span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-4">Patient Appoinment</h4>
+                                <div class="appointment-tab">
+
+                                    <!-- Appointment Tab -->
+                                    <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /Appointment Tab -->
+                                  
+                             <div class="tab-content">
+
+                                       
+                                        <div class="tab-pane show active" id="upcoming-appointments">
+                                            <div class="card card-table mb-0">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover table-center mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Patient Name</th>
+                                                                    <th>Patient Age</th>
+                                                                    <th>Patient Phone</th>
+                                                                    <th>Patient Address</th>
+                                                                    <th>Booking Mode</th>
+                                                                    <th class="text-center">Status</th>
+                                                                   
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <%var c=0%>
+                                                                <%for(patients of locals.user.booking){%>
+                                                                <%var today = new Date();
+                                                                var dd = String(today.getDate()).padStart(2, '0');
+                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                var yyyy = today.getFullYear();
+                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                var dayOfWeek = weekday[today.getDay()];%>
+                                                                <%var today = patients.createdAt;
+                                                                var dd1= String(today.getDate()).padStart(2, '0');
+                                                                var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                var yyyy1 = today.getFullYear();
+                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                var dayOfWeek = weekday[today.getDay()];%>
+                                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                                
+                                                                <%if(str1 != str2){%>
+                                                                    <%continue;%>
+                                                                <%}%>
+                                                               
+                                                                 
+                                                                    <td>
+                                                                        <h2 class="table-avatar">
+                                                                            
+            
+                                                                            <a href="#"><%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                        </h2>
+                                                                    </td>
+                                                                   <td><%=patients.age%></td>
+            
+                                                                   <td><%=patients.phone%></td>
+            
+                                                                   <td><%=patients.address%></td>
+                                                                   <%if(patients.type=='online'){%>
+                                                                   <td><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                   <%}else{%>
+                                                                    <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+            
+                                                                    <%}%>
+            
+                                                                    
+                                                                        
+                                                                            <%if(patients.cancel == true){%>
+                                                                                <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                <%}else{%>
+                                                                                  <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                  <%}%>
+            
+                                                                           
+                                                                     
+                                                                </tr>
+                                                                <%}%>
+                                                               
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%>, <%=doctor.contacts.state%></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Booking Doctor Info -->
+                                      
 
-                                <div class="booking-summary">
-                                    <%var today = new Date();%>
-                                        <%var dd = String(today.getDate()).padStart(2, '0');
-                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                        var yyyy = today.getFullYear();
-                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                        var dayOfWeek = weekday[today.getDay()];%>
-                                    <div class="booking-item-wrap">
-                                        <ul class="booking-date">
-                                            <li>Date <span><%=dd%>-<%=mm%>-<%=yyyy%></span></li>
-                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                                <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
-
-                                           <%}else{%>
-                                            <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
-                                            <%}%>
-                                            <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
-                                        </ul>
-                                        <ul class="booking-fee">
-                                            <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
-                                            <!-- <li>G.S.T <span>Rs 10</span></li> -->
-                                        </ul>
-                                        <div class="booking-total">
-                                            <ul class="booking-total-list">
-                                                <li>
-                                                    <span>Total</span>
-                                                    <span class="total-cost">Rs <%=doctor.booking_fee%></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    </div> 
+                                 
                                 </div>
                             </div>
                         </div>
-                        <!-- /Booking Summary -->
 
                     </div>
                 </div>
@@ -652,7 +582,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="/img/footer-logo.png" alt="logo">
+                                    <img src="img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -781,55 +711,24 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="/js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Sticky Sidebar JS -->
-    <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+
+    <!-- Circle Progress JS -->
+    <script src="js/circle-progress.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="/js/script.js"></script>
-    <script>
-        var own = document.getElementById('ownp');
-        var pat = document.getElementById('patientp');
-        function display()
-        {
-            own.classList.add('displayNone');
-            pat.classList.remove('displayNone');
-        }
-        function display1()
-        {
-            own.classList.remove('displayNone');
-            pat.classList.add('displayNone');
-        }
-    </script>
-    <script>
-        <%if(flash.success && flash.success.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.success%>',
-            type: 'success',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
-        <%if(flash.error && flash.error.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
-    </script>
+    <script src="js/script.js"></script>
 
 </body>
 
-<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+<!-- doccure/doctor-dashboard  30 Nov 2019 04:12:09 GMT -->
 
 </html>

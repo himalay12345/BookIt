@@ -141,6 +141,10 @@ const userSchema = mongoose.Schema({
         type:Boolean
     },
 
+    doctorid:{
+        type: mongoose.Schema.Types.ObjectId
+    },
+
    others:[{
     name : {
         type:String
@@ -150,6 +154,12 @@ const userSchema = mongoose.Schema({
     } ,
     phone : 
     {
+        type:String
+    },
+    age:{
+        type:String
+    },
+    address:{
         type:String
     }
 
@@ -240,6 +250,59 @@ const userSchema = mongoose.Schema({
         },
         createdAt: { type: Date, default: Date.now }
     }],
+
+    booking:[{
+            name:{
+                type:String
+            },
+            address:{
+                type:String
+            },
+            phone:{
+                type:Number
+            },
+            cancel:{
+                type:Boolean
+            },
+            age:{
+                type:String
+            },
+            time:{
+                type:String 
+            },
+            date:{
+                type:String
+            },
+            day:{
+                type:String
+            },
+            fee:{
+                type:String
+            },
+            seat:{
+                type:String
+            },
+            type:{
+                type:String
+            },
+            pid:{
+                type: mongoose.Schema.Types.ObjectId
+
+            },
+            createdAt: { type: Date, default: Date.now }
+
+    }],
+
+    staff_id:{
+        type: mongoose.Schema.Types.ObjectId
+
+    },
+
+    staff_flag:{
+        type: Boolean,
+        default: false
+
+    },
    
     clinicaddr: {
         type: String
@@ -258,6 +321,9 @@ const userSchema = mongoose.Schema({
     },
     approve1: {
         type: Boolean
+    },
+    age:{
+        type:String
     },
     approve2: {
         type: Boolean

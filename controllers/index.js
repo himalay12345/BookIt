@@ -13,7 +13,6 @@ module.exports.home = async(req, res) => {
             path: 'notification',
             populate: {
                 path: 'did',
-                sort:{createdAt:-1},
                 populate: { path: 'user', }
             }
         });
@@ -151,6 +150,11 @@ module.exports.booking = async(req, res) => {
             if(temp.day.toUpperCase() == dayOfWeek )
             {
                 if(typeof(temp.booked)=='string')
+                {
+                    temp.booked = 0;
+                }
+
+                if(typeof(temp.booked)=='number')
                 {
                     temp.booked = 0;
                 }
@@ -575,6 +579,15 @@ module.exports.pay = async(req, res) => {
     })
 }
 
+module.exports.patientTracking = async(req, res) => {
+    // let user = await User.findById(req.user.id);
+    
+    return res.render('patient-tracking', {
+        title: 'Track patients',
+        
+    })
+}
+
 module.exports.patientProfile = async(req, res) => {
     let user = await User.findById(req.query.pid).populate({
         path: 'doctors',
@@ -629,6 +642,18 @@ module.exports.register = (req, res) => {
     })
 }
 
+module.exports.staffAppointmentPage = (req, res) => {
+    if (req.user.type != 'Staff') {
+        return res.redirect('/staff-login-page')
+    }
+
+    else{
+    return res.render('staff-appointment-page', {
+        title: 'Appointments'
+    })
+}
+}
+
 module.exports.steps = (req, res) => {
     // if(req.user.approve == true)
     // {
@@ -643,6 +668,49 @@ module.exports.settings = (req, res) => {
     return res.render('settings', {
         title: 'Settings'
     })
+}
+module.exports.staffLogin = (req, res) => {
+    return res.render('staff-login', {
+        title: 'Staff Login'
+    })
+}
+
+module.exports.staffLoginPage = (req, res) => {
+    return res.render('staff-login-page', {
+        title: 'Staff Login'
+    })
+}
+module.exports.staffSignup = async(req, res) => {
+    let data = await client
+    .verify
+    .services(config.serviceID)
+    .verificationChecks
+    .create({
+        to: `+91${req.body.phone}`,
+        code: req.body.otp
+    });
+
+    console.log(req.body.id);
+
+
+if (data.status == 'approved') {
+    return res.render('staff-register', {
+        title: 'Staff Register',
+        phone: req.body.phone,
+        id:req.body.id
+    });
+
+} else {
+    req.flash('error', 'Wrong Otp');
+    return res.render('doctor-phone-verify', {
+        title: 'Phone verification',
+        phone: req.body.phone,
+        id:req.body.id
+    })
+
+}
+    
+    
 }
 
 module.exports.signUp = async(req, res) => {
@@ -786,6 +854,42 @@ module.exports.socialMedia = (req, res) => {
     })
 }
 
+module.exports.staffBooking = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    var today = new Date();
+    today.setDate(today.getDate() - 1)
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+        var dayOfWeek = weekday[today.getDay()].toUpperCase(); 
+      console.log(dayOfWeek);
+        
+
+        for(temp of doctor.schedule_time)
+        {
+            if(temp.day.toUpperCase() == dayOfWeek )
+            {
+                if(typeof(temp.booked)=='string')
+                {
+                    temp.booked = 0;
+                }
+
+                else{
+                    temp.booked = [0,0];
+                }
+            }
+        }
+    
+
+    doctor.save();
+
+    return res.render('staff-booking-page', {
+        title: 'Booking',
+        doctor: doctor
+    })
+}
+
 module.exports.termCondition = (req, res) => {
     return res.render('term-condition', {
         title: 'Term Condition'
@@ -823,6 +927,43 @@ module.exports.voiceCall = (req, res) => {
     return res.render('voice-call', {
         title: 'Voice Call'
     })
+}
+
+module.exports.verifyDoctor = async (req, res) => {
+    let doctor = await User.findOne({phone:req.body.phone,
+    type:'Doctor',staff_flag:false});
+   
+
+    if(doctor)
+    {
+        client
+        .verify
+        .services(config.serviceID)
+        .verifications
+        .create({
+            to: `+91${req.body.phone}`,
+            channel: req.query.service
+        }).then((data) => {
+
+           
+
+
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id:doctor._id
+
+            });
+        });
+    }
+
+    else{
+
+        req.flash('error','Either No Doctor account is associated with this number or Staff account already created.')
+        return res.redirect('back');
+    }
+
+  
 }
 
 module.exports.verify = async(req, res) => {

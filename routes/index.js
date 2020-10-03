@@ -60,6 +60,7 @@ router.get('/refund',homeController.refund);
 router.get('/patient-dashboard',passport.checkAuthentication, homeController.patientDashboard);
 router.get('/prescription',passport.checkAuthentication, homeController.prescription);
 router.get('/patient-profile',passport.checkAuthentication, homeController.patientProfile);
+router.get('/patient-tracking',passport.checkAuthentication, homeController.patientTracking);
 router.get('/privacy-policy', homeController.privacyPolicy);
 router.get('/profile-settings', passport.checkAuthentication, homeController.profileSettings);
 router.get('/profile-info', passport.checkAuthentication, homeController.profileInfo);
@@ -70,6 +71,10 @@ router.get('/schedule-timings', passport.checkAuthentication, homeController.sch
 router.get('/search', homeController.search);
 router.get('/social-media', passport.checkAuthentication, homeController.socialMedia);
 router.get('/settings', passport.checkAuthentication, homeController.settings);
+router.get('/staff-login',  homeController.staffLogin);
+router.get('/staff-login-page',  homeController.staffLoginPage);
+router.get('/staff-appointment-page',  homeController.staffAppointmentPage);
+router.get('/staff-booking',  homeController.staffBooking);
 router.get('/steps', passport.checkAuthentication, homeController.steps)
 router.get('/term-condition', homeController.termCondition);
 router.get('/timing', passport.checkAuthentication, homeController.timing);
@@ -77,7 +82,9 @@ router.get('/upload-documents', passport.checkAuthentication, homeController.upl
 router.get('/video-call', passport.checkAuthentication, homeController.videoCall);
 router.get('/voice-call', passport.checkAuthentication, homeController.voiceCall);
 router.post('/verify', homeController.verify);
+router.post('/verify-doctor', homeController.verifyDoctor);
 router.post('/signup', homeController.signUp);
+router.post('/staff-signup', homeController.staffSignup);
 router.get('/specialist', homeController.Specialist);
 router.get('/terms', passport.checkAuthentication, homeController.terms);
 router.get('/doc-register', homeController.docRegister);

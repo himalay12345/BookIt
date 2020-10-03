@@ -25,6 +25,44 @@ module.exports.create = async(req, res) => {
     return res.redirect('/login');
 }
 
+module.exports.createStaff = async(req, res) => {
+
+    let doctor  = await User.findById(req.body.id);
+
+    if(req.body.password == req.body.cpassword)
+    {
+        let user = await User.create({
+            name: req.body.name,
+            phone: req.body.phone,
+            password: req.body.password,
+            type: req.body.type,
+            doctorid:req.body.id
+        });
+
+        doctor.staff_id = user._id;
+        doctor.staff_flag = true;
+        doctor.save();
+    
+        req.flash('success', 'Account created successfully.Please Login!');
+        return res.redirect('/staff-login-page');
+    }
+
+    else{
+        req.flash('error','Passwords donot match.')
+        return res.render('staff-register', {
+            title: 'Staff Register',
+            phone: req.body.phone,
+            id:req.body.id
+        });
+    }
+    
+}
+
+module.exports.createStaffSession = async(req, res) => {
+    
+     return res.redirect(`/booking/?id=${req.user.doctorid}`);
+}
+
 module.exports.updateProfile = async(req, res) => {
 
     let doctor = await User.findById(req.user.id);
@@ -275,6 +313,8 @@ module.exports.confirmPay = async function(req, res) {
                 user.name = 'Himuu';
                 user.email = req.body.email;
                 user.phone = req.body.phone;
+                user.age = req.body.age;
+                user.contacts.address = req.body.address;
             }
 
             if(req.body.type == 'other')
@@ -282,7 +322,10 @@ module.exports.confirmPay = async function(req, res) {
                 user.others.push({  
                     name : req.body.pname,
                     email : req.body.pemail,
-                    phone : req.body.pphone
+                    phone : req.body.pphone,
+                    address: req.body.paddress,
+                    age: req.body.page
+
                 });
             }
 
@@ -399,7 +442,7 @@ module.exports.refund = async function(req, res) {
                         }
                         user1.notification.push({
                             type:'appointment-cancel',
-                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time + ' . ',
+                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time ,
                             flag:true,
                             did:req.body.doctorid
                         });
@@ -479,6 +522,7 @@ module.exports.verifyPayment = async(req, res) => {
 
    
     let user = await User.findById(req.query.doctorid);
+    let staff = await User.findById(user.staff_id);
     let patient = await User.findById(req.query.userid);
 
 
@@ -560,6 +604,20 @@ module.exports.verifyPayment = async(req, res) => {
       
           });
 
+          staff.booking.push({
+            name:req.query.name,
+            address:req.query.address,
+            phone:req.query.phone,
+            age:req.query.age,
+            cancel:false,
+            type:'online',
+            time:req.query.time,
+            date:req.query.date,
+            day:req.query.day,
+            fee:req.query.fee,
+            seat:b
+        });
+
 
           
       }
@@ -597,6 +655,20 @@ module.exports.verifyPayment = async(req, res) => {
               seat:b
       
           });
+
+          staff.booking.push({
+            name:req.query.name,
+            address:req.query.address,
+            phone:req.query.phone,
+            age:req.query.age,
+            cancel:false,
+            type:'online',
+            time:req.query.time,
+            date:req.query.date,
+            day:req.query.day,
+            fee:req.query.fee,
+            seat:b
+        });
           
       }
       patient.refresh_flag = false;
@@ -607,11 +679,12 @@ module.exports.verifyPayment = async(req, res) => {
     });
     patient.notification.push({
         type:'appointment-success',
-        message:'Your Apointment is confirmed with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time + ' . ',
+        message:'Your Apointment is confirmed with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time ,
         flag:true,
         did:req.query.doctorid
     });
       user.save();
+      staff.save();
       patient.save();
      
 
@@ -698,6 +771,20 @@ module.exports.verifyPayment = async(req, res) => {
   
           });
           
+          staff.booking.push({
+            name:req.query.name,
+            address:req.query.address,
+            phone:req.query.phone,
+            age:req.query.age,
+            cancel:false,
+            type:'online',
+            time:req.query.time,
+            date:req.query.date,
+            day:req.query.day,
+            fee:req.query.fee,
+            seat:k1
+        });
+          
       }
   
       else{
@@ -734,6 +821,20 @@ module.exports.verifyPayment = async(req, res) => {
   
           });
 
+          staff.booking.push({
+            name:req.query.name,
+            address:req.query.address,
+            phone:req.query.phone,
+            age:req.query.age,
+            cancel:false,
+            type:'online',
+            time:req.query.time,
+            date:req.query.date,
+            day:req.query.day,
+            fee:req.query.fee,
+            seat:k1
+        });
+
         
   
       }
@@ -745,12 +846,13 @@ module.exports.verifyPayment = async(req, res) => {
     });
     patient.notification.push({
         type:'appointment-success',
-        message:'Your Apointment is confirmed with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time + ' . ',
+        message:'Your Apointment is confirmed with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time ,
         flag:true,
         did:req.query.doctorid
     });
       
       user.save();
+      staff.save();
       patient.save();
      
     //  client.messages 
@@ -1048,6 +1150,195 @@ module.exports.bookAppointment = async (req, res) => {
 
     });
 }
+}
+
+module.exports.staffBookAppointment = async (req, res) => {
+  
+
+    let doctor = await User.findById(req.body.doctorid);
+    let user = await User.findById(req.user.id);
+    user.refresh_flag = true;
+    user.save();
+
+    if (req.isAuthenticated()) {
+
+        return res.render('staff-checkout',{
+            booked:req.body.booked,
+            available:req.body.available,
+            slotindex:req.body.slotindex,
+            dayindex:req.body.dayindex,
+            id:req.body.id,
+            doctor:doctor,
+            flag:true
+    
+        });
+
+        
+    }
+
+    else{
+
+    return res.redirect('/staff-login-page')
+}
+}
+
+
+module.exports.offlinePay = async (req, res) => {
+    let staff = await User.findById(req.user.id);
+    let user = await User.findById(req.body.doctorid);
+    if(req.user.type == 'Staff')
+    {
+        if(staff.refresh_flag == true)
+        {
+            if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
+            {
+              let available =  [];
+              let booked =  [];
+              let k = req.body.slotindex;
+              let i = req.body.available.split(',');
+              let a = parseInt(i[k]);
+              a =a-1;
+              for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+                  {
+                      if(temp == k)
+                      {
+                          available.push(a);
+                          continue;
+                      }
+                      var temp1 = parseInt(i[temp]);
+                      available.push(temp1);
+                  }
+          let j = req.body.booked.split(',');
+          let bd = user.schedule_time[req.body.dayindex].booked[req.body.slotindex];
+          let b = parseInt(bd);
+          b = b+1;
+          for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+          {
+              if(temp == req.body.slotindex)
+              {
+                  booked.push(b);
+                  continue;
+              }
+              var temp1 = parseInt(j[temp]);
+              booked.push(temp1);
+          }
+          let day = await User.update({ 'schedule_time._id': req.body.id }, {
+              '$set': {
+                  'schedule_time.$.booked': booked
+                //   'schedule_time.$.available': available,
+                  
+              }
+          });
+    
+          staff.booking.push({
+            name:req.body.name,
+            address:req.body.address,
+            phone:req.body.phone,
+            age:req.body.age,
+            cancel:false,
+            type:'offline',
+            time:req.body.time,
+            date:req.body.date,
+            day:req.body.day,
+            fee:req.body.fee,
+            seat:b
+        });
+        staff.refresh_flag = false;
+    
+    
+        staff.save();
+         
+    
+        //   client.messages
+        //   .create({
+        //      body: 'CONFIRMED Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+        //      from: '+12019755459',
+        //      statusCallback: 'http://postb.in/1234abcd',
+        //      to: '+91'+req.body.phone
+        //    })
+        //   .then(message => console.log(message.sid));     
+     
+        
+          return res.render('staff-booking-success',{
+              doctor:user,
+              seat:b,
+              slotindex:req.body.slotindex,
+              dayindex:req.body.dayindex,
+              date:req.body.date,
+             
+          });
+      
+          }
+      
+          if(typeof(user.schedule_time[req.body.dayindex].start) == 'string')
+          {
+              let bd1 = user.schedule_time[req.body.dayindex].booked;
+              let k1 = parseInt(bd1);
+              k1+=1;
+              var k2 = parseInt(req.body.available);
+              k2-=1;
+      
+              
+           let day = await User.update({ 'schedule_time._id': req.body.id }, {
+              '$set': {
+                  'schedule_time.$.booked': k1
+                //   'schedule_time.$.available': k2,
+                  
+              }
+          });
+    
+          staff.booking.push({
+            name:req.body.name,
+            address:req.body.address,
+            phone:req.body.phone,
+            age:req.body.age,
+            cancel:false,
+            type:'offline',
+            time:req.body.time,
+            date:req.body.date,
+            day:req.body.day,
+            fee:req.body.fee,
+            seat:k1
+        });
+        staff.refresh_flag = false;
+        staff.save();
+         
+        //   client.messages
+        //   .create({
+        //      body: 'CONFIRMED Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+        //      from: '+12019755459',
+        //      statusCallback: 'http://postb.in/1234abcd',
+        //      to: '+91'+req.body.phone
+        //    })
+        //   .then(message => console.log(message.sid));
+        
+          
+        
+          return res.render('staff-booking-success',{
+              doctor:user,
+              seat:k1,
+              slotindex:req.body.slotindex,
+              dayindex:req.body.dayindex,
+              date:req.body.date,
+             
+          });
+      
+          }
+        }
+
+        else{
+            return res.redirect(`/booking/?id=${req.user.doctorid}`);
+
+        }
+       
+   
+        
+    }
+
+    else{
+        return res.redirect('/staff-login-page');
+    }
+   
 }
 
 module.exports.setBookingFee = async function(req, res) {

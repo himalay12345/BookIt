@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -20,8 +20,6 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -391,17 +389,17 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar setting-top">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                                <li class="breadcrumb-item active" aria-current="page">Terms & Condition</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Checkout</h2>
+                        <h2 class="breadcrumb-title">Online Booking Agreement</h2>
                     </div>
                 </div>
             </div>
@@ -409,234 +407,37 @@
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        <div class="content">
-            <div class="container">
+        <div class="content success-page-cont">
+            <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="card">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+
+                        <!-- Success Card -->
+                        <div class="card success-card">
                             <div class="card-body">
+                                <div class="success-cont">
+                                    <i class="fas fa-check"></i>
+                                    <h3>Appointment booked Successfully!</h3>
+                                    <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                        <p>Appointment booked with <strong><%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
 
-                               
-                                    
-
-                                   
-                                    <div class="info-widget">
-                                        <h4 class="card-title">Patient Details</h4>
-                                        <div class="row">
-                                            <div class="col-md-11 col-11" style="border:1px solid lightgrey;border-radius:5px;padding:8px;margin-left:15px;margin-bottom: 15px;">
-                                                <div class="form-group" style="margin-bottom: 0px !important;">
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: 15px;" checked  onchange="display1();"><span><%=locals.user.name%></span></br>
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: -10px;" onchange="display();"><span>Someone Else</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" id="ownp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about <%=locals.user.name%></h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="type" value="own">
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                
-                                                <div class="col-md-12 col-sm-12">                                                
-                                                    <div class="form-group card-label">
-                                                        <label>Name</label>
-                                                        <%if(locals.user.name){%>
-                                                        <input class="form-control" type="text" name="name" value="<%=locals.user.name%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="name">
-
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Email</label>
-                                                        <%if(locals.user.email){%>
-                                                        <input class="form-control" type="email" name="email" value="<%=locals.user.email%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="email" name="email">
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Phone</label>
-                                                        <%if(locals.user.phone){%>
-                                                        <input class="form-control" type="text" name="phone" value="<%=locals.user.phone%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="phone">
-                                                        <%}%>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Address</label>
-                                                        <%if(locals.user.contacts.address){%>
-                                                        <input class="form-control" type="text" name="address" value="<%=locals.user.contacts.address%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="text" name="address">
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Age</label>
-                                                        <%if(locals.user.age){%>
-                                                            <input class="form-control" type="number" name="age" value="<%=locals.user.age%>" required>
-                                                            <%}else{%>
-                                                                <input class="form-control" type="number" name="age">
-                                                                <%}%>
-                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="submit-section mt-4">
-                                                    <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Procced to checkout</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="row displayNone" id="patientp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                <input type="hidden" name="type" value="other">
-                                                <div class="col-md-12 col-sm-12">
-                                                        
-                                                    <div class="form-group card-label">
-                                                        <label>Patients Full Name</label>
-                                                            <input class="form-control" type="text" name="pname" placeholder="Enter patient name" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Patient Email</label>
-                                                            <input class="form-control" type="email" name="pemail" placeholder="Enter patient email" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Phone</label>
-                                                            <input class="form-control" type="text" name="pphone" placeholder="Enter patient phone" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Address</label>
-                                                            <input class="form-control" type="text" name="paddress" placeholder="Enter patient address" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Age</label>
-                                                            <input class="form-control" type="text" name="page" placeholder="Enter patient age" required>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="submit-section mt-4" style="margin-left: 10px !important;">
-                                                    <button type="submit" class="btn btn-primary submit-btn ml-4">Procced to checkout</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                       
-                                    </div>
-                                   
-                               
-                                    
-                                    
-                                  
-                            
-                                    <!-- /Personal Information -->
-
-                                   
-                                <!-- /Checkout Form -->
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-5 col-lg-4 theiaStickySidebar">
-
-                        <!-- Booking Summary -->
-                        <div class="card booking-card">
-                            <div class="card-header">
-                                <h4 class="card-title">Booking Appointment</h4>
-                            </div>
-                            <div class="card-body">
-
-                                <!-- Booking Doctor Info -->
-                                <div class="booking-doc-info">
-                                    <a href="/doctor-profile" class="booking-doc-img">
-                                        <img src="<%=doctor.avatar%>" alt="User Image">
-                                    </a>
-                                    <div class="booking-info">
-                                        <h4><a href="/doctor-profile"><%=doctor.name%></a></h4>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">35</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%>, <%=doctor.contacts.state%></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Booking Doctor Info -->
-
-                                <div class="booking-summary">
-                                    <%var today = new Date();%>
-                                        <%var dd = String(today.getDate()).padStart(2, '0');
-                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                        var yyyy = today.getFullYear();
-                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                        var dayOfWeek = weekday[today.getDay()];%>
-                                    <div class="booking-item-wrap">
-                                        <ul class="booking-date">
-                                            <li>Date <span><%=dd%>-<%=mm%>-<%=yyyy%></span></li>
-                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                                <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
-
-                                           <%}else{%>
-                                            <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
-                                            <%}%>
-                                            <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
-                                        </ul>
-                                        <ul class="booking-fee">
-                                            <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
-                                            <!-- <li>G.S.T <span>Rs 10</span></li> -->
-                                        </ul>
-                                        <div class="booking-total">
-                                            <ul class="booking-total-list">
-                                                <li>
-                                                    <span>Total</span>
-                                                    <span class="total-cost">Rs <%=doctor.booking_fee%></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                   <%}else{%>
+                                    <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
+                                    <%}%>
+                                    <p>Your Booking Number alloted is <%=seat%></p>
+                                    <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.Show the message at the clinic's front-desk.</p>
+                                   <a href="/staff-booking/?id=<%=locals.user.doctorid%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                   <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- /Booking Summary -->
+                        <!-- /Success Card -->
 
                     </div>
                 </div>
 
             </div>
-
         </div>
         <!-- /Page Content -->
 
@@ -751,7 +552,7 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
                                 <div class="copyright-text">
-                                    <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
+                                    <p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6">
@@ -787,49 +588,11 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
-    <!-- Sticky Sidebar JS -->
-    <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
-
     <!-- Custom JS -->
     <script src="/js/script.js"></script>
-    <script>
-        var own = document.getElementById('ownp');
-        var pat = document.getElementById('patientp');
-        function display()
-        {
-            own.classList.add('displayNone');
-            pat.classList.remove('displayNone');
-        }
-        function display1()
-        {
-            own.classList.remove('displayNone');
-            pat.classList.add('displayNone');
-        }
-    </script>
-    <script>
-        <%if(flash.success && flash.success.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.success%>',
-            type: 'success',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
-        <%if(flash.error && flash.error.length>0){%>
-        new Noty({
-            theme: 'metroui',
-            text: '<%=flash.error%>',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000
-        }).show();
-        <%}%>
-    </script>
 
 </body>
 
-<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
 
 </html>
