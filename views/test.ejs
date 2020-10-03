@@ -719,23 +719,31 @@
 
             <section>
                 <div>
-                    <div class="Header-checkup " style="margin-left: 83px; ">
+                    <div class="Header-checkup " style="margin-left: 83px; margin-top: 20px ">
                         <h2 style="font-weight: 700; ">Popular Health Checkup Packages</h2>
                     </div>
                     <div class="second-heading " style="display: inline-flex; margin-left: 83px;margin-top: 12px; margin-bottom: 25px; ">
                         <ul style="list-style: none; display: inline-flex;">
-                            <li id="featured" onclick="changeDiv();" style="border: 1px solid black; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
-                                Featured Checkup</li>
+                            <a>
+                                <li id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Featured Checkup</li>
+                            </a>
 
-                            <li id="Diabetes" onclick="changeDiv();" style="border: 1px solid black;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
-                                Diabetes Care</li>
-                            <li id="women" onclick="changeDiv();" style="border: 1px solid black;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
-                                Women's Care</li>
-                            <li id="mens" onclick="changeDiv();" style="border: 1px solid black; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
-                                Men's Health</li>
+                            <a>
+                                <li id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Diabetes Care</li>
+                            </a>
+                            <a>
+                                <li id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Women's Care</li>
+                            </a>
+                            <a>
+                                <li id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Men's Health</li>
+                            </a>
                         </ul>
                     </div>
-                    <div class="doctor-slider slider ccdoctorslider" style="padding-left: 90px; padding-right: 90px;">
+                    <div class="doctor-slider slider ccdoctorslider  displayNone" id="div1" style="padding-left: 90px; padding-right: 90px;">
                         <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
                     border-top-right-radius: 9px;">
                             <div class="featured-img" style="height: 40%;">
@@ -850,6 +858,372 @@
                             <div class="featured-last" style="height:25% ; position: relative;">
                                 <span class="health-price">
                                 ₹ 2999
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider " id="div2" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 2999
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 699
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 3399
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 1899
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 2999
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider displayNone" id="div3" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 2999
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 699
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 3399
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 1899
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 2999
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider displayNone" id="div4" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 2999
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 699
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 3399
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/health3.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 899
+                            </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+                    border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/health2.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                                ₹ 3999
                             </span>
                                 <a class="health-book">
                                     <span class="books-health">Book Now</span>
@@ -1626,6 +2000,199 @@
 
 
             </div>
+            <div class="col-sm-12 third heading">
+                <h3 class="third-heading-name" style="font-weight: 800;">Lifestyle Health Packages</h3>
+            </div>
+            <div class="col-sm-12 Health-test" style="display: inline-flex;margin-left: -7px; height: 230px;padding-left:5px !important;padding-right:1px !important;margin-top: 8px;">
+                <div class="col-sm-12 booked-test" style="height: 140px;margin-top: 8px;padding-right: 0px !important;">
+                    <div class="col-sm-4" style=" height: 92%;border-radius: 10px;
+                    margin-right: 26px;padding-left: 0px;padding-right: 0px; border:1px solid black ;">
+                        <a href="/"><img src="/img/patients/life1.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+
+                    </div>
+                    <div class="col-sm-2 health-booked-name" style="margin-top: -2px;margin-left: -15px;">
+                        <h3 class="health-checkup-name" style="    
+                        font-size: 0.74rem;
+                        line-height: 1rem;
+                        font-weight: 700;
+                        margin-top: 5px;
+                        font-family: sans-serif;">Stress Assessment</h3>
+                        <div class="pric-health" style="    
+                        margin-top: -3px;
+                        margin-left: -17px;
+                        font-family: unset;
+                        font-weight: 700;
+                        height: 23px;
+                        width: 61px;
+                        position: relative;
+                        left: 14px;
+                        border-radius: 5px;
+                        background-color: #B94085;">
+                            <p class="price-healths"> ₹ 1299</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-12 booked-test" style="height: 140px;margin-top: 8px; padding-right: 0px !important;">
+                    <div class="col-sm-4" style=" height: 92%;border-radius: 10px;
+                    margin-right: 26px;padding-left: 0px;padding-right: 0px; border:1px solid black ;">
+                        <a href="/"><img src="/img/patients/life2.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+
+                    </div>
+                    <div class="col-sm-2 health-booked-name" style="margin-top: -2px;margin-left: -15px;">
+                        <h3 class="health-checkup-name" style="    
+                        font-size: 0.74rem;
+                        line-height: 1rem;
+                        font-weight: 700;
+                        margin-top: 5px;
+                        font-family: sans-serif;">Smoker Risk Assessment</h3>
+                        <div class="pric-health" style="    
+                        margin-top: -3px;
+                        margin-left: -17px;
+                        font-family: unset;
+                        font-weight: 700;
+                        height: 23px;
+                        width: 61px;
+                        position: relative;
+                        left: 14px;
+                        border-radius: 5px;
+                        background-color: #B94085;">
+                            <p class="price-healths"> ₹ 1399</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-12 booked-test" style="height: 140px;margin-top: 8px;padding-right: 0px !important;">
+                    <div class="col-sm-4" style=" height: 92%;border-radius: 10px;
+                    margin-right: 26px;padding-left: 0px;padding-right: 0px; border:1px solid black ;">
+                        <a href="/"><img src="/img/patients/life3.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+
+                    </div>
+                    <div class="col-sm-2 health-booked-name" style="margin-top: -2px;margin-left: -15px;">
+                        <h3 class="health-checkup-name" style="    
+                        font-size: 0.74rem;
+                        line-height: 1rem;
+                        font-weight: 700;
+                        margin-top: 5px;
+                        font-family: sans-serif;">Alochol Risk Assessment</h3>
+                        <div class="pric-health" style="    
+                        margin-top: -3px;
+                        margin-left: -17px;
+                        font-family: unset;
+                        font-weight: 700;
+                        height: 23px;
+                        width: 61px;
+                        position: relative;
+                        left: 14px;
+                        border-radius: 5px;
+                        background-color: #B94085;">
+                            <p class="price-healths"> ₹ 1399</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+            <div class="col-sm-12 Health-test" style="display: inline-flex;margin-left: -7px; height: 230px;padding-left:5px !important;padding-right:1px !important;margin-top: 8px;">
+                <div class="col-sm-12 booked-test" style="height: 140px;margin-top: 8px;padding-right: 0px !important;">
+                    <div class="col-sm-4" style=" height: 92%;border-radius: 10px;
+                    margin-right: 26px;padding-left: 0px;padding-right: 0px; border:1px solid black ;">
+                        <a href="/"><img src="/img/patients/life4.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+
+                    </div>
+                    <div class="col-sm-2 health-booked-name" style="margin-top: -2px;margin-left: -15px;">
+                        <h3 class="health-checkup-name" style="    
+                        font-size: 0.74rem;
+                        line-height: 1rem;
+                        font-weight: 700;
+                        margin-top: 5px;
+                        font-family: sans-serif;">Body Fat Risk</h3>
+                        <div class="pric-health" style="    
+                        margin-top: -3px;
+                        margin-left: -17px;
+                        font-family: unset;
+                        font-weight: 700;
+                        height: 23px;
+                        width: 61px;
+                        position: relative;
+                        left: 14px;
+                        border-radius: 5px;
+                        background-color: #B94085;">
+                            <p class="price-healths"> ₹ 1599</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-12 booked-test" style="height: 140px;margin-top: 8px; padding-right: 0px !important;">
+                    <div class="col-sm-4" style=" height: 92%;border-radius: 10px;
+                    margin-right: 26px;padding-left: 0px;padding-right: 0px; border:1px solid black ;">
+                        <a href="/"><img src="/img/patients/life6.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+
+                    </div>
+                    <div class="col-sm-2 health-booked-name" style="margin-top: -2px;margin-left: -15px;">
+                        <h3 class="health-checkup-name" style="    
+                        font-size: 0.74rem;
+                        line-height: 1rem;
+                        font-weight: 700;
+                        margin-top: 5px;
+                        font-family: sans-serif;">Cardiac Risk Assessment</h3>
+                        <div class="pric-health" style="    
+                        margin-top: -3px;
+                        margin-left: -17px;
+                        font-family: unset;
+                        font-weight: 700;
+                        height: 23px;
+                        width: 61px;
+                        position: relative;
+                        left: 14px;
+                        border-radius: 5px;
+                        background-color: #B94085;">
+                            <p class="price-healths"> ₹ 1099</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-12 booked-test" style="height: 140px;margin-top: 8px;padding-right: 0px !important;">
+                    <div class="col-sm-4" style=" height: 92%;border-radius: 10px;
+                    margin-right: 26px;padding-left: 0px;padding-right: 0px; border:1px solid black ;">
+                        <a href="/"><img src="/img/patients/life5.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+
+                    </div>
+                    <div class="col-sm-2 health-booked-name" style="margin-top: -2px;margin-left: -15px;">
+                        <h3 class="health-checkup-name" style="    
+                        font-size: 0.74rem;
+                        line-height: 1rem;
+                        font-weight: 700;
+                        margin-top: 5px;
+                        font-family: sans-serif;">Allergy Problem Test</h3>
+                        <div class="pric-health" style="    
+                        margin-top: -3px;
+                        margin-left: -17px;
+                        font-family: unset;
+                        font-weight: 700;
+                        height: 23px;
+                        width: 61px;
+                        position: relative;
+                        left: 14px;
+                        border-radius: 5px;
+                        background-color: #B94085;">
+                            <p class="price-healths"> ₹ 799</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
 
 
             <!-- -------------------------------------------------------------------- -->
@@ -1875,51 +2442,36 @@
         }
     </script>
     <script>
-        function changeDiv() {
+        function changeDiv(count) {
+            var div1 = document.getElementById('div1');
+            var div2 = document.getElementById('div2');
+            var div3 = document.getElementById('div3');
+            var div4 = document.getElementById('div4');
 
-            var featured = document.querySelectorAll('#featured');
-            var Diabetes = document.querySelectorAll('#Diabetes');
-            var women = document.querySelectorAll('#women');
-            var mens = document.querySelectorAll('#mens');
-
-
-
-            for (let i = 0; i < featured.length; i++) {
-                featured[i].addEventListener('click', function() {
-                    featured[i].classList.featured('displayNone');
-                    Diabetes[i].classList.Diabetes('displayNone');
-                    women[i].classList.women('displayNone');
-                    mens[i].classList.mens('displayNone');
-                })
+            if (count == 1) {
+                div1.classList.remove('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.add('displayNone');
             }
-
-            for (let i = 0; i < Diabetes.length; i++) {
-                Diabetes[i].addEventListener('click', function() {
-                    featured[i].classList.featured('displayNone');
-                    Diabetes[i].classList.Diabetes('displayNone');
-                    women[i].classList.women('displayNone');
-                    mens[i].classList.mens('displayNone');
-                })
+            if (count == 2) {
+                div1.classList.add('displayNone');
+                div2.classList.remove('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.add('displayNone');
             }
-            for (let i = 0; i < women.length; i++) {
-                women[i].addEventListener('click', function() {
-                    featured[i].classList.featured('displayNone');
-                    Diabetes[i].classList.Diabetes('displayNone');
-                    women[i].classList.women('displayNone');
-                    mens[i].classList.mens('displayNone');
-                })
+            if (count == 3) {
+                div1.classList.add('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.remove('displayNone');
+                div4.classList.add('displayNone');
             }
-            for (let i = 0; i < mens.length; i++) {
-                mens[i].addEventListener('click', function() {
-                    featured[i].classList.featured('displayNone');
-                    Diabetes[i].classList.Diabetes('displayNone');
-                    women[i].classList.women('displayNone');
-                    mens[i].classList.mens('displayNone');
-                })
+            if (count == 4) {
+                div1.classList.add('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.remove('displayNone');
             }
-
-
-
 
 
         }

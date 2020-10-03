@@ -7,8 +7,7 @@ const Razorpay = require('razorpay');
 
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
-    if(req.isAuthenticated())
-    {
+    if (req.isAuthenticated()) {
         let patient = await User.findById(req.user.id).populate({
             path: 'notification',
             populate: {
@@ -16,21 +15,19 @@ module.exports.home = async(req, res) => {
                 populate: { path: 'user', }
             }
         });
-    
+
         return res.render('index', {
             title: 'Home',
             doctors: doctors,
-            patient:patient
+            patient: patient
         })
-    }
-
-    else{
+    } else {
         return res.render('index', {
             title: 'Home',
             doctors: doctors
         })
     }
-   
+
 }
 
 module.exports.addBilling = (req, res) => {
@@ -101,7 +98,7 @@ module.exports.appointments = async(req, res) => {
     })
 }
 
-module.exports.appointmentDetail = async (req, res) => {
+module.exports.appointmentDetail = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'doctors',
         populate: {
@@ -111,8 +108,8 @@ module.exports.appointmentDetail = async (req, res) => {
     });
     return res.render('appointment-detail', {
         title: 'Apppointment Details',
-        user:patients,
-        i:req.query.index
+        user: patients,
+        i: req.query.index
     })
 }
 
@@ -127,7 +124,7 @@ module.exports.bankDetails = (req, res) => {
     })
 }
 module.exports.Doctors = async(req, res) => {
-    let doctors = await User.find({ approve1: true,approve2:true });
+    let doctors = await User.find({ approve1: true, approve2: true });
     return res.render('doctors', {
         title: 'Doctors',
         doctors: doctors
@@ -164,15 +161,18 @@ module.exports.booking = async(req, res) => {
                 }
             }
         }
-    
 
-    doctor.save();
 
-    return res.render('booking', {
-        title: 'Booking',
-        doctor: doctor
-    })
+
+        doctor.save();
+
+        return res.render('booking', {
+            title: 'Booking',
+            doctor: doctor
+        })
+    }
 }
+
 
 module.exports.bookingSuccess = (req, res) => {
     return res.render('booking-success', {
@@ -342,15 +342,15 @@ module.exports.home2 = (req, res) => {
     })
 }
 
-module.exports.invoiceView = async (req, res) => {
+module.exports.invoiceView = async(req, res) => {
 
     let doctor = await User.findById(req.query.id);
     return res.render('invoice-view', {
         title: 'Invoice View',
-        doctor:doctor,
-        order:req.query.order,
-        date:req.query.date,
-        fee:req.query.fee
+        doctor: doctor,
+        order: req.query.order,
+        date: req.query.date,
+        fee: req.query.fee
     })
 }
 
@@ -412,15 +412,15 @@ module.exports.medicalRecords = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
         path: 'doctors',
-        populate: { 
+        populate: {
             path: 'did',
             populate: { path: 'user' }
-         }
+        }
     });
     return res.render('medical-record', {
         title: 'My Medical Records',
         user: user,
-        alldoctors:doctors
+        alldoctors: doctors
     })
 }
 
@@ -428,15 +428,15 @@ module.exports.myBilling = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
         path: 'doctors',
-        populate: { 
+        populate: {
             path: 'did',
             populate: { path: 'user' }
-         }
+        }
     });
     return res.render('my-billing', {
         title: 'My Billings',
         user: user,
-        alldoctors:doctors
+        alldoctors: doctors
     })
 }
 
@@ -445,15 +445,15 @@ module.exports.myAppointments = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
         path: 'doctors',
-        populate: { 
+        populate: {
             path: 'did',
             populate: { path: 'user' }
-         }
+        }
     });
     return res.render('my-appointments', {
         title: 'My Appointments',
         user: user,
-        alldoctors:doctors
+        alldoctors: doctors
     })
 }
 
@@ -468,17 +468,18 @@ module.exports.otherPatients = async(req, res) => {
     let user = await User.findById(req.user.id);
     let patients = await User.findById(req.user.id).populate({
         path: 'others',
-        populate: { 
+        populate: {
             path: 'doctors',
-            populate: { 
+            populate: {
                 path: 'did',
-                populate: { path: 'user' } }
-         }
+                populate: { path: 'user' }
+            }
+        }
     });
     return res.render('other-patients', {
         title: 'user Dashboard',
         user: user,
-        otherpatients:patients
+        otherpatients: patients
     })
 }
 
@@ -489,8 +490,8 @@ module.exports.patientDashboard = async(req, res) => {
         populate: {
             path: 'did',
             populate: { path: 'user' }
-         } 
-       
+        }
+
     });
     return res.render('my-appointments', {
         title: 'user Dashboard',
@@ -500,17 +501,17 @@ module.exports.patientDashboard = async(req, res) => {
 }
 
 
-module.exports.razorPay = async (req, res) => {
+module.exports.razorPay = async(req, res) => {
     const razorpay = new Razorpay({
         key_id: 'rzp_test_KPgD2YFDnBI7Ib',
         key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ'
-      });
-    
+    });
+
     const payment_capture = 1;
     const amount = 499;
     const currency = 'INR';
     const response = await razorpay.orders.create({
-        amount:amount*100,
+        amount: amount * 100,
         currency,
         receipt: shortid.generate(),
         payment_capture
@@ -518,14 +519,14 @@ module.exports.razorPay = async (req, res) => {
 
     console.log(response);
     var options = {
-        "key": "rzp_test_KPgD2YFDnBI7Ib", 
-        "amount": response.amount, 
+        "key": "rzp_test_KPgD2YFDnBI7Ib",
+        "amount": response.amount,
         "currency": response.currency,
         "name": "Book It",
         "description": "Procced to pay your booking fee.",
         "image": "/img/logo.png",
-        "order_id": response.id, 
-        "handler": function (response){
+        "order_id": response.id,
+        "handler": function(response) {
             alert(response.razorpay_payment_id);
             alert(response.razorpay_order_id);
             alert(response.razorpay_signature)
@@ -543,36 +544,36 @@ module.exports.razorPay = async (req, res) => {
         }
     };
     var rzp1 = new Razorpay(options);
-        rzp1.open();
-       
+    rzp1.open();
+
 
 }
 
 
-module.exports.refund = async (req, res) => {
-    return res.render('refund',{
-        title:'Refund'
+module.exports.refund = async(req, res) => {
+    return res.render('refund', {
+        title: 'Refund'
     });
 }
 
-module.exports.prescription= async(req, res) => {
+module.exports.prescription = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
         path: 'doctors',
-        populate: { 
+        populate: {
             path: 'did',
             populate: { path: 'user' }
-         }
+        }
     });
     return res.render('prescription', {
         title: 'My Prescription',
         user: user,
-        alldoctors:doctors
+        alldoctors: doctors
     })
 }
 module.exports.pay = async(req, res) => {
     let user = await User.findById(req.user.id)
-    
+
     return res.render('pay', {
         title: 'Payment',
         user: user
@@ -591,16 +592,16 @@ module.exports.patientTracking = async(req, res) => {
 module.exports.patientProfile = async(req, res) => {
     let user = await User.findById(req.query.pid).populate({
         path: 'doctors',
-        populate: { 
+        populate: {
             path: 'did',
             populate: { path: 'user' }
-         }
+        }
     });
     let doctor = await User.findById(req.query.doctorid);
     return res.render('patient-profile', {
         title: 'Patient Profile',
-        user1:user,
-        doctor:doctor
+        user1: user,
+        doctor: doctor
     })
 }
 
