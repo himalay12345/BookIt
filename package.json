@@ -31,6 +31,7 @@
         "passport-local": "^1.0.0",
         "razorpay": "^2.0.6",
         "shortid": "^2.2.15",
+        "socket.io": "^2.3.0",
         "twilio": "^3.49.0"
     }
 }

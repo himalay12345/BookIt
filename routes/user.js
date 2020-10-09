@@ -5,10 +5,14 @@ const passport = require('passport');
 const userController = require('../controllers/user');
 
 router.post('/create', userController.create);
+router.post('/create-staff', userController.createStaff);
 
 router.post('/create-session', passport.authenticate('local', {
     failureRedirect: '/login'
 }), userController.createSession);
+router.post('/create-staff-session', passport.authenticate('local', {
+    failureRedirect: '/staff-login'
+}), userController.createStaffSession);
 router.get('/logout', userController.destroySession);
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile email'] }));
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), userController.popup);
@@ -33,7 +37,9 @@ router.post('/doc-change-password', userController.docchangePassword);
 router.post('/bank-details', userController.bankDetails);
 router.post('/filter', userController.Filter);
 router.post('/book-appointment',userController.bookAppointment);
+router.post('/staff-book-appointment',userController.staffBookAppointment);
 router.post('/payment',userController.payment);
+router.post('/offline-pay',userController.offlinePay);
 router.get('/add-favourite', userController.addFavourite);
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-idproof', userController.uploadIdProof);

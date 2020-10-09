@@ -185,10 +185,9 @@
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title"><%=patient.notification[i].message%></p>
-                                                        <%var a = patient.notification[i].createdAt.toLocaleTimeString();%>
-                                                        <%var b = (new Date()).toLocaleTimeString();%>
-                                                        <%var c = b-a;%>
-                                                    <p class="noti-time"><span class="notification-time"><%=c%> mins ago</span></p>
+                                                        
+                                                       
+                                                    <p class="noti-time"><span class="notification-time"><%=patient.notification[i].createdAt.toLocaleTimeString()%></span></p>
                                                 </div>
                                             </div>
                                         </a>
@@ -208,7 +207,7 @@
                             <%if(locals.user.type == 'Doctor'){%>
                                 <li class="nav-item dropdown has-arrow">
                                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" width="31" alt="Ryan Taylor"></span>
+                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
                                     </a>
                                     <div class="dropdown-menu profile-drop">
                                         <div class="user-header">
@@ -269,6 +268,35 @@
                                         </div>
                                     </li>
                                     <%}%>
+                                    <%if(locals.user.type == 'Staff'){%>
+                                        <li class="nav-item dropdown has-arrow">
+                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
+                                            </a>
+                                            <div class="dropdown-menu profile-drop">
+                                                <div class="user-header">
+                                                    <div class="avatar avatar-sm">
+                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
+                                                    </div>
+                                                    <div class="user-text">
+                                                        <h6>
+                                                            <%=locals.user.name%>
+                                                        </h6>
+                                                        <p class="text-muted mb-0">Medical Staff</p>
+                                                    </div>
+                                                </div>
+                                                <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
+                                                <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                                <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+                                                <a class="dropdown-item" href="/staff-appointment-page">Appointments</a>
+                                                <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
+                                                <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                                <a class="dropdown-item" href="/settings">Settings</a>
+                                                <a class="dropdown-item" href="/user/logout">Logout</a>
+                                            </div>
+                                        </li>
+                                        <%}%>
 
                                             <!-- /User Menu -->
 
@@ -834,6 +862,7 @@
                                     <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
                                     <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
                                     <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                    <li><a href="/staff-login-page"><i class="fas fa-angle-double-right"></i> Staff Login</a></li>
                                     <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
                                     <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
                                 </ul>
