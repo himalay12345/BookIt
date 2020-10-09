@@ -725,25 +725,25 @@
                     <div class="second-heading " style="display: inline-flex; margin-left: 83px;margin-top: 12px; margin-bottom: 25px; ">
                         <ul style="list-style: none; display: inline-flex;">
                             <a>
-                                <li id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular1" id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
                                     Featured Checkup</li>
                             </a>
 
                             <a>
-                                <li id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular" id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
                                     Diabetes Care</li>
                             </a>
                             <a>
-                                <li id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular" id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
                                     Women's Care</li>
                             </a>
                             <a>
-                                <li id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular" id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
                                     Men's Health</li>
                             </a>
                         </ul>
                     </div>
-                    <div class="doctor-slider slider ccdoctorslider  displayNone" id="div1" style="padding-left: 90px; padding-right: 90px;">
+                    <div class="doctor-slider slider ccdoctorslider" id="div1" style="padding-left: 90px; padding-right: 90px;">
                         <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
                     border-top-right-radius: 9px;">
                             <div class="featured-img" style="height: 40%;">
@@ -865,7 +865,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="doctor-slider slider ccdoctorslider " id="div2" style="padding-left: 90px; padding-right: 90px;">
+                    <div class="doctor-slider slider ccdoctorslider displayNone" id="div2" style="padding-left: 90px; padding-right: 90px;">
                         <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
                     border-top-right-radius: 9px;">
                             <div class="featured-img" style="height: 40%;">
@@ -2448,29 +2448,59 @@
             var div3 = document.getElementById('div3');
             var div4 = document.getElementById('div4');
 
+            var featured = document.getElementById('featured');
+            var diabetes = document.getElementById('Diabetes');
+            var women = document.getElementById('women');
+            var mens = document.getElementById('mens');
+
+
             if (count == 1) {
                 div1.classList.remove('displayNone');
                 div2.classList.add('displayNone');
                 div3.classList.add('displayNone');
                 div4.classList.add('displayNone');
+                featured.classList.add('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+
             }
             if (count == 2) {
                 div1.classList.add('displayNone');
                 div2.classList.remove('displayNone');
                 div3.classList.add('displayNone');
                 div4.classList.add('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.add('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
             }
             if (count == 3) {
                 div1.classList.add('displayNone');
                 div2.classList.add('displayNone');
                 div3.classList.remove('displayNone');
                 div4.classList.add('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.add('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
             }
             if (count == 4) {
                 div1.classList.add('displayNone');
                 div2.classList.add('displayNone');
                 div3.classList.add('displayNone');
                 div4.classList.remove('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.add('active-popular1');
+
             }
 
 
