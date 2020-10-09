@@ -59,6 +59,238 @@
     display:none;
 }
 
+.patient-li{
+    /* background-image: url('/img/bg.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:auto;
+    width: 225px;
+    border:1px solid lightgrey;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+
+}
+
+
+.upcoming-ul li{
+       background-image: url('/img/bg.png');
+}
+
+.patient-li h4{
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color:#C71585;
+    margin-top: 15px;
+}
+.patient-li h5{
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    
+}
+
+.patient-li a{
+    font-size: 1.1rem;
+    display: block;
+    font-weight: 700;
+    width: 80%;
+    text-align: center;
+    padding:8px;
+    border-radius: 25px;
+    border:1px solid grey;
+    
+    margin-left: 20px;
+    color:white;
+    background-color:#006400;
+
+    
+}
+
+.patient-li h3{
+    font-size: 1.1rem;
+    display: block;
+    font-weight: 700;
+    width: 80%;
+    text-align: center;
+    padding:8px;
+    border-radius: 25px;
+    border:1px solid grey;
+    
+    margin-left: 20px;
+    color:white;
+    background-color:#C71585;
+
+    
+}
+
+.patient-li p{
+    font-size: 1rem;
+    display: block;
+    font-weight: 700;
+    width: 80%;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+
+.patient-li h4 i{
+    margin-right: 8px;
+}
+
+#patient-ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul0{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul1{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul2{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul3{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul4{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul5{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul6{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul7{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul8{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+#patient-ul9{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+#patient-ul10{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+    padding-left: 30px;
+    /* justify-content: space-around; */
+}
+
+
+
+
+.patient_tracking_display{
+    min-height: 400px;
+    height: auto;
+    border:1px solid grey;
+    margin:20px 100px;
+    background-color: white;
+    border-radius: 5px;
+    padding:50px 0px;
+    
+}
+
+
+.b_red{
+    font-size: 1.1rem;
+    display: block;
+    font-weight: 700;
+    width: 80%;
+    text-align: center;
+    padding:8px;
+    border-radius: 25px;
+    border:1px solid grey;
+    
+    margin-left: 20px;
+    color:white;
+    background-color: #D00000!important ;
+}
+
 .consult-specilities {
     display: none;
 }

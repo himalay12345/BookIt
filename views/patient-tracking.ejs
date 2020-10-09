@@ -9,23 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style1.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -390,6 +391,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
+        <%if(locals.user.type == 'Staff'){%>
         <div class="breadcrumb-bar"  style="padding: 10px 0px !important;margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -407,11 +409,12 @@
                 </div>
             </div>
         </div>
+        <%}%>
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        <div class="content">
-            <div class="container-fluid">
+        <div class="content" style="padding-top: 0px !important;">
+            <div class="container-fluid" style="padding-right: 0px !important;padding-left: 0px !important;">
 
                 <div class="row">
                 
@@ -421,7 +424,7 @@
 
                       <%if(locals.user.type == 'Staff'){%>
 
-                        <div class="row" id="patient_track">
+                        <div class="row" id="patient_track" style="padding-top: 15px;padding-left:10px;">
                             <div class="col-md-12">
                                 <h4 class="mb-4">Patient Appoinment</h4>
                                 <div class="appointment-tab">
@@ -436,37 +439,414 @@
                                         </li>
                                     </ul>
                                     <!-- /Appointment Tab -->
-                                  
-                             <div class="tab-content">
+
+                                    <%var today = new Date();%>
+                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                    var yyyy = today.getFullYear();
+                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                
+                                    <%var slots=0,sindex=0;%>
+                                    <%for(let i2 = 0 ; i2< user1.doctorid.schedule_time.length; i2++){%>
+                                        <%if(user1.doctorid.schedule_time[i2].day.toUpperCase() == dayOfWeek.toUpperCase()){%>
+                                            <%if(typeof(user1.doctorid.schedule_time[i2].start)!='string'){%>
+                                            <%slots = user1.doctorid.schedule_time[i2].start.length;sindex=i2%>
+                                            <%}%>
+                                        <%}%>
+                                    
+                                    <%}%>
+
+                                    <%if(slots <= 1){%>
+                                        <div class="tab-content">
 
                                        
-                                        <div class="tab-pane show active" id="upcoming-appointments">
-                                            <div class="card card-table mb-0">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover table-center mb-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Patient Name</th>
-                                                                    <th>Patient Age</th>
-                                                                    <th>Patient Phone</th>
-                                                                    <th>Patient Address</th>
-                                                                    <th>Booking Mode</th>
-                                                                    <th class="text-center">Status</th>
-                                                                    <th>Track</th>
+                                            <div class="tab-pane show active" id="upcoming-appointments">
+                                                <div class="card card-table mb-0">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover table-center mb-0">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Patient Name</th>
+                                                                        <th>Patient Age</th>
+                                                                        <th>Patient Phone</th>
+                                                                        <th>Patient Address</th>
+                                                                        <th>Booking Mode</th>
+                                                                        <th class="text-center">Status</th>
+                                                                        <th class="text-center">Track</th>
+                                                                        <th class=""></th>
+                                                                       
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <%var c=1%>
+                                                                    <%var b = 0;%>
+                                                                    <%for(patients of locals.user.booking){%>
+                                                                    <%var today = new Date();
+                                                                    var dd = String(today.getDate()).padStart(2, '0');
+                                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                    var yyyy = today.getFullYear();
+                                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                                    <%var today = patients.createdAt;
+                                                                    var dd1= String(today.getDate()).padStart(2, '0');
+                                                                    var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                    var yyyy1 = today.getFullYear();
+                                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                                    <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                    <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                                    
+                                                                    <%if(str1 != str2 || patients.cancel != false){%>
+                                                                        <%b++;continue;%>
+                                                                    <%}%>
                                                                    
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <%var c=0%>
-                                                                <%for(patients of locals.user.booking){%>
+                                                                     
+                                                                        <td>
+                                                                            <h2 class="table-avatar">
+                                                                                
+                
+                                                                                <a href="#"><%=patients.name%> <span>#PT00<%=c%></span></a>
+                                                                            </h2>
+                                                                        </td>
+                                                                       <td><%=patients.age%></td>
+                
+                                                                       <td><%=patients.phone%></td>
+                
+                                                                       <td><%=patients.address%></td>
+                                                                       <%if(patients.type=='online'){%>
+                                                                       <td><span class="badge badge-pill bg-sucIcess-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                       <%}else{%>
+                                                                        <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+                
+                                                                        <%}%>
+                
+                                                                        
+                                                                            
+                                                                                <%if(patients.cancel == true){%>
+                                                                                    <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                    <%}else{%>
+                                                                                      <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                      <%}%>
+                                                                        <%var tflag = false;%>
+                                                                        
+                                                                        <%for(track of user.tracked){%>
+                                                                                                            
+                                                                            <%if(track.tid == patients.id && track.status == 'ongoing'){%>
+                                                                                <%console.log(track.tid)%>
+                                                                                <%tflag = true;%>
+                                                                            <%}%>
+                                                                            <%}%> 
+                                                                        <%if(!tflag){%>             
+                                                                       <td id="updatedStatus1"><a data-count='<%=c++%>' data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus">Check In</a></td>        
+                                                                       <%}else{%>
+                                                                        <td id="updatedStatus1" class="displayNone"><a data-count='<%=c++%>'data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus">Check In</a></td>        
+                                                                       <td id="updatedStatus3"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+                                                                       <%}%> 
+                                                                       <td class="displayNone" id="updatedStatus2"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+     
+                                                                    </tr>
+                                                                    <%b++;%>
+                                                                    <%}%>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+    
+                                        </div> 
+                                    <%}else{%>
+                                        <%for(let i1 =0 ;i1<slots;i1++){%>
+                                              <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                                                <li class="nav-item" style="width: 100%;">
+                                                    <a class="nav-link active" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab" ><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;"><%=user1.doctorid.schedule_time[sindex].start[i1].toUpperCase()%> - <%=user1.doctorid.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
+                                                </li>
+                                              </ul>
+                                              <div class="tab-content">
+
+                                       
+                                                <div class="tab-pane show active" id="upcoming-appointments">
+                                                    <div class="card card-table mb-0">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover table-center mb-0">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Patient Name</th>
+                                                                            <th>Patient Age</th>
+                                                                            <th>Patient Phone</th>
+                                                                            <th>Patient Address</th>
+                                                                            <th>Booking Mode</th>
+                                                                            <th class="text-center">Status</th>
+                                                                            <th class="text-center">Track</th>
+                                                                            <th class=""></th>
+                                                                           
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <%var c=1%>
+                                                                        <%var b = 0;%>
+                                                                        <%for(patients of locals.user.booking){%>
+                                                                        <%var today = new Date();
+                                                                        var dd = String(today.getDate()).padStart(2, '0');
+                                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                        var yyyy = today.getFullYear();
+                                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                        var dayOfWeek = weekday[today.getDay()];%>
+                                                                        <%var today = patients.createdAt;
+                                                                        var dd1= String(today.getDate()).padStart(2, '0');
+                                                                        var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                        var yyyy1 = today.getFullYear();
+                                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                        var dayOfWeek = weekday[today.getDay()];%>
+                                                                        <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                        <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                                        
+                                                                        <%if(str1 != str2 || patients.slot != i1){%>
+                                                                            <%b++;continue;%>
+                                                                        <%}%>
+                                                                       
+                                                                         
+                                                                            <td>
+                                                                                <h2 class="table-avatar">
+                                                                                    
+                    
+                                                                                    <a href="#"><%=patients.name%> <span>#PT00<%=c%></span></a>
+                                                                                </h2>
+                                                                            </td>
+                                                                           <td><%=patients.age%></td>
+                    
+                                                                           <td><%=patients.phone%></td>
+                    
+                                                                           <td><%=patients.address%></td>
+                                                                           <%if(patients.type=='online'){%>
+                                                                           <td><span class="badge badge-pill bg-sucIcess-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                           <%}else{%>
+                                                                            <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+                    
+                                                                            <%}%>
+                    
+                                                                            
+                                                                                
+                                                                                    <%if(patients.cancel == true){%>
+                                                                                        <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                        <%}else{%>
+                                                                                          <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                          <%}%>
+                                                                            <%var tflag = false;%>
+                                                                            
+                                                                            <%for(track of user.tracked){%>
+                                                                                                                
+                                                                                <%if(track.tid == patients.id && track.status == 'ongoing'){%>
+                                                                                    <%console.log(track.tid)%>
+                                                                                    <%tflag = true;%>
+                                                                                <%}%>
+                                                                                <%}%> 
+                                                                            <%if(!tflag){%>             
+                                                                           <td id="updatedStatus1<%=i1%>"><a data-count='<%=c++%>' data-slot='<%=i1%>' data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus<%=i1%>">Check In</a></td>        
+                                                                           <%}else{%>
+                                                                            <td id="updatedStatus1<%=i1%>" class="displayNone"><a data-count='<%=c++%>'data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus<%=i1%>">Check In</a></td>        
+                                                                           <td id="updatedStatus3<%=i1%>"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+                                                                           <%}%> 
+                                                                           <td class="displayNone" id="updatedStatus2<%=i1%>"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+         
+                                                                        </tr>
+                                                                        <%b++;%>
+                                                                        <%}%>
+                                                                       
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                              
+        
+                                            </div> 
+
+                                        <%}%>
+
+                                        <%}%>
+                                  
+                            
+                                 
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+                        <%if(locals.user.type == 'Staff'){%>
+                               <%if(slots <= 1){%>
+                                    <div class="" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                                        <div id="track_header" style="padding-top: 50px;">
+                                            <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
+                                        </div>
+                                        <div class="patient_tracking_display">
+                                            <%var last=0;%>
+                                            <ul id="patient-ul">
+                                                <%for(u of user1.tracked){%>
+                                                    <%var today = new Date();
+                                                    var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                    <%var today = u.createdAt;
+                                                    var dd1= String(today.getDate()).padStart(2, '0');
+                                                    var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy1 = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                    <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                    <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                    
+                                                    <%if(str1 != str2){%>
+                                                        <%continue;%>
+                                                    <%}%>
+                                                    
+                                                    <li class="patient-li unique">
+                                                        <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
+                                                        <%last=u.seat%>
+                                                        <h5><%=u.name%></h5>
+                                                        <a class="displayNone uongoing">Ongoing</a>
+                                                        <%if(u.status == 'Waiting'){%>
+                                                            <h3 class="b_red uwaiting"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                            <h3 class="displayNone uvisited"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>                                               
+                                                        <%}else{%>
+                                                            <h3 class="b_red uwaiting displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                            <h3 class="uvisited"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>
+                                                            <%}%> 
+                                                        <%var date = u.time.toLocaleTimeString();
+                                                        var date1 = date.slice(0,4);
+                                                        var date2 = date.slice(8,10);%>
+                                                        <p>CheckIn Time : <%=date1%>&nbsp;<%=date2%></p>
+                                                    </li>
+                                            <%}%>
+                                            
+                                            </ul>
+                                            <%if(last==0){%>
+                                                <div id="no_patient">
+                                                <h1 class="text-center font-weight-bolder"style="font-size:2rem;color:black"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span>Doctor has not started seeing yet!</h1>
+                                                <h2 class="text-center font-weight-bolder"style="font-size:1.5rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
+                                                </div>
+                                                <%}%>
+                                            <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                                                <li class="nav-item" style="width: 100%;">
+                                                    <a class="nav-link active" href="#upcoming-appointments" style="height: 70px !important;padding-top: 15px;font-size: 1.8rem;font-weight: bold;margin-bottom: 30px;" data-toggle="tab" >Upcoming Appointments</a>
+                                                </li>
+                                            </ul>
+                                            <div class="upcoming_patient_display">
+                                                <ul id="patient-ul" class="upcoming-ul">
+                                                    <%var c=last;%>
+                                                    <%for(let i = 0 ; i<user1.booking.length;i++){%>
+                                                        <%var today = new Date();
+                                                        var dd = String(today.getDate()).padStart(2, '0');
+                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy = today.getFullYear();
+                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek = weekday[today.getDay()];%>
+                                                        <%var today = user1.booking[i].createdAt;
+                                                        var dd1= String(today.getDate()).padStart(2, '0');
+                                                        var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy1 = today.getFullYear();
+                                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek = weekday[today.getDay()];%>
+                                                        <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                        <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                        
+                                                        <%if(str1 != str2){%>
+                                                            <%continue;%>
+                                                        <%}%>
+
+                                                        <%if(user1.booking[i].seat > c){%>
+                                                            <%var c1 = user1.booking[i].seat;%>
+                                                        <li class="patient-li upcoming-li" data-index="<%=c1%>">
+                                                            <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
+                                                            <h5><%=user1.booking[i].name%></h5>
+                                                            
+                                                        </li>
+                                                        <%}%>
+                                                <%}%>
+                                                
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <%}else{%>
+                                        <%for(let i1 =0 ;i1<slots;i1++){%>
+                                            <div class="" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                                                <div id="track_header" style="padding-top: 50px;">
+                                                    <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
+                                                </div>
+                                                <div class="patient_tracking_display">
+                                                    <%var last=0;%>
+                                                    <ul id="patient-ul<%=i1%>">
+                                                        <%for(u of user1.tracked){%>
+                                                            <%var today = new Date();
+                                                            var dd = String(today.getDate()).padStart(2, '0');
+                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                            var yyyy = today.getFullYear();
+                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                            var dayOfWeek = weekday[today.getDay()];%>
+                                                            <%var today = u.createdAt;
+                                                            var dd1= String(today.getDate()).padStart(2, '0');
+                                                            var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                            var yyyy1 = today.getFullYear();
+                                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                            var dayOfWeek = weekday[today.getDay()];%>
+                                                            <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                            <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                            
+                                                            <%if(str1 != str2 || u.slot != i1){%>
+                                                                <%continue;%>
+                                                            <%}%>
+                                                            
+                                                            <li class="patient-li unique">
+                                                                <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
+                                                                <%last=u.seat%>
+                                                                <h5><%=u.name%></h5>
+                                                                <a class="displayNone uongoing<%=i1%>">Ongoing</a>
+                                                                <%if(u.status == 'Waiting'){%>
+                                                                    <h3 class="b_red uwaiting<%=i1%>"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                                    <h3 class="displayNone uvisited<%=i1%>"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>                                               
+                                                                <%}else{%>
+                                                                    <h3 class="b_red uwaiting<%=i1%> displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                                    <h3 class="uvisited<%=i1%>"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>
+                                                                    <%}%> 
+                                                                <%var date = u.time.toLocaleTimeString();
+                                                                var date1 = date.slice(0,4);
+                                                                var date2 = date.slice(8,10);%>
+                                                                <p>CheckIn Time : <%=date1%>&nbsp;<%=date2%></p>
+                                                            </li>
+                                                    <%}%>
+                                                    
+                                                    </ul>
+                                                    <%if(last==0){%>
+                                                        <div id="no_patient<%=i1%>">
+                                                        <h1 class="text-center font-weight-bolder"style="font-size:2rem;color:black"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span>Doctor has not started seeing yet!</h1>
+                                                        <h2 class="text-center font-weight-bolder"style="font-size:1.5rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
+                                                        </div>
+                                                        <%}%>
+                                                    <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                                                        <li class="nav-item" style="width: 100%;">
+                                                            <a class="nav-link active" href="#upcoming-appointments" style="height: 70px !important;padding-top: 15px;font-size: 1.8rem;font-weight: bold;margin-bottom: 30px;" data-toggle="tab" >Upcoming Appointments</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="upcoming_patient_display">
+                                                        <ul id="patient-ul<%=i1%>" class="upcoming-ul<%=i1%>">
+                                                            <%var c=last;%>
+                                                            <%for(let i = 0 ; i<user1.booking.length;i++){%>
                                                                 <%var today = new Date();
                                                                 var dd = String(today.getDate()).padStart(2, '0');
                                                                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                                 var yyyy = today.getFullYear();
                                                                 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                                 var dayOfWeek = weekday[today.getDay()];%>
-                                                                <%var today = patients.createdAt;
+                                                                <%var today = user1.booking[i].createdAt;
                                                                 var dd1= String(today.getDate()).padStart(2, '0');
                                                                 var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                                 var yyyy1 = today.getFullYear();
@@ -475,56 +855,240 @@
                                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                 <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                                 
-                                                                <%if(str1 != str2){%>
+                                                                <%if(str1 != str2|| user1.booking[i].slot != i1){%>
                                                                     <%continue;%>
                                                                 <%}%>
-                                                               
-                                                                 
-                                                                    <td>
-                                                                        <h2 class="table-avatar">
-                                                                            
-            
-                                                                            <a href="#"><%=patients.name%> <span>#PT00<%=++c%></span></a>
-                                                                        </h2>
-                                                                    </td>
-                                                                   <td><%=patients.age%></td>
-            
-                                                                   <td><%=patients.phone%></td>
-            
-                                                                   <td><%=patients.address%></td>
-                                                                   <%if(patients.type=='online'){%>
-                                                                   <td><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
-                                                                   <%}else{%>
-                                                                    <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
-            
-                                                                    <%}%>
-            
+        
+                                                                <%if(user1.booking[i].seat > c){%>
+                                                                    <%var c1 = user1.booking[i].seat;%>
+                                                                <li class="patient-li upcoming-li<%=i1%>" data-index="<%=c1%>">
+                                                                    <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
+                                                                    <h5><%=user1.booking[i].name%></h5>
                                                                     
-                                                                        
-                                                                            <%if(patients.cancel == true){%>
-                                                                                <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
-                                                                                <%}else{%>
-                                                                                  <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-                                                                                  <%}%>
-            
-                                                                   <td><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Check In</a></td>        
-                                                                     
-                                                                </tr>
+                                                                </li>
                                                                 <%}%>
-                                                               
-                                                            </tbody>
-                                                        </table>
+                                                        <%}%>
+                                                        
+                                                        </ul>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
-                                        </div>
-                                      
+                                        <%}%>
+                                    <%}%>
+                        <%}else{%>
+                            <%var slots=0,sindex=0;%>
+                            <%var today = new Date();%>
+                            <%var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                            var dayOfWeek = weekday[today.getDay()];%>
+                            <%for(let i2 = 0 ; i2< user1.doctorid.schedule_time.length; i2++){%>
+                                <%if(user1.doctorid.schedule_time[i2].day.toUpperCase() == dayOfWeek.toUpperCase()){%>
+                                    <%if(typeof(user1.doctorid.schedule_time[i2].start)!='string'){%>
+                                    <%slots = user1.doctorid.schedule_time[i2].start.length;sindex=i2%>
+                                    <%}%>
+                                <%}%>
+                            
+                            <%}%>
+                            <%if(slots <= 1){%>
+                        <div style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                            <div id="track_header" style="padding-top: 50px;">
+                                <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
+                            </div>
+                            <div class="patient_tracking_display">
+                                <%var last=0;%>
+                                <ul id="patient-ul">
+                                    <%for(u of user1.tracked){%>
+                                        <%var today = new Date();
+                                        var dd = String(today.getDate()).padStart(2, '0');
+                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                        var yyyy = today.getFullYear();
+                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                        var dayOfWeek = weekday[today.getDay()];%>
+                                        <%var today = u.createdAt;
+                                        var dd1= String(today.getDate()).padStart(2, '0');
+                                        var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                        var yyyy1 = today.getFullYear();
+                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                        var dayOfWeek = weekday[today.getDay()];%>
+                                        <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                        <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                        
+                                        <%if(str1 != str2){%>
+                                            <%continue;%>
+                                        <%}%>
+                                        
+                                        <li class="patient-li">
+                                            <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
+                                            <%last=u.seat%>
+                                            <h5><%=u.name%></h5>
+                                            <a class="displayNone uongoing">Ongoing</a>
+                                            <%if(u.status == 'Waiting'){%>
+                                                <h2 class="b_red uwaiting"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                <h3 class="displayNone uvisited"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>                                               
+                                            <%}else{%>
+                                                <h2 class="b_red uwaiting displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                <h3 class="uvisited"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>
+                                                <%}%>
+                                            <%var date = u.time.toLocaleTimeString();
+                                            var date1 = date.slice(0,4);
+                                            var date2 = date.slice(8,10);%>
+                                            <p>CheckIn Time : <%=date1%>&nbsp;<%=date2%></p>
+                                        </li>
+                                <%}%>
+                                
+                                </ul>
+                                <%if(last==0){%>
+                                    <div id="no_patient">
+                                    <h1 class="text-center font-weight-bolder"style="font-size:2rem;color:black"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span>Doctor has not started seeing yet!</h1>
+                                    <h2 class="text-center font-weight-bolder"style="font-size:1.5rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
+                                    </div>
+                                    <%}%>
+                                <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                                    <li class="nav-item" style="width: 100%;">
+                                        <a class="nav-link active" href="#upcoming-appointments" style="height: 70px !important;padding-top: 15px;font-size: 1.8rem;font-weight: bold;margin-bottom: 30px;" data-toggle="tab" >Upcoming Appointments</a>
+                                    </li>
+                                </ul>
+                                <div class="upcoming_patient_display">
+                                    <ul id="patient-ul" class="upcoming-ul">
+                                       <%var c=last;%>
+                                        <%for(let i = 0 ; i<user1.booking.length;i++){%>
+                                            <%var today = new Date();
+                                            var dd = String(today.getDate()).padStart(2, '0');
+                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                            var yyyy = today.getFullYear();
+                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                            var dayOfWeek = weekday[today.getDay()];%>
+                                            <%var today = user1.booking[i].createdAt;
+                                            var dd1= String(today.getDate()).padStart(2, '0');
+                                            var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                            var yyyy1 = today.getFullYear();
+                                            var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                            var dayOfWeek = weekday[today.getDay()];%>
+                                            <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                            <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                            
+                                            <%if(str1 != str2){%>
+                                                <%continue;%>
+                                            <%}%>
 
-                                    </div> 
-                                 
+                                            <%if(user1.booking[i].seat > c){%>
+                                                <%var c1 = user1.booking[i].seat;%>
+                                            <li class="patient-li upcoming-li" data-index="<%=c1%>">
+                                                <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
+                                                <h5><%=user1.booking[i].name%></h5>
+                                                
+                                            </li>
+                                            <%}%>
+                                    <%}%>
+                                    
+                                    </ul>
                                 </div>
                             </div>
+                          
                         </div>
+                        <%}else{%>
+                            <%for(let i1 =0 ;i1<slots;i1++){%>
+                                <div style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                                    <div id="track_header" style="padding-top: 50px;">
+                                        <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
+                                    </div>
+                                    <div class="patient_tracking_display">
+                                        <%var last=0;%>
+                                        <ul id="patient-ul<%=i1%>">
+                                            <%for(u of user1.tracked){%>
+                                                <%var today = new Date();
+                                                var dd = String(today.getDate()).padStart(2, '0');
+                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                var yyyy = today.getFullYear();
+                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                var dayOfWeek = weekday[today.getDay()];%>
+                                                <%var today = u.createdAt;
+                                                var dd1= String(today.getDate()).padStart(2, '0');
+                                                var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                var yyyy1 = today.getFullYear();
+                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                var dayOfWeek = weekday[today.getDay()];%>
+                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                
+                                                <%if(str1 != str2 || u.slot != i1 ){%>
+                                                    <%continue;%>
+                                                <%}%>
+                                                
+                                                <li class="patient-li">
+                                                    <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
+                                                    <%last=u.seat%>
+                                                    <h5><%=u.name%></h5>
+                                                    <a class="displayNone uongoing<%=i1%>">Ongoing</a>
+                                                    <%if(u.status == 'Waiting'){%>
+                                                        <h2 class="b_red uwaiting<%=i1%>"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                        <h3 class="displayNone uvisited<%=i1%>"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>                                               
+                                                    <%}else{%>
+                                                        <h2 class="b_red uwaiting<%=i1%> displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
+                                                        <h3 class="uvisited<%=i1%>"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>
+                                                        <%}%>
+                                                    <%var date = u.time.toLocaleTimeString();
+                                                    var date1 = date.slice(0,4);
+                                                    var date2 = date.slice(8,10);%>
+                                                    <p>CheckIn Time : <%=date1%>&nbsp;<%=date2%></p>
+                                                </li>
+                                        <%}%>
+                                        
+                                        </ul>
+                                        <%if(last==0){%>
+                                            <div id="no_patient<%=i1%>">
+                                            <h1 class="text-center font-weight-bolder"style="font-size:2rem;color:black"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span>Doctor has not started seeing yet!</h1>
+                                            <h2 class="text-center font-weight-bolder"style="font-size:1.5rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
+                                            </div>
+                                            <%}%>
+                                        <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                                            <li class="nav-item" style="width: 100%;">
+                                                <a class="nav-link active" href="#upcoming-appointments" style="height: 70px !important;padding-top: 15px;font-size: 1.8rem;font-weight: bold;margin-bottom: 30px;" data-toggle="tab" >Upcoming Appointments</a>
+                                            </li>
+                                        </ul>
+                                        <div class="upcoming_patient_display">
+                                            <ul id="patient-ul<%=i1%>" class="upcoming-ul<%=i1%>">
+                                               <%var c=last;%>
+                                                <%for(let i = 0 ; i<user1.booking.length;i++){%>
+                                                    <%var today = new Date();
+                                                    var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                    <%var today = user1.booking[i].createdAt;
+                                                    var dd1= String(today.getDate()).padStart(2, '0');
+                                                    var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy1 = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                    <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                    <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                    
+                                                    <%if(str1 != str2 || user1.booking[i].slot != i1){%>
+                                                        <%continue;%>
+                                                    <%}%>
+        
+                                                    <%if(user1.booking[i].seat > c){%>
+                                                        <%var c1 = user1.booking[i].seat;%>
+                                                    <li class="patient-li upcoming-li<%=i1%>" data-index="<%=c1%>">
+                                                        <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
+                                                        <h5><%=user1.booking[i].name%></h5>
+                                                        
+                                                    </li>
+                                                    <%}%>
+                                            <%}%>
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                                <%}%>
+                                <%}%>
                         <%}%>
 
                     </div>
@@ -547,7 +1111,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -676,26 +1240,35 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Sticky Sidebar JS -->
-    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
     <!-- Circle Progress JS -->
-    <script src="js/circle-progress.min.js"></script>
+    <script src="/js/circle-progress.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/script.js"></script>
-    <script>
-        new PatientTracking('patient_track','<%=locals.user.phone%>');
-    </script>
+    <script src="/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="/js/tracking-engine.js"></script>
+    <script>  
+        var div = $(".patient_tracking_display");
+        div.scrollTop(div.prop('scrollHeight'));</script>
+         <script>
+            // $( "#patient-ul li a" ).last().removeClass( "displayNone" );
+            // $( "#patient-ul li h3" ).last().addClass( "displayNone" );
+            new PatientTracking('patient_track','<%=user._id%>','<%=user.name%>','<%=slots%>');
+    
+        </script>  
+    
 
-</body>
+</body> 
 
 <!-- doccure/doctor-dashboard  30 Nov 2019 04:12:09 GMT -->
 

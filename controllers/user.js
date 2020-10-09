@@ -368,6 +368,7 @@ module.exports.refund = async function(req, res) {
     try{
         console.log(req.body);
                 let user = await User.findById(req.body.doctorid);
+                let staff = await User.findById(user.staff_id);
                 let user1 = await User.findById(req.user.id);
                 
 
@@ -401,6 +402,13 @@ module.exports.refund = async function(req, res) {
                             '$set': {
                                 
                                 'patients.$.cancel': true
+                                
+                            }
+                        });
+                        let n3 = await User.update({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.body.index].payment_id }, {
+                            '$set': {
+                                
+                                'booking.$.cancel': true
                                 
                             }
                         });
@@ -605,6 +613,7 @@ module.exports.verifyPayment = async(req, res) => {
           });
 
           staff.booking.push({
+            payment_id:req.body.razorpay_payment_id,
             name:req.query.name,
             address:req.query.address,
             phone:req.query.phone,
@@ -657,6 +666,7 @@ module.exports.verifyPayment = async(req, res) => {
           });
 
           staff.booking.push({
+            payment_id:req.body.razorpay_payment_id,
             name:req.query.name,
             address:req.query.address,
             phone:req.query.phone,
@@ -772,6 +782,7 @@ module.exports.verifyPayment = async(req, res) => {
           });
           
           staff.booking.push({
+            payment_id:req.body.razorpay_payment_id,
             name:req.query.name,
             address:req.query.address,
             phone:req.query.phone,
@@ -822,6 +833,7 @@ module.exports.verifyPayment = async(req, res) => {
           });
 
           staff.booking.push({
+            payment_id:req.body.razorpay_payment_id,
             name:req.query.name,
             address:req.query.address,
             phone:req.query.phone,
@@ -1240,6 +1252,7 @@ module.exports.offlinePay = async (req, res) => {
             time:req.body.time,
             date:req.body.date,
             day:req.body.day,
+            slot:req.body.slotindex,
             fee:req.body.fee,
             seat:b
         });

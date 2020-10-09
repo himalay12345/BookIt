@@ -160,7 +160,7 @@ module.exports.booking = async(req, res) => {
                     temp.booked = [0,0];
                 }
             }
-        }
+        
 
 
 
@@ -581,12 +581,38 @@ module.exports.pay = async(req, res) => {
 }
 
 module.exports.patientTracking = async(req, res) => {
-    // let user = await User.findById(req.user.id);
-    
-    return res.render('patient-tracking', {
-        title: 'Track patients',
+
+    if(req.user.type == 'Staff')
+    {
+        let user = await User.findById(req.user.id).populate({
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        });
         
-    })
+        return res.render('patient-tracking', {
+            title: 'Track patients',
+            user1:user
+            
+        })
+    }
+
+    else{
+        let user = await User.findById(req.query.id).populate({
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        });
+
+        
+        return res.render('patient-tracking', {
+            title: 'Track patients',
+            user1:user
+            
+        })
+    }
 }
 
 module.exports.patientProfile = async(req, res) => {
