@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/  30 Nov 2019 04:11:34 GMT -->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Doccure</title>
+
+    <!-- Favicons-->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar navbar-expand-lg header-nav">
+                <div id="stylenavbar">
+                    <div class="navbar-header">
+                        <a id="mobile_btn" href="javascript:void(0);">
+                            <span class="bar-icon">
+								<span></span>
+                            <span></span>
+                            <span></span>
+                            </span>
+                        </a>
+                        <a href="/" class="navbar-brand logo">
+                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
+                        </a>
+
+                    </div>
+                    <div class="main-menu-wrapper">
+                        <div class="menu-header">
+                            <a href="/" class="menu-logo">
+                                <img src="/img/logo.png" class="img-fluid" alt="Logo">
+                            </a>
+                            <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </div>
+                        <ul class="main-nav">
+                            <li class="active" style="display: none;">
+                                <a href="index" style="font-size: 1.5rem;">Home</a>
+
+                            </li>
+                            <li class="mdlist">
+                                <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
+                                <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
+                            </li>
+
+                            <li class="smlist" style="display: none;">
+                                <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
+                            </li>
+                            <li class="smlist" style="display: none;">
+                                <a><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
+                            </li>
+                            <li class="smlist" style="display: none;">
+                                <a><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
+                            </li>
+
+                            <li class="mdlist">
+                                <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Consult</a>
+                                <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Consult with best doctors</a>
+                            </li>
+                            <li class="mdlist">
+                                <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Diagonistics</a>
+                                <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book tests and checkups</a>
+                            </li>
+
+
+
+
+                            <li class="has-submenu" style="display: none;">
+                                <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
+                                <ul class="submenu">
+                                    <li><a href="/voice-call">Voice Call</a></li>
+                                    <li><a href="/video-call">Video Call</a></li>
+                                    <li><a href="/consult">consult</a></li>
+                                    <li><a href="/search">Search Doctors</a></li>
+                                    <li><a href="/calendar">Calendar</a></li>
+                                    <li><a href="/components">Components</a></li>
+                                    <li class="has-submenu">
+                                        <a href="invoices">Invoices</a>
+                                        <ul class="submenu">
+                                            <li><a href="/invoices">Invoices</a></li>
+                                            <li><a href="/invoice-view">Invoice View</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="/blank-page">Starter Page</a></li>
+                                    <li><a href="/login">Login</a></li>
+                                    <li><a href="/register">Register</a></li>
+                                    <li><a href="/forgot-password">Forgot Password</a></li>
+                                </ul>
+                            </li>
+
+                            <%if(locals.user){%>
+
+
+                                <%}else{%>
+                                    <li class="login-link">
+                                        <a href="/login">Login / Signup</a>
+                                    </li>
+                                    <%}%>
+                        </ul>
+                    </div>
+                    <ul class="nav header-navbar-rht">
+                        <li class="nav-item contact-item">
+                            <div class="header-contact-img">
+                                <i class="far fa-hospital"></i>
+                            </div>
+                            <div class="header-contact-detail">
+                                <p class="contact-header">Contact</p>
+                                <p class="contact-info-header"> +1 315 369 5943</p>
+                            </div>
+                        </li>
+                        <%if(locals.user){%>
+
+                            <%}else{%>
+                                <li class="nav-item">
+                                    <a class="nav-link header-login" href="/login">Login </a>
+                                </li>
+                                <%}%>
+                    </ul>
+                    <%if(locals.user){%>
+                        <ul class="nav user-menu mt-md-3">
+
+                            <!-- Notifications -->
+                            <li class="nav-item dropdown noti-dropdown bell">
+                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <i class="far fa-bell" style="color: black; "></i> <span class="badge badge-pill">1</span>
+                                </a>
+                                <div class="dropdown-menu notifications">
+                                    <div class="topnav-dropdown-header">
+                                        <span class="notification-title">Notifications</span>
+                                        <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                                    </div>
+                                    <div class="noti-content" style="padding-top:10px ;">
+                                        <ul class="notification-list">
+                                            <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
+
+                                                <li class="notification-message">
+                                                    <a href="#">
+                                                        <div class="media">
+                                                            <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
+                                                    </span>
+                                                            <div class="media-body chng">
+                                                                <a href="/doctor-terms-and-condition">
+                                                                    <p class="noti-details"><span class="noti-title"></span>
+                                                                        <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                    </p>
+                                                                </a>
+                                                                <p class="noti-time chng-time"><span class="notification-time">6 mins ago</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                <%}%>
+                                                    <%for(let i = patient.notification.length-1;i>=0;i--){%>
+                                                        <li class="notification-message">
+                                                            <a href="/doctor-profile/?id=<%=patient.notification[i].did._id%>">
+                                                                <div class="media">
+                                                                    <span class="avatar avatar-sm">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=patient.notification[i].did.avatar%>">
+                                                    </span>
+                                                                    <div class="media-body">
+                                                                        <p class="noti-details"><span class="noti-title"><%=patient.notification[i].message%></p>
+                                                        <%var a = patient.notification[i].createdAt.toLocaleTimeString();%>
+                                                        <%var b = (new Date()).toLocaleTimeString();%>
+                                                        <%var c = b-a;%>
+                                                    <p class="noti-time"><span class="notification-time"><%=c%> mins ago</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <%}%>
+
+                                        </ul>
+                                    </div>
+                                    <div class="topnav-dropdown-footer">
+                                        <a href="#">View all Notifications</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- /Notifications -->
+
+                            <!-- User Menu -->
+                            <%if(locals.user.type == 'Doctor'){%>
+                                <li class="nav-item dropdown has-arrow">
+                                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" width="31" alt="Ryan Taylor"></span>
+                                    </a>
+                                    <div class="dropdown-menu profile-drop">
+                                        <div class="user-header">
+                                            <div class="avatar avatar-sm">
+                                                <img src="<%=locals.user.avatar%>" onerror='this.src="/img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
+                                            </div>
+                                            <div class="user-text">
+                                                <h6>Dr.
+                                                    <%=locals.user.name%>
+                                                </h6>
+                                                <p class="text-muted mb-0">Doctor</p>
+                                            </div>
+                                        </div>
+                                        <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
+                                        <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                        <a class="dropdown-item" href="/chat">Messages</a>
+                                        <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+                                        <a class="dropdown-item" href="/appointments">Appointments</a>
+                                        <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                        <a class="dropdown-item" href="/invoices">Invoices</a>
+                                        <a class="dropdown-item" href="/review">Review</a>
+
+
+                                        <a class="dropdown-item" href="/settings">Settings</a>
+                                        <a class="dropdown-item" href="/user/logout">Logout</a>
+                                    </div>
+                                </li>
+                                <%}%>
+                                    <%if(locals.user.type == 'Patient'){%>
+                                        <li class="nav-item dropdown has-arrow">
+                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
+                                            </a>
+                                            <div class="dropdown-menu profile-drop">
+                                                <div class="user-header">
+                                                    <div class="avatar avatar-sm">
+                                                        <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
+                                                    </div>
+                                                    <div class="user-text">
+                                                        <h6>
+                                                            <%=locals.user.name%>
+                                                        </h6>
+                                                        <p class="text-muted mb-0">Patient</p>
+                                                    </div>
+                                                </div>
+
+                                                <a class="dropdown-item" href="/profile-settings">My Profile</a>
+                                                <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
+                                                <a class="dropdown-item" href="/prescription">My Prescriptions</a>
+                                                <a class="dropdown-item" href="/medical-records">My Medical records</a>
+                                                <a class="dropdown-item" href="/my-billing">My Billings</a>
+                                                <a class="dropdown-item" href="/favourites">My Favourites</a>
+                                                <a class="dropdown-item" href="/other-patients">Other Patient Appointment</a>
+                                                <a class="dropdown-item" href="/chat">Messages</a>
+
+                                                <a class="dropdown-item" href="/settings">Settings</a>
+                                                <a class="dropdown-item" href="/user/logout">Logout</a>
+                                            </div>
+                                        </li>
+                                        <%}%>
+
+                                            <!-- /User Menu -->
+
+                        </ul>
+                        <%}%>
+
+                            <!-- <%if(locals.user){%>
+                    <%if(locals.user.type == 'Doctor'){%>
+                        <div class="hideinphone" style="margin-left: 25px;">
+                            <ul class="main-nav amain-nav">
+
+                                        <li class="has-submenu ahas-submenu">
+                                            <a href="#">
+                                                <span class="user-img">
+                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                            </span>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </a>
+
+                                    <ul class="submenu asubmenun phoneul">
+                                        <li><a href="/doctor-dashboard">My Dashboard</a></li>
+                                        <li><a href="/appointments">Appointments</a></li>
+                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
+                                        <li><a href="/chat-doctor">Chat</a></li>
+                                        
+                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
+                                        
+                                        <li><a href="/user/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    <%}%>
+                <%if(locals.user.type == 'Patient'){%>
+                    <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
+                        <ul class="main-nav amain-nav">
+                            <li class="has-submenu ahas-submenu">
+                                <a href="#">
+                                    <span class="user-img">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                    </span>
+                               
+                    <%}%>
+                <%}%> -->
+                </div>
+            </nav>
+        </header>
+        <!-- /Header -->
+        <section class="laptop-blood">
+            <div class=" col-md-12 lip-search" style=" height: 100px; border-bottom: 1px solid black;">
+                <div class="col-md-8" style="border: 1px solid black; height: 50px; margin-top: 35px;position: relative; display: inline-flex;">
+                    <div class="col-md-4" style="height: 100%;">
+                        <input type="text" placeholder="enter the city name" style="padding: 10px;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 lipid-nav" style="display: inline-flex;top: 6px;
+                    left: 38px;">
+                            <p class="lip-dig underline-on-hover" style="cursor: pointer; "><a href="/" style="color: #b4b4be;">Doccure</a></p>
+                            <p><span><i class="fa fa-chevron-right"  style="padding-left: 6px; padding-top: 2px; color: #b4b4be;" aria-hidden="true"></i></span>
+                                <span class=" lip-Dig underline-on-hover" style="cursor: pointer; "><a href="/" style="color: #b4b4be;">Diagonistics</a></span>
+                            </p>
+                            <p><span><i class="fa fa-chevron-right"  style="padding-left: 6px; padding-top: 2px; color: #b4b4be;" aria-hidden="true"></i></span>
+                                <span style="color: #b4b4be;">Test</span>
+                            </p>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="height: 600px; display:inline-flex">
+                        <div class="col-md-3" style=" height:35%; left: 20px;">
+                            <a href="/"><img src="/img/patients/health2.jfif" style="width: 100%;height: 100%;"></a>
+
+                        </div>
+                        <div class="col-md-5" style="height: 100%; left: 20px">
+                            <div class="lip-heading">
+                                <h2>Blood Profile Test</h2>
+                                <p>Also known as Blood Test</p>
+                            </div>
+                            <div class="certi" style="display: inline-flex;">
+                                <div class="certi-logo" style="margin-left: -4px;">
+                                    <img src="/img/patients/certi2.png" style="height: 37px;">
+                                </div>
+                                <div class="certi-heading">
+                                    <h4 style="font-weight: 800; margin-top: 11px; margin-left: 6px;">Certified Labs</h4>
+                                </div>
+                            </div>
+                            <div class="lip-sec" style="margin-left: -42px;">
+                                <ul class="lip-ul" style="list-style:none">
+                                    <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span> <span style="line-height: 30px; margin-left:10px;">Free Home Sample Pickup
+                            </span</li>
+                            <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> E-Reports on next day
+                            </span</li>
+                            <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> 100% Secured with Accuracy
+                            </span</li>                    
+                        </ul>
+                    </div>
+                    <div class=" col-md-12 lip-block" style="height: 60px;position: relative; display: inline-flex; border-top: 1px solid black; border-bottom: 1px solid black;">
+                        <div class="lips-price" style="margin-left: -7px;" >
+                            <h3 style="margin-top: 13px;margin-left: 0px;">₹ 400</h3>
+                            <p style="margin-top:-12px; margin-left:-2px"><span style="margin-left: 2px; color: #558B2F">+</span><span style="color: #558B2F">10% Health Cashback*</span> </p>
+                            </div>
+                            <div class="lip-add" style="border: 1px solid black; height: 39px;width: 109px;left: 303px;
+                    margin-top: 13px;
+                    border-radius: 3px;position: absolute;">
+                                <h4 style="text-align: center; padding-top: 7px;">Add Cart</h4>
+
+                            </div>
+                            <div class="lip-add" style="border: 1px solid #fff; position: absolute; height: 39px;width: 116px; left: 422px;
+                    margin-top: 13px;
+                    border-radius: 3px;
+                    background-color: #4DD0E1">
+                                <h4 style="text-align: center; padding-top: 7px;color: white;
+                        font-weight: 800; color: #fff; cursor: pointer;">Book Now</h4>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
+                            <div class="imgs">
+                                <img src="/img/patients/first1.jfif" style="height: 45px; width: 40px;">
+                            </div>
+                            <div class="imgs-heading" style="margin-left: 15px;">
+                                <h4 style="font-weight: 800;"> Home sample collection for FREE</h4>
+                                <p style="font-weight: 400;line-height: 17px;
+                        margin-top: -6px;">A certified professional will collect your sample from a location of your preference.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
+                            <div class="imgs">
+                                <img src="/img/patients/e12.png" style="height: 45px; width: 40px;">
+                            </div>
+                            <div class="imgs-heading" style="margin-left: 15px;">
+                                <h4 style="font-weight: 800;">
+                                    Digital reports</h4>
+                                <p style="font-weight: 400;line-height: 17px;
+                        margin-top: -6px;">Access your reports anytime on your Practo account. We will email you a copy.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
+                            <div class="imgs">
+                                <img src="/img/patients/offer.jpg" style="height: 45px; width: 40px;">
+                            </div>
+                            <div class="imgs-heading" style="margin-left: 15px;">
+                                <h4 style="font-weight: 800;">
+                                    Offers and affordable prices</h4>
+                                <p style="font-weight: 400;line-height: 17px;
+                        margin-top: -6px;">Get great discounts and offers on tests and packages</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="col-md-2" style="height: 60%; margin-left:40px;border: 1px solid black;left: 28px position:relative;">
+                        <div class=" col-md-12 cart-added" style="position: absolute; top: 20px; border-bottom: 1px solid #BDBDBD; left: 1px;">
+                            <h3 style="margin-left: 6px; font-weight: 700;">Your Cart</h3>
+                        </div>
+
+                        <div class="lipid-rs" style="display: inline-flex; position: absolute; top: 66px;">
+                            <p style="margin-left: -9px;"> Blood Test
+                            </p>
+                            <p style="margin-left: 50px;"><span>₹ 400</span> <span style="margin-left:5px;"><i class="fa fa-times" aria-hidden="true"></i></span></p>
+
+                        </div>
+                        <div class="col-md-12 coupan" style="height: 50px; width: 100%; border: 1px dashed black; top: 100px; display: inline-flex;">
+                            <div class="gift-image" style="height: 30px; width: 30px; margin-top: 9px;">
+                                <img src="/img/patients/gift.png" style="height: 30px;">
+
+                            </div>
+                            <div class="apply" style="margin-left: 8px; margin-top: 13px;">
+                                <h4 style="font-weight: 700;">Apply Coupan </h4>
+                            </div>
+                            <div style="">
+                                <span style="right: 10px;position: absolute;margin-top: 11px; font-size: 21px;"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                            </div>
+
+
+                        </div>
+                        <div style="display: inline-flex; top: 108px;position: relative;">
+                            <p style="font-weight: 600;">Picking charges</p>
+                            <p style="position: absolute;
+                    right: -100px;">₹ 0</p>
+                        </div>
+                        <div style="position: absolute; top:182px;">
+                            <p style="line-height: 17px;
+                    font-size: 12px;">Free home sample collection for orders above ₹ 400</p>
+                        </div>
+                        <div class="col-md-10 price-total" style="position: absolute;background-color: #BDBDBD;height: 42px; right:20px;bottom: 88px; border-radius: 3px; display: inline-flex;">
+                            <div class="col-md-2" style="justify-content: space-between; display: inline-flex;">
+                                <h4 style="margin-left: -24px;
+                        margin-top: 7px; font-weight: 700;">Total</h4>
+                                <h4 style="margin-left: 110px;
+                        margin-top: 10px; font-weight: 700;"><span style="margin-left: -5px;">₹</span><span style="margin-left: 5px;">400</span></h4>
+                            </div>
+
+                        </div>
+                        <div class="col-md-10 price-total" style="position: absolute; cursor: pointer; background-color: green;height: 42px; right:20px;bottom: 25px; border-radius: 3px;">
+                            <h4 style="text-align: center; margin-top: 10px; font-weight: 700; color: #fff;">Procced to Checkout</h4>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-12 about-lipid" style="height: auto ">
+                    <div class="col-md-5" style="margin-left: auto; margin-right: auto;padding-left: 0px; height: 100%;">
+                        <div class="col-md-12 test-des" style="border-bottom: 1px solid; border-top: 1px solid; position: relative; padding-top: 14px;">
+                            <div onclick="show(0)">
+                                <h3><span>What is test?</span>
+                                    <span style="position: absolute; right: 26px;cursor: pointer;"><i class=" fa fa-angle-down " id="down"  aria-hidden="true "></i>
+                            <i class="fa fa-angle-up displayNone " id="up" aria-hidden="true "></i></span>
+                                </h3>
+                                <div class="displayNone" id="test">
+                                    <p>This test helps to diagnose enteric fever or typhoid fever caused by microorganisms like Salmonella typhi, Salmonella paratyphi A, B, C. In this test, the blood of an individual reacts with the Salmonella antigens on
+                                        slide and forms agglutination (clumping) or not.</p>
+
+                                    <h4>Test parameters:</h4>
+                                    <p>
+                                        This test is performed to check the presence of Salmonella species antibodies in the blood. It also helps to diagnose enteric fever or typhoid fever caused by microorganisms like Salmonella typhi, Salmonella paratyphi A, B, C. The doctor may ask you to
+                                        undergo this test if you are suffering from symptoms like fever, weakness, headache, loss of appetite, rose-colored spots, pain in abdomen, chills, nausea or vomiting, constipation, muscle weakness, or skin rash,
+                                        etc. This test may be recommended for patients those who are undergoing treatment for typhoid or paratyphoid fever to assess the effectiveness of the treatment. If you have been diagnosed with typhoid or paratyphoid
+                                        fever, your doctor may advise you to get this test done once in every 2 weeks based on your clinical condition.
+                                    </p>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-12 test-prep " style="border-bottom: 1px solid rgb(141, 125, 125); position: relative; padding-top: 14px; ">
+                            <div onclick="show(1)">
+                                <h3><span> Test Preparation</span>
+                                    <span style="position: absolute; right: 26px;cursor: pointer; "><i class="fa fa-angle-down " id="down"  aria-hidden="true "></i>
+                            <i class="fa fa-angle-up displayNone" id="up"  aria-hidden="true "></i></span>
+                                </h3>
+                                <div class="displayNone" id="prep">
+                                    <p>
+                                        This test is performed to check the presence of Salmonella species antibodies in the blood. It also helps to diagnose enteric fever or typhoid fever caused by microorganisms like Salmonella typhi, Salmonella paratyphi A, B, C. The doctor may ask you to
+                                        undergo this test if you are suffering from symptoms like fever, weakness, headache, loss of appetite, rose-colored spots, pain in abdomen, chills, nausea or vomiting, constipation, muscle weakness, or skin rash,
+                                        etc. This test may be recommended for patients those who are undergoing treatment for typhoid or paratyphoid fever to assess the effectiveness of the treatment. If you have been diagnosed with typhoid or paratyphoid
+                                        fever, your doctor may advise you to get this test done once in every 2 weeks based on your clinical condition.</p>
+
+                                    <p><strong> Precautions:</strong> Some medications may change the test results and hence, you are advised to inform all your current medications to the doctor prior to the test. Also known as Widal Serological Test Slide
+                                        Test Blood, Widal Serological Test Slide Test.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 test-result " style="border-bottom: 1px solid rgb(141, 125, 125); position: relative; padding-top: 14px; ">
+                            <div onclick="show(2)">
+                                <h3><span> Understanding of Test result</span>
+                                    <span style="position: absolute; right: 26px;cursor: pointer; "><i class="fa fa-angle-down " id="down" aria-hidden="true "></i>
+                            <i class="fa fa-angle-up displayNone " id="up" aria-hidden="true "></i></span>
+                                </h3>
+                                <div class="displayNone" id="result">
+                                    <p>
+                                        If the test results are negative, it may indicate that there is no infection caused by Salmonella species. In case the test results are positive, it may indicate that there may be a chance for infection caused by Salmonella species and you may consult
+                                        with your doctor.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <section>
+                <div>
+                    <div class="Header-checkup " style="margin-left: 83px; margin-top: 20px ">
+                        <h2 style="font-weight: 700; ">Popular Health Checkup Packages</h2>
+                    </div>
+                    <div class="second-heading " style="display: inline-flex; margin-left: 83px;margin-top: 12px; margin-bottom: 25px; ">
+                        <ul style="list-style: none; display: inline-flex;">
+                            <a>
+                                <li class="active-popular1" id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Featured Checkup</li>
+                            </a>
+
+                            <a>
+                                <li class="active-popular" id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Diabetes Care</li>
+                            </a>
+                            <a>
+                                <li class="active-popular" id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Women's Care</li>
+                            </a>
+                            <a>
+                                <li class="active-popular" id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                    Men's Health</li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider" id="div1" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 699
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 3399
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 1899
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider displayNone" id="div2" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 699
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 3399
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 1899
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider displayNone" id="div3" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 699
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 3399
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 1899
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doctor-slider slider ccdoctorslider displayNone" id="div4" style="padding-left: 90px; padding-right: 90px;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged for all Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 2999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Young Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 699
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">114 test Included</p>
+                                </div>
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 3399
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/health3.jfif" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured">Active Professional Health Checkup</h3>
+                                <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">100 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 899
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+            border-top-right-radius: 9px;">
+                            <div class="featured-img" style="height: 40%;">
+                                <a href="/"><img src="/img/patients/health2.jpg" style="width: 100%;height: 100%;"></a>
+                            </div>
+                            <div class="featured-para" style="height: 20%;">
+                                <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                                <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                            </div>
+                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                                <div class="test-number">
+                                    <p class="included-test">60 test Included</p>
+                                </div>
+
+                            </div>
+                            <div class="featured-last" style="height:25% ; position: relative;">
+                                <span class="health-price">
+                        ₹ 3999
+                    </span>
+                                <a class="health-book">
+                                    <span class="books-health">Book Now</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer ">
+
+                <!-- Footer Top -->
+                <div class="footer-top ">
+                    <div class="container-fluid ">
+                        <div class="row ">
+                            <div class="col-lg-3 col-md-6 ">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-about ">
+                                    <div class="footer-logo ">
+                                        <img src="/img/footer-logo.png " alt="logo ">
+                                    </div>
+                                    <div class="footer-about-content ">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                        <div class="social-icon ">
+                                            <ul>
+                                                <li>
+                                                    <a href="# " target="_blank "><i class="fab fa-facebook-f "></i> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="# " target="_blank "><i class="fab fa-twitter "></i> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="# " target="_blank "><i class="fab fa-linkedin-in "></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="# " target="_blank "><i class="fab fa-instagram "></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="# " target="_blank "><i class="fab fa-dribbble "></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 ">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-menu ">
+                                    <h2 class="footer-title ">For Patients</h2>
+                                    <ul>
+                                        <li><a href="/search "><i class="fas fa-angle-double-right "></i> Search for Doctors</a></li>
+                                        <li><a href="/login "><i class="fas fa-angle-double-right "></i> Login</a></li>
+                                        <li><a href="/register "><i class="fas fa-angle-double-right "></i> Register</a></li>
+                                        <li><a href="/booking "><i class="fas fa-angle-double-right "></i> Booking</a></li>
+                                        <li><a href="/patient-dashboard "><i class="fas fa-angle-double-right "></i> Patient Dashboard</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 ">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-menu ">
+                                    <h2 class="footer-title ">For Doctors</h2>
+                                    <ul>
+                                        <li><a href="/appointments "><i class="fas fa-angle-double-right "></i> Appointments</a></li>
+                                        <li><a href="/chat "><i class="fas fa-angle-double-right "></i> Chat</a></li>
+                                        <li><a href="/login "><i class="fas fa-angle-double-right "></i> Login</a></li>
+                                        <li><a href="/doctor-register "><i class="fas fa-angle-double-right "></i> Register</a></li>
+                                        <li><a href="/doctor-dashboard "><i class="fas fa-angle-double-right "></i> Doctor Dashboard</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 ">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-contact ">
+                                    <h2 class="footer-title ">Contact Us</h2>
+                                    <div class="footer-contact-info ">
+                                        <div class="footer-address ">
+                                            <span><i class="fas fa-map-marker-alt "></i></span>
+                                            <p> 3556 Beech Street, San Francisco,<br> California, CA 94158 </p>
+                                        </div>
+                                        <p>
+                                            <i class="fas fa-phone-alt "></i> +1 315 369 5943
+                                        </p>
+                                        <p class="mb-0 ">
+                                            <i class="fas fa-envelope "></i> doccure@example.com
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /Footer Top -->
+
+                <!-- Footer Bottom -->
+                <div class="footer-bottom ">
+                    <div class="container-fluid ">
+
+                        <!-- Copyright -->
+                        <div class="copyright ">
+                            <div class="row ">
+                                <div class="col-md-6 col-lg-6 ">
+                                    <div class="copyright-text ">
+                                        <p class="mb-0 "><a href="templateshub.net ">Templates Hub</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 ">
+
+                                    <!-- Copyright Menu -->
+                                    <div class="copyright-menu ">
+                                        <ul class="policy-menu ">
+                                            <li><a href="/term-condition ">Terms and Conditions</a></li>
+                                            <li><a href="/privacy-policy ">Policy</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /Copyright Menu -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Copyright -->
+
+                    </div>
+                </div>
+                <!-- /Footer Bottom -->
+
+            </footer>
+            <!-- /Footer -->
+
+    </div>
+    </section>
+    <section class="mobile-blood">
+        <div class=" Pregnancy" style="height: 200px; margin-top:3px;background-size: cover; position: relative; margin-bottom: 31px;background-image:linear-gradient(transparent,95%,white) ,url('/img/patients/blood1.jpg');">
+
+            <div class="pric-health" style="    
+            margin-top: -3px;
+            margin-left: -17px;
+            font-family: unset;
+            font-weight: 700;
+            height: 23px;
+            width: 61px;
+            position: absolute;
+            left: 0.875rem;
+            border-radius: 5px;
+            bottom: -15px;
+            left: 28px;
+            ">
+                <p class="price-healths" style="color:grey;text-decoration: line-through;"> ₹ 300</p>
+            </div>
+            <div class="pric-health" style="    
+            margin-top: -3px;
+            margin-left: -17px;
+            font-family: unset;
+            font-weight: 700;
+            height: 23px;
+            width: 61px;
+            position: absolute;
+            left: 0.875rem;
+            border-radius: 5px;
+            bottom: -15px;
+            left: 91px;
+            background-color: #B94085;">
+                <p class="price-healths"> ₹ 200</p>
+            </div>
+
+        </div>
+        <div class="Pregnancy" style="margin-bottom: 17px;">
+            <h3 style="margin-left: 8px;
+            font-weight: 700;">Blood Test</h3>
+        </div>
+        <div class="col-sm-12 test-type" style="display: inline-flex;">
+            <div class="col-sm-4" style="display:inline-flex">
+                <div class="col-sm-2" style="height: 54px;
+                width: 54px; border-radius: 7px; background-image: url('/img/patients/p3.png'); background-size: cover; background-color:#a93e65;">
+
+                </div>
+                <div class="col-sm-1" style="width: 117px; margin-left: -4px;">
+                    <p style="line-height: 17px;"><span style="font-weight: 800;
+                        font-size: 19px;
+                        margin-left: 1px;">1</span><span style="margin-left: 3px;">Test Included</span></p>
+                </div>
+
+            </div>
+            <div class="col-sm-4" style="display:inline-flex; margin-left: -70px;">
+                <div class="col-sm-2" style="height: 54px;
+                width: 54px; border-radius: 7px; background-image: url('/img/patients/p5.jpg'); background-size: cover; background-color:#a93e65;">
+
+                </div>
+                <div class="col-sm-1" style="width: 100px;">
+                    <p style="line-height: 17px;"><span style="font-weight: 800;
+                        font-size: 19px;
+                        margin-left: 1px;">100+</span><span style="margin-left: 3px;">Booked in 10 Last Days </span></p>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div style="margin-left: 3px; margin-top: 12px;">
+            <h3 style="font-weight: 600; margin-left: 7px;"> This package covers</h3>
+            <ul style="font-family: system-ui;
+            font-weight: 500;">
+                <li>Measurment:Complete Blood Count</li>
+                <li>Nutrient tests for levels of vital nutrients such as iron or vit B.</li>
+            </ul>
+        </div>
+
+        <div style="background-color: #EEEEEE;">
+            <div class="col-sm-12">
+                <h3 style="text-align: center;
+                padding-top: 15px;
+                font-size: 1.125rem;
+            ">Why should you choose this Package?</h3>
+            </div>
+
+
+
+            <div class="col-sm-12" style="display: inline-flex; height: 200px;margin-top: 15px;">
+
+                <div class="col-sm-6">
+                    <img src="/img/patients/v.jpg" style="height: 70px; width: 70px; border-radius: 0.6rem;;">
+                    <p style="font-size: 0.875rem;
+                    margin-top: 8px;">if your a male above 18 years of age.</p>
+                </div>
+                <div class="col-sm-6">
+                    <img src="/img/patients/v1.jpg" style="height:70px; width:70px; border-radius: 0.6rem;;">
+                    <p style="font-size: 0.875rem;
+                    margin-top: 8px;"> To help evaluate lifestyle changes and health risks.</p>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-12">
+            <div class="col-sm-12 last" style="border: 1px solid #BDBDBD;
+            margin-bottom: 8px;
+            border-radius: 0.6rem;;
+            margin-top: 16px;">
+                <div style="display: inline-flex;margin-top: 18px;height: auto;">
+                    <div class=" col-sm-4 ">
+                        <img src="/img/patients/l3.png " style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
+                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Sample Pickup at home</p>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <img src="/img/patients/l1.jpg " style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
+                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Online reports in 24-48 hours</p>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <img src="/img/patients/l2.png " style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
+                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Reports analysis by top doctors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 text-center position-sticky" style="bottom:0px">
+            <a class="btn" style="text-align: center;padding: 8px;background-color: #FF5722;margin-top: 18px; border-radius:27px;color:white;margin-bottom: 20px;width:186px; ">
+               Book Now
+            </a>
+
+        </div>
+
+    </section>
+    <!-- /Main Wrapper -->
+    <script>
+        function show(count) {
+            var up = document.querySelectorAll("#up");
+            var down = document.querySelectorAll("#down");
+            var test = document.getElementById("test");
+            var prep = document.getElementById("prep");
+            var result = document.getElementById("result");
+
+            if (count == 0) {
+                test.classList.toggle('displayNone');
+                down[count].classList.toggle('displayNone');
+                up[count].classList.toggle('displayNone');
+
+            }
+            if (count == 1) {
+                prep.classList.toggle('displayNone');
+                down[count].classList.toggle('displayNone');
+                up[count].classList.toggle('displayNone');
+            }
+            if (count == 2) {
+                result.classList.toggle('displayNone');
+                down[count].classList.toggle('displayNone');
+                up[count].classList.toggle('displayNone');
+
+            }
+        }
+
+        function hide(count) {
+
+
+            var up = document.querySelectorAll("#up");
+            var down = document.querySelectorAll("#down");
+            var test = document.getElementById("test");
+            var prep = document.getElementById("prep");
+            var result = document.getElementById("result");
+
+            if (count == 0) {
+                test.classList.add('displayNone');
+                up[count].classList.add('displayNone');
+                down[count].classList.remove('displayNone');
+
+            }
+            if (count == 1) {
+                prep.classList.add('displayNone');
+                up[count].classList.add('displayNone');
+                down[count].classList.remove('displayNone');
+
+            }
+            if (count == 2) {
+                result.classList.add('displayNone');
+                up[count].classList.add('displayNone');
+                down[count].classList.remove('displayNone');
+            }
+
+
+
+        }
+    </script>
+    <script>
+        function changeDiv(count) {
+            var div1 = document.getElementById('div1');
+            var div2 = document.getElementById('div2');
+            var div3 = document.getElementById('div3');
+            var div4 = document.getElementById('div4');
+
+            var featured = document.getElementById('featured');
+            var diabetes = document.getElementById('Diabetes');
+            var women = document.getElementById('women');
+            var mens = document.getElementById('mens');
+
+
+            if (count == 1) {
+                div1.classList.remove('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.add('displayNone');
+                featured.classList.add('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+
+            }
+            if (count == 2) {
+                div1.classList.add('displayNone');
+                div2.classList.remove('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.add('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.add('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+            }
+            if (count == 3) {
+                div1.classList.add('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.remove('displayNone');
+                div4.classList.add('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.add('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+            }
+            if (count == 4) {
+                div1.classList.add('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.remove('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.add('active-popular1');
+
+            }
+
+
+        }
+    </script>
+
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js "></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="/js/popper.min.js "></script>
+    <script src="/js/bootstrap.min.js "></script>
+
+    <!-- Slick JS -->
+    <script src="/js/slick.js "></script>
+
+    <!-- Custom JS -->
+    <script src="/js/script1.js "></script>
+    <script src="/js/script.js "></script>
+
+
+
+</body>
+
+<!-- doccure/  30 Nov 2019 04:11:53 GMT -->
+
+</html>

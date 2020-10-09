@@ -1,8 +1,24 @@
 const User = require('../models/user');
+const Test = require('../models/test');
 
 module.exports.appointmentList = (req, res) => {
     return res.render('a-appointment-list', {
         title: 'Appointment List'
+    })
+}
+module.exports.test = async(req, res) => {
+    let tests = await Test.find({});
+    return res.render('a-test', {
+        tests: tests,
+        title: 'Test'
+    })
+}
+module.exports.addtest = async(req, res) => {
+
+
+    return res.render('a-addtest', {
+
+        title: 'Add Test'
     })
 }
 module.exports.applicationRequest = async(req, res) => {
@@ -12,20 +28,51 @@ module.exports.applicationRequest = async(req, res) => {
         user: user
     })
 }
+
+module.exports.atest = async function(req, res) {
+
+    try {
+        // let test = await User.findById(req.user.id);
+        Test.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let test = await Test.create({
+                testname: req.body.testname,
+                testprice: req.body.testprice
+
+            });
+
+            let newPath = Test.avatarPath + '/' + req.file.filename;
+            test.testavatar = newPath;
+
+            test.save();
+            console.log(test);
+            req.flash('success', 'Test Added Successfully');
+            return res.redirect('back');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
 module.exports.approveDocuments = async(req, res) => {
     let users = await User.findById(req.body.id);
     let user = await User.find({ step4: true });
     users.approve1 = true;
     users.save();
-    if(users.approve2 == true)
-    {
+    if (users.approve2 == true) {
         return res.render('a-application-request', {
             title: 'Application Request',
             user: user
         })
-    }
-
-    else{
+    } else {
         return res.render('a-profile', {
             title: 'Profile',
             user: users
@@ -37,34 +84,29 @@ module.exports.approveBank = async(req, res) => {
     let users = await User.findById(req.body.id);
     let user = await User.find({ step4: true });
 
-    if(req.body.accountid == req.body.reaccountid)
-    {
+    if (req.body.accountid == req.body.reaccountid) {
         users.accountid = req.body.accountid;
         users.approve2 = true;
         users.save();
-        if(users.approve1 == true)
-        {
+        if (users.approve1 == true) {
             return res.render('a-application-request', {
                 title: 'Application Request',
                 user: user
             })
-        }
-
-        else{
+        } else {
             return res.render('a-profile', {
                 title: 'Profile',
                 user: users
             })
         }
-     }
-     else{
+    } else {
         req.flash('error', 'AccountId Donot match');
         return res.render('a-profile', {
             title: 'Profile',
             user: users
         })
-     }
-    
+    }
+
 }
 module.exports.blankPage = (req, res) => {
     return res.render('a-blank-page', {

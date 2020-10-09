@@ -55,11 +55,23 @@
     border: 1px solid red;
 }
 
-.sscreen{
-    display:none;
+.x-men {
+    display: block;
+}
+
+.sscreen {
+    display: none;
+}
+
+.laptop-Pregnancy {
+    display: block;
 }
 
 .consult-specilities {
+    display: none;
+}
+
+.mobile-Pregnancy {
     display: none;
 }
 
@@ -71,9 +83,18 @@ lthenex {
     display: none;
 }
 
+.active-popular1 {
+    background-color: cadetblue;
+    transition: 1s all;
+}
+
 .font-li {
     font-size: 1rem;
     padding: 0px 10px;
+}
+
+.underline-on-hover:hover {
+    text-decoration: underline;
 }
 
 .carda {
@@ -141,25 +162,21 @@ lthenex {
 .nots-span span p {
     font-size: 0.9rem;
 }
-.new_tab2{
-    border:none !important;
+
+.new_tab2 {
+    border: none !important;
     background-color: lightgrey;
     height: 50px !important;
     color: white!important;
-    
 }
 
-.new_tab1 .nav-tabs.nav-tabs-bottom>li>a:hover{
-   
+.new_tab1 .nav-tabs.nav-tabs-bottom>li>a:hover {
     background-color: rgb(160, 154, 154);
     height: 50px !important;
     color: white!important;
-    
 }
 
-
-
-.pall-10{
+.pall-10 {
     padding: 10px !important;
 }
 
@@ -273,14 +290,13 @@ lthenex {
     color: white;
 }
 
-.chng a{
+.chng a {
     margin-top: -10px !important;
     margin-left: -18px;
 }
 
-.chng-time{
-
-margin-top: -10px !important;
+.chng-time {
+    margin-top: -10px !important;
 }
 
 .ammie {
@@ -308,6 +324,14 @@ margin-top: -10px !important;
 .carda:hover {
     transform: scale(1.1);
     box-shadow: 5px 5px 15px;
+}
+
+.laptop-sugar {
+    display: block;
+}
+
+.mobile-sugar {
+    display: none;
 }
 
 .acrossm {
@@ -611,6 +635,12 @@ input[type=password] {
 .btn.focus,
 .btn:focus {
     box-shadow: inherit;
+}
+.laptop-blood {
+    display: block;
+}
+.mobile-blood {
+    display: none;
 }
 #max {
     margin-top: 50px;
@@ -7228,8 +7258,6 @@ html.menu-opened body {
     .doctor-img {
         margin: 0 auto -5px;
     }
-
-
     
     .doctor-action {
         justify-content: center;
@@ -7243,8 +7271,16 @@ html.menu-opened body {
         max-width: 50%;
     }
     
+    .mobile-Pregnancy {
+        display: block;
+    }
+    
     .breadcrumb-bar .breadcrumb-title {
         font-size: 18px;
+    }
+    
+    .laptop-Pregnancy {
+        display: none;
     }
     
     .dash-widget h6 {
@@ -7342,11 +7378,9 @@ html.menu-opened body {
     .card {
         margin-bottom: 0.9375rem;
     }
-
-
     
-    .doctor-img img{
-       height:110px;
+    .doctor-img img {
+        height: 110px;
     }
     
     .clinic-gallery {
@@ -7403,8 +7437,8 @@ html.menu-opened body {
         margin-left: -91px !important;
         width: 329px !important;
     }
-
-    .no-file{
+    
+    .no-file {
         margin-top: 20px !important;
         margin-bottom: 50px !important;
     }
@@ -7461,26 +7495,26 @@ html.menu-opened body {
         transition: 0.5s ease;
         cursor: pointer;
     }
-
-    .no-show-mobile{
-        display:none;
+    
+    .no-show-mobile {
+        display: none;
     }
-
-    .plr0{
+    
+    .plr0 {
         padding-left: 0!important;
         padding-right: 0!important;
     }
-
-    #mal{
-        border:none;
+    
+    #mal {
+        border: none;
     }
     
     .offers {
         display: block;
     }
-
-    .sscreen{
-        display:block;
+    
+    .sscreen {
+        display: block;
     }
     
     .offers-going {
@@ -7753,8 +7787,6 @@ html.menu-opened body {
         font-size: 1.125rem;
     }
     
-   
-    
     .notifications {
         width: 317px;
         left: -191px;
@@ -7791,20 +7823,18 @@ html.menu-opened body {
     .setting-bread {
         margin-top: 0px !important;
     }
-
-    .setting-top{
+    
+    .setting-top {
         padding-top: 80px !important;
     }
-
-    .lscreen{
-    display:none !important;
+    
+    .lscreen {
+        display: none !important;
     }
-
-    .new_tab2{
-        
-    margin-top: 124px !important;
-    margin-bottom: 50px !important;
-
+    
+    .new_tab2 {
+        margin-top: 124px !important;
+        margin-bottom: 50px !important;
     }
     
     .setting-bread h2 {
@@ -7906,12 +7936,10 @@ html.menu-opened body {
         padding: 0px 10px;
         margin-top: 0px !important;
     }
-
+    
     .sidebar-overlay {
         z-index: 0 !important;
     }
-
-
     
     .main-menu-wrapper {
         order: 3;
@@ -7954,11 +7982,31 @@ html.menu-opened body {
         transform: translateY(-50%);
     }
     
+    .laptop-blood {
+        display: none;
+    }
+    
+    .mobile-sugar {
+        display: block;
+    }
+    
+    .laptop-sugar {
+        display: none;
+    }
+    
+    .mobile-blood {
+        display: block;
+    }
+    
     .price-healths {
         position: absolute;
         left: 5px;
         color: #fff;
         top: -1px;
+    }
+    
+    .x-men {
+        display: none;
     }
     
     .prices-health {
@@ -8466,8 +8514,6 @@ input:-webkit-autofill:focus {
     color: #989c9e;
     margin-top: 0px;
 }
-
-
 .noti-title {
     color: #333;
 }
