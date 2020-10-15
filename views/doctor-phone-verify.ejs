@@ -404,12 +404,19 @@
                                 </div>
                                 <div class="col-md-12 col-lg-6 login-right">
                                     <div class="login-header">
-                                        <h3>Number Verification </h3>
+                                        <%var type;%>
+                                        <%if(type == 'email'){%>
+                                            <h3>Email Verification </h3>
+                                        <%}else{%>
+                                            <h3>Number Verification </h3>
+                                        <%}%>
+                                       
                                     </div>
                                     <div class="col-md-12 col-lg-12" style="margin-left: -15px;margin-bottom: 20px;">
                                         <p style="font-size: 0.8rem;">We have sent you an OTP on</p>
-                                        <p style="font-size: 1.1rem; margin-top: -12px;">+91
-                                            <%=phone%>
+                                        <p style="font-size: 1.1rem; margin-top: -12px;"><%if(type != 'email'){%>
+                                            +91
+                                        <%}%><%=phone%>
                                         </p>
                                     </div>
 
@@ -424,6 +431,7 @@
                                             <input type="text" name="otp" id="text" style="font-size: 0.9rem;" class="form-control floating" placeholder="Please enter here the 6 digit OTP to verify ">
                                             <input type="hidden" name="phone" value="<%=phone%>">
                                             <input type="hidden" name="id" value="<%=id%>">
+                                            <input type="hidden" name="type" value="<%=type%>">
                                             
                                         </div>
                                         <!-- <div class="form-group form-focus">

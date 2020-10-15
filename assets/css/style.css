@@ -58,6 +58,9 @@
 .x-men {
     display: block;
 }
+.cal-icon:after {
+    right:25px !important;
+}
 
 .sscreen {
     display: none;
@@ -68,9 +71,6 @@
 }
 
 .patient-li{
-    /* background-image: url('/img/bg.png'); */
-    background-size: cover;
-    background-repeat: no-repeat;
     height:auto;
     width: 225px;
     border:1px solid lightgrey;
@@ -159,6 +159,10 @@
     padding-left: 30px;
     /* justify-content: space-around; */
 }
+
+
+
+
 
 #patient-ul0{
     list-style: none;
@@ -298,6 +302,8 @@
     color:white;
     background-color: #D00000!important ;
 }
+
+
 
 .consult-specilities {
     display: none;
@@ -604,7 +610,7 @@ lthenex {
 }
 
 #inclinic {
-    padding: 0px 100px;
+    padding: 0px 80px;
 }
 
 .header {
@@ -6827,7 +6833,7 @@ html.menu-opened body {
         left: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        z-index: 1060;
+        z-index: 1045;
         transform: translateX(-317px);
         transition: all 0.4s;
         background-color: #15558d;
@@ -7025,7 +7031,7 @@ html.menu-opened body {
         left: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        z-index: 1060;
+        z-index: 1045;
         transform: translateX(-500px);
         transition: all 0.4s;
         background-color: #15558d;
@@ -7712,6 +7718,168 @@ html.menu-opened body {
     .lommies {
         display: block;
     }
+    /* Force table to not be like tables anymore */
+	.stable,.sthead, .stbody, .sth, .std, .str , .sstd ,.std1{ 
+        display: block; 
+        border:none !important;
+    }
+
+    .stbody{
+        padding-right: 8px;
+    }
+    
+    .str{
+        border-radius:5px;
+        border:1px solid darkcyan !important;
+        margin-bottom: 10px !important; 
+        overflow: scroll;
+    }
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.sthead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+    }
+
+    .stbody{
+        margin-top: 10px;
+    }
+    
+    
+	
+    .str { border: 1px solid #ccc;
+    }
+	
+	.std { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee !important; 
+        position: relative;
+       padding-top:7px !important;
+       padding-bottom: 7px !important;
+        height: auto;
+		padding-left: 50% !important; 
+    }
+    
+    .std1 { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee !important; 
+        position: relative;
+       padding-top:7px !important;
+       padding-bottom: 7px !important;
+        height: auto;
+		padding-left: 50% !important; 
+    }
+    
+    .sstd { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee !important; 
+        position: relative;
+       padding-top:7px !important;
+       padding-bottom: 7px !important;
+        height: auto;
+		padding-left: 50% !important; 
+    }
+    
+    .sbtn a{
+        width: 320px!important;
+    }
+	
+	.std:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 10px;
+		left: 20px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+    }
+    .std1:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 10px;
+		left: 20px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+    
+    .sstd:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 10px;
+		left: 20px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	/*
+	Label the data
+	*/
+	.std:nth-of-type(1):before { content: "Name"; }
+	.std:nth-of-type(2):before { content: "Age"; }
+	.std:nth-of-type(3):before { content: "Phone"; }
+	.std:nth-of-type(4):before { content: "Address"; }
+	.std:nth-of-type(5):before { content: "Mode"; }
+	.std:nth-of-type(6):before { content: "Status"; }
+    
+    .sstd:nth-of-type(1):before { content: "Name"; }
+	.sstd:nth-of-type(2):before { content: "Age"; }
+	.sstd:nth-of-type(3):before { content: "Phone"; }
+	.sstd:nth-of-type(4):before { content: "Address"; }
+	.sstd:nth-of-type(5):before { content: "Mode"; }
+    .sstd:nth-of-type(6):before { content: "Status"; }
+    .sstd:nth-of-type(7):before { content: "Track"; }
+
+    .std1:nth-of-type(1):before { content: "Name"; }
+	.std1:nth-of-type(2):before { content: "Phone"; }
+	.std1:nth-of-type(3):before { content: "Address"; }
+	.std1:nth-of-type(4):before { content: "App.Date"; }
+	.std1:nth-of-type(5):before { content: "Amount"; }
+    .std1:nth-of-type(6):before { content: "Status"; }
+   
+	
+
+    .sscreentd{
+        width:100% !important;
+    }
+    .sscreenul{
+        padding-left: 0px !important;
+        text-align: center !important;
+        display: block !important;
+        padding: 0px 10px !important;
+    }
+    
+    .sscreenul li {
+        width: 100% !important;
+    }
+
+    .mheader{
+        padding-left: 10px!important;
+        padding-right: 10px !important;
+    }
+
+    .m1header{
+        padding-left: 10px!important;
+        padding-right: 10px !important;
+    }
+
+
+    .mheader h2{
+        font-size:1.7rem !important;
+        color:white;
+        margin-top:-20px !important;
+    }
+
+    .mdisplay{
+        margin: 0px !important;border-radius:0px !important;border: 0 !important;
+    }
     
     .cardy {
         width: 65% !important;
@@ -7929,7 +8097,21 @@ html.menu-opened body {
     .note {
         display: none;
     }
+
+    .mslabel{
+        font-size: 0.8rem!important;
+    margin-top: 2px !important;
+    }
     
+
+    .msbtn{
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: 600;
+        min-width: 61px;
+        height: 47px;
+        padding: 0;
+    }
     .phoneul {
         position: absolute;
         top: 75px;
@@ -7968,6 +8150,16 @@ html.menu-opened body {
     .arrow {
         display: none;
     }
+
+    .fsmall{
+        font-size: 1.2rem !important;
+    }
+    
+    .f1small{
+        font-size: 0.8rem !important;
+    }
+    
+
     
     .user-menu {
         position: absolute;
@@ -8182,7 +8374,7 @@ html.menu-opened body {
         left: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        z-index: 1060;
+        z-index: 1045;
         transform: translateX(-320px);
         transition: all 0.4s;
         background-color: #15558d;

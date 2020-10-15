@@ -21,6 +21,9 @@ const userSchema = mongoose.Schema({
     gender: {
         type: String
     },
+    service: {
+            type: String
+        },
     contacts: {
         address: {
             type: String
@@ -34,12 +37,9 @@ const userSchema = mongoose.Schema({
         pincode: {
             type: Number
         },
-        service: {
-            type: String
-        },
         country: {
             type: String
-        },
+        }
     },
     favourites: [{
         type: mongoose.Schema.Types.ObjectId
@@ -60,6 +60,28 @@ const userSchema = mongoose.Schema({
     type: {
         type: String
     },
+    booking_service:{
+        type:Boolean
+    },
+
+    reviews:[{
+        rating:{
+            type:Number
+        },
+        title:{
+            type:String
+        },
+
+        review_description:{
+            type:String
+        },
+        pid:{
+            type: mongoose.Schema.Types.ObjectId
+
+        },
+        createdAt: { type: Date, default: Date.now }
+    }],
+    
     fbid: {
         type: String
     },
@@ -264,6 +286,9 @@ const userSchema = mongoose.Schema({
             slot:{
                 type:String
             },
+            dayindex:{
+                type:String
+            },
             address:{
                 type:String
             },
@@ -450,6 +475,14 @@ const userSchema = mongoose.Schema({
     services: {
         type: String
 
+    },
+
+    emailverify:{
+        type:Boolean
+    },
+
+    emailkey:{
+        type:String
     },
 
     specialisation: {

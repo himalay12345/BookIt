@@ -87,6 +87,7 @@ module.exports.approveBank = async(req, res) => {
     if (req.body.accountid == req.body.reaccountid) {
         users.accountid = req.body.accountid;
         users.approve2 = true;
+        users.booking_service = true;
         users.save();
         if (users.approve1 == true) {
             return res.render('a-application-request', {

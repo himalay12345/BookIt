@@ -6,7 +6,7 @@ passport.use(new localStrategy({
     usernameField: 'phone',
     passReqToCallback: true
 }, function(req, phone, password, done) {
-        User.findOne({ phone: phone }, function(err, user) {
+        User.findOne({ phone: phone , service:'phone' }, function(err, user) {
             if (err) {
                 console.log('Error in finding patient data in passport', err);
                 return done(err);

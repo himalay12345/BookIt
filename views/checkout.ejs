@@ -441,6 +441,7 @@
                                                 <input type="hidden" name="available" value="<%=available%>">
                                                 <input type="hidden" name="slotindex" value="<%=slotindex%>">
                                                 <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                                <input type="hidden" name="date" value="<%=date%>">
                                                 
                                                 <div class="col-md-12 col-sm-12">                                                
                                                     <div class="form-group card-label">
@@ -509,6 +510,7 @@
                                                 <input type="hidden" name="available" value="<%=available%>">
                                                 <input type="hidden" name="slotindex" value="<%=slotindex%>">
                                                 <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                                <input type="hidden" name="date" value="<%=date%>">
                                                 <input type="hidden" name="type" value="other">
                                                 <div class="col-md-12 col-sm-12">
                                                         
@@ -597,15 +599,9 @@
                                 <!-- Booking Doctor Info -->
 
                                 <div class="booking-summary">
-                                    <%var today = new Date();%>
-                                        <%var dd = String(today.getDate()).padStart(2, '0');
-                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                        var yyyy = today.getFullYear();
-                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                        var dayOfWeek = weekday[today.getDay()];%>
                                     <div class="booking-item-wrap">
                                         <ul class="booking-date">
-                                            <li>Date <span><%=dd%>-<%=mm%>-<%=yyyy%></span></li>
+                                            <li>Date <span><%=date%></span></li>
                                             <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
                                                 <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/doctor-dashboard  30 Nov 2019 04:12:03 GMT -->
+<!-- doccure/profile-settings  30 Nov 2019 04:12:18 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
 
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+
+    <!-- Select2 CSS -->
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="css/style.css">
@@ -26,7 +32,9 @@
     <!--[if lt IE 9]>
 			<script src="js/html5shiv.min.js"></script>
 			<script src="js/respond.min.js"></script>
-		<![endif]-->
+        <![endif]-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
 </head>
 
@@ -390,20 +398,18 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar"  style="padding: 10px 0px !important;margin-top: 20px;">
+        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-12" style="margin-bottom: 15px;">
+                    <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Dashboard</h2>
+                        <h2 class="breadcrumb-title">Profile Settings</h2>
                     </div>
-                   
-                   
                 </div>
             </div>
         </div>
@@ -412,159 +418,139 @@
         <!-- Page Content -->
         <div class="content">
             <div class="container-fluid">
-
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
 
-                        <!-- Profile Sidebar -->
-                        <div class="profile-sidebar">
-                            <div class="widget-profile pro-widget-content">
-                                <div class="profile-info-widget">
-                                    <a href="#" class="booking-doc-img" style="width: 100% !important;background-color: transparent;">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
-                                    </a>
-                                    <div class="profile-det-info">
-                                        <h3>
-                                            <%=locals.user.name%>
-                                        </h3>
+                    <!-- Profile Sidebar -->
+                    
+                    <!-- /Profile Sidebar -->
 
-                                        <!-- <h4 style="font-size: 0.9rem;"> <%=locals.user.department%></h4> -->
-                                      
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashboard-widget">
-                                <nav class="dashboard-menu">
-                                    <ul>
-                                        <li class="active">
-                                            <a href="/doctor-dashboard">
-                                                <i class="fas fa-columns"></i>
-                                                <span>Dashboard</span>
-                                            </a>
-                                        </li>
-                                       
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
 
 
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                        <!-- /Profile Sidebar -->
-
-                    </div>
-
-                    <div class="col-md-7 col-lg-8 col-xl-9">
-
-                      
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="mb-4">Patient Appoinment</h4>
-                                <div class="appointment-tab">
-
-                                    <!-- Appointment Tab -->
-                                    <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /Appointment Tab -->
-                                  
-                             <div class="tab-content">
-
-                                       
-                                        <div class="tab-pane show active" id="upcoming-appointments">
-                                            <div class="card card-table mb-0">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover table-center mb-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Patient Name</th>
-                                                                    <th>Patient Age</th>
-                                                                    <th>Patient Phone</th>
-                                                                    <th>Patient Address</th>
-                                                                    <th>Booking Mode</th>
-                                                                    <th class="text-center">Status</th>
-                                                                   
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <%var c=0%>
-                                                                <%for(patients of locals.user.booking){%>
-                                                                <%var today = new Date();
-                                                                var dd = String(today.getDate()).padStart(2, '0');
-                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                                                var yyyy = today.getFullYear();
-                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                                                var dayOfWeek = weekday[today.getDay()];%>
-                                                                <%var today = patients.createdAt;
-                                                                var dd1= String(today.getDate()).padStart(2, '0');
-                                                                var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                                                var yyyy1 = today.getFullYear();
-                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                                                                var dayOfWeek = weekday[today.getDay()];%>
-                                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
-                                                                <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
-                                                                
-                                                                <%if(str1 != str2){%>
-                                                                    <%continue;%>
-                                                                <%}%>
-                                                               
-                                                                 
-                                                                    <td>
-                                                                        <h2 class="table-avatar">
-                                                                            
-            
-                                                                            <a href="#"><%=patients.name%> <span>#PT00<%=++c%></span></a>
-                                                                        </h2>
-                                                                    </td>
-                                                                   <td><%=patients.age%></td>
-            
-                                                                   <td><%=patients.phone%></td>
-            
-                                                                   <td><%=patients.address%></td>
-                                                                   <%if(patients.type=='online'){%>
-                                                                   <td><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
-                                                                   <%}else{%>
-                                                                    <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
-            
-                                                                    <%}%>
-            
-                                                                    
-                                                                        
-                                                                            <%if(patients.cancel == true){%>
-                                                                                <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
-                                                                                <%}else{%>
-                                                                                  <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-                                                                                  <%}%>
-            
-                                                                           
-                                                                     
-                                                                </tr>
-                                                                <%}%>
-                                                               
-                                                            </tbody>
-                                                        </table>
+                                <form action="/user/profile/update" id="edit_form" method="POST" enctype="multipart/form-data">
+                                    <div class="row form-row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <div class="change-avatar">
+                                                    <div class="profile-img">
+                                                        <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/profile.png"'>
+                                                    </div>
+                                                    <div class="upload-img">
+                                                        <div class="change-photo-btn">
+                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                            <input type="file" class="upload" id="imageUpload" name="avatar">
+                                                        </div>
+                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                      
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label> Name</label>
+                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <select name="gender" class="form-control select">
+                                                    <%if(locals.user.gender == 'Male '){%><option selected>Male</option><%}else{%>
+                                                    <option>Male</option><%}%>
+                                                    <%if(locals.user.gender == 'Female '){%><option selected>Female</option><%}else{%>
+                                                    <option>Female</option><%}%>
+                                                    <%if(locals.user.gender == 'Others '){%><option selected>Others</option><%}else{%>
+                                                    <option>Others</option><%}%>
+													</select>
+                                            </div>
+                                        </div>
 
-                                    </div> 
-                                 
-                                </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Date of Birth</label>
+                                                <div class="cal-icon">
+                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Blood Group</label>
+                                                <select name="bloodgroup" class="form-control select">
+                                                        <%if(locals.user.bloodgroup == 'A-'){%><option selected>A-</option><%}else{%>
+                                                        <option>A-</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'A+'){%><option selected>A+</option><%}else{%>
+                                                        <option>A+</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'B-'){%><option selected>B-</option><%}else{%>
+                                                        <option>B-</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'B-'){%><option selected>B-</option><%}else{%>
+                                                        <option>B-</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'AB-'){%><option selected>AB-</option><%}else{%>
+                                                        <option>AB-</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'AB+'){%><option selected>AB+</option><%}else{%>
+                                                        <option>AB+</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'O-'){%><option selected>O-</option><%}else{%>
+                                                        <option>O-</option><%}%>
+                                                        <%if(locals.user.bloodgroup == 'O+'){%><option selected>O+</option><%}else{%>
+                                                        <option>O+</option><%}%>
+													</select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Email ID</label>
+                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Mobile</label>
+                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.contacts.address%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Pin Code</label>
+                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.contacts.country%>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="submit-section">
+                                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                                    </div>
+                                </form>
+
+
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -589,7 +575,7 @@
                                     <div class="social-icon">
                                         <ul>
                                             <li>
-                                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                <a href="<%=locals.user.fbid%>" target="_blank"><i class="fab fa-facebook-f"></i> </a>
                                             </li>
                                             <li>
                                                 <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
@@ -615,13 +601,13 @@
 
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
+                                <h2 class="footer-title">For Patient</h2>
                                 <ul>
                                     <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
                                     <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
                                     <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
                                     <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
+                                    <li><a href="/locals.user-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -717,18 +703,47 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
+    <!-- Select2 JS -->
+    <script src="plugins/select2/js/select2.min.js"></script>
+
+    <!-- Datetimepicker JS -->
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+
     <!-- Sticky Sidebar JS -->
     <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
     <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
-    <!-- Circle Progress JS -->
-    <script src="js/circle-progress.min.js"></script>
-
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+        document.getElementById("imageUpload").onchange = function() {
+            document.getElementById("edit_form").submit();
+        };
+    </script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui ',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+                    theme: 'metroui',
+                    text: '
+                    <%=flash.error%>
+                    ', type: '
+                    error ', layout: '
+                    topRight ', timeout: 3000 }).show();
+                    <%}%>
+    </script>
 
 </body>
 
-<!-- doccure/doctor-dashboard  30 Nov 2019 04:12:09 GMT -->
+<!-- doccure/profile-settings  30 Nov 2019 04:12:18 GMT -->
 
 </html>

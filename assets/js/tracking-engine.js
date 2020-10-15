@@ -279,8 +279,8 @@ class PatientTracking{
                 var h3 = h2.append($('<h3 class="displayNone uvisited"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>'));
     
                 var date = new Date().toLocaleTimeString();
-                var date1 = date.slice(0,4);
-                var date2 = date.slice(8,10); 
+                var date1 = date.slice(0,5);
+                var date2 = date.slice(8,11); 
                 h3.append($('<p>',{
                     'html':'CheckIn Time : '+date1 +' '+ date2
                 })); 
@@ -358,8 +358,8 @@ class PatientTracking{
                     var h3 = h2.append($('<h3 class="uvisited displayNone"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>'));
         
                     var date = new Date().toLocaleTimeString();
-                    var date1 = date.slice(0,4);
-                    var date2 = date.slice(8,10); 
+                    var date1 = date.slice(0,5);
+                    var date2 = date.slice(8,11); 
                     h3.append($('<p>',{
                         'html':'CheckIn Time : '+date1 +' '+ date2
                     })); 
@@ -453,8 +453,8 @@ class PatientTracking{
                 var h3 = h2.append($('<h3 class="displayNone uvisited'+data.data.slot+'"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>'));
     
                 var date = new Date().toLocaleTimeString();
-                var date1 = date.slice(0,4);
-                var date2 = date.slice(8,10); 
+                var date1 = date.slice(0,5);
+                var date2 = date.slice(8,11); 
                 h3.append($('<p>',{
                     'html':'CheckIn Time : '+date1 +' '+ date2
                 })); 
@@ -487,9 +487,9 @@ class PatientTracking{
                     let l2 = activevisited.length;
                     if(l1>0 && l2>0)
                     {
-                    console.log('u are there');
-                    activeongoing[l1-1].classList.add('displayNone');
-                    activevisited[l2-1].classList.remove('displayNone');
+                    console.log('u are  now there');
+                    activeongoing[0].classList.add('displayNone');
+                    activevisited[0].classList.remove('displayNone');
                     }
 
                     let waiting = document.querySelectorAll(`.uwaiting${data.slot}`);
@@ -533,8 +533,8 @@ class PatientTracking{
                     var h3 = h2.append($('<h3 class="uvisited'+data.slot+' displayNone"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>'));
         
                     var date = new Date().toLocaleTimeString();
-                    var date1 = date.slice(0,4);
-                    var date2 = date.slice(8,10); 
+                    var date1 = date.slice(0,5);
+                    var date2 = date.slice(8,11); 
                     h3.append($('<p>',{
                         'html':'CheckIn Time : '+date1 +' '+ date2
                     })); 
@@ -547,8 +547,8 @@ class PatientTracking{
                     if(l1>0 && l2>0)
                     {
                     console.log('u are there');
-                    activeongoing[l1-1].classList.add('displayNone');
-                    activevisited[l2-1].classList.remove('displayNone');
+                    activeongoing[0].classList.add('displayNone');
+                    activevisited[0].classList.remove('displayNone');
                     }
         
                     $(`#no_patient${data.slot}`).last().addClass("displayNone");

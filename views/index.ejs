@@ -285,13 +285,11 @@
                                                         <p class="text-muted mb-0">Medical Staff</p>
                                                     </div>
                                                 </div>
-                                                <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
-                                                <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                                <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
-                                                <a class="dropdown-item" href="/staff-appointment-page">Appointments</a>
-                                                <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                <a class="dropdown-item" href="/staff-profile">My Profile</a>
+                                                <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
+                                                <a class="dropdown-item" href="/staff-schedule-timings">Schedule Timing</a>
                                                 <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
-                                                <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                                <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
                                                 <a class="dropdown-item" href="/settings">Settings</a>
                                                 <a class="dropdown-item" href="/user/logout">Logout</a>
                                             </div>
@@ -551,12 +549,12 @@
                     <div class="col-lg-12">
                         <div class="doctor-slider slider">
 
-                            <div class="">
-                                <div class="card">
+                            <div class="" >
+                                <div class="card" style="height: 350px !important;" >
                                     <div class="card-img-top card-img-top-250">
                                         <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
                                     </div>
-                                    <div class="card-block p-t-2">
+                                    <div class="card-block p-t-2" style="padding: 15px;">
                                         <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dentist</a>
                                         </h2>
                                         <p style="font-size:15px;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
@@ -566,7 +564,7 @@
                                 </div>
                             </div>
                             <div class="">
-                                <div class="card">
+                                <div class="card" style="height: 350px !important;" >
                                     <div class="card-img-top card-img-top-250">
                                         <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
                                     </div>
@@ -579,8 +577,8 @@
                                 </div>
                             </div>
                             <div class="">
-                                <div class="card">
-                                    <div class="card-img-top card-img-top-250" style="padding: 15px;">
+                                <div class="card" style="height: 350px !important;" >
+                                    <div class="card-img-top card-img-top-250">
                                         <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
                                     </div>
                                     <div class="card-block p-t-2" style="padding: 15px;">
@@ -688,7 +686,7 @@
         <!-- /Popular Section -->
 
         <!-- Availabe Features -->
-        <section class="section section-features">
+        <section class="section section-features position-relative" id="inclinic" style="background-color: rgba(252, 245, 245, 0.918);padding-top: 50px;margin-bottom: 50px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5 features-img">
@@ -696,18 +694,18 @@
                     </div>
                     <div class="col-md-7">
                         <div class="section-header">
-                            <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 32px;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the Doccure app</h2>
+                            <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 1.8rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the Doccure app</h2>
                             <div class="u-t-c--black_1 u-font--14 u-margin--20__top">
-                                <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;">Access video consultation with India’s top doctors on the Doccure app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
+                                <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;font-size:1rem;">Access video consultation with India’s top doctors on the Doccure app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
 
 
                                 <!-- <h4>Book appointments </h4> -->
-                                <ul class="list-item">
-                                    <li style="font-size: 20px;margin: 15px;">
+                                <ul class="list-item" style="margin-top: 50px;">
+                                    <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">
                                         </i>Book appointments</li>
-                                    <li style="font-size: 20px;margin: 15px;">Consult doctors online</li>
-                                    <li style="font-size: 20px;margin: 15px;">Store health records</li>
-                                    <li style="font-size: 20px;margin: 15px;">Read health tips</li>
+                                    <li style="font-size: 1rem;margin-top: 10px;font-weight: bold;">Consult doctors online</li>
+                                    <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Store health records</li>
+                                    <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Read health tips</li>
 
 
                                 </ul>
@@ -716,15 +714,15 @@
 
                                 </div>
                                 <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
-                                    <div class="col-md-8">
-                                        <div class="col-md-1" style="border:1px solid lightgrey; padding: 12.8px;font-size: 1.3rem;font-weight: bold;margin-right: -15px;">
+                                    <div class="col-md-12" style="display: inline-flex;">
+                                        <div class="col-md-1" style="border:1px solid lightgrey; padding: 5.8px;height:46px;font-size: 1.3rem;font-weight: bold;margin-right: -15px;">
                                             +91
                                         </div>
-                                        <div class="form-group col-md-8">
-                                            <input type="Number" placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;">
+                                        <div class="form-group col-md-5">
+                                            <input type="Number" placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;width: 275px;">
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-3" id="sum_phone" style="margin-left:-170px ;">
+                                    <div class="form-group col-md-3" id="sum_phone" >
 
                                         <a href="#"><button type="submit" class="form-control" style="border-radius:20px; background-color: #fff; border-color: #dddddd;color:#2c2929;">Send SMS</button></a>
 
@@ -735,19 +733,15 @@
                             <!-- <p>Doccure is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
                         </div>
 
-                        <div class="row text-center" style="padding-right: 20px; padding-left: 50px !important;">
+                        <div class="row text-center position-absolute" style="padding-right: 20px; padding-left: 50px !important;bottom: 0;left: -450px;">
 
 
                             <p>
-                                <!-- <a href="#" class="btn btn-store">
-                                    <span class="fa fa-apple fa-3x pull-left"></span>
+                               
+                                <a href="#" class="btn btn-store" style="margin-top: -40px;">
+                                    <span><img src="/img/googleplay.png" style="height: 70px;width:250px;margin-left: 0px;"></span>
                                     <span class="btn-label">Download on the</span>
-                                    <span class="btn-caption">App Store</span>
-                                </a> -->
-                                <a href="#" class="btn btn-store">
-                                    <span class="fa fa-android fa-3x pull-left"></span>
-                                    <span class="btn-label">Download on the</span>
-                                    <span class="btn-caption">Google Play</span>
+                                    <span class="btn-caption">Google Play Store</span>
                                 </a>
 
 

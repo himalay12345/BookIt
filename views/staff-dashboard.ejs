@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/search  30 Nov 2019 04:12:16 GMT -->
+<!-- doccure/doctor-dashboard  30 Nov 2019 04:12:03 GMT -->
 
 <head>
     <meta charset="utf-8">
@@ -9,25 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="/plugins/fontawesome//css/fontawesome.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome//css/all.min.css">
-
-    <!-- Datetimepicker CSS -->
     <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
 
-    <!-- Select2 CSS -->
-    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
-
-    <!-- Fancybox CSS -->
-    <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
 
     <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/style1.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -398,32 +391,19 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar"  style="padding: 10px 0px !important;margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="col-md-8 col-12">
+                    <div class="col-md-6 col-12" style="margin-bottom: 15px;">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Search</li>
+                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">2245 matches found for : Dentist In Bangalore</h2>
+                        <h2 class="breadcrumb-title">Dashboard</h2>
                     </div>
-                    <div class="col-md-4 col-12 d-md-block d-none">
-                        <div class="sort-by">
-                            <span class="sort-title">Sort by</span>
-                            <span class="sortby-fliter">
-									<select class="select">
-										<option>Select</option>
-										<option class="sorting">Rating</option>
-										<option class="sorting">Popular</option>
-										<option class="sorting">Latest</option>
-										<option class="sorting">Free</option>
-									</select>
-								</span>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
@@ -434,283 +414,188 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+                   
 
-                        <!-- Search Filter -->
-                        <div class="card search-filter">
-                            <form action="/user/filter" method="POST">
-                                <div class="card-header">
-                                    <h4 class="card-title mb-0">Search Filter</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="filter-widget">
+                    <div class="col-md-12 col-lg-12 col-xl-12 position-relative" >
 
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4>Gender</h4>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="gender_type" value="Male">
-											<span class="checkmark"></span> Male Doctor
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="gender_type" value="Female">
-											<span class="checkmark"></span> Female Doctor
-										</label>
-                                        </div>
-                                    </div>
-                                    <div class="filter-widget">
-                                        <h4>Select Specialist</h4>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Urology">
-											<span class="checkmark"></span> Urology (Kidney)
-                                        </label>
-                                            <div>
-                                                <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Neurology">
-											<span class="checkmark"></span> General Physician
-										</label>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Neurology">
-											<span class="checkmark"></span> Neurology (Nerve)
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Dentist">
-											<span class="checkmark"></span> Dentist
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Orthopedic">
-											<span class="checkmark"></span> Orthopedic (Bone)
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Cardiologist">
-											<span class="checkmark"></span> Cardiologist (Heart)
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Paediatrics">
-											<span class="checkmark"></span> Paediatrics (Child Doctor)
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Ophthalmology">
-											<span class="checkmark"></span> Ophthalmology (Eye Doctor)
-										</label>
-                                        </div>
-                                        <div>
-                                            <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Dermatology">
-											<span class="checkmark"></span> Dermatology (Hair Doctor)
-										</label>
-                                        </div>
-                                    </div>
-                                    <div class="btn-search">
-                                        <button type="submit" class="btn btn-block">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- /Search Filter -->
-
-                    </div>
-
-                    <div class="col-md-12 col-lg-8 col-xl-9">
-
-                        <!-- Doctor Widget -->
-                        <div class="card">
-                            <div class="card-body">
-                                <% if (doctors.length==0) {%>
-                                    <h2>No Doctor Available!</h2>
-                                    <% }else{ %>
-                                        <%for(doctor of doctors){%>
-                                            <div class="doctor-widget" style="margin-bottom: 50px;">
-                                                <div class="doc-info-left">
-                                                    <div class="doctor-img">
-                                                        <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                <img src="<%=doctor.avatar%>" class="img-fluid" onerror='this.src="/img/profile.png"' alt="User Image">
-                                            </a>
-                                                    </div>
-                                                    <div class="doc-info-cont">
-                                                        <h4 class="doc-name">
-                                                            <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                                <%=doctor.name%>
-                                                            </a>
-                                                        </h4>
-                                                        <p class="doc-speciality">
-                                                            <%=doctor.department%>
-
-                                                        </p>
-                                                        <p class="doc-department">
-                                                            <% if(doctor.department== "General Physician"){ %>
-
-                                                                <img src="/img/specialities/physical.jfif" class="img-fluid" alt="Speciality">
-                                                                <% } %>
-
-                                                                    <% if(doctor.department== "Ophthalmology"){ %>
-
-                                                                        <img src="/img/specialities/eye.png" class="img-fluid" alt="Speciality">
-                                                                        <% } %>
-                                                                            <% if(doctor.department== "Dermatology"){ %>
-
-                                                                                <img src="/img/specialities/hair.jpg" class="img-fluid" alt="Speciality">
-                                                                                <% } %>
-                                                                                    <% if(doctor.department== "Paediatrics"){ %>
-
-                                                                                        <img src="/img/specialities/child.jpg" class="img-fluid" alt="Speciality">
-                                                                                        <% } %>
-                                                                                            <% if(doctor.department== "Urology"){ %>
-
-                                                                                                <img src="/img/specialities/brain.png" class="img-fluid" alt="Speciality">
-                                                                                                <% } %>
-                                                                                                    <% if(doctor.department== "Neurology"){ %>
-
-                                                                                                        <img src="/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
-                                                                                                        <% } %>
-                                                                                                            <% if(doctor.department== "Orthopedic"){ %>
-
-                                                                                                                <img src="/img/specialities/specialities.png" class="img-fluid" alt="Speciality">
-                                                                                                                <% } %>
-                                                                                                                    <% if(doctor.department== "Cardiologist"){ %>
-
-                                                                                                                        <img src="/img/specialities/heart.jpg" class="img-fluid" alt="Speciality">
-                                                                                                                        <% } %>
-                                                                                                                            <% if(doctor.department== "Dentist"){ %>
-
-                                                                                                                                <img src="/img/specialities/teeth.png" class="img-fluid" alt="Speciality">
-                                                                                                                                <% } %>
-                                                                                                                                    <%=doctor.department%>
-
-                                                        </p>
-                                                        <%var sum=0,avg,cnt=doctor.reviews.length;%>
-                                                        <%for(review of doctor.reviews){%>
-                                                            <%sum+=review.rating;%>
-                                                        <%}%>
-                                                        <%avg=sum/cnt;%>
-                                                        <div class="rating">
-                                                            <%if(avg>=1){%>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <%}else{%>
-                                                                <i class="fas fa-star"></i>
-                                                            <%}%>
-                                                            <%if(avg>=2){%>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <%}else{%>
-                                                                <i class="fas fa-star"></i>
-                                                            <%}%>
-                                                            <%if(avg>=3){%>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <%}else{%>
-                                                                <i class="fas fa-star"></i>
-                                                            <%}%>
-                                                            <%if(avg>=4){%>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <%}else{%>
-                                                                <i class="fas fa-star"></i>
-                                                            <%}%>
-                                                            <%if(avg>=5){%>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <%}else{%>
-                                                                <i class="fas fa-star"></i>
-                                                            <%}%>
-                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
-                                                        </div>
-                                                        <div class="clinic-details">
-                                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
-                                                                <%=doctor.contacts.city%>
-                                                                    <%=doctor.contacts.country%>
-                                                            </p>
-                                                            <ul class="clinic-gallery">
-                                                                <%for(doctorsclinic of doctor.clinicphoto){%>
-                                                                    <li>
-                                                                        <a href="<%=doctorsclinic%>" data-fancybox="gallery">
-                                                                    <img src="<%=doctorsclinic%> " alt="Feature" height="50px">
-                                                                </a>
-                                                                    </li>
-                                                                    <%}%>
-
-
-                                                            </ul>
-                                                        </div>
-                                                        <div class="clinic-services">
-                                                            <%if(doctor.services){%>
-                                                                <%var service = doctor.services.toString().split(',')%>
-                                                                    <%for(temp of service){%>
-                                                                        <span><%=temp%></span>
-                                                                        <%}%>
-                                                                            <%}%>
-
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card dash-card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="dash-widget dct-border-rht">
+                                                    <div class="circle-bar circle-bar1">
+                                                        <div class="circle-graph1" data-percent="<%=allpatients.booking.length%>">
+                                                            <img src="/img/icon-01.png" class="img-fluid" alt="patient">
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="doc-info-right">
-                                                    <div class="clini-infos">
-                                                        <ul>
+                                                    <%var today = new Date();%>
+                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];
+                                                    var n1  = dd +'-'+mm+'-'+yyyy%> %>
+                                                    <%var count = 0;%>
+                                                    <%for(patients of allpatients.booking){%>
+                                                        <%var today = patients.createdAt;%>
+                                                        <%var dd1 = String(today.getDate()).padStart(2, '0');
+                                                        var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy1 = today.getFullYear();
+                                                        var weekday1 = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek1 = weekday[today.getDay()];
+                                                        var n2 = dd1 +'-'+mm1+'-'+yyyy1%>
+                                                        <%if(n1 == n2){%>
                                                             
-                                                            <li><i class="fas fa-map-marker-alt"></i>
-                                                                <%=doctor.contacts.city%>
-                                                                    <%=doctor.contacts.state%>
-                                                            </li>
-                                                            <li><i class="far fa-money-bill-alt"></i>RS
-                                                                <%=doctor.booking_fee%>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="doctor-action">
-                                                        <a href="javascript:void(0)" class="btn btn-white fav-btn">
-                                                            <i class="far fa-bookmark"></i>
-                                                        </a>
-                                                        <a href="/chat" class="btn btn-white msg-btn">
-                                                            <i class="far fa-comment-alt"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-                                                            <i class="fas fa-phone"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-                                                            <i class="fas fa-video"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div class="clinic-booking">
-                                                        <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a>
-                                                        <a class="apt-btn" href="/login">Book Appointment</a>
+                                                           <%count++;%>
+                                                        <%}%>
+                                                       
+                                                    <%}%>
+                                                    <div class="dash-widget-info">
+                                                        <h6>Total Patient</h6>
+                                                        <h3><%=allpatients.booking.length%></h3>
+                                                        <p class="text-muted">Till Today</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <% }} %>
+
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="dash-widget dct-border-rht">
+                                                    <div class="circle-bar circle-bar2">
+                                                        <div class="circle-graph2" data-percent="<%=count%>">
+                                                            <img src="/img/icon-02.png" class="img-fluid" alt="Patient">
+                                                        </div>
+                                                    </div>
+                                                    <div class="dash-widget-info">
+                                                        <h6>Today Patient</h6>
+                                                        <h3><%=count%></h3>
+                                                        <p class="text-muted"><%=dd%>-<%=mm%>-<%=yyyy%></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="dash-widget">
+                                                    <div class="circle-bar circle-bar3">
+                                                        <div class="circle-graph3" data-percent="<%=allpatients.booking.length%>">
+                                                            <img src="/img/icon-03.png" class="img-fluid" alt="Patient">
+                                                        </div>
+                                                    </div>
+                                                    <div class="dash-widget-info">
+                                                        <h6>Appointments</h6>
+                                                        <h3><%=allpatients.booking.length%></h3>
+                                                        <p class="text-muted"><%=dd%>-<%=mm%>-<%=yyyy%></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- /Doctor Widget -->
 
-                        <!-- Doctor Widget -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-4">Patient Appoinment</h4>
+                                <div class="col-12 col-md-12" >
+                                    <form action="/user/sort-by-date" method="POST">
+                                    <div class="form-group" style="display: inline-flex;width: 100%;">
+                                        <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
+                                        <div class="cal-icon col-md-3" style="padding-right: 15px;">
+                                            <input type="text" placeholder="<%=date%>" name="date" class="form-control datetimepicker">
 
-                        <!-- /Doctor Widget -->
+                                        </div>
+                                        <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
 
-                        <!-- Doctor Widget -->
 
-                        <!-- /Doctor Widget -->
+                                    </div>
+                                </form>
+                                </div>
+                              
+                                <div class="appointment-tab">
 
-                        <!-- Doctor Widget -->
+                                    <!-- Appointment Tab -->
+                                  
+                                    <!-- /Appointment Tab -->
+                                    <%if(allpatients.booking == ''){%>
+                                        <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
+                                        <%}else{%>
+                             <div class="tab-content">
+                                     <div class="tab-pane show active" id="upcoming-appointments">
+                                            <div class="card card-table mb-0">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover table-center mb-0 stable">
+                                                            <thead class="sthead">
+                                                                <tr class="str">
+                                                                    <th class="sth">Patient Name</th>
+                                                                    <th class="sth">Patient Phone</th>
+                                                                    <th class="sth">Patient Address</th>
+                                                                    <th class="sth">Appt Date</th>
+                                                                    <th class="text-center sth">Paid Amount</th>
+                                                                    <th class="text-center sth">Status</th>
+                                                                   
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="stbody">
+                                                                <%var c=0,z=0;%>
+                                                                <%var date;%>
+                                                                <%for(patients of allpatients.booking){%>
+                                                                    <%if(date != undefined){%>
+                                                                        <%if(date != patients.date){%>
+                                                                            <%z++;continue;%>
+                                                                            <%}%>
 
-                        <!-- /Doctor Widget -->
+                                                                    <%}%>
+                                                                <tr class="str">
+                                                                    <td class="std1">
+                                                                        <h2 class="table-avatar">
+                                                                            
+                                                                            
 
-                        <!-- Doctor Widget -->
+                                                                            <a href="#"><%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                        </h2>
+                                                                    </td>
+                                                                    <td class="std1"><%=patients.phone%></td>
+                                                                    <td class="std1"><%=patients.address%></td>
+                                                                    <td class="std1"><%=patients.date%><span class="d-block text-info"><%=patients.time%></span></td>
+                                                                 
+                                                                    
+                                                                    
+                                                                    <td class="std1 text-md-center">Rs<%=patients.fee%></td>
+                                                                    
+                                                                        
+                                                                            <%if(patients.cancel == true){%>
+                                                                                <td class="std1"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                <%}else{%>
+                                                                                  <td class="std1"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                  <%}%>
 
-                        <!-- /Doctor Widget -->
+                                                                           
+                                                                     
+                                                                </tr>
+                                                                <%}%>
+                                                              
+                                                            </tbody>
+                                                            
+                                                          
+                                                        </table>
+                                                        <%if(z==allpatients.booking.length){%>
+                                                            <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                        <%}%>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
 
-                       
+                                    </div> 
+                                    <%}%>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -731,7 +616,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -862,29 +747,24 @@
     <!-- jQuery -->
     <script src="/js/jquery.min.js"></script>
 
-    <!-- Bootstrap Core /JS -->
+    <!-- Bootstrap Core JS -->
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
-    <!-- Sticky Sidebar /JS -->
+    <!-- Sticky Sidebar JS -->
     <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
     <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
-
-    <!-- Select2 /JS -->
-    <script src="/plugins/select2//js/select2.min.js"></script>
-
-    <!-- Datetimepicker /JS -->
     <script src="/js/moment.min.js"></script>
     <script src="/js/bootstrap-datetimepicker.min.js"></script>
 
-    <!-- Fancybox /JS -->
-    <script src="/plugins/fancybox/jquery.fancybox.min.js"></script>
+    <!-- Circle Progress JS -->
+    <script src="/js/circle-progress.min.js"></script>
 
-    <!-- Custom /JS -->
+    <!-- Custom JS -->
     <script src="/js/script.js"></script>
 
 </body>
 
-<!-- doccure/search  30 Nov 2019 04:12:16 GMT -->
+<!-- doccure/doctor-dashboard  30 Nov 2019 04:12:09 GMT -->
 
 </html>

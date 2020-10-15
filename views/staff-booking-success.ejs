@@ -420,7 +420,7 @@
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
                                     <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                        <p>Appointment booked with <strong><%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
+                                        <p>Appointment booked with <strong>Dr. <%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
 
                                    <%}else{%>
                                     <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>

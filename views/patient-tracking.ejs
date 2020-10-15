@@ -426,18 +426,17 @@
 
                         <div class="row" id="patient_track" style="padding-top: 15px;padding-left:10px;">
                             <div class="col-md-12">
-                                <h4 class="mb-4">Patient Appoinment</h4>
+                                <%var today = new Date();%>
+                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                var yyyy = today.getFullYear();
+                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                var dayOfWeek = weekday[today.getDay()];%>
+                                <h4 class="mb-4">Patient Appoinment&nbsp;&nbsp;&nbsp;  <%=dd%>-<%=mm%>-<%=yyyy%> , <%=dayOfWeek%></h4>
                                 <div class="appointment-tab">
 
                                     <!-- Appointment Tab -->
-                                    <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
-                                        </li>
-                                    </ul>
+                                  
                                     <!-- /Appointment Tab -->
 
                                     <%var today = new Date();%>
@@ -465,21 +464,21 @@
                                                 <div class="card card-table mb-0">
                                                     <div class="card-body">
                                                         <div class="table-responsive">
-                                                            <table class="table table-hover table-center mb-0">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Patient Name</th>
-                                                                        <th>Patient Age</th>
-                                                                        <th>Patient Phone</th>
-                                                                        <th>Patient Address</th>
-                                                                        <th>Booking Mode</th>
-                                                                        <th class="text-center">Status</th>
-                                                                        <th class="text-center">Track</th>
-                                                                        <th class=""></th>
+                                                            <table class="table table-hover table-center mb-0 stable">
+                                                                <thead class="sthead">
+                                                                    <tr class="str">
+                                                                        <th class="sth">Patient Name</th>
+                                                                        <th class="sth">Patient Age</th>
+                                                                        <th class="sth">Patient Phone</th>
+                                                                        <th class="sth">Patient Address</th>
+                                                                        <th class="sth">Booking Mode</th>
+                                                                        <th class="text-center sth">Status</th>
+                                                                        <th class="text-center sth">Track</th>
+                                                                       
                                                                        
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody class="stbody">
                                                                     <%var c=1%>
                                                                     <%var b = 0;%>
                                                                     <%for(patients of locals.user.booking){%>
@@ -501,33 +500,33 @@
                                                                     <%if(str1 != str2 || patients.cancel != false){%>
                                                                         <%b++;continue;%>
                                                                     <%}%>
-                                                                   
+                                                                   <tr class="str">
                                                                      
-                                                                        <td>
+                                                                        <td class="sstd">
                                                                             <h2 class="table-avatar">
                                                                                 
                 
                                                                                 <a href="#"><%=patients.name%> <span>#PT00<%=c%></span></a>
                                                                             </h2>
                                                                         </td>
-                                                                       <td><%=patients.age%></td>
+                                                                       <td class="sstd"><%=patients.age%></td>
                 
-                                                                       <td><%=patients.phone%></td>
+                                                                       <td class="sstd"><%=patients.phone%></td>
                 
-                                                                       <td><%=patients.address%></td>
+                                                                       <td class="sstd"><%=patients.address%></td>
                                                                        <%if(patients.type=='online'){%>
-                                                                       <td><span class="badge badge-pill bg-sucIcess-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                       <td class="sstd"><span class="badge badge-pill bg-sucIcess-light"><%=patients.type.toUpperCase()%></span></td>
                                                                        <%}else{%>
-                                                                        <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                        <td class="sstd"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
                 
                                                                         <%}%>
                 
                                                                         
                                                                             
                                                                                 <%if(patients.cancel == true){%>
-                                                                                    <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                    <td class="sstd"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                                     <%}else{%>
-                                                                                      <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                      <td class="sstd"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                       <%}%>
                                                                         <%var tflag = false;%>
                                                                         
@@ -539,12 +538,12 @@
                                                                             <%}%>
                                                                             <%}%> 
                                                                         <%if(!tflag){%>             
-                                                                       <td id="updatedStatus1"><a data-count='<%=c++%>' data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus">Check In</a></td>        
+                                                                       <td class="sbtn" id="updatedStatus1"><a data-count='<%=c++%>' data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus">Check In</a></td>        
                                                                        <%}else{%>
-                                                                        <td id="updatedStatus1" class="displayNone"><a data-count='<%=c++%>'data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus">Check In</a></td>        
-                                                                       <td id="updatedStatus3"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+                                                                        <td id="updatedStatus1" class="displayNone sbtn"><a data-count='<%=c++%>'data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus">Check In</a></td>        
+                                                                       <td id="updatedStatus3" class="sbtn"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
                                                                        <%}%> 
-                                                                       <td class="displayNone" id="updatedStatus2"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+                                                                       <td class="displayNone sbtn" id="updatedStatus2"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
      
                                                                     </tr>
                                                                     <%b++;%>
@@ -563,7 +562,7 @@
                                         <%for(let i1 =0 ;i1<slots;i1++){%>
                                               <ul class="nav nav-tabs nav-tabs-solid  text-center">
                                                 <li class="nav-item" style="width: 100%;">
-                                                    <a class="nav-link active" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab" ><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;"><%=user1.doctorid.schedule_time[sindex].start[i1].toUpperCase()%> - <%=user1.doctorid.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
+                                                    <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab" ><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span class="f1small" style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;"><%=user1.doctorid.schedule_time[sindex].start[i1].toUpperCase()%> - <%=user1.doctorid.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
                                                 </li>
                                               </ul>
                                               <div class="tab-content">
@@ -573,23 +572,23 @@
                                                     <div class="card card-table mb-0">
                                                         <div class="card-body">
                                                             <div class="table-responsive">
-                                                                <table class="table table-hover table-center mb-0">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Patient Name</th>
-                                                                            <th>Patient Age</th>
-                                                                            <th>Patient Phone</th>
-                                                                            <th>Patient Address</th>
-                                                                            <th>Booking Mode</th>
-                                                                            <th class="text-center">Status</th>
-                                                                            <th class="text-center">Track</th>
-                                                                            <th class=""></th>
+                                                                <table class="table table-hover table-center mb-0 stable">
+                                                                    <thead class="sthead">
+                                                                        <tr class="str">
+                                                                            <th class="sth">Patient Name</th>
+                                                                            <th class="sth">Patient Age</th>
+                                                                            <th class="sth">Patient Phone</th>
+                                                                            <th class="sth">Patient Address</th>
+                                                                            <th class="sth">Booking Mode</th>
+                                                                            <th class="text-center sth">Status</th>
+                                                                            <th class="text-center sth">Track</th>
+                                                                            
                                                                            
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
+                                                                    <tbody class="stbody">
                                                                         <%var c=1%>
-                                                                        <%var b = 0;%>
+                                                                        <%var b = 0,z1=0;%>
                                                                         <%for(patients of locals.user.booking){%>
                                                                         <%var today = new Date();
                                                                         var dd = String(today.getDate()).padStart(2, '0');
@@ -606,36 +605,36 @@
                                                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                                         
-                                                                        <%if(str1 != str2 || patients.slot != i1){%>
-                                                                            <%b++;continue;%>
+                                                                        <%if(str1 != str2 || patients.slot != i1 || patients.cancel != false){%>
+                                                                            <%b++;z1++;continue;%>
                                                                         <%}%>
-                                                                       
+                                                                       <tr class="str">
                                                                          
-                                                                            <td>
+                                                                            <td class="sstd">
                                                                                 <h2 class="table-avatar">
                                                                                     
                     
                                                                                     <a href="#"><%=patients.name%> <span>#PT00<%=c%></span></a>
                                                                                 </h2>
                                                                             </td>
-                                                                           <td><%=patients.age%></td>
+                                                                           <td class="sstd"><%=patients.age%></td>
                     
-                                                                           <td><%=patients.phone%></td>
+                                                                           <td class="sstd"><%=patients.phone%></td>
                     
-                                                                           <td><%=patients.address%></td>
+                                                                           <td class="sstd"><%=patients.address%></td>
                                                                            <%if(patients.type=='online'){%>
-                                                                           <td><span class="badge badge-pill bg-sucIcess-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                           <td class="sstd"><span class="badge badge-pill bg-sucIcess-light"><%=patients.type.toUpperCase()%></span></td>
                                                                            <%}else{%>
-                                                                            <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                            <td class="sstd"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
                     
                                                                             <%}%>
                     
                                                                             
                                                                                 
                                                                                     <%if(patients.cancel == true){%>
-                                                                                        <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                        <td class="sstd"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                                         <%}else{%>
-                                                                                          <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                          <td class="sstd"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                           <%}%>
                                                                             <%var tflag = false;%>
                                                                             
@@ -647,19 +646,23 @@
                                                                                 <%}%>
                                                                                 <%}%> 
                                                                             <%if(!tflag){%>             
-                                                                           <td id="updatedStatus1<%=i1%>"><a data-count='<%=c++%>' data-slot='<%=i1%>' data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus<%=i1%>">Check In</a></td>        
+                                                                           <td id="updatedStatus1<%=i1%>" class="sbtn"><a data-count='<%=c++%>' data-slot='<%=i1%>' data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus<%=i1%>">Check In</a></td>        
                                                                            <%}else{%>
-                                                                            <td id="updatedStatus1<%=i1%>" class="displayNone"><a data-count='<%=c++%>'data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus<%=i1%>">Check In</a></td>        
-                                                                           <td id="updatedStatus3<%=i1%>"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+                                                                            <td id="updatedStatus1<%=i1%>" class="displayNone sbtn"><a data-count='<%=c++%>'data-mindex='<%=b%>' data-tid='<%=patients._id%>' data-name='<%=patients.name%>' data-waiting='<%=patients.waiting%>' style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:crimson;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;" id="updateStatus<%=i1%>">Check In</a></td>        
+                                                                           <td id="updatedStatus3<%=i1%>" class="sbtn"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
                                                                            <%}%> 
-                                                                           <td class="displayNone" id="updatedStatus2<%=i1%>"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
+                                                                           <td class="displayNone sbtn" id="updatedStatus2<%=i1%>"><a style="padding: 8px;border:1px solid grey;border-radius: 5px; background-color:forestgreen;color: white;cursor: pointer;width:140px;display: inline-block;text-align: center;"><i class="fas fa-check-square" style="margin-right: 8px;"></i>Checked In</a></td>        
          
                                                                         </tr>
                                                                         <%b++;%>
                                                                         <%}%>
                                                                        
                                                                     </tbody>
+                                                                  
                                                                 </table>
+                                                                <%if(z1==locals.user.booking.length){%>
+                                                                    <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this slot.</h2>
+                                                                <%}%>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -680,7 +683,7 @@
                         <%}%>
                         <%if(locals.user.type == 'Staff'){%>
                                <%if(slots <= 1){%>
-                                    <div class="" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                                    <div class="displayNone" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
                                         <div id="track_header" style="padding-top: 50px;">
                                             <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
                                         </div>
@@ -757,7 +760,7 @@
                                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                         
-                                                        <%if(str1 != str2){%>
+                                                        <%if(str1 != str2 || user1.booking[i].cancel != false){%>
                                                             <%continue;%>
                                                         <%}%>
 
@@ -778,7 +781,7 @@
                                     </div>
                                     <%}else{%>
                                         <%for(let i1 =0 ;i1<slots;i1++){%>
-                                            <div class="" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                                            <div class="displayNone" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
                                                 <div id="track_header" style="padding-top: 50px;">
                                                     <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
                                                 </div>
@@ -802,6 +805,7 @@
                                                             <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                             
                                                             <%if(str1 != str2 || u.slot != i1){%>
+
                                                                 <%continue;%>
                                                             <%}%>
                                                             
@@ -855,7 +859,7 @@
                                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                 <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                                 
-                                                                <%if(str1 != str2|| user1.booking[i].slot != i1){%>
+                                                                <%if(str1 != str2|| user1.booking[i].slot != i1 || user1.booking[i].cancel != false){%>
                                                                     <%continue;%>
                                                                 <%}%>
         
@@ -893,13 +897,13 @@
                             
                             <%}%>
                             <%if(slots <= 1){%>
-                        <div style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
-                            <div id="track_header" style="padding-top: 50px;">
+                     <div style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
+                            <div id="track_header"class="mheader" style="padding-top: 50px;">
                                 <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
                             </div>
-                            <div class="patient_tracking_display">
+                            <div class="patient_tracking_display mdisplay">
                                 <%var last=0;%>
-                                <ul id="patient-ul">
+                                <ul id="patient-ul" class="sscreenul">
                                     <%for(u of user1.tracked){%>
                                         <%var today = new Date();
                                         var dd = String(today.getDate()).padStart(2, '0');
@@ -933,17 +937,17 @@
                                                 <h3 class="uvisited"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>
                                                 <%}%>
                                             <%var date = u.time.toLocaleTimeString();
-                                            var date1 = date.slice(0,4);
-                                            var date2 = date.slice(8,10);%>
+                                            var date1 = date.slice(0,5);
+                                            var date2 = date.slice(8,11);%>
                                             <p>CheckIn Time : <%=date1%>&nbsp;<%=date2%></p>
                                         </li>
                                 <%}%>
                                 
                                 </ul>
                                 <%if(last==0){%>
-                                    <div id="no_patient">
+                                    <div id="no_patient" class="m1header">
                                     <h1 class="text-center font-weight-bolder"style="font-size:2rem;color:black"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span>Doctor has not started seeing yet!</h1>
-                                    <h2 class="text-center font-weight-bolder"style="font-size:1.5rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
+                                    <h2 class="text-center font-weight-bolder"style="font-size:1.3rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
                                     </div>
                                     <%}%>
                                 <ul class="nav nav-tabs nav-tabs-solid  text-center">
@@ -952,7 +956,7 @@
                                     </li>
                                 </ul>
                                 <div class="upcoming_patient_display">
-                                    <ul id="patient-ul" class="upcoming-ul">
+                                    <ul id="patient-ul" class="upcoming-ul sscreenul">
                                        <%var c=last;%>
                                         <%for(let i = 0 ; i<user1.booking.length;i++){%>
                                             <%var today = new Date();
@@ -970,7 +974,7 @@
                                             <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                             <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                             
-                                            <%if(str1 != str2){%>
+                                            <%if(str1 != str2 || user1.booking[i].cancel != false){%>
                                                 <%continue;%>
                                             <%}%>
 
@@ -989,15 +993,17 @@
                             </div>
                           
                         </div>
+                        
                         <%}else{%>
                             <%for(let i1 =0 ;i1<slots;i1++){%>
+                                <%if(slotnumber == i1){%>
                                 <div style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('/img/app.jpeg');min-height: 100vh;height: auto;background-size: cover;background-repeat: no-repeat;padding-bottom: 100px;">
-                                    <div id="track_header" style="padding-top: 50px;">
+                                    <div id="track_header" class="mheader" style="padding-top: 50px;">
                                         <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
                                     </div>
-                                    <div class="patient_tracking_display">
+                                    <div class="patient_tracking_display mdisplay">
                                         <%var last=0;%>
-                                        <ul id="patient-ul<%=i1%>">
+                                        <ul id="patient-ul<%=i1%>" class="sscreenul">
                                             <%for(u of user1.tracked){%>
                                                 <%var today = new Date();
                                                 var dd = String(today.getDate()).padStart(2, '0');
@@ -1031,15 +1037,15 @@
                                                         <h3 class="uvisited<%=i1%>"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</h3>
                                                         <%}%>
                                                     <%var date = u.time.toLocaleTimeString();
-                                                    var date1 = date.slice(0,4);
-                                                    var date2 = date.slice(8,10);%>
+                                                    var date1 = date.slice(0,5);
+                                                    var date2 = date.slice(8,11);%>
                                                     <p>CheckIn Time : <%=date1%>&nbsp;<%=date2%></p>
                                                 </li>
                                         <%}%>
                                         
                                         </ul>
                                         <%if(last==0){%>
-                                            <div id="no_patient<%=i1%>">
+                                            <div id="no_patient<%=i1%>" class="m1header">
                                             <h1 class="text-center font-weight-bolder"style="font-size:2rem;color:black"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span>Doctor has not started seeing yet!</h1>
                                             <h2 class="text-center font-weight-bolder"style="font-size:1.5rem;color:black;margin-bottom:30px;">Stay Tuned to see the live tracking.</h2>
                                             </div>
@@ -1050,7 +1056,7 @@
                                             </li>
                                         </ul>
                                         <div class="upcoming_patient_display">
-                                            <ul id="patient-ul<%=i1%>" class="upcoming-ul<%=i1%>">
+                                            <ul id="patient-ul<%=i1%>" class="upcoming-ul<%=i1%> sscreenul">
                                                <%var c=last;%>
                                                 <%for(let i = 0 ; i<user1.booking.length;i++){%>
                                                     <%var today = new Date();
@@ -1087,6 +1093,7 @@
                                     </div>
                                   
                                 </div>
+                                <%}%>
                                 <%}%>
                                 <%}%>
                         <%}%>

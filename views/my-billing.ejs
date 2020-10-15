@@ -506,7 +506,56 @@
                     <!-- / Profile Sidebar -->
 
                     <div class="col-md-7 col-lg-8 col-xl-9 plr0">
-                      
+                       
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="false" style="z-index:1050;">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <!-- <div id="popup2" class="overlay">
+                            <div class="popup">
+                                <form action="/user/payments/refund" method="POST">
+                                    <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                        <div class="form-group">
+                                            <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
+                                                <input type="hidden" name="id" value="" id="input">
+                                                <input type="hidden" name="doctorid" value="" id="input">
+                                                <input type="hidden" name="slotindex" value="" id="input">
+                                                <input type="hidden" name="dayindex" value="" id="input">
+                                                <input type="hidden" name="index" value="" id="input">
+                                                <input type="hidden" name="bid" value="" id="input">
+                                                <input type="hidden" name="time" value="" id="input">
+                                                <input type="hidden" name="date" value="" id="input">
+                                                <input type="hidden" name="phone" value="" id="input">
+                                                <input type="hidden" name="email" value="" id="input">
+                                                <input type="hidden" name="payment_id" value="" id="input">
+                                                <input type="hidden" name="fee" value="">
+                                                    <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                    <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
+                                </form>
+                            </div>
+                        </div>
+                       -->
                         <%if(alldoctors.doctors == ''){%>
                             <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Billings Available !</span></h2>
                             <%}else{%>
@@ -631,32 +680,7 @@
                                                                 
                                                                 <%c++;%>
 
-                                                                <div id="popup2" class="overlay">
-                                                                    <div class="popup">
-                                                                        <form action="/user/payments/<%=alldoctors.payments[i].payment_id%>/refund" method="POST">
-                                                                            <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
-                                                                                <div class="form-group">
-                                                                                    <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
-                                                                                        <input type="hidden" name="id" value="<%=alldoctors.payments[i].payment_id%>">
-                                                                                        <input type="hidden" name="doctorid" value="<%=alldoctors.doctors[i].did._id%>">
-                                                                                        <input type="hidden" name="slotindex" value="<%=alldoctors.doctors[i].slotindex%>">
-                                                                                        <input type="hidden" name="dayindex" value="<%=alldoctors.doctors[i].dayindex%>">
-                                                                                        <input type="hidden" name="index" value="<%=i%>">
-                                                                                        <input type="hidden" name="bid" value="<%=alldoctors.doctors[i]._id%>">
-                                                                                        <input type="hidden" name="time" value="<%=alldoctors.doctors[i].time%>">
-                                                                                        <input type="hidden" name="date" value="<%=alldoctors.doctors[i].date%>">
-                                                                                        <input type="hidden" name="phone" value="<%=alldoctors.doctors[i].phone%>">
-                                                                                        <input type="hidden" name="email" value="<%=alldoctors.doctors[i].email%>">
-                                                                                        <input type="hidden" name="fee" value="<%=alldoctors.doctors[i].fee%>">
-                                                                                            <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
-                                                                                            <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
-                                                                                </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
+                                                              
                                                             <tr>
                                                                 <td>
                                                                     <a href="/invoice-view">#INV-000<%=c%></a>
@@ -685,13 +709,17 @@
 
                                                                             <i class="fas fa-print"></i> Cancellled
                                                                         </a>
+                                                                        
                                                                       <%}else{%>
                                                                      
-                                                                          <a href="#popup2" class="btn btn-sm bg-danger-light">
+                                                                          <a data-target="#exampleModalCenter" id="popbtn" class="btn btn-sm bg-danger-light" data-0 ="<%=alldoctors.payments[i].payment_id%>" data-1="<%=alldoctors.doctors[i].did._id%>" data-2="<%=alldoctors.doctors[i].slotindex%>" data-3="<%=alldoctors.doctors[i].dayindex%>" data-4="<%=i%>" data-5="<%=alldoctors.doctors[i]._id%>" data-6="<%=alldoctors.doctors[i].time%>"data-7="<%=alldoctors.doctors[i].date%>"data-8="<%=alldoctors.doctors[i].phone%>" data-9="<%=alldoctors.doctors[i].email%>" data-10="<%=alldoctors.doctors[i].fee%>" >
 
                                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                         </a>
                                                                         <%}%>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                                            Launch demo modal
+                                                                          </button>
                                                                 
                                                                     </div>
                                                                 </td>
@@ -873,6 +901,21 @@
 
     <!-- Custom JS -->
     <script src="/js/script.js"></script>
+    <script> 
+     $(document).on('shown.bs.modal', '#popup2' , function(e) {
+
+       var values = document.querySelectorAll('#input');
+       var popbtn = document.querySelectorAll('#popbtn');
+       for(let i=0;i<values.length;i++)
+       {
+        
+           values[i].value = popbtn.data(i);
+       }
+
+       
+
+        
+    });</script>
   
 
 </body>

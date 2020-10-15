@@ -23,6 +23,8 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -473,13 +475,38 @@
                                                                                                                 <%=doctor.department%>
 
                                     </p>
+                                    <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                    <%for(review of doctor.reviews){%>
+                                        <%sum+=review.rating;%>
+                                    <%}%>
+                                    <%avg=sum/cnt;console.log(avg,sum)%>
                                     <div class="rating">
+                                        <%if(avg>=1){%>
                                         <i class="fas fa-star filled"></i>
+                                        <%}else{%>
+                                            <i class="fas fa-star"></i>
+                                        <%}%>
+                                        <%if(avg>=2){%>
                                         <i class="fas fa-star filled"></i>
+                                        <%}else{%>
+                                            <i class="fas fa-star"></i>
+                                        <%}%>
+                                        <%if(avg>=3){%>
                                         <i class="fas fa-star filled"></i>
+                                        <%}else{%>
+                                            <i class="fas fa-star"></i>
+                                        <%}%>
+                                        <%if(avg>=4){%>
                                         <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="d-inline-block average-rating">(35)</span>
+                                        <%}else{%>
+                                            <i class="fas fa-star"></i>
+                                        <%}%>
+                                        <%if(avg>=5){%>
+                                        <i class="fas fa-star filled"></i>
+                                        <%}else{%>
+                                            <i class="fas fa-star"></i>
+                                        <%}%>
+                                        <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
                                     </div>
 
                                     <div class="clinic-details">
@@ -510,8 +537,7 @@
                             <div class="doc-info-right">
                                 <div class="clini-infos">
                                     <ul>
-                                        <li><i class="far fa-thumbs-up"></i> 0</li>
-                                        <li><i class="far fa-comment"></i> 0</li>
+                                       
                                         <li><i class="fas fa-map-marker-alt"></i>
                                             <%=doctor.contacts.city%>
                                                 <%=doctor.contacts.state%>
@@ -789,90 +815,115 @@
 
                             <!-- Reviews Content -->
                             <div role="tabpanel" id="doc_reviews" class="tab-pane fade">
+                                <div class="write-review">
+                                    <h4>Write a review for <strong>Dr. <%=doctor.name%></strong></h4>
 
 
-                                <!-- <div class="widget review-listing">
+                                    <form action="/user/doctor-review/?id=<%=doctor._id%>" method="POST">
+                                        <div class="form-group">
+                                            <label>Review</label>
+                                            <input type="hidden" name="pid" value="<%=locals.user._id%>">
+                                            <div class="star-rating">
+                                                <input id="star-5" type="radio" name="rating" value="5">
+                                                <label for="star-5" title="5 stars">
+														<i class="active fa fa-star"></i>
+													</label>
+                                                <input id="star-4" type="radio" name="rating" value="4">
+                                                <label for="star-4" title="4 stars">
+														<i class="active fa fa-star"></i>
+													</label>
+                                                <input id="star-3" type="radio" name="rating" value="3">
+                                                <label for="star-3" title="3 stars">
+														<i class="active fa fa-star"></i>
+													</label>
+                                                <input id="star-2" type="radio" name="rating" value="2">
+                                                <label for="star-2" title="2 stars">
+														<i class="active fa fa-star"></i>
+													</label>
+                                                <input id="star-1" type="radio" name="rating" value="1">
+                                                <label for="star-1" title="1 star">
+														<i class="active fa fa-star"></i>
+													</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Title of your review</label>
+                                            <input class="form-control" type="text" name="title" placeholder="If you could say it in one sentence, what would you say?">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Your review</label>
+                                            <textarea id="review_desc" maxlength="100" name="review_description" class="form-control"></textarea>
+
+                                            <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
+                                        </div>
+                                        <hr>
+                                       
+                                        <div class="submit-section">
+                                            <button type="submit" class="btn btn-primary submit-btn">Add Review</button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+
+
+                             <div class="widget review-listing">
                                     <ul class="comments-list">
 
-
+                                        <%for(review of doctor.reviews){%>
+                                        
                                         <li>
                                             <div class="comment">
-                                                <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient.jpg">
+                                            <img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%=review.pid.avatar%>" onerror="this.src='/img/profile.png'">
                                                 <div class="comment-body">
                                                     <div class="meta-data">
-                                                        <span class="comment-author">Richard Wilson</span>
+                                                        <span class="comment-author"><%=review.pid.name%></span>
                                                         <span class="comment-date">Reviewed 2 Days ago</span>
+                                                        <%var avg = review.rating;%>
+                                                       
                                                         <div class="review-count rating">
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star"></i>
+                                                            <%if(avg>=1){%>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <%}else{%>
+                                                                    <i class="fas fa-star"></i>
+                                                                <%}%>
+                                                                <%if(avg>=2){%>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <%}else{%>
+                                                                    <i class="fas fa-star"></i>
+                                                                <%}%>
+                                                                <%if(avg>=3){%>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <%}else{%>
+                                                                    <i class="fas fa-star"></i>
+                                                                <%}%>
+                                                                <%if(avg>=4){%>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <%}else{%>
+                                                                    <i class="fas fa-star"></i>
+                                                                <%}%>
+                                                                <%if(avg>=5){%>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <%}else{%>
+                                                                    <i class="fas fa-star"></i>
+                                                                <%}%>
                                                         </div>
                                                     </div>
-                                                    <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
+                                                    <p class="recommended"><i class="far fa-thumbs-up"></i> <%=review.title%></p>
                                                     <p class="comment-content">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
+                                                        <%=review.review_description%>
                                                     </p>
-                                                    <div class="comment-reply">
-                                                        <a class="comment-btn" href="#">
-                                                            <i class="fas fa-reply"></i> Reply
-                                                        </a>
-                                                        <p class="recommend-btn">
-                                                            <span>Recommend?</span>
-                                                            <a href="#" class="like-btn">
-                                                                <i class="far fa-thumbs-up"></i> Yes
-                                                            </a>
-                                                            <a href="#" class="dislike-btn">
-                                                                <i class="far fa-thumbs-down"></i> No
-                                                            </a>
-                                                        </p>
-                                                    </div>
+                                                  
                                                 </div>
                                             </div>
 
 
-                                            <ul class="comments-reply">
-                                                <li>
-                                                    <div class="comment">
-                                                        <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient1.jpg">
-                                                        <div class="comment-body">
-                                                            <div class="meta-data">
-                                                                <span class="comment-author">Charlene Reed</span>
-                                                                <span class="comment-date">Reviewed 3 Days ago</span>
-                                                                <div class="review-count rating">
-                                                                    <i class="fas fa-star filled"></i>
-                                                                    <i class="fas fa-star filled"></i>
-                                                                    <i class="fas fa-star filled"></i>
-                                                                    <i class="fas fa-star filled"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                </div>
-                                                            </div>
-                                                            <p class="comment-content">
-                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Curabitur non nulla sit amet nisl tempus
-                                                            </p>
-                                                            <div class="comment-reply">
-                                                                <a class="comment-btn" href="#">
-                                                                    <i class="fas fa-reply"></i> Reply
-                                                                </a>
-                                                                <p class="recommend-btn">
-                                                                    <span>Recommend?</span>
-                                                                    <a href="#" class="like-btn">
-                                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                                    </a>
-                                                                    <a href="#" class="dislike-btn">
-                                                                        <i class="far fa-thumbs-down"></i> No
-                                                                    </a>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                          
 
                                         </li>
+                                        <%}%>
 
-                                        <li>
+                                        <!-- <li>
                                             <div class="comment">
                                                 <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient2.jpg">
                                                 <div class="comment-body">
@@ -906,78 +957,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li> -->
 
 
                                     </ul>
 
 
-                                    <div class="all-feedback text-center">
-                                        <a href="#" class="btn btn-primary btn-sm">
-												Show all feedback <strong>(167)</strong>
-											</a>
-                                    </div>
-
-
-                                </div> -->
-
-                                <div class="write-review">
-                                    <h4>Write a review for <strong>Dr. <%=doctor.name%></strong></h4>
-
-
-                                    <form>
-                                        <div class="form-group">
-                                            <label>Review</label>
-                                            <div class="star-rating">
-                                                <input id="star-5" type="radio" name="rating" value="star-5">
-                                                <label for="star-5" title="5 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-                                                <input id="star-4" type="radio" name="rating" value="star-4">
-                                                <label for="star-4" title="4 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-                                                <input id="star-3" type="radio" name="rating" value="star-3">
-                                                <label for="star-3" title="3 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-                                                <input id="star-2" type="radio" name="rating" value="star-2">
-                                                <label for="star-2" title="2 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-                                                <input id="star-1" type="radio" name="rating" value="star-1">
-                                                <label for="star-1" title="1 star">
-														<i class="active fa fa-star"></i>
-													</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Title of your review</label>
-                                            <input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Your review</label>
-                                            <textarea id="review_desc" maxlength="100" class="form-control"></textarea>
-
-                                            <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
-                                        </div>
-                                        <hr>
-                                        <div class="form-group">
-                                            <div class="terms-accept">
-                                                <div class="custom-checkbox">
-                                                    <input type="checkbox" id="terms_accept">
-                                                    <label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="submit-section">
-                                            <button type="submit" class="btn btn-primary submit-btn">Add Review</button>
-                                        </div>
-                                    </form>
+                                  
 
 
                                 </div>
 
+
+                             
 
                             </div>
 
@@ -1265,6 +1257,26 @@
 
     <!-- Custom JS -->
     <script src="/js/script.js"></script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui ',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+                    theme: 'metroui',
+                    text: '
+                    <%=flash.error%>
+                    ', type: '
+                    error ', layout: '
+                    topRight ', timeout: 3000 }).show();
+                    <%}%>
+    </script>
 
 </body>
 

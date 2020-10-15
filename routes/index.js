@@ -18,6 +18,7 @@ router.get('/appointment-detail', passport.checkAuthentication, homeController.a
 router.get('/blank-page', passport.checkAuthentication, homeController.blankPage);
 router.get('/booking', homeController.booking);
 router.get('/booking-success', homeController.bookingSuccess);
+router.get('/booking-service', homeController.bookingServiceSetting);
 router.get('/calendar', homeController.calendar);
 router.get('/change-password', passport.checkAuthentication, homeController.changePassword);
 router.get('/chat', passport.checkAuthentication, homeController.chat);
@@ -38,6 +39,7 @@ router.get('/doctor-register', passport.checkAuthentication, homeController.doct
 router.get('/edit-billing', passport.checkAuthentication, homeController.editBilling);
 router.get('/edit-prescription', passport.checkAuthentication, homeController.editPrescription);
 router.get('/educational', passport.checkAuthentication, homeController.educational);
+router.get('/email-verified', homeController.emailVerified);
 router.get('/establishment', passport.checkAuthentication, homeController.establishment);
 router.get('/favourites', passport.checkAuthentication, homeController.favourites);
 router.get('/fees', passport.checkAuthentication, homeController.fees);
@@ -69,12 +71,14 @@ router.get('/preview-profile', passport.checkAuthentication, homeController.prev
 router.get('/register', homeController.register);
 router.get('/reviews', passport.checkAuthentication, homeController.reviews);
 router.get('/schedule-timings', passport.checkAuthentication, homeController.scheduleTimings);
+router.get('/staff-schedule-timings', passport.checkAuthentication, homeController.staffScheduleTimings);
 router.get('/search', homeController.search);
 router.get('/social-media', passport.checkAuthentication, homeController.socialMedia);
 router.get('/settings', passport.checkAuthentication, homeController.settings);
 router.get('/staff-login', homeController.staffLogin);
+router.get('/staff-profile', homeController.staffProfile);
+router.get('/staff-dashboard', homeController.staffDashboard);
 router.get('/staff-login-page', homeController.staffLoginPage);
-router.get('/staff-appointment-page', homeController.staffAppointmentPage);
 router.get('/staff-booking', homeController.staffBooking);
 router.get('/steps', passport.checkAuthentication, homeController.steps)
 router.get('/term-condition', homeController.termCondition);

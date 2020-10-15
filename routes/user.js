@@ -25,10 +25,13 @@ router.post('/update-medical-registration',userController.updateMedicalRegistrat
 router.post('/update-education',userController.updateEducation);
 router.post('/update-establishment',userController.updateEstablishment);
 router.post('/confirm-pay',userController.confirmPay);
+router.post('/manage-booking-service',userController.manageBookingService);
+router.post('/doctor-review',userController.doctorReview);
 router.post('/set-schedule-timing', userController.setScheduleTiming);
 router.post('/update-schedule', userController.updateSchedule);
 router.post('/verify-payment',userController.verifyPayment);
-router.post('/payments/:id/refund',userController.refund)
+router.get('/verify-email',userController.verifyEmail);
+router.post('/payments/refund',userController.refund)
 router.post('/set-booking-fee', userController.setBookingFee);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
@@ -40,6 +43,8 @@ router.post('/book-appointment',userController.bookAppointment);
 router.post('/staff-book-appointment',userController.staffBookAppointment);
 router.post('/payment',userController.payment);
 router.post('/offline-pay',userController.offlinePay);
+router.post('/offline-cancel',userController.offlineCancel);
+router.post('/sort-by-date',userController.sortByDate);
 router.get('/add-favourite', userController.addFavourite);
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-idproof', userController.uploadIdProof);

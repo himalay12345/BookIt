@@ -592,13 +592,38 @@
                                                                                                                                     <%=doctor.department%>
 
                                                         </p>
+                                                        <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                                        <%for(review of doctor.reviews){%>
+                                                            <%sum+=review.rating;%>
+                                                        <%}%>
+                                                        <%avg=sum/cnt;%>
                                                         <div class="rating">
+                                                            <%if(avg>=1){%>
                                                             <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=2){%>
                                                             <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=3){%>
                                                             <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=4){%>
                                                             <i class="fas fa-star filled"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <span class="d-inline-block average-rating">(17)</span>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=5){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
                                                         </div>
                                                         <div class="clinic-details">
                                                             <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
@@ -631,8 +656,7 @@
                                                 <div class="doc-info-right">
                                                     <div class="clini-infos">
                                                         <ul>
-                                                            <li><i class="far fa-thumbs-up"></i> 0</li>
-                                                            <li><i class="far fa-comment"></i> 0</li>
+                                                            
                                                             <li><i class="fas fa-map-marker-alt"></i>
                                                                 <%=doctor.contacts.city%>
                                                                     <%=doctor.contacts.state%>
@@ -683,9 +707,7 @@
 
                         <!-- /Doctor Widget -->
 
-                        <div class="load-more text-center">
-                            <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
-                        </div>
+                        
                     </div>
                 </div>
 

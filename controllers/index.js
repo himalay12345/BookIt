@@ -3,6 +3,7 @@ const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
 const shortid = require('shortid');
 const Razorpay = require('razorpay');
+const emailVerification = require('../mailers/email-otp');
 
 
 module.exports.home = async(req, res) => {
@@ -124,7 +125,7 @@ module.exports.bankDetails = (req, res) => {
     })
 }
 module.exports.Doctors = async(req, res) => {
-    let doctors = await User.find({ approve1: true, approve2: true });
+    let doctors = await User.find({ approve1: true, approve2: true,booking_service:true });
     return res.render('doctors', {
         title: 'Doctors',
         doctors: doctors
@@ -180,6 +181,12 @@ module.exports.bookingSuccess = (req, res) => {
     })
 }
 
+module.exports.bookingServiceSetting = (req, res) => {
+    return res.render('booking-service-setting', {
+        title: 'Booking-Service'
+    })
+}
+
 module.exports.calendar = (req, res) => {
     return res.render('calendar', {
         title: 'Calendar'
@@ -224,7 +231,7 @@ module.exports.checkout = (req, res) => {
     })
 }
 module.exports.components = (req, res) => {
-    return res.render('components', {
+    return res.render('email-verification', {
         title: 'Components'
     })
 }
@@ -264,7 +271,13 @@ module.exports.doctorDashboard = async(req, res) => {
 
 module.exports.doctorProfile = async(req, res) => {
     console.log(req.query.id);
-    let doctor = await User.findById(req.query.id);
+    let doctor = await User.findById(req.query.id).populate({
+        path: 'reviews',
+        populate: {
+            path: 'pid',
+            populate: { path: 'user', }
+        }
+    });
 
     return res.render('doctor-profile', {
         title: 'Profile',
@@ -298,6 +311,12 @@ module.exports.editBilling = (req, res) => {
 module.exports.editPrescription = (req, res) => {
     return res.render('edit-prescription', {
         title: 'Edit prescription'
+    })
+}
+
+module.exports.emailVerified = (req, res) => {
+    return res.render('email-verify-success', {
+        title: 'Email Verified'
     })
 }
 module.exports.establishment = (req, res) => {
@@ -609,7 +628,8 @@ module.exports.patientTracking = async(req, res) => {
         
         return res.render('patient-tracking', {
             title: 'Track patients',
-            user1:user
+            user1:user,
+            slotnumber:req.query.slotindex
             
         })
     }
@@ -669,17 +689,6 @@ module.exports.register = (req, res) => {
     })
 }
 
-module.exports.staffAppointmentPage = (req, res) => {
-    if (req.user.type != 'Staff') {
-        return res.redirect('/staff-login-page')
-    }
-
-    else{
-    return res.render('staff-appointment-page', {
-        title: 'Appointments'
-    })
-}
-}
 
 module.exports.steps = (req, res) => {
     // if(req.user.approve == true)
@@ -707,35 +716,72 @@ module.exports.staffLoginPage = (req, res) => {
         title: 'Staff Login'
     })
 }
-module.exports.staffSignup = async(req, res) => {
-    let data = await client
-    .verify
-    .services(config.serviceID)
-    .verificationChecks
-    .create({
-        to: `+91${req.body.phone}`,
-        code: req.body.otp
-    });
 
-    console.log(req.body.id);
-
-
-if (data.status == 'approved') {
-    return res.render('staff-register', {
-        title: 'Staff Register',
-        phone: req.body.phone,
-        id:req.body.id
-    });
-
-} else {
-    req.flash('error', 'Wrong Otp');
-    return res.render('doctor-phone-verify', {
-        title: 'Phone verification',
-        phone: req.body.phone,
-        id:req.body.id
+module.exports.staffDashboard = async(req, res) => {
+    let patients = await User.findById(req.user.id);
+    return res.render('staff-dashboard', {
+        title: 'My Dashboard',
+        allpatients: patients
     })
-
 }
+
+module.exports.staffSignup = async(req, res) => {
+
+    if(req.body.type == 'email')
+    {
+        let doctor = await User.findById(req.body.id);
+        if(req.body.otp == doctor.emailkey)
+        {
+            return res.render('staff-register', {
+                title: 'Staff Register',
+                phone: req.body.phone,
+                id:req.body.id,
+                type:'email'
+            });
+        }
+
+        else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id:req.body.id,
+                type:'email'
+            })
+        
+        }
+    }
+    else{
+        let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+    
+        console.log(req.body.id);
+    
+    
+    if (data.status == 'approved') {
+        return res.render('staff-register', {
+            title: 'Staff Register',
+            phone: req.body.phone,
+            id:req.body.id
+        });
+    
+    } else {
+        req.flash('error', 'Wrong Otp');
+        return res.render('doctor-phone-verify', {
+            title: 'Phone verification',
+            phone: req.body.phone,
+            id:req.body.id
+        })
+    
+    }
+    }
+   
     
     
 }
@@ -868,12 +914,31 @@ module.exports.scheduleTimings = async(req, res) => {
         user: user
     })
 }
+module.exports.staffScheduleTimings = async(req, res) => {
+    let user1 = await User.findById(req.user.id);
+    let user = await User.findById(user1.doctorid).populate('schedule_time');
+
+    return res.render('staff_schedule_timing', {
+        title: 'Schedule Timings',
+        user: user
+    })
+}
+
+module.exports.staffProfile = async (req, res) => {
+    // let user = await User.findById(req.user.id);
+    return res.render('staff-profile', {
+        title: 'Profile Settings'
+    })
+}
+
 
 module.exports.search = (req, res) => {
     return res.render('search', {
         title: 'Search'
     })
 }
+
+
 
 module.exports.socialMedia = (req, res) => {
     return res.render('social-media', {
@@ -883,6 +948,7 @@ module.exports.socialMedia = (req, res) => {
 
 module.exports.staffBooking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
+    let user1 = await User.findById(req.user.id).populate('doctorid');
     var today = new Date();
     today.setDate(today.getDate() - 1)
         var dd = String(today.getDate()).padStart(2, '0');
@@ -913,7 +979,8 @@ module.exports.staffBooking = async(req, res) => {
 
     return res.render('staff-booking-page', {
         title: 'Booking',
-        doctor: doctor
+        doctor: doctor,
+        user1:user1
     })
 }
 
@@ -957,38 +1024,75 @@ module.exports.voiceCall = (req, res) => {
 }
 
 module.exports.verifyDoctor = async (req, res) => {
-    let doctor = await User.findOne({phone:req.body.phone,
-    type:'Doctor',staff_flag:false});
-   
 
-    if(doctor)
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var check = re.test(String(req.body.phone).toLowerCase());
+    if(check == true)
     {
-        client
-        .verify
-        .services(config.serviceID)
-        .verifications
-        .create({
-            to: `+91${req.body.phone}`,
-            channel: req.query.service
-        }).then((data) => {
-
-           
-
+        let doctor = await User.findOne({email:req.body.phone, type:'Doctor', service:'google'});
+        if(doctor)
+        {
+            var key = Math.floor(100000 + Math.random() * 900000);
+            emailVerification.newAlert(doctor,key ,req.body.phone);
+            doctor.emailkey = key;
+            doctor.save();
+            
 
             return res.render('doctor-phone-verify', {
                 title: 'Phone verification',
                 phone: req.body.phone,
+                type: 'email',
                 id:doctor._id
 
             });
-        });
+
+        }
+
+        else{
+        
+            req.flash('error','Either No Doctor account is associated with this number or Staff account already created.')
+            return res.redirect('back');
+        }
+
+
     }
 
     else{
-
-        req.flash('error','Either No Doctor account is associated with this number or Staff account already created.')
-        return res.redirect('back');
+        let doctor = await User.findOne({phone:req.body.phone,
+            type:'Doctor',staff_flag:false});
+           
+        
+            if(doctor)
+            {
+                client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then((data) => {
+        
+                   
+        
+        
+                    return res.render('doctor-phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        id:doctor._id
+        
+                    });
+                });
+            }
+        
+            else{
+        
+                req.flash('error','Either No Doctor account is associated with this number or Staff account already created.')
+                return res.redirect('back');
+            }
     }
+    
+   
 
   
 }

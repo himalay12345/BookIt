@@ -228,7 +228,7 @@ Version      : 1.0
             '</select>' +
             '</div>' +
             '</div>' +
-            '<div class="col-md-6">'+
+            '<div class="col-md-6" style="margin-bottom: 20px !important;">'+
             '<label>Maximum number of patients in the slot</label>'+
             '<select class="form-control" name="max_count" required>'+
             '<option>1</option>'+

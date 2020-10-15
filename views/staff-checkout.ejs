@@ -427,7 +427,7 @@
                                         <div class="row">
                                             <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about the Patient</h5>
                                             <form action="/user/offline-pay" method="POST" style="width: 100%;">
-                                                <%var day,time,date,fee%>
+                                                <%var day,time,fee%>
                                                 <% day = doctor.schedule_time[dayindex].day%>
                                                 <% fee = doctor.booking_fee%>
                                                 <%var today = new Date();%>
@@ -443,7 +443,7 @@
                                                 <%time = doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%>
                                                 <%}%>
                                             
-                                                <%date = dd +'-'+mm+'-'+yyyy%>
+                                                
                                                 <input type="hidden" name="day" value="<%=day%>">
                                                 <input type="hidden" name="userid" value="<%=locals.user.id%>">
                                                 <input type="hidden" name="date" value="<%=date%>">
@@ -546,7 +546,7 @@
                                         var dayOfWeek = weekday[today.getDay()];%>
                                     <div class="booking-item-wrap">
                                         <ul class="booking-date">
-                                            <li>Date <span><%=dd%>-<%=mm%>-<%=yyyy%></span></li>
+                                            <li>Date <span><%=date%></span></li>
                                             <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
                                                 <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
 
