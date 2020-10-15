@@ -68,13 +68,13 @@
                             </li>
 
                             <li class="smlist" style="display: none;">
-                                <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
+                                <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 0.9375rem;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
                             </li>
                             <li class="smlist" style="display: none;">
-                                <a><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
+                                <a><span><i class="fas fa-comments" style="margin-right: 0.9375rem;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
                             </li>
                             <li class="smlist" style="display: none;">
-                                <a><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
+                                <a><span><i class="fas fa-flask" style="margin-right: 0.9375rem;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
                             </li>
 
                             <li class="mdlist">
@@ -174,26 +174,26 @@
                                                         </div>
                                                     </a>
                                                 </li>
-                                               
+
                                                 <%}%>
-                                <%for(let i = patient.notification.length-1;i>=0;i--){%>
-                                    <li class="notification-message">
-                                        <a href="/doctor-profile/?id=<%=patient.notification[i].did._id%>">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
+                                                    <%for(let i = patient.notification.length-1;i>=0;i--){%>
+                                                        <li class="notification-message">
+                                                            <a href="/doctor-profile/?id=<%=patient.notification[i].did._id%>">
+                                                                <div class="media">
+                                                                    <span class="avatar avatar-sm">
                                                         <img class="avatar-img rounded-circle" alt="User Image" src="<%=patient.notification[i].did.avatar%>">
                                                     </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title"><%=patient.notification[i].message%></p>
+                                                                    <div class="media-body">
+                                                                        <p class="noti-details"><span class="noti-title"><%=patient.notification[i].message%></p>
                                                         
                                                        
                                                     <p class="noti-time"><span class="notification-time"><%=patient.notification[i].createdAt.toLocaleTimeString()%></span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <%}%>
-                                   
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        <%}%>
+
                                         </ul>
                                     </div>
                                     <div class="topnav-dropdown-footer">
@@ -254,51 +254,51 @@
                                                     </div>
                                                 </div>
 
-                                            <a class="dropdown-item" href="/profile-settings">My Profile</a>
-                                            <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
-                                            <a class="dropdown-item" href="/prescription">My Prescriptions</a>
-                                            <a class="dropdown-item" href="/medical-records">My Medical records</a>
-                                            <a class="dropdown-item" href="/my-billing">My Billings</a>
-                                            <a class="dropdown-item" href="/favourites">My Favourites</a>
-                                            <a class="dropdown-item" href="/other-patients">Other Patient Appointment</a>
-                                            <a class="dropdown-item" href="/chat">Messages</a>
-                                         
-                                            <a class="dropdown-item" href="/settings">Settings</a>
-                                            <a class="dropdown-item" href="/user/logout">Logout</a>
-                                        </div>
-                                    </li>
-                                    <%}%>
-                                    <%if(locals.user.type == 'Staff'){%>
-                                        <li class="nav-item dropdown has-arrow">
-                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
-                                            </a>
-                                            <div class="dropdown-menu profile-drop">
-                                                <div class="user-header">
-                                                    <div class="avatar avatar-sm">
-                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
-                                                    </div>
-                                                    <div class="user-text">
-                                                        <h6>
-                                                            <%=locals.user.name%>
-                                                        </h6>
-                                                        <p class="text-muted mb-0">Medical Staff</p>
-                                                    </div>
-                                                </div>
-                                                <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
-                                                <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                                <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
-                                                <a class="dropdown-item" href="/staff-appointment-page">Appointments</a>
-                                                <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
-                                                <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
-                                                <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                                <a class="dropdown-item" href="/profile-settings">My Profile</a>
+                                                <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
+                                                <a class="dropdown-item" href="/prescription">My Prescriptions</a>
+                                                <a class="dropdown-item" href="/medical-records">My Medical records</a>
+                                                <a class="dropdown-item" href="/my-billing">My Billings</a>
+                                                <a class="dropdown-item" href="/favourites">My Favourites</a>
+                                                <a class="dropdown-item" href="/other-patients">Other Patient Appointment</a>
+                                                <a class="dropdown-item" href="/chat">Messages</a>
+
                                                 <a class="dropdown-item" href="/settings">Settings</a>
                                                 <a class="dropdown-item" href="/user/logout">Logout</a>
                                             </div>
                                         </li>
                                         <%}%>
+                                            <%if(locals.user.type == 'Staff'){%>
+                                                <li class="nav-item dropdown has-arrow">
+                                                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
+                                                    </a>
+                                                    <div class="dropdown-menu profile-drop">
+                                                        <div class="user-header">
+                                                            <div class="avatar avatar-sm">
+                                                                <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
+                                                            </div>
+                                                            <div class="user-text">
+                                                                <h6>
+                                                                    <%=locals.user.name%>
+                                                                </h6>
+                                                                <p class="text-muted mb-0">Medical Staff</p>
+                                                            </div>
+                                                        </div>
+                                                        <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
+                                                        <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                                        <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+                                                        <a class="dropdown-item" href="/staff-appointment-page">Appointments</a>
+                                                        <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                        <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
+                                                        <a class="dropdown-item" href="/my-patients">My Patients</a>
+                                                        <a class="dropdown-item" href="/settings">Settings</a>
+                                                        <a class="dropdown-item" href="/user/logout">Logout</a>
+                                                    </div>
+                                                </li>
+                                                <%}%>
 
-                                            <!-- /User Menu -->
+                                                    <!-- /User Menu -->
 
                         </ul>
                         <%}%>
@@ -368,7 +368,7 @@
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <form action="/user/update-type" method="POST">
-                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                        <div class="col-12 col-md-12" style="margin-left: -0.9375rem;margin-top:20px;margin-bottom: 20px;">
                             <div class="form-">
                                 <label style="color: rgb(138, 138, 138);">Are you a ?</label>
                                 <%if(locals.user){%>
@@ -537,251 +537,252 @@
                 </div>
             </div>
         </section>
-        <section class="section section-doctor" id="inclinic">
-            <div class="container-fluid">
-                <div class="section-header text-center">
-                    <h3 style="font-size: 25px; font-family: Camphor,Helvetica,Arial,sans-serif!important;margin-block-start: 0.83em;margin-block-end: 0.83em;margin-inline-start: 0px; ">Book an appointment for an in-clinic consultation
+        <section class="laptop-index">
+            <section class="section section-doctor" id="inclinic">
+                <div class="container-fluid">
+                    <div class="section-header text-center">
+                        <h3 style="font-size: 25px; font-family: Camphor,Helvetica,Arial,sans-serif!important;margin-block-start: 0.83em;margin-block-end: 0.83em;margin-inline-start: 0px; ">Book an appointment for an in-clinic consultation
 
-                    </h3>
-                    <p style="font-style: bold;display: block; margin-top:-10px;color: #414146;position: relative;-webkit-font-smoothing: antialiased;text-size-adjust: 100%; ">
-                        Find experienced doctors across all specialties</p>
-                </div>
-                <div class="row">
+                        </h3>
+                        <p style="font-style: bold;display: block; margin-top:-10px;color: #414146;position: relative;-webkit-font-smoothing: antialiased;text-size-adjust: 100%; ">
+                            Find experienced doctors across all specialties</p>
+                    </div>
+                    <div class="row">
 
-                    <div class="col-lg-12">
-                        <div class="doctor-slider slider">
+                        <div class="col-lg-12">
+                            <div class="doctor-slider slider">
 
-                            <div class="">
-                                <div class="card">
-                                    <div class="card-img-top card-img-top-250">
-                                        <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-                                    </div>
-                                    <div class="card-block p-t-2">
-                                        <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dentist</a>
-                                        </h2>
-                                        <p style="font-size:15px;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
-                                            <a href>Teeth Trouble?Schedule a dental checkup.</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="">
-                                <div class="card">
-                                    <div class="card-img-top card-img-top-250">
-                                        <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
-                                    </div>
-                                    <div class="card-block p-t-2" style="padding: 15px;">
-                                        <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dietitian/Nutrition</a>
-                                            <p style="font-size:15px;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
-                                                <a href>Get guidance on eating right, weight management and sports nutrition.</a>
+                                <div class="">
+                                    <div class="card">
+                                        <div class="card-img-top card-img-top-250">
+                                            <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+                                        </div>
+                                        <div class="card-block p-t-2">
+                                            <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dentist</a>
+                                            </h2>
+                                            <p style="font-size:0.9375rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
+                                                <a href>Teeth Trouble?Schedule a dental checkup.</a>
                                             </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="">
-                                <div class="card">
-                                    <div class="card-img-top card-img-top-250" style="padding: 15px;">
-                                        <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
+                                <div class="">
+                                    <div class="card">
+                                        <div class="card-img-top card-img-top-250">
+                                            <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
+                                        </div>
+                                        <div class="card-block p-t-2" style="padding: 0.9375rem;">
+                                            <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dietitian/Nutrition</a>
+                                                <p style="font-size:0.9375rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
+                                                    <a href>Get guidance on eating right, weight management and sports nutrition.</a>
+                                                </p>
+                                        </div>
                                     </div>
-                                    <div class="card-block p-t-2" style="padding: 15px;">
-                                        <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Women Pregnancy</a>
-                                            <p style="font-size:15px;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
-                                                <a href>Explore for women’s health, pregnancy and infertility treatments</a>
-                                            </p>
+                                </div>
+                                <div class="">
+                                    <div class="card">
+                                        <div class="card-img-top card-img-top-250" style="padding: 0.9375rem;">
+                                            <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
+                                        </div>
+                                        <div class="card-block p-t-2" style="padding: 0.9375rem;">
+                                            <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Women Pregnancy</a>
+                                                <p style="font-size:0.9375rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
+                                                    <a href>Explore for women’s health, pregnancy and infertility treatments</a>
+                                                </p>
+                                        </div>
                                     </div>
+
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
 
 
 
-        <!-- Clinic and Specialities -->
+            <!-- Clinic and Specialities -->
 
 
-        <!-- Popular Section -->
-        <section class="section section-doctor" style="background-color: white;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="section-header ">
-                            <h2>Book Our Doctor</h2>
-                            <p>Find experienced doctors across all specialties</p>
+            <!-- Popular Section -->
+            <section class="section section-doctor" style="background-color: white;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="section-header ">
+                                <h2>Book Our Doctor</h2>
+                                <p>Find experienced doctors across all specialties</p>
+                            </div>
+                            <div class="about-content">
+                                <p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is now
+                                    a critical tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
+                                <a href="javascript:;">Read More..</a>
+                            </div>
                         </div>
-                        <div class="about-content">
-                            <p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is now a critical
-                                tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
-                            <a href="javascript:;">Read More..</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="doctor-slider slider">
-                            <%for(doctor of doctors){%>
-                                <div class="profile-widget">
-                                    <div class="doc-img">
-                                        <a href="/doctor-profile/?id=<%=doctor._id%>">
+                        <div class="col-lg-8">
+                            <div class="doctor-slider slider">
+                                <%for(doctor of doctors){%>
+                                    <div class="profile-widget">
+                                        <div class="doc-img">
+                                            <a href="/doctor-profile/?id=<%=doctor._id%>">
                                         <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height: 200px; width: 150%;">
                                     </a>
-                                        <a href="javascript:void(0)" class="fav-btn">
-                                            <i class="far fa-bookmark"></i>
-                                        </a>
-                                    </div>
-                                    <div class="pro-content">
-                                        <h3 class="title">
-                                            <a href="/doctor-profile/?id=<%=doctor._id%>">
-                                                <%=doctor.name%>
+                                            <a href="javascript:void(0)" class="fav-btn">
+                                                <i class="far fa-bookmark"></i>
                                             </a>
-                                            <i class="fas fa-check-circle verified"></i>
-                                        </h3>
-                                        <p class="speciality">
-                                            <%=doctor.department%>
-                                        </p>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(49)</span>
                                         </div>
-                                        <ul class="available-info">
-                                            <li>
-                                                <i class="fas fa-map-marker-alt"></i>
-                                                <%=doctor.contacts.city%>
-                                                    <%=doctor.contacts.state%>
-                                            </li>
-                                            <li>
-                                                <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                                            </li>
-                                            <li>
-                                                <i class="far fa-money-bill-alt"></i>
-                                                <%=doctor.booking_fee%>
-                                                    <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                                            </li>
-                                        </ul>
-                                        <div class="row row-sm">
-                                            <div class="col-6">
-                                                <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn">View Profile</a>
+                                        <div class="pro-content">
+                                            <h3 class="title">
+                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                    <%=doctor.name%>
+                                                </a>
+                                                <i class="fas fa-check-circle verified"></i>
+                                            </h3>
+                                            <p class="speciality">
+                                                <%=doctor.department%>
+                                            </p>
+                                            <div class="rating">
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star"></i>
+                                                <span class="d-inline-block average-rating">(49)</span>
                                             </div>
-                                            <div class="col-6">
-                                                <a href="/booking" class="btn book-btn">Book Now</a>
+                                            <ul class="available-info">
+                                                <li>
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <%=doctor.contacts.city%>
+                                                        <%=doctor.contacts.state%>
+                                                </li>
+                                                <li>
+                                                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                                                </li>
+                                                <li>
+                                                    <i class="far fa-money-bill-alt"></i>
+                                                    <%=doctor.booking_fee%>
+                                                        <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                                                </li>
+                                            </ul>
+                                            <div class="row row-sm">
+                                                <div class="col-6">
+                                                    <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn">View Profile</a>
+                                                </div>
+                                                <div class="col-6">
+                                                    <a href="/booking" class="btn book-btn">Book Now</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <% } %>
-                                    <!-- /Doctor Widget -->
+                                    <% } %>
+                                        <!-- /Doctor Widget -->
 
-                                    <!-- Doctor Widget -->
+                                        <!-- Doctor Widget -->
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- /Popular Section -->
+            </section>
+            <!-- /Popular Section -->
 
-        <!-- Availabe Features -->
-        <section class="section section-features">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-5 features-img">
-                        <img src="/img/features/feature.png" class="img-fluid" alt="Feature">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="section-header">
-                            <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 32px;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the Doccure app</h2>
-                            <div class="u-t-c--black_1 u-font--14 u-margin--20__top">
-                                <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;">Access video consultation with India’s top doctors on the Doccure app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
-
-
-                                <!-- <h4>Book appointments </h4> -->
-                                <ul class="list-item">
-                                    <li style="font-size: 20px;margin: 15px;">
-                                        </i>Book appointments</li>
-                                    <li style="font-size: 20px;margin: 15px;">Consult doctors online</li>
-                                    <li style="font-size: 20px;margin: 15px;">Store health records</li>
-                                    <li style="font-size: 20px;margin: 15px;">Read health tips</li>
+            <!-- Availabe Features -->
+            <section class="section section-features">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5 features-img">
+                            <img src="/img/features/feature.png" class="img-fluid" alt="Feature">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="section-header">
+                                <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 32px;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the Doccure app</h2>
+                                <div class="u-t-c--black_1 u-font--14 u-margin--20__top">
+                                    <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;">Access video consultation with India’s top doctors on the Doccure app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
 
 
-                                </ul>
-                                <div>
-                                    <p style="margin-top: 50px;font-weight: 700;font-size: 16px;line-height: 1.5; font-family:Camphor,Helvetica,Arial,sans-serif!important;">Get the link to download the app</p>
+                                    <!-- <h4>Book appointments </h4> -->
+                                    <ul class="list-item">
+                                        <li style="font-size: 20px;margin: 0.9375rem;">
+                                            </i>Book appointments</li>
+                                        <li style="font-size: 20px;margin: 0.9375rem;">Consult doctors online</li>
+                                        <li style="font-size: 20px;margin: 0.9375rem;">Store health records</li>
+                                        <li style="font-size: 20px;margin: 0.9375rem;">Read health tips</li>
 
-                                </div>
-                                <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
-                                    <div class="col-md-8">
-                                        <div class="col-md-1" style="border:1px solid lightgrey; padding: 12.8px;font-size: 1.3rem;font-weight: bold;margin-right: -15px;">
-                                            +91
-                                        </div>
-                                        <div class="form-group col-md-8">
-                                            <input type="Number" placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-3" id="sum_phone" style="margin-left:-170px ;">
 
-                                        <a href="#"><button type="submit" class="form-control" style="border-radius:20px; background-color: #fff; border-color: #dddddd;color:#2c2929;">Send SMS</button></a>
+                                    </ul>
+                                    <div>
+                                        <p style="margin-top: 50px;font-weight: 700;font-size: 16px;line-height: 1.5; font-family:Camphor,Helvetica,Arial,sans-serif!important;">Get the link to download the app</p>
 
                                     </div>
+                                    <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
+                                        <div class="col-md-8">
+                                            <div class="col-md-1" style="border:1px solid lightgrey; padding: 12.8px;font-size: 1.3rem;font-weight: bold;margin-right: -0.9375rem;">
+                                                +91
+                                            </div>
+                                            <div class="form-group col-md-8">
+                                                <input type="Number" placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3" id="sum_phone" style="margin-left:-170px ;">
+
+                                            <a href="#"><button type="submit" class="form-control" style="border-radius:20px; background-color: #fff; border-color: #dddddd;color:#2c2929;">Send SMS</button></a>
+
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <!-- <p>Doccure is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
                             </div>
 
-                            <!-- <p>Doccure is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
-                        </div>
-
-                        <div class="row text-center" style="padding-right: 20px; padding-left: 50px !important;">
+                            <div class="row text-center" style="padding-right: 20px; padding-left: 50px !important;">
 
 
-                            <p>
-                                <!-- <a href="#" class="btn btn-store">
+                                <p>
+                                    <!-- <a href="#" class="btn btn-store">
                                     <span class="fa fa-apple fa-3x pull-left"></span>
                                     <span class="btn-label">Download on the</span>
                                     <span class="btn-caption">App Store</span>
                                 </a> -->
-                                <a href="#" class="btn btn-store">
-                                    <span class="fa fa-android fa-3x pull-left"></span>
-                                    <span class="btn-label">Download on the</span>
-                                    <span class="btn-caption">Google Play</span>
-                                </a>
+                                    <a href="#" class="btn btn-store">
+                                        <span class="fa fa-android fa-3x pull-left"></span>
+                                        <span class="btn-label">Download on the</span>
+                                        <span class="btn-caption">Google Play</span>
+                                    </a>
 
 
-                            </p>
-                            <style>
-                                .btn-store {
-                                    color: #2c2929;
-                                    min-width: 254px;
-                                    padding: 12px 20px !important;
-                                    border-color: #dddddd !important;
-                                }
-                                
-                                .btn-store:focus,
-                                .btn-store:hover {
-                                    color: #ffffff !important;
-                                    background-color: #072135;
-                                    border-color: #0a1014 !important;
-                                }
-                                
-                                .btn-store .btn-label,
-                                .btn-store .btn-caption {
-                                    display: block;
-                                    text-align: left;
-                                    line-height: 1;
-                                }
-                                
-                                .btn-store .btn-caption {
-                                    font-size: 24px;
-                                }
-                            </style>
-                        </div>
+                                </p>
+                                <style>
+                                    .btn-store {
+                                        color: #2c2929;
+                                        min-width: 254px;
+                                        padding: 12px 20px !important;
+                                        border-color: #dddddd !important;
+                                    }
+                                    
+                                    .btn-store:focus,
+                                    .btn-store:hover {
+                                        color: #ffffff !important;
+                                        background-color: #072135;
+                                        border-color: #0a1014 !important;
+                                    }
+                                    
+                                    .btn-store .btn-label,
+                                    .btn-store .btn-caption {
+                                        display: block;
+                                        text-align: left;
+                                        line-height: 1;
+                                    }
+                                    
+                                    .btn-store .btn-caption {
+                                        font-size: 24px;
+                                    }
+                                </style>
+                            </div>
 
 
-                        <!-- <div class="features-slider slider">
+                            <!-- <div class="features-slider slider">
                             Slider Item
                             <div class="feature-item text-center">
                                 <img src="/img/features/feature-01.jpg" class="img-fluid" alt="Feature">
@@ -789,148 +790,361 @@
                             </div>
                           
                         </div> -->
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- Availabe Features -->
+            </section>
 
-        <!-- Footer -->
-        <footer class="footer">
+            <!-- Availabe Features -->
 
-            <!-- Footer Top -->
-            <div class="footer-top">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6">
+            <!-- Footer -->
+            <footer class="footer">
 
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-about">
-                                <div class="footer-logo">
-                                    <img src="/img/footer-logo.png" alt="logo">
-                                </div>
-                                <div class="footer-about-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                    <div class="social-icon">
-                                        <ul>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Patients</h2>
-                                <ul>
-                                    <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                                    <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                    <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                    <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                    <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-                                </ul>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-menu">
-                                <h2 class="footer-title">For Doctors</h2>
-                                <ul>
-                                    <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-                                    <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                                    <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                    <li><a href="/staff-login-page"><i class="fas fa-angle-double-right"></i> Staff Login</a></li>
-                                    <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                    <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-                                </ul>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6">
-
-                            <!-- Footer Widget -->
-                            <div class="footer-widget footer-contact">
-                                <h2 class="footer-title">Contact Us</h2>
-                                <div class="footer-contact-info">
-                                    <div class="footer-address">
-                                        <span><i class="fas fa-map-marker-alt"></i></span>
-                                        <p> 3556 Beech Street, San Francisco,<br> California, CA 94158 </p>
-                                    </div>
-                                    <p>
-                                        <i class="fas fa-phone-alt"></i> +1 315 369 5943
-                                    </p>
-                                    <p class="mb-0">
-                                        <i class="fas fa-envelope"></i> doccure@example.com
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /Footer Widget -->
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- /Footer Top -->
-
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="container-fluid">
-
-                    <!-- Copyright -->
-                    <div class="copyright">
+                <!-- Footer Top -->
+                <div class="footer-top">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <div class="copyright-text">
-                                    <p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6">
+                            <div class="col-lg-3 col-md-6">
 
-                                <!-- Copyright Menu -->
-                                <div class="copyright-menu">
-                                    <ul class="policy-menu">
-                                        <li><a href="/term-condition">Terms and Conditions</a></li>
-                                        <li><a href="/privacy-policy">Policy</a></li>
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-about">
+                                    <div class="footer-logo">
+                                        <img src="/img/footer-logo.png" alt="logo">
+                                    </div>
+                                    <div class="footer-about-content">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                        <div class="social-icon">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">For Patients</h2>
+                                    <ul>
+                                        <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
+                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                        <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                                        <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
+                                        <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
                                     </ul>
                                 </div>
-                                <!-- /Copyright Menu -->
+                                <!-- /Footer Widget -->
 
                             </div>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-menu">
+                                    <h2 class="footer-title">For Doctors</h2>
+                                    <ul>
+                                        <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
+                                        <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
+                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
+                                        <li><a href="/staff-login-page"><i class="fas fa-angle-double-right"></i> Staff Login</a></li>
+                                        <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
+                                        <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
+                                    </ul>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+
+                                <!-- Footer Widget -->
+                                <div class="footer-widget footer-contact">
+                                    <h2 class="footer-title">Contact Us</h2>
+                                    <div class="footer-contact-info">
+                                        <div class="footer-address">
+                                            <span><i class="fas fa-map-marker-alt"></i></span>
+                                            <p> 3556 Beech Street, San Francisco,<br> California, CA 94158 </p>
+                                        </div>
+                                        <p>
+                                            <i class="fas fa-phone-alt"></i> +1 315 369 5943
+                                        </p>
+                                        <p class="mb-0">
+                                            <i class="fas fa-envelope"></i> doccure@example.com
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- /Footer Widget -->
+
+                            </div>
+
                         </div>
                     </div>
-                    <!-- /Copyright -->
+                </div>
+                <!-- /Footer Top -->
 
+                <!-- Footer Bottom -->
+                <div class="footer-bottom">
+                    <div class="container-fluid">
+
+                        <!-- Copyright -->
+                        <div class="copyright">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="copyright-text">
+                                        <p class="mb-0"><a href="templateshub.net">Templates Hub</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+
+                                    <!-- Copyright Menu -->
+                                    <div class="copyright-menu">
+                                        <ul class="policy-menu">
+                                            <li><a href="/term-condition">Terms and Conditions</a></li>
+                                            <li><a href="/privacy-policy">Policy</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /Copyright Menu -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Copyright -->
+
+                    </div>
+                </div>
+                <!-- /Footer Bottom -->
+
+            </footer>
+        </section>
+        <section class="mobile-index">
+            <div class=" col-sm-12 index-content">
+                <div class="col-sm-12 index-first" style="background-color: navy; margin-bottom: 10px; position: relative; height: 200px; border: 1px solid black; border-radius: 3px;">
+                    <div class="say-doubts" style="position: absolute;">
+                        <h4>Goodbye doubts</h4>
+                    </div>
+                    <div class="say-hello" style="position: absolute;">
+                        <h3 style="text-decoration: underline;">Say Hello Doctor.</h3>
+                    </div>
+                    <div class="off" style="position: absolute; bottom: 17px; color: white;">
+                        <p style="line-height: 1.125rem;"><span style="font-size: 1.25rem; font-weight: 600;">10% Off</span><span style="margin-left: 2px;">+
+                        </span> <span>10% Cashback <br>on First Booking</span></p>
+
+                    </div>
                 </div>
             </div>
-            <!-- /Footer Bottom -->
+            <section class="health-concerns" style="margin-bottom: 20px;">
+                <div class="concerns">
 
-        </footer>
+                    <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+
+                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                            <div style="height: 50%;">
+                                <img src="/img/patients/patient1.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                            </div>
+                            <div style="height: 40%;padding: 5px;position: relative;">
+                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                                <a href="/" style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now
+                                </a>
+
+                            </div>
+
+                        </div>
+                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                            <div style="height: 50%;">
+                                <img src="/img/patients/patient2.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                            </div>
+                            <div style="height: 40%;padding: 5px;position: relative;">
+                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                            </div>
+
+                        </div>
+                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                            <div style="height: 50%;">
+                                <img src="/img/patients/patient3.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                            </div>
+                            <div style="height: 40%;padding: 5px;position: relative;">
+                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                            </div>
+
+                        </div>
+                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                            <div style="height: 50%;">
+                                <img src="/img/patients/patient4.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                            </div>
+                            <div style="height: 40%;padding: 5px;position: relative;">
+                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                            </div>
+
+                        </div>
+                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                            <div style="height: 50%;">
+                                <img src="/img/patients/patient5.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                            </div>
+                            <div style="height: 40%;padding: 5px;position: relative;">
+                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+            <div class="head">
+                <h3 style="font-weight: 800;    margin-bottom: 16px;
+                margin-left: 7px;">
+                    Top Specialities
+                </h3>
+            </div>
+
+            <div class="top-specilities" style="height: 500px;">
+                <div class="col-sm-12 upper" style="height: 25%; padding-left: 2px; display: inline-flex;">
+                    <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 80%;">
+                        <div style="height: 70%; border-radius: 10px;">
+                            <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.9375rem;
+                                        padding-top: 5px;
+                                        line-height: 1rem;
+                                        font-family: system-ui;">
+                                Covid-19 Expert
+                            </h3>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                        <div style="height: 70%; border-radius: 10px;">
+                            <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.9375rem;
+                                    padding-top: 5px;
+                                    line-height: 1rem;
+                                    font-family: system-ui;">
+                                Pregnancy
+                            </h3>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                        <div style="height: 70%; border-radius: 10px;">
+                            <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.9375rem;
+                                        padding-top: 5px;
+                                        line-height: 1rem;
+                                        font-family: system-ui;">
+                                Bone Expert
+                            </h3>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-sm-12 upper" style="height: 25%; padding-left: 2px; display: inline-flex; margin-top: 20px;">
+                    <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 80%;">
+                        <div style="height: 70%; border-radius: 10px;">
+                            <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.9375rem;
+                                    padding-top: 5px;
+                                    line-height: 1rem;
+                                    font-family: system-ui;">
+                                Ear & Nose Expert
+                            </h3>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                        <div style="height: 70%; border-radius: 10px;">
+                            <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.9375rem;
+                                    padding-top: 5px;
+                                    line-height: 1rem;
+                                    font-family: system-ui;">
+                                Physician Expert
+                            </h3>
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                        <div style="height: 70%; border-radius: 10px;">
+                            <p style="padding: 11px;
+                            height: 100%;
+                            border-radius: 10px;
+                            border: 2px solid #126a78;
+                            font-size: 0.9375rem;
+                            line-height: 1.0625rem;
+                            padding-top: 24px;
+                            margin-left: -6px;
+                            ">
+                                <span style="font-weight: 700;color: #12444c">See More Specialities</span>
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 0.9375rem;
+                                padding-top: 5px;
+                                line-height: 1rem;
+                                font-family: system-ui;">
+                                Explore More Expert
+                            </h3>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </section>
         <!-- /Footer -->
 
     </div>

@@ -93,6 +93,14 @@ lthenex {
     padding: 0px 10px;
 }
 
+.laptop-index {
+    display: block;
+}
+
+.mobile-index {
+    display: none;
+}
+
 .underline-on-hover:hover {
     text-decoration: underline;
 }
@@ -7218,6 +7226,14 @@ html.menu-opened body {
     
     .user-tabs {
         margin-top: 1.5rem;
+    }
+    
+    .laptop-index {
+        display: none;
+    }
+    
+    .mobile-index {
+        display: block;
     }
     
     .user-tabs .nav-tabs>li>a {

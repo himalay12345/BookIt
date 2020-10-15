@@ -8,7 +8,7 @@ router.get('/Blood-test', testController.Blood);
 router.get('/Malarial-test', testController.Malarial);
 router.get('/Hba1c-test', testController.Hba1c);
 router.get('/sugar-test', testController.sugar);
-
+router.get('/thyroid-test', testController.thyroid);
 
 
 

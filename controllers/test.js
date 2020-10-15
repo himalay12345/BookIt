@@ -26,3 +26,8 @@ module.exports.sugar = (req, res) => {
         title: 'Sugar Test'
     })
 }
+module.exports.thyroid = (req, res) => {
+    return res.render('thyroid-test', {
+        title: 'thyroid Test'
+    })
+}
