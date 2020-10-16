@@ -36,9 +36,11 @@ module.exports.addBilling = (req, res) => {
         title: 'Add Billing'
     })
 }
-module.exports.consult = (req, res) => {
+module.exports.consult = async (req, res) => {
+    let doctors = await User.find({ type: "Doctor" });
     return res.render('consult', {
-        title: 'Consult'
+        title: 'Consult',
+        doctors: doctors
     })
 }
 module.exports.addPrescription = (req, res) => {

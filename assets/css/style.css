@@ -376,6 +376,28 @@ lthenex {
 
 .bdoctor-slider .slick-slide {
     width: 500px !important;
+    padding: 0px !important;
+}
+
+.search-ul{
+    list-style: none;
+    height:auto;
+    border:1px solid lightgrey;
+    background-color: white;
+}
+
+.search-li{
+    height:35px;
+    width:100%;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    background-color: white;
+    padding-top:5px;
+}
+
+.highlight{
+    font-weight: bold;
+    color:rgb(40, 178, 233);
 }
 
 .slick-silders .slick-slide {
@@ -391,7 +413,7 @@ lthenex {
     font-family: roboto;
     border-radius: 18px;
     background: white;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+    /* box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9); */
     text-align: center;
     transition: 0.5s ease;
     cursor: pointer;

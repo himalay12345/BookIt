@@ -393,12 +393,17 @@
                     <div class="search-box">
                         <form action="templateshub.net">
                             <div class="form- search-location">
-                                <input type="text" class="form-control" placeholder="Search Location">
-                                <span class="form-text">Based on your Location</span>
+                                <input type="text" class="form-control" onfocus="showul()" onblur="hideul()" placeholder="Search Location">
+                                <!-- <span class="form-text">Based on your Location</span> -->
+                                <ul class="search-ul displayNone" id="search-ul">
+                                    <li class="search-li highlight"><a onclick="getLocation()" style="cursor: pointer;"> <i class="fas fa-map-marker" style="margin-right:5px;"></i>Use my location</a></li>
+                                </ul>
+                                <div id="yourinfo"></div>
                             </div>
                             <div class="form- search-info">
                                 <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                 <span class="form-text">Ex : Dental or Sugar Check up etc</span>
+                              
                             </div>
                             <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
                         </form>
@@ -943,6 +948,62 @@
     <!-- Custom JS -->
     <script src="/js/script1.js"></script>
     <script src="/js/script.js"></script>
+    <script>
+        function showul(){
+            var ul = document.getElementById('search-ul');
+        ul.classList.remove('displayNone')
+        }
+        function hideul(){
+            var ul = document.getElementById('search-ul');
+        ul.classList.add('displayNone')
+        }
+      
+    </script>
+    <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyAaoH4-RxCT9jQ6XrvuS9vQ-buKI-pmWs0"></script>
+        <script type="text/javascript">
+            if(google.loader.ClientLocation)
+            {
+                visitor_lat = google.loader.ClientLocation.latitude;
+                visitor_lon = google.loader.ClientLocation.longitude;
+                visitor_city = google.loader.ClientLocation.address.city;
+                visitor_region = google.loader.ClientLocation.address.region;
+                visitor_country = google.loader.ClientLocation.address.country;
+                visitor_countrycode = google.loader.ClientLocation.address.country_code;
+                document.getElementById('yourinfo').innerHTML = '<p>Lat/Lon: ' + visitor_lat + ' / ' + visitor_lon + '</p><p>Location: ' + visitor_city + ', ' + visitor_region + ', ' + visitor_country + ' (' + visitor_countrycode + ')</p>';
+            }
+            else
+            {
+                document.getElementById('yourinfo').innerHTML = '<p>Whoops!</p>';
+            }
+        </script>
+
+<script>
+    var x = document.getElementById("demo");
+    
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // Success function
+                showPosition, 
+                // Error function
+                null, 
+                // Options. See MDN for details.
+                {
+                   enableHighAccuracy: true,
+                   timeout: 5000,
+                   maximumAge: 0
+                });
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    
+    function showPosition(position) {
+        x.innerHTML="Latitude: " + position.coords.latitude + 
+        "<br>Longitude: " + position.coords.longitude;  
+    }
+    </script>
+
 
 
 
