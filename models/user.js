@@ -255,6 +255,15 @@ const userSchema = mongoose.Schema({
             name:{
                 type:String
             },
+            payment_id:{
+                type:String
+            },
+            waiting:{
+                type:String
+            },
+            slot:{
+                type:String
+            },
             address:{
                 type:String
             },
@@ -289,7 +298,30 @@ const userSchema = mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId
 
             },
+            
             createdAt: { type: Date, default: Date.now }
+
+    }],
+    tracked:[{
+        tid:{
+            type: mongoose.Schema.Types.ObjectId
+        },
+        seat:{
+            type:Number
+        },
+        time:{
+            type:Date
+        },
+        name:{
+            type:String
+        },
+        slot:{
+            type:String
+        },
+        status:{
+            type:String
+        },
+        createdAt: { type: Date, default: Date.now }
 
     }],
 

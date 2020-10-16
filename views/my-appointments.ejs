@@ -582,7 +582,7 @@
                                                                 <th>Amount</th>
                                                                 <th>Follow Up</th>
                                                                 <th>Status</th>
-                                                                <th></th>
+                                                                <th>Track Appointment</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -607,19 +607,19 @@
                                                                   <%}else{%>
                                                                     <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                     <%}%>
+                                                                    <%var n1,n2,n3,n4,n5,n6,n7%>
+                                                                <%var today = new Date();%>
+                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                var yyyy = today.getFullYear();
+                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                var dayOfWeek = weekday[today.getDay()];%>
+                                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                             
+                                                                <%if(str1 == alldoctors.doctors[i].date){%>
+                                                                <td class="text-center"><a href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:8px;border:1px solod grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;">Track</a></td>
+                                                                <%}%>
                                                                 
-                                                                
-                                                                <td class="text-right">
-                                                                    <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                                                                            <i class="fas fa-print"></i> Print
-                                                                        </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                                                            <i class="far fa-eye"></i> View
-                                                                        </a>
-                                                                    </div>
-                                                                </td>
                                                             </tr>
                                                             <%}%>
                    

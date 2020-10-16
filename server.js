@@ -12,7 +12,11 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 const bodyParser = require('body-parser');
-// const twilio = require('./config/twilio');
+const trackServer = require('http').Server(app);
+const trackSockets = require('./config/track_socket').trackSockets(trackServer);
+trackServer.listen(5000);
+console.log('Patient Tracking server is running on port 5000');
+
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
