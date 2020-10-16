@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Test = require('../models/test');
+const Consult = require('../models/consult');
 const fs = require('fs');
 const path = require('path');
 
@@ -130,6 +131,40 @@ module.exports.atest = async function(req, res) {
     }
 
 }
+module.exports.addconsult = async function(req, res) {
+
+    try {
+        // let test = await User.findById(req.user.id);
+        Consult.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let consult = await Consult.create({
+                consultname: req.body.consultname,
+                consultprice: req.body.consultprice,
+                consultspecilisation: req.body.consultspecilisation
+
+            });
+
+            let newPath = Consult.avatarPath + '/' + req.file.filename;
+            consult.consultavatar = newPath;
+
+            consult.save();
+            console.log(consult);
+            req.flash('success', 'consult Added Successfully');
+            return res.redirect('back');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
 module.exports.approveDocuments = async(req, res) => {
     let users = await User.findById(req.body.id);
     let user = await User.find({ step4: true });
@@ -238,6 +273,17 @@ module.exports.formMask = (req, res) => {
 module.exports.formVertical = (req, res) => {
     return res.render('a-form-vertical', {
         title: 'Form Vertical'
+    })
+}
+module.exports.aconsult = (req, res) => {
+    return res.render('a-consult', {
+        title: 'Consult'
+    })
+}
+
+module.exports.addconsult = (req, res) => {
+    return res.render('add-consult', {
+        title: ' Add Consult'
     })
 }
 module.exports.index = async(req, res) => {
