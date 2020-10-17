@@ -47,6 +47,27 @@ module.exports.deletetest = async function(req, res) {
     return res.redirect('back');
 
 }
+module.exports.deleteconsult = async function(req, res) {
+
+
+    let consult = await Consult.findOne({ _id: req.query.id });
+
+    if (consult.consultavatar) {
+        if (fs.existsSync(path.join(__dirname, '..', consult.consultavatar))) {
+            fs.unlinkSync(path.join(__dirname, '..', consult.consultavatar));
+
+        }
+    }
+
+
+
+
+    let prope = await Consult.deleteOne({ _id: req.query.id });
+
+    req.flash('success', 'Consult removed Successfully');
+    return res.redirect('back');
+
+}
 module.exports.edittest = async function(req, res) {
     let test = await Test.findOne({ _id: req.query.id });
 
@@ -131,7 +152,7 @@ module.exports.atest = async function(req, res) {
     }
 
 }
-module.exports.addconsult = async function(req, res) {
+module.exports.addConsultData = async function(req, res) {
 
     try {
         // let test = await User.findById(req.user.id);
@@ -276,9 +297,11 @@ module.exports.formVertical = (req, res) => {
         title: 'Form Vertical'
     })
 }
-module.exports.aconsult = (req, res) => {
+module.exports.aconsult = async(req, res) => {
+    let consults = await Consult.find({})
     return res.render('a-consult', {
-        title: 'Consult'
+        title: 'Consult',
+        consults: consults
     })
 }
 

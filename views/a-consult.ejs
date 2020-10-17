@@ -335,6 +335,37 @@
                                                     <th>Total Price</th>
                                                     <th>Edit</th>
                                                 </tr>
+                                                <%var c=1;%>
+                                                    <%for(consult of consults){%>
+                                                        <tr>
+                                                            <td>
+                                                                <%=c++;%>
+                                                            </td>
+                                                            <td>
+
+                                                                <a href="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=consult.consultavatar%>" alt="User Image"></a>
+
+                                                            </td>
+                                                            <td>
+                                                                <%=consult.consultname%>
+                                                            </td>
+                                                            <td>Rs
+                                                                <%=consult.consultprice%>
+                                                            </td>
+
+                                                            <td>
+                                                                <%=consult.consultspecilisation%>
+                                                            </td>
+                                                            <td style="cursor: pointer;">
+
+                                                                <a href="/admin/delete-consult/?id=<%=consult._id %> "><img src="/img/patients/e1.png" style="height:30px; width: 30px;"></a>
+                                                            </td>
+
+
+
+                                                        </tr>
+                                                        <%}%>
+
 
                                             </thead>
 
