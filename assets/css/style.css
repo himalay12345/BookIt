@@ -66,6 +66,11 @@
     display: none;
 }
 
+.test-slider .slick-slide{
+    width:195px !important;
+    padding: 5px !important;
+}
+
 .laptop-Pregnancy {
     display: block;
 }
@@ -322,13 +327,23 @@ lthenex {
 }
 
 .active-popular1 {
-    background-color: cadetblue;
-    transition: 1s all;
+    background-color: rgb(58, 197, 252);
+    color:white !important;
+    font-weight: bold;
+    transition: 0.5s ease;
 }
 
 .font-li {
     font-size: 1rem;
     padding: 0px 10px;
+}
+
+.laptop-index {
+    display: block;
+}
+
+.mobile-index {
+    display: none;
 }
 
 .underline-on-hover:hover {
@@ -669,20 +684,26 @@ lthenex {
 .test-anno {
     padding-top: 17px;
     padding-left: 12px;
+    font-size:1.2rem;
     font-weight: 700;
 }
 
 .test-debo {
-    font-size: 16px;
+    font-size:1rem;
     padding-left: 12px;
     padding-top: -8px;
 }
 
 .added {
     text-align: center;
-    font-size: 22px;
+    padding-top: 5px;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #14bef0;
+}
+
+.col-black{
+    color:black !important;
 }
 
 .removed {
@@ -705,11 +726,11 @@ lthenex {
 }
 
 .test-ally {
-    font-size: 23px;
+    font-size: 1.1rem;
     padding-top: -4px;
     margin-top: -12px;
     font-weight: 600;
-    padding-left: 8px;
+    padding-left: 15px;
 }
 
 .zzslider .slick-slide {
@@ -770,7 +791,7 @@ lthenex {
 }
 
 
-}
+
 .para-featured {
     font-weight: 700;
     padding-top: 10px;
@@ -780,7 +801,9 @@ lthenex {
     left: 56px !important;
 }
 .ccdoctorslider .slick-slide {
-    width: 450px !important;
+    width: 395px !important;
+   
+    padding:15px !important;
 }
 .des {
     border-top: 1px solid black;
@@ -2230,8 +2253,8 @@ button.bg-danger:hover {
 }
 .slick-slide img {
     display: block;
-    border-top-right-radius: 9px;
-    border-top-left-radius: 9px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 .slick-slide.slick-loading img {
     display: none;
@@ -7478,6 +7501,14 @@ html.menu-opened body {
     
     .user-tabs {
         margin-top: 1.5rem;
+    }
+    
+    .laptop-index {
+        display: none;
+    }
+    
+    .mobile-index {
+        display: block;
     }
     
     .user-tabs .nav-tabs>li>a {

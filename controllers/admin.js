@@ -1,5 +1,8 @@
 const User = require('../models/user');
 const Test = require('../models/test');
+const Consult = require('../models/consult');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.appointmentList = (req, res) => {
     return res.render('a-appointment-list', {
@@ -28,6 +31,72 @@ module.exports.applicationRequest = async(req, res) => {
         user: user
     })
 }
+module.exports.deletetest = async function(req, res) {
+
+
+    let test = await Test.findOne({ _id: req.query.id });
+
+
+    fs.unlinkSync(path.join(__dirname, '..', test.testavatar));
+    // console.log(path.join(__dirname,'..','\assets',property.avatar[0]))
+
+
+    let prope = await Test.deleteOne({ _id: req.query.id });
+
+    req.flash('success', 'Test removed Successfully');
+    return res.redirect('back');
+
+}
+module.exports.edittest = async function(req, res) {
+    let test = await Test.findOne({ _id: req.query.id });
+
+    return res.render('a-edittest', {
+        title: 'Edit Test',
+        test: test
+    })
+
+
+
+
+}
+module.exports.updatetest = async function(req, res) {
+
+    try {
+
+        Test.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let test = await Test.findById(req.body.id);
+            test.testname = req.body.testname,
+                test.testprice = req.body.testprice
+
+
+
+            if (req.file) {
+                let newPath = Test.avatarPath + '/' + req.file.filename;
+                test.testavatar = newPath;
+            }
+
+
+
+            test.save();
+            console.log(test);
+
+            req.flash('success', 'Test updated Successfully');
+            return res.redirect('back');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
 
 module.exports.atest = async function(req, res) {
 
@@ -50,6 +119,40 @@ module.exports.atest = async function(req, res) {
             test.save();
             console.log(test);
             req.flash('success', 'Test Added Successfully');
+            return res.redirect('back');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+module.exports.addconsult = async function(req, res) {
+
+    try {
+        // let test = await User.findById(req.user.id);
+        Consult.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let consult = await Consult.create({
+                consultname: req.body.consultname,
+                consultprice: req.body.consultprice,
+                consultspecilisation: req.body.consultspecilisation
+
+            });
+
+            let newPath = Consult.avatarPath + '/' + req.file.filename;
+            consult.consultavatar = newPath;
+
+            consult.save();
+            console.log(consult);
+            req.flash('success', 'consult Added Successfully');
             return res.redirect('back');
 
         });
@@ -171,6 +274,17 @@ module.exports.formMask = (req, res) => {
 module.exports.formVertical = (req, res) => {
     return res.render('a-form-vertical', {
         title: 'Form Vertical'
+    })
+}
+module.exports.aconsult = (req, res) => {
+    return res.render('a-consult', {
+        title: 'Consult'
+    })
+}
+
+module.exports.addconsult = (req, res) => {
+    return res.render('add-consult', {
+        title: ' Add Consult'
     })
 }
 module.exports.index = async(req, res) => {

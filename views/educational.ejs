@@ -431,7 +431,7 @@
                         <%if(locals.user.education[0]){%>
                         <div class="form-group">
                             <label style="font-size: 0.85rem;">College/Institute</label>
-                            <input type="text" placeholder="Enter your college"  name="college"  class="form-control" required>
+                            <input type="text" placeholder="Enter your college"  name="college" value="<%=locals.user.education[0].college%>"  class="form-control" required>
                         </div>
                         <%}else{%>
                             <div class="form-group">

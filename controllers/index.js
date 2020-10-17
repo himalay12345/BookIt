@@ -137,43 +137,37 @@ module.exports.booking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     var today = new Date();
     today.setDate(today.getDate() - 1)
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-        var dayOfWeek = weekday[today.getDay()].toUpperCase(); 
-      console.log(dayOfWeek);
-        
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    console.log(dayOfWeek);
 
-        for(temp of doctor.schedule_time)
-        {
-            if(temp.day.toUpperCase() == dayOfWeek )
-            {
-                if(typeof(temp.booked)=='string')
-                {
-                    temp.booked = 0;
-                }
 
-                if(typeof(temp.booked)=='number')
-                {
-                    temp.booked = 0;
-                }
-
-                else{
-                    temp.booked = [0,0];
-                }
+    for (temp of doctor.schedule_time) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+            if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
             }
-        
 
-
-
-        doctor.save();
-
-        return res.render('booking', {
-            title: 'Booking',
-            doctor: doctor
-        })
+            if (typeof(temp.booked) == 'number') {
+                temp.booked = 0;
+            } else {
+                temp.booked = [0, 0];
+            }
+        }
     }
+
+
+
+    doctor.save();
+
+    return res.render('booking', {
+        title: 'Booking',
+        doctor: doctor
+    })
+
 }
 
 
@@ -603,31 +597,28 @@ module.exports.pay = async(req, res) => {
 
 module.exports.patientTracking = async(req, res) => {
 
-    if(req.user.type == 'Staff')
-    {
+    if (req.user.type == 'Staff') {
         let user = await User.findById(req.user.id).populate({
-            path:'doctorid',
-            populate:{
-                path:'user'
+            path: 'doctorid',
+            populate: {
+                path: 'user'
             }
         });
-        
+
         return res.render('patient-tracking', {
             title: 'Track patients',
-            user1:user
-            
-        })
-    }
+            user1: user
 
-    else{
+        })
+    } else {
         let user = await User.findById(req.query.id).populate({
-            path:'doctorid',
-            populate:{
-                path:'user'
+            path: 'doctorid',
+            populate: {
+                path: 'user'
             }
         });
 
-        
+
         return res.render('patient-tracking', {
             title: 'Track patients',
             user1:user,
@@ -693,10 +684,10 @@ module.exports.register = (req, res) => {
 
 
 module.exports.steps = (req, res) => {
-    // if(req.user.approve == true)
-    // {
-    //     return res.redirect('/doctor-dashboard');
-    // }
+    if(req.user.approve1 == true && req.user.approve2 == true) 
+    {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('steps', {
         title: 'Profile Information'
     })
@@ -953,29 +944,24 @@ module.exports.staffBooking = async(req, res) => {
     let user1 = await User.findById(req.user.id).populate('doctorid');
     var today = new Date();
     today.setDate(today.getDate() - 1)
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-        var dayOfWeek = weekday[today.getDay()].toUpperCase(); 
-      console.log(dayOfWeek);
-        
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    console.log(dayOfWeek);
 
-        for(temp of doctor.schedule_time)
-        {
-            if(temp.day.toUpperCase() == dayOfWeek )
-            {
-                if(typeof(temp.booked)=='string')
-                {
-                    temp.booked = 0;
-                }
 
-                else{
-                    temp.booked = [0,0];
-                }
+    for (temp of doctor.schedule_time) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+            if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
+            } else {
+                temp.booked = [0, 0];
             }
         }
-    
+    }
+
 
     doctor.save();
 
@@ -1096,7 +1082,7 @@ module.exports.verifyDoctor = async (req, res) => {
     
    
 
-  
+
 }
 
 module.exports.verify = async(req, res) => {
@@ -1150,8 +1136,8 @@ module.exports.verify = async(req, res) => {
 
 
         } else {
-            console.log('hii')
-            let user = await User.findOne({ phone: req.body.phone });
+       
+            let user = await User.findOne({ phone: req.body.phone , service:'phone'});
 
             if (user) {
                 req.flash('error', 'Account already linked with this mobile number');

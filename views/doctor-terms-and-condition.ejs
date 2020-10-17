@@ -485,7 +485,7 @@ User-accounts registered by bots or other automated methods are not permitted.
                 <br>
 				
                 </p>
-                <input type="checkbox" checked onchange="document.getElementById('sendNewSms').disabled = !this.checked;" class="mt-5 mr-2"><b>I <%=locals.user.name%>  have read and agree to the terms of the DOCCURE Online Booking Agreement.</b>
+                <input type="checkbox" checked onchange="document.getElementById('sendNewSms').disabled = !this.checked;" class="mt-5 mr-2"><b>I Dr.<%=locals.user.name%>  have read and agree to the terms of the DOCCURE Online Booking Agreement.</b>
                 <form action="/user/accept-agreement" method="POST">
                     <div class="submit-section text-center" style="margin-bottom: 100px; margin-top: 50px;">
                         <%if(locals.user.schedule_time == '' || locals.user.bank == '{}'|| locals.user.approve != true){%>

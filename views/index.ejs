@@ -223,7 +223,7 @@
                                         </div>
                                         <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
                                         <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                        <a class="dropdown-item" href="/chat">Messages</a>
+                                     
                                         <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
                                         <a class="dropdown-item" href="/appointments">Appointments</a>
                                         <a class="dropdown-item" href="/my-patients">My Patients</a>
@@ -260,8 +260,7 @@
                                             <a class="dropdown-item" href="/medical-records">My Medical records</a>
                                             <a class="dropdown-item" href="/my-billing">My Billings</a>
                                             <a class="dropdown-item" href="/favourites">My Favourites</a>
-                                            <a class="dropdown-item" href="/other-patients">Other Patient Appointment</a>
-                                            <a class="dropdown-item" href="/chat">Messages</a>
+                                            
                                          
                                             <a class="dropdown-item" href="/settings">Settings</a>
                                             <a class="dropdown-item" href="/user/logout">Logout</a>
@@ -296,66 +295,12 @@
                                         </li>
                                         <%}%>
 
-                                            <!-- /User Menu -->
+                
 
                         </ul>
                         <%}%>
 
-                            <!-- <%if(locals.user){%>
-                    <%if(locals.user.type == 'Doctor'){%>
-                        <div class="hideinphone" style="margin-left: 25px;">
-                            <ul class="main-nav amain-nav">
 
-                                        <li class="has-submenu ahas-submenu">
-                                            <a href="#">
-                                                <span class="user-img">
-                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-                            </span>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </a>
-
-                                    <ul class="submenu asubmenun phoneul">
-                                        <li><a href="/doctor-dashboard">My Dashboard</a></li>
-                                        <li><a href="/appointments">Appointments</a></li>
-                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
-                                        <li><a href="/chat-doctor">Chat</a></li>
-                                        
-                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
-                                        
-                                        <li><a href="/user/logout">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    <%}%>
-                <%if(locals.user.type == 'Patient'){%>
-                    <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
-                        <ul class="main-nav amain-nav">
-                            <li class="has-submenu ahas-submenu">
-                                <a href="#">
-                                    <span class="user-img">
-                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-                    </span>
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-
-                                <ul class="submenu asubmenu">
-                                    <li><a href="/search">Search Doctor</a></li>
-                                    <li><a href="/booking">Booking</a></li>
-                                    <li><a href="/checkout">Checkout</a></li>
-                                    <li><a href="/booking-success">Booking Success</a></li>
-                                    <li><a href="/patient-dashboard">My Dashboard</a></li>
-                                    <li><a href="/favourites">My Favourites</a></li>
-                                    <li><a href="/chat">Messages</a></li>
-                                    <li><a href="/profile-settings">Profile Settings</a></li>
-                                    <li><a href="/change-password">Change Password</a></li>
-                                    <li><a href="/user/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <%}%>
-                <%}%> -->
                 </div>
             </nav>
         </header>
@@ -540,6 +485,7 @@
                 </div>
             </div>
         </section>
+        <section class="laptop-index">
         <section class="section section-doctor" id="inclinic">
             <div class="container-fluid">
                 <div class="section-header text-center">
@@ -620,7 +566,7 @@
                         <div class="about-content">
                             <p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is now a critical
                                 tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
-                            <a href="javascript:;">Read More..</a>
+                            <a href="/doctors">See all</a>
                         </div>
                     </div>
                     <div class="col-lg-8">
@@ -691,7 +637,7 @@
         <!-- /Popular Section -->
 
         <!-- Availabe Features -->
-        <section class="section section-features position-relative" id="inclinic" style="background-color: rgba(252, 245, 245, 0.918);padding-top: 50px;margin-bottom: 50px;">
+        <section class="section section-features position-relative" id="inclinic" style="background-color: rgba(252, 245, 245, 0.918);padding-top: 50px;padding-bottom: 50px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5 features-img">
@@ -795,6 +741,287 @@
         <!-- Availabe Features -->
 
         <!-- Footer -->
+    </section>
+    <section class="mobile-index">
+        <section>
+            <div class=" col-sm-12 index-content">
+                <div class="col-sm-12 index-first" style="background-color: navy; margin-bottom: 10px; position: relative; height: 200px; border: 1px solid black; border-radius: 3px;">
+                    <div class="say-doubts" style="position: absolute;">
+                        <h4>Goodbye doubts</h4>
+                    </div>
+                    <div class="say-hello" style="position: absolute;">
+                        <h3 style="text-decoration: underline;">Say Hello Doctor.</h3>
+                    </div>
+                    <div class="off" style="position: absolute; bottom: 17px; color: white;">
+                        <p style="line-height: 1.125rem;"><span style="font-size: 1.25rem; font-weight: 600;">10% Off</span><span style="margin-left: 2px;">+
+                    </span> <span>10% Cashback <br>on First Booking</span></p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="health-concerns" style="margin-bottom: 20px;">
+            <div class="concerns">
+
+                <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+
+                    <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                        <div style="height: 50%;">
+                            <img src="/img/patients/patient1.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                        </div>
+                        <div style="height: 40%;padding: 5px;position: relative;">
+                            <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                            <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                            <a href="/" style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                        <div style="height: 50%;">
+                            <img src="/img/patients/patient2.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                        </div>
+                        <div style="height: 40%;padding: 5px;position: relative;">
+                            <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                            <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                            <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                        </div>
+
+                    </div>
+                    <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                        <div style="height: 50%;">
+                            <img src="/img/patients/patient3.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                        </div>
+                        <div style="height: 40%;padding: 5px;position: relative;">
+                            <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                            <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                            <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                        </div>
+
+                    </div>
+                    <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                        <div style="height: 50%;">
+                            <img src="/img/patients/patient4.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                        </div>
+                        <div style="height: 40%;padding: 5px;position: relative;">
+                            <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                            <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                            <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                        </div>
+
+                    </div>
+                    <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                        <div style="height: 50%;">
+                            <img src="/img/patients/patient5.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                        </div>
+                        <div style="height: 40%;padding: 5px;position: relative;">
+                            <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
+                            <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
+                            <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+        <section class="health-concerns" style="margin-bottom: 20px;">
+            <div class="concerns" style="margin-top: -14px;">
+                <h3 style="font-weight: 700; margin-left: 13px;
+                margin-bottom: 15px;
+                font-size: 1.375rem;">Book Our Doctors</h3>
+
+                <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+                    <%console.log(doctors)%>
+                        <% var count=1 %>
+                            <%for(let i=0; i<doctors.length;i++){%>
+                                <% if(count=>10) {%>
+                                    <% break;} %>
+                                        <%count++%>
+                                            <div class="img-cough-cold" style="width:180px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
+                                                <div style="height: 40%;">
+                                                    <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                                </div>
+                                                <div style="height: 60%;padding: 5px;position: relative;margin-top: 12px;
+                                ">
+                                                    <h4 style="font-weight: bold;margin-top: 29px;">
+                                                        Dr.
+                                                        <%=doctors[i].name%>
+                                                    </h4>
+                                                    <h4 style="font-weight: 600;margin-top: -5px;
+                                    font-size: 13px;">
+                                                        General Physician
+                                                    </h4>
+                                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161; position: absolute;    top: 70px;
+                                    margin-left: 2px; ">₹
+                                                        <%=doctors[i].booking_fee%>
+                                                    </p>
+                                                    <div style="position: absolute; display: inline-flex;">
+
+
+                                                        <div style="border-radius: 2px;
+                                        background-color: skyblue;margin-top: 17px;width: 80px;">
+                                                            <a href="/" style="font-size: 13px;
+                                            font-weight: 800;
+                                            color: white; text-align: center;margin-left: 4px;">View Profile</a>
+                                                        </div>
+                                                        <div style="border-radius: 2px;width: 75px;
+                                        background-color: skyblue;margin-top: 17px;margin-left: 18px;">
+                                                            <a href="/" style="font-size: 13px;
+                                            font-weight: 800;
+                                            color: white;text-align:center;margin-left: 9px;">Book Now</a>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                            <%}%>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+        <section>
+            <div>
+                <div class="head">
+                    <h3 style="font-weight: 800;    margin-bottom: 16px;
+            margin-left: 7px;">
+                        Top Specialities
+                    </h3>
+                </div>
+
+                <div class="top-specilities" style="height: 500px;">
+                    <div class="col-sm-12 upper" style="height: 25%; padding-left: 2px; display: inline-flex; margin-left: -6px;">
+                        <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 80%;">
+                            <div style="height: 70%; border-radius: 10px;">
+                                <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 0.9375rem;
+                                    padding-top: 5px;
+                                    line-height: 1rem;
+                                    font-family: system-ui;">
+                                    Covid-19 Expert
+                                </h3>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                            <div style="height: 70%; border-radius: 10px;">
+                                <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 0.9375rem;
+                                padding-top: 5px;
+                                line-height: 1rem;
+                                font-family: system-ui;">
+                                    Pregnancy
+                                </h3>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                            <div style="height: 70%; border-radius: 10px;">
+                                <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 0.9375rem;
+                                    padding-top: 5px;
+                                    line-height: 1rem;
+                                    font-family: system-ui;">
+                                    Bone Expert
+                                </h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-12 upper" style="height: 25%; padding-left: 2px; display: inline-flex; margin-top: 20px; margin-left: -8px;">
+                        <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 80%;">
+                            <div style="height: 70%; border-radius: 10px;">
+                                <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 0.9375rem;
+                                padding-top: 5px;
+                                line-height: 1rem;
+                                font-family: system-ui;">
+                                    Ear & Nose Expert
+                                </h3>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                            <div style="height: 70%; border-radius: 10px;">
+                                <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                            </div>
+                            <div>
+                                <h3 style="font-size: 0.9375rem;
+                                padding-top: 5px;
+                                line-height: 1rem;
+                                font-family: system-ui;">
+                                    Physician Expert
+                                </h3>
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                            <div style="height: 70%; border-radius: 10px;">
+                                <p style="padding: 11px;
+                        height: 100%;
+                        border-radius: 10px;
+                        border: 2px solid #126a78;
+                        font-size: 0.9375rem;
+                        line-height: 1.0625rem;
+                        padding-top: 24px;
+                        margin-left: -6px;
+                        ">
+                                    <span style="font-weight: 700;color: #12444c">See More Specialities</span>
+                                </p>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 0.9375rem;
+                            padding-top: 5px;
+                            line-height: 1rem;
+                            font-family: system-ui;">
+                                    Explore More Expert
+                                </h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </section>
+
+
+    </section>
         <footer class="footer">
 
             <!-- Footer Top -->
@@ -1002,7 +1229,7 @@
         x.innerHTML="Latitude: " + position.coords.latitude + 
         "<br>Longitude: " + position.coords.longitude;  
     }
-    </script>
+</script>
 
 
 

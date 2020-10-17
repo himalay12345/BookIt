@@ -8,6 +8,9 @@ const feedbackSchema = mongoose.Schema({
     },
     did:{
         type: mongoose.Schema.Types.ObjectId
+    },
+    delete_value:{
+        type: Number
     }
 },
 {timestamps:true})

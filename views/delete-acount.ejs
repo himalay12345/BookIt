@@ -452,17 +452,23 @@
                             </div>
                             
                         </div>
+                        <form action="/user/delete-account" method="POST">
                         <div style="display: none;" id="options">
+                           
                             <p style="font-size: 1rem;margin-left:40px;margin-top: -20px;font-weight: bold;">Why are you leaving Doccure?</p>
                                <p style="font-size: 1rem;margin-left:40px;"> Help us serve you better, tell us why you are deleting your account.</p>
-                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio"></span><span>I have another Doccure account</span></br>
-                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio"></span><span>I don't find Doccure useful</span></br>
-                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio"></span><span>Others</span></br>
+                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio" name="delete" value="1" class="cb1" onchange="check1(this);"></span><span>I have another Doccure account</span></br>
+                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio" name="delete" value="2" class="cb1" onchange="check1(this);"></span><span>I don't find Doccure useful</span></br>
+                               <span style="margin-left: 40px;margin-right: 15px;"><input type="radio" name="delete" value="3" class="cb1" data-type="others" onchange="check1(this);"></span><span>Others</span></br>
+                               <span style="margin-left: 25px;margin-right: 30px;"></span><textarea cols="50" name="del_description" style="height:100px;margin-top:15px;padding:5px;outline:0;" id="texta" name="description" class="displayNone"></textarea>
+
                                <!-- <span><input type=""></span><span>I received too many notifications, emails and messages from Practo</span> -->
                                <div class="submit-section">
                                 <button type="submit" class="btn btn-primary submit-btn" style="margin-bottom:50px;">Save Changes</button>
                             </div>
                         </div>
+                    </form>
+                        
                         
                     </div>
                 </div>
@@ -624,6 +630,24 @@
 
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+    <script>
+          function check1(element){
+
+if(element.checked){
+var options = document.getElementById('texta');
+  var checkboxes = document.getElementsByClassName('cb1');
+    for(var i=0;i<checkboxes.length;i++){
+       if(checkboxes[i]!=element)
+         checkboxes[i].checked = false;
+    }
+    if(element.getAttribute('data-type')=='others')
+    {
+        options.classList.toggle('displayNone');
+    }
+}
+}
+    </script>
+  
     <script>
         <%if(flash.success && flash.success.length>0){%>
         new Noty({

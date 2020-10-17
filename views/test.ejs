@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/css/style.css">
 
 
+
 </head>
 
 <body style="background-color: white;">
@@ -385,7 +386,26 @@
 
         <!-- Home Banner -->
         <section class="test-laptop">
-            <section class="banner-class">
+                <div class="search-box" style="margin-top: 50px;margin-left: 50px;">
+                        <form action="templateshub.net">
+                            <div class="form- search-location">
+                                <input type="text" class="form-control" onfocus="showul()" onblur="hideul()" placeholder="Search Location">
+                                <!-- <span class="form-text">Based on your Location</span> -->
+                                <ul class="search-ul displayNone" id="search-ul">
+                                    <li class="search-li highlight"><a onclick="getLocation()" style="cursor: pointer;"> <i class="fas fa-map-marker" style="margin-right:5px;"></i>Use my location</a></li>
+                                </ul>
+                                <div id="yourinfo"></div>
+                            </div>
+                            <div class="form- search-info">
+                                <input type="text" class="form-control" placeholder="Search For Tests, Profiles Etc">
+                                <span class="form-text">Ex : Dental or Sugar Check up etc</span>
+                              
+                            </div>
+                            <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
+                            <a style="padding: 8px;border:1px solid grey;border-radius:3px;font-size: 1rem;font-family: sans-serif;height:45px;margin-left: auto;margin-right: 40px;"><i class="fas fa-shopping-cart" style="margin-right: 5px;"></i><b>Cart</b></a>
+                        </form>
+                    </div>
+            <section class="banner-class" style="margin-top: -40px;">
                 <div class="banner-dignostic" style="margin: 0px auto;
            position: relative;width: 1280px;margin-top: 64px; margin-bottom: 42px;">
                     <div class="banner-img">
@@ -414,13 +434,13 @@
                     </div>
                 </div>
             </section>
-            <section class="section section-specialities " style="margin-top: 1px !important;">
+            <section class="section section-specialities " style="margin-top: -30px !important;">
                 <div class="container-fluid" style="margin-top:-39px !important;">
                     <div class="section-header " style="margin-left: 82px !important;">
-                        <h2 style="font-size: 32px !important;">Health Checkups and Screenings For</h2>
+                        <h2 style="font-size: 2.1rem !important;font-weight: bold;margin-left: -30px;">Health Checkups and Screenings For</h2>
 
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center" style="margin-top: -40px;">
                         <div class="col-md-11">
                             <!-- Slider -->
                             <div class="specialities-slider slider">
@@ -541,10 +561,10 @@
                     <div class="test-header" style="margin-left:83px ;">
                         <h2 style="font-weight: 700;">Top Booked Diagonistics Test</h2>
                     </div>
-                    <div class="test-price" style="background-color: white;">
-                        <div class="position-absolute" id="left-div" style="height:50px;width:50px;border-radius:50%;cursor:pointer;background-color:lightgrey;top:128px;left: 40px;"><a class="left-arrow" id="left" onclick="prevslides()"><i class="fas fa-angle-left" style="margin-top: 12px;margin-left: 15px;font-weight: 700;font-size: 1.5rem;"></i></a></div>
-                        <div style="padding-left: 100px;padding-right:78px;padding-top: 20px; display: inline-flex;width:auto;overflow-x: hidden; ">
-                            <div class="test1" id="dt1" style="transition: all 5s ease;width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                    <div class="test-price" style="background-color: white;overflow: hidden;width:100%; padding-left: 80px;padding-right: 0px;">
+                    
+                            <div class="doctor-slider test-slider slider">
+                            <div class="test1" id="dt1" style="transition: all 5s ease;width:80%; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Blood Test</h3>
@@ -554,13 +574,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added" id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone" id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="test1 " id="dt2" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1 " id="dt2" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Sugar test</h3>
@@ -570,13 +590,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added" id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone" id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="test1 " id="dt3" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1 " id="dt3" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Pregancy test </h3>
@@ -586,16 +606,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-
-
-
-                            <div class="test1 " id="dt4" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1 " id="dt4" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Dengue NS1</h3>
@@ -605,15 +622,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-
-
-                            <div class="test1 " id="dt5" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1 " id="dt5" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Malarial Test</h3>
@@ -623,13 +638,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="test1 " id="dt6" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1 " id="dt6" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Hba1c Test</h3>
@@ -645,7 +660,7 @@
                                 </div>
 
                             </div>
-                            <div class="test1" id="dt7" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1" id="dt7" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Blood Test</h3>
@@ -655,13 +670,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="test1" id="dt8" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1" id="dt8" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Blood Test</h3>
@@ -671,13 +686,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="test1" id="dt9" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1" id="dt9" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Blood Test</h3>
@@ -687,13 +702,13 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="test1" id="dt10" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 11px; margin:5px 12px 15px px;border:2px solid grey; ">
+                            <div class="test1" id="dt10" style="width:200px!important; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                 <div class="test-des " style="height: 146px; ">
                                     <div class="test-about ">
                                         <h3 class="test-anno ">Blood Test</h3>
@@ -703,21 +718,22 @@
                                 </div>
                                 <div class="test-des des " style="height: 36px; ">
                                     <div class="test-about ">
-                                        <p class="added " id="add" onclick="changeText(); "> Add</p>
-                                        <p class="removed displayNone " id="remove" onclick="changeText(); ">Remove</p>
+                                        <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+    
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="position-absolute" id="right-div" style="height:50px;width:50px;border-radius:50%;background-color:lightgrey;top:133px;right: 40px;"><a class="right-arrow" data-counter="1" id="right" onclick="nextslides()" style="cursor: pointer;"><i class="fas fa-angle-right" style="margin-top: 12px;margin-left: 15px;font-weight: 700;font-size: 1.5rem;"></i></a></div>
+                            </div>
+                        <!-- </div> -->
+                        <!-- <div class="position-absolute" id="right-div" style="height:50px;width:50px;border-radius:50%;background-color:lightgrey;top:133px;right: 40px;"><a class="right-arrow" data-counter="1" id="right" onclick="nextslides()" style="cursor: pointer;"><i class="fas fa-angle-right" style="margin-top: 12px;margin-left: 15px;font-weight: 700;font-size: 1.5rem;"></i></a></div> -->
 
 
                     </div>
                 </div>
             </section>
 
-            <section>
+            <section style="margin-bottom: 50px;">
                 <div>
                     <div class="Header-checkup " style="margin-left: 83px; margin-top: 20px ">
                         <h2 style="font-weight: 700; ">Popular Health Checkup Packages</h2>
@@ -725,35 +741,35 @@
                     <div class="second-heading " style="display: inline-flex; margin-left: 83px;margin-top: 12px; margin-bottom: 25px; ">
                         <ul style="list-style: none; display: inline-flex;">
                             <a>
-                                <li class="active-popular1" id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular1" id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid grey;color:black;cursor:pointer;font-weight: bold; margin-right: 24px; border-radius: 30px; padding:5px 15px; ">
                                     Featured Checkup</li>
                             </a>
 
                             <a>
-                                <li class="active-popular" id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular" id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid grey;color:black;cursor:pointer;font-weight: bold;margin-right: 24px; border-radius: 30px; padding:5px 15px; ">
                                     Diabetes Care</li>
                             </a>
                             <a>
-                                <li class="active-popular" id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular" id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid grey;color:black;cursor:pointer;font-weight: bold;margin-right: 24px; border-radius: 30px; padding:5px 15px; ">
                                     Women's Care</li>
                             </a>
                             <a>
-                                <li class="active-popular" id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; ">
+                                <li class="active-popular" id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid grey;color:black;cursor:pointer;font-weight: bold; margin-right: 24px; border-radius: 30px; padding:5px 15px; ">
                                     Men's Health</li>
                             </a>
                         </ul>
                     </div>
                     <div class="doctor-slider slider ccdoctorslider" id="div1" style="padding-left: 90px; padding-right: 90px;">
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;height:450px;">
+                            <div class="featured-img" style="height: 50%;">
                                 <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Comprehensive Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged for all Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -769,16 +785,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
                                 <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Young Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -793,16 +809,16 @@
 
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
                                 <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 41-60 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">114 test Included</p>
                                 </div>
@@ -816,16 +832,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
                                 <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.></p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">100 test Included</p>
                                 </div>
@@ -840,16 +856,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
                                 <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured"> Health Old Citizen Checkup</h3>
                                 <p class="para-p">ideals for individual aged for 40-100 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -866,16 +882,16 @@
                         </div>
                     </div>
                     <div class="doctor-slider slider ccdoctorslider displayNone" id="div2" style="padding-left: 90px; padding-right: 90px;">
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Comprehensive Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged for all Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -891,16 +907,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Young Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -915,16 +931,16 @@
 
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 41-60 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">114 test Included</p>
                                 </div>
@@ -938,16 +954,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.></p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">100 test Included</p>
                                 </div>
@@ -962,16 +978,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
                                 <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured"> Health Old Citizen Checkup</h3>
                                 <p class="para-p">ideals for individual aged for 40-100 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -988,16 +1004,16 @@
                         </div>
                     </div>
                     <div class="doctor-slider slider ccdoctorslider displayNone" id="div3" style="padding-left: 90px; padding-right: 90px;">
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac2.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Comprehensive Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged for all Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -1013,16 +1029,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac2.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Young Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -1037,16 +1053,16 @@
 
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac2.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 41-60 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">114 test Included</p>
                                 </div>
@@ -1060,16 +1076,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac2.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.></p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">100 test Included</p>
                                 </div>
@@ -1084,16 +1100,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/old.jpg" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac2.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured"> Health Old Citizen Checkup</h3>
                                 <p class="para-p">ideals for individual aged for 40-100 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -1110,16 +1126,16 @@
                         </div>
                     </div>
                     <div class="doctor-slider slider ccdoctorslider displayNone" id="div4" style="padding-left: 90px; padding-right: 90px;">
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac1.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Comprehensive Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged for all Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -1135,16 +1151,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac1.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Young Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -1159,16 +1175,16 @@
 
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/look1.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac1.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 41-60 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">114 test Included</p>
                                 </div>
@@ -1182,16 +1198,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/health3.jfif" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac1.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured">Active Professional Health Checkup</h3>
                                 <p class="para-p">ideals for individual aged 21-40 Years.></p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">100 test Included</p>
                                 </div>
@@ -1206,16 +1222,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
-                    border-top-right-radius: 9px;">
-                            <div class="featured-img" style="height: 40%;">
-                                <a href="/"><img src="/img/patients/health2.jpg" style="width: 100%;height: 100%;"></a>
+                        <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 5px;
+                    border-top-right-radius: 5px; height:450px;">
+                            <div class="featured-img" style="height: 50%;">
+                                <a href="/"><img src="/img/patients/ac1.jpg" style="width: 100%;height: 100%;"></a>
                             </div>
                             <div class="featured-para" style="height: 20%;">
                                 <h3 class="para-featured"> Health Old Citizen Checkup</h3>
                                 <p class="para-p">ideals for individual aged for 40-100 Years.</p>
                             </div>
-                            <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                            <div class="featured-paraTest" style="height:5% ;margin-bottom: 26px;margin-top: 27px;">
                                 <div class="test-number">
                                     <p class="included-test">60 test Included</p>
                                 </div>
@@ -1229,6 +1245,210 @@
                                     <span class="books-health">Book Now</span>
                                 </a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section >
+                <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+                    <div class="col-md-12" style="height:330px; background-color: #f6f6f9;padding:50px">
+                    <h2 class="text-center"  style="font-weight: bold;font-size: 2rem;">Why Book With Us ?</h2>
+                    <div style="display: flex;margin-top: 20px;">
+                        <div style="width: 50%;height:280px;padding:8px 30px">
+                            <div style="display:inline-flex;margin-bottom: 40px;">
+                                <span style="margin-right: 20px;">
+                                <img src="/img/med1.png" style="height:40px;width:40px;">
+                            </span>
+                            <span>
+                                <h3 style="font-size: 1rem;font-weight: bold;">Home sample collection for FREE</h3>
+                                <h4 style="font-size: 0.9rem;margin-top:-5px">A certified professional will collect your sample from a location of your preference.</h4>
+                            </span>
+
+                            </div>
+                            <div style="display:inline-flex;margin-bottom: 40px;">
+                                <span style="margin-right: 20px;">
+                                <img src="/img/med2.png" style="height:40px;width:40px;">
+                            </span>
+                            <span>
+                                <h3 style="font-size: 1rem;font-weight: bold;">Digital reports</h3>
+                                <h4 style="font-size: 0.9rem;margin-top:-5px">Access your reports anytime on your Practo account. We will email you a copy.</h4>
+                            </span>
+
+                            </div>
+                        </div>
+                        <div style="width: 50%;height:280px;padding:8px 30px">
+                            <div style="display:inline-flex;margin-bottom: 40px;">
+                                <span style="margin-right: 20px;">
+                                <img src="/img/med3.png" style="height:40px;width:40px;">
+                            </span>
+                            <span>
+                                <h3 style="font-size: 1rem;font-weight: bold;">Doccure Associate Labs: Labs with industry standards</h3>
+                                <h4 style="font-size: 0.9rem;margin-top:-5px">To ensure the accuracy of reports.
+                                </h4>
+                            </span>
+
+                            </div>
+                            <div style="display:inline-flex;margin-bottom: 40px;">
+                                <span style="margin-right: 20px;">
+                                <img src="/img/med4.png" style="height:40px;width:40px;">
+                            </span>
+                            <span>
+                                <h3 style="font-size: 1rem;font-weight: bold;">Offers and affordable prices</h3>
+                                <h4 style="font-size: 0.9rem;margin-top:-5px">Get great discounts and offers on tests and packages.</h4>
+                            </span>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                </div>
+            </section>
+            <section >
+                <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+                    <div class="col-md-12" style="height:330px; background-color: white;padding:50px">
+                    <h2 class="text-center"  style="font-weight: bold;font-size: 2rem;">How it Works ?</h2>
+                    <div style="display: flex;margin-top: 40px;">
+                        <div style="width:10%"></div>
+                        <div style="width: 25%;height:280px;padding:8px 30px">
+                            
+                            <img src="/img/meds1.png" style="height:35px;width:35px;">
+                            <div style="margin-top:20px;margin-left:-170px">
+                                <p class="text-center">Search for tests and packages and</p> 
+                                <p class="text-center" style="margin-top:-15px;">seamlessly book a home sample </p>
+                                   <p class="text-center" style="margin-top:-15px;"> collection.</p>
+
+
+                            </div>
+
+                        </div>
+                        <div style="width:10%"></div>
+                        <div style="width: 25%;height:280px;padding:8px 30px">
+                            <img src="/img/meds2.png" style="height:35px;width:35px;">
+                            <div style="margin-top:20px;margin-left:-170px">
+                                <p class="text-center">We will send a certified professional to</p> 
+                                <p class="text-center" style="margin-top:-15px;">your place to assist you with the </p>
+                                   <p class="text-center" style="margin-top:-15px;"> sample collection.</p>
+
+
+                            </div>
+
+                        </div>
+                        <div style="width:10%"></div>
+                        <div style="width: 25%;height:280px;padding:8px 30px">
+                            <img src="/img/meds3.png" style="height:35px;width:35px;">
+                            <div style="margin-top:20px;margin-left:-170px">
+                                <p class="text-center">We will email you the reports. You can</p> 
+                                <p class="text-center" style="margin-top:-15px;">also access your reports within your </p>
+                                   <p class="text-center" style="margin-top:-15px;"> account on the Practo app.</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                </div>
+            </section>
+
+
+            <section class="section section-features position-relative" id="inclinic" style="background-color: rgba(252, 245, 245, 0.918);padding-top: 50px;padding-bottom: 50px;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5 features-img">
+                            <img src="/img/features/feature.png" class="img-fluid" alt="Feature">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="section-header">
+                                <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 1.8rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the Doccure app</h2>
+                                <div class="u-t-c--black_1 u-font--14 u-margin--20__top">
+                                    <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;font-size:1rem;">Access video consultation with India’s top doctors on the Doccure app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
+    
+    
+                                    <!-- <h4>Book appointments </h4> -->
+                                    <ul class="list-item" style="margin-top: 50px;">
+                                        <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">
+                                            </i>Book appointments</li>
+                                        <li style="font-size: 1rem;margin-top: 10px;font-weight: bold;">Consult doctors online</li>
+                                        <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Store health records</li>
+                                        <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Read health tips</li>
+    
+    
+                                    </ul>
+                                    <div>
+                                        <p style="margin-top: 50px;font-weight: 700;font-size: 16px;line-height: 1.5; font-family:Camphor,Helvetica,Arial,sans-serif!important;">Get the link to download the app</p>
+    
+                                    </div>
+                                    <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
+                                        <div class="col-md-12" style="display: inline-flex;">
+                                            <div class="col-md-1" style="border:1px solid lightgrey; padding: 5.8px;height:46px;font-size: 1.3rem;font-weight: bold;margin-right: -15px;">
+                                                +91
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <input type="Number" placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;width: 275px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3" id="sum_phone" >
+    
+                                            <a href="#"><button type="submit" class="form-control" style="border-radius:20px; background-color: #fff; border-color: #dddddd;color:#2c2929;">Send SMS</button></a>
+    
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <!-- <p>Doccure is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
+                            </div>
+    
+                            <div class="row text-center position-absolute" style="padding-right: 20px; padding-left: 50px !important;bottom: 0;left: -450px;">
+    
+    
+                                <p>
+                                   
+                                    <a href="#" class="btn btn-store" style="margin-top: -40px;">
+                                        <span><img src="/img/googleplay.png" style="height: 70px;width:250px;margin-left: 0px;"></span>
+                                        <span class="btn-label">Download on the</span>
+                                        <span class="btn-caption">Google Play Store</span>
+                                    </a>
+    
+    
+                                </p>
+                                <style>
+                                    .btn-store {
+                                        color: #2c2929;
+                                        min-width: 254px;
+                                        padding: 12px 20px !important;
+                                        border-color: #dddddd !important;
+                                    }
+                                    
+                                    .btn-store:focus,
+                                    .btn-store:hover {
+                                        color: #ffffff !important;
+                                        background-color: #072135;
+                                        border-color: #0a1014 !important;
+                                    }
+                                    
+                                    .btn-store .btn-label,
+                                    .btn-store .btn-caption {
+                                        display: block;
+                                        text-align: left;
+                                        line-height: 1;
+                                    }
+                                    
+                                    .btn-store .btn-caption {
+                                        font-size: 24px;
+                                    }
+                                </style>
+                            </div>
+    
+    
+                            <!-- <div class="features-slider slider">
+                                Slider Item
+                                <div class="feature-item text-center">
+                                    <img src="/img/features/feature-01.jpg" class="img-fluid" alt="Feature">
+                                    <p>Patient Ward</p>
+                                </div>
+                              
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -2358,87 +2578,24 @@
     <!-- Custom JS -->
     <script src="/js/script1.js "></script>
     <script src="/js/script.js "></script>
+
+
+
     <script>
-        function nextslides() {
-            var right = document.getElementById("right-div");
-            var left = document.getElementById("left-div");
-            var count = $('#right').data('counter');
-            if (count >= 1) {
-                left.classList.remove('displayNone');
-            }
-            if (count > 3) {
-                right.classList.add('displayNone');
+        function changeText(a) {
+            if(a.getAttribute('data-flag')== 'false')
+            {
+                a.innerText="Remove";
+                a.classList.add('col-black');
+                a.setAttribute('data-flag','true');
             }
 
-
-            var d = count + 1;
-
-
-            var first1 = document.getElementById("dt" + count);
-
-            var first2 = document.getElementById("dt" + d);
-
-            first1.classList.add('displayNone');
-            first1.style.transition = "all 10s delay";
-            first2.style.transition = "all 10s delay";
-            $('#right').data('counter', d);
-
-
-        }
-
-        function prevslides() {
-
-            var right = document.getElementById("right-div");
-            var left = document.getElementById("left-div");
-            var count = $('#right').data('counter');
-            if (count < 2) {
-                left.classList.add('displayNone');
-            }
-            console.log(count);
-            var c1 = count - 1;
-            var c2 = count - 1;
-
-
-            var d = count + 5;
-
-
-            var prev1 = document.getElementById("dt" + c1);
-
-
-            var prev2 = document.getElementById("dt" + 4);
-            prev2.classList.add('displayNone');
-            prev1.classList.remove('displayNone');
-            if (c2 <= 4) {
-                right.classList.remove('displayNone');
+            else{
+                a.innerText="Add";
+                a.classList.remove('col-black');
+                a.setAttribute('data-flag','false');
             }
 
-            // first1.style.transition = "all 10s delay";
-            // first2.style.transition = "all 10s delay";
-            $('#right').data('counter', count - 1);
-
-
-        }
-    </script>
-    <script>
-        function changeText() {
-
-            var add = document.querySelectorAll('#add');
-            var remove = document.querySelectorAll('#remove');
-
-
-            for (let i = 0; i < add.length; i++) {
-                add[i].addEventListener('click', function() {
-                    add[i].classList.add('displayNone');
-                    remove[i].classList.remove('displayNone');
-                })
-            }
-
-            for (let i = 0; i < remove.length; i++) {
-                remove[i].addEventListener('click', function() {
-                    remove[i].classList.add('displayNone');
-                    add[i].classList.remove('displayNone');
-                })
-            }
         }
     </script>
     <script>

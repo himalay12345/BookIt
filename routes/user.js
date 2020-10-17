@@ -51,6 +51,7 @@ router.post('/upload-idproof', userController.uploadIdProof);
 router.post('/upload-degree', userController.uploadDegree);
 router.post('/accept-agreement', userController.acceptAgreement);
 router.get('/delete-registration', userController.deleteRegistration);
+router.post('/delete-account',userController.deleteAccount);
 router.get('/delete-award', userController.deleteAward);
 router.get('/delete-experience', userController.deleteExperience);
 router.get('/delete-education', userController.deleteEducation);

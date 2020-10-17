@@ -265,7 +265,7 @@
                         <%if(locals.user.type == 'Doctor'){%>
                             <li class="nav-item dropdown has-arrow">
                                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" width="31" alt="Ryan Taylor"></span>
+                                    <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
                                 </a>
                                 <div class="dropdown-menu profile-drop">
                                     <div class="user-header">
@@ -512,6 +512,18 @@
                                                 <div class="form-group col-sm-12">
                                                     <label class="control-label">City</label>
                                                     <input type="text" class="form-control gwidth" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-11" style="margin-left: -30px;">
+                                                <div class="form-group">
+                                                    <label class="control-label">State / Province</label>
+                                                    <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>" >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-11" style="margin-left: -30px;">
+                                                <div class="form-group">
+                                                    <label class="control-label">Postal Code</label>
+                                                    <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>" >
                                                 </div>
                                             </div>
                                             <div class="submit-section submit-btn-bottom" style="margin-top: 25px;">

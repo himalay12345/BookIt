@@ -628,13 +628,15 @@
 
                                                     </ul>
                                                 </div>
+                                                <%if(doctor.services){%>
                                                 <div class="clinic-services">
                                                     <%var service = doctor.services.toString().split(',')%>
                                                         <%for(temp of service){%>
                                                             <span><%=temp%></span>
                                                             <%}%>
-
+                                              
                                                 </div>
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div class="doc-info-right">

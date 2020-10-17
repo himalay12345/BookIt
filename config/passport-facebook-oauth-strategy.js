@@ -29,7 +29,9 @@ passport.use(new FacebookStrategy({
                         name: profile.displayName,
                         email:profile.emails[0].value,
                         password: crypto.randomBytes(20).toString('hex'),
-                        avatar: profile.photos[0].value
+                        avatar: profile.photos[0].value,
+                        service:'facebook',
+                        emailverify:true
                     },
                     function(err, new_user) {
                         if (err) {

@@ -89,6 +89,8 @@ module.exports.updateProfile = async(req, res) => {
     doctor.department = req.body.department;
     doctor.gender = req.body.gender;
     doctor.contacts.city = req.body.city;
+    doctor.contacts.state = req.body.state;
+    doctor.contacts.pincode = req.body.pincode;
 
     if (req.files['avatar']) {
         if (!doctor.avatar) {
@@ -126,6 +128,10 @@ module.exports.updateMedicalRegistration = async(req, res) => {
 module.exports.updateEducation = async(req, res) => {
     console.log(req.body);
     let doctor = await User.findById(req.body.id);
+    if(doctor.education.length == 1)
+    {
+        doctor.education.pull(doctor.education[0]._id);
+    }
     doctor.education.push(req.body);
     
    
@@ -142,7 +148,6 @@ module.exports.updateEstablishment = async(req, res) => {
     doctor.clinicname = req.body.clinicname;
     doctor.clinicaddr = req.body.clinicaddr;
     doctor.cliniccity = req.body.cliniccity;
-    doctor.contacts.city = req.body.city;
     doctor.step1 = true;
     
    
@@ -251,7 +256,7 @@ module.exports.popup = async function(req, res) {
             });
         }
         else{
-        return res.redirect('/patient-dashboard');
+        return res.redirect('/my-appointments');
         }
     }
     }
@@ -293,7 +298,7 @@ module.exports.updateType = async function(req, res) {
     }
 
     if (user.type == 'Patient') {
-        return res.redirect('/patient-dashboard');
+        return res.redirect('/profile-settings');
     }
 
 }
@@ -1340,6 +1345,30 @@ module.exports.bookAppointment = async (req, res) => {
 
     });
 }
+}
+
+module.exports.deleteAccount = async (req, res) => {
+    console.log(req.body);
+    Feedback.create({
+        delete_value:req.body.delete,
+        description:req.body.del_description,
+        did:req.user.id
+    });
+
+    let user = await User.findOne({ _id: req.user.id });
+
+    if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
+    fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+    }
+    
+
+
+    let prope = await User.deleteOne({ _id: req.user.id });
+
+    req.flash('success', 'Account removed Successfully');
+
+
+    return res.redirect('/');
 }
 
 module.exports.staffBookAppointment = async (req, res) => {

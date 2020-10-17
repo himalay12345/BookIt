@@ -743,7 +743,7 @@
                                     <div class="row">
 
                                         <!-- Clinic Content -->
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="clinic-content">
                                                 <h4 class="clinic-name">
                                                     <a href="#">
@@ -781,15 +781,28 @@
                                         <!-- /Clinic Content -->
 
                                         <!-- Clinic Timing -->
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <div class="clinic-timing">
-                                                <div>
-                                                    <p class="timings-days">
-                                                        <span>  </span>
+                                                <div style="display: flex;">
+                                                    <p class="timings-days" style="display:inline-flex;flex-direction: column;">
+                                                        <%for(time of doctor.schedule_time){%>
+
+                                                            <span> <%=time.day.toUpperCase()%> </span>
+                                                        <%}%>
                                                     </p>
                                                     <p class="timings-times">
                                                         <%for(time of doctor.schedule_time){%>
-                                                            <span><%=time.day.toUpperCase()%> : <%=time.start%> - <%=time.end%></span>
+                                                            <%if(typeof(time.start) == 'object'){%>
+
+                                                                <span><%for(let i = 0;i<time.start.length;i++){%>
+                                                                    : &nbsp;&nbsp;&nbsp;<%=time.start[i]%> - <%=time.end[i]%>
+                                                                    <%}%>
+                                                                </span>
+
+                                                            <%}else{%>
+                                                                <span>: &nbsp;&nbsp;&nbsp;<%=time.start%> - <%=time.end%></span>
+
+                                                            <%}%>
                                                             <%}%>
 
                                                     </p>
@@ -1009,20 +1022,36 @@
                                                                                                         <span class="open-status"><span class="badge bg-success-light">Not Available</span></span>
 
                                                                                                         <%}else{%>
+                                                                                                            <%if(typeof(d1.start) == 'object'){%>
+                                                                                                                <%for(let i = 0;i<d1.start.length;i++){%>
+                                                                                                                    <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+
+                                                                                                                    <span class="time"><%=d1.start[i]%>-<%=d1.end[i]%></span> 
+                                                                                                                    <%}%>
+                                                                                                                    <%}else{%>                                                                                                                   
                                                                                                             <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
 
-                                                                                                            <span class="time"><%=d1.start%><%=d1.end%></span>
+                                                                                                            <span class="time"><%=d1.start%>-<%=d1.end%></span>
+                                                                                                            <%}%>
                                                                                                             <%}%>
 
                                                             </div>
                                                     </div>
+                                   
                                                     <%for(time of doctor.schedule_time){%>
                                                         <div class="listing-day">
                                                             <div class="day">
                                                                 <%=time.day.toUpperCase()%>
                                                             </div>
                                                             <div class="time-items">
+                                                                <%if(typeof(time.start) == 'object'){%>
+                                                                <%for(let i = 0;i<time.start.length;i++){%>
+                                                                    <span class="time"> <%=time.start[i]%> -<%=time.end[i]%></span>
+                                                                    <%}%>
+                                                                    <%}else{%>
+
                                                                 <span class="time"> <%=time.start%> -<%=time.end%></span>
+                                                                <%}%>
                                                             </div>
                                                         </div>
                                                         <%}%>

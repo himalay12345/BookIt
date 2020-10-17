@@ -422,12 +422,12 @@
                                 <div class="form-group">
                                     <div class="change-avatar">
                                         <div class="profile-img">
-                                            <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                            <img src="<%=locals.user.degreephoto%>" id="image" onerror='this.src="/img/med2.png"' alt="User Image">
                                         </div>
                                         <div class="upload-img">
                                             <div class="change-photo-btn">
                                                 <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                <%if(locals.user.idproof){%>
+                                                <%if(locals.user.degreephoto){%>
                                                     <input type="file" class="upload" name="avatar" id="imageUpload">
                                                 <%}else{%>
                                                     <input type="file" class="upload" name="avatar" id="imageUpload" required>
@@ -620,9 +620,17 @@
     <!-- Custom JS -->
     <script src="js/script.js"></script>
     <script>
-        document.getElementById("imageUpload").onchange = function() {
-            document.getElementById("edit_form").submit();
+        document.getElementById("imageUpload").onchange = function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("image").src = e.target.result;
         };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+};
     </script>
     <script>
         <%if(flash.success && flash.success.length>0){%>
