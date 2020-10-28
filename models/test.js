@@ -22,6 +22,10 @@ const testSchema = mongoose.Schema({
         type: String
 
     },
+    testdiscripation: {
+        type: String
+
+    },
     testtotalprice: {
         type: String
     },
