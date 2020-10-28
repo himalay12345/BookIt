@@ -459,9 +459,9 @@
                                 <nav class="dashboard-menu">
                                     <ul>
                                         <li>
-                                            <a href="/patient-dashboard">
-                                                <i class="fas fa-columns"></i>
-                                                <span>My Dashboard</span>
+                                            <a href="/my-appointments">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>My Appointments</span>
                                             </a>
                                         </li>
                                         <li>
@@ -482,12 +482,7 @@
                                                 <span>My Billings</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/other-patients">
-                                                <i class="fas fa-edit"></i>
-                                                <span>Other Appointments</span>
-                                            </a>
-                                        </li>
+                                        
                                         <li>
                                             <a href="/favourites">
                                                 <i class="fas fa-bookmark"></i>
@@ -509,25 +504,7 @@
                        
                           
                           <!-- Modal -->
-                          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="false" style="z-index:1050;">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  ...
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          
                         <!-- <div id="popup2" class="overlay">
                             <div class="popup">
                                 <form action="/user/payments/refund" method="POST">
@@ -631,8 +608,49 @@
                                                     </div>
                                                     <div class="top-content" style="width: 75%;height:100%;padding:10px;">
                                                         <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
-                                                        <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=alldoctors.doctors[i].date%>, <%=alldoctors.doctors[i].time%> </h5>
+                                                        <%var str2 = alldoctors.doctors[i].date.split('-');%>
+                                                        <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                            <%var str1 = formatDate(str);%>
+                                            <%function formatDate(d){%>
+                                                <%var date = new Date(d);
+
+                                                if ( isNaN( date .getTime() ) ) 
+                                                {
+                                                   return d;
+                                                }
+                                                else
+                                               {
+                                                 
+                                                 var month = new Array();
+                                                 month[0] = "Jan";
+                                                 month[1] = "Feb";
+                                                 month[2] = "Mar";
+                                                 month[3] = "Apr";
+                                                 month[4] = "May";
+                                                 month[5] = "Jun";
+                                                 month[6] = "Jul";
+                                                 month[7] = "Aug";
+                                                 month[8] = "Sept";
+                                                 month[9] = "Oct";
+                                                 month[10] = "Nov";
+                                                 month[11] = "Dec";
+                                       
+                                                 day = date.getDate();
+                                                 
+                                                 if(day < 10)
+                                                 {
+                                                    day = "0"+day;
+                                                 }
+                                                 
+                                                 return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                 }
+                                                   %>
+                                            <%}%>
+                                            <%var x1 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                            <%var x2 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                        <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=str1%>, <%=x1%><%=x2%> </h5>
                                                         <h5 style="font-size: 1rem;font-weight: 700;">Rs <%=alldoctors.doctors[i].fee%>
+                                                            
                                                             <%if(alldoctors.doctors[i].cancel == true){%>
                                                                 <span class="badge badge-pill bg-danger-light" style="margin-left: 20px;">Cancelled</span>
                                                               <%}else{%>
@@ -645,6 +663,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="bottom-part table-action" >
+                                                    <% var tdate = new Date();%>
+                                                    <%var stra = alldoctors.doctors[i].date.split('-');%>
+                                                    <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
+                                                    <%var bdate = new Date(strb)%>
+                                                    <%if(bdate > tdate){%>
                                                     <%if(alldoctors.doctors[i].cancel == true){%>
                                                         <a href="#" class="btn btn-sm bg-danger" style="color: white;width: 100%;">
 
@@ -656,6 +679,13 @@
 
                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         </a>
+                                                        <%}%>
+                                                        <%}else{%>
+                                                            <div class="table-action">
+                                                 
+                                                            <h5><span class="btn btn-sm bg-success-light" style="padding:5px 15px;width: 100%;">
+                                                                <i class="fas fa-check-circle" style="margin-right: 5px;"></i>Confirm</span></h5>
+                                                                </div>
                                                         <%}%>
                                                                                                 </div>
                                             </div>
@@ -671,6 +701,7 @@
                                                                 <th>Doctor</th>
                                                                 <th>Amount</th>
                                                                 <th>Paid On</th>
+                                                                <th>Appointment Date</th>
                                                                 <th class="text-center">Status</th>
                                                             </tr>
                                                         </thead>
@@ -694,16 +725,59 @@
                                                                     </h2>
                                                                 </td>
                                                                 <td>Rs<%=alldoctors.doctors[i].fee%></td>
-                                                                <td><%=alldoctors.doctors[i].date%><span class="d-block text-info"></span><%=alldoctors.doctors[i].createdAt.toLocaleTimeString()%></td>
+                                                                <%var str2 = alldoctors.doctors[i].date.split('-');%>
+                                                                
+                                                                <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                                <%var str3 = formatDate(str);%>
+                                                    <%var str1 = formatDate(alldoctors.doctors[i].createdAt);%>
+                                                    <%function formatDate(d){%>
+                                                        <%var date = new Date(d);
+
+                                                        if ( isNaN( date .getTime() ) ) 
+                                                        {
+                                                           return d;
+                                                        }
+                                                        else
+                                                       {
+                                                         
+                                                         var month = new Array();
+                                                         month[0] = "Jan";
+                                                         month[1] = "Feb";
+                                                         month[2] = "Mar";
+                                                         month[3] = "Apr";
+                                                         month[4] = "May";
+                                                         month[5] = "Jun";
+                                                         month[6] = "Jul";
+                                                         month[7] = "Aug";
+                                                         month[8] = "Sept";
+                                                         month[9] = "Oct";
+                                                         month[10] = "Nov";
+                                                         month[11] = "Dec";
+                                               
+                                                         day = date.getDate();
+                                                         
+                                                         if(day < 10)
+                                                         {
+                                                            day = "0"+day;
+                                                         }
+                                                         
+                                                         return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                         }
+                                                           %>
+                                                    <%}%>
+                                                    <%var x1 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                    <%var x2 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                                <td><%=str1%><span class="d-block text-info"></span><%=x1%><%=x2%></td>
+                                                                <td><%=str3%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
                                                                 <td class="text-right">
+                                                                    <% var tdate = new Date();%>
+                                                                    <%var stra = alldoctors.doctors[i].date.split('-');%>
+                                                                    <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
+                                                                    <%var bdate = new Date(strb)%>
+                                                                    <%if(bdate > tdate){%>
                                                                     
                                                                     <div class="table-action">
-                                                                        <%if(alldoctors.doctors[i].cancel != true){%>
-                                                                            <a href="/invoice-view" class="btn btn-sm bg-info-light">
-                                                                                <i class="far fa-eye"></i> View
-                                                                            </a>
-                                                                            <%}%>
-                                                                        
+                                                               
                                                                       <%if(alldoctors.doctors[i].cancel == true){%>
                                                                         <a href="#" class="btn btn-sm bg-danger" style="color: white;">
 
@@ -711,17 +785,23 @@
                                                                         </a>
                                                                         
                                                                       <%}else{%>
+                                                                        
                                                                      
-                                                                          <a data-target="#exampleModalCenter" id="popbtn" class="btn btn-sm bg-danger-light" data-0 ="<%=alldoctors.payments[i].payment_id%>" data-1="<%=alldoctors.doctors[i].did._id%>" data-2="<%=alldoctors.doctors[i].slotindex%>" data-3="<%=alldoctors.doctors[i].dayindex%>" data-4="<%=i%>" data-5="<%=alldoctors.doctors[i]._id%>" data-6="<%=alldoctors.doctors[i].time%>"data-7="<%=alldoctors.doctors[i].date%>"data-8="<%=alldoctors.doctors[i].phone%>" data-9="<%=alldoctors.doctors[i].email%>" data-10="<%=alldoctors.doctors[i].fee%>" >
+                                                                          <a data-target="#" id="popbtn" class="btn btn-sm bg-danger-light" data-0 ="<%=alldoctors.payments[i].payment_id%>" data-1="<%=alldoctors.doctors[i].did._id%>" data-2="<%=alldoctors.doctors[i].slotindex%>" data-3="<%=alldoctors.doctors[i].dayindex%>" data-4="<%=i%>" data-5="<%=alldoctors.doctors[i]._id%>" data-6="<%=alldoctors.doctors[i].time%>"data-7="<%=alldoctors.doctors[i].date%>"data-8="<%=alldoctors.doctors[i].phone%>" data-9="<%=alldoctors.doctors[i].email%>" data-10="<%=alldoctors.doctors[i].fee%>" >
 
                                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                         </a>
                                                                         <%}%>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                                                            Launch demo modal
-                                                                          </button>
+                                                                       
                                                                 
                                                                     </div>
+                                                                    <%}else{%>
+                                                                        <div class="table-action">
+                                                             
+                                                                        <h5><span class="btn btn-sm bg-success-light" style="padding:5px 15px;">
+                                                                            <i class="fas fa-check-circle" style="margin-right: 5px;"></i>Confirm</span></h5>
+                                                                            </div>
+                                                                    <%}%>
                                                                 </td>
                                                             </tr>
                                                             <%}%>

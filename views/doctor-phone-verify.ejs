@@ -404,7 +404,7 @@
                                 </div>
                                 <div class="col-md-12 col-lg-6 login-right">
                                     <div class="login-header">
-                                        <%var type;%>
+                                        <%var type,id;%>
                                         <%if(type == 'email'){%>
                                             <h3>Email Verification </h3>
                                         <%}else{%>
@@ -432,6 +432,7 @@
                                             <input type="hidden" name="phone" value="<%=phone%>">
                                             <input type="hidden" name="id" value="<%=id%>">
                                             <input type="hidden" name="type" value="<%=type%>">
+                                            <input type="hidden" name="designation" value="<%=designation%>">
                                             
                                         </div>
                                         <!-- <div class="form-group form-focus">

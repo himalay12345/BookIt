@@ -55,11 +55,7 @@ module.exports.accountSetting = (req, res) => {
     })
 }
 
-module.exports.activeDevice = (req, res) => {
-    return res.render('active-device', {
-        title: 'Account Settings'
-    })
-}
+
 
 module.exports.addBank = (req, res) => {
     return res.render('add-bank', {
@@ -479,24 +475,7 @@ module.exports.notificationSettings = (req, res) => {
 }
 
 
-module.exports.otherPatients = async(req, res) => {
-    let user = await User.findById(req.user.id);
-    let patients = await User.findById(req.user.id).populate({
-        path: 'others',
-        populate: {
-            path: 'doctors',
-            populate: {
-                path: 'did',
-                populate: { path: 'user' }
-            }
-        }
-    });
-    return res.render('other-patients', {
-        title: 'user Dashboard',
-        user: user,
-        otherpatients: patients
-    })
-}
+
 
 module.exports.patientDashboard = async(req, res) => {
     let user = await User.findById(req.user.id);
@@ -718,6 +697,12 @@ module.exports.staffDashboard = async(req, res) => {
     })
 }
 
+module.exports.staffForgotPassword = (req, res) => {
+    return res.render('staff-forgot-password', {
+        title: 'Staff Login'
+    })
+}
+
 module.exports.staffSignup = async(req, res) => {
 
     if(req.body.type == 'email')
@@ -743,6 +728,40 @@ module.exports.staffSignup = async(req, res) => {
             })
         
         }
+    }
+
+    if(req.body.designation == 'Staff')
+    {
+        let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+    
+        console.log(req.body.id);
+    
+    
+    if (data.status == 'approved') {
+        return res.render('set-password', {
+            title: 'Reset Pasword',
+            phone: req.body.phone,
+            id:req.body.id,
+            designation:req.body.designation
+        });
+    
+    } else {
+        req.flash('error', 'Wrong Otp');
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id:req.body.id,
+                designation:req.body.designation
+            })
+    
+    }
     }
     else{
         let data = await client
@@ -893,9 +912,17 @@ module.exports.signUp = async(req, res) => {
 
 }
 
-module.exports.reviews = (req, res) => {
+module.exports.reviews = async (req, res) => {
+    let users = await User.findById(req.user.id).populate({
+        path: 'reviews',
+        populate: {
+            path: 'pid',
+            populate: { path: 'user' }
+        }
+    })
     return res.render('reviews', {
-        title: 'Reviews'
+        title: 'Reviews',
+        users:users
     })
 }
 
@@ -908,12 +935,13 @@ module.exports.scheduleTimings = async(req, res) => {
     })
 }
 module.exports.staffScheduleTimings = async(req, res) => {
-    let user1 = await User.findById(req.user.id);
-    let user = await User.findById(user1.doctorid).populate('schedule_time');
+    let user = await User.findById(req.user.id);
+    let user1 = await User.findById(user.doctorid).populate('schedule_time');
 
     return res.render('staff_schedule_timing', {
         title: 'Schedule Timings',
-        user: user
+        user: user,
+        user1:user1
     })
 }
 
@@ -1017,7 +1045,7 @@ module.exports.verifyDoctor = async (req, res) => {
     var check = re.test(String(req.body.phone).toLowerCase());
     if(check == true)
     {
-        let doctor = await User.findOne({email:req.body.phone, type:'Doctor', service:'google'});
+        let doctor = await User.findOne({email:req.body.phone, type:'Doctor', service:'google',staff_flag:false});
         if(doctor)
         {
             var key = Math.floor(100000 + Math.random() * 900000);
@@ -1047,7 +1075,7 @@ module.exports.verifyDoctor = async (req, res) => {
 
     else{
         let doctor = await User.findOne({phone:req.body.phone,
-            type:'Doctor',staff_flag:false});
+            type:'Doctor',staff_flag:false,service:'phone'});
            
         
             if(doctor)
@@ -1088,6 +1116,12 @@ module.exports.verifyDoctor = async (req, res) => {
 module.exports.verify = async(req, res) => {
 
     if (req.body.type == 'forgot') {
+        let user = await User.findOne({ phone: req.body.phone , service:'phone', type:'Staff'});
+        console.log(user)
+        if (!user) {
+            req.flash('error', 'No account linked with this phone number.');
+            return res.redirect('back');
+        } else {
         console.log(req.body.type)
         client
             .verify
@@ -1098,13 +1132,33 @@ module.exports.verify = async(req, res) => {
                 channel: req.query.service
             }).then((data) => {
 
+                if(req.body.designation == 'Staff')
+                {
+                   
+                   
+                        return res.render('doctor-phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        type: req.body.type,
+                        designation:req.body.designation
+    
+                    });
+                
+                }
+
+                else{
+                  
                 return res.render('phone-verify', {
                     title: 'Phone verification',
                     phone: req.body.phone,
                     type: req.body.type
 
                 });
+            
+            }
             });
+        }
+        
 
     } else {
         if (req.body.type == 'book') {

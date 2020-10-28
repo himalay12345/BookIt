@@ -457,9 +457,9 @@
                                 <nav class="dashboard-menu">
                                     <ul>
                                         <li>
-                                            <a href="/patient-dashboard">
-                                                <i class="fas fa-columns"></i>
-                                                <span>My Dashboard</span>
+                                            <a href="/my-appointments">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>My Appointments</span>
                                             </a>
                                         </li>
                                         <li>
@@ -480,12 +480,7 @@
                                                 <span>My Billings</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/other-patients">
-                                                <i class="fas fa-edit"></i>
-                                                <span>Other Appointments</span>
-                                            </a>
-                                        </li>
+                                       
                                         <li class="active">
                                             <a href="/favourites">
                                                 <i class="fas fa-bookmark"></i>
@@ -504,7 +499,7 @@
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <div class="row row-grid">
                             <%if(doctors.favourites == ''){%>
-                                <h2 style="margin-top:50px;margin-left: 100px;">No favourites added yet.</h2>
+                                <h2 class="text-center no-file" style="margin-top: 100px;margin-right: auto;margin-left: auto;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Favourites Added Yet !</span></h2>
                                 <%}%>
                             <%for(doctor of doctors.favourites){%>
                                 <div class="col-md-6 col-lg-4 col-xl-3">
@@ -513,7 +508,7 @@
                                             <a href="/doctor-profile/?id=<%=doctor._id%>">
                                                 <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height:200px;width:100%">
                                             </a>
-                                            <a href="javascript:void(0)" class="fav-btn">
+                                            <a href="javascript:void(0)" class="fav-btn" style="background-color: red;color:white">
                                                 <i class="far fa-bookmark"></i>
                                             </a>
                                         </div>

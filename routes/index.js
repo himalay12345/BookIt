@@ -11,7 +11,7 @@ router.get('/', homeController.home);
 router.get('/account-setting', passport.checkAuthentication, homeController.accountSetting);
 router.get('/add-billing', passport.checkAuthentication, homeController.addBilling);
 router.get('/add-bank', passport.checkAuthentication, homeController.addBank);
-router.get('/active-device', passport.checkAuthentication, homeController.activeDevice);
+
 router.get('/add-prescription', passport.checkAuthentication, homeController.addPrescription);
 router.get('/appointments', passport.checkAuthentication, homeController.appointments);
 router.get('/appointment-detail', passport.checkAuthentication, homeController.appointmentDetail);
@@ -56,7 +56,6 @@ router.get('/medical-records', passport.checkAuthentication, homeController.medi
 router.get('/my-billing', passport.checkAuthentication, homeController.myBilling);
 router.get('/my-appointments', passport.checkAuthentication, homeController.myAppointments);
 router.get('/notification-settings', passport.checkAuthentication, homeController.notificationSettings);
-router.get('/other-patients', passport.checkAuthentication, homeController.otherPatients);
 router.get('/pay', homeController.pay);
 router.post('/razorpay', homeController.razorPay);
 router.get('/refund', homeController.refund);
@@ -77,6 +76,7 @@ router.get('/social-media', passport.checkAuthentication, homeController.socialM
 router.get('/settings', passport.checkAuthentication, homeController.settings);
 router.get('/staff-login', homeController.staffLogin);
 router.get('/staff-profile', homeController.staffProfile);
+router.get('/staff-forgot-password', homeController.staffForgotPassword);
 router.get('/staff-dashboard', homeController.staffDashboard);
 router.get('/staff-login-page', homeController.staffLoginPage);
 router.get('/staff-booking', homeController.staffBooking);

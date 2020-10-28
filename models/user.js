@@ -41,6 +41,16 @@ const userSchema = mongoose.Schema({
             type: String
         }
     },
+
+    nots_settings:{
+        email:{
+            type:Object
+        },
+        phone:{
+            type:Object
+        }
+
+    },
     favourites: [{
         type: mongoose.Schema.Types.ObjectId
     }],

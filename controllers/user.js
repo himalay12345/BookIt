@@ -1371,6 +1371,15 @@ module.exports.deleteAccount = async (req, res) => {
     return res.redirect('/');
 }
 
+module.exports.manageNotification = async (req, res) => {
+    console.log(req.body);
+    let user = await User.findById(req.user.id);
+    user.nots_settings.email = req.body.email;
+    user.nots_settings.phone = req.body.phone;
+    user.save();
+    return res.redirect('back');
+}
+
 module.exports.staffBookAppointment = async (req, res) => {
   
 
@@ -1581,6 +1590,23 @@ module.exports.setBookingFee = async function(req, res) {
     }
 
 }
+
+module.exports.staffSetBookingFee = async function(req, res) {
+    let user = await User.findById(req.user.doctorid);
+    user.booking_fee = req.body.fee;
+    user.save();
+
+    if(req.body.flag == 'true')
+    {
+        return res.redirect('/terms');
+    }
+
+    else{
+        return res.redirect('back');
+
+    }
+
+}
 module.exports.bankDetails = async function(req, res) {
   
     if (req.body.accountnumber != req.body.reaccountnumber) {
@@ -1619,6 +1645,28 @@ module.exports.updateSchedule = async function(req, res) {
 
     if ((!req.body.start) || (!req.body.end)) {
         let user = await User.findById(req.user.id);
+        user.schedule_time.pull({ _id: req.body.id });
+        user.save();
+        return res.redirect('back');
+    }
+    let day = await User.update({ 'schedule_time._id': req.body.id }, {
+        '$set': {
+            'schedule_time.$.start': req.body.start,
+            'schedule_time.$.end': req.body.end,
+            'schedule_time.$.max_count': req.body.max_count,
+            'schedule_time.$.available': req.body.max_count
+        }
+    });
+
+
+        return res.redirect('back');
+
+}
+module.exports.staffUpdateSchedule = async function(req, res) {
+
+
+    if ((!req.body.start) || (!req.body.end)) {
+        let user = await User.findById(req.user.doctorid);
         user.schedule_time.pull({ _id: req.body.id });
         user.save();
         return res.redirect('back');
@@ -1677,6 +1725,45 @@ module.exports.setScheduleTiming = async function(req, res) {
 
     }
 
+    module.exports.staffSetScheduleTiming = async function(req, res) {
+
+        let user = await User.findById(req.user.doctorid);
+    
+    
+    
+    
+        if (typeof(req.body.start) == 'string') {
+            user.schedule_time.push({
+                start: req.body.start,
+                end: req.body.end,
+                day: req.body.day,
+                max_count:req.body.max_count,
+                available:req.body.max_count,
+                booked:0
+            })
+        }
+    
+        if (typeof(req.body.start) == 'object') {
+            user.schedule_time.push({ 
+                day: req.body.day,
+                start:req.body.start,
+                end:req.body.end,
+                max_count:req.body.max_count,
+                available:req.body.max_count,
+                booked:['0','0']
+            } );
+            
+        }
+    
+    
+    
+        user.save();
+        console.log(req.body);
+      
+            return res.redirect('back');
+    
+        }
+    
     
 
 module.exports.changePassword = async(req, res) => {
@@ -1724,8 +1811,19 @@ module.exports.resetPassword = async(req, res) => {
             title: 'Reset-password',
             phone: req.body.phone
         })
-    } else {
-        let user = await User.findOne({ phone: req.body.phone });
+    }
+
+    if(req.body.designation == 'Staff')
+    {
+        let user = await User.findOne({ phone: req.body.phone, type:'Staff' });
+        user.password = req.body.password;
+        user.save();
+
+        req.flash('success', 'Password reset successfully');
+        return res.redirect('/staff-login-page');
+    }
+     else {
+        let user = await User.findOne({ phone: req.body.phone ,type:'Patient'});
         user.password = req.body.password;
         user.save();
 
@@ -1853,6 +1951,29 @@ module.exports.sortByDate = async (req, res) => {
   
 }
 
+module.exports.doctorSortByDate = async (req, res) => {
+    let patients = await User.findById(req.user.id).populate({
+        path: 'patients',
+        populate: {
+            path: 'pid',
+            populate: { path: 'user', }
+        }
+    });
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+    console.log(str);
+
+  
+
+        return res.render('doctor-dashboard', {
+            title: 'My Dashboard',
+            allpatients: patients,
+            date: str
+        })
+    
+  
+}
+
 module.exports.profileUpdate = async function(req, res) {
 
     try {
@@ -1971,16 +2092,10 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
             user.services = req.body.services;
             user.specialisation = req.body.specialisation;
-            // user.pincode = req.body.pincode;
-            // user.state = req.body.state;
-            // user.country = req.body.country;
-            // user.city = req.body.city;
-            // user.address = req.body.address;
             user.clinicname = req.body.clinicname;
             user.clinicaddr = req.body.clinicaddr;
             user.department = req.body.department;
             user.name = req.body.name;
-            user.email = req.body.email;
             user.phone = req.body.phone;
             user.gender = req.body.gender;
             user.dob = req.body.dob;
@@ -2053,21 +2168,6 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
 
 
-            // if (typeof(req.body.registration) == 'object') {
-            //     for (let i = 0; i < req.body.registration.length; i++) {
-            //         user.registrations.push({ registration: req.body.registration[i], regYear: req.body.regYear[i] });
-            //     }
-            // }
-
-
-
-            // if (typeof(req.body.registration) == 'string' && req.body.registration != '') {
-            //     user.registrations.push({ registration: req.body.registration, regYear: req.body.regYear });
-            // }
-
-
-
-
             if (req.files['avatar']) {
                 if (!user.avatar) {
                     user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
@@ -2082,6 +2182,25 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                     user.clinicphoto.push(User.avatarPath + '/' + req.files['clinicphoto'][i].filename);
                 }
             }
+
+            const rand = Math.floor((Math.random() * 100) + 54); 
+            user.emailkey = rand;
+            if(!user.emailverify)
+            {
+                console.log('sent');
+                emailVerification.newAlert(user,rand ,req.body.email);
+                user.email = req.body.email;
+                user.emailverify = false;
+            }
+
+            if(user.email != req.body.email)
+            {
+                console.log('sent again');
+                emailVerification.newAlert(user,rand ,req.body.email);
+                user.email = req.body.email;
+                user.emailverify = false;
+            }
+        
 
 
             user.save();

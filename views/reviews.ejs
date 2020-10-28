@@ -389,7 +389,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar paddingt">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -411,7 +411,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar lscreen">
 
                         <!-- Profile Sidebar -->
                         <div class="profile-sidebar">
@@ -425,12 +425,16 @@
                                         <h3>Dr.
                                             <%=locals.user.name%>
                                         </h3>
+                                        <h5 style="font-size: 0.8rem;">
+                                            <%if(locals.user.education.length == 1){%>
+                                                <%=locals.user.education.degree%>
+                                                    <%}%>
+                                                        <%if(locals.user.education.length > 1){for(deg of locals.user.education){%>
+                                                            <%=deg.degree%>
+                                                                <%}}%>
+                                        </h5>
 
-                                        <div class="patient-details">
-                                            <h5 class="mb-0">
-                                                <%=locals.user.department%>
-                                            </h5>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -479,299 +483,69 @@
 
                     </div>
                     <div class="col-md-7 col-lg-8 col-xl-9">
+                        <%if(users.reviews.length == 0){%>
+                 
                         <h2 class="text-center" style="margin-top: 100px;margin-left: auto;margin-right: auto;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Reviews To Show !</span></h2>
+                        <%}else{%>
+                        <div class="doc-review review-listing">
 
-                        <!-- <div class="doc-review review-listing">
-
-                           
+                          
+                        
                             <ul class="comments-list">
+                                <%for(u of users.reviews){%>
 
                                
                                 <li>
                                     <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient.jpg">
+                                        <img class="avatar rounded-circle" alt="User Image" src="<%=u.pid.avatar%>" onerror="this.src='/img/profile.png'">
                                         <div class="comment-body">
                                             <div class="meta-data">
-                                                <span class="comment-author">Richard Wilson</span>
-                                                <span class="comment-date">Reviewed 2 Days ago</span>
+                                                <span class="comment-author"><%=u.pid.name%></span>
+                                                <span class="comment-date">Reviewed on <%=u.createdAt.toDateString()%></span>
+                                                
+                                                <%var avg = u.rating;%>
+                                                       
                                                 <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star"></i>
+                                                    <%if(avg>=1){%>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <%}else{%>
+                                                            <i class="fas fa-star"></i>
+                                                        <%}%>
+                                                        <%if(avg>=2){%>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <%}else{%>
+                                                            <i class="fas fa-star"></i>
+                                                        <%}%>
+                                                        <%if(avg>=3){%>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <%}else{%>
+                                                            <i class="fas fa-star"></i>
+                                                        <%}%>
+                                                        <%if(avg>=4){%>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <%}else{%>
+                                                            <i class="fas fa-star"></i>
+                                                        <%}%>
+                                                        <%if(avg>=5){%>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <%}else{%>
+                                                            <i class="fas fa-star"></i>
+                                                        <%}%>
                                                 </div>
                                             </div>
-                                            <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
+                                            <p class="recommended"><i class="far fa-thumbs-up"></i> <%=u.title%></p>
                                             <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
+                                                <%=u.review_description%>
                                             </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
+                                          
                                         </div>
                                     </div>
 
-                                  
-                                    <ul class="comments-reply">
-
-                                      
-                                        <li>
-                                            <div class="comment">
-                                                <img class="avatar rounded-circle" alt="User Image" src="img/doctors/doctor-thumb-02.jpg">
-                                                <div class="comment-body">
-                                                    <div class="meta-data">
-                                                        <span class="comment-author">Dr. Darren Elder</span>
-                                                        <span class="comment-date">Reviewed 3 Days ago</span>
-                                                    </div>
-                                                    <p class="comment-content">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Curabitur non nulla sit amet nisl tempus
-                                                    </p>
-                                                    <div class="comment-reply">
-                                                        <a class="comment-btn" href="#">
-                                                            <i class="fas fa-reply"></i> Reply
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                       
-
-                                    </ul>
-                                   
-
                                 </li>
-                             
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient2.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Travis Trimble</span>
-                                                <span class="comment-date">Reviewed 4 Days ago</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                </div>
-                                            </div>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                               
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient3.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Carl Kelly</span>
-                                                <span class="comment-date">Reviewed 5 Days ago</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                </div>
-                                            </div>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient4.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Michelle Fairfax</span>
-                                                <span class="comment-date">Reviewed 6 Days ago</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                </div>
-                                            </div>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                               
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient5.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Gina Moore</span>
-                                                <span class="comment-date">Reviewed 1 Week ago</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                </div>
-                                            </div>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient9.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Walter Roberson</span>
-                                                <span class="comment-date">Reviewed 1 Week ago</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                </div>
-                                            </div>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                             
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="img/patients/patient8.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Daniel Griffing</span>
-                                                <span class="comment-date">Reviewed on 1 Nov 2019</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                </div>
-                                            </div>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                             
+                                <%}%>
                             </ul>
-                           
-                        </div> -->
+                        </div> 
+                        <%}%>
                     </div>
                 </div>
             </div>

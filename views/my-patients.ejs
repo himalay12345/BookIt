@@ -389,7 +389,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar paddingt">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -411,7 +411,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar lscreen">
 
                         <!-- Profile Sidebar -->
                         <div class="profile-sidebar">
@@ -497,7 +497,7 @@
                                     <div class="card-body">
                                         <div class="pro-widget-content">
                                             <div class="profile-info-widget">
-                                                <a href="/patient-profile" class="booking-doc-img">
+                                                <a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>" class="booking-doc-img">
                                                     <%if(patient.pid){%>
                                                         <img class="avatar-img rounded-circle" src="<%=patient.pid.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                         <%}else{%>
@@ -505,11 +505,11 @@
                                                         <%}%>
                                                 </a>
                                                 <div class="profile-det-info">
-                                                    <h3><a href="/patient-profile"><%=patient.name%></a></h3>
+                                                    <h3><a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>"><%=patient.name%></a></h3>
 
                                                     <div class="patient-details">
                                                         <h5><b>Patient ID :</b> P00<%=++c%></h5>
-                                                        <%if(patient.pid){%><h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> <%=patient.pid.contacts.city%></h5><%}%>
+                                                        <%if(patient.pid.contacts.city){%><h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> <%=patient.pid.contacts.city%></h5><%}%>
                                                     </div>
                                                 </div>
                                             </div>

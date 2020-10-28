@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css">
 
     <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/style1.css">
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +39,7 @@
 
 </head>
 
-<body>
+<body class="position-relative">
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
@@ -400,7 +401,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar lscreen">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-8 col-12">
@@ -434,8 +435,10 @@
         <!-- Page Content -->
         <div class="content">
             <div class="container-fluid">
+              
 
                 <div class="row">
+                   
                     <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                         <!-- Search Filter -->
@@ -505,18 +508,226 @@
                         <!-- /Search Filter -->
 
                     </div>
+                    <div class="sscreen col-sm-12" style="padding-left: 0px;padding-right: 0px;">
+                    <div style="top:62px;z-index:400;height:65px;width:100%;background-color: white;margin-top:-15px;border-top:1px solid rgb(245, 244, 244);padding-top:10px;margin-bottom: 20px;display: inline-flex;padding-bottom: 10px;">
+                        <h5 id="filter" style="font-size: 1rem;text-align: left;margin-left:20px;border-radius: 3px;width:45%;height:45px;padding:12px 15px;" class="btn-primary"><i class="fas fa-sliders-h" style="margin-left: 10px;margin-right:5px;"></i><span>Filter</span></h5>
+                        <div class="btn-group position-absolute" style="right: 20px;width:42%;height:45px;">
+                            <button type="button" style="padding: 8px !important;" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Sort By
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="#">Rating</a>
+                              <a class="dropdown-item" href="#">Popular</a>
+                              <a class="dropdown-item" href="#">Latest</a>
+                              
+                          </div>
+                    </div>
+                    </div>
+                    <div style="" class="sscreen">
+                    <div class="displayNone" id="filter_box" style="overflow:auto;margin-top:63px;margin-left:10px;margin-right:10px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    visibility: visible;
+    opacity: 1;">
+                    <div id="header_filter" style="padding:10px ;">
+                        <i class="fas fa-times" style="font-size: 2.2rem;color:grey;" id="close_btn"></i>
+                    </div>
+                    <div class="card search-filter" style="display: block;">
 
-                    <div class="col-md-12 col-lg-8 col-xl-9">
+                        <div class="card-body">
+
+                            <div class="filter-widget">
+                                <h4>Gender</h4>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="gender_type" checked>
+                                        <span class="checkmark"></span>Male 
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="gender_type">
+                                        <span class="checkmark"></span> Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-widget">
+                                <h4>Select Specialist</h4>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist" checked>
+                                        <span class="checkmark"></span> Urology
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist" checked>
+                                        <span class="checkmark"></span> Neurology
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist">
+                                        <span class="checkmark"></span> Dentist
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist">
+                                        <span class="checkmark"></span> Orthopedic
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist">
+                                        <span class="checkmark"></span> Cardiologist
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist">
+                                        <span class="checkmark"></span> Cardiologist
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="btn-search">
+                                <button type="button" class="btn btn-block">Doctors</button>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+                    
+                    </div>
+                    
+
+                    <div class="col-md-12 col-lg-8 col-xl-9 p-0">
 
                         <!-- Doctor Widget -->
                         <div class="card" id="doctorsm">
-                            <div class="card-body">
+                            <div class="card-body p-0">
+                                
                                 <%for(doctor of doctors){%>
-                                    <div class="doctor-widget pb-4 mb-2 pt-2" style="border-bottom: 1px solid lightgrey;">
+                                    <div class="col-md-6 col-lg-4 col-xl-3 sscreen p-0" style="margin-top: -30px;">
+                                        <div class="profile-widget">
+                                            <div style="display: inline-flex;">
+                                            <div class="doc-img" style="width:40%;">
+                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                    <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height:150px;width:100%">
+                                                </a>
+                                                
+                                            </div>
+                                            <div style="width: 60%;padding:10px">
+                                                <h3 class="title">
+                                                    <a href="/doctor-profile/?id=<%=doctor._id%>" style="font-size: 1.5rem;">Dr.<%=doctor.name%></a>
+                                                    <i class="fas fa-check-circle verified"></i>
+                                                </h3>
+                                                <p class="speciality">
+                                                    <%=doctor.department%>
+                                                </p>
+                                                <%var flag = false;%>
+                                                <%if(locals.user){%>
+                                                    <%for(fav of locals.user.favourites){
+                                                    
+                                                   
+                                                if(fav.toString() == doctor._id)flag = true;%>
+
+                                                        <%}%>
+                                                            <%}%>
+
+                                                                <%if(!flag){%>
+                                                    <a href="/user/add-favourite/?id=<%=doctor._id%>"style="background-color: white;color:black;display: block;
+                                                        margin-top: -24px;
+                                                        margin-bottom: 15px;padding:8px;margin-top:-30px;margin-left:-5px;">
+                                                    <i class="far fa-bookmark" style="margin-right: 5px;"></i>Add Favourite
+                                                </a>
+                                                <%}else{%>
+                                                    <a style="background-color: red;color:white;padding:8px;">
+                                                        <i class="far fa-bookmark"  style="margin-right: 5px;"></i>Favourite
+                                                    </a>
+                                                <%}%>
+                                                <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                                        <%for(review of doctor.reviews){%>
+                                                            <%sum+=review.rating;%>
+                                                        <%}%>
+                                                        <%avg=sum/cnt;%>
+                                                        <div class="rating" style="margin-top: -15px;">
+                                                            <%if(avg>=1){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=2){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=3){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=4){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=5){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                        </div>
+                                                        
+                    
+                                            </div>
+                                        </div>
+                                            <div class="pro-content">
+                                                <div class="clinic-details"> 
+                                                    <p><i class="fas fa-hospital"></i><span style="font-weight: 600;margin-left: 10px;"><%=doctor.clinicname%></span> &nbsp;<span style="font-size: 0.8rem;">  |   &nbsp; <%=doctor.clinicaddr%></span></p>
+
+                                                </div>
+                                              
+                                               
+                                                <ul class="available-info" style="margin-top: -8px;">
+                                                    <li>
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <%=doctor.contacts.city%>
+                                                            <%=doctor.contacts.state%>
+                                                    </li>
+                                                    <%var a = new Date();%>
+                                                    <li>
+                                                        <i class="far fa-clock"></i> Available Today : <%=a.toDateString()%>
+                                                    </li>
+                                                   
+                                                    
+                                                    
+                                                    <li>
+                                                        <i class="far fa-money-bill-alt"></i>
+                                                        Rs <%=doctor.booking_fee%><i class="fas fa-info-circle ml-2" data-toggle="tooltip" ></i>
+                                                    </li>
+                                                    
+                                                   
+                                                </ul>
+                                                <div class="row row-sm">
+                                                    <div class="col-6">
+                                                        <a href="doctor-profile/?id=<%=doctor._id%>" class="btn view-btn">View Profile</a>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn">Book Now</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="doctor-widget pb-4 mb-2 pt-2 lscreen" style="border-bottom: 1px solid lightgrey;">
                                         <div class="doc-info-left">
                                             <div class="doctor-img">
                                                 <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;"onerror='this.src="/img/profile.png"' alt="User Image">
+                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;height: 100%;"onerror='this.src="/img/profile.png"' alt="User Image">
                                             </a>
                                             </div>
                                             <div class="doc-info-cont">
@@ -652,7 +863,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="doctor-action">
+                                            <div class="doctor-action clinic-booking">
                                                 <%var flag = false;%>
                                                     <%if(locals.user){%>
                                                         <%for(fav of locals.user.favourites){
@@ -664,16 +875,16 @@
                                                                 <%}%>
 
                                                                     <%if(flag){%>
-                                                                        <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn" style="background-color: red;">
+                                                                        <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn" style="background-color: red;width:18% !important;height:50px;margin-top: 15px;border: none;">
                                                                             <i class="far fa-bookmark" style="color:white;"></i>
                                                                         </a>
                                                                         <%}else{%>
-                                                                            <a href="/user/add-favourite/?id=<%=doctor._id%>" class="btn btn-white fav-btn">
+                                                                            <a href="/user/add-favourite/?id=<%=doctor._id%>" style="width:18%;height:50px;margin-top: 15px;" class="btn btn-white fav-btn">
                                                                                 <i class="far fa-bookmark"></i>
                                                                             </a>
                                                                             <%}%>
-
-                                                                                <a href="/chat" class="btn btn-white msg-btn">
+                                                                            <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>" style="width:78%;">View Profile</a>
+                                                                                <!-- <a href="/chat" class="btn btn-white msg-btn">
                                                                                     <i class="far fa-comment-alt"></i>
                                                                                 </a>
                                                                                 <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
@@ -681,10 +892,10 @@
                                                                                 </a>
                                                                                 <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
                                                                                     <i class="fas fa-video"></i>
-                                                                                </a>
+                                                                                </a> -->
                                             </div>
                                             <div class="clinic-booking">
-                                                <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a>
+                                                <!-- <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a> -->
                                                 <a class="apt-btn" href="/booking/?id=<%=doctor._id%>">Book Appointment</a>
                                             </div>
                                         </div>
@@ -860,6 +1071,31 @@
 
 
     <script src="/js/script.js"></script>
+    <script>
+        var filter = document.getElementById('filter');
+        var fbox = document.getElementById('filter_box');
+        var close_btn = document.getElementById('close_btn');
+        close_btn.addEventListener('click',function(){
+            fbox.classList.add('displayNone');
+        })
+        filter.addEventListener('click',function(e)
+        {
+            e.preventDefault();
+            fbox.classList.remove('displayNone');
+        //     var count = 0;
+        //    setInterval(function(){
+        //        if(count<=-540)
+        //        {
+        //            return;
+        //        }
+        //        fbox.style.transform = `translateY(${count}px)`;
+        //        count-=3;
+        //    },1)
+            
+            
+
+        })
+    </script>
 
 </body>
 

@@ -393,7 +393,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar paddingt">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -414,7 +414,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar lscreen">
 
                         <!-- Profile Sidebar -->
                         <div class="profile-sidebar">
@@ -425,7 +425,7 @@
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>Dr.
-                                            <%=locals.user.name%> r</h3>
+                                            <%=locals.user.name%></h3>
 
                                         <div class="patient-details">
                                             <h5 class="mb-0">
@@ -473,45 +473,194 @@
                                                             <div class="form-group">
                                                                 <label>Bank Name</label>
                                                                 <!-- <input type="text" placeholder="Enter the Bank Name" name="bankname" value="<%=locals.user.bank.bankname%>" class="form-control"> -->
-                                                                <select name="bankname" class="form-control" required>
+                                                                <select name="bankname" class="form-control" readonly>
                                                                     <option selected="selected" value="0">--Select --</option>
-                                                                    <option value="1">ALLAHABAD BANK </option>
-                                                                    <option value="2">ANDHRA BANK</option>
-                                                                    <option value="3">AXIS BANK</option>
-                                                                    <option value="29">STATE BANK OF INDIA</option>
-                                                                    <option value="4">BANK OF BARODA</option>
-                                                                    <option value="29">UCO BANK</option>
-                                                                    <option value="29">UNION BANK OF INDIA</option>
-                                                                    <option value="5">BANK OF INDIA</option>
-                                                                    <option value="20">BANDHAN BANK LIMITED</option>
-                                                                    <option value="7">CANARA BANK</option>
-                                                                    <option value="32">GRAMIN VIKASH BANK</option>
-                                                                    <option value="8">CORPORATION BANK</option>
-                                                                    <option value="9">INDIAN BANK</option>
-                                                                    <option value="10">INDIAN OVERSEAS BANK</option>
-                                                                    <option value="11">ORIENTAL BANK OF COMMERCE</option>
-                                                                    <option value="12">PUNJAB AND SIND BANK</option>
-                                                                    <option value="13">PUNJAB NATIONAL BANK</option>
-                                                                    <option value="14">RESERVE BANK OF INDIA</option>
-                                                                    <option value="15">SOUTH INDIAN BANK</option>
-                                                                    <option value="16">UNITED BANK OF INDIA</option>
-                                                                    <option value="17">CENTRAL BANK OF INDIA</option>
-                                                                    <option value="18">VIJAYA BANK</option>
-                                                                    <option value="19">DENA BANK</option>
-                                                                    <option value="21">BHARATIYA MAHILA BANK LIMITED</option>
-                                                                    <option value="22">FEDERAL BANK LTD </option>
-                                                                    <option value="23">HDFC BANK LTD</option>
-                                                                    <option value="24">ICICI BANK LTD</option>
-                                                                    <option value="25">IDBI BANK LTD</option>
-                                                                    <option value="66">PAYTM BANK</option>
-                                                                    <option value="29">FINO PAYMENT BANK</option>
-                                                                    <option value="26">INDUSIND BANK LTD</option>
-                                                                    <option value="27">KARNATAKA BANK LTD</option>
-                                                                    <option value="28">KOTAK MAHINDRA BANK</option>
-                                                                    <option value="30">YES BANK LTD</option>
-                                                                    <option value="31">SYNDICATE BANK</option>
-                                                                    <option value="5">BANK OF INDIA</option>
-                                                                    <option value="6">BANK OF MAHARASHTRA</option>
+                                                                    <%if(locals.user.bank.bankname == 'ALLAHABAD BANK'){%>
+                                                                        <option value="ALLAHABAD BANK" selected>ALLAHABAD BANK </option>
+                                                                    <%}else{%>
+                                                                        <option value="ALLAHABAD BANK">ALLAHABAD BANK </option>
+                                                                    <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'ANDHRA BANK'){%>
+                                                                        <option value="ANDHRA BANK" selected>ANDHRA BANK </option>
+                                                                    <%}else{%>
+                                                                        <option value="ANDHRA BANK">ANDHRA BANK </option>
+                                                                    <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'AXIS BANK'){%>
+                                                                        <option value="AXIS BANK" selected>AXIS BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="AXIS BANK">AXIS BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'STATE BANK OF INDIA'){%>
+                                                                        <option value="STATE BANK OF INDIA" selected>STATE BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="STATE BANK OF INDIA">STATE BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'BANK OF BARODA'){%>
+                                                                        <option value="BANK OF BARODA" selected>BANK OF BARODA</option>
+                                                                        <%}else{%>
+                                                                            <option value="BANK OF BARODA">BANK OF BARODA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'UCO BANK'){%>
+                                                                        <option value="UCO BANK" selected>UCO BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="UCO BANK">UCO BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'UNION BANK OF INDIA'){%>
+                                                                        <option value="UNION BANK OF INDIA" selected>UNION BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="UNION BANK OF INDIA">UNION BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'BANK OF INDIA'){%>
+                                                                        <option value="BANK OF INDIA" selected>BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="BANK OF INDIA">BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'BANDHAN BANK LIMITED'){%>
+                                                                        <option value="BANDHAN BANK LIMITED" selected>BANDHAN BANK LIMITED</option>
+                                                                        <%}else{%>
+                                                                            <option value="BANDHAN BANK LIMITED">BANDHAN BANK LIMITED</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'CANARA BANK'){%>
+                                                                        <option value="CANARA BANK" selected>CANARA BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="CANARA BANK">CANARA BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'GRAMIN VIKASH BANK'){%>
+                                                                        <option value="GRAMIN VIKASH BANK" selected>GRAMIN VIKASH BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="GRAMIN VIKASH BANK">GRAMIN VIKASH BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'CORPORATION BANK'){%>
+                                                                        <option value="CORPORATION BANK" selected>CORPORATION BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="CORPORATION BANK">CORPORATION BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'INDIAN BANK'){%>
+                                                                        <option value="INDIAN BANK" selected>INDIAN BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="INDIAN BANK">INDIAN BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'INDIAN OVERSEAS BANK'){%>
+                                                                        <option value="INDIAN OVERSEAS BANK" selected>INDIAN OVERSEAS BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="INDIAN OVERSEAS BANK">INDIAN OVERSEAS BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'ORIENTAL BANK OF COMMERCE'){%>
+                                                                        <option value="ORIENTAL BANK OF COMMERCE" selected>ORIENTAL BANK OF COMMERCE</option>
+                                                                        <%}else{%>
+                                                                            <option value="ORIENTAL BANK OF COMMERCE">ORIENTAL BANK OF COMMERCE</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'PUNJAB AND SIND BANK'){%>
+                                                                        <option value="PUNJAB AND SIND BANK" selected>PUNJAB AND SIND BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="PUNJAB AND SIND BANK">PUNJAB AND SIND BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'PUNJAB NATIONAL BANK'){%>
+                                                                        <option value="PUNJAB NATIONAL BANK" selected>PUNJAB NATIONAL BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="PUNJAB NATIONAL BANK">PUNJAB NATIONAL BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'RESERVE BANK OF INDIA'){%>
+                                                                        <option value="RESERVE BANK OF INDIA" selected>RESERVE BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="RESERVE BANK OF INDIA">RESERVE BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'SOUTH INDIAN BANK'){%>
+                                                                        <option value="SOUTH INDIAN BANK" selected>SOUTH INDIAN BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="SOUTH INDIAN BANK">SOUTH INDIAN BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'UNITED BANK OF INDIA'){%>
+                                                                        <option value="UNITED BANK OF INDIA" selected>UNITED BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="UNITED BANK OF INDIA">UNITED BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'CENTRAL BANK OF INDIA'){%>
+                                                                        <option value="CENTRAL BANK OF INDIA" selected>CENTRAL BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="CENTRAL BANK OF INDIA">CENTRAL BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'VIJAYA BANK'){%>
+                                                                        <option value="VIJAYA BANK" selected>VIJAYA BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="VIJAYA BANK">VIJAYA BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'DENA BANK'){%>
+                                                                        <option value="DENA BANK" selected>DENA BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="DENA BANK">DENA BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'BHARATIYA MAHILA BANK LIMITED'){%>
+                                                                        <option value="BHARATIYA MAHILA BANK LIMITED" selected>BHARATIYA MAHILA BANK LIMITED</option>
+                                                                        <%}else{%>
+                                                                            <option value="BHARATIYA MAHILA BANK LIMITED">BHARATIYA MAHILA BANK LIMITED</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'FEDERAL BANK LTD'){%>
+                                                                        <option value="FEDERAL BANK LTD" selected>FEDERAL BANK LTD </option>
+                                                                        <%}else{%>
+                                                                            <option value="FEDERAL BANK LTD">FEDERAL BANK LTD </option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'HDFC BANK LTD'){%>
+                                                                        <option value="HDFC BANK LTD" selected>HDFC BANK LTD</option>
+                                                                        <%}else{%>
+                                                                            <option value="HDFC BANK LTD">HDFC BANK LTD</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'ICICI BANK LTD'){%>
+                                                                        <option value="ICICI BANK LTD" selected>ICICI BANK LTD</option>
+                                                                        <%}else{%>
+                                                                            <option value="ICICI BANK LTD">ICICI BANK LTD</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'IDBI BANK LTD'){%>
+                                                                        <option value="IDBI BANK LTD" selected>IDBI BANK LTD</option>
+                                                                        <%}else{%>
+                                                                            <option value="IDBI BANK LTD">IDBI BANK LTD</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'PAYTM BANK'){%>
+                                                                        <option value="PAYTM BANK" selected>PAYTM BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="PAYTM BANK">PAYTM BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'FINO PAYMENT BANK'){%>
+                                                                        <option value="FINO PAYMENT BANK" selected>FINO PAYMENT BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="FINO PAYMENT BANK">FINO PAYMENT BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'INDUSIND BANK LTD'){%>
+                                                                        <option value="INDUSIND BANK LTD" selected>INDUSIND BANK LTD</option>
+                                                                        <%}else{%>
+                                                                            <option value="INDUSIND BANK LTD">INDUSIND BANK LTD</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'KARNATAKA BANK LTD'){%>
+                                                                        <option value="KARNATAKA BANK LTD" selected>KARNATAKA BANK LTD</option>
+                                                                        <%}else{%>
+                                                                            <option value="KARNATAKA BANK LTD">KARNATAKA BANK LTD</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'KOTAK MAHINDRA BANK'){%>
+                                                                        <option value="KOTAK MAHINDRA BANK" selected>KOTAK MAHINDRA BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="KOTAK MAHINDRA BANK">KOTAK MAHINDRA BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'YES BANK LTD'){%>
+                                                                        <option value="YES BANK LTD" selected>YES BANK LTD</option>
+                                                                        <%}else{%>
+                                                                            <option value="YES BANK LTD">YES BANK LTD</option>
+                                                                            <%}%>
+
+                                                                    <%if(locals.user.bank.bankname == 'SYNDICATE BANK'){%>
+                                                                        <option value="SYNDICATE BANK" selected>SYNDICATE BANK</option>
+                                                                        <%}else{%>
+                                                                            <option value="SYNDICATE BANK">SYNDICATE BANK</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'BANK OF INDIA'){%>
+                                                                        <option value="BANK OF INDIA" selected>BANK OF INDIA</option>
+                                                                        <%}else{%>
+                                                                            <option value="BANK OF INDIA">BANK OF INDIA</option>
+                                                                            <%}%>
+                                                                    <%if(locals.user.bank.bankname == 'BANK OF MAHARASHTRA'){%>
+                                                                        <option value="BANK OF MAHARASHTRA" selected>BANK OF MAHARASHTRA</option>
+                                                                        <%}else{%>
+                                                                            <option value="BANK OF MAHARASHTRA">BANK OF MAHARASHTRA</option>
+                                                                            <%}%>
                                                                   </select>
                                                             </div>
                                                         </div>
@@ -521,7 +670,7 @@
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
                                                                 <label>Account Number</label>
-                                                                <input type="text" placeholder="Enter your Account Number" name="accountnumber" value="<%=locals.user.bank.accountnumber%>" class="form-control" required>
+                                                                <input type="text" placeholder="Enter your Account Number" name="accountnumber" value="<%=locals.user.bank.accountnumber%>" class="form-control" readonly>
 
                                                             </div>
                                                         </div>
@@ -531,7 +680,7 @@
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
                                                                 <label>Re-enter Account Number</label>
-                                                                <input type="text" placeholder="Enter your Account Number" name="reaccountnumber" value="<%=locals.user.bank.accountnumber%>" class="form-control" required>
+                                                                <input type="text" placeholder="Enter your Account Number" name="reaccountnumber" value="<%=locals.user.bank.accountnumber%>" class="form-control" readonly>
 
                                                             </div>
                                                         </div>
@@ -541,7 +690,7 @@
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
                                                                 <label>Account Holder Name</label>
-                                                                <input type="text" placeholder="Renter your Account Number" name="accountholdername" value="<%=locals.user.bank.accountholdername%>" class="form-control" required>
+                                                                <input type="text" placeholder="Renter your Account Number" name="accountholdername" value="<%=locals.user.bank.accountholdername%>" class="form-control" readonly>
                                                             </div>
                                                         </div>
 
@@ -550,7 +699,7 @@
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
                                                                 <label>IFSC Code</label>
-                                                                <input type="text" placeholder="Enter IFSCcode" name="ifsccode" value="<%=locals.user.bank.ifsccode%>" class="form-control" required>
+                                                                <input type="text" placeholder="Enter IFSCcode" name="ifsccode" value="<%=locals.user.bank.ifsccode%>" class="form-control" readonly>
 
                                                             </div>
 
@@ -558,9 +707,9 @@
 
                                                     </div>
 
-                                                    <div class="submit-section submit-btn-bottom">
+                                                    <!-- <div class="submit-section submit-btn-bottom">
                                                         <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
-                                                    </div>
+                                                    </div> -->
 
                                                 </div>
 

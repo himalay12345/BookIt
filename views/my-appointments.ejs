@@ -458,12 +458,7 @@
                             <div class="dashboard-widget">
                                 <nav class="dashboard-menu">
                                     <ul>
-                                        <li>
-                                            <a href="/patient-dashboard">
-                                                <i class="fas fa-columns"></i>
-                                                <span>My Dashboard</span>
-                                            </a>
-                                        </li>
+                                       
                                         <li class="active">
                                             <a href="/my-appointments">
                                                 <i class="fas fa-calendar-alt"></i>
@@ -488,12 +483,7 @@
                                                 <span>My Billings</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/other-patients">
-                                                <i class="fas fa-edit"></i>
-                                                <span>Other Appointments</span>
-                                            </a>
-                                        </li>
+                                      
                                         <li>
                                             <a href="/favourites">
                                                 <i class="fas fa-bookmark"></i>
@@ -550,7 +540,50 @@
                                                         </div>
                                                         <div class="top-content" style="width: 75%;height:100%;padding:5px;">
                                                             <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
-                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=alldoctors.doctors[i].date%>, <%=alldoctors.doctors[i].time%> </h5>
+                                                            <%var str2 = alldoctors.doctors[i].date.split('-');%>
+                                                                <%var str3 = formatDate(alldoctors.doctors[i].createdAt);%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+
+                                                        <%var x1 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                        <%var x2 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                                
+                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=str1%>, <%=alldoctors.doctors[i].time%> </h5>
                                                             <h5 style="font-weight: 0.9rem;font-weight: 700;"><%=alldoctors.doctors[i].did.clinicname%></h5>
                                                             <%if(alldoctors.doctors[i].cancel == true){%>
                                                                 <h5><span class="badge badge-pill bg-danger-light">Cancelled</span></h5>
@@ -561,11 +594,33 @@
 
                                                         </div>
                                                     </div>
+                                                    <%var today = new Date();%>
+                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                    <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                      <div class="bottom-part" style="height: 50px;display: flex;justify-content: space-around;">
-                                                        <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 40px;">Book Again</a>
-                                                        <a  href="/appointment-detail/?index=<%=i%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;font-weight: bold;height: 40px;text-align: center6;">View</a>
-                                                        <a  href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;font-weight: bold;height: 40px;text-align: center6;">Track</a>
+                                                        <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Book Again</a>
+                                                        <a href="/appointment-detail/?index=<%=i%>" class="btn btn-sm bg-info-light" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:90px;font-size:0.9rem;font-weight: bold;height: 45px;text-align: center6;">
+                                                            <i class="far fa-eye"></i> View
+                                                        </a>
+                                                        <% var tdate = new Date();%>
+                                                        <%var stra = alldoctors.doctors[i].date.split('-');%>
+                                                        <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
+                                                        <%var bdate = new Date(strb)%>
+                                                        <%if(bdate > tdate){%>
+                                                            <td class="text-center"> <a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:#15558d;color:white;text-align: center;width:120px;height:45px;display: block;"><span><i class="fas fa-share" aria-hidden="true" style="margin-right: 8px;"></i></span>Upcoming</a></td>
+                                                            <%}else{%>
 
+                                                       
+                                                        <%if(str1 == alldoctors.doctors[i].date){%>
+                                                        <a href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color: #C71585;height: 45px;color:white;text-align: center;width:100px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
+                                                        <%}else{%>
+                                                            <a href="" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:100px;display: block;height: 45px;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a>
+                                                        <%}%>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                                 <%}%>
@@ -579,7 +634,7 @@
                                                                 <th>Appt Date</th>
                                                                 <th>Booking Date</th>
                                                                 <th>Amount</th>
-                                                                <th>Follow Up</th>
+                                                            
                                                                 <th>Status</th>
                                                                 <th>Track Appointment</th>
                                                             </tr>
@@ -597,16 +652,59 @@
                                                                         <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>"><%=alldoctors.doctors[i].did.name%> <span><%=alldoctors.doctors[i].did.department%></span></a>
                                                                     </h2>
                                                                 </td>
-                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
-                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].createdAt.toLocaleTimeString()%></td>
+                                                                <%var str2 = alldoctors.doctors[i].date.split('-');%>
+                                                                <%var str3 = formatDate(alldoctors.doctors[i].createdAt);%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+
+                                                        <%var x1 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                        <%var x2 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                                
+                                                                <td><%=str1%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
+                                                                <td><%=str3%> <span class="d-block text-info"></span><%=x1%><%=x2%></td>
                                                                 <td>Rs<%=alldoctors.doctors[i].fee%></td>
-                                                                <td><%=alldoctors.doctors[i].date%></td>
+                                                         
                                                                 <%if(alldoctors.doctors[i].cancel == true){%>
                                                                     <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                   <%}else{%>
                                                                     <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                     <%}%>
-                                                                    <%var n1,n2,n3,n4,n5,n6,n7%>
+                                                                    
                                                                 <%var today = new Date();%>
                                                                 <%var dd = String(today.getDate()).padStart(2, '0');
                                                                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -614,15 +712,25 @@
                                                                 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                                 var dayOfWeek = weekday[today.getDay()];%>
                                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                <% var tdate = new Date();%>
+                                                                <%var stra = alldoctors.doctors[i].date.split('-');%>
+                                                                <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
+                                                                <%var bdate = new Date(strb)%>
+                                                                <%if(bdate > tdate){%>
+                                                                    <td class="text-center"> <a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:#15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-share" aria-hidden="true" style="margin-right: 8px;"></i></span>Upcoming</a></td>
+                                                                    <%}else{%>
+
                                                             
                                                                 <%if(str1 == alldoctors.doctors[i].date){%>
                                                                 <td class="text-center"><a href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a></td>
                                                                 <%}else{%>
                                                                     <td class="text-center"><a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a></td>
                                                                 <%}%>
+                                                                <%}%>
                                                                 
                                                             </tr>
                                                             <%}%>
+                                                            
                    
                                                         </tbody>
                                                     </table>
@@ -645,7 +753,47 @@
                                                         </div>
                                                         <div class="top-content" style="width: 75%;height:100%;padding:5px;">
                                                             <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
-                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=alldoctors.doctors[i].date%>, <%=alldoctors.doctors[i].time%> </h5>
+                                                            <%var str2 = alldoctors.doctors[i].date.split('-');%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+                                                        <%var x1 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                        <%var x2 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=str1%>, <%=alldoctors.doctors[i].time%> </h5>
                                                             <h5 style="font-weight: 0.9rem;font-weight: 700;"><%=alldoctors.doctors[i].did.clinicname%></h5>
                                                             <%if(alldoctors.doctors[i].cancel == true){%>
                                                                 <h5><span class="badge badge-pill bg-danger-light">Cancelled</span></h5>
@@ -656,11 +804,34 @@
 
                                                         </div>
                                                     </div>
+                                                    <%var today = new Date();%>
+                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                    <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                      <div class="bottom-part" style="height: 50px;display: flex;justify-content: space-around;">
-                                                        <a  href="" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 40px;">Book Again</a>
-                                                        <a  href="/appointment-detail/?index=<%=i%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;font-weight: bold;height: 40px;">View</a>
-                                                        <a  href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding: 8px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:70px;font-size:0.9rem;font-weight: bold;height: 40px;text-align: center6;">Track</a>
+                                                        <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Book Again</a>
+                                                        <a href="/appointment-detail/?index=<%=i%>" class="btn btn-sm bg-info-light" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:90px;font-size:0.9rem;font-weight: bold;height: 45px;text-align: center6;">
+                                                            <i class="far fa-eye"></i> View
+                                                        </a>
 
+                                                        <% var tdate = new Date();%>
+                                                                <%var stra = alldoctors.doctors[i].date.split('-');%>
+                                                                <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
+                                                                <%var bdate = new Date(strb)%>
+                                                                <%if(bdate > tdate){%>
+                                                                    <td class="text-center"> <a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:#15558d;color:white;text-align: center;width:120px;display: block;height:45px"><span><i class="fas fa-share" aria-hidden="true" style="margin-right: 8px;"></i></span>Upcoming</a></td>
+                                                                    <%}else{%>
+
+                                                       
+                                                        <%if(str1 == alldoctors.doctors[i].date){%>
+                                                        <a href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color: #C71585;height: 45px;color:white;text-align: center;width:100px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
+                                                        <%}else{%>
+                                                            <a href="" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:100px;display: block;height: 45px;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a>
+                                                        <%}%>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                                 <%}%>
@@ -674,9 +845,9 @@
                                                                 <th>Appt Date</th>
                                                                 <th>Booking Date</th>
                                                                 <th>Amount</th>
-                                                                <th>Follow Up</th>
+                                                          
                                                                 <th>Status</th>
-                                                                <th></th>
+                                                                <th>Track Appointment</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -692,10 +863,53 @@
                                                                         <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>"><%=alldoctors.doctors[i].did.name%> <span><%=alldoctors.doctors[i].did.department%></span></a>
                                                                     </h2>
                                                                 </td>
-                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
-                                                                <td><%=alldoctors.doctors[i].date%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].createdAt.toLocaleTimeString()%></td>
+                                                                <%var str2 = alldoctors.doctors[i].date.split('-');%>
+                                                                <%var str3 = formatDate(alldoctors.doctors[i].createdAt);%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+
+                                                        <%var x1 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                        <%var x2 = alldoctors.doctors[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                                
+                                                                <td><%=str1%> <span class="d-block text-info"></span><%=alldoctors.doctors[i].time%></td>
+                                                                <td><%=str3%> <span class="d-block text-info"></span><%=x1%><%=x2%></td>
                                                                 <td>Rs<%=alldoctors.doctors[i].fee%></td>
-                                                                <td><%=alldoctors.doctors[i].date%></td>
+                                                                
                                                                 <%if(alldoctors.doctors[i].cancel == true){%>
                                                                     <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                   <%}else{%>
@@ -708,11 +922,21 @@
                                                                 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                                 var dayOfWeek = weekday[today.getDay()];%>
                                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                <% var tdate = new Date();%>
+                                                                <%var stra = alldoctors.doctors[i].date.split('-');%>
+                                                                <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
+                                                                <%var bdate = new Date(strb)%>
+                                                                <%if(bdate > tdate){%>
+                                                                    <td class="text-center"> <a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:#15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-share" aria-hidden="true" style="margin-right: 8px;"></i></span>Upcoming</a></td>
+                                                                    <%}else{%>
+
                                                                     <%if(str1 == alldoctors.doctors[i].date){%>
                                                                         <td class="text-center"><a href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a></td>
                                                                         <%}else{%>
                                                                             <td class="text-center"><a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a></td>
                                                                         <%}%>
+                                                                        <%}%>
+
                                                             </tr>
                                                             <%}%>
                                                            

@@ -9,23 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="icon">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style1.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-			<script src="js/html5shiv.min.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
 		<![endif]-->
 
 </head>
@@ -214,7 +215,7 @@
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient1.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="///img/patients/patient1.jpg">
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
@@ -227,7 +228,7 @@
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient2.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="///img/patients/patient2.jpg">
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $215 for his <span class="noti-title">appointment</span></p>
@@ -240,7 +241,7 @@
                                         <a href="#">
                                             <div class="media">
                                                 <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient3.jpg">
+                                                        <img class="avatar-img rounded-circle" alt="User Image" src="///img/patients/patient3.jpg">
                                                     </span>
                                                 <div class="media-body">
                                                     <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
@@ -267,7 +268,7 @@
                                 <div class="dropdown-menu profile-drop">
                                     <div class="user-header">
                                         <div class="avatar avatar-sm">
-                                            <img src="<%=locals.user.avatar%>" onerror='this.src="/img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
+                                            <img src="<%=locals.user.avatar%>" onerror='this.src="//img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
                                         </div>
                                         <div class="user-text">
                                             <h6>Dr.
@@ -294,12 +295,12 @@
                                 <%if(locals.user.type == 'Patient'){%>
                                     <li class="nav-item dropdown has-arrow">
                                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
+                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="//img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
                                         </a>
                                         <div class="dropdown-menu profile-drop">
                                             <div class="user-header">
                                                 <div class="avatar avatar-sm">
-                                                    <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
+                                                    <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="//img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
                                                 </div>
                                                 <div class="user-text">
                                                     <h6>
@@ -337,7 +338,7 @@
                                         <li class="has-submenu ahas-submenu">
                                             <a href="#">
                                                 <span class="user-img">
-                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
+                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
                             </span>
                                         <i class="fas fa-chevron-down"></i>
                                     </a>
@@ -362,7 +363,7 @@
                             <li class="has-submenu ahas-submenu">
                                 <a href="#">
                                     <span class="user-img">
-                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
+                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="///img/profile.png" width="31" alt="Ryan Taylor">
                     </span>
                                     <i class="fas fa-chevron-down"></i>
                                 </a>
@@ -404,8 +405,8 @@
                     </div>
                    
                     <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
-                        <div class="col-md-6 col-12 text-md-right">
-                            <a href="#" style="color: #ff1d58;font-size:1rem;font-weight: bold;color:white;background-color:rgb(0, 143, 24); padding: 8px 40px; border-radius: 5px;"><i class="fas fa-check mr-3"></i>Booking Service Activated</a>
+                        <div class="col-md-6 col-12 text-md-right" style="margin-bottom:10px;">
+                            <a href="#" style="color: #ff1d58;margin-left:20px;font-size:1rem;font-weight: bold;color:white;background-color:rgb(0, 143, 24); padding: 8px 40px; border-radius: 5px;"><i class="fas fa-check mr-3"></i>Booking Service Activated</a>
                         </div>
                      <%}else{%>
                         <div class="col-md-6 col-12 text-md-right">
@@ -422,14 +423,14 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar ">
 
                         <!-- Profile Sidebar -->
                         <div class="profile-sidebar">
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img" style="width: 100% !important;background-color: transparent;">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="//img/profile.png"' alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
@@ -449,7 +450,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="dashboard-widget">
+                            <div class="dashboard-widget lscreen">
                                 <nav class="dashboard-menu">
                                     <ul>
                                         <li class="active">
@@ -512,7 +513,7 @@
                                                 <div class="dash-widget dct-border-rht">
                                                     <div class="circle-bar circle-bar1">
                                                         <div class="circle-graph1" data-percent="<%=allpatients.patients.length%>">
-                                                            <img src="img/icon-01.png" class="img-fluid" alt="patient">
+                                                            <img src="/img/icon-01.png" class="img-fluid" alt="patient">
                                                         </div>
                                                     </div>
                                                     <%var today = new Date();%>
@@ -549,13 +550,50 @@
                                                 <div class="dash-widget dct-border-rht">
                                                     <div class="circle-bar circle-bar2">
                                                         <div class="circle-graph2" data-percent="<%=count%>">
-                                                            <img src="img/icon-02.png" class="img-fluid" alt="Patient">
+                                                            <img src="/img/icon-02.png" class="img-fluid" alt="Patient">
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
                                                         <h6>Today Patient</h6>
                                                         <h3><%=count%></h3>
-                                                        <p class="text-muted"><%=dd%>-<%=mm%>-<%=yyyy%></p>
+                                                        <%var str = yyyy+'-'+mm+'-'+dd;%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+                                                        <p class="text-muted"><%=str1%></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -564,13 +602,13 @@
                                                 <div class="dash-widget">
                                                     <div class="circle-bar circle-bar3">
                                                         <div class="circle-graph3" data-percent="<%=allpatients.patients.length%>">
-                                                            <img src="img/icon-03.png" class="img-fluid" alt="Patient">
+                                                            <img src="/img/icon-03.png" class="img-fluid" alt="Patient">
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
                                                         <h6>Appointments</h6>
                                                         <h3><%=allpatients.patients.length%></h3>
-                                                        <p class="text-muted"><%=dd%>-<%=mm%>-<%=yyyy%></p>
+                                                        <p class="text-muted"><%=str1%></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -583,6 +621,22 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h4 class="mb-4">Patient Appoinment</h4>
+                                <%var date;%>
+                                <div class="col-12 col-md-12" >
+                                    <form action="/user/doctor-sort-by-date" method="POST">
+                                    <div class="form-group" style="display: inline-flex;width: 100%;">
+                                        <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
+                                        <div class="cal-icon col-md-3" style="padding-right: 15px;">
+                                            <input type="text" placeholder="<%=date%>" name="date" class="form-control datetimepicker">
+
+                                        </div>
+                                        <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
+
+
+                                    </div>
+                                </form>
+                                </div>
+                              
                                 <div class="appointment-tab">
 
                                     <!-- Appointment Tab -->
@@ -594,6 +648,7 @@
                                             <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
                                         </li>
                                     </ul>
+
                                     <!-- /Appointment Tab -->
                                     <%if(allpatients.patients == ''){%>
                                         <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
@@ -605,23 +660,28 @@
                                             <div class="card card-table mb-0">
                                                 <div class="card-body">
                                                     <div class="table-responsive">
-                                                        <table class="table table-hover table-center mb-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Patient Name</th>
-                                                                    <th>Appt Date</th>
-                                                                    <th>Purpose</th>
-                                                                    <th>Type</th>
-                                                                    <th class="text-center">Paid Amount</th>
-                                                                    <th class="text-center">Status</th>
+                                                        <table class="table table-hover table-center mb-0 stable">
+                                                            <thead class="sthead">
+                                                                <tr class="str">
+                                                                    <th class="sth">Patient Name</th>
+                                                                    <th class="sth">Appt Date</th>
+                                                                    <th class="sth">Purpose</th>
+                                                                    <th class="sth">Type</th>
+                                                                    <th class="text-center sth">Paid Amount</th>
+                                                                    <th class="text-center sth">Status</th>
                                                                    
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <%var c=0%>
+                                                            <tbody class="stbody">
+                                                                <%var c=0,z=0;%>
                                                                 <%for(patients of allpatients.patients){%>
-                                                                <tr>
-                                                                    <td>
+                                                                    <%if(date!=undefined){%>
+                                                                        <%if(patients.date != date){%>
+                                                                            <%z++;continue;%>
+                                                                        <%}%>
+                                                                    <%}%>   
+                                                                <tr class="str">
+                                                                    <td class="std2">
                                                                         <h2 class="table-avatar">
                                                                             
                                                                             <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
@@ -630,11 +690,49 @@
                                                                                </a>
                                                                               
 
-                                                                            <a href="/patient-profile"><%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                            <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=++c%></span></a>
                                                                         </h2>
                                                                     </td>
-                                                                    <td><%=patients.date%><span class="d-block text-info"><%=patients.time%></span></td>
-                                                                    <td>General</td>
+                                                                    <%var str2 = patients.date.split('-');%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+                                                                    <td class="std2"><%=str1%><span class="d-block text-info"><%=patients.time%></span></td>
+                                                                    <td class="std2">General</td>
                                                                     <%var zz = 0;%>
                                                                     <%if(patients.type == 'own'){%>
                                                                     <%for(u of patients.pid.doctors){%>
@@ -645,17 +743,17 @@
                                                                   
                                                                     <%}%>
                                                                     <%if(zz == 0){%>
-                                                                    <td>New Patient</td>
+                                                                    <td class="std2">New Patient</td>
                                                                     <%}else{%>
-                                                                    <td>Old Patient</td>
+                                                                    <td class="std2">Old Patient</td>
                                                                     <%}%>
-                                                                    <td class="text-center">Rs<%=patients.fee%></td>
+                                                                    <td class=" std2">Rs<%=patients.fee%></td>
                                                                     
                                                                         
                                                                             <%if(patients.cancel == true){%>
-                                                                                <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                <td class="std2"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                                 <%}else{%>
-                                                                                  <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                  <td class="std2"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                   <%}%>
 
                                                                            
@@ -665,6 +763,9 @@
                                                               
                                                             </tbody>
                                                         </table>
+                                                        <%if(z==allpatients.patients.length){%>
+                                                            <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                        <%}%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -697,7 +798,7 @@
                             <!-- Footer Widget -->
                             <div class="footer-widget footer-about">
                                 <div class="footer-logo">
-                                    <img src="img/footer-logo.png" alt="logo">
+                                    <img src="/img/footer-logo.png" alt="logo">
                                 </div>
                                 <div class="footer-about-content">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -826,21 +927,23 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JS -->
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 
     <!-- Sticky Sidebar JS -->
-    <script src="plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
-    <script src="plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
-
+    <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+    <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+    <script src="/js/moment.min.js"></script>
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Circle Progress JS -->
-    <script src="js/circle-progress.min.js"></script>
+    <script src="/js/circle-progress.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
+   
 
 </body>
 

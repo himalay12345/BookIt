@@ -11,7 +11,7 @@ router.post('/create-session', passport.authenticate('local', {
     failureRedirect: '/login'
 }), userController.createSession);
 router.post('/create-staff-session', passport.authenticate('local', {
-    failureRedirect: '/staff-login'
+    failureRedirect: '/staff-login-page'
 }), userController.createStaffSession);
 router.get('/logout', userController.destroySession);
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile email'] }));
@@ -26,13 +26,17 @@ router.post('/update-education',userController.updateEducation);
 router.post('/update-establishment',userController.updateEstablishment);
 router.post('/confirm-pay',userController.confirmPay);
 router.post('/manage-booking-service',userController.manageBookingService);
+router.post('/manage-notification',userController.manageNotification);
 router.post('/doctor-review',userController.doctorReview);
 router.post('/set-schedule-timing', userController.setScheduleTiming);
+router.post('/staff-set-schedule-timing', userController.staffSetScheduleTiming);
 router.post('/update-schedule', userController.updateSchedule);
+router.post('/staff-update-schedule', userController.staffUpdateSchedule);
 router.post('/verify-payment',userController.verifyPayment);
 router.get('/verify-email',userController.verifyEmail);
 router.post('/payments/refund',userController.refund)
 router.post('/set-booking-fee', userController.setBookingFee);
+router.post('/staff-set-booking-fee', userController.staffSetBookingFee);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
 router.post('/change-password', userController.changePassword);
@@ -45,6 +49,7 @@ router.post('/payment',userController.payment);
 router.post('/offline-pay',userController.offlinePay);
 router.post('/offline-cancel',userController.offlineCancel);
 router.post('/sort-by-date',userController.sortByDate);
+router.post('/doctor-sort-by-date',userController.doctorSortByDate);
 router.get('/add-favourite', userController.addFavourite);
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-idproof', userController.uploadIdProof);

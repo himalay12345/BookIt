@@ -428,16 +428,6 @@
                                         <div class="profile-box">
                                             <div class="row">
 
-                                                <div class="col-lg-4">
-                                                    <div class="form-group">
-                                                        <label>Timing Slot Duration</label>
-                                                        <select class="select form-control">
-																<option>1 Hour</option>
-																
-                                                                <option>2 Hour</option>
-															</select>
-                                                    </div>
-                                                </div>
                                                 
                                              
                                            
@@ -488,7 +478,7 @@
                                                     
                                                         <div id="slot_sunday" class="tab-pane fade show active">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'sunday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -557,7 +547,7 @@
                                                         <!-- Monday Slot -->
                                                         <div id="slot_monday" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'monday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -627,7 +617,7 @@
                                                         <!-- Tuesday Slot -->
                                                         <div id="slot_tuesday" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'tuesday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -696,7 +686,7 @@
                                                         <!-- Wednesday Slot -->
                                                         <div id="slot_wednesday" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'wednesday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -765,7 +755,7 @@
                                                         <!-- Thursday Slot -->
                                                         <div id="slot_thursday" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'thursday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -834,7 +824,7 @@
                                                         <!-- Friday Slot -->
                                                         <div id="slot_friday" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'friday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -906,7 +896,7 @@
                                                         <!-- Saturday Slot -->
                                                         <div id="slot_saturday" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                            <%for(day of user.schedule_time){
+                                                            <%for(day of user1.schedule_time){
                                                                 if(day.day == 'saturday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -990,12 +980,12 @@
                                         <h4 class="card-title">Set Booking Appointment Charges</h4>
                                         <div class="profile-box">
                                             <div class="row">
-                                                <form action="/user/set-booking-fee" method="POST">
+                                                <form action="/user/staff-set-booking-fee" method="POST">
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                                     <div class="col-md-12 col-sm-12" style="margin-left: -15px;">
                                                     <div class="form-group col-sm-12">
                                                         <label for="booking">Booking Fee (In rupees)</label></br>
-                                                        <input type="text" name="fee" class="form-control" value="<%=locals.user.booking_fee%>" id="booking" placeholder="Enter the booking fee">
+                                                        <input type="text" name="fee" class="form-control" value="<%=user1.booking_fee%>" id="booking" placeholder="Enter the booking fee">
                                                         </div>
                                                 
                                                           
@@ -1174,7 +1164,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1349,7 +1339,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1523,7 +1513,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1697,7 +1687,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -1871,7 +1861,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2045,7 +2035,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2219,7 +2209,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2399,12 +2389,12 @@
                 </div>
                 
                 <div class="modal-body">
-                    <form action="/user/update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="sunday">
                             
                             <%var flag = false;var temp;%>
-                            <%for(day of user.schedule_time){
+                            <%for(day of user1.schedule_time){
                                 if(day.day == 'sunday'){
                                 flag=true;
                                 temp=day;
@@ -3221,12 +3211,12 @@
             </div>
             
             <div class="modal-body">
-                <form action="/user/update-schedule" method="POST">
+                <form action="/user/staff-update-schedule" method="POST">
                     <div class="hours-info">
                         <input type="hidden" name="day" value="monday">
                         
                         <%var flag = false;var temp;%>
-                        <%for(day of user.schedule_time){
+                        <%for(day of user1.schedule_time){
                             if(day.day == 'monday'){
                             flag=true;
                             temp=day;
@@ -4038,12 +4028,12 @@
             </div>
             
             <div class="modal-body">
-                <form action="/user/update-schedule" method="POST">
+                <form action="/user/staff-update-schedule" method="POST">
                     <div class="hours-info">
                         <input type="hidden" name="day" value="tuesday">
                         
                         <%var flag = false;var temp;%>
-                        <%for(day of user.schedule_time){
+                        <%for(day of user1.schedule_time){
                             if(day.day == 'tuesday'){
                             flag=true;
                             temp=day;
@@ -4856,12 +4846,12 @@
             </div>
             
             <div class="modal-body">
-                <form action="/user/update-schedule" method="POST">
+                <form action="/user/staff-update-schedule" method="POST">
                     <div class="hours-info">
                         <input type="hidden" name="day" value="wednesday">
                         
                         <%var flag = false;var temp;%>
-                        <%for(day of user.schedule_time){
+                        <%for(day of user1.schedule_time){
                             if(day.day == 'wednesday'){
                             flag=true;
                             temp=day;
@@ -5673,12 +5663,12 @@
             </div>
             
             <div class="modal-body">
-                <form action="/user/update-schedule" method="POST">
+                <form action="/user/staff-update-schedule" method="POST">
                     <div class="hours-info">
                         <input type="hidden" name="day" value="thursday">
                         
                         <%var flag = false;var temp;%>
-                        <%for(day of user.schedule_time){
+                        <%for(day of user1.schedule_time){
                             if(day.day == 'thursday'){
                             flag=true;
                             temp=day;
@@ -6490,12 +6480,12 @@
             </div>
             
             <div class="modal-body">
-                <form action="/user/update-schedule" method="POST">
+                <form action="/user/staff-update-schedule" method="POST">
                     <div class="hours-info">
                         <input type="hidden" name="day" value="friday">
                         
                         <%var flag = false;var temp;%>
-                        <%for(day of user.schedule_time){
+                        <%for(day of user1.schedule_time){
                             if(day.day == 'friday'){
                             flag=true;
                             temp=day;
@@ -7308,12 +7298,12 @@
             </div>
             
             <div class="modal-body">
-                <form action="/user/update-schedule" method="POST">
+                <form action="/user/staff-update-schedule" method="POST">
                     <div class="hours-info">
                         <input type="hidden" name="day" value="saturday">
                         
                         <%var flag = false;var temp;%>
-                        <%for(day of user.schedule_time){
+                        <%for(day of user1.schedule_time){
                             if(day.day == 'saturday'){
                             flag=true;
                             temp=day;

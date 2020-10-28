@@ -533,8 +533,9 @@
                                                 <label>Mobile</label>
                                                 <%if(locals.user.service == 'phone'){%>
                                                 <input type="number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control" readonly>
-                                                <%}%>
+                                                <%}else{%>
                                                 <input type="number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control">
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-4">

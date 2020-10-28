@@ -389,7 +389,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar paddingt">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -411,7 +411,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar lscreen">
 
                         <!-- Profile Sidebar -->
                         <div class="profile-sidebar">
@@ -488,43 +488,37 @@
 
                                
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-center mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Invoice No</th>
-                                                <th>Patient</th>
-                                                <th>Amount</th>
-                                                <th>Paid On</th>
-                                                <th></th>
+                                    <table class="table table-hover table-center mb-0 stable">
+                                        <thead class="sthead">
+                                            <tr class="str">
+                                                <th class="sth">Invoice No</th>
+                                                <th class="sth">Patient</th>
+                                                <th class="sth">Amount</th>
+                                                <th class="sth">Paid On</th>
+                                                <th class="sth"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="stbody">
                                             <%var c=0;%>
                                             <%for(patients of allpatients.patients){%>
-                                            <tr>
-                                                <td>
+                                                <%if(patients.cancel == true){%>
+                                                    <%continue;%>
+                                                    <%}%>
+                                            <tr class="str">
+                                                <td class="std3">
                                                     <a href="/invoice-view">#INV-00<%=++c%></a>
                                                 </td>
-                                                <td>
+                                                <td class="std3">
                                                     <h2 class="table-avatar">
-                                                        <a href="/patient-profile" class="avatar avatar-sm mr-2">
+                                                        <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
                                                             <img class="avatar-img rounded-circle" src="<%=patients.pid.avatar%>" alt="User Image">
                                                         </a>
-                                                        <a href="/patient-profile"><%=patients.name%> <span>#PT00<%=c%></span></a>
+                                                        <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=c%></span></a>
                                                     </h2>
                                                 </td>
-                                                <td>Rs <%=patients.fee%></td>
-                                                <td><%=patients.date%></td>
-                                                <td class="text-right">
-                                                    <div class="table-action">
-                                                        <a href="/invoice-view" class="btn btn-sm bg-info-light">
-                                                            <i class="far fa-eye"></i> View
-                                                        </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                                                            <i class="fas fa-print"></i> Print
-                                                        </a>
-                                                    </div>
-                                                </td>
+                                                <td class="std3">Rs <%=patients.fee%></td>
+                                                <td class="std3"><%=patients.createdAt.toDateString()%></td>
+                                                
                                             </tr>
                                             <%}%>
                                             <!-- <tr>
