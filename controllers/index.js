@@ -5,6 +5,7 @@ const Test = require('../models/test');
 const shortid = require('shortid');
 const Razorpay = require('razorpay');
 const emailVerification = require('../mailers/email-otp');
+const Consult = require('../models/consult');
 
 
 module.exports.home = async(req, res) => {
@@ -39,9 +40,12 @@ module.exports.addBilling = (req, res) => {
 }
 module.exports.consult = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
+    let consults = await Consult.find({});
+ 
     return res.render('consult', {
         title: 'Consult',
-        doctors: doctors
+        doctors: doctors,
+        consults:consults
     })
 }
 module.exports.addPrescription = (req, res) => {
@@ -220,31 +224,7 @@ module.exports.test = async(req, res) => {
 
 
 }
-module.exports.consult = async(req, res) => {
-        let consult = await Test.find({})
-        return res.render('consult', {
 
-            title: 'consult User',
-            consult: consult
-
-
-        })
-
-
-    }
-    // module.exports.consult = async(req, res) => {
-    //     let test = await Test.findById({
-    //         testname: req.body.testname,
-    //         testprice: req.body.testprice,
-    //         testdiscripation: req.body.testdiscripation,
-    //         title: 'Test User',
-    //         test: test
-
-
-//     })
-
-
-// }
 module.exports.test1 = (req, res) => {
     return res.render('test1', {
         title: 'Test1 User'
@@ -261,6 +241,13 @@ module.exports.components = (req, res) => {
         title: 'Components'
     })
 }
+
+module.exports.comingSoon = (req, res) => {
+    return res.render('coming-soon', {
+        title: 'Coming-Soon'
+    })
+}
+
 
 module.exports.deleteAccount = (req, res) => {
     return res.render('delete-acount', {
@@ -1098,12 +1085,7 @@ module.exports.verifyDoctor = async(req, res) => {
         }
 
 
-    } else {
-        let doctor = await User.findOne({
-            phone: req.body.phone,
-            type: 'Doctor',
-            staff_flag: false
-        });
+    } 
 
     else{
         let doctor = await User.findOne({phone:req.body.phone,

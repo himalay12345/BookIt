@@ -165,6 +165,38 @@ module.exports.addFavourite = async(req, res) => {
     return res.redirect('back');
 }
 
+
+module.exports.searchDoctor = async(req, res) => {
+   console.log(req.body);
+   var selected = [];
+   let users = await User.find({type:'Doctor'});
+  
+
+   var keyword = req.body.keyword.toUpperCase();
+ 
+
+   for (u of users) {
+       //    if(property.address.toUpperCase().indexOf(req.body.address.toUpperCase())){ 
+       var name = u.name.toUpperCase();
+       var temp = name.indexOf(keyword);
+       if (temp > -1) {
+           selected.push(u);
+       }
+   }
+
+   
+
+
+  
+
+
+
+   return res.render('search', {
+    doctors: selected
+});
+
+}
+
 module.exports.doctorReview = async(req, res) => {
     let user = await User.findById(
         req.query.id);
@@ -405,8 +437,7 @@ module.exports.confirmPay = async function(req, res) {
 
             if(req.body.type == 'own')
             {
-                user.name = 'Himuu';
-                user.email = req.body.email;
+                user.name = req.body.name;
                 user.phone = req.body.phone;
                 user.age = req.body.age;
                 user.contacts.address = req.body.address;
@@ -442,6 +473,7 @@ module.exports.confirmPay = async function(req, res) {
                 type:req.body.type,
                 user:user,
                 date:req.body.date
+                
             })
     }
 
@@ -792,6 +824,9 @@ module.exports.verifyPayment = async(req, res) => {
       
           });
 
+          if(staff)
+          {
+
           staff.booking.push({
             payment_id:req.body.razorpay_payment_id,
             name:req.query.name,
@@ -807,6 +842,8 @@ module.exports.verifyPayment = async(req, res) => {
             slot:req.query.slotindex,
             seat:b
         });
+        staff.save();
+    }
 
 
           
@@ -845,6 +882,8 @@ module.exports.verifyPayment = async(req, res) => {
               seat:b
       
           });
+          if(staff)
+          {
 
           staff.booking.push({
             payment_id:req.body.razorpay_payment_id,
@@ -861,6 +900,8 @@ module.exports.verifyPayment = async(req, res) => {
             slot:req.query.slotindex,
             seat:b
         });
+        staff.save();
+    }
           
       }
       patient.refresh_flag = false;
@@ -876,7 +917,7 @@ module.exports.verifyPayment = async(req, res) => {
         did:req.query.doctorid
     });
       user.save();
-      staff.save();
+      
       patient.save();
      
 
@@ -962,6 +1003,9 @@ module.exports.verifyPayment = async(req, res) => {
               seat:k1
   
           });
+
+          if(staff)
+          {
           
           staff.booking.push({
             payment_id:req.body.razorpay_payment_id,
@@ -977,6 +1021,8 @@ module.exports.verifyPayment = async(req, res) => {
             fee:req.query.fee,
             seat:k1
         });
+        staff.save();
+    }
           
       }
   
@@ -1014,6 +1060,9 @@ module.exports.verifyPayment = async(req, res) => {
   
           });
 
+          if(staff)
+          {
+
           staff.booking.push({
             payment_id:req.body.razorpay_payment_id,
             name:req.query.name,
@@ -1028,6 +1077,8 @@ module.exports.verifyPayment = async(req, res) => {
             fee:req.query.fee,
             seat:k1
         });
+        staff.save();
+    }
 
         
   
@@ -1046,7 +1097,7 @@ module.exports.verifyPayment = async(req, res) => {
     });
       
       user.save();
-      staff.save();
+     
       patient.save();
      
     //  client.messages 

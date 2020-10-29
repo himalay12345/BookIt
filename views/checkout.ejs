@@ -454,16 +454,7 @@
                                                         <%}%>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Email</label>
-                                                        <%if(locals.user.email){%>
-                                                        <input class="form-control" type="email" name="email" value="<%=locals.user.email%>" required>
-                                                        <%}else{%>
-                                                            <input class="form-control" type="email" name="email">
-                                                        <%}%>
-                                                    </div>
-                                                </div>
+                                               
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group card-label">
                                                         <label>Phone</label>
@@ -521,8 +512,8 @@
                                                 </div>
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group card-label">
-                                                        <label>Patient Email</label>
-                                                            <input class="form-control" type="email" name="pemail" placeholder="Enter patient email" required>
+                                                        <label>Patient Email (optional) </label>
+                                                            <input class="form-control" type="email" name="pemail" placeholder="Enter patient email">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12">
@@ -583,16 +574,41 @@
                                     </a>
                                     <div class="booking-info">
                                         <h4><a href="/doctor-profile"><%=doctor.name%></a></h4>
+                                        <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                        <%for(review of doctor.reviews){%>
+                                            <%sum+=review.rating;%>
+                                        <%}%>
+                                        <%avg=sum/cnt;%>
                                         <div class="rating">
+                                            <%if(avg>=1){%>
                                             <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=2){%>
                                             <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=3){%>
                                             <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=4){%>
                                             <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">35</span>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=5){%>
+                                            <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
                                         </div>
                                         <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%>, <%=doctor.contacts.state%></p>
+                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%> &nbsp; <%=doctor.contacts.state%></p>
                                         </div>
                                     </div>
                                 </div>

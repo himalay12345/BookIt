@@ -70,15 +70,12 @@
                             <li class="smlist" style="display: none;">
                                 <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 0.9375rem;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
                             </li>
+                           
                             <li class="smlist" style="display: none;">
-                                <<<<<<< HEAD <a><span><i class="fas fa-comments" style="margin-right: 0.9375rem;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
-                            </li>
-                            <li class="smlist" style="display: none;">
-                                <a><span><i class="fas fa-flask" style="margin-right: 0.9375rem;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a> =======
                                 <a href="/consult"><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
                             </li>
                             <li class="smlist" style="display: none;">
-                                <a href="/tests"><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a> >>>>>>> 007df9989d7505b3f6e9fc94c43b1be4737ab9a8
+                                <a href="/test"><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a> 
                             </li>
 
                             <li class="mdlist">
@@ -394,13 +391,13 @@
 
                     <!-- Search -->
                     <div class="search-box">
-                        <form action="templateshub.net">
+                        <form action="/user/search-doctor" method="POST">
                             <div class="form- search-location">
-                                <input type="text" class="form-control" placeholder="Search Location">
+                                <input type="text" name="location" class="form-control" placeholder="Search Location">
                                 <span class="form-text">Based on your Location</span>
                             </div>
                             <div class="form- search-info">
-                                <input type="text" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                <input type="text" name="keyword" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                 <span class="form-text">Ex : Dental or Sugar Check up etc</span>
                             </div>
                             <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
@@ -900,7 +897,7 @@
                     font-size: 1.375rem;">Book Our Doctors</h3>
 
                     <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
-                        <%console.log(doctors)%>
+                        
                             <% var count=1 %>
                                 <%for(let i=0; i<doctors.length;i++){%>
                                     <% if(count=>10) {%>

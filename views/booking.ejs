@@ -458,21 +458,46 @@
 <%=doctor.department%>
 
 </p>
-<div class="rating">
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star filled"></i>
-<i class="fas fa-star"></i>
-<span class="d-inline-block average-rating">35</span>
-</div>
+<%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                                        <%for(review of doctor.reviews){%>
+                                                            <%sum+=review.rating;%>
+                                                        <%}%>
+                                                        <%avg=sum/cnt;%>
+                                                        <div class="rating">
+                                                            <%if(avg>=1){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=2){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=3){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=4){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <%if(avg>=5){%>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <%}else{%>
+                                                                <i class="fas fa-star"></i>
+                                                            <%}%>
+                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                        </div>
 <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
 <%=doctor.booking_fee%>
 </p>
 
 
 <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
-<%=doctor.contacts.city%>,
+<%=doctor.contacts.city%> &nbsp;
 <%=doctor.contacts.state%>
 </p>
 </div>
@@ -1389,7 +1414,7 @@ Not Available
 <%}}%>
 </li>
 <%}else{%>
-<li id="smd1">
+<li id="smd1" style="display:none;">
 <a class="timing" href="#">
 Not Available
 </a>
@@ -1415,7 +1440,7 @@ Not Available
 <span style="font-size: 0.5rem;">Booked</span>
 </a>
 <%}else{%>
-<a class="timing" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="display:flex;width: 40px; height:40px;margin-left: 5px;" id="checkme">
+<a class="timing" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px !important;" id="checkme">
 <span><%=j%></span>
 </a>
 
@@ -1441,7 +1466,7 @@ Not Available
 <span style="font-size: 0.5rem;">Booked</span>
 </a>
 <%}else{%>
-<a class="timing" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="display:flex;width: 40px; height:40px;margin-left: 5px;" id="checkme">
+<a class="timing" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
 <span><%=j%></span>
 </a>
 
@@ -1453,14 +1478,14 @@ Not Available
 <%}}%>
 </li>
 <%}else{%>
-<li id="smd2">
+<li id="smd2" style="display:none;">
 <a class="timing" href="#">
 Not Available
 </a>
 </li>
 <%}%>
 <%if(d3 != undefined){%>
-<li id="smd3" style="display:none">
+<li id="smd3" style="display:none;">
 
 <%if(typeof(d3.start) == 'string'){%>
 <a class="timing" onclick="smshowSeats('<%=z%>')">
@@ -1517,14 +1542,14 @@ Not Available
 </li>
 
 <%}else{%>
-<li id="smd3">
+<li id="smd3" style="display:none;">
 <a class="timing" href="#">
 Not Available
 </a>
 </li>
 <%}%>
 <%if(d4 != undefined){%>
-<li style="display: none;" id="smd4">
+<li  id="smd4" style="display: none;">
 
 <%if(typeof(d4.start) == 'string'){%>
 <a class="timing" onclick="smshowSeats('<%=z%>')">

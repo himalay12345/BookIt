@@ -396,7 +396,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar paddingt">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -548,18 +548,27 @@
                                     </ul>
                                 </div>
                                 <div class="doctor-action">
+                                    <%var flag = false;%>
+                                                <%if(locals.user){%>
+                                                    <%for(fav of locals.user.favourites){
+                                                    
+                                                   
+                                                if(fav.toString() == doctor._id)flag = true;%>
+
+                                                        <%}%>
+                                                            <%}%>
+
+                                                                <%if(!flag){%>
                                     <a href="javascript:void(0)" class="btn btn-white fav-btn">
-                                        <i class="far fa-bookmark"></i>
+                                        <i class="far fa-bookmark"></i>&nbsp;Add Favourite
                                     </a>
-                                    <a href="/chat" class="btn btn-white msg-btn">
-                                        <i class="far fa-comment-alt"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-                                        <i class="fas fa-phone"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-                                        <i class="fas fa-video"></i>
-                                    </a>
+                                    <%}else{%>
+                                        <a href="javascript:void(0)" class="btn btn-white fav-btn" style="background-color: red;color:white;">
+                                            <i class="far fa-bookmark"></i>&nbsp;Favourite
+                                        </a>
+
+                                        <%}%>
+                                   
                                 </div>
                                 <div class="clinic-booking">
                                     <a class="apt-btn" href="/booking/?id=<%=doctor._id%>">Book Appointment</a>
@@ -571,7 +580,7 @@
                 <!-- /Doctor Widget -->
 
                 <!-- Doctor Details Tab -->
-                <div class="card">
+                <div class="card" >
                     <div class="card-body pt-0">
 
                         <!-- Tab Menu -->
@@ -594,7 +603,7 @@
                         <!-- /Tab Menu -->
 
                         <!-- Tab Content -->
-                        <div class="tab-content pt-0">
+                        <div class="tab-content pt-0" >
 
                             <!-- Overview Content -->
                             <div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
@@ -739,11 +748,11 @@
                             <div role="tabpanel" id="doc_locations" class="tab-pane fade">
 
                                 <!-- Location List -->
-                                <div class="location-list">
+                                <div class="location-list" style="padding: 5px !important;"> 
                                     <div class="row">
 
                                         <!-- Clinic Content -->
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" style="padding-left: 0px !important;padding-right: 0px !important;">
                                             <div class="clinic-content">
                                                 <h4 class="clinic-name">
                                                     <a href="#">
@@ -765,7 +774,7 @@
                                                     <h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i>
                                                         <%=doctor.clinicaddr%>,
                                                             <%=doctor.contacts.country%><br><a href="/javascript:void(0);">Get Directions</a></h5>
-                                                    <ul>
+                                                    <ul style="margin-bottom: 10px;">
                                                         <%for(doctorsclinic of doctor.clinicphoto){%>
                                                             <li>
                                                                 <a href="<%=doctorsclinic%>" data-fancybox="gallery">
@@ -787,7 +796,19 @@
                                                     <p class="timings-days" style="display:inline-flex;flex-direction: column;">
                                                         <%for(time of doctor.schedule_time){%>
 
-                                                            <span> <%=time.day.toUpperCase()%> </span>
+                                                            <span> <%=time.day.toUpperCase()%> : </span>
+                                                            <%if(typeof(time.start) == 'object'){%>
+
+                                                                <%for(let i = 1;i<time.start.length;i++){%>
+                                                                   </br>
+                                                                    <%}%>
+                                                            
+
+                                                            <%}else{%>
+                                                               
+
+                                                            <%}%>
+
                                                         <%}%>
                                                     </p>
                                                     <p class="timings-times">
@@ -795,12 +816,12 @@
                                                             <%if(typeof(time.start) == 'object'){%>
 
                                                                 <span><%for(let i = 0;i<time.start.length;i++){%>
-                                                                    : &nbsp;&nbsp;&nbsp;<%=time.start[i]%> - <%=time.end[i]%>
+                                                                     &nbsp;&nbsp;&nbsp;<%=time.start[i]%> - <%=time.end[i]%></br>
                                                                     <%}%>
                                                                 </span>
 
                                                             <%}else{%>
-                                                                <span>: &nbsp;&nbsp;&nbsp;<%=time.start%> - <%=time.end%></span>
+                                                                <span> &nbsp;&nbsp;&nbsp;<%=time.start%> - <%=time.end%></span>
 
                                                             <%}%>
                                                             <%}%>
@@ -891,7 +912,7 @@
                                                 <div class="comment-body">
                                                     <div class="meta-data">
                                                         <span class="comment-author"><%=review.pid.name%></span>
-                                                        <span class="comment-date">Reviewed 2 Days ago</span>
+                                                        <span class="comment-date">Reviewed <%=review.createdAt.toDateString()%></span>
                                                         <%var avg = review.rating;%>
                                                        
                                                         <div class="review-count rating">
@@ -1001,7 +1022,7 @@
                                                         var yyyy = today.getFullYear();
                                                         var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 	                                                    var dayOfWeek = weekday[today.getDay()]%>
-                                                            <div class="day">Today &nbsp;&nbsp;
+                                                            <div class="day text-sm-center">Today &nbsp;&nbsp;
                                                                 <%=dd%>-
                                                                     <%=mm%>-
                                                                         <%=yyyy%>
@@ -1023,8 +1044,9 @@
 
                                                                                                         <%}else{%>
                                                                                                             <%if(typeof(d1.start) == 'object'){%>
+                                                                                                                <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
                                                                                                                 <%for(let i = 0;i<d1.start.length;i++){%>
-                                                                                                                    <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+                                                                                                                   
 
                                                                                                                     <span class="time"><%=d1.start[i]%>-<%=d1.end[i]%></span> 
                                                                                                                     <%}%>
