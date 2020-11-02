@@ -222,53 +222,50 @@
 
                         <div class="col-lg-12">
                             <div class="doctor-slider slider">
+                                <!-- <% var count2=1 %>
+                                    <%for(consult of consults) {%>
+                                        <% if(count2>=10) {%>
+                                            <% break;} %>
+                                                <%count2++%> -->
+                                <div style="height: 250px; width: 90px;   grey;  border-radius: 5px;">
 
-                                <div class="">
-                                    <div class="card">
-                                        <div class="card-img-top card-img-top-250">
-                                            <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-                                        </div>
-                                        <div class="card-block p-t-2">
-                                            <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dentist</a>
-                                            </h2>
-                                            <p style="font-size:0.9375rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
-                                                <a href>Teeth Trouble?Schedule a dental checkup.</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="card">
-                                        <div class="card-img-top card-img-top-250">
-                                            <img class="img-fluid" src="http://i.imgur.com/Hw7sWGU.png" alt="Carousel 2">
-                                        </div>
-                                        <div class="card-block p-t-2" style="padding: 0.9375rem;">
-                                            <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Dietitian/Nutrition</a>
-                                                <p style="font-size:0.9375rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
-                                                    <a href>Get guidance on eating right, weight management and sports nutrition.</a>
-                                                </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <div class="card">
-                                        <div class="card-img-top card-img-top-250" style="padding: 0.9375rem;">
-                                            <img class="img-fluid" src="http://i.imgur.com/g27lAMl.png" alt="Carousel 3">
-                                        </div>
-                                        <div class="card-block p-t-2" style="padding: 0.9375rem;">
-                                            <h2 class=" text-wide p-b-2" style="line-height: 1.5;font-size:16px ;margin-bottom: 10px;"><a href>Women Pregnancy</a>
-                                                <p style="font-size:0.9375rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;box-sizing: border-box;">
-                                                    <a href>Explore for women’s health, pregnancy and infertility treatments</a>
-                                                </p>
-                                        </div>
-                                    </div>
 
+                                    <div style="height: 70%; width: 100%;">
+                                        <img src="<%=consult.consultavatar%> " style="height: 100%; width: 100%;">
+
+                                    </div>
+                                    <div style="height: 30%; width: 100%; position: relative;border-bottom: 1px solid grey;border-left: 1px solid gray; border-right:1px solid gray;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+
+                                        <h4 style="padding-top: 5px;
+                                        padding-left: 4px;
+                                        font-family: system-ui;">
+                                            <%=consult.consultname %>
+                                        </h4>
+                                        <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 5px; display: block;margin-top: -4px;">₹
+                                            <%=consult.consultprice %>
+                                        </p>
+                                        <a href="/" style="color:#455A64;font-weight:bold; position: absolute;    margin-top: -16px;
+                                        display: block;
+                                        padding-left: 5px;">Consult Now<span style="margin-left: 7px;"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></span>
+                                         </a>
+
+
+
+
+
+
+                                    </div>
                                 </div>
+
+
+                                <!-- <% } %> -->
+
+
+
 
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
 
 
@@ -473,88 +470,69 @@
         </section>
         <section class="mobile-index">
             <section>
-                <div class=" col-sm-12 index-content">
-                    <div class="col-sm-12 index-first" style="background-color: navy; margin-bottom: 10px; position: relative; height: 200px; border: 1px solid black; border-radius: 3px;">
-                        <div class="say-doubts" style="position: absolute;">
-                            <h4>Goodbye doubts</h4>
-                        </div>
-                        <div class="say-hello" style="position: absolute;">
-                            <h3 style="text-decoration: underline;">Say Hello Doctor.</h3>
-                        </div>
-                        <div class="off" style="position: absolute; bottom: 17px; color: white;">
-                            <p style="line-height: 1.125rem;"><span style="font-size: 1.25rem; font-weight: 600;">10% Off</span><span style="margin-left: 2px;">+
+                <a href="/">
+                    <div class=" col-sm-12 index-content">
+                        <div class="col-sm-12 index-first" style="background-color: navy; margin-bottom: 10px; position: relative; height: 200px; border: 1px solid black; border-radius: 14px;">
+                            <div class="say-doubts" style="position: absolute;">
+                                <h4 style="color: white;
+                                            margin-top: 16px;
+                                            margin-left: 3px;
+                                            font-size: 14px;
+                                            font-family: system-ui;">
+                                    Goodbye doubts,
+                                </h4>
+                            </div>
+                            <div class="say-hello" style="position: absolute;">
+                                <h3 style="text-decoration: underline; font-weight: 800;margin-top: 33px;  font-size: 1.5rem;color: white;">Say Hello Doctor.</h3>
+
+                            </div>
+                            <div class="doctor-hi">
+                                <img class="hi-image" src="/img/patients/doctoron.png">
+                            </div>
+                            <div class="off" style="position: absolute; bottom: 17px; color: white;">
+                                <p style="line-height: 1.125rem;"><span style=" font-weight: 600;font-size: 1.25rem;    
+                               ">10% Off</span><span style="margin-left: 2px;">+
                         </span> <span>10% Cashback <br>on First Booking</span></p>
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </section>
             <section class="health-concerns" style="margin-bottom: 20px;">
                 <div class="concerns">
 
                     <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
 
-                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                            <div style="height: 50%;">
-                                <img src="/img/patients/patient1.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                            </div>
-                            <div style="height: 40%;padding: 5px;position: relative;">
-                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
-                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
-                                <a href="/" style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now
+                        <% var count1=1 %>
+                            <%for(consult of consults) {%>
+                                <% if(count1>=10) {%>
+                                    <% break;} %>
+                                        <%count1++%>
+
+
+                                            <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                                                <div style="height: 50%;">
+                                                    <img src="<%=consult.consultavatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                                </div>
+                                                <div style="height: 40%;padding: 5px; position: relative;">
+                                                    <h4 class="consultname" style="padding-top: 20px;">
+                                                        <%=consult.consultname %>
+                                                    </h4>
+                                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 6px;">₹
+                                                        <%=consult.consultprice %>
+                                                    </p>
+                                                    <a href="/" style="color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 7px;">Consult Now
                                 </a>
 
-                            </div>
+                                                </div>
 
-                        </div>
-                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                            <div style="height: 50%;">
-                                <img src="/img/patients/patient2.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                            </div>
-                            <div style="height: 40%;padding: 5px;position: relative;">
-                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
-                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
-                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
+                                            </div>
+                                            <% } %>
 
-                            </div>
 
-                        </div>
-                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                            <div style="height: 50%;">
-                                <img src="/img/patients/patient3.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                            </div>
-                            <div style="height: 40%;padding: 5px;position: relative;">
-                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
-                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
-                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
 
-                            </div>
 
-                        </div>
-                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                            <div style="height: 50%;">
-                                <img src="/img/patients/patient4.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                            </div>
-                            <div style="height: 40%;padding: 5px;position: relative;">
-                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
-                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
-                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
-
-                            </div>
-
-                        </div>
-                        <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                            <div style="height: 50%;">
-                                <img src="/img/patients/patient5.jpg" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                            </div>
-                            <div style="height: 40%;padding: 5px;position: relative;">
-                                <h4 style="font-weight: bold;text-align: center;margin-top: 21px;">Cough & Cold?</h4>
-                                <p style="text-align:center;font-family: ui-serif;font-weight: 800;color: #616161">₹ 299</p>
-                                <a style="font-size: 0.8rem;color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 51px;">Consult Now</a>
-
-                            </div>
-
-                        </div>
 
 
                     </div>
@@ -570,52 +548,50 @@
                     font-size: 1.375rem;">Book Our Doctors</h3>
 
                     <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
-                        
-                            <% var count=1 %>
-                                <%for(let i=0; i<doctors.length;i++){%>
-                                    <% if(count=>10) {%>
-                                        <% break;} %>
-                                            <%count++%>
-                                                <div class="img-cough-cold" style="width:180px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
-                                                    <div style="height: 40%;">
-                                                        <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                                                    </div>
-                                                    <div style="height: 60%;padding: 5px;position: relative;margin-top: 12px;
+
+
+                        <%for(let i=0; i<doctors.length;i++){%>
+
+                            <div class="img-cough-cold" style="width:180px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
+                                <div style="height: 40%;">
+                                    <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                </div>
+                                <div style="height: 60%;padding: 5px;position: relative;margin-top: 12px;
                                     ">
-                                                        <h4 style="font-weight: bold;margin-top: 29px;">
-                                                            Dr.
-                                                            <%=doctors[i].name%>
-                                                        </h4>
-                                                        <h4 style="font-weight: 600;margin-top: -5px;
+                                    <h4 style="font-weight: bold;margin-top: 29px;">
+                                        Dr.
+                                        <%=doctors[i].name%>
+                                    </h4>
+                                    <h4 style="font-weight: 600;margin-top: -5px;
                                         font-size: 13px;">
-                                                            General Physician
-                                                        </h4>
-                                                        <p style="font-family: ui-serif;font-weight: 800;color: #616161; position: absolute;    top: 70px;
+                                        General Physician
+                                    </h4>
+                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161; position: absolute;    top: 70px;
                                         margin-left: 2px; ">₹
-                                                            <%=doctors[i].booking_fee%>
-                                                        </p>
-                                                        <div style="position: absolute; display: inline-flex;">
+                                        <%=doctors[i].booking_fee%>
+                                    </p>
+                                    <div style="position: absolute; display: inline-flex;">
 
 
-                                                            <div style="border-radius: 2px;
+                                        <div style="border-radius: 2px;
                                             background-color: skyblue;margin-top: 17px;width: 80px;">
-                                                                <a href="/" style="font-size: 13px;
+                                            <a href="/" style="font-size: 13px;
                                                 font-weight: 800;
                                                 color: white; text-align: center;margin-left: 4px;">View Profile</a>
-                                                            </div>
-                                                            <div style="border-radius: 2px;width: 75px;
+                                        </div>
+                                        <div style="border-radius: 2px;width: 75px;
                                             background-color: skyblue;margin-top: 17px;margin-left: 18px;">
-                                                                <a href="/" style="font-size: 13px;
+                                            <a href="/" style="font-size: 13px;
                                                 font-weight: 800;
                                                 color: white;text-align:center;margin-left: 9px;">Book Now</a>
-                                                            </div>
-                                                        </div>
+                                        </div>
+                                    </div>
 
 
-                                                    </div>
+                                </div>
 
-                                                </div>
-                                                <%}%>
+                            </div>
+                            <%}%>
 
 
                     </div>
@@ -630,7 +606,7 @@
                     <div class="head">
                         <h3 style="font-weight: 800;    margin-bottom: 16px;
                 margin-left: 7px;">
-                            Top Specialities
+                            Top Test
                         </h3>
                     </div>
 
@@ -638,14 +614,14 @@
                         <div class="col-sm-12 upper" style="height: 25%; padding-left: 2px; display: inline-flex; margin-left: -6px;">
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 80%;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                                    <img src="/img/patients/blood1.jpg" style="height: 100%;border-radius: 10px;width: 94px;">
                                 </div>
                                 <div>
                                     <h3 style="font-size: 0.9375rem;
                                         padding-top: 5px;
                                         line-height: 1rem;
                                         font-family: system-ui;">
-                                        Covid-19 Expert
+                                        Blood Test
                                     </h3>
 
                                 </div>
@@ -653,14 +629,14 @@
                             </div>
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                                    <img src="/img/patients/checkup10.jfif" style="height: 100%;border-radius: 10px;">
                                 </div>
                                 <div>
                                     <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                        Pregnancy
+                                        Thyroid Test
                                     </h3>
 
                                 </div>
@@ -668,14 +644,14 @@
                             </div>
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                                    <img src="/img/patients/health13.jfif" style="height: 100%;border-radius: 10px;">
                                 </div>
                                 <div>
                                     <h3 style="font-size: 0.9375rem;
                                         padding-top: 5px;
                                         line-height: 1rem;
                                         font-family: system-ui;">
-                                        Bone Expert
+                                        Diabetes
                                     </h3>
 
                                 </div>
@@ -687,14 +663,14 @@
                         <div class="col-sm-12 upper" style="height: 25%; padding-left: 2px; display: inline-flex; margin-top: 20px; margin-left: -8px;">
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 80%;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                                    <img src="/img/patients/health6.jfif" style="height: 100%;border-radius: 10px;">
                                 </div>
                                 <div>
                                     <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                        Ear & Nose Expert
+                                        Liver function test
                                     </h3>
 
                                 </div>
@@ -702,42 +678,45 @@
                             </div>
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/health1.jfif" style="height: 100%;border-radius: 10px;">
+                                    <img src="/img/patients/checkup2.jfif" style="height: 100%;border-radius: 10px;">
                                 </div>
                                 <div>
                                     <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                        Physician Expert
+                                        Full Body Checkup
                                     </h3>
 
                                 </div>
 
                             </div>
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
-                                <div style="height: 70%; border-radius: 10px;">
-                                    <p style="padding: 11px;
-                            height: 100%;
-                            border-radius: 10px;
-                            border: 2px solid #126a78;
-                            font-size: 0.9375rem;
-                            line-height: 1.0625rem;
-                            padding-top: 24px;
-                            margin-left: -6px;
-                            ">
-                                        <span style="font-weight: 700;color: #12444c">See More Specialities</span>
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 style="font-size: 0.9375rem;
-                                padding-top: 5px;
-                                line-height: 1rem;
-                                font-family: system-ui;">
-                                        Explore More Expert
-                                    </h3>
 
-                                </div>
+                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;">
+                                <a href="/test">
+                                    <div style="height: 70%; border-radius: 10px;">
+                                        <p style="padding: 11px;
+                                        height: 100%;
+                                        border-radius: 10px;
+                                        border: 2px solid #126a78;
+                                        font-size: 0.9375rem;
+                                        line-height: 1.0625rem;
+                                        padding-top: 24px;
+                                        margin-left: -6px;
+                                        ">
+                                            <span style="font-weight: 700;color: #12444c">See More Specialities</span>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h3 style="font-size: 0.9375rem;
+                                            padding-top: 5px;
+                                            line-height: 1rem;
+                                            font-family: system-ui;">
+                                            Explore More Expert
+                                        </h3>
+
+                                    </div>
+                                </a>
 
                             </div>
                         </div>
@@ -756,22 +735,22 @@
       
         <!-- /Footer -->
 
-    </div>
-    <!-- /Main Wrapper -->
+        </div>
+        <!-- /Main Wrapper -->
 
-    <!-- jQuery -->
-    <script src="/js/jquery.min.js"></script>
+        <!-- jQuery -->
+        <script src="/js/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JS -->
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+        <!-- Bootstrap Core JS -->
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
 
-    <!-- Slick JS -->
-    <script src="/js/slick.js"></script>
+        <!-- Slick JS -->
+        <script src="/js/slick.js"></script>
 
-    <!-- Custom JS -->
-    <script src="/js/script1.js"></script>
-    <script src="/js/script.js"></script>
+        <!-- Custom JS -->
+        <script src="/js/script1.js"></script>
+        <script src="/js/script.js"></script>
 
 
 
