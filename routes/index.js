@@ -26,6 +26,7 @@ router.get('/consult', homeController.consult);
 router.get('/test', homeController.test);
 router.get('/test1', homeController.test1);
 router.get('/coming-soon', homeController.comingSoon);
+router.get('/change-bank-account', homeController.changeBankAccount);
 router.get('/chat-doctor', passport.checkAuthentication, homeController.chatDoctor);
 router.get('/checkout', passport.checkAuthentication, homeController.checkout);
 router.get('/components', homeController.components);
@@ -40,6 +41,7 @@ router.get('/edit-billing', passport.checkAuthentication, homeController.editBil
 router.get('/edit-prescription', passport.checkAuthentication, homeController.editPrescription);
 router.get('/educational', passport.checkAuthentication, homeController.educational);
 router.get('/email-verified', homeController.emailVerified);
+router.get('/email-not-verified', homeController.emailNotVerified);
 router.get('/establishment', passport.checkAuthentication, homeController.establishment);
 router.get('/favourites', passport.checkAuthentication, homeController.favourites);
 router.get('/fees', passport.checkAuthentication, homeController.fees);

@@ -11,13 +11,16 @@ const appointmentAlert = require('../mailers/appointment-alert');
 const appointmentCancelAlert = require('../mailers/appointment-cancel');
 const emailVerification = require('../mailers/email-verify');
 const Feedback = require('../models/disable_feedback');
+const Path = require('path');
 
 
 module.exports.create = async(req, res) => {
+    let davatar = path.join(__dirname,'..','/assets/img/bg.png');
     let user = await User.create({
         name: req.body.name,
         phone: req.body.phone,
         password: req.body.password,
+        avatar: davatar,
         service: 'phone',
         type: req.body.type
     });
@@ -76,7 +79,7 @@ module.exports.verifyEmail = async(req, res) => {
   }
 
   else{
-      return res.redirect('/');
+      return res.redirect('/email-not-verified');
   }
 }
 
@@ -96,6 +99,9 @@ module.exports.updateProfile = async(req, res) => {
         if (!doctor.avatar) {
             doctor.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
         } else {
+            if (fs.existsSync(path.join(__dirname, '..', doctor.avatar))) {
+                fs.unlinkSync(path.join(__dirname, '..', doctor.avatar));
+                }
 
             fs.unlinkSync(path.join(__dirname, '..', doctor.avatar));
             doctor.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
@@ -214,6 +220,7 @@ module.exports.createSession =async function(req, res) {
       
         let doctor = await User.findById(req.body.doctorid);
         return res.render('checkout',{
+            title: 'Checkout',
             booked:req.body.booked,
             available:req.body.available,
             slotindex:req.body.slotindex,
@@ -278,6 +285,7 @@ module.exports.popup = async function(req, res) {
           
             let doctor = await User.findById(req.body.doctorid);
             return res.render('checkout',{
+                title: 'Checkout',
                 booked:req.body.booked,
                 available:req.body.available,
                 slotindex:req.body.slotindex,
@@ -460,6 +468,7 @@ module.exports.confirmPay = async function(req, res) {
 
           
             return res.render('pay',{
+                title: 'Payment',
                 response:response,
                 amount:response.amount,
                 orderid:response.id,
@@ -824,6 +833,8 @@ module.exports.verifyPayment = async(req, res) => {
       
           });
 
+          
+
           if(staff)
           {
 
@@ -882,6 +893,9 @@ module.exports.verifyPayment = async(req, res) => {
               seat:b
       
           });
+          let n = patient.others.length-1;
+          let nid = patient.others[n]._id;
+          patient.others.pull(nid);
           if(staff)
           {
 
@@ -938,11 +952,15 @@ module.exports.verifyPayment = async(req, res) => {
          to: '+91'+req.query.phone
        })
       .then(message => console.log(message.sid));
+      if(req.query.email)
+      {
       appointmentAlert.newAlert(req.query.date,req.query.time,req.query.email,user,patient);
+      }
      
  
     
       return res.render('booking-success',{
+        title: 'Booking-Success',
           doctor:user,
           seat:b,
           slotindex:req.query.slotindex,
@@ -1059,6 +1077,9 @@ module.exports.verifyPayment = async(req, res) => {
               seat:k1
   
           });
+          let n = patient.others.length-1;
+          let nid = patient.others[n]._id;
+          patient.others.pull(nid);
 
           if(staff)
           {
@@ -1117,10 +1138,13 @@ module.exports.verifyPayment = async(req, res) => {
          to: '+91'+req.query.phone
        })
       .then(message => console.log(message.sid));
+      if(req.query.email)
+      {
       appointmentAlert.newAlert(req.query.date,req.query.time,req.query.email,user,patient);
-      
+      }
     
       return res.render('booking-success',{
+        title: 'Booking-Success',
           doctor:user,
           seat:k1,
           slotindex:req.query.slotindex,
@@ -1261,6 +1285,7 @@ module.exports.payment = async (req, res) => {
     user.save();
     patient.save();
     return res.render('booking-success',{
+        title: 'Booking-Success',
         doctor:user,
         seat:b,
         slotindex:req.body.slotindex,
@@ -1348,6 +1373,7 @@ module.exports.payment = async (req, res) => {
     patient.save();
 
     return res.render('booking-success',{
+        title: 'Booking-Success',
         doctor:user,
         seat:k1,
         slotindex:req.body.slotindex,
@@ -1371,6 +1397,7 @@ module.exports.bookAppointment = async (req, res) => {
     if (req.isAuthenticated()) {
 
         return res.render('checkout',{
+            title: 'Checkout',
             booked:req.body.booked,
             available:req.body.available,
             slotindex:req.body.slotindex,
@@ -1411,6 +1438,20 @@ module.exports.deleteAccount = async (req, res) => {
     if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
     }
+
+    if(user.type == 'Doctor')
+    {
+        if(user.clinicphoto)
+        {
+            for(let i=0;i<user.clinicphoto.length;i++)
+            {
+                if (fs.existsSync(path.join(__dirname, '..', user.clinicphoto[i]))) {
+                    fs.unlinkSync(path.join(__dirname, '..', user.clinicphoto[i]));
+                    }
+            }
+        }
+      
+    }
     
 
 
@@ -1442,6 +1483,7 @@ module.exports.staffBookAppointment = async (req, res) => {
     if (req.isAuthenticated()) {
 
         return res.render('staff-checkout',{
+            title: 'Checkout',
             booked:req.body.booked,
             available:req.body.available,
             slotindex:req.body.slotindex,
@@ -1543,6 +1585,7 @@ module.exports.offlinePay = async (req, res) => {
         console.log(req.body.date)
           return res.render('staff-booking-success',{
               doctor:user,
+              title: 'Booking-Success',
               seat:b,
               slotindex:req.body.slotindex,
               dayindex:req.body.dayindex,
@@ -1600,6 +1643,7 @@ module.exports.offlinePay = async (req, res) => {
         
           return res.render('staff-booking-success',{
               doctor:user,
+              title: 'Booking-Success',
               seat:k1,
               slotindex:req.body.slotindex,
               dayindex:req.body.dayindex,
@@ -1894,8 +1938,10 @@ module.exports.uploadId = async function(req, res) {
                 user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
 
             } else {
+                if(fs.existsSync(path.join(__dirname, '..', user.avatar))){
 
                 fs.unlinkSync(path.join(__dirname, '..', user.idproof));
+                }
                 user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
             }
         }
@@ -1919,12 +1965,13 @@ module.exports.uploadIdProof = async function(req, res) {
         user.idproofname = req.body.idproofname;
         if (req.files['avatar']) {
             if (!user.idproof) {
-                console.log('hii');
+               
                 user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
 
             } else {
-                console.log('hello');
+                if(fs.existsSync(path.join(__dirname, '..', user.avatar))){
                 fs.unlinkSync(path.join(__dirname, '..', user.idproof));
+                }
                 user.idproof = User.avatarPath + '/' + req.files['avatar'][0].filename;
             }
         }
@@ -1950,8 +1997,10 @@ module.exports.uploadDegree = async function(req, res) {
             if (!user.degreephoto) {
                 user.degreephoto = User.avatarPath + '/' + req.files['avatar'][0].filename;
             } else {
-
+                
+                if(fs.existsSync(path.join(__dirname, '..', user.avatar))){
                 fs.unlinkSync(path.join(__dirname, '..', user.degreephoto));
+                }
                 user.degreephoto = User.avatarPath + '/' + req.files['avatar'][0].filename;
             }
         }
@@ -1971,6 +2020,24 @@ module.exports.acceptAgreement = async(req, res) => {
     user.step3 = true;
     user.save();
     return res.redirect('/steps');
+}
+
+module.exports.changeBankAccount = async(req, res) => {
+    let user = await User.findById(req.user.id);
+   
+    if(req.body.accountnumber == req.body.reaccountnumber)
+    {
+    user.account_change = true;
+    user.approve_account_change = false;
+    user.new_bank = req.body;
+    user.save();
+    req.flash('success','Account change requested');
+    return res.redirect('back');
+    }
+    else{
+        req.flash('error','Account number donot match!')
+        return res.redirect('back');
+    }
 }
 
 
@@ -2053,14 +2120,21 @@ module.exports.profileUpdate = async function(req, res) {
                 if (!user.avatar) {
                     user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 } else {
+                    if(fs.existsSync(path.join(__dirname, '..', user.avatar))){
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                   
+                    }
+                   
                     user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                   
                 }
             }
 
             const rand = Math.floor((Math.random() * 100) + 54); 
             user.emailkey = rand;
+            if(req.body.email != '')
+            {
             if(!user.emailverify)
             {
                 console.log('sent');
@@ -2076,6 +2150,7 @@ module.exports.profileUpdate = async function(req, res) {
                 user.email = req.body.email;
                 user.emailverify = false;
             }
+        }
         
 
             user.save();
@@ -2223,10 +2298,12 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                 if (!user.avatar) {
                     user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 } else {
+                    if(fs.existsSync(path.join(__dirname, '..', user.avatar))){
 
                     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
                 }
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+            }
             }
             if (req.files['clinicphoto']) {
                 for (let i = 0; i < req.files['clinicphoto'].length; i++) {

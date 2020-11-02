@@ -36,6 +36,7 @@ router.post('/verify-payment',userController.verifyPayment);
 router.get('/verify-email',userController.verifyEmail);
 router.post('/payments/refund',userController.refund)
 router.post('/search-doctor',userController.searchDoctor);
+router.post('/change-bank-account',userController.changeBankAccount);
 router.post('/set-booking-fee', userController.setBookingFee);
 router.post('/staff-set-booking-fee', userController.staffSetBookingFee);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);

@@ -8,8 +8,10 @@ const emailVerification = require('../mailers/email-otp');
 const Consult = require('../models/consult');
 
 
+
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
+   
     if (req.isAuthenticated()) {
         let patient = await User.findById(req.user.id).populate({
             path: 'notification',
@@ -248,6 +250,12 @@ module.exports.comingSoon = (req, res) => {
     })
 }
 
+module.exports.changeBankAccount = (req, res) => {
+    return res.render('change-bank-account', {
+        title: 'Change Bank Acoount'
+    })
+}
+
 
 module.exports.deleteAccount = (req, res) => {
     return res.render('delete-acount', {
@@ -330,6 +338,11 @@ module.exports.editPrescription = (req, res) => {
 module.exports.emailVerified = (req, res) => {
     return res.render('email-verify-success', {
         title: 'Email Verified'
+    })
+}
+module.exports.emailNotVerified = (req, res) => {
+    return res.render('email-not-verified', {
+        title: 'Email Not Verified'
     })
 }
 module.exports.establishment = (req, res) => {
@@ -509,7 +522,7 @@ module.exports.patientDashboard = async(req, res) => {
 
     });
     return res.render('my-appointments', {
-        title: 'user Dashboard',
+        title: 'My appointments',
         user: user,
         alldoctors: doctors
     })
@@ -1005,6 +1018,16 @@ module.exports.staffBooking = async(req, res) => {
             }
         }
     }
+    var todayd = new Date();
+    for(temp of user1.tracked)
+    {
+        if(todayd > temp.createdAt)
+        {
+            user1.tracked.pull(temp._id);
+        }
+    }
+
+    user1.save()
 
 
     doctor.save();

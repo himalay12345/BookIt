@@ -17,7 +17,9 @@
         <link rel="stylesheet" href="/css/font-awesome.min.css">
 		
 		<!-- Main CSS -->
-        <link rel="stylesheet" href="/css/style1.css">
+		<link rel="stylesheet" href="/css/style1.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 		
 		<!--[if lt IE 9]>
 			<script src="/js/html5shiv.min.js"></script>
@@ -27,7 +29,7 @@
     <body>
 	
 		<!-- Main Wrapper -->
-        <div class="main-wrapper login-body">
+        <div class="main-wrapper login-body" style="padding-top: 40px;">
             <div class="login-wrapper">
             	<div class="container">
                 	<div class="loginbox">
@@ -40,18 +42,34 @@
 								<p class="account-subtitle">Access to our dashboard</p>
 								
 								<!-- Form -->
-								<form action="https://dreamguys.co.in/demo/doccure/admin/login.html">
+								<form action="/admin/create-account" method="POST">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Name">
+										<input class="form-control" type="text" name="name" placeholder="Name">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Email">
+										<input class="form-control" type="text" name="phone" value="<%=phone%>" placeholder="Phone">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Password">
+										<input class="form-control" type="text" name="email"  placeholder="Email">
+									</div>
+									<%if(count>=1){%>
+										<div class="form-group">
+											<input class="form-control" type="text" name="master_password" placeholder="Enter Master Password">
+											<input type="hidden" name="flag" value="true">
+										</div>
+									<%}else{%>
+										<div class="form-group">
+											<input class="form-control" type="text" name="master_password" placeholder="Set Master Password">
+											<input type="hidden" name="flag" value="false">
+										</div>
+
+									<%}%>
+									<input type="hidden" name="type" value="<%=type%>">
+									<div class="form-group">
+										<input class="form-control" type="text" name="password" placeholder="Password">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="Confirm Password">
+										<input class="form-control" type="text" name="cpassword" placeholder="Confirm Password">
 									</div>
 									<div class="form-group mb-0">
 										<button class="btn btn-primary btn-block" type="submit">Register</button>
@@ -65,10 +83,10 @@
 								</div>
 								
 								<!-- Social Login -->
-								<div class="social-login">
+								<!-- <div class="social-login">
 									<span>Register with</span>
 									<a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google"></i></a>
-								</div>
+								</div> -->
 								<!-- /Social Login -->
 								
 								<div class="text-center dont-have">Already have an account? <a href="/admin/login">Login</a></div>
@@ -89,6 +107,26 @@
 		
 		<!-- Custom JS -->
 		<script src="/js/script1.js"></script>
+		 <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
 		
     </body>
 

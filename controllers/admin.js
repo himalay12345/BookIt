@@ -1,8 +1,13 @@
 const User = require('../models/user');
+const Admin = require('../models/admin');
 const Test = require('../models/test');
 const Consult = require('../models/consult');
 const fs = require('fs');
 const path = require('path');
+const accountChangeAlert = require('../mailers/account-change');
+const serviceStartAlert = require('../mailers/service-start');
+const config = require('../config/twilio');
+const client = require('twilio')(config.accountSID, config.authToken);
 
 module.exports.appointmentList = (req, res) => {
     return res.render('a-appointment-list', {
@@ -28,6 +33,13 @@ module.exports.applicationRequest = async(req, res) => {
     let user = await User.find({ step4: true });
     return res.render('a-application-request', {
         title: 'Application Request',
+        user: user
+    })
+}
+module.exports.accountChange = async(req, res) => {
+    let user = await User.find({ account_change: true });
+    return res.render('a-account-change', {
+        title: 'Account Change Request',
         user: user
     })
 }
@@ -204,6 +216,56 @@ module.exports.approveDocuments = async(req, res) => {
     }
 }
 
+
+module.exports.approveRequestedBank = async(req, res) => {
+    let users = await User.findById(req.body.id);
+    let user = await User.find({ account_change: true });
+
+    if (req.body.accountid == req.body.reaccountid) {
+        users.accountid = req.body.accountid;
+        users.bank = {
+            accountholdername : req.body.accountholdername,
+            bankname : req.body.bankname,
+            accountnumber : req.body.accountnumber,
+            ifsccode : req.body.ifsccode
+        }
+        users.approve_account_change = true;
+        users.account_change = false;
+        users.save();
+
+        if(users.phone)
+        {
+            client.messages
+            .create({
+               body: 'Hii Dr.'+users.name+'! Your request of bank account change in doccure is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable http://localhost:4000/booking-service',
+               from: '+12019755459',
+               statusCallback: 'http://postb.in/1234abcd',
+               to: '+91'+users.phone
+             })
+            .then(message => console.log(message.sid));
+        }
+
+        if(users.email)
+        {
+        accountChangeAlert.newAlert(user,users.email);
+        }
+       
+       
+            return res.render('a-change-profile', {
+                title: 'Profile',
+                user: users
+            })
+        }
+    else {
+        req.flash('error', 'AccountId Donot match');
+        return res.render('a-profile', {
+            title: 'Profile',
+            user: users
+        })
+    }
+
+}
+
 module.exports.approveBank = async(req, res) => {
     let users = await User.findById(req.body.id);
     let user = await User.find({ step4: true });
@@ -214,6 +276,22 @@ module.exports.approveBank = async(req, res) => {
         users.booking_service = true;
         users.save();
         if (users.approve1 == true) {
+            if(users.phone)
+            {
+                client.messages
+                .create({
+                   body: 'Hii Dr.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Doccure. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link http://localhost:4000/doctor-dashboard',
+                   from: '+12019755459',
+                   statusCallback: 'http://postb.in/1234abcd',
+                   to: '+91'+users.phone
+                 })
+                .then(message => console.log(message.sid));
+            }
+    
+            if(users.email)
+            {
+            serviceStartAlert.newAlert(user,users.email);
+            }
             return res.render('a-application-request', {
                 title: 'Application Request',
                 user: user
@@ -358,6 +436,22 @@ module.exports.profile = async(req, res) => {
         user: user
     })
 }
+
+
+module.exports.phoneLogin = async(req, res) => {
+    
+    return res.render('a-phone-login', {
+        title: 'Phone Login'
+    })
+}
+
+module.exports.changeProfile = async(req, res) => {
+    let user = await User.findById(req.query.id);
+    return res.render('a-change-profile', {
+        title: 'Profile',
+        user: user
+    })
+}
 module.exports.register = (req, res) => {
     return res.render('a-register', {
         title: 'Register'
@@ -387,4 +481,145 @@ module.exports.transactionsList = (req, res) => {
     return res.render('a-transactions-list', {
         title: 'Transactions List'
     })
+}
+
+module.exports.createAccount = async (req, res) => {
+    let admins = await Admin.find({});
+    let count = admins.length;
+    if(req.body.flag == 'false')
+    {
+        if(req.body.password == req.body.cpassword)
+        {
+            Admin.create({
+                name:req.body.name,
+                phone:req.body.phone,
+                email:req.body.email,
+                password:req.body.password,
+                master_password:req.body.master_password,
+                root_user:true
+            });
+            req.flash('success','Account Created Successfully');
+            return res.redirect('/admin/login');
+        }
+
+        else{
+            req.flash('error','Password Donot Match')
+            return res.render('a-register', {
+                title: 'Register',
+                phone: req.body.phone,
+                type: req.body.type,
+                count:count
+            });
+        }
+    }
+
+    else{
+        let admin = await Admin.findOne({root_user:true});
+        if(req.body.master_password == admin.master_password)
+        {
+            if(req.body.password == req.body.cpassword)
+            {
+                Admin.create({
+                    name:req.body.name,
+                    email:req.body.email,
+                    phone:req.body.phone,
+                    password:req.body.password
+                });
+
+                req.flash('success','Account Created Successfully');
+                return res.redirect('/admin/login');
+            }
+
+            else{
+                req.flash('error','Password Donot Match')
+                return res.render('a-register', {
+                    title: 'Register',
+                    phone: req.body.phone,
+                    type: req.body.type,
+                    count:count
+                });
+            }
+        }
+
+        else{
+            req.flash('error','Wrong Master Password')
+            return res.render('a-register', {
+                title: 'Register',
+                phone: req.body.phone,
+                type: req.body.type,
+                count:count
+            });
+        }
+    }
+}
+
+
+module.exports.signUp = async(req, res) => {
+
+    let admins = await Admin.find({});
+    let count = admins.length;
+
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
+
+        if (data.status == 'approved') {
+            return res.render('a-register', {
+                title: 'Register',
+                phone: req.body.phone,
+                type: req.body.type,
+                count:count
+            });
+
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('a-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                type: req.body.type
+            })
+
+        }
+
+    
+
+
+}
+
+module.exports.verify = async(req, res) => {
+  let user = await Admin.findOne({ phone: req.body.phone });
+
+            if (user) {
+                req.flash('error', 'Account already linked with this mobile number');
+                return res.redirect('back');
+            } else {
+
+                client
+                    .verify
+                    .services(config.serviceID)
+                    .verifications
+                    .create({
+                        to: `+91${req.body.phone}`,
+                        channel: req.query.service
+                    }).then((data) => {
+                        // console.log(data);
+                        return res.render('a-phone-verify', {
+                            title: 'Phone verification',
+                            phone: req.body.phone,
+                            type: req.body.type
+
+                        });
+                    });
+
+            }
+        
+
+
+ 
 }

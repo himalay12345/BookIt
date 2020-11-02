@@ -7763,6 +7763,10 @@ html.menu-opened body {
         margin-top: 12px !important;
         font-family: unset !important;
     }
+
+    #noa{
+        margin-left: 0px !important;
+    }
     
     .price {
         padding-left: 18px;

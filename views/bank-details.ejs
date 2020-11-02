@@ -39,361 +39,11 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-        <header class="header">
-            <nav class="navbar navbar-expand-lg header-nav">
-                <div id="stylenavbar">
-                <div class="navbar-header">
-                    <a id="mobile_btn" href="javascript:void(0);">
-                        <span class="bar-icon">
-								<span></span>
-                        <span></span>
-                        <span></span>
-                        </span>
-                    </a>
-                    <a href="/" class="navbar-brand logo">
-                        <img src="/img/logo.png" class="img-fluid" alt="Logo">
-                    </a>
-
-                </div>
-                <div class="main-menu-wrapper">
-                    <div class="menu-header">
-                        <a href="/" class="menu-logo">
-                            <img src="/img/logo.png" class="img-fluid" alt="Logo">
-                        </a>
-                        <a id="menu_close" class="menu-close" href="javascript:void(0);">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </div>
-                    <ul class="main-nav">
-                        <li class="active" style="display: none;">
-                            <a href="index" style="font-size: 1.5rem;">Home</a>
-                            
-                        </li>
-                        <li class="mdlist">
-                            <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
-                            <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
-                        </li>
-
-                        <li class="smlist" style="display: none;">
-                            <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 15px;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
-                        </li>
-                        <li class="smlist" style="display: none;">
-                            <a><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
-                        </li>
-                        <li class="smlist" style="display: none;">
-                            <a><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
-                        </li>
-
-                        <li class="mdlist">
-                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Consult</a>
-                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Consult with best doctors</a>
-                        </li>
-                        <li class="mdlist">
-                            <a href="#" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Diagonistics</a>
-                            <a href="#" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book tests and checkups</a>
-                        </li>
-                       
-
-
-
-                        <li class="has-submenu" style="display: none;">
-                            <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
-                                <li><a href="/voice-call">Voice Call</a></li>
-                                <li><a href="/video-call">Video Call</a></li>
-                                <li><a href="/consult">consult</a></li>
-                                <li><a href="/search">Search Doctors</a></li>
-                                <li><a href="/calendar">Calendar</a></li>
-                                <li><a href="/components">Components</a></li>
-                                <li class="has-submenu">
-                                    <a href="invoices">Invoices</a>
-                                    <ul class="submenu">
-                                        <li><a href="/invoices">Invoices</a></li>
-                                        <li><a href="/invoice-view">Invoice View</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="/blank-page">Starter Page</a></li>
-                                <li><a href="/login">Login</a></li>
-                                <li><a href="/register">Register</a></li>
-                                <li><a href="/forgot-password">Forgot Password</a></li>
-                            </ul>
-                        </li>
-
-                        <%if(locals.user){%>
-
-
-                            <%}else{%>
-                                <li class="login-link">
-                                    <a href="/login">Login / Signup</a>
-                                </li>
-                                <%}%>
-                    </ul>
-                </div>
-                <ul class="nav header-navbar-rht">
-                    <li class="nav-item contact-item">
-                        <div class="header-contact-img">
-                            <i class="far fa-hospital"></i>
-                        </div>
-                        <div class="header-contact-detail">
-                            <p class="contact-header">Contact</p>
-                            <p class="contact-info-header"> +1 315 369 5943</p>
-                        </div>
-                    </li>
-                    <%if(locals.user){%>
-
-                        <%}else{%>
-                            <li class="nav-item">
-                                <a class="nav-link header-login" href="/login">Login </a>
-                            </li>
-                            <%}%>
-                </ul>
-                <%if(locals.user){%>
-                    <ul class="nav user-menu mt-md-3">
-
-                        <!-- Notifications -->
-                        <li class="nav-item dropdown noti-dropdown bell">
-                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                <i class="far fa-bell" style="color: black; "></i> <span class="badge badge-pill">1</span>
-                            </a>
-                            <div class="dropdown-menu notifications">
-                                <div class="topnav-dropdown-header">
-                                    <span class="notification-title">Notifications</span>
-                                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-                                </div>
-                                <div class="noti-content">
-                                    <ul class="notification-list">
-                                        <%if(locals.user.approve == true){%>
-
-                                            <li class="notification-message">
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
-                                                    </span>
-                                                        <div class="media-body">
-                                                            <a href="/doctor-terms-and-condition">
-                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
-                                                                </p>
-                                                            </a>
-                                                            <p class="noti-time"><span class="notification-time"></span></p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-message">
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
-                                                    </span>
-                                                        <div class="media-body">
-                                                            <a href="/doctor-terms-and-condition">
-                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
-                                                                </p>
-                                                            </a>
-                                                            <p class="noti-time"><span class="notification-time"></span></p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-message">
-                                                <a href="#">
-                                                    <div class="media">
-                                                        <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>">
-                                                    </span>
-                                                        <div class="media-body">
-                                                            <a href="/doctor-terms-and-condition">
-                                                                <p class="noti-details"><span class="noti-title"></span><%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
-                                                                </p>
-                                                            </a>
-                                                            <p class="noti-time"><span class="notification-time"></span></p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <%}%>
-                                                <!-- <li class="notification-message">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient1.jpg">
-                                                    </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
-                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient2.jpg">
-                                                    </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $215 for his <span class="noti-title">appointment</span></p>
-                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="notification-message">
-                                        <a href="#">
-                                            <div class="media">
-                                                <span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="//img/patients/patient3.jpg">
-                                                    </span>
-                                                <div class="media-body">
-                                                    <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
-                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li> -->
-                                    </ul>
-                                </div>
-                                <div class="topnav-dropdown-footer">
-                                    <a href="#">View all Notifications</a>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- /Notifications -->
-
-                        <!-- User Menu -->
-                        <%if(locals.user.type == 'Doctor'){%>
-                            <li class="nav-item dropdown has-arrow">
-                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" width="31" alt="Ryan Taylor"></span>
-                                </a>
-                                <div class="dropdown-menu profile-drop">
-                                    <div class="user-header">
-                                        <div class="avatar avatar-sm">
-                                            <img src="<%=locals.user.avatar%>" onerror='this.src="/img/doctors/doctor-01.jpg"' alt="User Image" class="avatar-img rounded-circle">
-                                        </div>
-                                        <div class="user-text">
-                                            <h6>Dr.
-                                                <%=locals.user.name%>
-                                            </h6>
-                                            <p class="text-muted mb-0">Doctor</p>
-                                        </div>
-                                    </div>
-                                    <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
-                                    <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                    <a class="dropdown-item" href="/chat">Messages</a>
-                                    <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
-                                    <a class="dropdown-item" href="/appointments">Appointments</a>
-                                    <a class="dropdown-item" href="/my-patients">My Patients</a>
-                                    <a class="dropdown-item" href="/invoices">Invoices</a>
-                                    <a class="dropdown-item" href="/review">Review</a>
-                                    
-
-                                    <a class="dropdown-item" href="/settings">Settings</a>
-                                    <a class="dropdown-item" href="/user/logout">Logout</a>
-                                </div>
-                            </li>
-                            <%}%>
-                                <%if(locals.user.type == 'Patient'){%>
-                                    <li class="nav-item dropdown has-arrow">
-                                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                            <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/doctors/doctor-01.jpg"' width="31" alt="Ryan Taylor"></span>
-                                        </a>
-                                        <div class="dropdown-menu profile-drop">
-                                            <div class="user-header">
-                                                <div class="avatar avatar-sm">
-                                                    <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/doctors/doctor-01.jpg"' class="avatar-img rounded-circle">
-                                                </div>
-                                                <div class="user-text">
-                                                    <h6>
-                                                        <%=locals.user.name%>
-                                                    </h6>
-                                                    <p class="text-muted mb-0">Patient</p>
-                                                </div>
-                                            </div>
-
-                                            <a class="dropdown-item" href="/profile-settings">My Profile</a>
-                                            <a class="dropdown-item" href="/patient-dashboard">My Dashboard</a>
-                                            <a class="dropdown-item" href="/prescription">My Prescriptions</a>
-                                            <a class="dropdown-item" href="/medical-records">My Medical records</a>
-                                            <a class="dropdown-item" href="/my-billing">My Billings</a>
-                                            <a class="dropdown-item" href="/favourites">My Favourites</a>
-                                            <a class="dropdown-item" href="/other-patients">Other Patient Appointment</a>
-                                            <a class="dropdown-item" href="/chat">Messages</a>
-                                         
-                                            <a class="dropdown-item" href="/settings">Settings</a>
-                                            <a class="dropdown-item" href="/user/logout">Logout</a>
-                                        </div>
-                                    </li>
-                                    <%}%>
-
-                                        <!-- /User Menu -->
-
-                    </ul>
-                    <%}%>
-
-                        <!-- <%if(locals.user){%>
-                    <%if(locals.user.type == 'Doctor'){%>
-                        <div class="hideinphone" style="margin-left: 25px;">
-                            <ul class="main-nav amain-nav">
-
-                                        <li class="has-submenu ahas-submenu">
-                                            <a href="#">
-                                                <span class="user-img">
-                                <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="/img/profile.png" width="31" alt="Ryan Taylor">
-                            </span>
-                                        <i class="fas fa-chevron-down"></i>
-                                    </a>
-
-                                    <ul class="submenu asubmenun phoneul">
-                                        <li><a href="/doctor-dashboard">My Dashboard</a></li>
-                                        <li><a href="/appointments">Appointments</a></li>
-                                        <li><a href="/schedule-timings">Schedule Timing</a></li>
-                                        <li><a href="/chat-doctor">Chat</a></li>
-                                        
-                                        <li><a href="/doctor-profile-settings">Profile Settings</a></li>
-                                        
-                                        <li><a href="/user/logout">Logout</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    <%}%>
-                <%if(locals.user.type == 'Patient'){%>
-                    <div class="main-menu-wrapper hideinphone" style="margin-left: 25px; display: none;">
-                        <ul class="main-nav amain-nav">
-                            <li class="has-submenu ahas-submenu">
-                                <a href="#">
-                                    <span class="user-img">
-                        <img class="rounded-circle" src="<%=locals.user.avatar%>" onerror=this.src="//img/profile.png" width="31" alt="Ryan Taylor">
-                    </span>
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-
-                                <ul class="submenu asubmenu">
-                                    <li><a href="/search">Search Doctor</a></li>
-                                    <li><a href="/booking">Booking</a></li>
-                                    <li><a href="/checkout">Checkout</a></li>
-                                    <li><a href="/booking-success">Booking Success</a></li>
-                                    <li><a href="/patient-dashboard">My Dashboard</a></li>
-                                    <li><a href="/favourites">My Favourites</a></li>
-                                    <li><a href="/chat">Messages</a></li>
-                                    <li><a href="/profile-settings">Profile Settings</a></li>
-                                    <li><a href="/change-password">Change Password</a></li>
-                                    <li><a href="/user/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <%}%>
-                <%}%> -->
-                </div>
-            </nav>
-        </header>
+    
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar paddingt">
+        <div class="breadcrumb-bar paddingt" style="padding-top: 40px !important;">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -462,12 +112,14 @@
                     </div>
 
                     <div class="col-md-10 col-lg-8 col-xl-9">
+                    
                         
                                         <form action="/user/bank-details" method="POST">
                                             <!-- Basic Information -->
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h4 class="card-title">Bank Details</h4>
+                                                    <a href="/change-bank-account" style="color: blue;margin-bottom: 20px;display: block;"><i class="fas fa fa-exclamation-circle" style="color: red;margin-right: 10px;"></i>Change Bank Account</a>
                                                     <div class="row form-row">
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
@@ -475,192 +127,282 @@
                                                                 <!-- <input type="text" placeholder="Enter the Bank Name" name="bankname" value="<%=locals.user.bank.bankname%>" class="form-control"> -->
                                                                 <select name="bankname" class="form-control" readonly>
                                                                     <option selected="selected" value="0">--Select --</option>
-                                                                    <%if(locals.user.bank.bankname == 'ALLAHABAD BANK'){%>
-                                                                        <option value="ALLAHABAD BANK" selected>ALLAHABAD BANK </option>
-                                                                    <%}else{%>
-                                                                        <option value="ALLAHABAD BANK">ALLAHABAD BANK </option>
-                                                                    <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'ANDHRA BANK'){%>
-                                                                        <option value="ANDHRA BANK" selected>ANDHRA BANK </option>
-                                                                    <%}else{%>
-                                                                        <option value="ANDHRA BANK">ANDHRA BANK </option>
-                                                                    <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'AXIS BANK'){%>
-                                                                        <option value="AXIS BANK" selected>AXIS BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="AXIS BANK">AXIS BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'STATE BANK OF INDIA'){%>
-                                                                        <option value="STATE BANK OF INDIA" selected>STATE BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="STATE BANK OF INDIA">STATE BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'BANK OF BARODA'){%>
-                                                                        <option value="BANK OF BARODA" selected>BANK OF BARODA</option>
-                                                                        <%}else{%>
-                                                                            <option value="BANK OF BARODA">BANK OF BARODA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'UCO BANK'){%>
-                                                                        <option value="UCO BANK" selected>UCO BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="UCO BANK">UCO BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'UNION BANK OF INDIA'){%>
-                                                                        <option value="UNION BANK OF INDIA" selected>UNION BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="UNION BANK OF INDIA">UNION BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'BANK OF INDIA'){%>
-                                                                        <option value="BANK OF INDIA" selected>BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="BANK OF INDIA">BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'BANDHAN BANK LIMITED'){%>
-                                                                        <option value="BANDHAN BANK LIMITED" selected>BANDHAN BANK LIMITED</option>
-                                                                        <%}else{%>
-                                                                            <option value="BANDHAN BANK LIMITED">BANDHAN BANK LIMITED</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'CANARA BANK'){%>
-                                                                        <option value="CANARA BANK" selected>CANARA BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="CANARA BANK">CANARA BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'GRAMIN VIKASH BANK'){%>
-                                                                        <option value="GRAMIN VIKASH BANK" selected>GRAMIN VIKASH BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="GRAMIN VIKASH BANK">GRAMIN VIKASH BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'CORPORATION BANK'){%>
-                                                                        <option value="CORPORATION BANK" selected>CORPORATION BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="CORPORATION BANK">CORPORATION BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'INDIAN BANK'){%>
-                                                                        <option value="INDIAN BANK" selected>INDIAN BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="INDIAN BANK">INDIAN BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'INDIAN OVERSEAS BANK'){%>
-                                                                        <option value="INDIAN OVERSEAS BANK" selected>INDIAN OVERSEAS BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="INDIAN OVERSEAS BANK">INDIAN OVERSEAS BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'ORIENTAL BANK OF COMMERCE'){%>
-                                                                        <option value="ORIENTAL BANK OF COMMERCE" selected>ORIENTAL BANK OF COMMERCE</option>
-                                                                        <%}else{%>
-                                                                            <option value="ORIENTAL BANK OF COMMERCE">ORIENTAL BANK OF COMMERCE</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'PUNJAB AND SIND BANK'){%>
-                                                                        <option value="PUNJAB AND SIND BANK" selected>PUNJAB AND SIND BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="PUNJAB AND SIND BANK">PUNJAB AND SIND BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'PUNJAB NATIONAL BANK'){%>
-                                                                        <option value="PUNJAB NATIONAL BANK" selected>PUNJAB NATIONAL BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="PUNJAB NATIONAL BANK">PUNJAB NATIONAL BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'RESERVE BANK OF INDIA'){%>
-                                                                        <option value="RESERVE BANK OF INDIA" selected>RESERVE BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="RESERVE BANK OF INDIA">RESERVE BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'SOUTH INDIAN BANK'){%>
-                                                                        <option value="SOUTH INDIAN BANK" selected>SOUTH INDIAN BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="SOUTH INDIAN BANK">SOUTH INDIAN BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'UNITED BANK OF INDIA'){%>
-                                                                        <option value="UNITED BANK OF INDIA" selected>UNITED BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="UNITED BANK OF INDIA">UNITED BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'CENTRAL BANK OF INDIA'){%>
-                                                                        <option value="CENTRAL BANK OF INDIA" selected>CENTRAL BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="CENTRAL BANK OF INDIA">CENTRAL BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'VIJAYA BANK'){%>
-                                                                        <option value="VIJAYA BANK" selected>VIJAYA BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="VIJAYA BANK">VIJAYA BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'DENA BANK'){%>
-                                                                        <option value="DENA BANK" selected>DENA BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="DENA BANK">DENA BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'BHARATIYA MAHILA BANK LIMITED'){%>
-                                                                        <option value="BHARATIYA MAHILA BANK LIMITED" selected>BHARATIYA MAHILA BANK LIMITED</option>
-                                                                        <%}else{%>
-                                                                            <option value="BHARATIYA MAHILA BANK LIMITED">BHARATIYA MAHILA BANK LIMITED</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'FEDERAL BANK LTD'){%>
-                                                                        <option value="FEDERAL BANK LTD" selected>FEDERAL BANK LTD </option>
-                                                                        <%}else{%>
-                                                                            <option value="FEDERAL BANK LTD">FEDERAL BANK LTD </option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'HDFC BANK LTD'){%>
-                                                                        <option value="HDFC BANK LTD" selected>HDFC BANK LTD</option>
-                                                                        <%}else{%>
-                                                                            <option value="HDFC BANK LTD">HDFC BANK LTD</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'ICICI BANK LTD'){%>
-                                                                        <option value="ICICI BANK LTD" selected>ICICI BANK LTD</option>
-                                                                        <%}else{%>
-                                                                            <option value="ICICI BANK LTD">ICICI BANK LTD</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'IDBI BANK LTD'){%>
-                                                                        <option value="IDBI BANK LTD" selected>IDBI BANK LTD</option>
-                                                                        <%}else{%>
-                                                                            <option value="IDBI BANK LTD">IDBI BANK LTD</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'PAYTM BANK'){%>
-                                                                        <option value="PAYTM BANK" selected>PAYTM BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="PAYTM BANK">PAYTM BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'FINO PAYMENT BANK'){%>
-                                                                        <option value="FINO PAYMENT BANK" selected>FINO PAYMENT BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="FINO PAYMENT BANK">FINO PAYMENT BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'INDUSIND BANK LTD'){%>
-                                                                        <option value="INDUSIND BANK LTD" selected>INDUSIND BANK LTD</option>
-                                                                        <%}else{%>
-                                                                            <option value="INDUSIND BANK LTD">INDUSIND BANK LTD</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'KARNATAKA BANK LTD'){%>
-                                                                        <option value="KARNATAKA BANK LTD" selected>KARNATAKA BANK LTD</option>
-                                                                        <%}else{%>
-                                                                            <option value="KARNATAKA BANK LTD">KARNATAKA BANK LTD</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'KOTAK MAHINDRA BANK'){%>
-                                                                        <option value="KOTAK MAHINDRA BANK" selected>KOTAK MAHINDRA BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="KOTAK MAHINDRA BANK">KOTAK MAHINDRA BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'YES BANK LTD'){%>
-                                                                        <option value="YES BANK LTD" selected>YES BANK LTD</option>
-                                                                        <%}else{%>
-                                                                            <option value="YES BANK LTD">YES BANK LTD</option>
-                                                                            <%}%>
-
-                                                                    <%if(locals.user.bank.bankname == 'SYNDICATE BANK'){%>
-                                                                        <option value="SYNDICATE BANK" selected>SYNDICATE BANK</option>
-                                                                        <%}else{%>
-                                                                            <option value="SYNDICATE BANK">SYNDICATE BANK</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'BANK OF INDIA'){%>
-                                                                        <option value="BANK OF INDIA" selected>BANK OF INDIA</option>
-                                                                        <%}else{%>
-                                                                            <option value="BANK OF INDIA">BANK OF INDIA</option>
-                                                                            <%}%>
-                                                                    <%if(locals.user.bank.bankname == 'BANK OF MAHARASHTRA'){%>
-                                                                        <option value="BANK OF MAHARASHTRA" selected>BANK OF MAHARASHTRA</option>
-                                                                        <%}else{%>
-                                                                            <option value="BANK OF MAHARASHTRA">BANK OF MAHARASHTRA</option>
-                                                                            <%}%>
+                                    
+                                    <%if(locals.user.bank.bankname == 'ALLAHABAD BANK'){%>
+                                    <option value="ALLAHABAD BANK" selected>ALLAHABAD BANK </option>
+                                    <%}else{%>
+                                    <option value="ALLAHABAD BANK">ALLAHABAD BANK </option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'AP MAHESH CO-OPERATIVE URBAN BANK'){%>
+                                    <option value="AP MAHESH CO-OPERATIVE URBAN BANK" selected>AP MAHESH CO-OPERATIVE URBAN BANK </option>
+                                    <%}else{%>
+                                    <option value="AP MAHESH CO-OPERATIVE URBAN BANK">AP MAHESH CO-OPERATIVE URBAN BANK </option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'ABHYUDAYA CO-OPERATIVE BANK'){%>
+                                    <option value="ABHYUDAYA CO-OPERATIVE BANK" selected>ABHYUDAYA CO-OPERATIVE BANK </option>
+                                    <%}else{%>
+                                    <option value="ABHYUDAYA CO-OPERATIVE BANK">ABHYUDAYA CO-OPERATIVE BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'ADARSH CO-OPERATIVE BANK LIMITED'){%>
+                                    <option value="ADARSH CO-OPERATIVE BANK LIMITED" selected>ADARSH CO-OPERATIVE BANK LIMITED </option>
+                                    <%}else{%>
+                                    <option value="ADARSH CO-OPERATIVE BANK LIMITED">ADARSH CO-OPERATIVE BANK LIMITED </option>
+                                    <%}%>
+                                        <%if(locals.user.bank.bankname == 'AHMEDABAD MERCANTILE CO-OPERATIVE BANK'){%>
+                                        <option value="AHMEDABAD MERCANTILE CO-OPERATIVE BANK" selected>AHMEDABAD MERCANTILE CO-OPERATIVE BANK</option>
+                                        <%}else{%>
+                                        <option value="AHMEDABAD MERCANTILE CO-OPERATIVE BANK"> AHMEDABAD MERCANTILE CO-OPERATIVE BANK </option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'AIRTEL PAYMENTS BANK LIMITED'){%>
+                                        <option value="AIRTEL PAYMENTS BANK LIMITED" selected>AIRTEL PAYMENTS BANK LIMITED </option>
+                                        <%}else{%>
+                                        <option value="AIRTEL PAYMENTS BANK LIMITED">AIRTEL PAYMENTS BANK LIMITED </option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'ANDHRA BANK STATE CO-OPERATIVE BANK'){%>
+                                        <option value="ANDHRA BANK STATE CO-OPERATIVE BANK" selected>ANDHRA BANK STATE CO-OPERATIVE BANK </option>
+                                        <%}else{%>
+                                        <option value="ANDHRA BANK STATE CO-OPERATIVE BANK">ANDHRA BANK STATE CO-OPERATIVE BANK </option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'ANDHRA PRADESH STATE CO-OPERATIVE BANK'){%>
+                                        <option value="ANDHRA PRADESH STATE CO-OPERATIVE BANK" selected>ANDHRA PRADESH STATE CO-OPERATIVE BANK </option>
+                                        <%}else{%>
+                                        <option value="ANDHRA BANK">ANDHRA PRADESH STATE CO-OPERATIVE BANK </option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'ANDHRA PRAGATI GRAMEENA BANK'){%>
+                                        <option value="ANDHRA PRAGATI GRAMEENA BANK" selected>ANDHRA PRAGATI GRAMEENA BANK </option>
+                                        <%}else{%>
+                                        <option value="ANDHRA PRAGATI GRAMEENA BANK">ANDHRA PRAGATI GRAMEENA BANK </option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'APNA SAHAKARI BANK'){%>
+                                        <option value="APNA SAHAKARI BANK" selected>APNA SAHAKARI BANK </option>
+                                        <%}else{%>
+                                        <option value="APNA SAHAKARI BANK">APNA SAHAKARI BANK </option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'ASSAM GRAMIN VIKASH BANK'){%>
+                                        <option value="ASSAM GRAMIN VIKASH BANK" selected>ASSAM GRAMIN VIKASH BANK </option>
+                                        <%}else{%>
+                                        <option value="ASSAM GRAMIN VIKASH BANK">ASSAM GRAMIN VIKASH BANK </option>
+                                        <%}%>
+                                    
+                                        <%if(locals.user.bank.bankname == 'AU SMALL FINANCE BANK LIMITED'){%>
+                                        <option value="AU SMALL FINANCE BANK LIMITED" selected>AU SMALL FINANCE BANK LIMITED </option>
+                                        <%}else{%>
+                                        <option value="AU SMALL FINANCE BANK LIMITED">AU SMALL FINANCE BANK LIMITED </option>
+                                        <%}%>
+                                    
+                                    <%if(locals.user.bank.bankname == 'ANDHRA BANK'){%>
+                                    <option value="ANDHRA BANK" selected>ANDHRA BANK </option>
+                                    <%}else{%>
+                                    <option value="ANDHRA BANK">ANDHRA BANK </option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'AXIS BANK'){%>
+                                    <option value="AXIS BANK" selected>AXIS BANK</option>
+                                    <%}else{%>
+                                    <option value="AXIS BANK">AXIS BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'BANASKANTHA DISTRICT CENTRAL CO-OP BANK LTD.'){%>
+                                        <option value="BANASKANTHA DISTRICT CENTRAL CO-OP BANK LTD." selected>BANASKANTHA DISTRICT CENTRAL CO-OP BANK LTD.</option>
+                                        <%}else{%>
+                                        <option value="BANASKANTHA DISTRICT CENTRAL CO-OP BANK LTD.">BANASKANTHA DISTRICT CENTRAL CO-OP BANK LTD.</option>
+                                        <%}%>
+                                        <%if(locals.user.bank.bankname == 'BARODA CENTRAL C0-OP BANK LTD'){%>
+                                            <option value="BARODA CENTRAL C0-OP BANK LTD" selected>BARODA CENTRAL C0-OP BANK LTD</option>
+                                            <%}else{%>
+                                            <option value="BARODA CENTRAL C0-OP BANK LTD">BARODA CENTRAL C0-OP BANK LTD</option>
+                                            <%}%>
+                                            <%if(locals.user.bank.bankname == 'BRODA GUJRAT GRAMIN BANK'){%>
+                                                <option value="BRODA GUJRAT GRAMIN BANK" selected>BRODA GUJRAT GRAMIN BANK</option>
+                                                <%}else{%>
+                                                <option value="BRODA GUJRAT GRAMIN BANK">BRODA GUJRAT GRAMIN BANK</option>
+                                                <%}%>
+                                    
+                                    <%if(locals.user.bank.bankname == 'BRODA RAJASTHAN KSHETRIYA GRAMIN BANK'){%>
+                                    <option value="BRODA RAJASTHAN KSHETRIYA GRAMIN BANK" selected>BRODA RAJASTHAN KSHETRIYA GRAMIN BANK</option>
+                                    <%}else{%>
+                                    <option value="BRODA RAJASTHAN KSHETRIYA GRAMIN BANK">BRODA RAJASTHAN KSHETRIYA GRAMIN BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'BRODA UP GRAMIN BANK'){%>
+                                        <option value="BRODA UP GRAMIN BANK" selected>BRODA UP GRAMIN BANK</option>
+                                        <%}else{%>
+                                        <option value="BRODA UP GRAMIN BANK">BRODA UP GRAMIN BANK</option>
+                                        <%}%>
+                                    
+                                    <%if(locals.user.bank.bankname == 'BANK OF MAHARASHTRA'){%>
+                                    <option value="BANK OF MAHARASHTRA" selected>BANK OF MAHARASHTRA</option>
+                                    <%}else{%>
+                                    <option value="BANK OF MAHARASHTRA">BANK OF MAHARASHTRA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'BANK OF BARODA'){%>
+                                    <option value="BANK OF BARODA" selected>BANK OF BARODA</option>
+                                    <%}else{%>
+                                    <option value="BANK OF BARODA">BANK OF BARODA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'BANK OF INDIA'){%>
+                                    <option value="BANK OF INDIA" selected>BANK OF INDIA</option>
+                                    <%}else{%>
+                                    <option value="BANK OF INDIA">BANK OF INDIA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'BANDHAN BANK'){%>
+                                    <option value="BANDHAN BANK" selected>BANDHAN BANK</option>
+                                    <%}else{%>
+                                    <option value="BANDHAN BANK">BANDHAN BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'BHARATIYA MAHILA BANK LIMITED'){%>
+                                    <option value="BHARATIYA MAHILA BANK LIMITED" selected>BHARATIYA MAHILA BANK LIMITED</option>
+                                    <%}else{%>
+                                    <option value="BHARATIYA MAHILA BANK LIMITED">BHARATIYA MAHILA BANK LIMITED</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'CITIBANK'){%>
+                                        <option value="CITIBANK" selected>CITIBANK</option>
+                                        <%}else{%>
+                                        <option value="CITIBANK">CITIBANK</option>
+                                        <%}%>
+                                    <%if(locals.user.bank.bankname == 'CANARA BANK'){%>
+                                    <option value="CANARA BANK" selected>CANARA BANK</option>
+                                    <%}else{%>
+                                    <option value="CANARA BANK">CANARA BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'CORPORATION BANK'){%>
+                                    <option value="CORPORATION BANK" selected>CORPORATION BANK</option>
+                                    <%}else{%>
+                                    <option value="CORPORATION BANK">CORPORATION BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'CENTRAL BANK OF INDIA'){%>
+                                    <option value="CENTRAL BANK OF INDIA" selected>CENTRAL BANK OF INDIA</option>
+                                    <%}else{%>
+                                    <option value="CENTRAL BANK OF INDIA">CENTRAL BANK OF INDIA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'DENA BANK'){%>
+                                    <option value="DENA BANK" selected>DENA BANK</option>
+                                    <%}else{%>
+                                    <option value="DENA BANK">DENA BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'FEDERAL BANK LTD'){%>
+                                    <option value="FEDERAL BANK LTD" selected>FEDERAL BANK LTD </option>
+                                    <%}else{%>
+                                    <option value="FEDERAL BANK LTD">FEDERAL BANK LTD </option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'FINO PAYMENT BANK'){%>
+                                        <option value="FINO PAYMENT BANK" selected>FINO PAYMENT BANK</option>
+                                        <%}else{%>
+                                            <option value="FINO PAYMENT BANK">FINO PAYMENT BANK</option>
+                                            <%}%>
+                                    
+                                    <%if(locals.user.bank.bankname == 'GRAMIN VIKASH BANK'){%>
+                                    <option value="GRAMIN VIKASH BANK" selected>GRAMIN VIKASH BANK</option>
+                                    <%}else{%>
+                                    <option value="GRAMIN VIKASH BANK">GRAMIN VIKASH BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'HDFC BANK LTD'){%>
+                                        <option value="HDFC BANK LTD" selected>HDFC BANK LTD</option>
+                                        <%}else{%>
+                                            <option value="HDFC BANK LTD">HDFC BANK LTD</option>
+                                            <%}%>
+                                    <%if(locals.user.bank.bankname == 'INDUSIND BANK LTD'){%>
+                                        <option value="INDUSIND BANK LTD" selected>INDUSIND BANK LTD</option>
+                                        <%}else{%>
+                                            <option value="INDUSIND BANK LTD">INDUSIND BANK LTD</option>
+                                            <%}%>
+                                                                                                                                                                    
+                                    <%if(locals.user.bank.bankname == 'INDIAN BANK'){%>
+                                    <option value="INDIAN BANK" selected>INDIAN BANK</option>
+                                    <%}else{%>
+                                    <option value="INDIAN BANK">INDIAN BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'INDIAN OVERSEAS BANK'){%>
+                                    <option value="INDIAN OVERSEAS BANK" selected>INDIAN OVERSEAS BANK</option>
+                                    <%}else{%>
+                                    <option value="INDIAN OVERSEAS BANK">INDIAN OVERSEAS BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'ICICI BANK LTD'){%>
+                                    <option value="ICICI BANK LTD" selected>ICICI BANK LTD</option>
+                                    <%}else{%>
+                                    <option value="ICICI BANK LTD">ICICI BANK LTD</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'IDBI BANK LTD'){%>
+                                    <option value="IDBI BANK LTD" selected>IDBI BANK LTD</option>
+                                    <%}else{%>
+                                    <option value="IDBI BANK LTD">IDBI BANK LTD</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'KARNATAKA BANK LTD'){%>
+                                    <option value="KARNATAKA BANK LTD" selected>KARNATAKA BANK LTD</option>
+                                    <%}else{%>
+                                    <option value="KARNATAKA BANK LTD">KARNATAKA BANK LTD</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'KOTAK MAHINDRA BANK'){%>
+                                    <option value="KOTAK MAHINDRA BANK" selected>KOTAK MAHINDRA BANK</option>
+                                    <%}else{%>
+                                    <option value="KOTAK MAHINDRA BANK">KOTAK MAHINDRA BANK</option>
+                                    <%}%>
+                                    
+                                    <%if(locals.user.bank.bankname == 'ORIENTAL BANK OF COMMERCE'){%>
+                                    <option value="ORIENTAL BANK OF COMMERCE" selected>ORIENTAL BANK OF COMMERCE</option>
+                                    <%}else{%>
+                                    <option value="ORIENTAL BANK OF COMMERCE">ORIENTAL BANK OF COMMERCE</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'PUNJAB AND SIND BANK'){%>
+                                    <option value="PUNJAB AND SIND BANK" selected>PUNJAB AND SIND BANK</option>
+                                    <%}else{%>
+                                    <option value="PUNJAB AND SIND BANK">PUNJAB AND SIND BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'PUNJAB NATIONAL BANK'){%>
+                                    <option value="PUNJAB NATIONAL BANK" selected>PUNJAB NATIONAL BANK</option>
+                                    <%}else{%>
+                                    <option value="PUNJAB NATIONAL BANK">PUNJAB NATIONAL BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'PAYTM BANK'){%>
+                                    <option value="PAYTM BANK" selected>PAYTM BANK</option>
+                                    <%}else{%>
+                                    <option value="PAYTM BANK">PAYTM BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'RESERVE BANK OF INDIA'){%>
+                                    <option value="RESERVE BANK OF INDIA" selected>RESERVE BANK OF INDIA</option>
+                                    <%}else{%>
+                                    <option value="RESERVE BANK OF INDIA">RESERVE BANK OF INDIA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'STATE BANK OF INDIA'){%>
+                                    
+                                    <option value="STATE BANK OF INDIA" selected>STATE BANK OF INDIA</option>
+                                    <%}else{%>
+                                    <option value="STATE BANK OF INDIA">STATE BANK OF INDIA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'SOUTH INDIAN BANK'){%>
+                                    <option value="SOUTH INDIAN BANK" selected>SOUTH INDIAN BANK</option>
+                                    <%}else{%>
+                                    <option value="SOUTH INDIAN BANK">SOUTH INDIAN BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'SYNDICATE BANK'){%>
+                                    <option value="SYNDICATE BANK" selected>SYNDICATE BANK</option>
+                                    <%}else{%>
+                                    <option value="SYNDICATE BANK">SYNDICATE BANK</option>
+                                    <%}%>                
+                                    <%if(locals.user.bank.bankname == 'UCO BANK'){%>
+                                    <option value="UCO BANK" selected>UCO BANK</option>
+                                    <%}else{%>
+                                    <option value="UCO BANK">UCO BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'UNION BANK OF INDIA'){%>
+                                    <option value="UNION BANK OF INDIA" selected>UNION BANK OF INDIA</option>
+                                    <%}else{%>
+                                    <option value="UNION BANK OF INDIA">UNION BANK OF INDIA</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'UNITED BANK OF INDIA'){%>
+                                    <option value="UNITED BANK OF INDIA" selected>UNITED BANK OF INDIA</option>
+                                    <%}else{%>
+                                    <option value="UNITED BANK OF INDIA">UNITED BANK OF INDIA</option>
+                                    <%}%>  
+                                    <%if(locals.user.bank.bankname == 'VIJAYA BANK'){%>
+                                    <option value="VIJAYA BANK" selected>VIJAYA BANK</option>
+                                    <%}else{%>
+                                    <option value="VIJAYA BANK">VIJAYA BANK</option>
+                                    <%}%>
+                                    <%if(locals.user.bank.bankname == 'YES BANK LTD'){%>
+                                    <option value="YES BANK LTD" selected>YES BANK LTD</option>
+                                    <%}else{%>
+                                    <option value="YES BANK LTD">YES BANK LTD</option>
+                                    <%}%>
+                                    
+                                                                  
                                                                   </select>
                                                             </div>
                                                         </div>
@@ -676,16 +418,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="row form-row">
-                                                        <div class="col-sm-12 col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Re-enter Account Number</label>
-                                                                <input type="text" placeholder="Enter your Account Number" name="reaccountnumber" value="<%=locals.user.bank.accountnumber%>" class="form-control" readonly>
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
+                                                
                                                     <div class="row form-row">
                                                         <div class="col-sm-12 col-md-6">
                                                             <div class="form-group">
@@ -724,141 +457,7 @@
             <!-- /Page Content -->
 
             <!-- Footer -->
-            <footer class="footer">
-
-
-                <!-- Footer Top -->
-                <div class="footer-top">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-about">
-                                    <div class="footer-logo">
-                                        <img src="img/footer-logo.png" alt="logo">
-                                    </div>
-                                    <div class="footer-about-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <div class="social-icon">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">For Patients</h2>
-                                    <ul>
-                                        <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                        <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                        <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                        <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">For Doctors</h2>
-                                    <ul>
-                                        <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-                                        <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                        <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                        <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-contact">
-                                    <h2 class="footer-title">Contact Us</h2>
-                                    <div class="footer-contact-info">
-                                        <div class="footer-address">
-                                            <span><i class="fas fa-map-marker-alt"></i></span>
-                                            <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
-                                        </div>
-                                        <p>
-                                            <i class="fas fa-phone-alt"></i> +1 315 369 5943
-                                        </p>
-                                        <p class="mb-0">
-                                            <i class="fas fa-envelope"></i> doccure@example.com
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /Footer Top -->
-
-                <!-- Footer Bottom -->
-                <div class="footer-bottom">
-                    <div class="container-fluid">
-
-                        <!-- Copyright -->
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="copyright-text">
-                                        <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6">
-
-                                    <!-- Copyright Menu -->
-                                    <div class="copyright-menu">
-                                        <ul class="policy-menu">
-                                            <li><a href="/term-condition">Terms and Conditions</a></li>
-                                            <li><a href="/privacy-policy">Policy</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- /Copyright Menu -->
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Copyright -->
-
-                    </div>
-                </div>
-                <!-- /Footer Bottom -->
-
-            </footer>
+            <%-include('footer');%>
             <!-- /Footer -->
 
         </div>

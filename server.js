@@ -1,6 +1,7 @@
 const express = require('express');
 const port = 4000;
 const app = express();
+const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -18,6 +19,7 @@ trackServer.listen(5000);
 console.log('Patient Tracking server is running on port 5000');
 
 
+app.use(expressLayouts);
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

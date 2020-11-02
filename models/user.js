@@ -73,6 +73,13 @@ const userSchema = mongoose.Schema({
     booking_service:{
         type:Boolean
     },
+    account_change:{
+        type:Boolean
+    },
+    approve_account_change:{
+        type:Boolean
+    },
+    
 
     reviews:[{
         rating:{
@@ -411,6 +418,21 @@ const userSchema = mongoose.Schema({
         ifsccode: {
             type: String
         },
+
+    },
+    new_bank:{
+        bankname: {
+            type: String
+        },
+        accountholdername: {
+            type: String
+        },
+        accountnumber: {
+            type: String
+        },
+        ifsccode: {
+            type: String
+        }
 
     },
     terms: {
