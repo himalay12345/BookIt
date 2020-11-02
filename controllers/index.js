@@ -2,6 +2,8 @@ const config = require('../config/twilio');
 const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
 const Test = require('../models/test');
+const Consult = require('../models/consult');
+
 const shortid = require('shortid');
 const Razorpay = require('razorpay');
 const emailVerification = require('../mailers/email-otp');
@@ -9,6 +11,8 @@ const emailVerification = require('../mailers/email-otp');
 
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
+    let consults = await Consult.find({})
+    console.log(consults);
     if (req.isAuthenticated()) {
         let patient = await User.findById(req.user.id).populate({
             path: 'notification',
@@ -21,12 +25,14 @@ module.exports.home = async(req, res) => {
         return res.render('index', {
             title: 'Home',
             doctors: doctors,
+            consults: consults,
             patient: patient
         })
     } else {
         return res.render('index', {
             title: 'Home',
-            doctors: doctors
+            doctors: doctors,
+            consults: consults
         })
     }
 
@@ -759,40 +765,38 @@ module.exports.staffSignup = async(req, res) => {
         }
     }
 
-    if(req.body.designation == 'Staff')
-    {
+    if (req.body.designation == 'Staff') {
         let data = await client
-        .verify
-        .services(config.serviceID)
-        .verificationChecks
-        .create({
-            to: `+91${req.body.phone}`,
-            code: req.body.otp
-        });
-    
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
         console.log(req.body.id);
-    
-    
-    if (data.status == 'approved') {
-        return res.render('set-password', {
-            title: 'Reset Pasword',
-            phone: req.body.phone,
-            id:req.body.id,
-            designation:req.body.designation
-        });
-    
-    } else {
-        req.flash('error', 'Wrong Otp');
+
+
+        if (data.status == 'approved') {
+            return res.render('set-password', {
+                title: 'Reset Pasword',
+                phone: req.body.phone,
+                id: req.body.id,
+                designation: req.body.designation
+            });
+
+        } else {
+            req.flash('error', 'Wrong Otp');
             return res.render('doctor-phone-verify', {
                 title: 'Phone verification',
                 phone: req.body.phone,
-                id:req.body.id,
-                designation:req.body.designation
+                id: req.body.id,
+                designation: req.body.designation
             })
-    
-    }
-    }
-    else{
+
+        }
+    } else {
         let data = await client
             .verify
             .services(config.serviceID)
@@ -941,7 +945,7 @@ module.exports.signUp = async(req, res) => {
 
 }
 
-module.exports.reviews = async (req, res) => {
+module.exports.reviews = async(req, res) => {
     let users = await User.findById(req.user.id).populate({
         path: 'reviews',
         populate: {
@@ -951,7 +955,7 @@ module.exports.reviews = async (req, res) => {
     })
     return res.render('reviews', {
         title: 'Reviews',
-        users:users
+        users: users
     })
 }
 
@@ -970,7 +974,7 @@ module.exports.staffScheduleTimings = async(req, res) => {
     return res.render('staff_schedule_timing', {
         title: 'Schedule Timings',
         user: user,
-        user1:user1
+        user1: user1
     })
 }
 
@@ -1072,11 +1076,9 @@ module.exports.verifyDoctor = async(req, res) => {
 
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var check = re.test(String(req.body.phone).toLowerCase());
-    if(check == true)
-    {
-        let doctor = await User.findOne({email:req.body.phone, type:'Doctor', service:'google',staff_flag:false});
-        if(doctor)
-        {
+    if (check == true) {
+        let doctor = await User.findOne({ email: req.body.phone, type: 'Doctor', service: 'google', staff_flag: false });
+        if (doctor) {
             var key = Math.floor(100000 + Math.random() * 900000);
             emailVerification.newAlert(doctor, key, req.body.phone);
             doctor.emailkey = key;
@@ -1102,17 +1104,13 @@ module.exports.verifyDoctor = async(req, res) => {
         let doctor = await User.findOne({
             phone: req.body.phone,
             type: 'Doctor',
-            staff_flag: false
+            staff_flag: false,
+            service: 'phone'
         });
 
-    else{
-        let doctor = await User.findOne({phone:req.body.phone,
-            type:'Doctor',staff_flag:false,service:'phone'});
-           
-        
-            if(doctor)
-            {
-                client
+
+        if (doctor) {
+            client
                 .verify
                 .services(config.serviceID)
                 .verifications
@@ -1146,49 +1144,46 @@ module.exports.verifyDoctor = async(req, res) => {
 module.exports.verify = async(req, res) => {
 
     if (req.body.type == 'forgot') {
-        let user = await User.findOne({ phone: req.body.phone , service:'phone', type:'Staff'});
+        let user = await User.findOne({ phone: req.body.phone, service: 'phone', type: 'Staff' });
         console.log(user)
         if (!user) {
             req.flash('error', 'No account linked with this phone number.');
             return res.redirect('back');
         } else {
-        console.log(req.body.type)
-        client
-            .verify
-            .services(config.serviceID)
-            .verifications
-            .create({
-                to: `+91${req.body.phone}`,
-                channel: req.query.service
-            }).then((data) => {
+            console.log(req.body.type)
+            client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then((data) => {
 
-                if(req.body.designation == 'Staff')
-                {
-                   
-                   
+                    if (req.body.designation == 'Staff') {
+
+
                         return res.render('doctor-phone-verify', {
-                        title: 'Phone verification',
-                        phone: req.body.phone,
-                        type: req.body.type,
-                        designation:req.body.designation
-    
-                    });
-                
-                }
+                            title: 'Phone verification',
+                            phone: req.body.phone,
+                            type: req.body.type,
+                            designation: req.body.designation
 
-                else{
-                  
-                return res.render('phone-verify', {
-                    title: 'Phone verification',
-                    phone: req.body.phone,
-                    type: req.body.type
+                        });
 
+                    } else {
+
+                        return res.render('phone-verify', {
+                            title: 'Phone verification',
+                            phone: req.body.phone,
+                            type: req.body.type
+
+                        });
+
+                    }
                 });
-            
-            }
-            });
         }
-        
+
 
     } else {
         if (req.body.type == 'book') {
