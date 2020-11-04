@@ -48,11 +48,11 @@ module.exports.addBilling = (req, res) => {
 module.exports.consult = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
     let consults = await Consult.find({});
- 
+
     return res.render('consult', {
         title: 'Consult',
         doctors: doctors,
-        consults:consults
+        consults: consults
     })
 }
 module.exports.addPrescription = (req, res) => {
@@ -1040,10 +1040,8 @@ module.exports.staffBooking = async(req, res) => {
         }
     }
     var todayd = new Date();
-    for(temp of user1.tracked)
-    {
-        if(todayd > temp.createdAt)
-        {
+    for (temp of user1.tracked) {
+        if (todayd > temp.createdAt) {
             user1.tracked.pull(temp._id);
         }
     }
