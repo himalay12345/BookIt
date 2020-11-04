@@ -71,7 +71,7 @@
             <ul class="nav user-menu">
 
                 <!-- Notifications -->
-                <li class="nav-item dropdown noti-dropdown">
+                <!-- <li class="nav-item dropdown noti-dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
                     </a>
@@ -140,10 +140,12 @@
                             <a href="#">View all Notifications</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
                 <!-- /Notifications -->
 
                 <!-- User Menu -->
+                <%if(locals.user.type == 'Adminstrator'){%>
+               
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img"><img class="rounded-circle" src="/img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
@@ -154,15 +156,17 @@
                                 <img src="/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
-                                <h6>Ryan Taylor</h6>
+                                <h6><%=locals.user.name%></h6>
                                 <p class="text-muted mb-0">Administrator</p>
                             </div>
                         </div>
                         <a class="dropdown-item" href="/profile">My Profile</a>
                         <a class="dropdown-item" href="/settings">Settings</a>
-                        <a class="dropdown-item" href="/login">Logout</a>
+                        <a class="dropdown-item" href="/user/logout">Logout</a>
                     </div>
                 </li>
+
+                <%}%>
                 <!-- /User Menu -->
 
             </ul>

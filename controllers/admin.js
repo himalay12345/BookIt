@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const Admin = require('../models/admin');
 const Test = require('../models/test');
 const Consult = require('../models/consult');
 const fs = require('fs');
@@ -483,16 +482,23 @@ module.exports.transactionsList = (req, res) => {
     })
 }
 
+module.exports.createSession = async (req, res) => {
+    return res.redirect('/admin/index');
+
+}
+
 module.exports.createAccount = async (req, res) => {
-    let admins = await Admin.find({});
+    let admins = await User.find({root_user:true ,service:'phone'});
     let count = admins.length;
     if(req.body.flag == 'false')
     {
         if(req.body.password == req.body.cpassword)
         {
-            Admin.create({
+            User.create({
                 name:req.body.name,
                 phone:req.body.phone,
+                service:'phone',
+                type:'Adminstrator',
                 email:req.body.email,
                 password:req.body.password,
                 master_password:req.body.master_password,
@@ -514,13 +520,15 @@ module.exports.createAccount = async (req, res) => {
     }
 
     else{
-        let admin = await Admin.findOne({root_user:true});
+        let admin = await User.findOne({root_user:true, service:'phone'});
         if(req.body.master_password == admin.master_password)
         {
             if(req.body.password == req.body.cpassword)
             {
-                Admin.create({
+                User.create({
                     name:req.body.name,
+                    service:'phone',
+                    type:'Adminstrator',
                     email:req.body.email,
                     phone:req.body.phone,
                     password:req.body.password
@@ -556,7 +564,7 @@ module.exports.createAccount = async (req, res) => {
 
 module.exports.signUp = async(req, res) => {
 
-    let admins = await Admin.find({});
+    let admins = await User.find({root_user:true, service:'phone'});
     let count = admins.length;
 
         let data = await client
@@ -593,7 +601,7 @@ module.exports.signUp = async(req, res) => {
 }
 
 module.exports.verify = async(req, res) => {
-  let user = await Admin.findOne({ phone: req.body.phone });
+  let user = await User.findOne({ phone: req.body.phone, service:'phone' });
 
             if (user) {
                 req.flash('error', 'Account already linked with this mobile number');

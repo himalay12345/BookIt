@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+
+
 const userController = require('../controllers/user');
 
 router.post('/create', userController.create);
@@ -52,7 +54,7 @@ router.post('/offline-pay',userController.offlinePay);
 router.post('/offline-cancel',userController.offlineCancel);
 router.post('/sort-by-date',userController.sortByDate);
 router.post('/doctor-sort-by-date',userController.doctorSortByDate);
-router.get('/add-favourite', userController.addFavourite);
+router.get('/add-favourite',passport.checkAuthentication, userController.addFavourite);
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-idproof', userController.uploadIdProof);
 router.post('/upload-degree', userController.uploadDegree);

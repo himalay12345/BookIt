@@ -47,6 +47,44 @@ passport.checkAuthentication = function(req, res, next) {
     return res.redirect('/login');
 }
 
+
+passport.checkDoctorAuthentication = function(req, res, next) {
+    if (req.isAuthenticated() && req.user.type == 'Doctor') {
+        return next();
+    }
+
+
+    return res.redirect('/login');
+}
+passport.checkStaffAuthentication = function(req, res, next) {
+    if (req.isAuthenticated() && req.user.type == 'Staff') {
+        return next();
+    }
+
+
+    return res.redirect('/login');
+}
+passport.checkPatientAuthentication = function(req, res, next) {
+    if (req.isAuthenticated() && req.user.type == 'Patient') {
+        return next();
+    }
+
+
+    return res.redirect('/login');
+}
+
+
+
+
+passport.checkAdminAuthentication = function(req, res, next) {
+    if (req.isAuthenticated() && req.user.type == 'Adminstrator') {
+        return next();
+    }
+
+
+    return res.redirect('/admin/login');
+}
+
 passport.setAuthenticatedUser = function(req, res, next) {
     if (req.isAuthenticated()) {
         res.locals.user = req.user;

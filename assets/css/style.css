@@ -97,6 +97,10 @@
     margin-top: 15px;
 }
 
+.no_admin{
+    display: block  ;
+}
+
 .patient-li h5 {
     font-size: 1.6rem;
     font-weight: 700;
@@ -303,7 +307,7 @@
     margin-right: 5px;
 }
 
-lthenex {
+.lthenex {
     display: none;
 }
 
@@ -2994,7 +2998,7 @@ button.bg-danger:hover {
     width: 150px;
     position: absolute;
     border-radius: 4px;
-    padding: 10px 15px !important;
+    padding: 8px 15px !important;
     text-align: center;
     font-size: 15px;
     color: #09e5ab;
@@ -8308,7 +8312,7 @@ html.menu-opened body {
         left: -10px;
     }
     .specialities-slider .slick-slide {
-        margin-right: 15px;
+        margin-right: 0px !important;
     }
     .about-content a {
         padding: 12px 20px;
@@ -8603,6 +8607,35 @@ html.menu-opened body {
     }
     .slick-arrow {
         display: none !important;
+    }
+
+    .mbanner{
+        margin-top:-20px;
+    }
+
+    .m30{
+        margin-top:30px;
+    }
+
+    .mmbanner{
+        margin-top: 10px;
+    }
+
+    .mmmbanner{
+        margin-top: -25px !important;
+    }
+
+    .common-consult::-webkit-scrollbar {
+  display: none;
+}
+
+.common-consult {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+    .m20{
+        margin-top: 20px;
     }
     .acrossm {
         margin-top: -15px !important;
@@ -9052,7 +9085,7 @@ html.menu-opened body {
         width: 80px;
         height: 40px;
         margin-left: 20px;
-        margin-top: -20px;
+        margin-top: 10px;
     }
     #nots-warn {
         margin-left: 15px;
@@ -9123,9 +9156,9 @@ html.menu-opened body {
         /* padding-top: 20px; */
     }
     #max {
-        margin-top: 43px;
+        margin-top: 0px;
         padding: 3px 20px 1px;
-        margin-bottom: -17px;
+        margin-bottom: 15px;
     }
     .mcontaine {
         padding-left: 114px !important;
@@ -9208,7 +9241,11 @@ html.menu-opened body {
         margin: 0;
     }
     #inclinic {
-        padding: 0px 0px;
+        padding: 10px 0px;
+    }
+
+    .msearch{
+        margin-top:10px;
     }
     .social-sm {
         display: none !important;
@@ -9492,7 +9529,7 @@ html.menu-opened body {
     }
     .section-search {
         min-height: 410px;
-        padding: 30px 15px;
+        padding: 15px 15px;
     }
     .specialities-slider .slick-slide {
         margin-right: 10px;

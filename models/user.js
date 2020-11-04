@@ -508,6 +508,12 @@ const userSchema = mongoose.Schema({
         type: String
 
     },
+    master_password:{
+        type:String
+    },
+    root_user:{
+        type:Boolean
+    },
 
     emailverify:{
         type:Boolean

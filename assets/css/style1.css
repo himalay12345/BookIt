@@ -357,6 +357,10 @@ table.table td h2 span {
     padding-top: 0 !important;
 }
 
+.no_admin{
+    display: none ;
+}
+
 .m-0 {
     margin: 0 !important;
 }

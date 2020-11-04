@@ -44,7 +44,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar paddingt">
+        <div class="breadcrumb-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -68,7 +68,120 @@
                 <!-- Doctor Widget -->
                 <div class="card">
                     <div class="card-body">
-                        <div class="doctor-widget">
+                        <div class="col-md-6 col-lg-4 col-xl-3 sscreen p-0" style="margin-top: -30px;">
+                            <div class="profile-widget">
+                                <div style="display: inline-flex;">
+                                <div class="doc-img" style="width:40%;">
+                                    <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                        <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height:150px;width:100%">
+                                    </a>
+                                    
+                                </div>
+                                <div style="width: 60%;padding:10px">
+                                    <h3 class="title">
+                                        <a href="/doctor-profile/?id=<%=doctor._id%>" style="font-size: 1.5rem;">Dr.<%=doctor.name%></a>
+                                        <i class="fas fa-check-circle verified"></i>
+                                    </h3>
+                                    <p class="speciality">
+                                        <%=doctor.department%>
+                                    </p>
+                                    <%var flag = false;%>
+                                    <%if(locals.user){%>
+                                        <%for(fav of locals.user.favourites){
+                                        
+                                       
+                                    if(fav.toString() == doctor._id)flag = true;%>
+
+                                            <%}%>
+                                                <%}%>
+
+                                                    <%if(!flag){%>
+                                        <a href="/user/add-favourite/?id=<%=doctor._id%>"style="background-color: white;color:black;display: block;
+                                            margin-top: -24px;
+                                            margin-bottom: 15px;padding:8px;margin-top:-30px;margin-left:-5px;">
+                                        <i class="far fa-bookmark" style="margin-right: 5px;"></i>Add Favourite
+                                    </a>
+                                    <%}else{%>
+                                        <a style="color:black;padding:8px;margin-top:-30px;display: block;margin-left:-5px; margin-bottom: 15px;">
+                                            <i class="far fa-bookmark"  style="margin-right: 5px;color: red;"></i>Favourite
+                                        </a>
+                                    <%}%>
+                                    <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                            <%for(review of doctor.reviews){%>
+                                                <%sum+=review.rating;%>
+                                            <%}%>
+                                            <%avg=sum/cnt;%>
+                                            <div class="rating" style="margin-top: -15px;">
+                                                <%if(avg>=1){%>
+                                                <i class="fas fa-star filled"></i>
+                                                <%}else{%>
+                                                    <i class="fas fa-star"></i>
+                                                <%}%>
+                                                <%if(avg>=2){%>
+                                                <i class="fas fa-star filled"></i>
+                                                <%}else{%>
+                                                    <i class="fas fa-star"></i>
+                                                <%}%>
+                                                <%if(avg>=3){%>
+                                                <i class="fas fa-star filled"></i>
+                                                <%}else{%>
+                                                    <i class="fas fa-star"></i>
+                                                <%}%>
+                                                <%if(avg>=4){%>
+                                                <i class="fas fa-star filled"></i>
+                                                <%}else{%>
+                                                    <i class="fas fa-star"></i>
+                                                <%}%>
+                                                <%if(avg>=5){%>
+                                                <i class="fas fa-star filled"></i>
+                                                <%}else{%>
+                                                    <i class="fas fa-star"></i>
+                                                <%}%>
+                                                <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                            </div>
+                                            
+        
+                                </div>
+                            </div>
+                                <div class="pro-content">
+                                    <div class="clinic-details"> 
+                                        <p><i class="fas fa-hospital"></i><span style="font-weight: 600;margin-left: 10px;"><%=doctor.clinicname%></span> &nbsp;<span style="font-size: 0.8rem;">  |   &nbsp; <%=doctor.clinicaddr%></span></p>
+
+                                    </div>
+                                  
+                                   
+                                    <ul class="available-info" style="margin-top: -8px;">
+                                        <li>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <%=doctor.contacts.city%>
+                                                <%=doctor.contacts.state%>
+                                        </li>
+                                        <%var a = new Date();%>
+                                        <li>
+                                            <i class="far fa-clock"></i> Available Today : <%=a.toDateString()%>
+                                        </li>
+                                       
+                                        
+                                        
+                                        <li>
+                                            <i class="far fa-money-bill-alt"></i>
+                                            Rs <%=doctor.booking_fee%><i class="fas fa-info-circle ml-2" data-toggle="tooltip" ></i>
+                                        </li>
+                                        
+                                       
+                                    </ul>
+                                    <div class="row row-sm">
+                                        <div class="col-6">
+                                            <a href="doctor-profile/?id=<%=doctor._id%>" class="btn view-btn">View Profile</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn">Book Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doctor-widget lscreen">
                             <div class="doc-info-left">
                                 <div class="doctor-img">
                                     <img src="<%=doctor.avatar%>" onerror='this.src="/img/profile.png"' class="img-fluid" alt="User Image">
@@ -128,7 +241,7 @@
                                         <%sum+=review.rating;%>
                                     <%}%>
                                     <%avg=sum/cnt;console.log(avg,sum)%>
-                                    <div class="rating">
+                                    <div class="rating text-center">
                                         <%if(avg>=1){%>
                                         <i class="fas fa-star filled"></i>
                                         <%}else{%>
@@ -504,7 +617,7 @@
                                     <form action="/user/doctor-review/?id=<%=doctor._id%>" method="POST">
                                         <div class="form-group">
                                             <label>Review</label>
-                                            <input type="hidden" name="pid" value="<%=locals.user._id%>">
+                                            <input type="hidden" name="pid" value="<%=locals.user.id%>">
                                             <div class="star-rating">
                                                 <input id="star-5" type="radio" name="rating" value="5">
                                                 <label for="star-5" title="5 stars">

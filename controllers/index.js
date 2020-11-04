@@ -7,7 +7,7 @@ const Consult = require('../models/consult');
 const shortid = require('shortid');
 const Razorpay = require('razorpay');
 const emailVerification = require('../mailers/email-otp');
-const Consult = require('../models/consult');
+
 
 
 
@@ -61,15 +61,12 @@ module.exports.addPrescription = (req, res) => {
     })
 }
 
-module.exports.accountSetting = (req, res) => {
-    return res.render('account-setting', {
-        title: 'Account Settings'
-    })
-}
-
 
 
 module.exports.addBank = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('add-bank', {
         title: 'Add Bank Details'
     })
@@ -351,6 +348,9 @@ module.exports.emailNotVerified = (req, res) => {
     })
 }
 module.exports.establishment = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('establishment', {
         title: 'Establishment Details'
     })
@@ -358,6 +358,9 @@ module.exports.establishment = (req, res) => {
 
 
 module.exports.educational = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('educational', {
         title: 'Educational Qualification'
     })
@@ -375,6 +378,9 @@ module.exports.favourites = async(req, res) => {
 }
 
 module.exports.fees = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('fees', {
         title: 'Booking Fees'
     })
@@ -418,6 +424,9 @@ module.exports.invoices = async(req, res) => {
     })
 }
 module.exports.idProof = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('identity-proof', {
         title: 'ID Proof'
     })
@@ -447,12 +456,18 @@ module.exports.myPatients = async(req, res) => {
 }
 
 module.exports.medicalRegistration = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('medical-registration', {
         title: 'Medical Registration'
     })
 }
 
 module.exports.medicalProof = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('medical-proof', {
         title: 'Medical Proof'
     })
@@ -678,6 +693,9 @@ module.exports.profileSettings = async(req, res) => {
 }
 module.exports.profileInfo = async(req, res) => {
     let user = await User.findById(req.user.id);
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('profile-info', {
         title: 'Profile Settings',
         user: user
@@ -1050,6 +1068,9 @@ module.exports.termCondition = (req, res) => {
 
 
 module.exports.terms = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('terms', {
         title: 'Term Condition'
     })
@@ -1057,6 +1078,9 @@ module.exports.terms = (req, res) => {
 
 
 module.exports.timing = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
     return res.render('timing', {
         title: 'Timings'
     })
