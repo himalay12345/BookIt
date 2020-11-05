@@ -2819,6 +2819,7 @@ button.bg-danger:hover {
     display: flex;
     list-style: none;
     position: absolute;
+    
     left: 20%;
     top: 50px;
     /* margin-top: 50px; */
@@ -7882,7 +7883,7 @@ html.menu-opened body {
         padding-left: 0;
     }
     .main-nav>li {
-        border-bottom: 1px solid #1663a6;
+        border-bottom: 1px solid #178686;
         margin-left: 0;
     }
     .main-nav li+li {
@@ -7931,7 +7932,7 @@ html.menu-opened body {
         z-index: 1045;
         transform: translateX(-317px);
         transition: all 0.4s;
-        background-color: #15558d;
+        background-color: #478e8e;
     }
     .menu-header {
         display: -webkit-box;
@@ -8092,7 +8093,7 @@ html.menu-opened body {
         z-index: 1045;
         transform: translateX(-500px);
         transition: all 0.4s;
-        background-color: #15558d;
+        background-color: #478e8e;
     }
     .main-nav>li>a {
         line-height: 1.5;
@@ -8688,6 +8689,12 @@ html.menu-opened body {
     .lommy {
         display: none;
     }
+    .mlogo{
+        margin-top: 25px !important;
+        margin-left: -88px !important;
+        height: 60px !important;
+        width: 144px !important;
+    }
     .paddingt {
         padding-top: 70px;
     }
@@ -9050,6 +9057,7 @@ html.menu-opened body {
     }
     .main-nav {
         position: static;
+     
         left: 0%;
     }
     .header-navbar-rht {
@@ -9358,7 +9366,7 @@ html.menu-opened body {
         z-index: 1045;
         transform: translateX(-320px);
         transition: all 0.4s;
-        background-color: #15558d;
+        background-color:#478e8e !important;
     }
     .menu-header {
         height: 60px;
