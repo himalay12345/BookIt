@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
+<!-- AarogyaHub/booking-success  30 Nov 2019 04:12:16 GMT -->
 
 <head>
     <meta charset="utf-8">
-    <title>Doccure</title>
+    <title>AarogyaHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -35,7 +35,7 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-   
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
@@ -58,7 +58,7 @@
 
         <!-- Page Content -->
         <div class="content success-page-cont">
-           
+
             <div class="container-fluid">
 
                 <div class="row justify-content-center">
@@ -71,13 +71,13 @@
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment cancelled Successfully!</h3>
                                     <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                        <p>Appointment cancelled  with <strong><%=doctor.name%></strong><br> on <strong><%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
+                                        <p>Appointment cancelled with <strong><%=doctor.name%></strong><br> on <strong><%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
 
-                                   <%}else{%>
-                                    <p>Appointment cancelled with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
-                                    <%}%>
-                                    <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the money in your bank account within 4-5 working days.</p>
-                                   
+                                        <%}else{%>
+                                            <p>Appointment cancelled with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
+                                            <%}%>
+                                                <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the money in your bank account within 4-5 working days.</p>
+
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
@@ -109,6 +109,6 @@
 
 </body>
 
-<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
+<!-- AarogyaHub/booking-success  30 Nov 2019 04:12:16 GMT -->
 
 </html>

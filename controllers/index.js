@@ -86,7 +86,8 @@ module.exports.Specialist = async function(req, res) {
 
 
     return res.render('specialist', {
-        doctors: doctors
+        doctors: doctors,
+        title: 'specilalist'
     });
 
 }

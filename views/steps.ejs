@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- AarogyaHub/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 <head>
     <meta charset="utf-8">
-    <title>Doccure</title>
+    <title>AarogyaHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -39,21 +39,21 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-       
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-    
+
         <!-- /Breadcrumb -->
 
         <!-- Page Content -->
-        
+
         <div class="content setting-bread" style="padding:0px !important;margin-top: 20px;">
-           
+
             <div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
 
                 <div class="row">
-                    
+
                     <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
                         <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
                             <li style="border-bottom: 1px solid black;font-weight: 700;"><a href="/doctor-profile-settings">My profile</a></li>
@@ -65,63 +65,64 @@
                         <div class="card" style="border-radius: 0;border:0;">
                             <div class="card-body" style="padding:0rem;">
                                 <%if(locals.user.approve == true){%>
-                                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 15px;">
-                                    <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 15px;">
+                                        <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
-                                </div>
-                                <%}else{%>
-                                <%if(locals.user.step4==true){%>
-                                <div class="alert alert-info alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
-                                    <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    </div>
+                                    <%}else{%>
+                                        <%if(locals.user.step4==true){%>
+                                            <div class="alert alert-info alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
+                                                <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
-                                </div>
-                                <%}%>
-                                <%}%>
-
-                                <div class="row mstep">
-                                    <%if(locals.user.step1!= true){%>
-                                    <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;">
-
-                                        <!-- Change Password Form -->
-                                        <form action="/user/update-profile" enctype="multipart/form-data" method="POST">
-                                            <input type="hidden" name="id" value="<%=locals.user.id%>">
-                                           <h2 style="font-size: 1.6rem;margin-top: 20px;">Hello Dr.<%=locals.user.name%>! Lets build your dedicated profile.</h2>
-                                           <p style="margin-top: 20px;">Section A : Profile Details</p>
-                                           <div class="col-md-10 col-sm-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="change-avatar">
-                                                        <div class="profile-img">
-                                                            <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="/img/profile.png"' alt="User Image">
-                                                        </div>
-                                                        <div class="upload-img">
-                                                            <div class="change-photo-btn upload-sm-btn">
-                                                                <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                                <input type="file" class="upload" name="avatar" id="imageUpload">
-                                                            </div>
-                                                            <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
-                                            <div class="form-group" style="margin-left: -15px;">
-                                                <label style="font-size: 0.85rem;"> Name <span class="text-danger"></span></label>
-                                                <div class="col-md-4" style="margin-left: -15px;">
-                                                    <p style="border:1px solid lightgrey;width:95px;padding: 10px;">Dr./Mr./Ms.</p>
-                                                </div>
-                                                <div class="col-md-8" style="margin-top: -62px;margin-left: 75px;">
-                                                    <input type="text" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;" placeholder="Enter Your Name" name="name" class="form-control minput" value="<%=locals.user.name%>" required>
+                                            <%}%>
+                                                <%}%>
 
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-11" style="margin-left: -30px;">
-                                                <div class="form-group">
-                                                    <label style="font-size: 0.85rem;">Specialisation<span class="text-danger"></span></label>
-                                                    <select name="department" class="form-control mdept select" required>
+                                                    <div class="row mstep">
+                                                        <%if(locals.user.step1!= true){%>
+                                                            <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;">
+
+                                                                <!-- Change Password Form -->
+                                                                <form action="/user/update-profile" enctype="multipart/form-data" method="POST">
+                                                                    <input type="hidden" name="id" value="<%=locals.user.id%>">
+                                                                    <h2 style="font-size: 1.6rem;margin-top: 20px;">Hello Dr.
+                                                                        <%=locals.user.name%>! Lets build your dedicated profile.</h2>
+                                                                    <p style="margin-top: 20px;">Section A : Profile Details</p>
+                                                                    <div class="col-md-10 col-sm-12">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <div class="change-avatar">
+                                                                                    <div class="profile-img">
+                                                                                        <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="/img/profile.png"' alt="User Image">
+                                                                                    </div>
+                                                                                    <div class="upload-img">
+                                                                                        <div class="change-photo-btn upload-sm-btn">
+                                                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                                                        </div>
+                                                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group" style="margin-left: -15px;">
+                                                                            <label style="font-size: 0.85rem;"> Name <span class="text-danger"></span></label>
+                                                                            <div class="col-md-4" style="margin-left: -15px;">
+                                                                                <p style="border:1px solid lightgrey;width:95px;padding: 10px;">Dr./Mr./Ms.</p>
+                                                                            </div>
+                                                                            <div class="col-md-8" style="margin-top: -62px;margin-left: 75px;">
+                                                                                <input type="text" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;" placeholder="Enter Your Name" name="name" class="form-control minput" value="<%=locals.user.name%>" required>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-11" style="margin-left: -30px;">
+                                                                            <div class="form-group">
+                                                                                <label style="font-size: 0.85rem;">Specialisation<span class="text-danger"></span></label>
+                                                                                <select name="department" class="form-control mdept select" required>
                                                     <%if(locals.user.department == 'General Physician'){%><option selected>General Physician</option><%}else{%>
                                                     <option>General Physician</option><%}%>
                                                     <%if(locals.user.department == 'Ophthalmology'){%><option selected>Ophthalmology</option><%}else{%>
@@ -143,12 +144,12 @@
                                                     <%if(locals.user.department == 'Others'){%><option selected>Others</option><%}else{%>
                                                     <option>Others</option><%}%>
                                                     </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 gmargin" style="margin-left: -30px;display: inline-flex;">
-                                                <div class="form-group col-sm-12">
-                                                    <label style="font-size: 0.85rem;">Gender <span class="text-danger"></span></label>
-                                                    <select name="gender" class="form-control select gwidth" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 col-sm-12 gmargin" style="margin-left: -30px;display: inline-flex;">
+                                                                            <div class="form-group col-sm-12">
+                                                                                <label style="font-size: 0.85rem;">Gender <span class="text-danger"></span></label>
+                                                                                <select name="gender" class="form-control select gwidth" required>
                                                         <%if(locals.user.gender == 'Male'){%><option selected>Male</option><%}else{%>
                                                         <option>Male</option><%}%>
                                                         <%if(locals.user.gender == 'Female'){%><option selected>Female</option><%}else{%>
@@ -156,105 +157,106 @@
                                                         <%if(locals.user.gender == 'Others'){%><option selected>Others</option><%}else{%>
                                                         <option>Others</option><%}%>
                                                         </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 cmleft" style="display: inline-flex;margin-left: -50px;">
-                                                <div class="form-group col-sm-12">
-                                                    <label class="control-label">City</label>
-                                                    <input type="text" class="form-control gwidth" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-11" style="margin-left: -30px;">
-                                                <div class="form-group">
-                                                    <label class="control-label">State / Province</label>
-                                                    <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-11" style="margin-left: -30px;">
-                                                <div class="form-group">
-                                                    <label class="control-label">Postal Code</label>
-                                                    <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>" >
-                                                </div>
-                                            </div>
-                                            <div class="submit-section submit-btn-bottom" style="margin-top: 25px;">
-                                                <button type="submit" id="submit_button" class="btn btn-primary submit-btn bmargin btwidth" style="border-radius: 5px;width: 360px;margin-left: -90px;">Continue</button>
-                                            </div>
-                                        </div>
-                                        </form>
-                                        <!-- /Change Password Form -->
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 cmleft" style="display: inline-flex;margin-left: -50px;">
+                                                                            <div class="form-group col-sm-12">
+                                                                                <label class="control-label">City</label>
+                                                                                <input type="text" class="form-control gwidth" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-11" style="margin-left: -30px;">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">State / Province</label>
+                                                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-11" style="margin-left: -30px;">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Postal Code</label>
+                                                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;">
+                                                                            <button type="submit" id="submit_button" class="btn btn-primary submit-btn bmargin btwidth" style="border-radius: 5px;width: 360px;margin-left: -90px;">Continue</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <!-- /Change Password Form -->
 
-                                    </div>
-                                    <%}else{%>
-                                    <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;padding-right: 100px">
-                                        <%if(locals.user.approve == true){%>
-                                            <h2 style="font-size: 1.6rem;margin-top: 20px;">Welcome Dr.<%=locals.user.name%> on Doccure!</h2>
-                                            <p style="margin-top:0px;">Your profile is now live and the patients are on the way to book the appointments.</p>
-                                            <%}else{%>
-                                        <h2 style="font-size: 1.6rem;margin-top: 20px;">Great Progress!</h2>
-                                        <p style="margin-top:0px;">Your profile is just few steps away from getting live.</p>
-                                        <%}%>
-                                        <p  style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section A : Profile Details</p>
-                                        <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors basic details, medical registration, educational qualification, establishment details.</p>
-                                        <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                        <span style="font-size: 0.9rem;"><a href="/profile-info">Change</a></span>
+                                                            </div>
+                                                            <%}else{%>
+                                                                <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;padding-right: 100px">
+                                                                    <%if(locals.user.approve == true){%>
+                                                                        <h2 style="font-size: 1.6rem;margin-top: 20px;">Welcome Dr.
+                                                                            <%=locals.user.name%> on AarogyaHub!</h2>
+                                                                        <p style="margin-top:0px;">Your profile is now live and the patients are on the way to book the appointments.</p>
+                                                                        <%}else{%>
+                                                                            <h2 style="font-size: 1.6rem;margin-top: 20px;">Great Progress!</h2>
+                                                                            <p style="margin-top:0px;">Your profile is just few steps away from getting live.</p>
+                                                                            <%}%>
+                                                                                <p style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section A : Profile Details</p>
+                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors basic details, medical registration, educational qualification, establishment details.</p>
+                                                                                <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                <span style="font-size: 0.9rem;"><a href="/profile-info">Change</a></span>
 
-                                        <p  style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section B : Profile Verification</p>
-                                        <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors identity proof, Registration proof.</p>
-                                        <%if(locals.user.step2==true){%>
-                                        <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                        <span style="font-size: 0.9rem;"><a href="/id-proof">Change</a></span>
-                                        <%}else{%>
-                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
-                                            <a href="/id-proof" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>                                        
-                                        </div>
-                                        <%}%>
-                                        <%if(locals.user.step2==true){%>
-                                        
-                                        <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section C : Start getting patients</p>
-                                        <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees, Terms & Condition.</p>
-                                        <%if(locals.user.step3==true){%>
-                                        <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                        <span style="font-size: 0.9rem;"><a href="/timing">Change</a></span>
-                                        <%}else{%>
+                                                                                <p style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section B : Profile Verification</p>
+                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors identity proof, Registration proof.</p>
+                                                                                <%if(locals.user.step2==true){%>
+                                                                                    <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                    <span style="font-size: 0.9rem;"><a href="/id-proof">Change</a></span>
+                                                                                    <%}else{%>
+                                                                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
+                                                                                            <a href="/id-proof" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>
+                                                                                        </div>
+                                                                                        <%}%>
+                                                                                            <%if(locals.user.step2==true){%>
 
-                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
-                                            <a href="/timing" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>                                        
-                                        </div>
-                                        <%}%>
-                                        <%}else{%>
+                                                                                                <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section C : Start getting patients</p>
+                                                                                                <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees, Terms & Condition.</p>
+                                                                                                <%if(locals.user.step3==true){%>
+                                                                                                    <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                                    <span style="font-size: 0.9rem;"><a href="/timing">Change</a></span>
+                                                                                                    <%}else{%>
 
-                                        <p  style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section C : Start getting patients</p>
-                                        <p  style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees ,Terms & Condition.</p>
-                                        
-                                        <%}%>
-                                        <%if(locals.user.step3==true){%>
-                                        
-                                            <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section D : Add Bank Details</p>
-                                            <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
-                                            <%if(locals.user.step4==true){%>
-                                            <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
-                                            <span style="font-size: 0.9rem;"><a href="/add-bank">Change</a></span>
-                                            <%}else{%>
-    
-                                            <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
-                                                <a href="/add-bank" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>                                        
-                                            </div>
-                                            <%}%>
-                                            <%}else{%>
-    
-                                            <p  style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;" >Section D : Add Bank Details</p>
-                                            <p  style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
-                                            
-                                            <%}%>
+                                                                                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
+                                                                                                            <a href="/timing" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>
+                                                                                                        </div>
+                                                                                                        <%}%>
+                                                                                                            <%}else{%>
 
-                                        
-                                    </div>
-                                    
-                                    <%}%>
-                                    <div class="col-md-6 pass-setting" style="height:100vh;background-image:url('/img/doctor.jpg');background-size: cover;background-repeat: no-repeat;margin-top: 0px;margin-left: -30px;">
+                                                                                                                <p style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section C : Start getting patients</p>
+                                                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees ,Terms & Condition.</p>
 
-                                    </div>
-                                </div>
+                                                                                                                <%}%>
+                                                                                                                    <%if(locals.user.step3==true){%>
+
+                                                                                                                        <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section D : Add Bank Details</p>
+                                                                                                                        <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
+                                                                                                                        <%if(locals.user.step4==true){%>
+                                                                                                                            <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                                                            <span style="font-size: 0.9rem;"><a href="/add-bank">Change</a></span>
+                                                                                                                            <%}else{%>
+
+                                                                                                                                <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
+                                                                                                                                    <a href="/add-bank" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>
+                                                                                                                                </div>
+                                                                                                                                <%}%>
+                                                                                                                                    <%}else{%>
+
+                                                                                                                                        <p style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section D : Add Bank Details</p>
+                                                                                                                                        <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
+
+                                                                                                                                        <%}%>
+
+
+                                                                </div>
+
+                                                                <%}%>
+                                                                    <div class="col-md-6 pass-setting" style="height:100vh;background-image:url('/img/doctor.jpg');background-size: cover;background-repeat: no-repeat;margin-top: 0px;margin-left: -30px;">
+
+                                                                    </div>
+                                                    </div>
                             </div>
                         </div>
                     </div>
@@ -266,7 +268,7 @@
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
@@ -285,17 +287,17 @@
     <!-- Custom JS -->
     <script src="js/script.js"></script>
     <script>
-        document.getElementById("imageUpload").onchange = function () {
-        var reader = new FileReader();
+        document.getElementById("imageUpload").onchange = function() {
+            var reader = new FileReader();
 
-        reader.onload = function (e) {
-            // get loaded data and render thumbnail.
-            document.getElementById("image").src = e.target.result;
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("image").src = e.target.result;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
         };
-
-        // read the image file as a data URL.
-        reader.readAsDataURL(this.files[0]);
-};
     </script>
     <script>
         <%if(flash.success && flash.success.length>0){%>
@@ -320,6 +322,6 @@
 
 </body>
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- AarogyaHub/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 </html>

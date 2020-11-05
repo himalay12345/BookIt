@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/AarogyHub/admin/doctor-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Doccure - Doctor List Page</title>
+    <title>AarogyHub - Doctor List Page</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
@@ -328,34 +328,39 @@
                                         </thead>
                                         <tbody>
                                             <%for(u of user){%>
-                                            <tr>
-                                                <td>
-                                                    <h2 class="table-avatar">
-                                                        <a href="/admin/change-profile/?id=<%=u._id%>" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=u.avatar%>" alt="User Image"></a>
-                                                        <a href="/admin/change-profile/?id=<%=u._id%>"><%=u.name%></a>
-                                                    </h2>
-                                                </td>
-                                                <td><%=u.department%></td>
+                                                <tr>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="/admin/change-profile/?id=<%=u._id%>" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=u.avatar%>" alt="User Image"></a>
+                                                            <a href="/admin/change-profile/?id=<%=u._id%>">
+                                                                <%=u.name%>
+                                                            </a>
+                                                        </h2>
+                                                    </td>
+                                                    <td>
+                                                        <%=u.department%>
+                                                    </td>
 
-                                                <td><%=u.createdAt.toDateString()%> <br><small></small></td>
+                                                    <td>
+                                                        <%=u.createdAt.toDateString()%> <br><small></small></td>
 
-                                                
 
-                                                <td>
-                                                    <%if(u.account_change != true){%>
-                                                    <div class="status-toggle">
-                                                        <input type="checkbox" id="status_1" class="check" checked>
-                                                        <label for="status_1" class="checktoggle">checkbox</label>
-                                                    </div>
-                                                    <%}else{%>
-                                                        <div class="status-toggle">
-                                                            <input type="checkbox" id="status_1" class="check">
-                                                            <label for="status_1" class="checktoggle">checkbox</label>
-                                                        </div>
-                                                    <%}%>
-                                                </td>
-                                            </tr>
-                                            <%}%>
+
+                                                    <td>
+                                                        <%if(u.account_change != true){%>
+                                                            <div class="status-toggle">
+                                                                <input type="checkbox" id="status_1" class="check" checked>
+                                                                <label for="status_1" class="checktoggle">checkbox</label>
+                                                            </div>
+                                                            <%}else{%>
+                                                                <div class="status-toggle">
+                                                                    <input type="checkbox" id="status_1" class="check">
+                                                                    <label for="status_1" class="checktoggle">checkbox</label>
+                                                                </div>
+                                                                <%}%>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
                                         </tbody>
                                     </table>
                                 </div>
@@ -390,6 +395,6 @@
 
 </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/AarogyHub/admin/doctor-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 
 </html>
