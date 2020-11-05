@@ -3371,10 +3371,8 @@ html.menu-opened body {
 	16. Search
 -----------------------*/
 .breadcrumb-bar {
-    background-color: #478e8e;
-    padding-top: 40px !important;
-    padding: 15px 0;
-}
+  background-color: #15558d;
+  padding: 15px 0; }
 
 .breadcrumb-bar .breadcrumb-title {
   color: #fff;
