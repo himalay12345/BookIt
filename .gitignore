@@ -2,4 +2,3 @@ node_modules/
 public/
 production_logs/
 uploads/
-config/environment.js
