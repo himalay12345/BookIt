@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
+<!-- AarogyaHub/booking-success  30 Nov 2019 04:12:16 GMT -->
 
 <head>
     <meta charset="utf-8">
-    <title>Doccure</title>
+    <title>AarogyaHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -35,7 +35,7 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-       
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
@@ -72,13 +72,15 @@
                                     <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
                                         <p>Appointment booked with <strong>Dr. <%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
 
-                                   <%}else{%>
-                                    <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
-                                    <%}%>
-                                    <p>Your Booking Number alloted is <%=seat%></p>
-                                    <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.Show the message at the clinic's front-desk.</p>
-                                   <a href="/staff-booking/?id=<%=locals.user.doctorid%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
-                                   <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
+                                        <%}else{%>
+                                            <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
+                                            <%}%>
+                                                <p>Your Booking Number alloted is
+                                                    <%=seat%>
+                                                </p>
+                                                <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.Show the message at the clinic's front-desk.</p>
+                                                <a href="/staff-booking/?id=<%=locals.user.doctorid%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                                <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +95,7 @@
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
@@ -110,6 +112,6 @@
 
 </body>
 
-<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
+<!-- AarogyaHub/booking-success  30 Nov 2019 04:12:16 GMT -->
 
 </html>

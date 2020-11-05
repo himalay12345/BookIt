@@ -36,12 +36,12 @@
                     <li class="smlist" style="display: none;">
                         <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 0.9375rem;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
                     </li>
-                   
+
                     <li class="smlist" style="display: none;">
                         <a href="/consult"><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Consult</b> - <span>Consult with best doctors</span></a>
                     </li>
                     <li class="smlist" style="display: none;">
-                        <a href="/test"><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a> 
+                        <a href="/test"><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
                     </li>
 
                     <li class="mdlist">
@@ -96,7 +96,7 @@
                     </div>
                     <div class="header-contact-detail">
                         <p class="contact-header">Contact</p>
-                        <p class="contact-info-header"> +1 315 369 5943</p>
+                        <p class="contact-info-header"> +91 9304685471</p>
                     </div>
                 </li>
                 <%if(locals.user){%>
@@ -143,25 +143,25 @@
                                         </li>
 
                                         <%}%>
-                                        <%if(locals.user.notification){%>
-                                            <%for(let i = locals.user.notification.length-1;i>=0;i--){%>
-                                                <li class="notification-message">
-                                                    <a href="/doctor-profile/?id=<%=locals.user.notification[i].did._id%>">
-                                                        <div class="media">
-                                                            <span class="avatar avatar-sm">
+                                            <%if(locals.user.notification){%>
+                                                <%for(let i = locals.user.notification.length-1;i>=0;i--){%>
+                                                    <li class="notification-message">
+                                                        <a href="/doctor-profile/?id=<%=locals.user.notification[i].did._id%>">
+                                                            <div class="media">
+                                                                <span class="avatar avatar-sm">
                                                 <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.notification[i].did.avatar%>" onerror='this.src="/img/profile.png"'>
                                             </span>
-                                                            <div class="media-body">
-                                                                <p class="noti-details"><span class="noti-title"><%=locals.user.notification[i].message%></p>
+                                                                <div class="media-body">
+                                                                    <p class="noti-details"><span class="noti-title"><%=locals.user.notification[i].message%></p>
                                                 
                                                
                                             <p class="noti-time"><span class="notification-time"><%=locals.user.notification[i].createdAt.toLocaleTimeString()%></span></p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <%}%>
-                                                <%}%>
+                                                        </a>
+                                                    </li>
+                                                    <%}%>
+                                                        <%}%>
 
                                 </ul>
                             </div>
@@ -192,7 +192,7 @@
                                 </div>
                                 <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
                                 <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                
+
                                 <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
                                 <a class="dropdown-item" href="/appointments">Appointments</a>
                                 <a class="dropdown-item" href="/my-patients">My Patients</a>
@@ -223,53 +223,53 @@
                                             </div>
                                         </div>
 
-                                    <a class="dropdown-item" href="/profile-settings">My Profile</a>
-                                    <a class="dropdown-item" href="/patient-dashboard">My Appointments</a>
-                                    <a class="dropdown-item" href="/prescription">My Prescriptions</a>
-                                    <a class="dropdown-item" href="/medical-records">My Medical records</a>
-                                    <a class="dropdown-item" href="/my-billing">My Billings</a>
-                                    <a class="dropdown-item" href="/favourites">My Favourites</a>
-                                    
-                                 
-                                    <a class="dropdown-item" href="/settings">Settings</a>
-                                    <a class="dropdown-item" href="/user/logout">Logout</a>
-                                </div>
-                            </li>
-                            <%}%>
-                            <%if(locals.user.type == 'Staff'){%>
-                                <li class="nav-item dropdown has-arrow">
-                                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
-                                    </a>
-                                    <div class="dropdown-menu profile-drop">
-                                        <div class="user-header">
-                                            <div class="avatar avatar-sm">
-                                                <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
-                                            </div>
-                                            <div class="user-text">
-                                                <h6>
-                                                    <%=locals.user.name%>
-                                                </h6>
-                                                <p class="text-muted mb-0">Medical Staff</p>
-                                            </div>
-                                        </div>
-                                        <a class="dropdown-item" href="/staff-profile">My Profile</a>
-                                        <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
-                                        <a class="dropdown-item" href="/staff-schedule-timings">Schedule Timing</a>
-                                        <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
-                                        <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                        <a class="dropdown-item" href="/profile-settings">My Profile</a>
+                                        <a class="dropdown-item" href="/patient-dashboard">My Appointments</a>
+                                        <a class="dropdown-item" href="/prescription">My Prescriptions</a>
+                                        <a class="dropdown-item" href="/medical-records">My Medical records</a>
+                                        <a class="dropdown-item" href="/my-billing">My Billings</a>
+                                        <a class="dropdown-item" href="/favourites">My Favourites</a>
+
+
                                         <a class="dropdown-item" href="/settings">Settings</a>
                                         <a class="dropdown-item" href="/user/logout">Logout</a>
                                     </div>
                                 </li>
                                 <%}%>
-                                   
-                                       
+                                    <%if(locals.user.type == 'Staff'){%>
+                                        <li class="nav-item dropdown has-arrow">
+                                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
+                                            </a>
+                                            <div class="dropdown-menu profile-drop">
+                                                <div class="user-header">
+                                                    <div class="avatar avatar-sm">
+                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
+                                                    </div>
+                                                    <div class="user-text">
+                                                        <h6>
+                                                            <%=locals.user.name%>
+                                                        </h6>
+                                                        <p class="text-muted mb-0">Medical Staff</p>
+                                                    </div>
+                                                </div>
+                                                <a class="dropdown-item" href="/staff-profile">My Profile</a>
+                                                <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
+                                                <a class="dropdown-item" href="/staff-schedule-timings">Schedule Timing</a>
+                                                <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
+                                                <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                <a class="dropdown-item" href="/settings">Settings</a>
+                                                <a class="dropdown-item" href="/user/logout">Logout</a>
+                                            </div>
+                                        </li>
+                                        <%}%>
+
+
 
                 </ul>
                 <%}%>
 
-                   
+
         </div>
     </nav>
 </header>

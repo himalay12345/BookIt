@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/reviews  30 Nov 2019 04:12:15 GMT -->
+<!-- AarogyaHub/reviews  30 Nov 2019 04:12:15 GMT -->
 
 <head>
     <meta charset="utf-8">
-    <title>Doccure</title>
+    <title>AarogyaHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -35,7 +35,7 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-      
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
@@ -84,7 +84,7 @@
                                                                 <%}}%>
                                         </h5>
 
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                             </a>
                                         </li>
 
-                                      
+
                                         <li>
                                             <a href="/invoices">
                                                 <i class="fas fa-file-invoice"></i>
@@ -134,68 +134,70 @@
                     </div>
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <%if(users.reviews.length == 0){%>
-                 
-                        <h2 class="text-center" style="margin-top: 100px;margin-left: auto;margin-right: auto;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Reviews To Show !</span></h2>
-                        <%}else{%>
-                        <div class="doc-review review-listing">
 
-                          
-                        
-                            <ul class="comments-list">
-                                <%for(u of users.reviews){%>
+                            <h2 class="text-center" style="margin-top: 100px;margin-left: auto;margin-right: auto;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Reviews To Show !</span></h2>
+                            <%}else{%>
+                                <div class="doc-review review-listing">
 
-                               
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image" src="<%=u.pid.avatar%>" onerror="this.src='/img/profile.png'">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author"><%=u.pid.name%></span>
-                                                <span class="comment-date">Reviewed on <%=u.createdAt.toDateString()%></span>
-                                                
-                                                <%var avg = u.rating;%>
-                                                       
-                                                <div class="review-count rating">
-                                                    <%if(avg>=1){%>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <%}else{%>
-                                                            <i class="fas fa-star"></i>
-                                                        <%}%>
-                                                        <%if(avg>=2){%>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <%}else{%>
-                                                            <i class="fas fa-star"></i>
-                                                        <%}%>
-                                                        <%if(avg>=3){%>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <%}else{%>
-                                                            <i class="fas fa-star"></i>
-                                                        <%}%>
-                                                        <%if(avg>=4){%>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <%}else{%>
-                                                            <i class="fas fa-star"></i>
-                                                        <%}%>
-                                                        <%if(avg>=5){%>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <%}else{%>
-                                                            <i class="fas fa-star"></i>
-                                                        <%}%>
+
+
+                                    <ul class="comments-list">
+                                        <%for(u of users.reviews){%>
+
+
+                                            <li>
+                                                <div class="comment">
+                                                    <img class="avatar rounded-circle" alt="User Image" src="<%=u.pid.avatar%>" onerror="this.src='/img/profile.png'">
+                                                    <div class="comment-body">
+                                                        <div class="meta-data">
+                                                            <span class="comment-author"><%=u.pid.name%></span>
+                                                            <span class="comment-date">Reviewed on <%=u.createdAt.toDateString()%></span>
+
+                                                            <%var avg = u.rating;%>
+
+                                                                <div class="review-count rating">
+                                                                    <%if(avg>=1){%>
+                                                                        <i class="fas fa-star filled"></i>
+                                                                        <%}else{%>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <%}%>
+                                                                                <%if(avg>=2){%>
+                                                                                    <i class="fas fa-star filled"></i>
+                                                                                    <%}else{%>
+                                                                                        <i class="fas fa-star"></i>
+                                                                                        <%}%>
+                                                                                            <%if(avg>=3){%>
+                                                                                                <i class="fas fa-star filled"></i>
+                                                                                                <%}else{%>
+                                                                                                    <i class="fas fa-star"></i>
+                                                                                                    <%}%>
+                                                                                                        <%if(avg>=4){%>
+                                                                                                            <i class="fas fa-star filled"></i>
+                                                                                                            <%}else{%>
+                                                                                                                <i class="fas fa-star"></i>
+                                                                                                                <%}%>
+                                                                                                                    <%if(avg>=5){%>
+                                                                                                                        <i class="fas fa-star filled"></i>
+                                                                                                                        <%}else{%>
+                                                                                                                            <i class="fas fa-star"></i>
+                                                                                                                            <%}%>
+                                                                </div>
+                                                        </div>
+                                                        <p class="recommended"><i class="far fa-thumbs-up"></i>
+                                                            <%=u.title%>
+                                                        </p>
+                                                        <p class="comment-content">
+                                                            <%=u.review_description%>
+                                                        </p>
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <p class="recommended"><i class="far fa-thumbs-up"></i> <%=u.title%></p>
-                                            <p class="comment-content">
-                                                <%=u.review_description%>
-                                            </p>
-                                          
-                                        </div>
-                                    </div>
 
-                                </li>
+                                            </li>
+                                            <%}%>
+                                    </ul>
+                                </div>
                                 <%}%>
-                            </ul>
-                        </div> 
-                        <%}%>
                     </div>
                 </div>
             </div>
@@ -205,7 +207,7 @@
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
@@ -226,6 +228,6 @@
 
 </body>
 
-<!-- doccure/reviews  30 Nov 2019 04:12:15 GMT -->
+<!-- AarogyaHub/reviews  30 Nov 2019 04:12:15 GMT -->
 
 </html>

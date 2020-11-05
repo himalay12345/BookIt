@@ -1,6 +1,4 @@
-
-
-<!-- doccure/  30 Nov 2019 04:11:34 GMT -->
+<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
 
 <head>
 
@@ -31,7 +29,7 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-       
+
         <!-- /Header -->
 
         <!-- Home Banner -->
@@ -377,12 +375,12 @@
                                         <li style="font-size: 1rem;margin-top: 10px;font-weight: bold;">Consult doctors online</li>
                                         <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Store health records</li>
                                         <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Read health tips</li>
-    
-    
+
+
                                     </ul>
                                     <div>
                                         <p style="margin-top: 50px;font-weight: 700;font-size: 16px;line-height: 1.5; font-family:Camphor,Helvetica,Arial,sans-serif!important;">Get the link to download the app</p>
-    
+
                                     </div>
                                     <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
                                         <div class="col-md-12" style="display: inline-flex;">
@@ -403,10 +401,10 @@
     
                                 <!-- <p>AarogyaHub is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
                             </div>
-    
+
                             <div class="row text-center position-absolute" style="padding-right: 20px; padding-left: 50px !important;bottom: 0;left: -450px;">
-    
-    
+
+
                                 <p>
                                    
                                     <a href="/app-coming-soon" class="btn btn-store" style="margin-top: -40px;">
@@ -414,8 +412,8 @@
                                         <span class="btn-label">Download on the</span>
                                         <span class="btn-caption">Google Play Store</span>
                                     </a>
-    
-    
+
+
                                 </p>
                                 <style>
                                     .btn-store {
@@ -444,8 +442,8 @@
                                     }
                                 </style>
                             </div>
-    
-    
+
+
                             <!-- <div class="features-slider slider">
                                 Slider Item
                                 <div class="feature-item text-center">
@@ -465,7 +463,7 @@
         </section>
         <section class="mobile-index mt-2 mb-2">
             <section>
-                <a href="/">
+                <a href="/coming-soon">
                     <div class=" col-sm-12 index-content">
                         <div class="col-sm-12 index-first" style="background-color: navy; margin-bottom: 10px; position: relative; height: 200px; border: 1px solid black; border-radius: 14px;">
                             <div class="say-doubts" style="position: absolute;">
@@ -496,11 +494,11 @@
             </section>
             <section class="health-concerns m30" style="margin-bottom: 20px;">
                 <div class="concerns">
-                     <h3 style="font-weight: 700; margin-left: 13px;
+                    <h3 style="font-weight: 700; margin-left: 13px;
                     margin-bottom: 15px;
                     font-size: 1.375rem;">Online Consultation</h3>
 
-                    <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+                    <div class="common-consult" style="height:270px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
 
                         <% var count1=1 %>
                             <%for(consult of consults) {%>
@@ -509,9 +507,11 @@
                                         <%count1++%>
 
 
-                                            <div class="img-cough-cold" style="width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                                            <div class="img-cough-cold" style="min-height:260px;padding-bottom:5px;height:auto;width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
                                                 <div style="height: 50%;">
+                                                    <a href="/consult">
                                                     <img src="<%=consult.consultavatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                                </a>
                                                 </div>
                                                 <div style="height: 40%;padding: 5px; position: relative;">
                                                     <h4 class="consultname" style="padding-top: 20px;">
@@ -520,7 +520,7 @@
                                                     <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 6px;">₹
                                                         <%=consult.consultprice %>
                                                     </p>
-                                                    <a href="/consult" style="color:#455A64;font-weight:bold;position:absolute;bottom:-13px;left: 7px;">Consult Now
+                                                    <a href="/coming-soon" style="color:#455A64;font-weight:bold;position:absolute;bottom:-10px;left: 7px;">Consult Now
                                 </a>
 
                                                 </div>
@@ -552,6 +552,7 @@
 
                             <div class="img-cough-cold" style="width:180px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
                                 <div style="height: 40%;">
+
                                     <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
                                 </div>
                                 <div style="height: 60%;padding: 5px;position: relative;margin-top: 12px;
@@ -627,30 +628,37 @@
                             </div>
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
                                 <div style="height: 70%;width: 100%; border-radius: 10px;">
-                                    <img src="/img/patients/checkup10.jfif" style="height: 100%;width:100%;border-radius: 10px;">
+                                    <a href="/coming-soon">
+                                        <img src="/img/patients/checkup10.jfif" style="height: 100%;width:100%;border-radius: 10px;">
+                                    </a>
                                 </div>
                                 <div>
-                                    <h3 style="font-size: 0.9375rem;
+                                    <a href="/coming-soon">
+                                        <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                        Thyroid Test
-                                    </h3>
+                                            Thyroid Test
+                                        </h3>
+                                    </a>
 
                                 </div>
 
                             </div>
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;width: 100%;">
-                                    <img src="/img/patients/health13.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                    <a href="/coming-soon">
+                                        <img src="/img/patients/health13.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
                                 </div>
                                 <div>
-                                    <h3 style="font-size: 0.9375rem;
+                                    <a href="/coming-soon">
+                                        <h3 style="font-size: 0.9375rem;
                                         padding-top: 5px;
                                         line-height: 1rem;
                                         font-family: system-ui;">
-                                        Diabetes
-                                    </h3>
+                                            Diabetes
+                                        </h3>
+                                    </a>
 
                                 </div>
 
@@ -661,30 +669,38 @@
                         <div class="col-sm-12 upper" style="height: 50%; padding-left: 2px; display: inline-flex; margin-top: 20px; margin-left: -8px;">
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/health6.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                    <a href="/coming-soon">
+                                        <img src="/img/patients/health6.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                    </a>
                                 </div>
                                 <div>
-                                    <h3 style="font-size: 0.9375rem;
+                                    <a href="/coming-soon">
+                                        <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                        Liver function test
-                                    </h3>
+                                            Liver function test
+                                        </h3>
+                                    </a>
 
                                 </div>
 
                             </div>
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%;width: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/checkup2.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                    <a href="/coming-soon">
+                                        <img src="/img/patients/checkup2.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                    </a>
                                 </div>
                                 <div>
-                                    <h3 style="font-size: 0.9375rem;
+                                    <a href="/coming-soon">
+                                        <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                        Full Body Checkup
-                                    </h3>
+                                            Full Body Checkup
+                                        </h3>
+                                    </a>
 
                                 </div>
 
@@ -702,7 +718,8 @@
                                         padding-top: 24px;
                                         margin-left: -6px;
                                         ">
-                                            <span style="font-weight: 700;color: #12444c">See More Specialities</span>
+                                            <a href="/coming-soon">
+                                                <span style="font-weight: 700;color: #12444c">See More Specialities</span></a>
                                         </p>
                                     </div>
                                     <div>
@@ -727,31 +744,33 @@
             </section>
             <section style="height: 360px;padding:15px 8px;background-color: #45B8AC;">
                 <div style="display: inline-flex;margin-top: 10px;">
-                <div style="width: 20%;">
-                <img src="/img/crowns.png" style="height: 50px;width:60px;">
-            </div>
-            <div style="width: 80%;">
-                <h4 style="font-weight: bold;font-size: 1.5rem;color:white">India's 1<sup>st</sup> Online Patient Tracking System Website.</h4>
-            </div>
+                    <div style="width: 20%;">
+                        <img src="/img/crowns.png" style="height: 50px;width:60px;">
+                    </div>
+                    <div style="width: 80%;">
+                        <h4 style="font-weight: bold;font-size: 1.5rem;color:white">India's 1<sup>st</sup> Online Patient Tracking System Website.</h4>
+                    </div>
 
-        </div>
-        <ul style="list-style: none;margin-top: 30px;margin-left: -20px;">
-            <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/calendar.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Book the doctor online.</li>
-             <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/waiting.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Sit, Relax and track your turn on </li>
-             <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;">our patient tracking system.</li>
-             <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/visitor.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Get the reminder from us and </li>
-             <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;"> visit the doctor.</li>
-        </ul>
+                </div>
+                <ul style="list-style: none;margin-top: 30px;margin-left: -20px;">
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/calendar.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Book the doctor online.</li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/waiting.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Sit, Relax and track your turn on </li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;">our patient tracking system.</li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/visitor.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Get the reminder from us and </li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;"> visit the doctor.</li>
+                </ul>
 
 
             </section>
 
             <section style="background-color: #fff;padding-top: 30px;margin-bottom: -10px;">
-                <div class="app-download--banner"><div class="app-download__top" style="height: 300px;width: 100%;">
-                    <div class="image">
-                        <span class="LazyLoad is-visible">
+                <div class="app-download--banner">
+                    <div class="app-download__top" style="height: 300px;width: 100%;">
+                        <div class="image">
+                            <span class="LazyLoad is-visible">
                             <img class="app-download__top__image" src="/img/and.png" style="height: 100%;width: 70%;margin-left: 50px;">
                         </span>
+                        </div>
                     </div>
                 </div>
                 <div class="app-download__bottom">
@@ -769,36 +788,34 @@
                         <a href="/app-coming-soon"><button type="button"  class="app-download__bottom__footer__button btn btn-secondary" style="width: 100%;border-radius: 0px;padding:15px">Download the app now</button></a>
                     </div>
                 </div>
-            </div>
             </section>
 
 
         </section>
         <%-include('footer');%>
 
-      
-        <!-- /Footer -->
 
-        </div>
-        <!-- /Main Wrapper -->
+            <!-- /Footer -->
 
-        <!-- jQuery -->
-        <script src="/js/jquery.min.js"></script>
+            </div>
+            <!-- /Main Wrapper -->
 
-        <!-- Bootstrap Core JS -->
-        <script src="/js/popper.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
+            <!-- jQuery -->
+            <script src="/js/jquery.min.js"></script>
 
-        <!-- Slick JS -->
-        <script src="/js/slick.js"></script>
+            <!-- Bootstrap Core JS -->
+            <script src="/js/popper.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
 
-        <!-- Custom JS -->
-        <script src="/js/script1.js"></script>
-        <script src="/js/script.js"></script>
+            <!-- Slick JS -->
+            <script src="/js/slick.js"></script>
+
+            <!-- Custom JS -->
+            <script src="/js/script1.js"></script>
+            <script src="/js/script.js"></script>
 
 
 
 </body>
 
-<!-- doccure/  30 Nov 2019 04:11:53 GMT -->
-
+<!-- AarogyaHub/  30 Nov 2019 04:11:53 GMT -->

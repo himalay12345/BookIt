@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- AarogyaHub/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 <head>
     <meta charset="utf-8">
-    <title>Doccure</title>
+    <title>AarogyaHub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -39,7 +39,7 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-      
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
@@ -65,11 +65,11 @@
             <h3 style="font-size: 1rem;font-weight: bold;"><a href="/settings">Settings</a></h3>
         </div>
         <div class="content">
-           
+
             <div class="container-fluid">
 
                 <div class="row">
-                    
+
                     <div class="col-md-2 settings" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
                         <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
                             <%if(locals.user.service != 'google'){%>
@@ -78,12 +78,12 @@
                             <%if(locals.user.type != 'Staff'){%>
                                 <li><a href="/notification-settings">Notification Settings</a></li>
                                 <%}%>
-                           
-                            <%if(locals.user.type == 'Doctor'){%>
-                                <li><a href="/booking-service">Booking Service</a></li>
-                            <%}%>
-                            <li><a href="/delete-account">Delete Account</a></li>
-                            <li><a href="/user/logout" style="color: red;">Logout</a></li>
+
+                                    <%if(locals.user.type == 'Doctor'){%>
+                                        <li><a href="/booking-service">Booking Service</a></li>
+                                        <%}%>
+                                            <li><a href="/delete-account">Delete Account</a></li>
+                                            <li><a href="/user/logout" style="color: red;">Logout</a></li>
                         </ul>
                     </div>
                     <div class="col-md-10 col-lg-8 col-xl-9 settings-content" style="margin-left:-15px;border-left: 0.5px solid lighgrey;">
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label style="font-size: 0.9rem; font-weight: 500;">Confirm Password</label>
-                                                <input type="password" name="confirm" class="form-control"style="min-height: 0px!important;">
+                                                <input type="password" name="confirm" class="form-control" style="min-height: 0px!important;">
                                             </div>
                                             <div class="submit-section">
                                                 <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
@@ -126,7 +126,7 @@
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
@@ -167,6 +167,6 @@
 
 </body>
 
-<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+<!-- AarogyaHub/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
 
 </html>
