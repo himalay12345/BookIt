@@ -199,6 +199,7 @@ module.exports.searchDoctor = async(req, res) => {
 
 
    return res.render('search', {
+       title:'Search Results',
     doctors: selected
 });
 
@@ -396,6 +397,7 @@ module.exports.Filter = async function(req, res) {
     console.log(doctors);
 
     return res.render('search', {
+        title:'Search Results',
         doctors: doctors
     });
 
@@ -559,6 +561,7 @@ module.exports.offlineCancel = async function(req, res) {
                     //     user1.save();
                         
                     //     return res.render('staff-booking-page',{
+                    //         title:'Staff Booking Page',
                     //         doctor:user,
                     //        title:'Book Apointment'
                     //     });
@@ -570,6 +573,7 @@ module.exports.offlineCancel = async function(req, res) {
 
                 else{
                     return res.render('staff-booking-page',{
+                        title:'Staff Booking Page',
                         doctor:user,
                        title:'Book Apointment'
                     });
@@ -698,6 +702,7 @@ module.exports.refund = async function(req, res) {
                     //     appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
                         
                     //     return res.render('refund',{
+                        //     title:'Refund',
                     //         doctor:user,
                     //         slotindex:req.body.slotindex,
                     //         dayindex:req.body.dayindex
@@ -1412,6 +1417,7 @@ module.exports.bookAppointment = async (req, res) => {
     else{
 
     return res.render('login',{
+        title:'Login',
         booked:req.body.booked,
         available:req.body.available,
         slotindex:req.body.slotindex,

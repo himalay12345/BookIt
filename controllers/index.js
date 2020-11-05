@@ -252,6 +252,11 @@ module.exports.comingSoon = (req, res) => {
         title: 'Coming-Soon'
     })
 }
+module.exports.appComingSoon = (req, res) => {
+    return res.render('app_coming_soon', {
+        title: 'App Coming-Soon'
+    })
+}
 
 module.exports.changeBankAccount = (req, res) => {
     return res.render('change-bank-account', {

@@ -72,7 +72,9 @@
                     
                     <div class="col-md-2 settings" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
                         <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
+                            <%if(locals.user.service != 'google'){%>
                             <li><a href="/doctor-change-password">Change Password</a></li>
+                            <%}%>
                             <%if(locals.user.type != 'Staff'){%>
                                 <li><a href="/notification-settings">Notification Settings</a></li>
                                 <%}%>

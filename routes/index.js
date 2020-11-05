@@ -14,6 +14,7 @@ router.get('/add-bank', passport.checkDoctorAuthentication, homeController.addBa
 
 router.get('/add-prescription', passport.checkDoctorAuthentication, homeController.addPrescription);
 router.get('/appointments', passport.checkDoctorAuthentication, homeController.appointments);
+router.get('/app-coming-soon',  homeController.appComingSoon);
 router.get('/appointment-detail', passport.checkPatientAuthentication, homeController.appointmentDetail);
 router.get('/blank-page', passport.checkAuthentication, homeController.blankPage);
 router.get('/booking', homeController.booking);

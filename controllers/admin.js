@@ -203,6 +203,23 @@ module.exports.approveDocuments = async(req, res) => {
     users.approve1 = true;
     users.save();
     if (users.approve2 == true) {
+        if(users.phone)
+        {
+            client.messages
+            .create({
+               body: 'Hii Dr.'+users.name+'! Your request of bank account change in doccure is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable http://localhost:4000/booking-service',
+               from: '+12019755459',
+               statusCallback: 'http://postb.in/1234abcd',
+               to: '+91'+users.phone
+             })
+            .then(message => console.log(message.sid));
+        }
+
+        if(users.email)
+        {
+        accountChangeAlert.newAlert(user,users.email);
+        }
+       
         return res.render('a-application-request', {
             title: 'Application Request',
             user: user
@@ -391,7 +408,7 @@ module.exports.index = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" });
     let patients = await User.find({ type: "Patient" });
     return res.render('a-index', {
-        title: 'Index List',
+        title: 'Admin',
         doctors: doctors,
         patients: patients
     })

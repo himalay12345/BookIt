@@ -1,6 +1,7 @@
 const express = require('express');
 const port = 4000;
 const app = express();
+require('./config/view-helper')(app);
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
@@ -21,7 +22,7 @@ const trackSockets = require('./config/track_socket').trackSockets(trackServer);
 trackServer.listen(5000);
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
-
+console.log(env.asset_path);
 
 if(env.name == 'development'){
 
