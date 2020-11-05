@@ -4043,7 +4043,8 @@ html.menu-opened body {
 -----------------------*/
 
 .breadcrumb-bar {
-    background-color: #15558d;
+    background-color: #478e8e;
+    padding-top: 40px !important;
     padding: 15px 0;
 }
 
