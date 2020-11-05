@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/BookAnAppointment';
+const env = require('./environment');
+const url = `mongodb://localhost/${env.db}`;
 const opts = { useNewUrlParser: true ,
     useFindAndModify:false,
     useCreateIndex:true,

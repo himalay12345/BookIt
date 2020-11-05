@@ -6,6 +6,7 @@ const Consult = require('../models/consult');
 
 const shortid = require('shortid');
 const Razorpay = require('razorpay');
+const env = require('../config/environment');
 const emailVerification = require('../mailers/email-otp');
 
 
@@ -551,8 +552,8 @@ module.exports.patientDashboard = async(req, res) => {
 
 module.exports.razorPay = async(req, res) => {
     const razorpay = new Razorpay({
-        key_id: 'rzp_test_KPgD2YFDnBI7Ib',
-        key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ'
+        key_id: env.razorpay_key_id,
+        key_secret: env.razorpay.key_secret
     });
 
     const payment_capture = 1;

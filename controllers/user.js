@@ -12,6 +12,7 @@ const appointmentCancelAlert = require('../mailers/appointment-cancel');
 const emailVerification = require('../mailers/email-verify');
 const Feedback = require('../models/disable_feedback');
 const Path = require('path');
+const env = require('../config/environment');
 
 
 module.exports.create = async(req, res) => {
@@ -405,8 +406,8 @@ module.exports.confirmPay = async function(req, res) {
     try{
             let doctor = await User.findById(req.body.doctorid);
                 const razorpay = new Razorpay({
-                key_id: 'rzp_test_KPgD2YFDnBI7Ib',
-                key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
+                    key_id: env.razorpay_key_id,
+                    key_secret: env.razorpay.key_secret
                 
             });
 
@@ -428,10 +429,6 @@ module.exports.confirmPay = async function(req, res) {
                     account: doctor.accountid,
                     amount: vendor_amount*100,
                     currency: "INR",
-                    notes: {
-                        "branch": "Acme Corp Bangalore North",
-                        "name": "Gaurav Kumar"
-                    },
                     linked_account_notes: [
                         "branch"
                     ]
@@ -599,8 +596,8 @@ module.exports.refund = async function(req, res) {
                 {
 
                     // const razorpay1 = new Razorpay({
-                    //     key_id: 'rzp_test_KPgD2YFDnBI7Ib',
-                    //     key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
+                    //      key_id: env.razorpay_key_id,
+                        // key_secret: env.razorpay.key_secret
                         
                     // });
                     // var refund_amount = req.body.fee - 50 ;
