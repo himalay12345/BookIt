@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Doccure</title>
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -73,9 +73,12 @@
                     
                     <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
                         <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
-                            <li><a href="/doctor-change-password">Change Password</a></li>
-                            <li><a href="/notification-settings">Notification Settings</a></li>
-                        
+                            <%if(locals.user.service != 'google'){%>
+                                <li><a href="/doctor-change-password">Change Password</a></li>
+                                <%}%>     
+                                <%if(locals.user.type != 'Staff'){%>
+                                    <li><a href="/notification-settings">Notification Settings</a></li>
+                                    <%}%>      
                             <%if(locals.user.type == 'Doctor'){%>
                                 <li><a href="/booking-service"><b>Booking Service</b></a></li>
                             <%}%>

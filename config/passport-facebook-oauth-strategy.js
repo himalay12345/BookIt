@@ -2,13 +2,14 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const crypto = require('crypto');
 const User = require('../models/user');
+const env = require('./environment');
 
 
 passport.use(new FacebookStrategy({
-        clientID: '247163950066857',
-        clientSecret: 'c522c88a2060f9d8861cf47228f1964d',
-        callbackURL: "http://localhost:4000/user/auth/facebook/callback",
-        profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
+        clientID: env.fb_client_id,
+        clientSecret:  env.fb_client_secret,
+        callbackURL: env.fb_callback_url,
+        profileFields: env.fb_profile_fields
     },
     function(accessToken, refreshToken, profile, done) {
         // console.log(profile);

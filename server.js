@@ -1,10 +1,14 @@
 const express = require('express');
 const port = 4000;
 const app = express();
+require('./config/view-helper')(app);
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const env = require('./config/environment');
+const path = require('path');
+const logger = require('morgan');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportGoogle = require('./config/google_passport_auth2');
@@ -16,6 +20,20 @@ const bodyParser = require('body-parser');
 const trackServer = require('http').Server(app);
 const trackSockets = require('./config/track_socket').trackSockets(trackServer);
 trackServer.listen(5000);
+const sassMiddleware = require('node-sass-middleware');
+console.log(env.name);
+console.log(env.asset_path);
+
+if(env.name == 'development'){
+
+app.use(sassMiddleware({
+    src:path.join(__dirname,env.asset_path,'scss'),
+    dest:path.join(__dirname,env.asset_path,'css'),
+    debug: true,
+    outputStyle:'extended',
+    prefix:'/css'
+}));
+}
 console.log('Patient Tracking server is running on port 5000');
 
 
@@ -23,8 +41,9 @@ app.use(expressLayouts);
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use(logger(env.morgan.mode, env.morgan.options));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
@@ -37,7 +56,7 @@ app.set('views', './views');
 app.use(session({
     name: 'Bookit',
     // To be changed at deployment
-    secret: 'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
