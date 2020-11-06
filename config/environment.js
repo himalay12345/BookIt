@@ -34,7 +34,7 @@ const development = {
     google_callback_url:"/user/auth/google/callback",
     fb_client_id: '247163950066857',
     fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
-    fb_callback_url: "http://localhost:4000/user/auth/facebook/callback",
+    fb_callback_url: "/user/auth/facebook/callback",
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
     twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
     twilio_account_sid : "AC072f252c5635d5be8d199882a12ea742",
