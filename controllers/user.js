@@ -377,7 +377,7 @@ module.exports.confirmPay = async function(req, res) {
             let doctor = await User.findById(req.body.doctorid);
                 const razorpay = new Razorpay({
                     key_id: env.razorpay_key_id,
-                    key_secret: env.razorpay.key_secret
+                    key_secret: env.razorpay_key_secret
                 
             });
 
@@ -398,10 +398,7 @@ module.exports.confirmPay = async function(req, res) {
                     {
                     account: doctor.accountid,
                     amount: vendor_amount*100,
-                    currency: "INR",
-                    linked_account_notes: [
-                        "branch"
-                    ]
+                    currency: "INR"
                     
                     }
                 ]
