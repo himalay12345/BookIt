@@ -35,7 +35,7 @@ router.get('/delete-account', passport.checkAuthentication, homeController.delet
 router.get('/doctor-change-password', passport.checkDoctorAuthentication, homeController.doctorChangePassword);
 router.get('/doctor-terms-and-condition', passport.checkDoctorAuthentication, homeController.doctorTermsAndCondition);
 router.get('/doctor-dashboard', passport.checkDoctorAuthentication, homeController.doctorDashboard);
-router.get('/doctor-profile', passport.checkAuthentication, homeController.doctorProfile);
+router.get('/doctor-profile', homeController.doctorProfile);
 router.get('/doctor-profile-settings', passport.checkDoctorAuthentication, homeController.doctorProfileSettings);
 router.get('/doctor-register', passport.checkAuthentication, homeController.doctorRegister);
 router.get('/edit-billing', passport.checkDoctorAuthentication, homeController.editBilling);

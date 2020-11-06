@@ -1164,7 +1164,7 @@ module.exports.verifyDoctor = async(req, res) => {
                         title: 'Phone verification',
                         phone: req.body.phone,
                         id: doctor._id,
-                        designation:'Staff'
+                        designation:'Verify'
 
                     });
                 });

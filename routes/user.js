@@ -29,7 +29,7 @@ router.post('/update-establishment',userController.updateEstablishment);
 router.post('/confirm-pay',userController.confirmPay);
 router.post('/manage-booking-service',userController.manageBookingService);
 router.post('/manage-notification',userController.manageNotification);
-router.post('/doctor-review',userController.doctorReview);
+router.post('/doctor-review',passport.checkAuthentication,userController.doctorReview);
 router.post('/set-schedule-timing', userController.setScheduleTiming);
 router.post('/staff-set-schedule-timing', userController.staffSetScheduleTiming);
 router.post('/update-schedule', userController.updateSchedule);
