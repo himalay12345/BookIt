@@ -31,7 +31,7 @@ const development = {
     razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
     google_client_id: '728803225175-al2tlmub7iis0rdnnfdkq5tggr919a5o.apps.googleusercontent.com',
     google_client_secret: 'wFsBm1QsFDCogvFAHxstSfQh',
-    google_callback_url:"http://localhost:4000/user/auth/google/callback",
+    google_callback_url:"/user/auth/google/callback",
     fb_client_id: '247163950066857',
     fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
     fb_callback_url: "http://localhost:4000/user/auth/facebook/callback",
