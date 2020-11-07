@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-  
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-      
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
@@ -66,90 +66,90 @@
             <div class="container">
 
                 <!-- Doctor Widget -->
-                <div class="card">
+                <div class="card-laptopprofile">
                     <div class="card-body">
                         <div class="col-md-6 col-lg-4 col-xl-3 sscreen p-0" style="margin-top: -30px;">
                             <div class="profile-widget">
                                 <div style="display: inline-flex;">
-                                <div class="doc-img" style="width:40%;">
-                                    <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                    <div class="doc-img" style="width:40%;">
+                                        <a href="/doctor-profile/?id=<%=doctor._id%>">
                                         <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height:150px;width:100%">
                                     </a>
-                                    
-                                </div>
-                                <div style="width: 60%;padding:10px">
-                                    <h3 class="title">
-                                        <a href="/doctor-profile/?id=<%=doctor._id%>" style="font-size: 1.5rem;">Dr.<%=doctor.name%></a>
-                                        <i class="fas fa-check-circle verified"></i>
-                                    </h3>
-                                    <p class="speciality">
-                                        <%=doctor.department%>
-                                    </p>
-                                    <%var flag = false;%>
-                                    <%if(locals.user){%>
-                                        <%for(fav of locals.user.favourites){
+
+                                    </div>
+                                    <div style="width: 60%;padding:10px">
+                                        <h3 class="title">
+                                            <a href="/doctor-profile/?id=<%=doctor._id%>" style="font-size: 1.5rem;">Dr.<%=doctor.name%></a>
+                                            <i class="fas fa-check-circle verified"></i>
+                                        </h3>
+                                        <p class="speciality">
+                                            <%=doctor.department%>
+                                        </p>
+                                        <%var flag = false;%>
+                                            <%if(locals.user){%>
+                                                <%for(fav of locals.user.favourites){
                                         
                                        
                                     if(fav.toString() == doctor._id)flag = true;%>
 
-                                            <%}%>
-                                                <%}%>
+                                                    <%}%>
+                                                        <%}%>
 
-                                                    <%if(!flag){%>
-                                        <a href="/user/add-favourite/?id=<%=doctor._id%>"style="background-color: white;color:black;display: block;
+                                                            <%if(!flag){%>
+                                                                <a href="/user/add-favourite/?id=<%=doctor._id%>" style="background-color: white;color:black;display: block;
                                             margin-top: -24px;
                                             margin-bottom: 15px;padding:8px;margin-top:-30px;margin-left:-5px;">
-                                        <i class="far fa-bookmark" style="margin-right: 5px;"></i>Add Favourite
-                                    </a>
-                                    <%}else{%>
-                                        <a style="color:black;padding:8px;margin-top:-30px;display: block;margin-left:-5px; margin-bottom: 15px;">
-                                            <i class="far fa-bookmark"  style="margin-right: 5px;color: red;"></i>Favourite
-                                        </a>
-                                    <%}%>
-                                    <%var sum=0,avg,cnt=doctor.reviews.length;%>
-                                            <%for(review of doctor.reviews){%>
-                                                <%sum+=review.rating;%>
-                                            <%}%>
-                                            <%avg=sum/cnt;%>
-                                            <div class="rating" style="margin-top: -15px;">
-                                                <%if(avg>=1){%>
-                                                <i class="fas fa-star filled"></i>
-                                                <%}else{%>
-                                                    <i class="fas fa-star"></i>
-                                                <%}%>
-                                                <%if(avg>=2){%>
-                                                <i class="fas fa-star filled"></i>
-                                                <%}else{%>
-                                                    <i class="fas fa-star"></i>
-                                                <%}%>
-                                                <%if(avg>=3){%>
-                                                <i class="fas fa-star filled"></i>
-                                                <%}else{%>
-                                                    <i class="fas fa-star"></i>
-                                                <%}%>
-                                                <%if(avg>=4){%>
-                                                <i class="fas fa-star filled"></i>
-                                                <%}else{%>
-                                                    <i class="fas fa-star"></i>
-                                                <%}%>
-                                                <%if(avg>=5){%>
-                                                <i class="fas fa-star filled"></i>
-                                                <%}else{%>
-                                                    <i class="fas fa-star"></i>
-                                                <%}%>
-                                                <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
-                                            </div>
-                                            
-        
+                                                                    <i class="far fa-bookmark" style="margin-right: 5px;"></i>Add Favourite
+                                                                </a>
+                                                                <%}else{%>
+                                                                    <a style="color:black;padding:8px;margin-top:-30px;display: block;margin-left:-5px; margin-bottom: 15px;">
+                                                                        <i class="far fa-bookmark" style="margin-right: 5px;color: red;"></i>Favourite
+                                                                    </a>
+                                                                    <%}%>
+                                                                        <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                                                            <%for(review of doctor.reviews){%>
+                                                                                <%sum+=review.rating;%>
+                                                                                    <%}%>
+                                                                                        <%avg=sum/cnt;%>
+                                                                                            <div class="rating" style="margin-top: -15px;">
+                                                                                                <%if(avg>=1){%>
+                                                                                                    <i class="fas fa-star filled"></i>
+                                                                                                    <%}else{%>
+                                                                                                        <i class="fas fa-star"></i>
+                                                                                                        <%}%>
+                                                                                                            <%if(avg>=2){%>
+                                                                                                                <i class="fas fa-star filled"></i>
+                                                                                                                <%}else{%>
+                                                                                                                    <i class="fas fa-star"></i>
+                                                                                                                    <%}%>
+                                                                                                                        <%if(avg>=3){%>
+                                                                                                                            <i class="fas fa-star filled"></i>
+                                                                                                                            <%}else{%>
+                                                                                                                                <i class="fas fa-star"></i>
+                                                                                                                                <%}%>
+                                                                                                                                    <%if(avg>=4){%>
+                                                                                                                                        <i class="fas fa-star filled"></i>
+                                                                                                                                        <%}else{%>
+                                                                                                                                            <i class="fas fa-star"></i>
+                                                                                                                                            <%}%>
+                                                                                                                                                <%if(avg>=5){%>
+                                                                                                                                                    <i class="fas fa-star filled"></i>
+                                                                                                                                                    <%}else{%>
+                                                                                                                                                        <i class="fas fa-star"></i>
+                                                                                                                                                        <%}%>
+                                                                                                                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                                                            </div>
+
+
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="pro-content">
-                                    <div class="clinic-details"> 
+                                    <div class="clinic-details">
                                         <p><i class="fas fa-hospital"></i><span style="font-weight: 600;margin-left: 10px;"><%=doctor.clinicname%></span> &nbsp;<span style="font-size: 0.8rem;">  |   &nbsp; <%=doctor.clinicaddr%></span></p>
 
                                     </div>
-                                  
-                                   
+
+
                                     <ul class="available-info" style="margin-top: -8px;">
                                         <li>
                                             <i class="fas fa-map-marker-alt"></i>
@@ -157,18 +157,19 @@
                                                 <%=doctor.contacts.state%>
                                         </li>
                                         <%var a = new Date();%>
-                                        <li>
-                                            <i class="far fa-clock"></i> Available Today : <%=a.toDateString()%>
-                                        </li>
-                                       
-                                        
-                                        
-                                        <li>
-                                            <i class="far fa-money-bill-alt"></i>
-                                            Rs <%=doctor.booking_fee%><i class="fas fa-info-circle ml-2" data-toggle="tooltip" ></i>
-                                        </li>
-                                        
-                                       
+                                            <li>
+                                                <i class="far fa-clock"></i> Available Today :
+                                                <%=a.toDateString()%>
+                                            </li>
+
+
+
+                                            <li>
+                                                <i class="far fa-money-bill-alt"></i> Rs
+                                                <%=doctor.booking_fee%><i class="fas fa-info-circle ml-2" data-toggle="tooltip"></i>
+                                            </li>
+
+
                                     </ul>
                                     <div class="row row-sm">
                                         <div class="col-6">
@@ -237,68 +238,68 @@
 
                                     </p>
                                     <%var sum=0,avg,cnt=doctor.reviews.length;%>
-                                    <%for(review of doctor.reviews){%>
-                                        <%sum+=review.rating;%>
-                                    <%}%>
-                                    <%avg=sum/cnt;console.log(avg,sum)%>
-                                    <div class="rating text-center">
-                                        <%if(avg>=1){%>
-                                        <i class="fas fa-star filled"></i>
-                                        <%}else{%>
-                                            <i class="fas fa-star"></i>
-                                        <%}%>
-                                        <%if(avg>=2){%>
-                                        <i class="fas fa-star filled"></i>
-                                        <%}else{%>
-                                            <i class="fas fa-star"></i>
-                                        <%}%>
-                                        <%if(avg>=3){%>
-                                        <i class="fas fa-star filled"></i>
-                                        <%}else{%>
-                                            <i class="fas fa-star"></i>
-                                        <%}%>
-                                        <%if(avg>=4){%>
-                                        <i class="fas fa-star filled"></i>
-                                        <%}else{%>
-                                            <i class="fas fa-star"></i>
-                                        <%}%>
-                                        <%if(avg>=5){%>
-                                        <i class="fas fa-star filled"></i>
-                                        <%}else{%>
-                                            <i class="fas fa-star"></i>
-                                        <%}%>
-                                        <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
-                                    </div>
+                                        <%for(review of doctor.reviews){%>
+                                            <%sum+=review.rating;%>
+                                                <%}%>
+                                                    <%avg=sum/cnt;console.log(avg,sum)%>
+                                                        <div class="rating text-center">
+                                                            <%if(avg>=1){%>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <%}else{%>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <%}%>
+                                                                        <%if(avg>=2){%>
+                                                                            <i class="fas fa-star filled"></i>
+                                                                            <%}else{%>
+                                                                                <i class="fas fa-star"></i>
+                                                                                <%}%>
+                                                                                    <%if(avg>=3){%>
+                                                                                        <i class="fas fa-star filled"></i>
+                                                                                        <%}else{%>
+                                                                                            <i class="fas fa-star"></i>
+                                                                                            <%}%>
+                                                                                                <%if(avg>=4){%>
+                                                                                                    <i class="fas fa-star filled"></i>
+                                                                                                    <%}else{%>
+                                                                                                        <i class="fas fa-star"></i>
+                                                                                                        <%}%>
+                                                                                                            <%if(avg>=5){%>
+                                                                                                                <i class="fas fa-star filled"></i>
+                                                                                                                <%}else{%>
+                                                                                                                    <i class="fas fa-star"></i>
+                                                                                                                    <%}%>
+                                                                                                                        <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                        </div>
 
-                                    <div class="clinic-details">
-                                        <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
-                                            <%=doctor.contacts.city%>
-                                                <%=doctor.contacts.country%> - <a href="javascript:void(0);">Get Directions</a></p>
-                                        <ul class="clinic-gallery">
-                                            <%for(doctorsclinic of doctor.clinicphoto){%>
-                                                <li>
-                                                    <a href="<%=doctorsclinic%>" data-fancybox="gallery">
+                                                        <div class="clinic-details">
+                                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                                                <%=doctor.contacts.city%>
+                                                                    <%=doctor.contacts.country%> - <a href="javascript:void(0);">Get Directions</a></p>
+                                                            <ul class="clinic-gallery">
+                                                                <%for(doctorsclinic of doctor.clinicphoto){%>
+                                                                    <li>
+                                                                        <a href="<%=doctorsclinic%>" data-fancybox="gallery">
                                                         <img src="<%=doctorsclinic%> " alt="Feature" height="50px">
                                                     </a>
-                                                </li>
-                                                <%}%>
+                                                                    </li>
+                                                                    <%}%>
 
-                                        </ul>
-                                    </div>
-                                    <div class="clinic-services">
-                                        <%if(doctor.services){%>
-                                            <%var service = doctor.services.toString().split(',')%>
-                                                <%for(temp of service){%>
-                                                    <span><%=temp%></span>
-                                                    <%}}%>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="clinic-services">
+                                                            <%if(doctor.services){%>
+                                                                <%var service = doctor.services.toString().split(',')%>
+                                                                    <%for(temp of service){%>
+                                                                        <span><%=temp%></span>
+                                                                        <%}}%>
 
-                                    </div>
+                                                        </div>
                                 </div>
                             </div>
                             <div class="doc-info-right">
                                 <div class="clini-infos">
                                     <ul>
-                                       
+
                                         <li><i class="fas fa-map-marker-alt"></i>
                                             <%=doctor.contacts.city%>
                                                 <%=doctor.contacts.state%>
@@ -310,26 +311,26 @@
                                 </div>
                                 <div class="doctor-action">
                                     <%var flag = false;%>
-                                                <%if(locals.user){%>
-                                                    <%for(fav of locals.user.favourites){
+                                        <%if(locals.user){%>
+                                            <%for(fav of locals.user.favourites){
                                                     
                                                    
                                                 if(fav.toString() == doctor._id)flag = true;%>
 
-                                                        <%}%>
-                                                            <%}%>
+                                                <%}%>
+                                                    <%}%>
 
-                                                                <%if(!flag){%>
-                                    <a href="javascript:void(0)" class="btn btn-white fav-btn">
-                                        <i class="far fa-bookmark"></i>&nbsp;Add Favourite
-                                    </a>
-                                    <%}else{%>
-                                        <a href="javascript:void(0)" class="btn btn-white fav-btn" style="background-color: red;color:white;">
-                                            <i class="far fa-bookmark"></i>&nbsp;Favourite
-                                        </a>
+                                                        <%if(!flag){%>
+                                                            <a href="javascript:void(0)" class="btn btn-white fav-btn">
+                                                                <i class="far fa-bookmark"></i>&nbsp;Add Favourite
+                                                            </a>
+                                                            <%}else{%>
+                                                                <a href="javascript:void(0)" class="btn btn-white fav-btn" style="background-color: red;color:white;">
+                                                                    <i class="far fa-bookmark"></i>&nbsp;Favourite
+                                                                </a>
 
-                                        <%}%>
-                                   
+                                                                <%}%>
+
                                 </div>
                                 <div class="clinic-booking">
                                     <a class="apt-btn" href="/booking/?id=<%=doctor._id%>">Book Appointment</a>
@@ -338,10 +339,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-mobileprofile">
+                    <div style="height: 200px;width: 100%; border: 1px solid black; border-radius: 5px;">
+                    </div>
+                </div>
                 <!-- /Doctor Widget -->
 
                 <!-- Doctor Details Tab -->
-                <div class="card" >
+                <div class="card">
                     <div class="card-body pt-0">
 
                         <!-- Tab Menu -->
@@ -364,7 +369,7 @@
                         <!-- /Tab Menu -->
 
                         <!-- Tab Content -->
-                        <div class="tab-content pt-0" >
+                        <div class="tab-content pt-0">
 
                             <!-- Overview Content -->
                             <div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
@@ -509,7 +514,7 @@
                             <div role="tabpanel" id="doc_locations" class="tab-pane fade">
 
                                 <!-- Location List -->
-                                <div class="location-list" style="padding: 5px !important;"> 
+                                <div class="location-list" style="padding: 5px !important;">
                                     <div class="row">
 
                                         <!-- Clinic Content -->
@@ -561,16 +566,16 @@
                                                             <%if(typeof(time.start) == 'object'){%>
 
                                                                 <%for(let i = 1;i<time.start.length;i++){%>
-                                                                   </br>
+                                                                    </br>
                                                                     <%}%>
-                                                            
 
-                                                            <%}else{%>
-                                                               
 
-                                                            <%}%>
+                                                                        <%}else{%>
 
-                                                        <%}%>
+
+                                                                            <%}%>
+
+                                                                                <%}%>
                                                     </p>
                                                     <p class="timings-times">
                                                         <%for(time of doctor.schedule_time){%>
@@ -581,11 +586,11 @@
                                                                     <%}%>
                                                                 </span>
 
-                                                            <%}else{%>
-                                                                <span> &nbsp;&nbsp;&nbsp;<%=time.start%> - <%=time.end%></span>
+                                                                <%}else{%>
+                                                                    <span> &nbsp;&nbsp;&nbsp;<%=time.start%> - <%=time.end%></span>
 
-                                                            <%}%>
-                                                            <%}%>
+                                                                    <%}%>
+                                                                        <%}%>
 
                                                     </p>
                                                 </div>
@@ -652,7 +657,7 @@
                                             <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
                                         </div>
                                         <hr>
-                                       
+
                                         <div class="submit-section">
                                             <button type="submit" class="btn btn-primary submit-btn">Add Review</button>
                                         </div>
@@ -662,63 +667,65 @@
                                 </div>
 
 
-                             <div class="widget review-listing">
+                                <div class="widget review-listing">
                                     <ul class="comments-list">
 
                                         <%for(review of doctor.reviews){%>
-                                        
-                                        <li>
-                                            <div class="comment">
-                                            <img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%=review.pid.avatar%>" onerror="this.src='/img/profile.png'">
-                                                <div class="comment-body">
-                                                    <div class="meta-data">
-                                                        <span class="comment-author"><%=review.pid.name%></span>
-                                                        <span class="comment-date">Reviewed <%=review.createdAt.toDateString()%></span>
-                                                        <%var avg = review.rating;%>
-                                                       
-                                                        <div class="review-count rating">
-                                                            <%if(avg>=1){%>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <%}else{%>
-                                                                    <i class="fas fa-star"></i>
-                                                                <%}%>
-                                                                <%if(avg>=2){%>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <%}else{%>
-                                                                    <i class="fas fa-star"></i>
-                                                                <%}%>
-                                                                <%if(avg>=3){%>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <%}else{%>
-                                                                    <i class="fas fa-star"></i>
-                                                                <%}%>
-                                                                <%if(avg>=4){%>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <%}else{%>
-                                                                    <i class="fas fa-star"></i>
-                                                                <%}%>
-                                                                <%if(avg>=5){%>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <%}else{%>
-                                                                    <i class="fas fa-star"></i>
-                                                                <%}%>
+
+                                            <li>
+                                                <div class="comment">
+                                                    <img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%=review.pid.avatar%>" onerror="this.src='/img/profile.png'">
+                                                    <div class="comment-body">
+                                                        <div class="meta-data">
+                                                            <span class="comment-author"><%=review.pid.name%></span>
+                                                            <span class="comment-date">Reviewed <%=review.createdAt.toDateString()%></span>
+                                                            <%var avg = review.rating;%>
+
+                                                                <div class="review-count rating">
+                                                                    <%if(avg>=1){%>
+                                                                        <i class="fas fa-star filled"></i>
+                                                                        <%}else{%>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <%}%>
+                                                                                <%if(avg>=2){%>
+                                                                                    <i class="fas fa-star filled"></i>
+                                                                                    <%}else{%>
+                                                                                        <i class="fas fa-star"></i>
+                                                                                        <%}%>
+                                                                                            <%if(avg>=3){%>
+                                                                                                <i class="fas fa-star filled"></i>
+                                                                                                <%}else{%>
+                                                                                                    <i class="fas fa-star"></i>
+                                                                                                    <%}%>
+                                                                                                        <%if(avg>=4){%>
+                                                                                                            <i class="fas fa-star filled"></i>
+                                                                                                            <%}else{%>
+                                                                                                                <i class="fas fa-star"></i>
+                                                                                                                <%}%>
+                                                                                                                    <%if(avg>=5){%>
+                                                                                                                        <i class="fas fa-star filled"></i>
+                                                                                                                        <%}else{%>
+                                                                                                                            <i class="fas fa-star"></i>
+                                                                                                                            <%}%>
+                                                                </div>
                                                         </div>
+                                                        <p class="recommended"><i class="far fa-thumbs-up"></i>
+                                                            <%=review.title%>
+                                                        </p>
+                                                        <p class="comment-content">
+                                                            <%=review.review_description%>
+                                                        </p>
+
                                                     </div>
-                                                    <p class="recommended"><i class="far fa-thumbs-up"></i> <%=review.title%></p>
-                                                    <p class="comment-content">
-                                                        <%=review.review_description%>
-                                                    </p>
-                                                  
                                                 </div>
-                                            </div>
 
 
-                                          
 
-                                        </li>
-                                        <%}%>
 
-                                        <!-- <li>
+                                            </li>
+                                            <%}%>
+
+                                                <!-- <li>
                                             <div class="comment">
                                                 <img class="avatar avatar-sm rounded-circle" alt="User Image" src="/img/patients/patient2.jpg">
                                                 <div class="comment-body">
@@ -758,13 +765,13 @@
                                     </ul>
 
 
-                                  
+
 
 
                                 </div>
 
 
-                             
+
 
                             </div>
 
@@ -794,33 +801,33 @@
                                                                     <%for(time of doctor.schedule_time){%>
                                                                         <%var n1 = time.day.toUpperCase();%>
                                                                             <%var n2 = dayOfWeek.toUpperCase();%>
-                                                                                
 
-                                                                                        <%if(n1 == n2){%>
-                                                                                            <%d1=time;}%>
 
-                                                                                                <%}%>
-                                                                                                    <%if(d1 == undefined){%>
-                                                                                                        <span class="open-status"><span class="badge bg-success-light">Not Available</span></span>
+                                                                                <%if(n1 == n2){%>
+                                                                                    <%d1=time;}%>
 
-                                                                                                        <%}else{%>
-                                                                                                            <%if(typeof(d1.start) == 'object'){%>
-                                                                                                                <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
-                                                                                                                <%for(let i = 0;i<d1.start.length;i++){%>
-                                                                                                                   
+                                                                                        <%}%>
+                                                                                            <%if(d1 == undefined){%>
+                                                                                                <span class="open-status"><span class="badge bg-success-light">Not Available</span></span>
 
-                                                                                                                    <span class="time"><%=d1.start[i]%>-<%=d1.end[i]%></span> 
+                                                                                                <%}else{%>
+                                                                                                    <%if(typeof(d1.start) == 'object'){%>
+                                                                                                        <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+                                                                                                        <%for(let i = 0;i<d1.start.length;i++){%>
+
+
+                                                                                                            <span class="time"><%=d1.start[i]%>-<%=d1.end[i]%></span>
+                                                                                                            <%}%>
+                                                                                                                <%}else{%>
+                                                                                                                    <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
+
+                                                                                                                    <span class="time"><%=d1.start%>-<%=d1.end%></span>
                                                                                                                     <%}%>
-                                                                                                                    <%}else{%>                                                                                                                   
-                                                                                                            <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
-
-                                                                                                            <span class="time"><%=d1.start%>-<%=d1.end%></span>
-                                                                                                            <%}%>
-                                                                                                            <%}%>
+                                                                                                                        <%}%>
 
                                                             </div>
                                                     </div>
-                                   
+
                                                     <%for(time of doctor.schedule_time){%>
                                                         <div class="listing-day">
                                                             <div class="day">
@@ -828,13 +835,13 @@
                                                             </div>
                                                             <div class="time-items">
                                                                 <%if(typeof(time.start) == 'object'){%>
-                                                                <%for(let i = 0;i<time.start.length;i++){%>
-                                                                    <span class="time"> <%=time.start[i]%> -<%=time.end[i]%></span>
-                                                                    <%}%>
-                                                                    <%}else{%>
+                                                                    <%for(let i = 0;i<time.start.length;i++){%>
+                                                                        <span class="time"> <%=time.start[i]%> -<%=time.end[i]%></span>
+                                                                        <%}%>
+                                                                            <%}else{%>
 
-                                                                <span class="time"> <%=time.start%> -<%=time.end%></span>
-                                                                <%}%>
+                                                                                <span class="time"> <%=time.start%> -<%=time.end%></span>
+                                                                                <%}%>
                                                             </div>
                                                         </div>
                                                         <%}%>

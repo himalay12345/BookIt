@@ -76,6 +76,14 @@
     display: block;
 }
 
+.card-laptopprofile {
+    display: block;
+}
+
+.card-mobileprofile {
+    display: none;
+}
+
 .patient-li {
     height: auto;
     width: 225px;
@@ -97,8 +105,8 @@
     margin-top: 15px;
 }
 
-.no_admin{
-    display: block  ;
+.no_admin {
+    display: block;
 }
 
 .patient-li h5 {
@@ -2819,7 +2827,6 @@ button.bg-danger:hover {
     display: flex;
     list-style: none;
     position: absolute;
-    
     left: 20%;
     top: 50px;
     /* margin-top: 50px; */
@@ -5017,15 +5024,16 @@ html.menu-opened body {
     width: 30%;
 }
 
-#seats a{
-    height:50px !important;
-    width:50px !important;
+#seats a {
+    height: 50px !important;
+    width: 50px !important;
 }
 
-#smseats a{
-    height:50px !important;
-    width:50px !important;
+#smseats a {
+    height: 50px !important;
+    width: 50px !important;
 }
+
 .time-slot li .timing {
     background-color: #e9e9e9;
     border: 1px solid #e9e9e9;
@@ -8560,6 +8568,12 @@ html.menu-opened body {
     .h6 {
         font-size: 0.75rem;
     }
+    .card-laptopprofile {
+        display: none;
+    }
+    .card-mobileprofile {
+        display: block;
+    }
     .specilities-consult {
         font-size: 22px;
         margin-left: 21px;
@@ -8609,33 +8623,28 @@ html.menu-opened body {
     .slick-arrow {
         display: none !important;
     }
-
-    .mbanner{
-        margin-top:-20px;
+    .mbanner {
+        margin-top: -20px;
     }
-
-    .m30{
-        margin-top:30px;
+    .m30 {
+        margin-top: 30px;
     }
-
-    .mmbanner{
+    .mmbanner {
         margin-top: 10px;
     }
-
-    .mmmbanner{
+    .mmmbanner {
         margin-top: -25px !important;
     }
-
     .common-consult::-webkit-scrollbar {
-  display: none;
-}
-
-.common-consult {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-
-    .m20{
+        display: none;
+    }
+    .common-consult {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+    .m20 {
         margin-top: 20px;
     }
     .acrossm {
@@ -8672,11 +8681,9 @@ html.menu-opened body {
         margin-top: 12px !important;
         font-family: unset !important;
     }
-
-    #noa{
+    #noa {
         margin-left: 0px !important;
     }
-    
     .price {
         padding-left: 18px;
         margin-top: -11px;
@@ -8689,7 +8696,7 @@ html.menu-opened body {
     .lommy {
         display: none;
     }
-    .mlogo{
+    .mlogo {
         margin-top: 25px !important;
         margin-left: -88px !important;
         height: 60px !important;
@@ -9057,7 +9064,6 @@ html.menu-opened body {
     }
     .main-nav {
         position: static;
-     
         left: 0%;
     }
     .header-navbar-rht {
@@ -9251,9 +9257,8 @@ html.menu-opened body {
     #inclinic {
         padding: 10px 0px;
     }
-
-    .msearch{
-        margin-top:10px;
+    .msearch {
+        margin-top: 10px;
     }
     .social-sm {
         display: none !important;
@@ -9366,7 +9371,7 @@ html.menu-opened body {
         z-index: 1045;
         transform: translateX(-320px);
         transition: all 0.4s;
-        background-color:#478e8e !important;
+        background-color: #478e8e !important;
     }
     .menu-header {
         height: 60px;
