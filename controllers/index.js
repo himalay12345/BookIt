@@ -1163,7 +1163,8 @@ module.exports.verifyDoctor = async(req, res) => {
                     return res.render('doctor-phone-verify', {
                         title: 'Phone verification',
                         phone: req.body.phone,
-                        id: doctor._id
+                        id: doctor._id,
+                        designation:'Verify'
 
                     });
                 });

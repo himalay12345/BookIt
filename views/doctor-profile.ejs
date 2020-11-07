@@ -622,7 +622,9 @@
                                     <form action="/user/doctor-review/?id=<%=doctor._id%>" method="POST">
                                         <div class="form-group">
                                             <label>Review</label>
+                                            <%if(locals.user){%>
                                             <input type="hidden" name="pid" value="<%=locals.user.id%>">
+                                            <%}%>
                                             <div class="star-rating">
                                                 <input id="star-5" type="radio" name="rating" value="5">
                                                 <label for="star-5" title="5 stars">
