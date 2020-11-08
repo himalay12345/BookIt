@@ -1,27 +1,4 @@
-<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>AarogyaHub</title>
-
-    <!-- Favicons-->
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
-
-    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="/css/style1.css">
-    <link rel="stylesheet" href="/css/style.css">
-
-
-</head>
 
 <body>
 
@@ -33,7 +10,7 @@
         <!-- /Header -->
 
         <!-- Home Banner -->
-        <section class="section section-search" style="margin-top: 20px;">
+        <section class="section section-search" style="margin-top: 20px;   background: #f9f9f9 url(<%=assetPath('img/search-bg.png')%>) no-repeat bottom center;">
             <div id="popup1" class="overlay">
                 <div class="popup">
                     <form action="/user/update-type" method="POST">
@@ -96,7 +73,7 @@
                             <a href="/specialist/?dep=General Physician">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/physical.jfif" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/physical.jfif')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>General Physician</p>
@@ -106,7 +83,7 @@
                             <a href="/specialist/?dep=Ophthalmology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/eye.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/eye.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Ophthalmology</p>
@@ -116,7 +93,7 @@
                             <a href="/specialist/?dep=Dermatology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/hair.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/hair.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Dermatology</p>
@@ -126,7 +103,7 @@
                             <a href="/specialist/?dep=Paediatrics">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/child.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/child.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Paediatrics</p>
@@ -138,7 +115,7 @@
                             <a href="/specialist/?dep=Urology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/urology.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/urology.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Urology</p>
@@ -151,7 +128,7 @@
                             <a href="/specialist/?dep=Neurology">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/brain.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/brain.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Neurology</p>
@@ -164,7 +141,7 @@
                             <a href="/specialist/?dep=Orthopedic">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/bone.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/bone.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Orthopedic</p>
@@ -177,7 +154,7 @@
                             <a href="/specialist/?dep=Cardiologist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/heart.jpg" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/heart.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Cardiologist</p>
@@ -190,7 +167,7 @@
                             <a href="/specialist/?dep=Dentist">
                                 <div class="speicality-item text-center">
                                     <div class="speicality-img">
-                                        <img src="/img/specialities/teeth.png" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <img src="<%=assetPath('img/specialities/teeth.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
                                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <p>Dentist</p>
@@ -287,7 +264,7 @@
                             <div class="about-content">
                                 <p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is now
                                     a critical tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
-                                <a href="javascript:;">Read More..</a>
+                                <a href="javascript:;"class="tcolor">Read More..</a>
                             </div>
                         </div>
                         <div class="col-lg-8">
@@ -336,11 +313,11 @@
                                                 </li>
                                             </ul>
                                             <div class="row row-sm">
-                                                <div class="col-6">
-                                                    <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn">View Profile</a>
+                                                <div class="col-6 cloginbtn">
+                                                    <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn tbcolor">View Profile</a>
                                                 </div>
                                                 <div class="col-6">
-                                                    <a href="/booking" class="btn book-btn">Book Now</a>
+                                                    <a href="/booking" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -362,7 +339,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-5 features-img">
-                            <img src="/img/features/feature.png" class="img-fluid" alt="Feature">
+                            <img src="<%=assetPath('img/features/feature.png')%>" class="img-fluid" alt="Feature">
                         </div>
                         <div class="col-md-7">
                             <div class="section-header">
@@ -411,7 +388,7 @@
                                 <p>
 
                                     <a href="/app-coming-soon" class="btn btn-store" style="margin-top: -40px;">
-                                        <span><img src="/img/googleplay.png" style="height: 70px;width:250px;margin-left: 0px;"></span>
+                                        <span><img src="<%=assetPath('img/googleplay.png')%>" style="height: 70px;width:250px;margin-left: 0px;"></span>
                                         <span class="btn-label">Download on the</span>
                                         <span class="btn-caption">Google Play Store</span>
                                     </a>
@@ -483,7 +460,7 @@
 
                             </div>
                             <div class="doctor-hi">
-                                <img class="hi-image" src="/img/patients/doctoron.png" style="margin-left: -10px !important;">
+                                <img class="hi-image" src="<%=assetPath('img/patients/doctoron.png')%>" style="margin-left: -10px !important;">
                             </div>
                             <div class="btn sb-sd-3 st-sd-5" style="position: absolute;    top: 58px;
                             left: -6px;">
@@ -620,7 +597,7 @@
                         <div class="col-sm-12 upper" style="height: 50%; padding-left: 2px; display: inline-flex; margin-left: -6px;">
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
-                                    <img src="/img/patients/blood1.jpg" style="height: 100%;border-radius: 10px;width:100%">
+                                    <img src="<%=assetPath('img/patients/blood1.jpg')%>" style="height: 100%;border-radius: 10px;width:100%">
                                 </div>
                                 <div>
                                     <h3 style="font-size: 0.9375rem;
@@ -636,7 +613,7 @@
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
                                 <div style="height: 70%;width: 100%; border-radius: 10px;">
                                     <a href="/coming-soon">
-                                        <img src="/img/patients/checkup10.jfif" style="height: 100%;width:100%;border-radius: 10px;">
+                                        <img src="<%=assetPath('img/patients/checkup10.jfif')%>" style="height: 100%;width:100%;border-radius: 10px;">
                                     </a>
                                 </div>
                                 <div>
@@ -655,7 +632,7 @@
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;width: 100%;">
                                     <a href="/coming-soon">
-                                        <img src="/img/patients/health13.jfif" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+                                        <img src="<%=assetPath('img/patients/health13.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;"></a>
                                 </div>
                                 <div>
                                     <a href="/coming-soon">
@@ -677,7 +654,7 @@
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
                                     <a href="/coming-soon">
-                                        <img src="/img/patients/health6.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                        <img src="<%=assetPath('img/patients/health6.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;">
                                     </a>
                                 </div>
                                 <div>
@@ -696,7 +673,7 @@
                             <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%;width: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
                                 <div style="height: 70%; border-radius: 10px;">
                                     <a href="/coming-soon">
-                                        <img src="/img/patients/checkup2.jfif" style="height: 100%;width: 100%;border-radius: 10px;">
+                                        <img src="<%=assetPath('img/patients/checkup2.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;">
                                     </a>
                                 </div>
                                 <div>
@@ -752,7 +729,7 @@
             <section style="height: 360px;padding:15px 8px;background-color: #478e8e;">
                 <div style="display: inline-flex;margin-top: 10px;">
                     <div style="width: 20%;">
-                        <img src="/img/crowns.png" style="height: 50px;width:60px;">
+                        <img src="<%=assetPath('img/crowns.png')%>" style="height: 50px;width:60px;">
                     </div>
                     <div style="width: 80%;">
                         <h4 style="font-weight: bold;font-size: 1.5rem;color:white">India's 1<sup>st</sup> Online Patient Tracking System Website.</h4>
@@ -760,10 +737,10 @@
 
                 </div>
                 <ul style="list-style: none;margin-top: 30px;margin-left: -20px;">
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/calendar.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Book the doctor online.</li>
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/waiting.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Sit, Relax and track your turn on </li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/calendar.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Book the doctor online.</li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/waiting.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Sit, Relax and track your turn on </li>
                     <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;">our patient tracking system.</li>
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="/img/visitor.png" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Get the reminder from us and </li>
+                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/visitor.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Get the reminder from us and </li>
                     <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;"> visit the doctor.</li>
                 </ul>
 
@@ -775,7 +752,7 @@
                     <div class="app-download__top" style="height: 300px;width: 100%;">
                         <div class="image">
                             <span class="LazyLoad is-visible">
-                            <img class="app-download__top__image" src="/img/and.png" style="height: 100%;width: 70%;margin-left: 50px;">
+                            <img class="app-download__top__image" src="<%=assetPath('img/and.png')%>" style="height: 100%;width: 70%;margin-left: 50px;">
                         </span>
                         </div>
                     </div>
@@ -808,18 +785,7 @@
             <!-- /Main Wrapper -->
 
             <!-- jQuery -->
-            <script src="/js/jquery.min.js"></script>
-
-            <!-- Bootstrap Core JS -->
-            <script src="/js/popper.min.js"></script>
-            <script src="/js/bootstrap.min.js"></script>
-
-            <!-- Slick JS -->
-            <script src="/js/slick.js"></script>
-
-            <!-- Custom JS -->
-            <script src="/js/script1.js"></script>
-            <script src="/js/script.js"></script>
+           
 
 
 

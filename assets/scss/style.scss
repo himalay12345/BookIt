@@ -691,6 +691,7 @@
     color: black !important;
 }
 
+
 .removed {
     text-align: center;
     font-size: 16px;
@@ -1268,8 +1269,8 @@ button.bg-danger:hover {
 }
 
 .btn-primary {
-    background-color: #09e5ab;
-    border: 1px solid #09e5ab;
+    background-color:#478e8e;
+    border: 1px solid #478e8e;
 }
 
 .btn-primary:hover,
@@ -3504,7 +3505,7 @@ html.menu-opened body {
 -----------------------*/
 
 .section-search {
-    background: #f9f9f9 url(../img/search-bg.png) no-repeat bottom center;
+ 
     min-height: 450px;
     background-size: 100% auto;
     position: relative;
@@ -10028,4 +10029,26 @@ input:-webkit-autofill:focus {
 .card-img-top-250 {
     max-height: 250px !important;
     overflow: hidden !important;
+}
+
+.cloginbtn a{
+border-color:#478e8e !important;
+color:#478e8e !important;
+}
+
+.cloginbtn a:hover{
+    background-color:#478e8e !important;
+    color:white !important;
+}
+
+.tcolor{
+    background-color:#478e8e !important;
+    color:white !important;
+    border:none !important;
+}
+
+.tbcolor{
+ 
+    color: #478e8e!important;
+    border-color:#478e8e !important;
 }

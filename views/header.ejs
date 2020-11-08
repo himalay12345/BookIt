@@ -8,14 +8,14 @@
                     </i>
                 </a>
                 <a href="/" class="navbar-brand logo" style="width:250px !important;">
-                    <img src="/img/aalogo.png" style="height:90px;width:220px;margin-top: -12px;margin-left: 0px;" class="img-fluid mlogo" alt="Logo">
+                    <img src="<%=assetPath('img/aalogo.png')%>" style="height:90px;width:220px;margin-top: -12px;margin-left: 0px;" class="img-fluid mlogo" alt="Logo">
                 </a>
 
             </div>
             <div class="main-menu-wrapper">
                 <div class="menu-header">
                     <a href="/" class="menu-logo">
-                        <img src="/img/aalogo.png" style="height: 65px;
+                        <img src="<%=assetPath('img/aalogo.png')%>" style="height: 65px;
                         width: 157px;
                         margin-top: -4px;" class="img-fluid" alt="Logo">
                     </a>
@@ -114,7 +114,7 @@
                 <%if(locals.user){%>
 
                     <%}else{%>
-                        <li class="nav-item">
+                        <li class="nav-item cloginbtn">
                             <a class="nav-link header-login" href="/login">Login </a>
                         </li>
                         <%}%>
@@ -140,7 +140,7 @@
                                             <a href="#">
                                                 <div class="media">
                                                     <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"'>
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
                                             </span>
                                                     <div class="media-body chng">
                                                         <a href="/doctor-terms-and-condition">
@@ -161,7 +161,7 @@
                                                         <a href="/doctor-profile/?id=<%=locals.user.notification[i].did._id%>">
                                                             <div class="media">
                                                                 <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.notification[i].did.avatar%>" onerror='this.src="/img/profile.png"'>
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.notification[i].did.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
                                             </span>
                                                                 <div class="media-body">
                                                                     <p class="noti-details"><span class="noti-title"><%=locals.user.notification[i].message%></p>
@@ -188,12 +188,12 @@
                     <%if(locals.user.type == 'Doctor'){%>
                         <li class="nav-item dropdown has-arrow">
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
+                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
                             </a>
                             <div class="dropdown-menu profile-drop">
                                 <div class="user-header">
                                     <div class="avatar avatar-sm">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="user-text">
                                         <h6>Dr.
@@ -220,12 +220,12 @@
                             <%if(locals.user.type == 'Patient'){%>
                                 <li class="nav-item dropdown has-arrow">
                                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
+                                        <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
                                     </a>
                                     <div class="dropdown-menu profile-drop">
                                         <div class="user-header">
                                             <div class="avatar avatar-sm">
-                                                <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/profile.png"' class="avatar-img rounded-circle">
+                                                <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="<%=assetPath('img/profile.png')%>"' class="avatar-img rounded-circle">
                                             </div>
                                             <div class="user-text">
                                                 <h6>
@@ -251,12 +251,12 @@
                                     <%if(locals.user.type == 'Staff'){%>
                                         <li class="nav-item dropdown has-arrow">
                                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' width="31" alt="Ryan Taylor"></span>
+                                                <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
                                             </a>
                                             <div class="dropdown-menu profile-drop">
                                                 <div class="user-header">
                                                     <div class="avatar avatar-sm">
-                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image" class="avatar-img rounded-circle">
+                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image" class="avatar-img rounded-circle">
                                                     </div>
                                                     <div class="user-text">
                                                         <h6>
