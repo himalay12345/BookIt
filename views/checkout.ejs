@@ -37,12 +37,12 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-      
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-       
-        <div class="breadcrumb-bar paddingt" style="padding-top:50px !important">
+
+        <div class="breadcrumb-bar paddingt" style="padding-top:12px !important">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -68,140 +68,142 @@
                         <div class="card">
                             <div class="card-body">
 
-                               
-                                    
 
-                                   
-                                    <div class="info-widget">
-                                        <h4 class="card-title">Patient Details</h4>
-                                        <div class="row">
-                                            <div class="col-md-11 col-11" style="border:1px solid lightgrey;border-radius:5px;padding:8px;margin-left:15px;margin-bottom: 15px;">
-                                                <div class="form-group" style="margin-bottom: 0px !important;">
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: 15px;" checked  onchange="display1();"><span><%=locals.user.name%></span></br>
-                                                    <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: -10px;" onchange="display();"><span>Someone Else</span>
-                                                </div>
+
+
+
+                                <div class="info-widget">
+                                    <h4 class="card-title">Patient Details</h4>
+                                    <div class="row">
+                                        <div class="col-md-11 col-11" style="border:1px solid lightgrey;border-radius:5px;padding:8px;margin-left:15px;margin-bottom: 15px;">
+                                            <div class="form-group" style="margin-bottom: 0px !important;">
+                                                <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: 15px;" checked onchange="display1();"><span><%=locals.user.name%></span></br>
+                                                <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: -10px;" onchange="display();"><span>Someone Else</span>
                                             </div>
                                         </div>
-                                        <div class="row" id="ownp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about <%=locals.user.name%></h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="type" value="own">
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                <input type="hidden" name="date" value="<%=date%>">
-                                                
-                                                <div class="col-md-12 col-sm-12">                                                
-                                                    <div class="form-group card-label">
-                                                        <label>Name</label>
-                                                        <%if(locals.user.name){%>
+                                    </div>
+                                    <div class="row" id="ownp">
+                                        <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about
+                                            <%=locals.user.name%>
+                                        </h5>
+                                        <form action="/user/confirm-pay" method="POST" style="width: 100%;">
+                                            <input type="hidden" name="type" value="own">
+                                            <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                                            <input type="hidden" name="id" value="<%=id%>">
+                                            <input type="hidden" name="booked" value="<%=booked%>">
+                                            <input type="hidden" name="available" value="<%=available%>">
+                                            <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                            <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                            <input type="hidden" name="date" value="<%=date%>">
+
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label>Name</label>
+                                                    <%if(locals.user.name){%>
                                                         <input class="form-control" type="text" name="name" value="<%=locals.user.name%>" required>
                                                         <%}else{%>
                                                             <input class="form-control" type="text" name="name">
 
-                                                        <%}%>
-                                                    </div>
+                                                            <%}%>
                                                 </div>
-                                               
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Phone</label>
-                                                        <%if(locals.user.phone){%>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label>Phone</label>
+                                                    <%if(locals.user.phone){%>
                                                         <input class="form-control" type="text" name="phone" value="<%=locals.user.phone%>" required>
                                                         <%}else{%>
                                                             <input class="form-control" type="text" name="phone">
-                                                        <%}%>
+                                                            <%}%>
 
-                                                    </div>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Address</label>
-                                                        <%if(locals.user.contacts.address){%>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label>Address</label>
+                                                    <%if(locals.user.contacts.address){%>
                                                         <input class="form-control" type="text" name="address" value="<%=locals.user.contacts.address%>" required>
                                                         <%}else{%>
                                                             <input class="form-control" type="text" name="address">
-                                                        <%}%>
-                                                    </div>
+                                                            <%}%>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Age</label>
-                                                        <%if(locals.user.age){%>
-                                                            <input class="form-control" type="number" name="age" value="<%=locals.user.age%>" required>
-                                                            <%}else{%>
-                                                                <input class="form-control" type="number" name="age">
-                                                                <%}%>
-                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="submit-section mt-4">
-                                                    <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Procced to checkout</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="row displayNone" id="patientp">
-                                            <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
-                                            <form action="/user/confirm-pay" method="POST" style="width: 100%;" >
-                                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
-                                                <input type="hidden" name="id" value="<%=id%>">
-                                                <input type="hidden" name="booked" value="<%=booked%>">
-                                                <input type="hidden" name="available" value="<%=available%>">
-                                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
-                                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
-                                                <input type="hidden" name="date" value="<%=date%>">
-                                                <input type="hidden" name="type" value="other">
-                                                <div class="col-md-12 col-sm-12">
-                                                        
-                                                    <div class="form-group card-label">
-                                                        <label>Patients Full Name</label>
-                                                            <input class="form-control" type="text" name="pname" placeholder="Enter patient name" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label>Patient Email (optional) </label>
-                                                            <input class="form-control" type="email" name="pemail" placeholder="Enter patient email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Phone</label>
-                                                            <input class="form-control" type="text" name="pphone" placeholder="Enter patient phone" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Address</label>
-                                                            <input class="form-control" type="text" name="paddress" placeholder="Enter patient address" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group card-label">
-                                                        <label> Patient Age</label>
-                                                            <input class="form-control" type="text" name="page" placeholder="Enter patient age" required>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="submit-section mt-4" style="margin-left: 10px !important;">
-                                                    <button type="submit" class="btn btn-primary submit-btn ml-4">Procced to checkout</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                       
-                                    </div>
-                                   
-                               
-                                    
-                                    
-                                  
-                            
-                                    <!-- /Personal Information -->
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label>Age</label>
+                                                    <%if(locals.user.age){%>
+                                                        <input class="form-control" type="number" name="age" value="<%=locals.user.age%>" required>
+                                                        <%}else{%>
+                                                            <input class="form-control" type="number" name="age">
+                                                            <%}%>
 
-                                   
+                                                </div>
+                                            </div>
+                                            <div class="submit-section mt-4">
+                                                <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Procced to checkout</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="row displayNone" id="patientp">
+                                        <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
+                                        <form action="/user/confirm-pay" method="POST" style="width: 100%;">
+                                            <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                                            <input type="hidden" name="id" value="<%=id%>">
+                                            <input type="hidden" name="booked" value="<%=booked%>">
+                                            <input type="hidden" name="available" value="<%=available%>">
+                                            <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                            <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                            <input type="hidden" name="date" value="<%=date%>">
+                                            <input type="hidden" name="type" value="other">
+                                            <div class="col-md-12 col-sm-12">
+
+                                                <div class="form-group card-label">
+                                                    <label>Patients Full Name</label>
+                                                    <input class="form-control" type="text" name="pname" placeholder="Enter patient name" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label>Patient Email (optional) </label>
+                                                    <input class="form-control" type="email" name="pemail" placeholder="Enter patient email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label> Patient Phone</label>
+                                                    <input class="form-control" type="text" name="pphone" placeholder="Enter patient phone" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label> Patient Address</label>
+                                                    <input class="form-control" type="text" name="paddress" placeholder="Enter patient address" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group card-label">
+                                                    <label> Patient Age</label>
+                                                    <input class="form-control" type="text" name="page" placeholder="Enter patient age" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="submit-section mt-4" style="margin-left: 10px !important;">
+                                                <button type="submit" class="btn btn-primary submit-btn ml-4">Procced to checkout</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                                <!-- /Personal Information -->
+
+
                                 <!-- /Checkout Form -->
 
                             </div>
@@ -224,43 +226,50 @@
                                         <img src="<%=doctor.avatar%>" alt="User Image">
                                     </a>
                                     <div class="booking-info">
-                                        <h4><a href="/doctor-profile"><%=doctor.name%></a></h4>
+                                        <h4>
+                                            <a href="/doctor-profile">
+                                                <%=doctor.name%>
+                                            </a>
+                                        </h4>
                                         <%var sum=0,avg,cnt=doctor.reviews.length;%>
-                                        <%for(review of doctor.reviews){%>
-                                            <%sum+=review.rating;%>
-                                        <%}%>
-                                        <%avg=sum/cnt;%>
-                                        <div class="rating">
-                                            <%if(avg>=1){%>
-                                            <i class="fas fa-star filled"></i>
-                                            <%}else{%>
-                                                <i class="fas fa-star"></i>
-                                            <%}%>
-                                            <%if(avg>=2){%>
-                                            <i class="fas fa-star filled"></i>
-                                            <%}else{%>
-                                                <i class="fas fa-star"></i>
-                                            <%}%>
-                                            <%if(avg>=3){%>
-                                            <i class="fas fa-star filled"></i>
-                                            <%}else{%>
-                                                <i class="fas fa-star"></i>
-                                            <%}%>
-                                            <%if(avg>=4){%>
-                                            <i class="fas fa-star filled"></i>
-                                            <%}else{%>
-                                                <i class="fas fa-star"></i>
-                                            <%}%>
-                                            <%if(avg>=5){%>
-                                            <i class="fas fa-star filled"></i>
-                                            <%}else{%>
-                                                <i class="fas fa-star"></i>
-                                            <%}%>
-                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%> &nbsp; <%=doctor.contacts.state%></p>
-                                        </div>
+                                            <%for(review of doctor.reviews){%>
+                                                <%sum+=review.rating;%>
+                                                    <%}%>
+                                                        <%avg=sum/cnt;%>
+                                                            <div class="rating">
+                                                                <%if(avg>=1){%>
+                                                                    <i class="fas fa-star filled"></i>
+                                                                    <%}else{%>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <%}%>
+                                                                            <%if(avg>=2){%>
+                                                                                <i class="fas fa-star filled"></i>
+                                                                                <%}else{%>
+                                                                                    <i class="fas fa-star"></i>
+                                                                                    <%}%>
+                                                                                        <%if(avg>=3){%>
+                                                                                            <i class="fas fa-star filled"></i>
+                                                                                            <%}else{%>
+                                                                                                <i class="fas fa-star"></i>
+                                                                                                <%}%>
+                                                                                                    <%if(avg>=4){%>
+                                                                                                        <i class="fas fa-star filled"></i>
+                                                                                                        <%}else{%>
+                                                                                                            <i class="fas fa-star"></i>
+                                                                                                            <%}%>
+                                                                                                                <%if(avg>=5){%>
+                                                                                                                    <i class="fas fa-star filled"></i>
+                                                                                                                    <%}else{%>
+                                                                                                                        <i class="fas fa-star"></i>
+                                                                                                                        <%}%>
+                                                                                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                            </div>
+                                                            <div class="clinic-details">
+                                                                <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                                                    <%=doctor.contacts.city%> &nbsp;
+                                                                        <%=doctor.contacts.state%>
+                                                                </p>
+                                                            </div>
                                     </div>
                                 </div>
                                 <!-- Booking Doctor Info -->
@@ -272,10 +281,10 @@
                                             <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
                                                 <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
 
-                                           <%}else{%>
-                                            <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
-                                            <%}%>
-                                            <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
+                                                <%}else{%>
+                                                    <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
+                                                    <%}%>
+                                                        <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
                                         </ul>
                                         <ul class="booking-fee">
                                             <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
@@ -305,7 +314,7 @@
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
@@ -326,13 +335,13 @@
     <script>
         var own = document.getElementById('ownp');
         var pat = document.getElementById('patientp');
-        function display()
-        {
+
+        function display() {
             own.classList.add('displayNone');
             pat.classList.remove('displayNone');
         }
-        function display1()
-        {
+
+        function display1() {
             own.classList.remove('displayNone');
             pat.classList.add('displayNone');
         }

@@ -59,6 +59,12 @@
 .cal-icon:after {
   right: 25px !important; }
 
+.first {
+  display: block; }
+
+.second {
+  display: none; }
+
 .sscreen {
   display: none; }
 
@@ -68,6 +74,12 @@
 
 .laptop-Pregnancy {
   display: block; }
+
+.card-bookinglap {
+  display: block; }
+
+.card-bookingMob {
+  display: none; }
 
 .card-laptopprofile {
   display: block; }
@@ -3377,7 +3389,7 @@ html.menu-opened body {
 	16. Search
 -----------------------*/
 .breadcrumb-bar {
-  background-color: #15558d;
+  background-color: #478e8e;
   padding: 15px 0; }
 
 .breadcrumb-bar .breadcrumb-title {
@@ -6825,6 +6837,10 @@ html.menu-opened body {
     max-width: 250px; }
   .chat-window .chat-cont-right .chat-header .media .media-body {
     display: none; }
+  .first {
+    display: none; }
+  .second {
+    display: block; }
   .banner-wrapper .banner-header h1 {
     font-size: 2rem; }
   .banner-wrapper .banner-header p {
@@ -7102,6 +7118,10 @@ html.menu-opened body {
   .card-laptopprofile {
     display: none; }
   .card-mobileprofile {
+    display: block; }
+  .card-bookinglap {
+    display: none; }
+  .card-bookingMob {
     display: block; }
   .specilities-consult {
     font-size: 22px;

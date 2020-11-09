@@ -63,6 +63,14 @@
     right: 25px !important;
 }
 
+.first {
+    display: block;
+}
+
+.second {
+    display: none;
+}
+
 .sscreen {
     display: none;
 }
@@ -74,6 +82,14 @@
 
 .laptop-Pregnancy {
     display: block;
+}
+
+.card-bookinglap {
+    display: block;
+}
+
+.card-bookingMob {
+    display: none;
 }
 
 .card-laptopprofile {
@@ -4051,7 +4067,7 @@ html.menu-opened body {
 -----------------------*/
 
 .breadcrumb-bar {
-    background-color: #15558d;
+    background-color: #478e8e;
     padding: 15px 0;
 }
 
@@ -8198,6 +8214,12 @@ html.menu-opened body {
     .chat-window .chat-cont-right .chat-header .media .media-body {
         display: none;
     }
+    .first {
+        display: none;
+    }
+    .second {
+        display: block;
+    }
     .banner-wrapper .banner-header h1 {
         font-size: 2rem;
     }
@@ -8572,6 +8594,12 @@ html.menu-opened body {
         display: none;
     }
     .card-mobileprofile {
+        display: block;
+    }
+    .card-bookinglap {
+        display: none;
+    }
+    .card-bookingMob {
         display: block;
     }
     .specilities-consult {
