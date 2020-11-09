@@ -222,7 +222,7 @@ module.exports.test = async(req, res) => {
     let test = await Test.find({})
     return res.render('test', {
 
-        title: 'Test User',
+        title: 'Tests',
         test: test
 
 

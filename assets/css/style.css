@@ -69,6 +69,12 @@
 .laptop-Pregnancy {
   display: block; }
 
+.card-laptopprofile {
+  display: block; }
+
+.card-mobileprofile {
+  display: none; }
+
 .patient-li {
   height: auto;
   width: 225px;
@@ -7092,6 +7098,10 @@ html.menu-opened body {
   h6,
   .h6 {
     font-size: 0.75rem; }
+  .card-laptopprofile {
+    display: none; }
+  .card-mobileprofile {
+    display: block; }
   .specilities-consult {
     font-size: 22px;
     margin-left: 21px;
