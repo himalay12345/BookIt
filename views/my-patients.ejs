@@ -44,7 +44,7 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-											<img src=" <%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
+											<img src=" <%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
 										</a>
                                     <div class="profile-det-info">
                                         <h3>
@@ -144,7 +144,7 @@
                                             <ul>
                                                 <li>Phone <span>+91 <%=patient.phone%></span></li>
                                                
-                                                <%if(patient.pid){%>
+                                                <%if(patient.pid.dob){%>
                                                     <%var newDateObject = new Date();
 
                                                     var newObjectCurrentYear = newDateObject.getFullYear();

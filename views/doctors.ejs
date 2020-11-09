@@ -86,7 +86,7 @@
                                         </label>
                                             <div>
                                                 <label class="custom_check">
-											<input type="checkbox" name="select_specialist" value="Neurology">
+											<input type="checkbox" name="select_specialist" value="General Physician">
 											<span class="checkmark"></span> General Physician
 										</label>
                                             </div>
@@ -135,7 +135,7 @@
                                         </div>
                                     </div>
                                     <div class="btn-search">
-                                        <button type="submit" class="btn btn-block">Search</button>
+                                        <button type="submit" class="btn btn-block tcolor">Search</button>
                                     </div>
 
                                 </div>
@@ -201,7 +201,7 @@
                                     </label>
                                                 <div>
                                                     <label class="custom_check">
-                                        <input type="checkbox" name="select_specialist" value="Neurology">
+                                        <input type="checkbox" name="select_specialist" value="General Physician">
                                         <span class="checkmark"></span> General Physician
                                     </label>
                                                 </div>
@@ -250,7 +250,7 @@
                                             </div>
                                         </div>
                                         <div class="btn-search">
-                                            <button type="submit" class="btn btn-block">Search</button>
+                                            <button type="submit" class="btn btn-block tcolor">Search</button>
                                         </div>
 
                                     </div>
@@ -329,10 +329,11 @@
                                                                                 font-size: 15px;
                                                                                 font-weight: 500;
                                                                             ">
+                                                                            <%if(doctor.specialisation){%>
                                                                     <% const name =doctor.specialisation;
                                                                     const Capitalized = name.charAt(0).toUpperCase() + name.slice(1);%>
                                                                         <%=Capitalized%> Specialist
-
+                                                                        <%}%>
                                                                 </a>
 
                                                             </p>
@@ -576,7 +577,7 @@
                                             <div class="doc-info-left">
                                                 <div class="doctor-img">
                                                     <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;height: 100%;"onerror='this.src="/img/profile.png"' alt="User Image">
+                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;height: 100%;" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                             </a>
                                                 </div>
                                                 <div class="doc-info-cont">
@@ -596,40 +597,40 @@
                                                             <p class="doc-department">
                                                                 <% if(doctor.department== "General Physician"){ %>
 
-                                                                    <img src="/img/specialities/physical.jfif" class="img-fluid" alt="Speciality">
+                                                                    <img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
                                                                     <% } %>
 
                                                                         <% if(doctor.department== "Ophthalmology"){ %>
 
-                                                                            <img src="/img/specialities/eye.png" class="img-fluid" alt="Speciality">
+                                                                            <img src="<%=assetPath('img/specialities/eye.png')%>" class="img-fluid" alt="Speciality">
                                                                             <% } %>
                                                                                 <% if(doctor.department== "Dermatology"){ %>
 
-                                                                                    <img src="/img/specialities/hair.jpg" class="img-fluid" alt="Speciality">
+                                                                                    <img src="<%=assetPath('img/specialities/hair.jpg')%>" class="img-fluid" alt="Speciality">
                                                                                     <% } %>
                                                                                         <% if(doctor.department== "Paediatrics"){ %>
 
-                                                                                            <img src="/img/specialities/child.jpg" class="img-fluid" alt="Speciality">
+                                                                                            <img src="<%=assetPath('img/specialities/child.jpg')%>" class="img-fluid" alt="Speciality">
                                                                                             <% } %>
                                                                                                 <% if(doctor.department== "Urology"){ %>
 
-                                                                                                    <img src="/img/specialities/brain.png" class="img-fluid" alt="Speciality">
+                                                                                                    <img src="<%=assetPath('img/specialities/brain.png')%>" class="img-fluid" alt="Speciality">
                                                                                                     <% } %>
                                                                                                         <% if(doctor.department== "Neurology"){ %>
 
-                                                                                                            <img src="/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">
+                                                                                                            <img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
                                                                                                             <% } %>
                                                                                                                 <% if(doctor.department== "Orthopedic"){ %>
 
-                                                                                                                    <img src="/img/specialities/specialities.png" class="img-fluid" alt="Speciality">
+                                                                                                                    <img src="<%=assetPath('img/specialities/specialities.png')%>" class="img-fluid" alt="Speciality">
                                                                                                                     <% } %>
                                                                                                                         <% if(doctor.department== "Cardiologist"){ %>
 
-                                                                                                                            <img src="/img/specialities/heart.jpg" class="img-fluid" alt="Speciality">
+                                                                                                                            <img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
                                                                                                                             <% } %>
                                                                                                                                 <% if(doctor.department== "Dentist"){ %>
 
-                                                                                                                                    <img src="/img/specialities/teeth.png" class="img-fluid" alt="Speciality">
+                                                                                                                                    <img src="<%=assetPath('img/specialities/teeth.png')%>" class="img-fluid" alt="Speciality">
                                                                                                                                     <% } %>
                                                                                                                                         <%=doctor.department%>
 

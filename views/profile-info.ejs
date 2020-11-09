@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <div class="change-avatar">
                                 <div class="profile-img">
-                                    <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="/img/profile.png"' alt="User Image">
+                                    <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                 </div>
                                 <div class="upload-img">
                                     <div class="change-photo-btn upload-sm-btn">

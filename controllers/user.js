@@ -323,10 +323,19 @@ module.exports.Filter = async function(req, res) {
             doctors = await User.find({
                 department: req.body.select_specialist,
                 gender: req.body.gender_type,
-                type: "Doctor"
+                type: "Doctor",
+                approve1: true, approve2: true, booking_service: true
+            });
+            return res.render('search', {
+                title:'Search Results',
+                doctors: doctors
             });
         } else {
-            doctors = await User.find({ department: req.body.select_specialist, type: "Doctor" });
+            doctors = await User.find({ department: req.body.select_specialist, type: "Doctor",approve1: true, approve2: true, booking_service: true });
+            return res.render('search', {
+                title:'Search Results',
+                doctors: doctors
+            });
         }
     }
 
@@ -337,10 +346,12 @@ module.exports.Filter = async function(req, res) {
                 doctor = await User.find({
                     department: req.body.select_specialist[i],
                     gender: req.body.gender_type,
-                    type: "Doctor"
-                })
+                    type: "Doctor",
+                    approve1: true, approve2: true, booking_service: true
+                });
+                
             } else {
-                doctor = await User.find({ department: req.body.select_specialist[i], type: "Doctor" })
+                doctor = await User.find({ department: req.body.select_specialist[i], type: "Doctor",approve1: true, approve2: true, booking_service: true })
             }
             console.log(doctor);
             if (doctor != undefined) {
@@ -354,20 +365,28 @@ module.exports.Filter = async function(req, res) {
 
 
         }
-    } else {
+        return res.render('search', {
+            title:'Search Results',
+            doctors: doctors
+        });
+    }
+    
+     else {
         doctors = await User.find({
             gender: req.body.gender_type,
-            type: "Doctor"
+            type: "Doctor",
+            approve1: true, approve2: true, booking_service: true
+        });
+        return res.render('search', {
+            title:'Search Results',
+            doctors: doctors
         });
 
     }
 
-    console.log(doctors);
+    
 
-    return res.render('search', {
-        title:'Search Results',
-        doctors: doctors
-    });
+   
 
 }
 

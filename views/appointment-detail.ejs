@@ -44,7 +44,7 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerror=this.src="/img/profile.png">
+                                        <img src="<%=locals.user.avatar%> " alt="User Image" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
@@ -139,7 +139,7 @@
                         <div class="col-md-12" style="min-height:380px;height:auto;border:1px solid lightgrey;padding-left: 0px;margin-bottom: 50px;border-radius: 5px;">
                         <div style="min-height:70px;height:auto;border-bottom:1px solid lightgrey;display: flex;width: 105%;">
                             <div style="width:25%;padding: 5px;">
-                                <img src="<%=user.doctors[i].did.avatar%>"style="height:50px;width:50px;border-radius:50%;">
+                                <img src="<%=user.doctors[i].did.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' style="height:50px;width:50px;border-radius:50%;">
                             </div>
                             <div style="width:75%;padding-top: 5px;">
                                 <h5 style="font-weight: bold;font-size: 1.2em;">Dr. <%=user.doctors[i].did.name%></h5> 

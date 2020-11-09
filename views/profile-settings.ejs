@@ -70,7 +70,7 @@
                                             <div class="form-group">
                                                 <div class="change-avatar">
                                                     <div class="profile-img">
-                                                        <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="/img/profile.png"'>
+                                                        <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
                                                     </div>
                                                     <div class="upload-img">
                                                         <div class="change-photo-btn">

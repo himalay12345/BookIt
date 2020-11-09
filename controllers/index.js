@@ -82,13 +82,14 @@ module.exports.Specialist = async function(req, res) {
 
     let doctors = await User.find({
         department: req.query.dep,
-        type: "Doctor"
+        type: "Doctor",
+        approve1: true, approve2: true, booking_service: true
     });
 
 
     return res.render('specialist', {
         doctors: doctors,
-        title: 'specilalist'
+        title: 'Specialist'
     });
 
 }
@@ -457,7 +458,7 @@ module.exports.myPatients = async(req, res) => {
         }
     });
     return res.render('my-patients', {
-        title: 'My users',
+        title: 'My Patients',
         allpatients: patients
     })
 }

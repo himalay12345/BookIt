@@ -55,7 +55,7 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"'  alt="User Image">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
@@ -190,7 +190,7 @@
                                                                         <div class="form-group">
                                                                             <div class="change-avatar">
                                                                                 <div class="profile-img">
-                                                                                    <img src="<%=locals.user.idproof%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                                                                    <img src="<%=locals.user.idproof%>" onerror="this.src='<%=assetPath('img/features/feature-06.jpg')%>'" alt="User Image">
                                                                                 </div>
                                                                                 <div class="upload-img">
                                                                                     <div class="change-photo-btn">
@@ -239,7 +239,7 @@
                                                                         <div class="form-group">
                                                                             <div class="change-avatar">
                                                                                 <div class="profile-img">
-                                                                                    <img src="<%=locals.user.degreephoto%>" onerror="src='/img/features/feature-06.jpg'" alt="User Image">
+                                                                                    <img src="<%=locals.user.degreephoto%>" onerror="this.src='<%=assetPath('img/features/feature-06.jpg')%>'" alt="User Image">
                                                                                 </div>
                                                                                 <div class="upload-img">
                                                                                     <div class="change-photo-btn">

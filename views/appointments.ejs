@@ -43,7 +43,7 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-										<img src="<%=locals.user.avatar%>"onerror='this.src="/img/profile.png"' alt="User Image">
+										<img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>Dr.
@@ -114,9 +114,9 @@
                                 <div class="profile-info-widget">
                                     <a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>" class="booking-doc-img" style="margin-left: auto;margin-right:auto;">
                                         <%if(patient.pid){%>
-                                            <img class="avatar-img rounded-circle" src="<%=patient.pid.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
+                                            <img class="avatar-img rounded-circle" src="<%=patient.pid.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                             <%}else{%>
-                                            <img class="avatar-img rounded-circle" src="/img/profile.png" alt="User Image">
+                                            <img class="avatar-img rounded-circle" src="<%=assetPath('img/profile.png')%>" alt="User Image">
                                             <%}%>
                                     </a>
                                     <div class="profile-det-info">

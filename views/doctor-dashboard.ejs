@@ -67,7 +67,7 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img" style="width: 100% !important;background-color: transparent;">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
                                         <h3>
@@ -145,7 +145,7 @@
                                                 <div class="dash-widget dct-border-rht">
                                                     <div class="circle-bar circle-bar1">
                                                         <div class="circle-graph1" data-percent="<%=allpatients.patients.length%>">
-                                                            <img src="/img/icon-01.png" class="img-fluid" alt="patient">
+                                                            <img src="<%=assetPath('img/icon-01.png')%>" class="img-fluid" alt="patient">
                                                         </div>
                                                     </div>
                                                     <%var today = new Date();%>
@@ -182,7 +182,7 @@
                                                 <div class="dash-widget dct-border-rht">
                                                     <div class="circle-bar circle-bar2">
                                                         <div class="circle-graph2" data-percent="<%=count%>">
-                                                            <img src="/img/icon-02.png" class="img-fluid" alt="Patient">
+                                                            <img src="<%=assetPath('img/icon-02.png')%>" class="img-fluid" alt="Patient">
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
@@ -234,7 +234,7 @@
                                                 <div class="dash-widget">
                                                     <div class="circle-bar circle-bar3">
                                                         <div class="circle-graph3" data-percent="<%=allpatients.patients.length%>">
-                                                            <img src="/img/icon-03.png" class="img-fluid" alt="Patient">
+                                                            <img src="<%=assetPath('img/icon-03.png')%>" class="img-fluid" alt="Patient">
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
