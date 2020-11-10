@@ -446,6 +446,7 @@ for(let i=0;i<timing.length;i++){
     {
         for(let i=0;i<timing.length;i++){
             timing[i].classList.remove('selected');
+            timing[i].classList.remove('tselected');
             var a = $('#inputid');
             for( b of a)
             {
@@ -454,6 +455,7 @@ for(let i=0;i<timing.length;i++){
         }
         
         timing[i].classList.toggle('selected');
+        timing[i].classList.toggle('tselected');
        var data1 =  timing[i].getAttribute('data-id');
        var data2 =  timing[i].getAttribute('data-booked');
        var data3 =  timing[i].getAttribute('data-available');

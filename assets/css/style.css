@@ -56,8 +56,17 @@
 .x-men {
   display: block; }
 
+.lptop {
+  padding-top: 40px !important; }
+
 .cal-icon:after {
   right: 25px !important; }
+
+.first {
+  display: block; }
+
+.second {
+  display: none; }
 
 .sscreen {
   display: none; }
@@ -68,6 +77,12 @@
 
 .laptop-Pregnancy {
   display: block; }
+
+.card-bookinglap {
+  display: block; }
+
+.card-bookingMob {
+  display: none; }
 
 .card-laptopprofile {
   display: block; }
@@ -3376,7 +3391,7 @@ html.menu-opened body {
 	16. Search
 -----------------------*/
 .breadcrumb-bar {
-  background-color: #15558d;
+  background-color: #478e8e;
   padding: 15px 0; }
 
 .breadcrumb-bar .breadcrumb-title {
@@ -6824,6 +6839,10 @@ html.menu-opened body {
     max-width: 250px; }
   .chat-window .chat-cont-right .chat-header .media .media-body {
     display: none; }
+  .first {
+    display: none; }
+  .second {
+    display: block; }
   .banner-wrapper .banner-header h1 {
     font-size: 2rem; }
   .banner-wrapper .banner-header p {
@@ -7101,6 +7120,10 @@ html.menu-opened body {
   .card-laptopprofile {
     display: none; }
   .card-mobileprofile {
+    display: block; }
+  .card-bookinglap {
+    display: none; }
+  .card-bookingMob {
     display: block; }
   .specilities-consult {
     font-size: 22px;
@@ -7477,6 +7500,8 @@ html.menu-opened body {
     width: 252%;
     margin-left: -100px;
     height: 90%; }
+  .lptop {
+    padding-top: 20px !important; }
   .header-nav {
     padding-left: 15px;
     padding-right: 80px;
@@ -8255,4 +8280,16 @@ input:-webkit-autofill:focus {
 
 .tbcolor {
   color: #478e8e !important;
-  border-color: #478e8e !important; }
+  border-color: #478e8e !important;
+  background-color: white !important; }
+
+.hwhite :hover {
+  background-color: red !important;
+  color: white; }
+
+.tselected {
+  background-color: #478e8e !important;
+  color: white !important; }
+
+.tselected span {
+  color: white !important; }
