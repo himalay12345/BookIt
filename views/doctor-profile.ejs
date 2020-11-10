@@ -30,7 +30,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar" style="background-color: #478e8e !important; ">
+        <div class="breadcrumb-bar lptop" style="background-color: #478e8e !important; ">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -111,9 +111,11 @@
                                                             font-size: 15px;
                                                             font-weight: 500;
                                                         ">
+                                                       <%if(doctor.specialisation){%>
                                                 <% const name =doctor.specialisation;
                                                 const Capitalized = name.charAt(0).toUpperCase() + name.slice(1);%>
-                                                    <%=Capitalized%> Specialist
+                                                    <%=Capitalized%> 
+                                                    <%}%>
 
                                             </a>
 
@@ -189,12 +191,12 @@
                                     <h4 class="doc-name">Dr.
                                         <%=doctor.name%>
                                     </h4>
-                                    <p class="doc-speciality">
+                                    <p class="doc-speciality text-md-left">
                                         <% for(degrees of doctor.education){ %>
                                             <%=degrees.degree.toUpperCase() %>&nbsp&nbsp&nbsp
                                                 <% } %>
                                     </p>
-                                    <p class="doc-department">
+                                    <p class="doc-department text-md-left">
                                         <% if(doctor.department== "General Physician"){ %>
                                             <img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
                                             <% } %>
@@ -499,7 +501,7 @@
 
                                 <!-- Clinic Content -->
                                 <div class="col-md-4" style="padding-left: 0px !important;padding-right: 0px !important;">
-                                    <div class="clinic-content">
+                                    <div class="clinic-content" style="margin-left: 20px;">
                                         <h4 class="clinic-name">
                                             <a href="#">
                                                 <%=doctor.clinicname %>

@@ -239,11 +239,13 @@
                                                             <td class="text-center"> <a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:#15558d;color:white;text-align: center;width:120px;height:45px;display: block;"><span><i class="fas fa-share" aria-hidden="true" style="margin-right: 8px;"></i></span>Upcoming</a></td>
                                                             <%}else{%>
 
-                                                       
+                                                       <%if(alldoctors.doctors[i].did.staff_id){%>
                                                         <%if(str1 == alldoctors.doctors[i].date){%>
                                                         <a href="/patient-tracking/?id=<%=alldoctors.doctors[i].did.staff_id%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color: #C71585;height: 45px;color:white;text-align: center;width:100px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
+                                                      
                                                         <%}else{%>
                                                             <a href="" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:100px;display: block;height: 45px;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a>
+                                                        <%}%>
                                                         <%}%>
                                                         <%}%>
                                                     </div>

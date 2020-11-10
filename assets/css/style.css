@@ -7138,6 +7138,8 @@ html.menu-opened body {
     display: block; }
   .health-concerns {
     display: block; }
+  .ssstop {
+    margin-top: 0px !important; }
   .card {
     margin-bottom: 0.9375rem; }
   .doctor-img img {
@@ -7148,6 +7150,10 @@ html.menu-opened body {
     margin-top: -20px; }
   .card-header {
     padding: .75rem 1.25rem; }
+  .smargin {
+    margin-left: 20px !important; }
+  .ssmargin {
+    margin-left: 0px !important; }
   .cardx {
     width: 67% !important;
     margin-left: 77px !important;
@@ -8277,10 +8283,22 @@ input:-webkit-autofill:focus {
   background-color: #478e8e !important;
   color: white !important; }
 
+.cloginbtns a:hover {
+  background-color: #478e8e !important;
+  color: white !important; }
+
 .tcolor {
   background-color: #478e8e !important;
   color: white !important;
   border: none !important; }
+
+.tcolors {
+  background-color: #478e8e !important;
+  color: white !important;
+  border: none !important; }
+
+.tcolors span {
+  color: white !important; }
 
 .tbcolor {
   color: #478e8e !important;

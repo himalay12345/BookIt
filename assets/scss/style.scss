@@ -8624,6 +8624,10 @@ html.menu-opened body {
     .health-concerns {
         display: block;
     }
+
+    .ssstop{
+        margin-top:0px !important;
+    }
     .card {
         margin-bottom: 0.9375rem;
     }
@@ -8638,6 +8642,14 @@ html.menu-opened body {
     }
     .card-header {
         padding: .75rem 1.25rem;
+    }
+
+    .smargin{
+        margin-left:20px !important;
+    }
+
+    .ssmargin{
+        margin-left:0px !important;
     }
     .cardx {
         width: 67% !important;
@@ -10087,12 +10099,29 @@ color:#478e8e !important;
     background-color:#478e8e !important;
     color:white !important;
 }
+.cloginbtns a:hover{
+    background-color:#478e8e !important;
+    color:white !important;
+}
 
 .tcolor{
     background-color:#478e8e !important;
     color:white !important;
     border:none !important;
 }
+.tcolors{
+    background-color:#478e8e !important;
+    color:white !important;
+    border:none !important;
+}
+
+.tcolors span{
+   
+    color:white !important;
+  
+}
+
+
 
 .tbcolor{
  
@@ -10111,6 +10140,7 @@ color:#478e8e !important;
     color:white !important;
 
 }
+
 .tselected span{
     
     color:white !important;
