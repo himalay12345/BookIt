@@ -1741,17 +1741,17 @@ button.bg-danger:hover {
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
-    background-color: #20c0f3;
-    border-color: #20c0f3;
+    background-color: #478e8e;
+    border-color: #478e8e;
 }
 
 .pagination>li>a,
 .pagination>li>span {
-    color: #20c0f3;
+    color: #478e8e;
 }
 
 .page-link:hover {
-    color: #20c0f3;
+    color: #478e8e;
 }
 
 .page-link:focus {
@@ -1759,8 +1759,8 @@ button.bg-danger:hover {
 }
 
 .page-item.active .page-link {
-    background-color: #20c0f3;
-    border-color: #20c0f3;
+    background-color: #478e8e;
+    border-color: #478e8e;
 }
 
 .dropdown-menu {
@@ -1823,12 +1823,12 @@ button.bg-danger:hover {
 
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-    background-color: #20c0f3;
+    background-color: #478e8e;
     text-shadow: unset;
 }
 
 .bootstrap-datetimepicker-widget table td.today::before {
-    border-bottom-color: #20c0f3;
+    border-bottom-color: #478e8e;
 }
 
 .bg-info-light {
@@ -1914,7 +1914,7 @@ button.bg-danger:hover {
 .avatar-title {
     width: 100%;
     height: 100%;
-    background-color: #20c0f3;
+    background-color: #478e8e;
     color: #fff;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2159,7 +2159,7 @@ button.bg-danger:hover {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #20c0f3;
+    background-color: #478e8e;
 }
 
 .select2-container--default .select2-selection--multiple {
@@ -2203,8 +2203,8 @@ button.bg-danger:hover {
 .nav-tabs.nav-tabs-solid>.active>a,
 .nav-tabs.nav-tabs-solid>.active>a:hover,
 .nav-tabs.nav-tabs-solid>.active>a:focus {
-    background-color: #20c0f3;
-    border-color: #20c0f3;
+    background-color: #478e8e;
+    border-color: #478e8e;
     color: #fff;
 }
 
@@ -2244,8 +2244,8 @@ button.bg-danger:hover {
 .nav-tabs.nav-tabs-solid>li>a.active,
 .nav-tabs.nav-tabs-solid>li>a.active:hover,
 .nav-tabs.nav-tabs-solid>li>a.active:focus {
-    background-color: #20c0f3;
-    border-color: #20c0f3;
+    background-color: #478e8e;
+    border-color: #478e8e;
     color: #fff;
 }
 
@@ -2310,7 +2310,7 @@ button.bg-danger:hover {
 .nav-tabs.nav-tabs-top>li>a.active,
 .nav-tabs.nav-tabs-top>li>a.active:hover,
 .nav-tabs.nav-tabs-top>li>a.active:focus {
-    border-top-color: #20c0f3;
+    border-top-color: #478e8e;
 }
 
 .nav-tabs.nav-tabs-bottom>li>a.active,
@@ -2318,7 +2318,7 @@ button.bg-danger:hover {
 .nav-tabs.nav-tabs-bottom>li>a.active:focus {
     border-bottom-width: 2px;
     border-color: transparent;
-    border-bottom-color: #20c0f3;
+    border-bottom-color: #478e8e;
     background-color: transparent;
     transition: none 0s ease 0s;
     -moz-transition: none 0s ease 0s;
@@ -2451,7 +2451,7 @@ button.bg-danger:hover {
 }
 
 .line {
-    background-color: #20c0f3;
+    background-color: #478e8e;
     height: 2px;
     margin: 0;
     width: 60px;
@@ -3004,9 +3004,9 @@ button.bg-danger:hover {
 }
 
 .header-navbar-rht li a.header-login:hover {
-    background-color: #09e5ab;
-    border-color: #09e5ab;
-    color: #fff;
+    background-color: #478e8e !important;
+    color: #fff !important;
+    border-color: #478e8e !important;
 }
 
 .header-navbar-rht li .dropdown-menu a:hover {
@@ -3017,7 +3017,7 @@ button.bg-danger:hover {
 }
 
 .header-navbar-rht li a.header-login {
-    border: 2px solid #09e5ab;
+    border: 2px solid #478e8e;
     margin-left: 220px;
     width: 150px;
     position: absolute;
@@ -3025,9 +3025,11 @@ button.bg-danger:hover {
     padding: 8px 15px !important;
     text-align: center;
     font-size: 15px;
-    color: #09e5ab;
+    color: #fff;
     text-transform: uppercase;
     font-weight: 500;
+    background-color: #478e8e;
+    ;
 }
 
 .header .has-arrow .dropdown-toggle:after {
@@ -3464,6 +3466,8 @@ html.menu-opened body {
 .login-btn {
     font-size: 18px;
     font-weight: 500;
+    background-color: #478e8e !important;
+    border: none !important;
 }
 
 .login-or {
@@ -3956,9 +3960,10 @@ html.menu-opened body {
 }
 
 .view-btn {
-    color: #0de0fe;
+    color: #fff;
+    background-color: #478e8e;
     font-size: 13px;
-    border: 2px solid #0de0fe;
+    border: 2px solid #478e8e;
     text-align: center;
     display: block;
     font-weight: 500;
@@ -3967,13 +3972,13 @@ html.menu-opened body {
 
 .view-btn:hover,
 .view-btn:focus {
-    background-color: #0de0fe;
+    background-color: #478e8e;
     color: #fff;
 }
 
 .book-btn {
-    background-color: #0de0fe;
-    border: 2px solid #0de0fe;
+    background-color: #478e8e;
+    border: 2px solid #478e8e;
     color: #fff;
     font-size: 13px;
     text-align: center;
@@ -3984,8 +3989,8 @@ html.menu-opened body {
 
 .book-btn:hover,
 .book-btn:focus {
-    background-color: #01cae4;
-    border-color: #01cae4;
+    background-color: #478e8e;
+    border-color: #478e8e;
     color: #fff;
 }
 
@@ -4006,7 +4011,7 @@ html.menu-opened body {
 }
 
 .about-content a {
-    background-color: #0de0fe;
+    background-color: #478e8e;
     border-radius: 4px;
     color: #fff;
     display: inline-block;
@@ -4259,8 +4264,8 @@ html.menu-opened body {
 }
 
 .btn-search .btn {
-    background-color: #0de0fe;
-    border: 1px solid #0de0fe;
+    background-color: #478e8e;
+    border: 1px solid #478e8e;
     color: #fff;
     height: 46px;
     font-weight: 500;
@@ -4299,7 +4304,7 @@ html.menu-opened body {
 }
 
 .doc-department {
-    color: #20c0f3;
+    color: #478e8e;
     font-size: 14px;
     margin-bottom: 8px;
 }
@@ -4426,9 +4431,9 @@ html.menu-opened body {
 
 .clinic-booking a {
     background-color: #fff;
-    border: 2px solid #20c0f3;
+    border: 2px solid #478e8e;
     border-radius: 4px;
-    color: #20c0f3;
+    color: #478e8e;
     display: block;
     font-size: 14px;
     font-weight: 500;
@@ -4441,12 +4446,12 @@ html.menu-opened body {
 
 .clinic-booking a.view-pro-btn:hover,
 .clinic-booking a.view-pro-btn:focus {
-    background: #20c0f3;
+    background: #478e8e;
     color: #fff;
 }
 
 .clinic-booking a.apt-btn {
-    background-color: #20c0f3;
+    background-color: #478e8e;
     height: 45px;
     color: #fff;
 }
@@ -4523,7 +4528,7 @@ html.menu-opened body {
 .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active:hover,
 .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active:focus {
     border-bottom-width: 3px;
-    color: #20c0f3;
+    color: #478e8e;
 }
 
 .user-tabs .med-records {
@@ -4533,7 +4538,7 @@ html.menu-opened body {
 
 .user-tabs .nav-tabs>li>a:hover {
     background-color: unset;
-    color: #20c0f3;
+    color: #478e8e;
 }
 
 .widget {
@@ -4617,11 +4622,11 @@ html.menu-opened body {
     border-radius: 50%;
     height: 12px;
     width: 12px;
-    border: 2px solid #20c0f3;
+    border: 2px solid #478e8e;
 }
 
 .exp-year {
-    color: #20c0f3;
+    color: #478e8e;
     margin-bottom: 2px;
 }
 
@@ -4775,7 +4780,7 @@ html.menu-opened body {
 }
 
 .review-listing>ul li .comment .comment-body .comment-reply .comment-btn {
-    color: #20c0f3;
+    color: #478e8e;
     display: inline-block;
     font-weight: 500;
     font-size: 15px;
@@ -4856,7 +4861,7 @@ html.menu-opened body {
 }
 
 .terms-accept a {
-    color: #20c0f3;
+    color: #478e8e;
     font-weight: 500;
 }
 
@@ -5139,7 +5144,7 @@ html.menu-opened body {
 }
 
 .exist-customer a {
-    color: #20c0f3;
+    color: #478e8e;
     font-weight: 500;
 }
 
@@ -5194,7 +5199,7 @@ html.menu-opened body {
 }
 
 .payment-radio input:checked~.checkmark {
-    border-color: #20c0f3;
+    border-color: #478e8e;
 }
 
 .payment-radio .checkmark::after {
@@ -5204,7 +5209,7 @@ html.menu-opened body {
     content: '';
     width: 9px;
     height: 9px;
-    background-color: #20c0f3;
+    background-color: #478e8e;
     opacity: 0;
     visibility: hidden;
     -webkit-transform: scale(0.1);
@@ -5293,7 +5298,7 @@ html.menu-opened body {
 }
 
 .booking-total ul li .total-cost {
-    color: #20c0f3;
+    color: #478e8e;
     font-size: 16px;
     float: right;
 }
@@ -5549,7 +5554,7 @@ html.menu-opened body {
 }
 
 .edit-link {
-    color: #20c0f3;
+    color: #478e8e;
     font-size: 16px;
     margin-top: 4px;
 }
@@ -6519,7 +6524,7 @@ html.menu-opened body {
 }
 
 .change-photo-btn {
-    background-color: #20c0f3;
+    background-color: #478e8e;
     border-radius: 50px;
     color: #fff;
     cursor: pointer;
@@ -6617,7 +6622,7 @@ html.menu-opened body {
 }
 
 .add-more a {
-    color: #20c0f3;
+    color: #478e8e;
 }
 
 .bootstrap-tagsinput {
@@ -6633,7 +6638,7 @@ html.menu-opened body {
 }
 
 .bootstrap-tagsinput .tag {
-    background-color: #20c0f3;
+    background-color: #478e8e;
     color: #fff;
     display: inline-block;
     font-size: 14px;
@@ -6771,7 +6776,7 @@ html.menu-opened body {
 .fc-state-down,
 .fc-state-active,
 .fc-state-disabled {
-    background-color: #20c0f3 !important;
+    background-color: #478e8e !important;
     color: #fff !important;
     text-shadow: none !important;
 }
@@ -7162,7 +7167,7 @@ html.menu-opened body {
 }
 
 .typing-text {
-    color: #20c0f3;
+    color: #478e8e;
     font-size: 12px;
     text-transform: lowercase;
 }
@@ -8378,7 +8383,7 @@ html.menu-opened body {
     .nav-tabs.nav-justified>li>a.active,
     .nav-tabs.nav-justified>li>a.active:hover,
     .nav-tabs.nav-justified>li>a.active:focus {
-        border-color: transparent transparent transparent #20c0f3;
+        border-color: transparent transparent transparent #478e8e;
         border-left-width: 2px;
     }
     .nav-tabs {
@@ -8408,7 +8413,7 @@ html.menu-opened body {
     .nav-tabs>li>a.active,
     .nav-tabs>li>a.active:hover,
     .nav-tabs>li>a.active:focus {
-        border-color: transparent transparent transparent #20c0f3 !important;
+        border-color: transparent transparent transparent #478e8e !important;
         border-left-width: 2px;
     }
     .nav-tabs>li.open:not(.active)>a,
@@ -8432,7 +8437,7 @@ html.menu-opened body {
     .nav-tabs-justified>li>a.active:hover,
     .nav-tabs-justified>li>a.active:focus {
         border-width: 0 0 0 2px;
-        border-left-color: #20c0f3;
+        border-left-color: #478e8e;
     }
     .review-listing>ul li .comment .comment-body .meta-data span.comment-date {
         margin-bottom: 5px;
@@ -8477,7 +8482,7 @@ html.menu-opened body {
     .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active:hover,
     .user-tabs .nav-tabs.nav-tabs-bottom>li>a.active:focus {
         border-left-width: 2px;
-        color: #20c0f3;
+        color: #478e8e;
     }
     .doctor-widget {
         -ms-flex-direction: column;
