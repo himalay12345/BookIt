@@ -146,9 +146,9 @@
                     </div>
                     <div class="sscreen col-sm-12" style="padding-left: 0px;padding-right: 0px;">
                         <div style="top:62px;z-index:400;height:65px;width:100%;background-color: white;margin-top:-15px;border-top:1px solid rgb(245, 244, 244);padding-top:10px;margin-bottom: 20px;display: inline-flex;padding-bottom: 10px;">
-                            <h5 id="filter" style="font-size: 1rem;text-align: left;margin-left:20px;border-radius: 3px; background-color: #478e8e; width:45%;height:45px;padding:12px 15px;" class="btn-primary"><i class="fas fa-sliders-h" style="margin-left: 10px;margin-right:5px;"></i><span>Filter</span></h5>
+                            <h5 id="filter" style="font-size: 1rem;text-align: left;margin-left:20px;border-radius: 3px; background-color: #478e8e; width:45%;height:45px;padding:12px 15px; border: none !important;" class="btn-primary"><i class="fas fa-sliders-h" style="margin-left: 10px;margin-right:5px;"></i><span>Filter</span></h5>
                             <div class="btn-group position-absolute" style="right: 20px;width:42%;height:45px;">
-                                <button type="button" style="padding: 8px !important; background-color: #478e8e;" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" style="padding: 8px !important; background-color: #478e8e; border: none;" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Sort By
                             </button>
                                 <div class="dropdown-menu">
@@ -263,14 +263,14 @@
 
 
 
-                    <div class="col-md-12 col-lg-8 col-xl-9 p-0">
+                    <div class="col-md-12 col-lg-8 col-xl-9 p-0" style="margin-top: -40px; !important">
 
                         <!-- Doctor Widget -->
                         <div class="card" id="doctorsm">
                             <div class="card-body p-0">
 
                                 <%for(doctor of doctors){%>
-                                    <div class="col-md-6 col-lg-4 col-xl-3 sscreen p-0" style="margin-top: -30px;">
+                                    <div class="col-md-6 col-lg-4 col-xl-3 sscreen p-0" style="margin-top: 2px;">
                                         <div style="height: 250px;width: 100%; border: 1px solid #f0f0f0; border-radius: 20px; background-color: white; margin-bottom: 5px;">
                                             <div style="height: 70%; width: 100%;position: relative; display: inline-flex;">
                                                 <div style=" width: 40%;margin-top: 28px;
@@ -389,7 +389,7 @@
 
                                                                             </div>
                                                                             <%var a = new Date();%>
-                                                                                <p style="font-size: 13px;
+                                                                                <p style="font-size: 0.75rem;
                                                             margin-left: 4px;margin-top: -4px;">
 
                                                                                     <i class="far fa-clock"></i> Available Today :
