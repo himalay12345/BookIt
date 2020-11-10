@@ -13,7 +13,7 @@ const emailVerification = require('../mailers/email-otp');
 
 
 module.exports.home = async(req, res) => {
-    let doctors = await User.find({ type: "Doctor" });
+    let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
     let consults = await Consult.find({})
     console.log(consults);
     if (req.isAuthenticated()) {
