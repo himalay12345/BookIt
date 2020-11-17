@@ -38,7 +38,7 @@ const development = {
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
     twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
     twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
-    twilio_auth_token: "86202f3169b481aa05e1d2dbf0934259",
+    twilio_auth_token: "f592ecc1635b6742a7620bdea1fc7099",
     gmail_passw: 'Nixxit@123',
     morgan: {
         mode: 'dev',
@@ -81,5 +81,5 @@ const production = {
 }
 
 
-module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
-// module.exports = development;
+// module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
+module.exports = development;

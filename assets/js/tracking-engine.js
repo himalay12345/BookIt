@@ -8,8 +8,8 @@ class PatientTracking{
         this.userId = userId;
         this.userName = userName;
 
-        // this.socket = io.connect('http://localhost:5000')
-        this.socket = io.connect('http://aarogyahub.com:5000');
+        this.socket = io.connect('http://localhost:5000')
+        // this.socket = io.connect('http://aarogyahub.com:5000');
 
         if(this.userId)
         {
@@ -66,6 +66,7 @@ class PatientTracking{
                                     chatroom:'pts',
                                     index:j,
                                     status:'Waiting',
+                                    wcount : ar[i][j].getAttribute('data-waiting-count'),
                                     name:name,
                                     slot:i
                                 });
@@ -101,9 +102,12 @@ class PatientTracking{
                                         let tid = ar[i][j].getAttribute('data-tid');
                                         let name = ar[i][j].getAttribute('data-name');
                                         let mindex = ar[i][j].getAttribute('data-mindex');
+                                        let ss=0;
                                         for(let k = firstli-1;k<seat-1;k++)
                                         {
                                             ar[i][k].setAttribute("data-waiting", "waiting");
+                                            ar[i][k].setAttribute("data-waiting-count", ss);
+                                            ss++;
                                         }
             
                                         
@@ -458,12 +462,23 @@ class PatientTracking{
                 h3.append($('<p>',{
                     'html':'CheckIn Time : '+date1 +' '+ date2
                 })); 
-
+                
     
                 $(`#no_patient${data.data.slot}`).last().addClass("displayNone");
                
     
                 $(`#patient-ul${data.data.slot}`).append(newMessage);
+                let activeongoing = document.querySelectorAll(`.activeongoing${data.data.slot}`);
+                let activevisited = document.querySelectorAll(`.activevisit${data.data.slot}`);
+                let l1 = activeongoing.length;
+                let l2 = activevisited.length;
+                if(l1>0 && l2>0)
+                {
+               
+                activeongoing[0].classList.add('displayNone');
+                activevisited[0].classList.remove('displayNone');
+                }
+
 
             }
 
@@ -488,8 +503,8 @@ class PatientTracking{
                     if(l1>0 && l2>0)
                     {
                     console.log('u are  now there');
-                    activeongoing[0].classList.add('displayNone');
-                    activevisited[0].classList.remove('displayNone');
+                    activeongoing[data.wcount].classList.add('displayNone');
+                    activevisited[data.wcount].classList.remove('displayNone');
                     }
 
                     let waiting = document.querySelectorAll(`.uwaiting${data.slot}`);

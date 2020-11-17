@@ -980,7 +980,7 @@ module.exports.verifyPayment = async(req, res) => {
                         time: req.query.time,
                         date: req.query.date,
                         dayindex: req.query.dayindex,
-                        slotindex: req.query.slotindex,
+                        // slotindex: req.query.slotindex,
                         day: req.query.day,
                         fee: req.query.fee,
                         type: req.query.type,
@@ -1033,7 +1033,7 @@ module.exports.verifyPayment = async(req, res) => {
                         time: req.query.time,
                         date: req.query.date,
                         dayindex: req.query.dayindex,
-                        slotindex: req.query.slotindex,
+                        // slotindex: req.query.slotindex,
                         day: req.query.day,
                         fee: req.query.fee,
                         type: req.query.type,
@@ -1108,7 +1108,7 @@ module.exports.verifyPayment = async(req, res) => {
                     title: 'Booking-Success',
                     doctor: user,
                     seat: k1,
-                    slotindex: req.query.slotindex,
+                    // slotindex: req.query.slotindex,
                     dayindex: req.query.dayindex,
                     date: req.query.date,
                     user: patient
@@ -1554,7 +1554,7 @@ module.exports.offlinePay = async(req, res) => {
                     time: req.body.time,
                     date: req.body.date,
                     day: req.body.day,
-                    slot: req.body.slotindex,
+                    
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: k1
@@ -1577,7 +1577,7 @@ module.exports.offlinePay = async(req, res) => {
                     doctor: user,
                     title: 'Booking-Success',
                     seat: k1,
-                    slotindex: req.body.slotindex,
+                   
                     dayindex: req.body.dayindex,
                     date: req.body.date,
 
