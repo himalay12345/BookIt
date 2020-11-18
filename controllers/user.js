@@ -1386,15 +1386,10 @@ module.exports.deleteAccount = async(req, res) => {
 
     if (user.type == 'Doctor') {
 
-        let staff = await User.find({doctorid:user._id, type:'Staff'});
+        let staff = await User.findById(user.staff_id);
         if(staff)
         {
-            if (fs.existsSync(path.join(__dirname, '..', staff.avatar))) {
-                fs.unlinkSync(path.join(__dirname, '..', staff.avatar));
-            }
-            let prope1 = await User.deleteOne({ _id: staff._id });
-
-
+            let prope1 = await User.deleteOne({ _id: user.staff_id });
         }
 
         if (user.clinicphoto) {
