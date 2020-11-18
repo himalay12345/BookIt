@@ -1385,6 +1385,18 @@ module.exports.deleteAccount = async(req, res) => {
     }
 
     if (user.type == 'Doctor') {
+
+        let staff = await User.find({doctorid:user._id, type:'Staff'});
+        if(staff)
+        {
+            if (fs.existsSync(path.join(__dirname, '..', staff.avatar))) {
+                fs.unlinkSync(path.join(__dirname, '..', staff.avatar));
+            }
+            let prope1 = await User.deleteOne({ _id: staff._id });
+
+
+        }
+
         if (user.clinicphoto) {
             for (let i = 0; i < user.clinicphoto.length; i++) {
                 if (fs.existsSync(path.join(__dirname, '..', user.clinicphoto[i]))) {

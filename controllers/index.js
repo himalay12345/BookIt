@@ -1047,14 +1047,14 @@ module.exports.staffBooking = async(req, res) => {
             }
         }
     }
-    var todayd = new Date();
-    for (temp of user1.tracked) {
-        if (todayd > temp.createdAt) {
-            user1.tracked.pull(temp._id);
-        }
-    }
+    // var todayd = new Date();
+    // for (temp of user1.tracked) {
+    //     if (todayd > temp.createdAt) {
+    //         user1.tracked.pull(temp._id);
+    //     }
+    // }
 
-    user1.save()
+    // user1.save()
 
 
     doctor.save();
