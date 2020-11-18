@@ -24,7 +24,7 @@ const development = {
         secure: false,
         auth: {
             user: 'himalayshankar31@gmail.com',
-            pass: 'Nixxit@12345'
+            pass: 'Himalay@NIXXIT'
         }
     },
     razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
@@ -38,8 +38,8 @@ const development = {
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
     twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
     twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
-    twilio_auth_token: "f592ecc1635b6742a7620bdea1fc7099",
-    gmail_passw: 'Nixxit@123',
+    twilio_auth_token: "668b8725e086983ba4d89d95941deece",
+    gmail_passw: 'Himalay@NIXXIT',
     morgan: {
         mode: 'dev',
         options: { stream: accessLogStream }
@@ -81,5 +81,5 @@ const production = {
 }
 
 
-module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
-// module.exports = development;
+// module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
+module.exports = development;
