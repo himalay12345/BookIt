@@ -2021,6 +2021,8 @@ module.exports.profileUpdate = async function(req, res) {
         let user = await User.findById(req.user.id);
         User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
+
+            console.log(req.body);
             user.name = req.body.name;
             user.dob = req.body.dob;
             user.phone = req.body.phone;
