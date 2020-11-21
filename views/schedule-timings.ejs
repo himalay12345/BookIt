@@ -473,7 +473,7 @@
                                                                                                         <p style="font-size:0.9rem;" id="nots-warn">*** You are not allowed to make changes on the current day of booking.</p>
 
                                                                                                         <%}else{%>
-                                                                                                            <a class="edit-link" data-toggle="modal" href="#edit_time_slot_tuesday"><i class="fa fa-edit mr-1"></i>Edit</a>
+                                                                                                            <a class="edit-link" data-toggle="modal" href="#edit_time_slot_thursday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                                                                             <%}%>
 
                                                                                                                 <%}else{%>
@@ -481,7 +481,7 @@
                                                                                                                         <p style="font-size:0.8rem;" id="nots-warn">*** You are not allowed to make changes if the booking is started on the current day.</p>
 
                                                                                                                         <%}else{%>
-                                                                                                                            <a class="edit-link" data-toggle="modal" href="#edit_time_slot_tuesday"><i class="fa fa-edit mr-1"></i>Edit</a>
+                                                                                                                            <a class="edit-link" data-toggle="modal" href="#edit_time_slot_thursday"><i class="fa fa-edit mr-1"></i>Edit</a>
                                                                                                                             <%}%>
                                                                                                                                 <%}%>
                                                                                             </h4>
@@ -5239,14 +5239,15 @@
                             temp=day;
                         }%>
                                     <%}%>
+                                    
                                         <%if(flag == true){%>
                                             <input type="hidden" name="id" value="<%=temp._id%>">
                                             <%if(typeof(temp.start) == 'string' ){%>
                                                 <div class="row form-row hours-cont">
-                                                    <div class="col-12 col-md-10 ">
-                                                        <div class="row form-row ">
+                                                    <div class="col-12 col-md-10">
+                                                        <div class="row form-row">
                                                             <div class="col-12 col-md-3">
-                                                                <div class="form-group ">
+                                                                <div class="form-group">
                                                                     <label>Start Time</label>
                                                                     <select class="form-control" name="start" required>
                                                     <%if(temp.start == '12.00 am'){%>
@@ -5325,7 +5326,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-md-3">
-                                                                <div class="form-group ">
+                                                                <div class="form-group">
                                                                     <label>End Time</label>
                                                                     <select class="form-control" name="end" required>
                                                     <%if(temp.end == '12.00 am'){%>
@@ -5628,15 +5629,15 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 col-md-2 "><label class="d-md-block d-sm-none d-none ">&nbsp;</label><a href="# " class="btn btn-danger trash "><i class="far fa-trash-alt "></i></a></div>
+                                                    <div class="col-12 col-md-2"><label class="d-md-block d-sm-none d-none ">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt "></i></a></div>
                                                 </div>
                                                 <%}else{%>
                                                     <%for(let i=0;i<temp.start.length;i++){%>
                                                         <div class="row form-row hours-cont">
-                                                            <div class="col-12 col-md-10 ">
-                                                                <div class="row form-row ">
+                                                            <div class="col-12 col-md-10">
+                                                                <div class="row form-row">
                                                                     <div class="col-12 col-md-3">
-                                                                        <div class="form-group ">
+                                                                        <div class="form-group">
                                                                             <label>Start Time</label>
                                                                             <select class="form-control" name="start" required>
                                                 <%if(temp.start[i] == '12.00 am'){%>

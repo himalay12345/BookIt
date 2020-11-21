@@ -449,6 +449,41 @@ module.exports.login = (req, res) => {
     })
 }
 
+module.exports.livePatientTracking = async (req, res) => {
+    let doctor = await User.findById(req.query.id);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    let i = 0;
+    let index;
+    for(days of doctor.schedule_time)
+    {
+        if(days.day.toUpperCase() == dayOfWeek)
+        {
+            index=i;
+            break;
+        }
+        i++;
+    }
+
+    if(typeof(doctor.schedule_time[index].start) == 'string')
+    {
+        return res.redirect(`/patient-tracking/?id=${doctor.staff_id}&slotindex=`)
+    }
+
+    if(typeof(doctor.schedule_time[index].start) == 'object')
+    {
+        return res.render('patient-slot-select',{
+            title:'Choose Slot Timing',
+            doctor:doctor,
+            index:index
+        })
+    }
+}
+
 module.exports.myPatients = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'patients',
@@ -637,21 +672,42 @@ module.exports.pay = async(req, res) => {
 }
 
 module.exports.patientTracking = async(req, res) => {
+    if(req.isAuthenticated()){
+        if (req.user.type == 'Staff') {
+            let user = await User.findById(req.user.id).populate({
+                path: 'doctorid',
+                populate: {
+                    path: 'user'
+                }
+            });
+    
+            return res.render('patient-tracking', {
+                title: 'Track patients',
+                user1: user
+    
+            })
+        }
 
-    if (req.user.type == 'Staff') {
-        let user = await User.findById(req.user.id).populate({
-            path: 'doctorid',
-            populate: {
-                path: 'user'
-            }
-        });
 
-        return res.render('patient-tracking', {
-            title: 'Track patients',
-            user1: user
+        else {
+            let user = await User.findById(req.query.id).populate({
+                path: 'doctorid',
+                populate: {
+                    path: 'user'
+                }
+            });
+    
+    
+            return res.render('patient-tracking', {
+                title: 'Track patients',
+                user1: user,
+                slotnumber: req.query.slotindex
+    
+            })
+        }
+    }
 
-        })
-    } else {
+     else {
         let user = await User.findById(req.query.id).populate({
             path: 'doctorid',
             populate: {

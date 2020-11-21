@@ -52,6 +52,7 @@ router.get('/invoice-view', passport.checkAuthentication, homeController.invoice
 router.get('/invoices', passport.checkDoctorAuthentication, homeController.invoices);
 router.get('/id-proof', passport.checkDoctorAuthentication, homeController.idProof);
 router.get('/login', homeController.login);
+router.get('/live-patient-tracking', homeController.livePatientTracking);
 router.get('/my-patients', passport.checkDoctorAuthentication, homeController.myPatients);
 router.get('/medical-registration', passport.checkDoctorAuthentication, homeController.medicalRegistration);
 router.get('/medical-proof', passport.checkDoctorAuthentication, homeController.medicalProof);

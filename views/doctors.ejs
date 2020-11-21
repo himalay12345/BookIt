@@ -573,7 +573,7 @@
                                                 </div>
                                             </div> -->
                                         </div>
-                                        <div class="doctor-widget pb-4 mb-2 pt-2 lscreen" style="border-bottom: 1px solid lightgrey;">
+                                        <div class="doctor-widget pb-4 mb-2 lscreen" style="border-bottom: 1px solid lightgrey;padding-left:15px;padding-right:15px;padding-top: 1.5rem !important;">
                                             <div class="doc-info-left">
                                                 <div class="doctor-img">
                                                     <a href="doctor-profile/?id=<%=doctor._id%>">
@@ -672,10 +672,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="clinic-details">
-                                                        <!-- <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
-                                                        <%=doctor.contacts.city%>
-                                                            <%=doctor.contacts.country%>
-                                                    </p> -->
+                                                        <p class="doc-location" style="font-weight: bold;font-size: 1rem;"><i class="fas fa-building" style="margin-right: 5px;"></i>
+                                                        <%=doctor.clinicname%>
+                                                         
+                                                    </p>
+                                                    <p class="doc-location" style="font-weight: bold;font-size: 1rem;margin-top: -20px;"><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>
+                                                        <%=doctor.clinicaddr%>
+                                                            
+                                                    </p>
 
                                                         <ul class="clinic-gallery" style="margin-top: 15px;">
                                                             <%for(doctorsclinic of doctor.clinicphoto){%>
@@ -713,7 +717,7 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div class="doctor-action clinic-booking">
+                                                <div class="doctor-action clinic-booking" style="margin-top: -20px;">
                                                     <%var flag = false;%>
                                                         <%if(locals.user){%>
                                                             <%for(fav of locals.user.favourites){
@@ -744,6 +748,12 @@
                                                                                     <i class="fas fa-video"></i>
                                                                                 </a> -->
                                                 </div>
+                                                <%if(doctor.staff_flag){%>
+                                                <div class="clinic-booking" style="margin-bottom: 10px;">
+                                                    <!-- <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a> -->
+                                                    <a class="apt-btn tcolor" style="background-color: #C71585 !important;" href="/live-patient-tracking/?id=<%=doctor._id%>">Live Patient Tracking</a>
+                                                </div>
+                                                <%}%>
                                                 <div class="clinic-booking">
                                                     <!-- <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>">View Profile</a> -->
                                                     <a class="apt-btn tcolor" href="/booking/?id=<%=doctor._id%>">Book Appointment</a>

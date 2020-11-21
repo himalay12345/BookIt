@@ -18,12 +18,17 @@ const development = {
     session_cookie_key: 'aarogya@123',
     db: 'Aarogyahub',
     smtp: {
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
+        // service: 'gmail',
+        // host: 'smtp.gmail.com',
+        service: 'Godaddy',
+        host: "smtpout.secureserver.net",  
+        secureConnection: true,
+        port: 465,
+        // host:'smtp.office365.com',
+        // port: 587,
+        // secure: false,
         auth: {
-            user: 'himalayshankar31@gmail.com',
+            user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
         }
     },

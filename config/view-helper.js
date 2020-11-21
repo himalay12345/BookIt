@@ -7,7 +7,7 @@ module.exports = (app)=>{
     {
         if(env.name == 'development')
         {
-            console.log(filePath);
+            // console.log(filePath);
             return '/' + filePath;
         }
 

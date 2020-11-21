@@ -11,9 +11,10 @@ exports.newAlert = (date, time, email, doctor, patient) => {
         },'/appointment-alert/booking-cancel.ejs');
 
     nodeMailer.transporter.sendMail({
-        from:'himalayshankar31@gmail.com',
+        // from:'himalayshankar31@gmail.com',
+        from:'support@aarogyahub.com',
         to: email,
-        subject:"BookIt Appointment Alerts",
+        subject:"AarogyaHub Appointment Alerts",
         html:htmlString
 },(err,info) => {
     if(err)
