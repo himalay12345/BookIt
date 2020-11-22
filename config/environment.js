@@ -22,11 +22,14 @@ const development = {
         // host: 'smtp.gmail.com',
         service: 'Godaddy',
         host: "smtpout.secureserver.net",  
-        // secureConnection: true,
+        secure: true,
+        secureConnection: false, // TLS requires secureConnection to be false
+        tls: {
+            ciphers:'SSLv3'
+        },
+        requireTLS:true,
         port: 465,
-        // host:'smtp.office365.com',
-        // port: 587,
-        secure: false,
+        debug: true,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
