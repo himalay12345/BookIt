@@ -22,11 +22,11 @@ const development = {
         // host: 'smtp.gmail.com',
         service: 'Godaddy',
         host: "smtpout.secureserver.net",  
-        secureConnection: true,
+        // secureConnection: true,
         port: 465,
         // host:'smtp.office365.com',
         // port: 587,
-        // secure: false,
+        secure: false,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
