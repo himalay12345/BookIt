@@ -22,14 +22,8 @@ const development = {
         // host: 'smtp.gmail.com',
         service: 'Godaddy',
         host: "smtpout.secureserver.net",  
-        secure: true,
-        secureConnection: false, // TLS requires secureConnection to be false
-        tls: {
-            ciphers:'SSLv3'
-        },
-        requireTLS:true,
+        secure: false,
         port: 465,
-        debug: true,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
