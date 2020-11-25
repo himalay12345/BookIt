@@ -29,9 +29,9 @@ const development = {
         // }
         service: 'Godaddy',
         host: "smtpout.secureserver.net",  
-        secure: true,
-        // secureConnection: true,
-        port: 465,
+        // secure: true,
+        secureConnection: true,
+        port: 25,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
