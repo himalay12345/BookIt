@@ -18,24 +18,24 @@ const development = {
     session_cookie_key: 'aarogya@123',
     db: 'Aarogyahub',
     smtp: {
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        port:587,
+        // service: 'gmail',
+        // host: 'smtp.gmail.com',
+        // port:587,
         // port:465,
-        secure:true,
-        auth:{
-            user:'himalayshankar31@gmail.com',
-            pass:'Himalay@NIXXIT'
-        }
-        // service: 'Godaddy',
-        // host: "smtpout.secureserver.net",  
-        // secure: false,
-        // secureConnection: true,
-        // port: 465,
-        // auth: {
-        //     user: 'support@aarogyahub.com',
-        //     pass: 'Himalay@NIXXIT'
+        // secure:true,
+        // auth:{
+        //     user:'himalayshankar31@gmail.com',
+        //     pass:'Himalay@NIXXIT'
         // }
+        service: 'Godaddy',
+        host: "smtpout.secureserver.net",  
+        secure: true,
+        // secureConnection: true,
+        port: 587,
+        auth: {
+            user: 'support@aarogyahub.com',
+            pass: 'Himalay@NIXXIT'
+        }
     },
     razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
     // razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
