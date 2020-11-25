@@ -31,7 +31,7 @@ const development = {
         host: "smtpout.secureserver.net",  
         secure: true,
         // secureConnection: true,
-        port: 587,
+        port: 465,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'

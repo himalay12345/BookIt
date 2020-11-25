@@ -23,7 +23,7 @@ exports.newAlert = (date, time, email, doctor, patient) => {
         console.log('Error in sending mail',err);
         return;
     }
-    // console.log('Message sent',info);
+    console.log('Message sent',info);
     return;
 });
 } 
