@@ -28,11 +28,20 @@ const development = {
         //     user:'himalayshankar31@gmail.com',
         //     pass:'Himalay@NIXXIT'
         // }
-        service: 'Godaddy',
+        // service: 'Godaddy',
+        // host: "smtpout.secureserver.net",  
+        // secure: true,
+        // secureConnection: true,
+        // port: 465,
         host: "smtpout.secureserver.net",  
         secure: true,
-        // secureConnection: true,
+        secureConnection: false, // TLS requires secureConnection to be false
+        tls: {
+            ciphers:'SSLv3'
+        },
+        requireTLS:true,
         port: 465,
+        debug: true,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
