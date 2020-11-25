@@ -1,6 +1,7 @@
 const fs = require('fs');
 const rfs = require('rotating-file-stream');
 const path = require('path');
+const os = require('os');
 
 
 const logDirectory = path.join(__dirname, '../production_logs');
@@ -31,7 +32,7 @@ const development = {
         host: "smtpout.secureserver.net",  
         // secure: true,
         secureConnection: true,
-        port: 25,
+        port: 465,
         auth: {
             user: 'support@aarogyahub.com',
             pass: 'Himalay@NIXXIT'
