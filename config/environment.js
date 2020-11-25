@@ -22,7 +22,8 @@ const development = {
         // host: 'smtp.gmail.com',
         service: 'Godaddy',
         host: "smtpout.secureserver.net",  
-        secure: false,
+        // secure: false,
+        secureConnection: true,
         port: 465,
         auth: {
             user: 'support@aarogyahub.com',
