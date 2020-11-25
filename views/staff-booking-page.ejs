@@ -2,7 +2,10 @@
 <html lang="en">
 
 <!-- AarogyaHub/booking  30 Nov 2019 04:12:16 GMT -->
-
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+</head>
 
 
 <body>
@@ -1092,7 +1095,7 @@ Not Available
                                                                                                                                                                                     <%}}%>
                                                                                                                                                                     </li>
                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                        <li id="smd2">
+                                                                                                                                                                        <li id="smd2" style="display:none">
                                                                                                                                                                             <a class="timing" href="#">
 Not Available
 </a>
@@ -1156,7 +1159,7 @@ Not Available
                                                                                                                                                                                 </li>
 
                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                    <li id="smd3">
+                                                                                                                                                                                    <li id="smd3" style="display:none">
                                                                                                                                                                                         <a class="timing" href="#">
 Not Available
 </a>
@@ -1445,7 +1448,7 @@ Not Available
                 </form>
                 <!-- /Submit Section -->
 
-                <div class="tab-pane show active" id="upcoming-appointments">
+                <div class="tab-pane show active position-relative" id="upcoming-appointments">
                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
                         <li class="nav-item" style="width: 100%;">
                             <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Today Appointments</a>
@@ -1465,6 +1468,59 @@ Not Available
 
                             </div>
                         </form>
+                    </div>
+                    <div class="col-md-12 smadd" style="position: absolute;top:65px;left:60%;display: inline-flex;width: 100%;">
+                        <%var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                        var yyyy = today.getFullYear();
+                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                        var dayOfWeek = weekday[today.getDay()].toUpperCase();
+                        let ih = 0;
+                        let index=0;
+                        let sid;%>
+                       <%for(days of user1.doctorid.schedule_time){%>
+                        <%console.log(index,ih)%>
+                            <%if(days.day.toUpperCase() == dayOfWeek){%>
+                                <%index=ih;sid = days._id;break;%>
+                                
+                            <%}ih++;}%>
+                            <%console.log(index,ih)%>
+                        <form action="/user/add-more-seats" method="POST">
+                            <input type="hidden" name="did" value="<%=user.doctorid%>">
+                        <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Add Seats</label>
+                        <a id="submore" style="padding:8.8px 20px;border:1px solid grey;margin-right: -3px;margin-left: 30px;cursor:pointer;"onclick="minus();" class="tcolor">-</a>
+                        <input type="text" id="add_more" name="more" value="0" style="width: 50px;padding:5px;padding-left: 18px;outline: none !important;border:1px solid grey;">
+                        <a id="admore" style="padding:8.8px 20px;border:1px solid grey;margin-left: -3px;cursor:pointer;"onclick="add();" class="tcolor">+</a>
+                        <%if(typeof(user1.doctorid.schedule_time[index].start) == 'string'){%>
+                        <button type="submit" class="btn btn-primary submit-btn msbtn adbtn" style="min-width:0px !important;width:80px;margin-left: 30px;">Add</button>
+                        <%}else{%>
+                            <a href="#popup2" class="btn btn-primary submit-btn msbtn adbtn" style="min-width:0px !important;width:80px;margin-left: 30px;color:white">Add</a>
+                            <%}%>
+                       
+                        <div id="popup2" class="overlay">
+                            <div class="popup" id="popup">
+                                    <input type="hidden" name="index" value="<%index%>">
+                                    <div class="col-12 col-md-12 position-relative" style="margin-left: -0.9375rem;margin-top:20px;margin-bottom: 20px;">
+                                        <div id="header_filter" style="padding:10px;margin-top: -40px;
+                                        position: absolute;right:-15px;">
+                                <a href="/staff-booking/?id=<%=user1.doctorid._id%>"><i class="fas fa-times" style="font-size: 1.5rem;color:grey;cursor: pointer;" id="close_btn"></i></a>
+                            </div>
+                                        <div class="form-">
+                                            <label style="color: rgb(138, 138, 138);">Which slot you want to add the seat?</label>
+                                           
+                                                    <select name="slot" class="form-control select1">
+                                        <%for(let ik=0;ik<user1.doctorid.schedule_time[index].start.length;ik++){%>
+                                            <option value="<%=ik%>">Slot <%=user1.doctorid.schedule_time[index].start[ik]%>-<%=user1.doctorid.schedule_time[index].end[ik]%></option>
+                                        <%}%>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </form>
                     </div>
                     <%var slots=0,sindex=0;%>
                         <%var daten;%>
@@ -1799,7 +1855,52 @@ var dayOfWeek = weekday[today.getDay()];%>
     <!-- jQuery -->
    
     <script>
+        function minus()
+        {
+            var addmore = document.getElementById('add_more');
+            var value = addmore.value;
+            console.log(value);
+
+            if(value>0)
+            {
+               newvalue = value-1;
+               addmore.value=newvalue;
+            }
+        }
+
+        function add()
+        {
+            var addmore = document.getElementById('add_more');
+            var value = addmore.value;
+            console.log(value);
+
+            if(value>=0)
+            {
+               newvalue = parseInt(value)+1;
+               addmore.value=newvalue;
+            }
+        }
     </script>
+
+<script>
+    <%if(flash.success && flash.success.length>0){%>
+    new Noty({
+        theme: 'metroui ',
+        text: '<%=flash.success%>',
+        type: 'success',
+        layout: 'topRight',
+        timeout: 3000
+    }).show();
+    <%}%>
+    <%if(flash.error && flash.error.length>0){%>
+    new Noty({
+                theme: 'metroui',
+                text: '<%=flash.error%>',
+                 type: 'error', 
+                 layout: 'topRight',
+                  timeout: 3000 }).show();
+                <%}%>
+</script>
 
 
 </body>

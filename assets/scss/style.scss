@@ -8251,6 +8251,19 @@ html.menu-opened body {
     #btn {
         margin-top: 55px;
     }
+
+    .smadd{
+        position: static !important;
+        margin-top: -15px !important;
+        left:0% !important;
+
+    }
+
+    .adbtn{
+        margin-left: 12px !important;
+        padding: 8px !important;
+        width:60px !important;
+    }
     #rom {
         margin: 12px -16px -33px;
         padding: 12px 16px 0px;
@@ -9229,6 +9242,16 @@ html.menu-opened body {
         padding: 3px 20px 1px;
         margin-bottom: 15px;
     }
+
+    #admore,#submore{
+        display:none !important;
+    }
+
+    #add_more{
+        width: 100px !important;
+        margin-left: 10px !important;
+        padding-left: 40px !important;
+    }
     .mcontaine {
         padding-left: 114px !important;
         margin-top: -123px !important;
@@ -9687,6 +9710,16 @@ html.menu-opened body {
     .fc-header-toolbar .fc-right {
         margin-bottom: 10px;
     }
+}
+
+@media only screen and (max-width: 320px) {
+#dlist{
+    min-height:300px !important;
+}
+
+#lmar{
+    margin-left: 5px !important;
+}
 }
 
 .box {

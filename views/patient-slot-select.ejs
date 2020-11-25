@@ -37,9 +37,9 @@
                
                     <input type="hidden" name="doctorid" value="<%=doctor._id%>">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-md-6">
 
-                            <div class="card-bookinglap">
+                            <div class="card-bookinglap" style="display: block !important;">
                                 <div class="card-body">
                                     <div class="booking-doc-info">
                                         <a href="/doctor-profile/?id=<%=doctor._id%>" class="booking-doc-img">
@@ -139,7 +139,7 @@
                             <!-- /Submit Section -->
 
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="clinic-booking" style="margin-top: 15px;">
                                 <%var i=0;%>
                                 <%for(slot of doctor.schedule_time[index].start){%>

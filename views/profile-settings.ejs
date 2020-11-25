@@ -239,11 +239,10 @@
         <%if(flash.error && flash.error.length>0){%>
         new Noty({
                     theme: 'metroui',
-                    text: '
-                    <%=flash.error%>
-                    ', type: '
-                    error ', layout: '
-                    topRight ', timeout: 3000 }).show();
+                    text: '<%=flash.error%>',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 3000 }).show();
                     <%}%>
     </script>
 

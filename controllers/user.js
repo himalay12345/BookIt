@@ -204,6 +204,86 @@ module.exports.doctorReview = async(req, res) => {
     return res.redirect('back');
 }
 
+module.exports.addMoreSeat = async(req, res) => {
+    let user = await User.findById(
+        req.body.did);
+ 
+  var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    let i = 0;
+    let index;
+    let sid;
+    for(days of user.schedule_time)
+    {
+        if(days.day.toUpperCase() == dayOfWeek)
+        {
+            index=i;
+            sid = days._id;
+            break;
+        }
+        i++;
+    }
+    if(parseInt(req.body.more)>0)
+    {
+        if(typeof(user.schedule_time[index].start) == 'string')
+    {
+        let value = parseInt(user.schedule_time[index].available)+ parseInt(req.body.more);
+        let day = await User.update({ 'schedule_time._id': sid }, {
+                        '$set': {
+                            
+                            'schedule_time.$.available': value
+                            
+                        }
+                    });
+
+    }
+
+    if(typeof(user.schedule_time[index].start) == 'object')
+    {
+        let available = [];
+               let navailable = user.schedule_time[index].available;
+                let a = parseInt(navailable[req.body.slot]);
+                a = a + parseInt(req.body.more);
+                for (var temp = 0; temp < user.schedule_time[index].start.length; temp++) {
+                    if (temp == req.body.slot) {
+                        available.push(a);
+                        continue;
+                    }
+                    var temp1 = parseInt(navailable[temp]);
+                    available.push(temp1);
+                }
+
+                let day = await User.update({ 'schedule_time._id': sid }, {
+                    '$set': {
+                        
+                        'schedule_time.$.available': available
+                        
+                    }
+                });
+
+     
+    }
+
+    return res.redirect('back');
+    }
+
+    else{
+        req.flash('error','Please enter the value greater than 0 ')
+        return res.redirect('back');
+    }
+
+    
+
+
+
+   
+    
+}
+
 module.exports.createSession = async function(req, res) {
 
     console.log(req.body);
@@ -406,7 +486,7 @@ module.exports.confirmPay = async function(req, res) {
             const payment_capture = 1;
             const amount = doctor.booking_fee;
             const currency = 'INR';
-            const vendor_amount = amount-(amount*0.1);
+            const vendor_amount = amount-(amount*0.02);
             
             const response = await razorpay.orders.create({
                 amount:amount*100,
@@ -2001,13 +2081,15 @@ module.exports.doctorSortByDate = async(req, res) => {
     const date = req.body.date;
     const str = date.split("/").join("-");
     console.log(str);
+    let staff = await User.findById(patients.staff_id);
 
 
 
     return res.render('doctor-dashboard', {
         title: 'My Dashboard',
         allpatients: patients,
-        date: str
+        date: str,
+        staff:staff
     })
 
 

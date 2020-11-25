@@ -294,9 +294,12 @@ module.exports.doctorDashboard = async(req, res) => {
             populate: { path: 'user', }
         }
     });
+
+    let staff = await User.findById(patients.staff_id);
     return res.render('doctor-dashboard', {
         title: 'My Dashboard',
-        allpatients: patients
+        allpatients: patients,
+        staff:staff
     })
 }
 
