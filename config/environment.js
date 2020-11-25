@@ -20,7 +20,8 @@ const development = {
     smtp: {
         service: 'gmail',
         host: 'smtp.gmail.com',
-        port:587,
+        // port:587,
+        port:25,
         secure:false,
         auth:{
             user:'himalayshankar31@gmail.com',
