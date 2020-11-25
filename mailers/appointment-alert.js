@@ -11,8 +11,9 @@ exports.newAlert = (date, time, email, doctor, patient) => {
         },'/appointment-alert/booking-success.ejs');
 
     nodeMailer.transporter.sendMail({
-        // from:'himalayshankar31@gmail.com',
-        from:'support@aarogyahub.com',
+        from:'himalayshankar31@gmail.com',
+        // from:'AarogyaHub',
+        // from:'support@aarogyahub.com',
         to: email,
         subject:"AarogyaHub Appointment Alerts",
         html:htmlString
