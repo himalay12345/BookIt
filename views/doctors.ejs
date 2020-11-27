@@ -329,11 +329,11 @@
                                                                                 font-size: 15px;
                                                                                 font-weight: 500;
                                                                             ">
-                                                                            <%if(doctor.specialisation){%>
-                                                                    <% const name =doctor.specialisation;
+                                                                    <%if(doctor.specialisation){%>
+                                                                        <% const name =doctor.specialisation;
                                                                     const Capitalized = name.charAt(0).toUpperCase() + name.slice(1);%>
-                                                                        <%=Capitalized%> Specialist
-                                                                        <%}%>
+                                                                            <%=Capitalized%> Specialist
+                                                                                <%}%>
                                                                 </a>
 
                                                             </p>
@@ -577,7 +577,7 @@
                                             <div class="doc-info-left">
                                                 <div class="doctor-img">
                                                     <a href="doctor-profile/?id=<%=doctor._id%>">
-                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;height: 100%;" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
+                                                <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;height: 93%;" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                             </a>
                                                 </div>
                                                 <div class="doc-info-cont">
@@ -770,31 +770,30 @@
         </div>
 
 
-      
 
-    
-    <script>
-        var filter = document.getElementById('filter');
-        var fbox = document.getElementById('filter_box');
-        var close_btn = document.getElementById('close_btn');
-        close_btn.addEventListener('click',function(){
-            fbox.classList.add('displayNone');
-        })
-        filter.addEventListener('click',function(e)
-        {
-            e.preventDefault();
-            fbox.classList.remove('displayNone');
-        //     var count = 0;
-        //    setInterval(function(){
-        //        if(count<=-540)
-        //        {
-        //            return;
-        //        }
-        //        fbox.style.transform = `translateY(${count}px)`;
-        //        count-=3;
-        //    },1)
-            
-            
+
+
+        <script>
+            var filter = document.getElementById('filter');
+            var fbox = document.getElementById('filter_box');
+            var close_btn = document.getElementById('close_btn');
+            close_btn.addEventListener('click', function() {
+                fbox.classList.add('displayNone');
+            })
+            filter.addEventListener('click', function(e) {
+                e.preventDefault();
+                fbox.classList.remove('displayNone');
+                //     var count = 0;
+                //    setInterval(function(){
+                //        if(count<=-540)
+                //        {
+                //            return;
+                //        }
+                //        fbox.style.transform = `translateY(${count}px)`;
+                //        count-=3;
+                //    },1)
+
+
 
             })
         </script>

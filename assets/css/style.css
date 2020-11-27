@@ -447,6 +447,12 @@
 .consulations {
   display: block; }
 
+.view-all {
+  display: none; }
+
+.speciality-all {
+  display: none; }
+
 .consulation {
   display: none; }
 
@@ -7044,6 +7050,10 @@ html.menu-opened body {
     -ms-flex-direction: column;
     flex-direction: column;
     text-align: center; }
+  .view-all {
+    display: block; }
+  .speciality-all {
+    display: block; }
   .doc-info-right {
     margin-left: 0;
     -ms-flex: 0 0 100%;

@@ -59,8 +59,8 @@
     display: block;
 }
 
-.lptop{
-padding-top:40px !important;
+.lptop {
+    padding-top: 40px !important;
 }
 
 .cal-icon:after {
@@ -514,6 +514,14 @@ padding-top:40px !important;
     display: block;
 }
 
+.view-all {
+    display: none;
+}
+
+.speciality-all {
+    display: none;
+}
+
 .consulation {
     display: none;
 }
@@ -718,7 +726,6 @@ padding-top:40px !important;
 .col-black {
     color: black !important;
 }
-
 
 .removed {
     text-align: center;
@@ -1297,7 +1304,7 @@ button.bg-danger:hover {
 }
 
 .btn-primary {
-    background-color:#478e8e;
+    background-color: #478e8e;
     border: 1px solid #478e8e;
 }
 
@@ -3536,7 +3543,6 @@ html.menu-opened body {
 -----------------------*/
 
 .section-search {
- 
     min-height: 450px;
     background-size: 100% auto;
     position: relative;
@@ -8494,6 +8500,12 @@ html.menu-opened body {
         flex-direction: column;
         text-align: center;
     }
+    .view-all {
+        display: block;
+    }
+    .speciality-all {
+        display: block;
+    }
     .doc-info-right {
         margin-left: 0;
         -ms-flex: 0 0 100%;
@@ -9092,10 +9104,8 @@ html.menu-opened body {
         margin-left: -100px;
         height: 90%;
     }
-
-
-    .lptop{
-        padding-top:20px !important;
+    .lptop {
+        padding-top: 20px !important;
     }
     .header-nav {
         padding-left: 15px;
@@ -10078,41 +10088,38 @@ input:-webkit-autofill:focus {
     overflow: hidden !important;
 }
 
-.cloginbtn a{
-border-color:#478e8e !important;
-color:#478e8e !important;
+.cloginbtn a {
+    border-color: #478e8e !important;
+    color: #478e8e !important;
 }
 
-.cloginbtn a:hover{
-    background-color:#478e8e !important;
-    color:white !important;
+.cloginbtn a:hover {
+    background-color: #478e8e !important;
+    color: white !important;
 }
 
-.tcolor{
-    background-color:#478e8e !important;
-    color:white !important;
-    border:none !important;
+.tcolor {
+    background-color: #478e8e !important;
+    color: white !important;
+    border: none !important;
 }
 
-.tbcolor{
- 
+.tbcolor {
     color: #478e8e!important;
-    border-color:#478e8e !important;
+    border-color: #478e8e !important;
     background-color: white !important;
 }
 
-.hwhite :hover{
+.hwhite :hover {
     background-color: red !important;
-    color:white;
+    color: white;
 }
 
-.tselected{
-    background-color:#478e8e !important;
-    color:white !important;
-
+.tselected {
+    background-color: #478e8e !important;
+    color: white !important;
 }
-.tselected span{
-    
-    color:white !important;
 
+.tselected span {
+    color: white !important;
 }

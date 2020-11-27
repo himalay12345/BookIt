@@ -83,7 +83,9 @@ module.exports.Specialist = async function(req, res) {
     let doctors = await User.find({
         department: req.query.dep,
         type: "Doctor",
-        approve1: true, approve2: true, booking_service: true
+        approve1: true,
+        approve2: true,
+        booking_service: true
     });
 
 
@@ -92,6 +94,11 @@ module.exports.Specialist = async function(req, res) {
         title: 'Specialist'
     });
 
+}
+module.exports.SpecialistAll = (req, res) => {
+    return res.render('specialist-all', {
+        title: 'Specialist All'
+    })
 }
 
 module.exports.appointments = async(req, res) => {
@@ -1165,7 +1172,7 @@ module.exports.verifyDoctor = async(req, res) => {
                         title: 'Phone verification',
                         phone: req.body.phone,
                         id: doctor._id,
-                        designation:'Verify'
+                        designation: 'Verify'
 
                     });
                 });

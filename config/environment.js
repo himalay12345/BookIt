@@ -81,5 +81,5 @@ const production = {
 }
 
 
-// module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
-module.exports = development;
+module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development : eval(process.env.AAROGYAHUB_ENVIRONMENT);
+// module.exports = development;
