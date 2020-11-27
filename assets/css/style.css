@@ -8336,31 +8336,25 @@ input:-webkit-autofill:focus {
 .tselected span {
   color: white !important; }
 
-
-#myTable tr{
+#myTable tr {
   background-color: white;
-  border-bottom:1px solid rgb(184, 181, 181);
-  height:30px !important;
-}
+  border-bottom: 1px solid #b8b5b5;
+  height: 30px !important; }
 
-#myTable tr img{
- height:30px;
- width: 30px;
- border-radius: 50%;
- margin-left: 15px;
- margin-top: 5px;
- margin-right: -40px;
-}
+#myTable tr img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-right: -40px; }
 
-#myTable tr td{
-font-size: 1rem !important;
-font-weight: bold;
-padding: 5px !important;
- }
+#myTable tr td {
+  font-size: 1rem !important;
+  font-weight: bold;
+  padding: 5px !important; }
 
- #myTable tr td span{
+#myTable tr td span {
   font-size: 0.8rem !important;
   font-weight: normal !important;
-  color:black !important;
-   }
-
+  color: black !important; }
