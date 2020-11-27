@@ -41,7 +41,8 @@ module.exports.home = async(req, res) => {
             title: 'Home',
             doctors: doctors,
             consults: consults,
-            patient: patient
+            patient: patient,
+            ar:JSON.stringify(ar)
         })
     } else {
         return res.render('index', {
