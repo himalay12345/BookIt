@@ -1,0 +1,264 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<title>
+			<%=title%>
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta name="theme-color" content="#478e8e">
+		<link href="img/favicon.png" rel="icon">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="<%=assetPath('css/bootstrap-datetimepicker.min.css')%>">
+     <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+		<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+	</head>
+	
+<!-- doccure/invoice-view  30 Nov 2019 04:12:19 GMT -->
+
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+		
+			<!-- Header -->
+		
+			<!-- /Header -->
+			
+			<!-- Breadcrumb -->
+			<!-- <div class="breadcrumb-bar lptop">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Invoice View</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Invoice View</h2>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content"  style="padding-left: 0px !important; padding-right: 0px !important;">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="offset-lg-2" style="width: 100% !important;margin-left: 0px !important;">
+							<div class="invoice-content">
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-4" style="margin-bottom: 15px;margin-top: -15px;display: inline-flex;">
+											<div class="navbar-brand logo">
+												<img src="<%=assetPath('img/aalogo.png')%>" style="height:90px;width:210px" alt="logo">
+                                            </div>
+                                            <div style="margin-top: 20px;margin-left:30px;font-size: 2.5rem;"><i class="fas fa-hospital"></i></div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div style="width: auto;border-bottom: 3px solid black;">
+                                            <h1 style="font-family: Bradley Hand, cursive;font-size: 2.5rem;"><%=doctor.clinicname%></h1>
+                                        </div>
+                                        <h5 style="margin-top: 10px;font-weight: bold;"><%=doctor.clinicaddr%>,&nbsp;<%=doctor.contacts.city%> Ph.No. - <%=doctor.phone%></h5>
+                                        <h5 style="margin-top: 0px;font-weight: bold;margin-left: 110px;">Regn. No. : <%=doctor.registrations.registration%></h5>
+                                        </div>
+										<!-- <div class="col-md-6">
+											<p class="invoice-details">
+												<strong>Appointment No:</strong> #<%=order%> <br>
+												<strong>Issued:</strong> <%=date%>
+											</p>
+										</div> -->
+									</div>
+								</div>
+								
+								<!-- Invoice Item -->
+								<div class="invoice-item" style="margin-bottom: 30px;margin-top: 25px;padding-bottom:10px;border-bottom: 5px double rgb(155, 95, 95);">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="invoice-info">
+												
+												<p class="invoice-details invoice-details-two text-left" style="float: left !important;color:black;">
+													<b style="font-family: Bradley Hand, cursive;font-size: 1.6rem;">Dr.<%=doctor.name%> </b><br>
+													<b>
+                                                        <%var i=0;%>
+                                                        <%for(exp of doctor.education){%>
+                                                            <%if(i>=2){%>
+                                                            <%break;}%>
+                                                            <%=exp.degree.toUpperCase()%>
+                                                            <%i++;%>
+                                                            <%}%>
+                                                        (<%=doctor.department%>)</b> <br>
+														<%for(let j=i;j<doctor.education.length;j++){%>
+                                                            <b><%=doctor.education[j].degree.toUpperCase()%>&nbsp;(<%=doctor.department%>)</b></br>
+                                                            <%}%>
+                                                            <%for(exp1 of doctor.experience){%>
+                                                    <b>Ex <%=exp1.designation%> <%=exp1.institutionname%>, <%=exp1.city%></b><br>
+                                                    <%}%>
+                                                    
+												</p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="invoice-info invoice-info2">
+												<!-- <strong class="customer-text">Invoice To</strong>
+												<p class="invoice-details">
+													<%=name%> <br>
+													<%=age%> Years<br>
+													<%=address%><br>
+													<%=phone%><br>
+												</p> -->
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+								
+								<!-- Invoice Item -->
+								<!-- <div class="invoice-item">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="invoice-info">
+												<strong class="customer-text">Payment Method</strong>
+												<p class="invoice-details invoice-details-two">
+													Debit Card <br>
+													XXXXXXXXXXXX-2541 <br>
+													HDFC Bank<br>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div> -->
+								<!-- /Invoice Item -->
+								
+								<!-- Invoice Item -->
+                                <div class="invoice-item invoice-table-wrap" style="height: 1000px !important;">
+                                    <style>
+                                        .dpad h5:after{
+    content:'<%=name%>';
+    display:inline-block;
+    width:90%; height:100%;
+    margin-right:-100%;
+    margin-top:10px;
+    margin-left: 5px;
+    border-bottom:2px solid grey;
+  }
+  .dpad h4:after{
+    content:'<%=address%>';
+    display:inline-block;
+    width:90%; height:100%;
+    margin-right:-100%;
+    margin-top:10px;
+    margin-left: 5px;
+    border-bottom:2px solid grey;
+  }
+  .dpad h3:after{
+    content:'';
+    display:inline-block;
+    width:90%; height:100%;
+    margin-right:-100%;
+    margin-top:25px;
+    margin-left: 5px;
+    border-bottom:2px solid grey;
+  }
+  .dpad h2:after{
+    content:'';
+    display:inline-block;
+    width:90%; height:100%;
+    margin-right:-100%;
+    margin-top:25px;
+    margin-left: 5px;
+    border-bottom:2px solid grey;
+  }
+                                        .ddpad h5:after{
+    content:'<%=date%>';
+    display:inline-block;
+    width:75%; height:100%;
+    margin-right:-100%;
+    margin-top:10px;
+    margin-left: 10px;
+    border-bottom:2px solid grey;
+    
+  }
+  
+    .ddpad h4:after{
+    content:'<%=age%>';
+    display:inline-block;
+    width:75%; height:100%;
+    margin-right:-100%;
+    margin-top:10px;
+    margin-left: 10px;
+    border-bottom:2px solid grey;
+    }
+    .ddpad h3:after{
+    content:'<%=gender%>';
+    display:inline-block;
+    width:75%; height:100%;
+    margin-right:-100%;
+    margin-top:10px;
+    margin-left: 10px;
+    border-bottom:2px solid grey;
+    }
+    .ddpad h2:after{
+    content:'';
+    display:inline-block;
+    width:75%; height:100%;
+    margin-right:-100%;
+    margin-top:25px;
+    margin-left: 10px;
+    border-bottom:2px solid grey;
+  }
+                                    </style>
+									<div class="row">
+										<div class="col-md-8 dpad">
+                                            <h5 style="font-weight: bold;font-size: 1rem;">Name : </h5>
+                                            <h4 style="font-weight: bold;font-size: 1rem;">Address : </h5>
+                                            <h3 style="font-weight: bold;font-size: 1rem;">Op No. : </h5>
+                                            <h2 style="font-weight: bold;font-size: 1rem;">BP : </h5>
+                                        </div>
+                                        <div class="col-md-4 ddpad">
+                                            <h5 style="font-weight: bold;font-size: 1rem;">Date :</h5>
+                                            <h4 style="font-weight: bold;font-size: 1rem;">Age :</h5>
+                                            <h3 style="font-weight: bold;font-size: 1rem;">Sex :</h5>
+                                            <h2 style="font-weight: bold;font-size: 1rem;">Weight :</h5>
+                                        </div>
+                                        
+										
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+			<!-- Footer -->
+			
+			<!-- /Footer -->
+		   
+		</div>
+		<script src="<%=assetPath('js/jquery.min.js')%>"></script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="<%=assetPath('js/popper.min.js')%>"></script>
+		<script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+		<script src="<%=assetPath('js/script1.js')%>"></script>
+
+		<!-- /Main Wrapper -->
+	  
+		<!-- jQuery -->
+	
+	</body>
+
+<!-- doccure/invoice-view  30 Nov 2019 04:12:20 GMT -->
+</html>

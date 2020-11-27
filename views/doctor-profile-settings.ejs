@@ -319,7 +319,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">City</label>
-                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" >
+                                                <input type="text" class="form-control" name="cityname" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" >
                                             </div>
                                         </div>
 
@@ -445,10 +445,16 @@
                                             <div class="row form-row experience-cont">
                                                 <div class="col-12 col-md-10 col-lg-11">
                                                     <div class="row form-row">
-                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                        <div class="col-12 col-md-6 col-lg-3">
                                                             <div class="form-group">
                                                                 <label>Institution Name</label>
                                                                 <input type="text" placeholder="Enter Institution Name" name="institutionname" class="form-control" value="" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6 col-lg-2">
+                                                            <div class="form-group">
+                                                                <label>City</label>
+                                                                <input type="text" placeholder="Enter City Name" name="city" class="form-control" value="" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6 col-lg-2">
@@ -463,7 +469,7 @@
                                                                 <input type="Number" placeholder="To" name="to" value="" class="form-control" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 col-md-6 col-lg-4">
+                                                        <div class="col-12 col-md-6 col-lg-3">
                                                             <div class="form-group">
                                                                 <label>Designation</label>
                                                                 <input type="text" placeholder="Designation" name="designation" class="form-control" value="" >
@@ -478,10 +484,16 @@
                                                     <div class="row form-row experience-cont">
                                                         <div class="col-12 col-md-10 col-lg-11">
                                                             <div class="row form-row">
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Institution Name</label>
                                                                         <input type="text" placeholder="Enter the Name" class="form-control" value="<%=temp.institutionname%>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-6 col-lg-2">
+                                                                    <div class="form-group">
+                                                                        <label>City</label>
+                                                                        <input type="text" class="form-control" value="<%=temp.city%>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-md-6 col-lg-2">
@@ -496,7 +508,7 @@
                                                                         <input type="Number" value="<%=temp.to%>" class="form-control">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-md-6 col-lg-4">
+                                                                <div class="col-12 col-md-6 col-lg-3">
                                                                     <div class="form-group">
                                                                         <label>Designation</label>
                                                                         <input type="text" class="form-control" value="<%=temp.designation%>">

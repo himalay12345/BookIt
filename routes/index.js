@@ -71,6 +71,7 @@ router.get('/privacy-policy', homeController.privacyPolicy);
 router.get('/profile-settings', passport.checkPatientAuthentication, homeController.profileSettings);
 router.get('/profile-info', passport.checkDoctorAuthentication, homeController.profileInfo);
 router.get('/preview-profile', passport.checkAuthentication, homeController.previewProfile);
+router.get('/prescription-pad', passport.checkAuthentication, homeController.prescriptionPad);
 router.get('/register', homeController.register);
 router.get('/reviews', passport.checkDoctorAuthentication, homeController.reviews);
 router.get('/schedule-timings', passport.checkDoctorAuthentication, homeController.scheduleTimings);

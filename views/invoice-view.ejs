@@ -1,5 +1,22 @@
 <!DOCTYPE html> 
 <html lang="en">
+	<head>
+		<title>
+			<%=title%>
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta name="theme-color" content="#478e8e">
+		<link href="img/favicon.png" rel="icon">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="<%=assetPath('css/bootstrap-datetimepicker.min.css')%>">
+     <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+		<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+	</head>
 	
 <!-- doccure/invoice-view  30 Nov 2019 04:12:19 GMT -->
 
@@ -13,7 +30,7 @@
 			<!-- /Header -->
 			
 			<!-- Breadcrumb -->
-			<div class="breadcrumb-bar">
+			<!-- <div class="breadcrumb-bar lptop">
 				<div class="container-fluid">
 					<div class="row align-items-center">
 						<div class="col-md-12 col-12">
@@ -27,7 +44,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- /Breadcrumb -->
 			
 			<!-- Page Content -->
@@ -39,14 +56,14 @@
 							<div class="invoice-content">
 								<div class="invoice-item">
 									<div class="row">
-										<div class="col-md-6">
-											<div class="invoice-logo">
-												<img src="<%=assetPath('img/logo.png')%>" alt="logo">
+										<div class="col-md-6" style="margin-bottom: 15px;">
+											<div class="navbar-brand logo">
+												<img src="<%=assetPath('img/aalogo.png')%>" style="height:90px;width:210px" alt="logo">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<p class="invoice-details">
-												<strong>Order:</strong> #000<%=order%> <br>
+												<strong>Appointment No:</strong> #<%=order%> <br>
 												<strong>Issued:</strong> <%=date%>
 											</p>
 										</div>
@@ -54,15 +71,16 @@
 								</div>
 								
 								<!-- Invoice Item -->
-								<div class="invoice-item">
+								<div class="invoice-item" style="margin-bottom: 30px;">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
 												<strong class="customer-text">Invoice From</strong>
-												<p class="invoice-details invoice-details-two">
-													Dr.<%=doctor.name%> <br>
-													<%=doctor.contacts.address%>, <%=doctor.contacts.city%>,<br>
-													<%=doctor.contacts.state%> <br>
+												<p class="invoice-details invoice-details-two text-left" style="float: left !important;">
+													<b>Dr.<%=doctor.name%> </b><br>
+													<b><%=doctor.clinicname%></b> <br>
+														<b><%=doctor.clinicaddr%></b><br>
+													<b><%=doctor.contacts.state%> </b><br>
 												</p>
 											</div>
 										</div>
@@ -70,9 +88,10 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Invoice To</strong>
 												<p class="invoice-details">
-													<%=locals.user.name%> <br>
-													<%=locals.user.address%>, <%=locals.user.city%>, <br>
-													<%=locals.user.state%> <br>
+													<%=name%> <br>
+													<%=age%> Years, <%=gender%><br>
+													<%=address%><br>
+													<%=phone%><br>
 												</p>
 											</div>
 										</div>
@@ -169,10 +188,17 @@
 			<!-- /Page Content -->
    
 			<!-- Footer -->
-			<%-include('footer');%>
+			
 			<!-- /Footer -->
 		   
 		</div>
+		<script src="<%=assetPath('js/jquery.min.js')%>"></script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="<%=assetPath('js/popper.min.js')%>"></script>
+		<script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+		<script src="<%=assetPath('js/script1.js')%>"></script>
+
 		<!-- /Main Wrapper -->
 	  
 		<!-- jQuery -->

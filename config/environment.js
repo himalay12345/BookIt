@@ -19,23 +19,9 @@ const development = {
     session_cookie_key: 'aarogya@123',
     db: 'Aarogyahub',
     smtp: {
-        // service: 'gmail',
-        // host: 'smtp.gmail.com',
-        // port:587,
-        // port:465,
-        // secure:true,
-        // auth:{
-        //     user:'himalayshankar31@gmail.com',
-        //     pass:'Himalay@NIXXIT'
-        // }
-        // service: 'Godaddy',
-        // host: "smtpout.secureserver.net",  
-        // secure: true,
-        // secureConnection: true,
-        // port: 465,
         host: "smtpout.secureserver.net",  
         secure: true,
-        secureConnection: false, // TLS requires secureConnection to be false
+        secureConnection: false,
         tls: {
             ciphers:'SSLv3'
         },
@@ -75,10 +61,15 @@ const production = {
     session_cookie_key: process.env.SESSION_COOKIE_KEY,
     db: process.env.DB,
     smtp: {
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
+        host: "smtpout.secureserver.net",  
+        secure: true,
+        secureConnection: false,
+        tls: {
+            ciphers:'SSLv3'
+        },
+        requireTLS:true,
+        port: 465,
+        debug: true,
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASSWORD,
@@ -104,5 +95,5 @@ const production = {
 }
 
 
-// module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
-module.exports = development;
+module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development :  eval(process.env.AAROGYAHUB_ENVIRONMENT);
+// module.exports = development;

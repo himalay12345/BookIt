@@ -12,8 +12,8 @@ exports.newAlert = (date, time, email, doctor, patient) => {
 
     nodeMailer.transporter.sendMail({
         // from:'himalayshankar31@gmail.com',
-        // from:'AarogyaHub',
-        from:'support@aarogyahub.com',
+        from:'AarogyaHub',
+        // from:'support@aarogyahub.com',
         to: email,
         subject:"AarogyaHub Appointment Alerts",
         html:htmlString

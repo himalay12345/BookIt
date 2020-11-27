@@ -69,10 +69,16 @@ Version      : 1.0
         var experiencecontent = '<div class="row form-row experience-cont">' +
             '<div class="col-12 col-md-10 col-lg-11">' +
             '<div class="row form-row">' +
-            '<div class="col-12 col-md-6 col-lg-4">' +
+            '<div class="col-12 col-md-6 col-lg-3">' +
             '<div class="form-group">' +
             '<label>Institution Name</label>' +
             '<input type="text" name="institutionname" placeholder="Enter Institution Name" class="form-control">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-12 col-md-6 col-lg-2">' +
+            '<div class="form-group">' +
+            '<label>City</label>' +
+            '<input type="text" placeholder="City" name="cityname" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-2">' +
@@ -87,7 +93,7 @@ Version      : 1.0
             '<input type="text" placeholder="To" name="to" class="form-control">' +
             '</div>' +
             '</div>' +
-            '<div class="col-12 col-md-6 col-lg-4">' +
+            '<div class="col-12 col-md-6 col-lg-3">' +
             '<div class="form-group">' +
             '<label>Designation</label>' +
             '<input type="text" placeholder="Designation" name="designation" class="form-control">' +

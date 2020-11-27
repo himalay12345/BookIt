@@ -564,6 +564,8 @@ module.exports.destroySession = function(req, res) {
 
 module.exports.offlineCancel = async function(req, res) {
 
+   
+
     try{
 
                 let user1 = await User.findById(req.user.id);
@@ -573,60 +575,56 @@ module.exports.offlineCancel = async function(req, res) {
                 if(req.body.flag == 'yes')
                 {
 
-                    //    let n1 = await User.update({ "_id" : user1._id, "booking._id": req.body.bid}, {
-                    //         '$set': {
+                       let n1 = await User.update({ "_id" : user1._id, "booking._id": req.body.bid}, {
+                            '$set': {
                                 
-                    //             'booking.$.cancel': true
+                                'booking.$.cancel': true
                                 
-                    //         }
-                    //     });
+                            }
+                        });
                       
-                    //     if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
-                    //     {
-                    //         let available1 = [];
-                    //         let k = req.body.slotindex;
-                    //         let id = user.schedule_time[req.body.dayindex]._id;
+                        if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
+                        {
+                            let available1 = [];
+                            let k = req.body.slotindex;
+                            let id = user.schedule_time[req.body.dayindex]._id;
 
-                    //         let j = user.schedule_time[req.body.dayindex].available;
-                    //         var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
-                    //         console.log(a2);
-                    //         for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
-                    //             {
-                    //                 if(temp == k)
-                    //                 {
-                    //                     available1.push(a2+1);
-                    //                     continue;
-                    //                 }
-                    //                 var temp1 = parseInt(j[temp]);
-                    //                 available1.push(temp1);
-                    //             }
-                    //         let day = await User.update({ 'schedule_time._id': id }, {
-                    //             '$set': {
+                            let j = user.schedule_time[req.body.dayindex].available;
+                            var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
+                            console.log(a2);
+                            for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+                                {
+                                    if(temp == k)
+                                    {
+                                        available1.push(a2+1);
+                                        continue;
+                                    }
+                                    var temp1 = parseInt(j[temp]);
+                                    available1.push(temp1);
+                                }
+                            let day = await User.update({ 'schedule_time._id': id }, {
+                                '$set': {
                                     
-                    //                 'schedule_time.$.available': available1
+                                    'schedule_time.$.available': available1
                                     
-                    //             }
-                    //         });
-                    //         // user.schedule_time[0].available[0] = 5;
-                    //         user.save();
-                    //     }
-                    //     else{
-                    //         var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
+                                }
+                            });
+                            // user.schedule_time[0].available[0] = 5;
+                            user.save();
+                        }
+                        else{
+                            var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
                             
-                    //         user.schedule_time[req.body.dayindex].available= a1 + 1 ;
-                    //         user.save();
+                            user.schedule_time[req.body.dayindex].available= a1 + 1 ;
+                            user.save();
 
-                    //     }
+                        }
                        
                         
-                    //     user1.save();
+                        user1.save();
                         
-                    //     return res.render('staff-booking-page',{
-                    //         title:'Staff Booking Page',
-                    //         doctor:user,
-                    //        title:'Book Apointment'
-                    //     });
-               console.log(req.body);
+                      
+               return res.redirect('back');
 
                    
                         
@@ -1585,7 +1583,8 @@ module.exports.offlinePay = async(req, res) => {
                     slot: req.body.slotindex,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
-                    seat: b
+                    seat: b,
+                    gender:req.body.gender
                 });
                 staff.refresh_flag = false;
 
@@ -1641,7 +1640,7 @@ module.exports.offlinePay = async(req, res) => {
                     time: req.body.time,
                     date: req.body.date,
                     day: req.body.day,
-                    
+                    gender:req.body.gender,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: k1
@@ -2218,6 +2217,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
         User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
 
+            console.log(req.body)
+
             user.services = req.body.services;
             user.specialisation = req.body.specialisation;
             user.clinicname = req.body.clinicname;
@@ -2268,7 +2269,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                         institutionname: req.body.institutionname[i],
                         from: req.body.from[i],
                         to: req.body.to[i],
-                        designation: req.body.designation[i]
+                        designation: req.body.designation[i],
+                        city:req.body.cityname[i]
                     });
                 }
             }
@@ -2279,7 +2281,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                     institutionname: req.body.institutionname,
                     from: req.body.from,
                     to: req.body.to,
-                    designation: req.body.designation
+                    designation: req.body.designation,
+                    city:req.body.cityname
                 });
             }
 

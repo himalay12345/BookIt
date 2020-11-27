@@ -14,6 +14,18 @@ const emailVerification = require('../mailers/email-otp');
 
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+    let ar = [];
+    for(i of doctors)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
+
+    console.log(ar);
     let consults = await Consult.find({})
     console.log(consults);
     if (req.isAuthenticated()) {
@@ -35,7 +47,8 @@ module.exports.home = async(req, res) => {
         return res.render('index', {
             title: 'Home',
             doctors: doctors,
-            consults: consults
+            consults: consults,
+            ar:JSON.stringify(ar)
         })
     }
 
@@ -417,7 +430,33 @@ module.exports.invoiceView = async(req, res) => {
         doctor: doctor,
         order: req.query.order,
         date: req.query.date,
-        fee: req.query.fee
+        fee: req.query.fee,
+        name : req.query.name,
+        age : req.query.age,
+        phone : req.query.phone,
+        address:req.query.address,
+        gender:req.query.gender,
+        layout: 'invoice-view' 
+
+    })
+}
+
+module.exports.prescriptionPad = async(req, res) => {
+
+    let doctor = await User.findById(req.query.id);
+    return res.render('doctor_prescription_pad', {
+        title: 'Invoice View',
+        doctor: doctor,
+        order: req.query.order,
+        date: req.query.date,
+        fee: req.query.fee,
+        name : req.query.name,
+        age : req.query.age,
+        phone : req.query.phone,
+        address:req.query.address,
+        gender:req.query.gender,
+        layout: 'doctor_prescription_pad' 
+
     })
 }
 
