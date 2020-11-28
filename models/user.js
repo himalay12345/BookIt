@@ -324,6 +324,9 @@ const userSchema = mongoose.Schema({
             date:{
                 type:String
             },
+            gender:{
+                type:String
+            },
             day:{
                 type:String
             },
@@ -540,10 +543,15 @@ const userSchema = mongoose.Schema({
         designation: {
             type: String
 
+        },
+        city:{
+            type: String
         }
     }]
 
 }, { timestamps: true });
+
+userSchema.index({name: 'text'});
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, path.join(__dirname, '..', AVATAR_PATH));

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/booking  30 Nov 2019 04:12:16 GMT -->
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li  class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li  class="breadcrumb-item active" aria-current="page">Select Slot</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Patient Tracking System</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container">
+               
+                    <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="card-bookinglap" style="display: block !important;">
+                                <div class="card-body">
+                                    <div class="booking-doc-info">
+                                        <a href="/doctor-profile/?id=<%=doctor._id%>" class="booking-doc-img">
+<img src="<%=doctor.avatar%>" alt="User Image">
+</a>
+<div class="booking-info">
+<h4>
+<a href="/doctor-profile/?id=<%=doctor._id%>">
+<%=doctor.name%>
+</a>
+</h4>
+<p class="doc-department">
+<% if(doctor.department== "General Physician"){ %>
+<img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
+<% } %>
+
+<% if(doctor.department== "Ophthalmology"){ %>
+<img src="<%=assetPath('img/specialities/eye.png')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Dermatology"){ %>
+<img src="<%=assetPath('img/specialities/hair.jpg')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Paediatrics"){ %>
+<img src="<%=assetPath('img/specialities/child.jpg')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Urology"){ %>
+<img src="<%=assetPath('img/specialities/brain.png')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Neurology"){ %>
+<img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Orthopedic"){ %>
+<img src="<%=assetPath('img/specialities/specialities.png')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Cardiologist"){ %>
+<img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<% if(doctor.department== "Dentist"){ %>
+<img src="<%=assetPath('img/specialities/teeth.png')%>" class="img-fluid" alt="Speciality">
+<% } %>
+<%=doctor.department%>
+
+</p>
+<%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                                        <%for(review of doctor.reviews){%>
+                                                            <%sum+=review.rating;%>
+                                                                <%}%>
+                                                                    <%avg=sum/cnt;%>
+                                                                        <div class="rating">
+                                                                            <%if(avg>=1){%>
+                                                                                <i class="fas fa-star filled"></i>
+                                                                                <%}else{%>
+                                                                                    <i class="fas fa-star"></i>
+                                                                                    <%}%>
+                                                                                        <%if(avg>=2){%>
+                                                                                            <i class="fas fa-star filled"></i>
+                                                                                            <%}else{%>
+                                                                                                <i class="fas fa-star"></i>
+                                                                                                <%}%>
+                                                                                                    <%if(avg>=3){%>
+                                                                                                        <i class="fas fa-star filled"></i>
+                                                                                                        <%}else{%>
+                                                                                                            <i class="fas fa-star"></i>
+                                                                                                            <%}%>
+                                                                                                                <%if(avg>=4){%>
+                                                                                                                    <i class="fas fa-star filled"></i>
+                                                                                                                    <%}else{%>
+                                                                                                                        <i class="fas fa-star"></i>
+                                                                                                                        <%}%>
+                                                                                                                            <%if(avg>=5){%>
+                                                                                                                                <i class="fas fa-star filled"></i>
+                                                                                                                                <%}else{%>
+                                                                                                                                    <i class="fas fa-star"></i>
+                                                                                                                                    <%}%>
+                                                                                                                                        <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                                        </div>
+                                                                        <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
+                                                                            <%=doctor.booking_fee%>
+                                                                        </p>
+
+
+                                                                        <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
+                                                                            <%=doctor.contacts.city%> &nbsp;
+                                                                                <%=doctor.contacts.state%>
+                                                                        </p>
+                                                </div>
+                                        </div>
+                                    </div> 
+                            </div>
+
+                            <!-- Schedule Widget -->
+                           
+                            <!-- /Schedule Widget -->
+
+                            <!-- Submit Section -->
+                          
+                            <!-- /Submit Section -->
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="clinic-booking" style="margin-top: 15px;">
+                                <%var i=0;%>
+                                <%for(slot of doctor.schedule_time[index].start){%>
+                                <a class="apt-btn tcolor" href="/patient-tracking/?id=<%=doctor.staff_id%>&slotindex=<%=i%>">Slot <%=doctor.schedule_time[index].start[i]%>-<%=doctor.schedule_time[index].end[i]%></a>
+                                <%i++;%>
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+            
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    
+
+
+</body>
+
+<!-- doccure/booking  30 Nov 2019 04:12:16 GMT -->
+
+</html>

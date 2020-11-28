@@ -4006,3 +4006,11 @@ table.table-inbox tbody tr.checked {
     max-width: 160px; }
   .page-header .breadcrumb {
     display: none; } }
+
+.dpad h5:after {
+  content: 'Himalay';
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin-right: -100%;
+  border-bottom: 1px solid #000; }

@@ -204,6 +204,86 @@ module.exports.doctorReview = async(req, res) => {
     return res.redirect('back');
 }
 
+module.exports.addMoreSeat = async(req, res) => {
+    let user = await User.findById(
+        req.body.did);
+ 
+  var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    let i = 0;
+    let index;
+    let sid;
+    for(days of user.schedule_time)
+    {
+        if(days.day.toUpperCase() == dayOfWeek)
+        {
+            index=i;
+            sid = days._id;
+            break;
+        }
+        i++;
+    }
+    if(parseInt(req.body.more)>0)
+    {
+        if(typeof(user.schedule_time[index].start) == 'string')
+    {
+        let value = parseInt(user.schedule_time[index].available)+ parseInt(req.body.more);
+        let day = await User.update({ 'schedule_time._id': sid }, {
+                        '$set': {
+                            
+                            'schedule_time.$.available': value
+                            
+                        }
+                    });
+
+    }
+
+    if(typeof(user.schedule_time[index].start) == 'object')
+    {
+        let available = [];
+               let navailable = user.schedule_time[index].available;
+                let a = parseInt(navailable[req.body.slot]);
+                a = a + parseInt(req.body.more);
+                for (var temp = 0; temp < user.schedule_time[index].start.length; temp++) {
+                    if (temp == req.body.slot) {
+                        available.push(a);
+                        continue;
+                    }
+                    var temp1 = parseInt(navailable[temp]);
+                    available.push(temp1);
+                }
+
+                let day = await User.update({ 'schedule_time._id': sid }, {
+                    '$set': {
+                        
+                        'schedule_time.$.available': available
+                        
+                    }
+                });
+
+     
+    }
+
+    return res.redirect('back');
+    }
+
+    else{
+        req.flash('error','Please enter the value greater than 0 ')
+        return res.redirect('back');
+    }
+
+    
+
+
+
+   
+    
+}
+
 module.exports.createSession = async function(req, res) {
 
     console.log(req.body);
@@ -406,7 +486,7 @@ module.exports.confirmPay = async function(req, res) {
             const payment_capture = 1;
             const amount = doctor.booking_fee;
             const currency = 'INR';
-            const vendor_amount = amount-(amount*0.1);
+            const vendor_amount = amount-(amount*0.02);
             
             const response = await razorpay.orders.create({
                 amount:amount*100,
@@ -484,6 +564,8 @@ module.exports.destroySession = function(req, res) {
 
 module.exports.offlineCancel = async function(req, res) {
 
+   
+
     try{
 
                 let user1 = await User.findById(req.user.id);
@@ -493,60 +575,56 @@ module.exports.offlineCancel = async function(req, res) {
                 if(req.body.flag == 'yes')
                 {
 
-                    //    let n1 = await User.update({ "_id" : user1._id, "booking._id": req.body.bid}, {
-                    //         '$set': {
+                       let n1 = await User.update({ "_id" : user1._id, "booking._id": req.body.bid}, {
+                            '$set': {
                                 
-                    //             'booking.$.cancel': true
+                                'booking.$.cancel': true
                                 
-                    //         }
-                    //     });
+                            }
+                        });
                       
-                    //     if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
-                    //     {
-                    //         let available1 = [];
-                    //         let k = req.body.slotindex;
-                    //         let id = user.schedule_time[req.body.dayindex]._id;
+                        if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
+                        {
+                            let available1 = [];
+                            let k = req.body.slotindex;
+                            let id = user.schedule_time[req.body.dayindex]._id;
 
-                    //         let j = user.schedule_time[req.body.dayindex].available;
-                    //         var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
-                    //         console.log(a2);
-                    //         for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
-                    //             {
-                    //                 if(temp == k)
-                    //                 {
-                    //                     available1.push(a2+1);
-                    //                     continue;
-                    //                 }
-                    //                 var temp1 = parseInt(j[temp]);
-                    //                 available1.push(temp1);
-                    //             }
-                    //         let day = await User.update({ 'schedule_time._id': id }, {
-                    //             '$set': {
+                            let j = user.schedule_time[req.body.dayindex].available;
+                            var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
+                            console.log(a2);
+                            for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+                                {
+                                    if(temp == k)
+                                    {
+                                        available1.push(a2+1);
+                                        continue;
+                                    }
+                                    var temp1 = parseInt(j[temp]);
+                                    available1.push(temp1);
+                                }
+                            let day = await User.update({ 'schedule_time._id': id }, {
+                                '$set': {
                                     
-                    //                 'schedule_time.$.available': available1
+                                    'schedule_time.$.available': available1
                                     
-                    //             }
-                    //         });
-                    //         // user.schedule_time[0].available[0] = 5;
-                    //         user.save();
-                    //     }
-                    //     else{
-                    //         var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
+                                }
+                            });
+                            // user.schedule_time[0].available[0] = 5;
+                            user.save();
+                        }
+                        else{
+                            var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
                             
-                    //         user.schedule_time[req.body.dayindex].available= a1 + 1 ;
-                    //         user.save();
+                            user.schedule_time[req.body.dayindex].available= a1 + 1 ;
+                            user.save();
 
-                    //     }
+                        }
                        
                         
-                    //     user1.save();
+                        user1.save();
                         
-                    //     return res.render('staff-booking-page',{
-                    //         title:'Staff Booking Page',
-                    //         doctor:user,
-                    //        title:'Book Apointment'
-                    //     });
-               console.log(req.body);
+                      
+               return res.redirect('back');
 
                    
                         
@@ -980,7 +1058,7 @@ module.exports.verifyPayment = async(req, res) => {
                         time: req.query.time,
                         date: req.query.date,
                         dayindex: req.query.dayindex,
-                        slotindex: req.query.slotindex,
+                        // slotindex: req.query.slotindex,
                         day: req.query.day,
                         fee: req.query.fee,
                         type: req.query.type,
@@ -1033,7 +1111,7 @@ module.exports.verifyPayment = async(req, res) => {
                         time: req.query.time,
                         date: req.query.date,
                         dayindex: req.query.dayindex,
-                        slotindex: req.query.slotindex,
+                        // slotindex: req.query.slotindex,
                         day: req.query.day,
                         fee: req.query.fee,
                         type: req.query.type,
@@ -1108,7 +1186,7 @@ module.exports.verifyPayment = async(req, res) => {
                     title: 'Booking-Success',
                     doctor: user,
                     seat: k1,
-                    slotindex: req.query.slotindex,
+                    // slotindex: req.query.slotindex,
                     dayindex: req.query.dayindex,
                     date: req.query.date,
                     user: patient
@@ -1385,6 +1463,13 @@ module.exports.deleteAccount = async(req, res) => {
     }
 
     if (user.type == 'Doctor') {
+
+        let staff = await User.findById(user.staff_id);
+        if(staff)
+        {
+            let prope1 = await User.deleteOne({ _id: user.staff_id });
+        }
+
         if (user.clinicphoto) {
             for (let i = 0; i < user.clinicphoto.length; i++) {
                 if (fs.existsSync(path.join(__dirname, '..', user.clinicphoto[i]))) {
@@ -1498,7 +1583,8 @@ module.exports.offlinePay = async(req, res) => {
                     slot: req.body.slotindex,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
-                    seat: b
+                    seat: b,
+                    gender:req.body.gender
                 });
                 staff.refresh_flag = false;
 
@@ -1554,7 +1640,7 @@ module.exports.offlinePay = async(req, res) => {
                     time: req.body.time,
                     date: req.body.date,
                     day: req.body.day,
-                    slot: req.body.slotindex,
+                    gender:req.body.gender,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: k1
@@ -1577,7 +1663,7 @@ module.exports.offlinePay = async(req, res) => {
                     doctor: user,
                     title: 'Booking-Success',
                     seat: k1,
-                    slotindex: req.body.slotindex,
+                   
                     dayindex: req.body.dayindex,
                     date: req.body.date,
 
@@ -1994,13 +2080,15 @@ module.exports.doctorSortByDate = async(req, res) => {
     const date = req.body.date;
     const str = date.split("/").join("-");
     console.log(str);
+    let staff = await User.findById(patients.staff_id);
 
 
 
     return res.render('doctor-dashboard', {
         title: 'My Dashboard',
         allpatients: patients,
-        date: str
+        date: str,
+        staff:staff
     })
 
 
@@ -2014,6 +2102,8 @@ module.exports.profileUpdate = async function(req, res) {
         let user = await User.findById(req.user.id);
         User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
+
+            console.log(req.body);
             user.name = req.body.name;
             user.dob = req.body.dob;
             user.phone = req.body.phone;
@@ -2127,6 +2217,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
         User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
 
+            console.log(req.body)
+
             user.services = req.body.services;
             user.specialisation = req.body.specialisation;
             user.clinicname = req.body.clinicname;
@@ -2177,7 +2269,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                         institutionname: req.body.institutionname[i],
                         from: req.body.from[i],
                         to: req.body.to[i],
-                        designation: req.body.designation[i]
+                        designation: req.body.designation[i],
+                        city:req.body.cityname[i]
                     });
                 }
             }
@@ -2188,7 +2281,8 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                     institutionname: req.body.institutionname,
                     from: req.body.from,
                     to: req.body.to,
-                    designation: req.body.designation
+                    designation: req.body.designation,
+                    city:req.body.cityname
                 });
             }
 

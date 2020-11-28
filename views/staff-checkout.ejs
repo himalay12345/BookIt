@@ -27,7 +27,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar lptop">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -92,7 +92,12 @@
                                                                                     <input type="hidden" name="slotindex" value="<%=slotindex%>">
                                                                                     <input type="hidden" name="dayindex" value="<%=dayindex%>">
 
-
+                                                                                    <!-- <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group card-label">
+                                                                                            <label>C/O (optional)</label>
+                                                                                            <input class="form-control" type="text" placeholder="Enter name" name="cname" required>
+                                                                                        </div>
+                                                                                    </div> -->
 
                                                                                     <div class="col-md-12 col-sm-12">
                                                                                         <div class="form-group card-label">
@@ -103,7 +108,7 @@
                                                                                     <div class="col-md-12 col-sm-12">
                                                                                         <div class="form-group card-label">
                                                                                             <label>Phone</label>
-                                                                                            <input class="form-control" type="text" placeholder="Enter phone number" name="phone" required>
+                                                                                            <input class="form-control" type="text" placeholder="Enter phone number" name="phone">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-md-12 col-sm-12">
@@ -112,14 +117,28 @@
                                                                                             <input class="form-control" type="text" placeholder="Enter address" name="address" required>
                                                                                         </div>
                                                                                     </div>
+                                                                                   
                                                                                     <div class="col-md-12 col-sm-12">
                                                                                         <div class="form-group card-label">
                                                                                             <label>Age</label>
                                                                                             <input class="form-control" type="number" placeholder="Enter age" name="age" required>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <div class="col-12 col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label style="font-size: 0.9rem!important;margin-left: 5px;">Gender <span class="text-danger"></span></label>
+                                                                                            <select name="gender" class="form-control select" required >
+                                                                                               
+                                                                                                <option>Male</option>
+                                                                                                
+                                                                                                <option>Female</option>
+                                                                                              
+                                                                                                <option>Others</option>
+                                                                                                </select>
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <div class="submit-section mt-4">
-                                                                                        <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Procced to checkout</button>
+                                                                                        <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Submit</button>
                                                                                     </div>
                                         </form>
                                     </div>

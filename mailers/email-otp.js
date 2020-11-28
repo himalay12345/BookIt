@@ -10,9 +10,10 @@ exports.newAlert = (user,link,email) => {
         },'/email-verify/email-otp.ejs');
 
     nodeMailer.transporter.sendMail({
-        from:'himalayshankar31@gmail.com',
+        // from:'himalayshankar31@gmail.com',
+        from:'support@aarogyahub.com',
         to: email,
-        subject:"BookIt Email verification",
+        subject:"AarogyaHub Email verification",
         html:htmlString
 },(err,info) => {
     if(err)

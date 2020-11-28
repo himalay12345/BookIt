@@ -114,7 +114,7 @@
                 <%if(locals.user){%>
 
                     <%}else{%>
-                        <li class="nav-item cloginbtn">
+                        <li class="nav-item">
                             <a class="nav-link header-login" href="/login">Login </a>
                         </li>
                         <%}%>
@@ -190,7 +190,7 @@
                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                 <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
                             </a>
-                            <div class="dropdown-menu profile-drop">
+                            <div class="dropdown-menu profile-drop cloginbtns">
                                 <div class="user-header">
                                     <div class="avatar avatar-sm">
                                         <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image" class="avatar-img rounded-circle">
@@ -204,6 +204,7 @@
                                 </div>
                                 <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
                                 <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                <a class="dropdown-item" href="/live-patient-tracking/?id=<%=locals.user.id%>">Live Patient Tracking</a>
 
                                 <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
                                 <a class="dropdown-item" href="/appointments">Appointments</a>
@@ -222,7 +223,7 @@
                                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                         <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
                                     </a>
-                                    <div class="dropdown-menu profile-drop">
+                                    <div class="dropdown-menu profile-drop cloginbtns">
                                         <div class="user-header">
                                             <div class="avatar avatar-sm">
                                                 <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="<%=assetPath('img/profile.png')%>"' class="avatar-img rounded-circle">
@@ -253,7 +254,7 @@
                                             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                                 <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
                                             </a>
-                                            <div class="dropdown-menu profile-drop">
+                                            <div class="dropdown-menu profile-drop cloginbtns">
                                                 <div class="user-header">
                                                     <div class="avatar avatar-sm">
                                                         <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image" class="avatar-img rounded-circle">

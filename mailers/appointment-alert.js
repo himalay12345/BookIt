@@ -11,9 +11,11 @@ exports.newAlert = (date, time, email, doctor, patient) => {
         },'/appointment-alert/booking-success.ejs');
 
     nodeMailer.transporter.sendMail({
-        from:'himalayshankar31@gmail.com',
+        // from:'himalayshankar31@gmail.com',
+        from:'AarogyaHub',
+        // from:'support@aarogyahub.com',
         to: email,
-        subject:"BookIt Appointment Alerts",
+        subject:"AarogyaHub Appointment Alerts",
         html:htmlString
 },(err,info) => {
     if(err)
@@ -21,7 +23,7 @@ exports.newAlert = (date, time, email, doctor, patient) => {
         console.log('Error in sending mail',err);
         return;
     }
-    // console.log('Message sent',info);
+    console.log('Message sent',info);
     return;
 });
 } 

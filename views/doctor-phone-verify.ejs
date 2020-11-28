@@ -78,10 +78,16 @@
                                         </div>
                                         <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
                                     </form>
+                                  
+
                                     <div id="call" class="" style="display: inline-flex; margin-top: 30px;">
+                                        <%if(type == 'email'){%>
+                                            <a href="/staff-login" style=" cursor:pointer;margin-left: 50px;" class="forgot-link">Resend OTP</a>
+                                            <%}else{%>
                                         <p style="font-size: 0.7rem;">Still not received OTP?<a onclick="document.getElementById('myform').submit();" style=" cursor:pointer;color: rgb(0, 94, 182);">&nbsp&nbspGet via call</a>
                                         </p>
                                         <a onclick="document.getElementById('myform1').submit();" style=" cursor:pointer;margin-left: 50px;" class="forgot-link">Resend OTP</a>
+                                        <%}%>
                                     </div>
 
 

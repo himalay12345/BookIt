@@ -8,8 +8,8 @@ class PatientTracking{
         this.userId = userId;
         this.userName = userName;
 
-        this.socket = io.connect('http://localhost:5000');
-        // this.socket = io.connect('http://aarogyahub.com:5000');
+        // this.socket = io.connect('http://localhost:5000')
+        this.socket = io.connect('http://aarogyahub.com:5000');
 
         if(this.userId)
         {
@@ -66,6 +66,7 @@ class PatientTracking{
                                     chatroom:'pts',
                                     index:j,
                                     status:'Waiting',
+                                    wcount : ar[i][j].getAttribute('data-waiting-count'),
                                     name:name,
                                     slot:i
                                 });
@@ -101,9 +102,12 @@ class PatientTracking{
                                         let tid = ar[i][j].getAttribute('data-tid');
                                         let name = ar[i][j].getAttribute('data-name');
                                         let mindex = ar[i][j].getAttribute('data-mindex');
+                                        let ss=0;
                                         for(let k = firstli-1;k<seat-1;k++)
                                         {
                                             ar[i][k].setAttribute("data-waiting", "waiting");
+                                            ar[i][k].setAttribute("data-waiting-count", ss);
+                                            ss++;
                                         }
             
                                         
@@ -227,6 +231,18 @@ class PatientTracking{
                 
                 $( "#patient-ul li a" ).last().addClass( "displayNone" );
                 $( "#patient-ul li h3" ).last().removeClass( "displayNone" );
+                let activeongoing = document.querySelectorAll('.activeongoing');
+                let activevisited = document.querySelectorAll('.activevisit');
+                let l1 = activeongoing.length;
+                let l2 = activevisited.length;
+                if(l1>0 && l2>0)
+                {
+                console.log('u are there');
+                activeongoing[0].classList.add('displayNone');
+                activevisited[0].classList.remove('displayNone');
+                activeongoing[0].classList.remove('activeongoing');
+                activevisited[0].classList.remove('activevisit');
+                }
     
 
                 var j=1;
@@ -314,17 +330,22 @@ class PatientTracking{
                     if(l1>0 && l2>0)
                     {
                     console.log('u are there');
-                    activeongoing[l1-1].classList.add('displayNone');
-                    activevisited[l2-1].classList.remove('displayNone');
+                    activeongoing[0].classList.add('displayNone');
+                    activevisited[0].classList.remove('displayNone');
+                    activeongoing[0].classList.remove('activeongoing');
+                    activevisited[0].classList.remove('activevisit');
                     }
+
 
                     let waiting = document.querySelectorAll('.uwaiting');
                     let ongoing = document.querySelectorAll('.uongoing');
                     var visited = document.querySelectorAll('.uvisited');
                     waiting[data.index].classList.add('displayNone');
+                    ongoing[data.index].classList.remove('displayNone');
                     ongoing[data.index].classList.add('activeongoing');
                     visited[data.index].classList.add('activevisit');
-                    ongoing[data.index].classList.remove('displayNone');
+                    console.log('new added');
+                    
                  
                     $( "#patient-ul li a" ).last().addClass( "displayNone" );
                     $( "#patient-ul li h3" ).last().removeClass( "displayNone" );
@@ -339,6 +360,19 @@ class PatientTracking{
                        trackButton[data.index].classList.add('displayNone');
                        tracked[data.index].classList.remove('displayNone');
                     }
+                    let activeongoing = document.querySelectorAll('.activeongoing');
+                    let activevisited = document.querySelectorAll('.activevisit');
+                    let l1 = activeongoing.length;
+                    let l2 = activevisited.length;
+                    if(l1>0 && l2>0)
+                    {
+                    console.log('u are there');
+                    activeongoing[0].classList.add('displayNone');
+                    activevisited[0].classList.remove('displayNone');
+                    activeongoing[0].classList.remove('activeongoing');
+                    activevisited[0].classList.remove('activevisit');
+                    }
+        
         
                     var h4 = newMessage.append($('<h4>',{
                         'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+data.seat
@@ -365,17 +399,7 @@ class PatientTracking{
                     })); 
 
 
-                    let activeongoing = document.querySelectorAll('.activeongoing');
-                    let activevisited = document.querySelectorAll('.activevisit');
-                    let l1 = activeongoing.length;
-                    let l2 = activevisited.length;
-                    if(l1>0 && l2>0)
-                    {
-                    console.log('u are there');
-                    activeongoing[l1-1].classList.add('displayNone');
-                    activevisited[l2-1].classList.remove('displayNone');
-                    }
-        
+                   
                     $('#no_patient').last().addClass("displayNone");
                     $('.upcoming-ul li:first-child').remove();
                     $( "#patient-ul li a" ).last().addClass( "displayNone" );
@@ -403,6 +427,19 @@ class PatientTracking{
                 let upcomingsli = document.querySelectorAll(`.upcoming-li${data.data.slot}`);
                 $( `#patient-ul${data.data.slot} li a` ).last().addClass( "displayNone" );
                 $( `#patient-ul${data.data.slot} li h3` ).last().removeClass( "displayNone" );
+
+                let activeongoing = document.querySelectorAll(`.activeongoing${data.data.slot}`);
+                let activevisited = document.querySelectorAll(`.activevisit${data.data.slot}`);
+                let l1 = activeongoing.length;
+                let l2 = activevisited.length;
+                if(l1>0 && l2>0)
+                {
+               
+                activeongoing[0].classList.add('displayNone');
+                activevisited[0].classList.remove('displayNone');
+                activeongoing[0].classList.remove(`activeongoing${data.data.slot}`);
+                activevisited[0].classList.remove(`activevisit${data.data.slot}`);
+                }
     
 
                 var j=1;
@@ -458,12 +495,14 @@ class PatientTracking{
                 h3.append($('<p>',{
                     'html':'CheckIn Time : '+date1 +' '+ date2
                 })); 
-
+                
     
                 $(`#no_patient${data.data.slot}`).last().addClass("displayNone");
                
     
                 $(`#patient-ul${data.data.slot}`).append(newMessage);
+                
+
 
             }
 
@@ -490,15 +529,18 @@ class PatientTracking{
                     console.log('u are  now there');
                     activeongoing[0].classList.add('displayNone');
                     activevisited[0].classList.remove('displayNone');
+                    activeongoing[0].classList.remove(`activeongoing${data.slot}`);
+                    activevisited[0].classList.remove(`activevisit${data.slot}`);
                     }
 
                     let waiting = document.querySelectorAll(`.uwaiting${data.slot}`);
                     let ongoing = document.querySelectorAll(`.uongoing${data.slot}`);
                     var visited = document.querySelectorAll(`.uvisited${data.slot}`);
                     waiting[data.index].classList.add('displayNone');
+                    ongoing[data.index].classList.remove('displayNone');
                     ongoing[data.index].classList.add(`activeongoing${data.slot}`);
                     visited[data.index].classList.add(`activevisit${data.slot}`);
-                    ongoing[data.index].classList.remove('displayNone');
+                   
                  
                     $( `#patient-ul${data.slot} li a` ).last().addClass( "displayNone" );
                     $( `#patient-ul${data.slot} li h3` ).last().removeClass( "displayNone" );
@@ -506,7 +548,6 @@ class PatientTracking{
 
                 else{
                     console.log(data);
-                    let newMessage = $('<li class="patient-li">');
                     var trackButton = document.querySelectorAll(`#updatedStatus1${data.slot}`);
                     var tracked = document.querySelectorAll(`#updatedStatus2${data.slot}`);
           
@@ -514,6 +555,20 @@ class PatientTracking{
                        trackButton[data.index].classList.add('displayNone');
                        tracked[data.index].classList.remove('displayNone');
                     }
+                    let activeongoing = document.querySelectorAll(`.activeongoing${data.slot}`);
+                    let activevisited = document.querySelectorAll(`.activevisit${data.slot}`);
+                    let l1 = activeongoing.length;
+                    let l2 = activevisited.length;
+                    if(l1>0 && l2>0)
+                    {
+                    console.log('u are there');
+                    activeongoing[0].classList.add('displayNone');
+                    activevisited[0].classList.remove('displayNone');
+                    activeongoing[0].classList.remove(`activeongoing${data.slot}`);
+                    activevisited[0].classList.remove(`activevisit${data.slot}`);
+                    }
+
+                    let newMessage = $('<li class="patient-li">');
         
                     var h4 = newMessage.append($('<h4>',{
                         'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+data.seat
@@ -540,16 +595,7 @@ class PatientTracking{
                     })); 
 
 
-                    let activeongoing = document.querySelectorAll(`.activeongoing${data.slot}`);
-                    let activevisited = document.querySelectorAll(`.activevisit${data.slot}`);
-                    let l1 = activeongoing.length;
-                    let l2 = activevisited.length;
-                    if(l1>0 && l2>0)
-                    {
-                    console.log('u are there');
-                    activeongoing[0].classList.add('displayNone');
-                    activevisited[0].classList.remove('displayNone');
-                    }
+                    
         
                     $(`#no_patient${data.slot}`).last().addClass("displayNone");
                     $(`.upcoming-ul${data.slot} li:first-child`).remove();

@@ -9,9 +9,10 @@ exports.newAlert = (user,email) => {
         },'/account-confirmation/change-bank.ejs');
 
     nodeMailer.transporter.sendMail({
-        from:'himalayshankar31@gmail.com',
+        // from:'himalayshankar31@gmail.com',
+        from:'support@aarogyahub.com',
         to: email,
-        subject:"BookIt Bank Account Change Confirmation",
+        subject:"AarogyaHub Bank Account Change Confirmation",
         html:htmlString
 },(err,info) => {
     if(err)

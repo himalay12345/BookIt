@@ -13,7 +13,19 @@ const emailVerification = require('../mailers/email-otp');
 
 
 module.exports.home = async(req, res) => {
-    let doctors = await User.find({ type: "Doctor" });
+    let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+    let ar = [];
+    for(i of doctors)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
+
+    console.log(ar);
     let consults = await Consult.find({})
     console.log(consults);
     if (req.isAuthenticated()) {
@@ -29,13 +41,15 @@ module.exports.home = async(req, res) => {
             title: 'Home',
             doctors: doctors,
             consults: consults,
-            patient: patient
+            patient: patient,
+            ar:JSON.stringify(ar)
         })
     } else {
         return res.render('index', {
             title: 'Home',
             doctors: doctors,
-            consults: consults
+            consults: consults,
+            ar:JSON.stringify(ar)
         })
     }
 
@@ -301,9 +315,12 @@ module.exports.doctorDashboard = async(req, res) => {
             populate: { path: 'user', }
         }
     });
+
+    let staff = await User.findById(patients.staff_id);
     return res.render('doctor-dashboard', {
         title: 'My Dashboard',
-        allpatients: patients
+        allpatients: patients,
+        staff:staff
     })
 }
 
@@ -421,7 +438,33 @@ module.exports.invoiceView = async(req, res) => {
         doctor: doctor,
         order: req.query.order,
         date: req.query.date,
-        fee: req.query.fee
+        fee: req.query.fee,
+        name : req.query.name,
+        age : req.query.age,
+        phone : req.query.phone,
+        address:req.query.address,
+        gender:req.query.gender,
+        layout: 'invoice-view' 
+
+    })
+}
+
+module.exports.prescriptionPad = async(req, res) => {
+
+    let doctor = await User.findById(req.query.id);
+    return res.render('doctor_prescription_pad', {
+        title: 'Invoice View',
+        doctor: doctor,
+        order: req.query.order,
+        date: req.query.date,
+        fee: req.query.fee,
+        name : req.query.name,
+        age : req.query.age,
+        phone : req.query.phone,
+        address:req.query.address,
+        gender:req.query.gender,
+        layout: 'doctor_prescription_pad' 
+
     })
 }
 
@@ -454,6 +497,41 @@ module.exports.login = (req, res) => {
     return res.render('login', {
         title: 'Login'
     })
+}
+
+module.exports.livePatientTracking = async (req, res) => {
+    let doctor = await User.findById(req.query.id);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    let i = 0;
+    let index;
+    for(days of doctor.schedule_time)
+    {
+        if(days.day.toUpperCase() == dayOfWeek)
+        {
+            index=i;
+            break;
+        }
+        i++;
+    }
+
+    if(typeof(doctor.schedule_time[index].start) == 'string')
+    {
+        return res.redirect(`/patient-tracking/?id=${doctor.staff_id}&slotindex=`)
+    }
+
+    if(typeof(doctor.schedule_time[index].start) == 'object')
+    {
+        return res.render('patient-slot-select',{
+            title:'Choose Slot Timing',
+            doctor:doctor,
+            index:index
+        })
+    }
 }
 
 module.exports.myPatients = async(req, res) => {
@@ -644,21 +722,42 @@ module.exports.pay = async(req, res) => {
 }
 
 module.exports.patientTracking = async(req, res) => {
+    if(req.isAuthenticated()){
+        if (req.user.type == 'Staff') {
+            let user = await User.findById(req.user.id).populate({
+                path: 'doctorid',
+                populate: {
+                    path: 'user'
+                }
+            });
+    
+            return res.render('patient-tracking', {
+                title: 'Track patients',
+                user1: user
+    
+            })
+        }
 
-    if (req.user.type == 'Staff') {
-        let user = await User.findById(req.user.id).populate({
-            path: 'doctorid',
-            populate: {
-                path: 'user'
-            }
-        });
 
-        return res.render('patient-tracking', {
-            title: 'Track patients',
-            user1: user
+        else {
+            let user = await User.findById(req.query.id).populate({
+                path: 'doctorid',
+                populate: {
+                    path: 'user'
+                }
+            });
+    
+    
+            return res.render('patient-tracking', {
+                title: 'Track patients',
+                user1: user,
+                slotnumber: req.query.slotindex
+    
+            })
+        }
+    }
 
-        })
-    } else {
+     else {
         let user = await User.findById(req.query.id).populate({
             path: 'doctorid',
             populate: {
@@ -1054,14 +1153,14 @@ module.exports.staffBooking = async(req, res) => {
             }
         }
     }
-    var todayd = new Date();
-    for (temp of user1.tracked) {
-        if (todayd > temp.createdAt) {
-            user1.tracked.pull(temp._id);
-        }
-    }
+    // var todayd = new Date();
+    // for (temp of user1.tracked) {
+    //     if (todayd > temp.createdAt) {
+    //         user1.tracked.pull(temp._id);
+    //     }
+    // }
 
-    user1.save()
+    // user1.save()
 
 
     doctor.save();
@@ -1135,7 +1234,8 @@ module.exports.verifyDoctor = async(req, res) => {
                 title: 'Phone verification',
                 phone: req.body.phone,
                 type: 'email',
-                id: doctor._id
+                id: doctor._id,
+                designation:'Verify'
 
             });
 

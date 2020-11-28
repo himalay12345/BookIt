@@ -36,15 +36,59 @@
                     </div>
 
                     <!-- Search -->
-                    <div class="search-box">
+                    <div class="search-box lscreen">
                         <form action="/user/search-doctor" method="POST">
                             <div class="form- search-location">
-                                <input type="text" name="location" class="form-control" placeholder="Search Location">
-                                <span class="form-text">Based on your Location</span>
+
+                                <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
+                                <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
+                                    <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                    <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                    <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
+
+                                </ul>
+
+
                             </div>
+
                             <div class="form- search-info msearch">
-                                <input type="text" name="keyword" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc" required>
+                                <span class="form-text" style="margin-top: -20px;">Ex : Dental or Sugar Check up etc</span>
+                                <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                <table class="table table-striped position-absolute" style="margin-top: 3px;">
+
+                                    <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+                        </form>
+                    </div>
+                    <div class="search-box sscreen">
+                        <form action="/user/search-doctor" method="POST">
+                            <div class="form- search-location">
+
+                                <input type="text" name="location" id="searchkey" class="form-control searchul" placeholder="Search Location">
+                                <ul style="list-style: none;margin-left: -40px;width:280px;" class="displayNone position-absolute" id="searchul">
+                                    <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                    <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                    <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
+
+                                </ul>
+
+
+                            </div>
+
+                            <div class="form- search-info msearch">
+
+                                <input type="text" name="keyword" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                 <span class="form-text">Ex : Dental or Sugar Check up etc</span>
+                                <table class="table table-striped position-absolute">
+
+                                    <tbody id="myTable">
+
+                                    </tbody>
+                                </table>
                             </div>
                             <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
                         </form>
@@ -326,7 +370,7 @@
                                                     <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn tbcolor">View Profile</a>
                                                 </div>
                                                 <div class="col-6">
-                                                    <a href="/booking" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
+                                                    <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -794,6 +838,75 @@
             <!-- /Main Wrapper -->
 
             <!-- jQuery -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script>
+                function updatesearch(key) {
+                    document.getElementById('searchkey').value = key;
+                    document.getElementById('searchul').classList.add('displayNone');
+                }
+
+                $(document).click(function(event) {
+                    if (!$(event.target).hasClass('searchul')) {
+                        $("#searchul").addClass("displayNone");
+                    }
+                });
+                document.getElementById('locationsearch').addEventListener('click', function() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            console.log(position);
+                            $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                                console.log(data);
+                            })
+
+                        })
+                    } else {
+                        console.log('geo not supported')
+                    }
+                })
+            </script>
+            <script>
+                $('#searchkd').on('keyup', function() {
+                    var value = $(this).val()
+                    console.log(value);
+                    var data = searchTable(value, <%-ar%>)
+                    buildTable(data);
+                })
+
+
+                function searchTable(value1, data) {
+                    var fdata = []
+                    $.each(data, function(key, value) {
+                            value1 = value1.toLowerCase();
+                            var name = value.name.toLowerCase();
+                            console.log(value1, name)
+
+                            if (name.includes(value1) && value1 != '') {
+                                fdata.push(value)
+                            }
+                        }
+
+                    );
+
+                    return fdata;
+                }
+
+
+                function buildTable(data) {
+                    var table = document.getElementById('myTable')
+                    table.innerHTML = ''
+                    for (var i = 0; i < data.length; i++) {
+
+                        var row = `<tr>
+                        <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
+                        <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
+                     
+                   </tr>`
+                        table.innerHTML += row
+                    }
+
+
+                }
+            </script>
 
 
 

@@ -20,6 +20,7 @@ router.get('/auth/google', passport.authenticate('google', { scope: ['profile em
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), userController.popup);
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), userController.popup);
+router.post('/add-more-seats',passport.checkStaffAuthentication,userController.addMoreSeat);
 router.post('/profile/update', userController.profileUpdate);
 router.post('/update-type', userController.updateType);
 router.post('/update-profile',userController.updateProfile);

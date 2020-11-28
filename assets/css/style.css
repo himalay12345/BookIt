@@ -6867,6 +6867,14 @@ html.menu-opened body {
     font-size: 0.875rem; }
   #btn {
     margin-top: 55px; }
+  .smadd {
+    position: static !important;
+    margin-top: -15px !important;
+    left: 0% !important; }
+  .adbtn {
+    margin-left: 12px !important;
+    padding: 8px !important;
+    width: 60px !important; }
   #rom {
     margin: 12px -16px -33px;
     padding: 12px 16px 0px; }
@@ -7148,6 +7156,8 @@ html.menu-opened body {
     display: block; }
   .health-concerns {
     display: block; }
+  .ssstop {
+    margin-top: 0px !important; }
   .card {
     margin-bottom: 0.9375rem; }
   .doctor-img img {
@@ -7158,6 +7168,10 @@ html.menu-opened body {
     margin-top: -20px; }
   .card-header {
     padding: .75rem 1.25rem; }
+  .smargin {
+    margin-left: 20px !important; }
+  .ssmargin {
+    margin-left: 0px !important; }
   .cardx {
     width: 67% !important;
     margin-left: 77px !important;
@@ -7609,6 +7623,13 @@ html.menu-opened body {
     margin-top: 0px;
     padding: 3px 20px 1px;
     margin-bottom: 15px; }
+  #admore,
+  #submore {
+    display: none !important; }
+  #add_more {
+    width: 100px !important;
+    margin-left: 10px !important;
+    padding-left: 40px !important; }
   .mcontaine {
     padding-left: 114px !important;
     margin-top: -123px !important;
@@ -7950,6 +7971,12 @@ html.menu-opened body {
   .fc-header-toolbar .fc-right {
     margin-bottom: 10px; } }
 
+@media only screen and (max-width: 320px) {
+  #dlist {
+    min-height: 300px !important; }
+  #lmar {
+    margin-left: 5px !important; } }
+
 .box {
   width: 40%;
   margin: 0 auto;
@@ -8287,10 +8314,22 @@ input:-webkit-autofill:focus {
   background-color: #478e8e !important;
   color: white !important; }
 
+.cloginbtns a:hover {
+  background-color: #478e8e !important;
+  color: white !important; }
+
 .tcolor {
   background-color: #478e8e !important;
   color: white !important;
   border: none !important; }
+
+.tcolors {
+  background-color: #478e8e !important;
+  color: white !important;
+  border: none !important; }
+
+.tcolors span {
+  color: white !important; }
 
 .tbcolor {
   color: #478e8e !important;
@@ -8307,3 +8346,26 @@ input:-webkit-autofill:focus {
 
 .tselected span {
   color: white !important; }
+
+#myTable tr {
+  background-color: white;
+  border-bottom: 1px solid #b8b5b5;
+  height: 30px !important; }
+
+#myTable tr img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-right: -40px; }
+
+#myTable tr td {
+  font-size: 1rem !important;
+  font-weight: bold;
+  padding: 5px !important; }
+
+#myTable tr td span {
+  font-size: 0.8rem !important;
+  font-weight: normal !important;
+  color: black !important; }
