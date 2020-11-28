@@ -70,31 +70,68 @@
                         <form action="/user/search-doctor" method="POST">
                             <div class="form- search-location">
                                 
-                                <input type="text" name="location" id="searchkey" class="form-control searchul"   placeholder="Search Location">
-                               <ul style="list-style: none;margin-left: -40px;width:280px;" class="displayNone position-absolute" id="searchul">
-                                <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
-                                <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
-                                <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
-
-                                </ul>
+                                <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location">
+                              
                                 
                                 
                             </div>
                             
                             <div class="form- search-info msearch">
                                
-                                <input type="text" name="keyword"   class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                 <span class="form-text">Ex : Dental or Sugar Check up etc</span>
-                                <table class="table table-striped position-absolute">
-   
-                                    <tbody id="myTable">
-                                        
-                                    </tbody>
-                                </table>
+                               
                             </div>
-                            <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+                            <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
                         </form>
                     </div>
+                     <div class="displayNone" id="filter_box" style="overflow:auto;margin-top:63px;margin-left:10px;margin-right:10px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    visibility: visible;
+    opacity: 1;">
+                            <div id="header_filter" style="padding:10px ;">
+
+                                <i class="fas fa-times" style="font-size: 2.2rem;color:grey;" id="close_btn"></i>
+                                <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
+                            </div>
+                            <div class="card search-filter" style="display: block;">
+
+                                <form action="/user/filter" method="POST">
+                                    <div class="card-body">
+
+
+                                        <div class="filter-widget">
+                                           
+                                            <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+                                            <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                           
+                                        </div>
+                                        <div class="filter-widget">
+                                            <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
+                                                <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                                <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                                <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
+                
+                                                </ul>
+                                                <table class="table table-striped position-absolute">
+   
+                                                    <tbody id="myTable1">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                        <!-- <div class="btn-search">
+                                            <button type="submit" class="btn btn-block tcolor">Search</button>
+                                        </div> -->
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                     <!-- /Search -->
 
                 </div>
@@ -831,10 +868,32 @@
             <!-- jQuery -->
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
            <script>
+
+               function showsearch()
+               {
+                document.getElementById('searchkey1').focus();
+               
+        var fbox = document.getElementById('filter_box');
+      
+       
+        fbox.classList.remove('displayNone');
+
+               }
+               var fbox = document.getElementById('filter_box');
+               var close_btn = document.getElementById('close_btn');
+               close_btn.addEventListener('click',function(){
+            fbox.classList.add('displayNone');
+        })
+
                 function updatesearch(key)
                {
                 document.getElementById('searchkey').value = key;
                 document.getElementById('searchul').classList.add('displayNone');
+               }
+
+               function updatesearch1(key)
+               {
+                document.getElementById('searchkey1').value = key;
                }
 
                 $(document).click(function(event){
@@ -851,6 +910,26 @@
                            console.log(position);
                            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
                     console.log(data);
+
+                       })
+                      
+                  })
+                   }
+
+                   else{
+                       console.log('geo not supported')
+                   }
+               })
+
+               document.getElementById('locationsearch1').addEventListener('click',function()
+               {
+                   if(navigator.geolocation)
+                   {
+                       navigator.geolocation.getCurrentPosition(function(position)
+                       {
+                           console.log(position);
+                           $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                    document.getElementById('searchkey1').value = 'Dumka';
                        })
                       
                   })
@@ -899,6 +978,57 @@ return fdata;
     
 function buildTable(data){
     var table = document.getElementById('myTable')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+       
+        var row = `<tr>
+                        <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
+                        <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
+                     
+                   </tr>`
+        table.innerHTML += row
+    }
+    
+                  
+}
+    
+$('#searchkd1').on('keyup', function()
+{
+   
+    var value = $(this).val()
+    $('#searchul1').addClass('displayNone')
+    if(value == '')
+    {
+        $('#searchul1').removeClass('displayNone')
+    }
+    console.log(value);
+    var data  = searchTable(value,<%-ar%>)
+    buildTable1(data);
+})
+   
+
+function searchTable1(value1,data){
+    var fdata = []
+    $.each(data, function( key, value ) {
+        value1 = value1.toLowerCase();
+        var name = value.name.toLowerCase();
+        console.log(value1,name)
+        
+        if(name.includes(value1) && value1 !='')
+        {
+           
+            fdata.push(value)
+        }
+}
+
+);
+
+return fdata;
+}
+ 
+    
+function buildTable1(data){
+    var table = document.getElementById('myTable1')
     table.innerHTML = ''
     for (var i = 0; i < data.length; i++){
        
