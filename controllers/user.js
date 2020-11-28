@@ -406,15 +406,42 @@ module.exports.Filter = async function(req, res) {
                 type: "Doctor",
                 approve1: true, approve2: true, booking_service: true
             });
+            let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+            let ar = [];
+            for(i of doctors1)
+            {
+                ar.push({
+                    name: i.name,
+                    id : i.id,
+                    dept: i.department,
+                    avatar: i.avatar
+                });
+            }
             return res.render('search', {
                 title:'Search Results',
-                doctors: doctors
+                doctors: doctors,
+                ar:JSON.stringify(ar)
+                
             });
         } else {
             doctors = await User.find({ department: req.body.select_specialist, type: "Doctor",approve1: true, approve2: true, booking_service: true });
+            let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+            let ar = [];
+            for(i of doctors1)
+            {
+                ar.push({
+                    name: i.name,
+                    id : i.id,
+                    dept: i.department,
+                    avatar: i.avatar
+                });
+            }
             return res.render('search', {
                 title:'Search Results',
-                doctors: doctors
+                doctors: doctors,
+                ar:JSON.stringify(ar)
             });
         }
     }
@@ -445,9 +472,22 @@ module.exports.Filter = async function(req, res) {
 
 
         }
+        let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+        let ar = [];
+        for(i of doctors1)
+        {
+            ar.push({
+                name: i.name,
+                id : i.id,
+                dept: i.department,
+                avatar: i.avatar
+            });
+        }
         return res.render('search', {
             title:'Search Results',
-            doctors: doctors
+            doctors: doctors,
+            ar:JSON.stringify(ar)
         });
     }
     
@@ -457,9 +497,22 @@ module.exports.Filter = async function(req, res) {
             type: "Doctor",
             approve1: true, approve2: true, booking_service: true
         });
+        let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+        let ar = [];
+        for(i of doctors1)
+        {
+            ar.push({
+                name: i.name,
+                id : i.id,
+                dept: i.department,
+                avatar: i.avatar
+            });
+        }
         return res.render('search', {
             title:'Search Results',
-            doctors: doctors
+            doctors: doctors,
+            ar:JSON.stringify(ar)
         });
 
     }

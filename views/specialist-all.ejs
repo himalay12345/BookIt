@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/search  30 Nov 2019 04:12:16 GMT -->
+
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <section class="speciality-all">
+        <div class="main-wrapper">
+
+            <!-- Header -->
+
+            <!-- /Header -->
+
+            <!-- Breadcrumb -->
+            <div class="search-box" style="margin-bottom:4px !important;">
+
+                <div class="form- search-info msearch">
+                    <input type="text" name="keyword" onfocus="showsearch()" id="searchkey1" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc" >
+
+                </div>
+                <div class="displayNone" id="filter_box" style="overflow:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                visibility: visible;
+opacity: 1;">
+                        <div id="header_filter" style="padding:10px ;">
+
+                            <i class="fas fa-times" style="font-size: 2rem;color:grey;" id="close_btn"></i>
+                            <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
+                        </div>
+                        <div class="card search-filter" style="display: block;">
+
+                            <form action="/user/filter" method="POST">
+                                <div class="card-body">
+
+
+                                    <div class="filter-widget">
+                                       
+                                        <input type="text" name="location" id="searchkey" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+                                        <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                       
+                                    </div>
+                                    <div class="filter-widget">
+                                        <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
+                                            <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                            <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                            <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
+            
+                                            </ul>
+                                            <table class="table table-striped position-absolute" style="margin-left: -20px;">
+
+                                                <tbody id="myTable1">
+                                                    
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                    <!-- <div class="btn-search">
+                                        <button type="submit" class="btn btn-block tcolor">Search</button>
+                                    </div> -->
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+            </div>
+            <div style="background-color: white;">
+                <div>
+                    <h4 style="margin-left: 9px;
+                margin-top: 14px;
+                font-weight: 700;
+                color: #757575;
+                padding-top: 8px;">
+                        Search All Speciality
+                    </h4>
+                </div>
+                <div style="width: 100%; display: inline-flex;">
+                    <div style="width: 50%;background-color: #f0f0f0; height: 66px; margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Ophthalmology">
+                            <img src="<%=assetPath('img/specialities/eye.png')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Ophthalmology">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;">
+                                    Eye Specialist
+                                </h4>
+                            </div>
+                        </a>
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div style="width: 50%; background-color: #f0f0f0; height: 66px;margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Dermatology">
+                            <img src="<%=assetPath('img/specialities/hair.jpg')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Dermatology">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;">
+                                    Hair Specialist
+                                </h4>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div style="width: 100%; display: inline-flex;">
+                    <div style="width: 50%;background-color: #f0f0f0; height: 66px; margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="">
+                            <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                            <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;
+                        margin-left: 5px;">
+                                Women's Health
+                            </h4>
+                        </div>
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div style="width: 50%; background-color: #f0f0f0; height: 66px;margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Paediatrics">
+                            <img src="<%=assetPath('img/specialities/child.png')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Paediatrics">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;
+                        ">
+                                    Child Specialist
+                                </h4>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div style="width: 100%; display: inline-flex;">
+                    <div style="width: 50%;background-color: #f0f0f0; height: 66px; margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Urology">
+                            <img src="<%=assetPath('img/specialities/urology.png')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Urology">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;
+                        margin-left: 5px;">
+                                    Urinary Specialist
+                                </h4>
+                            </div>
+                        </a>
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div style="width: 50%; background-color: #f0f0f0; height: 66px;margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Neurology">
+                            <img src="<%=assetPath('img/specialities/brain.png')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Neurology">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;
+                        margin-left: 7px;">
+                                    Brain & Nerve Specialist
+                                </h4>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div style="width: 100%; display: inline-flex;">
+                    <div style="width: 50%;background-color: #f0f0f0; height: 66px; margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=General Physician">
+                            <img src="<%=assetPath('img/specialities/physical.jfif')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=General Physician">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;
+                        margin-left: 5px;">
+                                    General Physician
+                                </h4>
+                            </div>
+                        </a>
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div style="width: 50%; background-color: #f0f0f0; height: 66px;margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Orthopedic">
+                            <img src="<%=assetPath('img/specialities/bone.jpg')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Orthopedic">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;
+                        ">
+                                    Bone Specialist
+                                </h4>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+                <div style="width: 100%; display: inline-flex;">
+                    <div style="width: 50%;background-color: #f0f0f0; height: 66px; margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Cardiologist">
+                            <img src="<%=assetPath('img/specialities/heart.jpg')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Cardiologist">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;">
+                                    Heart Specialist
+                                </h4>
+                            </div>
+                        </a>
+                        <div>
+
+                        </div>
+
+                    </div>
+                    <div style="width: 50%; background-color: #f0f0f0; height: 66px;margin: 8px; display: inline-flex;">
+                        <div>
+                            <a href="/specialist/?dep=Dentist">
+                            <img src="<%=assetPath('img/specialities/teeth.png')%>" style="border-radius: 50%;
+                            height: 40px;
+                            margin-left: 9px;
+                            margin-top: 14px;" class="img-fluid" alt="Speciality">
+                            
+                        </a>
+
+                        </div>
+                        <a href="/specialist/?dep=Dentist">
+                            <div style=" margin-top: 22px;
+                    margin-left: 8px;">
+                                <h4 style="font-weight: 700;
+                        font-family: unset;
+                        font-size: 1rem;">
+                                    Dentist
+                                </h4>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <%-include('footer');%>
+                <!-- /Footer -->
+
+        </div>
+    </section>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>
+        function showsearch()
+               {
+                // document.getElementById('searchkey1').focus();
+               
+        var fbox = document.getElementById('filter_box');
+      
+       
+        fbox.classList.remove('displayNone');
+
+               }
+               var fbox = document.getElementById('filter_box');
+               var close_btn = document.getElementById('close_btn');
+               close_btn.addEventListener('click',function(){
+                fbox.classList.add('displayNone');
+        })
+
+        function updatesearch1(key)
+               {
+                document.getElementById('searchkey').value = key;
+               }
+
+               document.getElementById('locationsearch1').addEventListener('click',function()
+               {
+                   if(navigator.geolocation)
+                   {
+                       navigator.geolocation.getCurrentPosition(function(position)
+                       {
+                           console.log(position);
+                           $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                    document.getElementById('searchkey').value = 'Dumka';
+                       })
+                      
+                  })
+                   }
+
+                   else{
+                       console.log('geo not supported')
+                   }
+               })
+
+               $('#searchkd1').on('keyup', function()
+{
+   
+    var value = $(this).val()
+    $('#searchul1').addClass('displayNone')
+    if(value == '')
+    {
+        $('#searchul1').removeClass('displayNone')
+    }
+    console.log(value);
+    var data  = searchTable1(value,<%-ar%>)
+    buildTable1(data);
+})
+   
+
+function searchTable1(value1,data){
+    var fdata = []
+    $.each(data, function( key, value ) {
+        value1 = value1.toLowerCase();
+        var name = value.name.toLowerCase();
+        console.log(value1,name)
+        
+        if(name.includes(value1) && value1 !='')
+        {
+           
+            fdata.push(value)
+        }
+}
+
+);
+
+return fdata;
+}
+ 
+    
+function buildTable1(data){
+    var table = document.getElementById('myTable1')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+       
+        var row = `<tr>
+                        <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
+                        <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
+                     
+                   </tr>`
+        table.innerHTML += row
+    }
+    
+                  
+}
+    
+    </script>
+
+</body>
+
+<!-- AarogyaHub/search  30 Nov 2019 04:12:16 GMT -->
+
+</html>

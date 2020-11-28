@@ -447,6 +447,12 @@
 .consulations {
   display: block; }
 
+.view-all {
+  display: none; }
+
+.speciality-all {
+  display: none; }
+
 .consulation {
   display: none; }
 
@@ -7052,6 +7058,10 @@ html.menu-opened body {
     -ms-flex-direction: column;
     flex-direction: column;
     text-align: center; }
+  .view-all {
+    display: block; }
+  .speciality-all {
+    display: block; }
   .doc-info-right {
     margin-left: 0;
     -ms-flex: 0 0 100%;
@@ -7613,7 +7623,8 @@ html.menu-opened body {
     margin-top: 0px;
     padding: 3px 20px 1px;
     margin-bottom: 15px; }
-  #admore, #submore {
+  #admore,
+  #submore {
     display: none !important; }
   #add_more {
     width: 100px !important;
@@ -8359,13 +8370,12 @@ input:-webkit-autofill:focus {
   font-weight: normal !important;
   color: black !important; }
 
- #myTable1{
-  padding-left: -30px !important;
- } 
+#myTable1 {
+  padding-left: -30px !important; }
+
 #myTable1 tr {
   background-color: white;
   border-bottom: 1px solid #b8b5b5;
-
   height: 30px !important; }
 
 #myTable1 tr img {

@@ -59,8 +59,8 @@
     display: block;
 }
 
-.lptop{
-padding-top:40px !important;
+.lptop {
+    padding-top: 40px !important;
 }
 
 .cal-icon:after {
@@ -514,6 +514,14 @@ padding-top:40px !important;
     display: block;
 }
 
+.view-all {
+    display: none;
+}
+
+.speciality-all {
+    display: none;
+}
+
 .consulation {
     display: none;
 }
@@ -718,7 +726,6 @@ padding-top:40px !important;
 .col-black {
     color: black !important;
 }
-
 
 .removed {
     text-align: center;
@@ -1297,7 +1304,7 @@ button.bg-danger:hover {
 }
 
 .btn-primary {
-    background-color:#478e8e;
+    background-color: #478e8e;
     border: 1px solid #478e8e;
 }
 
@@ -3536,7 +3543,6 @@ html.menu-opened body {
 -----------------------*/
 
 .section-search {
- 
     min-height: 450px;
     background-size: 100% auto;
     position: relative;
@@ -8251,18 +8257,15 @@ html.menu-opened body {
     #btn {
         margin-top: 55px;
     }
-
-    .smadd{
+    .smadd {
         position: static !important;
         margin-top: -15px !important;
-        left:0% !important;
-
+        left: 0% !important;
     }
-
-    .adbtn{
+    .adbtn {
         margin-left: 12px !important;
         padding: 8px !important;
-        width:60px !important;
+        width: 60px !important;
     }
     #rom {
         margin: 12px -16px -33px;
@@ -8507,6 +8510,12 @@ html.menu-opened body {
         flex-direction: column;
         text-align: center;
     }
+    .view-all {
+        display: block;
+    }
+    .speciality-all {
+        display: block;
+    }
     .doc-info-right {
         margin-left: 0;
         -ms-flex: 0 0 100%;
@@ -8637,9 +8646,8 @@ html.menu-opened body {
     .health-concerns {
         display: block;
     }
-
-    .ssstop{
-        margin-top:0px !important;
+    .ssstop {
+        margin-top: 0px !important;
     }
     .card {
         margin-bottom: 0.9375rem;
@@ -8656,13 +8664,11 @@ html.menu-opened body {
     .card-header {
         padding: .75rem 1.25rem;
     }
-
-    .smargin{
-        margin-left:20px !important;
+    .smargin {
+        margin-left: 20px !important;
     }
-
-    .ssmargin{
-        margin-left:0px !important;
+    .ssmargin {
+        margin-left: 0px !important;
     }
     .cardx {
         width: 67% !important;
@@ -9117,10 +9123,8 @@ html.menu-opened body {
         margin-left: -100px;
         height: 90%;
     }
-
-
-    .lptop{
-        padding-top:20px !important;
+    .lptop {
+        padding-top: 20px !important;
     }
     .header-nav {
         padding-left: 15px;
@@ -9242,12 +9246,11 @@ html.menu-opened body {
         padding: 3px 20px 1px;
         margin-bottom: 15px;
     }
-
-    #admore,#submore{
-        display:none !important;
+    #admore,
+    #submore {
+        display: none !important;
     }
-
-    #add_more{
+    #add_more {
         width: 100px !important;
         margin-left: 10px !important;
         padding-left: 40px !important;
@@ -9713,13 +9716,12 @@ html.menu-opened body {
 }
 
 @media only screen and (max-width: 320px) {
-#dlist{
-    min-height:300px !important;
-}
-
-#lmar{
-    margin-left: 5px !important;
-}
+    #dlist {
+        min-height: 300px !important;
+    }
+    #lmar {
+        margin-left: 5px !important;
+    }
 }
 
 .box {
@@ -10123,86 +10125,108 @@ input:-webkit-autofill:focus {
     overflow: hidden !important;
 }
 
-.cloginbtn a{
-border-color:#478e8e !important;
-color:#478e8e !important;
+.cloginbtn a {
+    border-color: #478e8e !important;
+    color: #478e8e !important;
 }
 
-.cloginbtn a:hover{
-    background-color:#478e8e !important;
-    color:white !important;
-}
-.cloginbtns a:hover{
-    background-color:#478e8e !important;
-    color:white !important;
+.cloginbtn a:hover {
+    background-color: #478e8e !important;
+    color: white !important;
 }
 
-.tcolor{
-    background-color:#478e8e !important;
-    color:white !important;
-    border:none !important;
-}
-.tcolors{
-    background-color:#478e8e !important;
-    color:white !important;
-    border:none !important;
+.cloginbtns a:hover {
+    background-color: #478e8e !important;
+    color: white !important;
 }
 
-.tcolors span{
-   
-    color:white !important;
-  
+.tcolor {
+    background-color: #478e8e !important;
+    color: white !important;
+    border: none !important;
 }
 
+.tcolors {
+    background-color: #478e8e !important;
+    color: white !important;
+    border: none !important;
+}
 
+.tcolors span {
+    color: white !important;
+}
 
-.tbcolor{
- 
+.tbcolor {
     color: #478e8e!important;
-    border-color:#478e8e !important;
+    border-color: #478e8e !important;
     background-color: white !important;
 }
 
-.hwhite :hover{
+.hwhite :hover {
     background-color: red !important;
-    color:white;
+    color: white;
 }
 
-.tselected{
-    background-color:#478e8e !important;
-    color:white !important;
-
+.tselected {
+    background-color: #478e8e !important;
+    color: white !important;
 }
 
-.tselected span{
-    
-    color:white !important;
-
+.tselected span {
+    color: white !important;
 }
 
-#myTable tr{
+#myTable tr {
+    background-color: white;
+    border-bottom: 1px solid rgb(184, 181, 181);
+    height: 30px !important;
+}
+
+#myTable tr img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-right: -40px;
+}
+
+#myTable tr td {
+    font-size: 1rem !important;
+    font-weight: bold;
+    padding: 5px !important;
+}
+
+#myTable tr td span {
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
+    color: black !important;
+}
+
+ #myTable1{
+  padding-left: -30px !important;
+ } 
+#myTable1 tr {
   background-color: white;
-  border-bottom:1px solid rgb(184, 181, 181);
-  height:30px !important;
-}
+  border-bottom: 1px solid #b8b5b5;
 
-#myTable tr img{
- height:30px;
- width: 30px;
- border-radius: 50%;
- margin-left: 15px;
- margin-top: 5px;
- margin-right: -40px;
-}
+  height: 30px !important; }
 
-#myTable tr td{
-font-size: 1rem !important;
-font-weight: bold;
-padding: 5px !important;
- }
+#myTable1 tr img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-right: -30px; }
 
- #myTable tr td span{
+#myTable1 tr td {
+  font-size: 1rem !important;
+  font-weight: bold;
+  margin-left: -30px !important;
+  padding: 5px !important; }
+
+#myTable1 tr td span {
   font-size: 0.8rem !important;
   font-weight: normal !important;
-  color:black !important;
-   }
+  color: black !important; }

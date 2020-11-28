@@ -97,15 +97,47 @@ module.exports.Specialist = async function(req, res) {
     let doctors = await User.find({
         department: req.query.dep,
         type: "Doctor",
-        approve1: true, approve2: true, booking_service: true
+        approve1: true,
+        approve2: true,
+        booking_service: true
     });
+    let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+    let ar = [];
+    for(i of doctors1)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
 
 
     return res.render('specialist', {
         doctors: doctors,
-        title: 'Specialist'
+        title: 'Specialist',
+        ar:JSON.stringify(ar)
     });
 
+}
+module.exports.SpecialistAll = async (req, res) => {
+    let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+    let ar = [];
+    for(i of doctors)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
+    return res.render('specialist-all', {
+        title: 'Specialist All',
+        ar:JSON.stringify(ar)
+    })
 }
 
 module.exports.appointments = async(req, res) => {
@@ -149,10 +181,22 @@ module.exports.bankDetails = (req, res) => {
     })
 }
 module.exports.Doctors = async(req, res) => {
-    let doctors = await User.find({ approve1: true, approve2: true, booking_service: true });
+
+    let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+    let ar = [];
+    for(i of doctors)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
     return res.render('doctors', {
         title: 'Doctors',
-        doctors: doctors
+        doctors: doctors,
+        ar:JSON.stringify(ar)
     })
 }
 module.exports.booking = async(req, res) => {
@@ -1265,7 +1309,7 @@ module.exports.verifyDoctor = async(req, res) => {
                         title: 'Phone verification',
                         phone: req.body.phone,
                         id: doctor._id,
-                        designation:'Verify'
+                        designation: 'Verify'
 
                     });
                 });
