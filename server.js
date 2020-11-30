@@ -17,7 +17,9 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 const bodyParser = require('body-parser');
-const trackServer = require('http').Server(app);
+// const trackServer = require('http').Server(app);
+const trackServer = require('https').Server(app);
+
 const trackSockets = require('./config/track_socket').trackSockets(trackServer);
 trackServer.listen(5000);
 const sassMiddleware = require('node-sass-middleware');
