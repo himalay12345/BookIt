@@ -27,7 +27,7 @@ cert: fs.readFileSync('./server.cert')
 // const trackServer = require('https').Server(app);
 
 const trackSockets = require('./config/track_socket').trackSockets(secureServer);
-secureServer.listen(5000);
+secureServer.listen(443);
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);
