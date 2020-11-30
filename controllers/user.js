@@ -351,7 +351,7 @@ module.exports.popup = async function(req, res) {
 
                 });
             } else {
-                return res.redirect('/my-appointments');
+                return res.redirect('https://aarogyahub.com/my-appointments');
             }
         }
     }
