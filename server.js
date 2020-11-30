@@ -18,10 +18,16 @@ const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 const bodyParser = require('body-parser');
 // const trackServer = require('http').Server(app);
-const trackServer = require('https').Server(app);
+const fs = require('fs');
+const https = require('https');
+const secureServer = https.createServer({
+key: fs.readFileSync('./server.key'),
+cert: fs.readFileSync('./server.cert')
+}, app);
+// const trackServer = require('https').Server(app);
 
-const trackSockets = require('./config/track_socket').trackSockets(trackServer);
-trackServer.listen(5000);
+const trackSockets = require('./config/track_socket').trackSockets(secureServer);
+secureServer.listen(5000);
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);
