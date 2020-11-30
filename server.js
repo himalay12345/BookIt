@@ -20,14 +20,16 @@ const bodyParser = require('body-parser');
 // const trackServer = require('http').Server(app);
 const fs = require('fs');
 const https = require('https');
-const secureServer = https.createServer({
-key: fs.readFileSync('./server.key'),
-cert: fs.readFileSync('./server.cert')
-}, app);
+var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/chain.pem'),
+    requestCert: false,     
+    rejectUnauthorized: false },app);
+     
 // const trackServer = require('https').Server(app);
 
 const trackSockets = require('./config/track_socket').trackSockets(secureServer);
-secureServer.listen(443);
+secureServer.listen(5000);
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);
