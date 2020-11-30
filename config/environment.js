@@ -40,7 +40,7 @@ const development = {
     google_client_id: '962720186337-l6gu83hkfs1qhh6f4vhv4ej0gad3e1ed.apps.googleusercontent.com',
     google_client_secret: 'OcauqQn-wvQezypG9ZMsJEf7',
     // google_callback_url: "/user/auth/google/callback",
-    google_callback_url:"http://www.aarogyahub.com/user/auth/google/callback",
+    google_callback_url:"https://aarogyahub.com/user/auth/google/callback",
     fb_client_id: '247163950066857',
     fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
     fb_callback_url: "/user/auth/facebook/callback",
