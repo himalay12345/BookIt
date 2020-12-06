@@ -33,10 +33,10 @@ const development = {
             pass: 'Himalay@NIXXIT'
         }
     },
-    razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
-    // razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
-    razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
-    // razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
+    // razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
+    razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
+    // razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
+    razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
     google_client_id: '962720186337-l6gu83hkfs1qhh6f4vhv4ej0gad3e1ed.apps.googleusercontent.com',
     google_client_secret: 'OcauqQn-wvQezypG9ZMsJEf7',
     // google_callback_url: "/user/auth/google/callback",
@@ -47,7 +47,7 @@ const development = {
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
     twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
     twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
-    twilio_auth_token: "cbd3157abe193d70a8e5557a2595673d",
+    twilio_auth_token: "2ee8a1e3e1c8f8294b4d106ca7c8065d",
     gmail_passw: 'Himalay@NIXXIT',
     morgan: {
         mode: 'dev',

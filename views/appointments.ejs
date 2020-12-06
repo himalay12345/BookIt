@@ -112,15 +112,15 @@
                         <%for(patient of allpatients.patients){%>
                             <div class="appointment-list">
                                 <div class="profile-info-widget">
-                                    <a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>" class="booking-doc-img" style="margin-left: auto;margin-right:auto;">
+                                    <a href="/patient-profile/?pid=<%=patient.pid%>&doctorid=<%=locals.user.id%>" class="booking-doc-img" style="margin-left: auto;margin-right:auto;">
                                         <%if(patient.pid){%>
-                                            <img class="avatar-img rounded-circle" src="<%=patient.pid.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
+                                            <img class="avatar-img rounded-circle" src="<%=patient.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                             <%}else{%>
                                             <img class="avatar-img rounded-circle" src="<%=assetPath('img/profile.png')%>" alt="User Image">
                                             <%}%>
                                     </a>
                                     <div class="profile-det-info">
-                                        <h3><a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>"><%=patient.name%></a></h3>
+                                        <h3><a href="/patient-profile/?pid=<%=patient.pid%>&doctorid=<%=locals.user.id%>"><%=patient.name%></a></h3>
                                         <div class="patient-details">
                                             <%var str2 = patient.date.split('-');%>
                                                                     <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>

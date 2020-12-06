@@ -598,6 +598,8 @@
                                     <label>Review</label>
                                     <%if(locals.user){%>
                                         <input type="hidden" name="pid" value="<%=locals.user.id%>">
+                                        <input type="hidden" name="pname" value="<%=locals.user.name%>">
+                                        <input type="hidden" name="pavatar" value="<%=locals.user.avatar%>">
                                         <%}%>
                                             <div class="star-rating">
                                                 <input id="star-5" type="radio" name="rating" value="5">
@@ -650,14 +652,14 @@
 
                                     <li>
                                         <div class="comment">
-                                            <img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%=review.pid.avatar%>" onerror="this.src='/img/profile.png'">
+                                            <img class="avatar avatar-sm rounded-circle" alt="User Image" src="<%=review.pavatar%>" onerror="this.src='/img/profile.png'">
                                             <div class="comment-body">
                                                 <div class="meta-data">
-                                                    <span class="comment-author"><%=review.pid.name%></span>
+                                                    <span class="comment-author"><%=review.pname%></span>
                                                     <span class="comment-date">Reviewed <%=review.createdAt.toDateString()%></span>
                                                     <%var avg = review.rating;%>
 
-                                                        <div class="review-count rating">
+                                                        <div class="review-count rating ratingll">
                                                             <%if(avg>=1){%>
                                                                 <i class="fas fa-star filled"></i>
                                                                 <%}else{%>

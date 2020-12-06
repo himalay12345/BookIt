@@ -36,32 +36,32 @@
         <div class="card-body" style="padding:0rem;">
         <div class="row position-relative mzero">
             <div class="col-md-12" style="height: 40px;background-color: rgb(248, 248, 248);">
-                <p style="margin-top: 10px;margin-left: 150px;font-weight: bold;">Step 2/3</p>
+                <p style="margin-top: 10px;margin-left: 150px;font-weight: bold;">Step 3/3</p>
             </div>
             <div class="col-md-12" style="margin-left: -15px;">
-            <div class="col-md-8" style="border-top: 5px solid blueviolet; width: 110%;"> 
+            <div class="col-md-12" style="border-top: 5px solid blueviolet; width: 110%;"> 
             </div>
         </div>
         <div class="col-md-6 col-lg-6 mzero pzero" style="margin-left: 150px;margin-top: 30px;">
-            <h2 style="font-size: 1.5rem;margin-top: 20px;font-weight: 700;">Medical Registration Proof</h2>
-            <form action="/user/upload-degree" method="POST" enctype="multipart/form-data" id="edit_form">
+            <h2 style="font-size: 1.5rem;margin-top: 20px;font-weight: 700;">Establishment Proof</h2>
+            <form action="/user/upload-eproof" method="POST" enctype="multipart/form-data" id="edit_form">
                 <input type="hidden" name="id" value="<%=locals.user.id%>">
                 <!-- Basic Information -->
                 <div class="card p-10" style="margin-left: -15px;margin-top: 50px;">
                     <div class="card-body">
-                        <h4 class="card-title">Verify Registration Proof</h4>
+                        <h4 class="card-title">Verify Establishment Proof</h4>
                         <div class="row form-row">
                           
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <div class="change-avatar">
                                         <div class="profile-img">
-                                            <img src="<%=locals.user.degreephoto%>" id="image" onerror='this.src="<%=assetPath('img/med2.png')%>"' alt="User Image">
+                                            <img src="<%=locals.user.estphoto%>" id="image" onerror='this.src="<%=assetPath('img/med2.png')%>"' alt="User Image">
                                         </div>
                                         <div class="upload-img">
                                             <div class="change-photo-btn">
                                                 <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                <%if(locals.user.degreephoto){%>
+                                                <%if(locals.user.estphoto){%>
                                                     <input type="file" class="upload" name="avatar" id="imageUpload">
                                                 <%}else{%>
                                                     <input type="file" class="upload" name="avatar" id="imageUpload" required>
@@ -73,11 +73,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size: 0.85rem;font-weight: 700;border-bottom:1px solid lightgrey;padding-bottom: 5px;">Please upload your medical registration proof. Only licensed and legit doctor are allowed to be listed in our website.</p>
+                            <p style="font-size: 0.85rem;font-weight: 700;border-bottom:1px solid lightgrey;padding-bottom: 5px;">Please upload your clinic registration proof. Only licensed and legit doctor are allowed to be listed in our website.</p>
                            
                         </div>
                         <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;height: 40px;">
-                            <a href="/id-proof" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="color:white;border-radius: 5px;width: 100px;left:8%;margin-top: -5px;">Back</a>
+                            <a href="/medical-proof" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="color:white;border-radius: 5px;width: 100px;left:8%;margin-top: -5px;">Back</a>
                         </div>
                         <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;height: 40px;">
                             <button type="submit" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="border-radius: 5px;width: 100px;right:8%;margin-top: -5px;">Next</button>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/search  30 Nov 2019 04:12:16 GMT -->
+
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-8 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title"><%=type%> not found</h2>
+                    </div>
+                    <!-- <div class="col-md-4 col-12 d-md-block d-none">
+                        <div class="sort-by">
+                            <span class="sort-title">Sort by</span>
+                            <span class="sortby-fliter">
+									<select class="select">
+										<option>Select</option>
+										<option class="sorting">Rating</option>
+										<option class="sorting">Popular</option>
+										<option class="sorting">Latest</option>
+										<option class="sorting">Free</option>
+									</select>
+								</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+
+                        <!-- Search Filter -->
+                        <div class="card search-filter">
+                            <form action="/user/filter" method="POST">
+                                <div class="card-body">
+
+
+                                    <div class="filter-widget">
+                                        <h4>Gender</h4>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="gender_type" value="Male">
+											<span class="checkmark"></span> Male Doctor
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="gender_type" value="Female">
+											<span class="checkmark"></span> Female Doctor
+										</label>
+                                        </div>
+                                    </div>
+                                    <div class="filter-widget">
+                                        <h4>Select Specialist</h4>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Urology">
+											<span class="checkmark"></span> Urology (Kidney)
+                                        </label>
+                                            <div>
+                                                <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="General Physician">
+											<span class="checkmark"></span> General Physician
+										</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Neurology">
+											<span class="checkmark"></span> Neurology (Nerve)
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Dentist">
+											<span class="checkmark"></span> Dentist
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Orthopedic">
+											<span class="checkmark"></span> Orthopedic (Bone)
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Cardiologist">
+											<span class="checkmark"></span> Cardiologist (Heart)
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Paediatrics">
+											<span class="checkmark"></span> Paediatrics (Child Doctor)
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Ophthalmology">
+											<span class="checkmark"></span> Ophthalmology (Eye Doctor)
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Dermatology">
+											<span class="checkmark"></span> Dermatology (Hair Doctor)
+										</label>
+                                        </div>
+                                    </div>
+                                    <div class="btn-search">
+                                        <button type="submit" class="btn btn-block">Search</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- /Search Filter -->
+
+                    </div>
+                   
+
+                    <div class="col-md-12 col-lg-8 col-xl-9 p-0">
+
+                        <!-- Doctor Widget -->
+                        <div class="card" id="doctorsm">
+                            <div class="card-body p-0" style="min-height: 50vh;height:auto;padding:0px 50px !important;">
+                                
+                                    <h2 class="text-center" style="margin-top: 100px;font-size: 1.3rem;"><span style="margin-right: 10px;"><i class="fas fa-user-md"></i></span>Sorry! The profile of the <%=type.toLowerCase()%> you are trying to see is no longer having the account in our website.</h2>
+                                 
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+
+  
+
+
+</body>
+
+<!-- AarogyaHub/search  30 Nov 2019 04:12:16 GMT -->
+
+</html>

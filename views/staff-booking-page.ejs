@@ -171,7 +171,21 @@ today=date;%>
                                                                                 </li>
 
                                                                                 <%}%>
-                                                                                    <%for(var i=0;i<3;i++){%>
+                                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+                                                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                                var yyyy = today.getFullYear();
+                                                                                var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                                                var dayOfWeek = weekday[today.getDay()];
+                                                                                
+                                                                                var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                                                                var date = new Date(res);
+                                                                                today=date;%>
+                                                                                
+                                                                                <li  id="li2" style="display: none;float: none !important;;margin-left: auto;margin-right: auto;">
+                                                                                    <span><%=dayOfWeek%></span>
+                                                                                    <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                </li>
+                                                                                    <!-- <%for(var i=0;i<3;i++){%>
                                                                                         <%var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
@@ -299,7 +313,7 @@ today=date;%>
                                                                                                                                                                                     <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
                                                                                                                                                                                 </li>
 
-                                                                                                                                                                                <%}%>
+                                                                                                                                                                                <%}%> -->
 
 
 
@@ -1590,13 +1604,13 @@ var dayOfWeek = weekday[today1.getDay()];%>
 
 
                                                                                                                                         <%if(daten != undefined){%>
-                                                                                                                                            <%if(daten != patients.date){%>
+                                                                                                                                            <%if(daten != patients.date || patients.old_flag){%>
                                                                                                                                                 <%z1++;z31++;continue;%>
                                                                                                                                                     <%}%>
 
                                                                                                                                                         <%}else{%>
 
-                                                                                                                                                            <%if(str1 != str2){%>
+                                                                                                                                                            <%if(str1 != str2 || patients.old_flag){%>
                                                                                                                                                                 <%z1++;z31++;continue;%>
                                                                                                                                                                     <%}%>
                                                                                                                                                                         <%}%>
@@ -1772,13 +1786,13 @@ var dayOfWeek = weekday[today.getDay()];%>
 
 
                                                                                                                                                 <%if(daten != undefined){%>
-                                                                                                                                                    <%if(daten != patients.date || patients.slot != i1){%>
+                                                                                                                                                    <%if(daten != patients.date || patients.slot != i1 || patients.old_flag){%>
                                                                                                                                                         <%z1++;z3++;continue;%>
                                                                                                                                                             <%}%>
 
                                                                                                                                                                 <%}else{%>
 
-                                                                                                                                                                    <%if(str1 != str2 || patients.slot != i1){%>
+                                                                                                                                                                    <%if(str1 != str2 || patients.slot != i1 || patients.old_flag){%>
                                                                                                                                                                         <%z1++;z3++;continue;%>
                                                                                                                                                                             <%}%>
                                                                                                                                                                                 <%}%>

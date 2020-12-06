@@ -52,7 +52,27 @@ const userSchema = mongoose.Schema({
 
     },
     favourites: [{
-        type: mongoose.Schema.Types.ObjectId
+        dname:{
+            type: String
+        },
+        davatar:{
+            type: String
+        },
+        ddept:{
+            type: String
+        },
+        dcity:{
+            type: String
+        },
+        dstate:{
+            type: String
+        },
+        dfee:{
+            type: String
+        },
+        did:{
+            type:  mongoose.Schema.Types.ObjectId
+        }
     }],
 
     avatar: {
@@ -96,6 +116,13 @@ const userSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId
 
         },
+        pavatar:{
+            type:String
+        },
+        pname:{
+            type:String
+        },
+
         createdAt: { type: Date, default: Date.now }
     }],
     
@@ -210,6 +237,24 @@ const userSchema = mongoose.Schema({
         did:{
             type: mongoose.Schema.Types.ObjectId
         },
+        davatar:{
+            type:String
+        },
+        dname:{
+            type:String
+        },
+        old_flag:{
+            type:Boolean
+        },
+        ddept:{
+            type:String
+        },
+        cname:{
+            type:String
+        },
+        dsid:{
+            type:String
+        },
         time:{
             type:String
         },
@@ -260,6 +305,25 @@ const userSchema = mongoose.Schema({
         time:{
             type:String
         },
+        avatar:{
+            type:String
+
+        },
+        old_flag:{
+            type:Boolean
+        },
+        city:{
+            type:String
+        },
+        dob:{
+            type:String
+        },
+        bloodgroup:{
+            type:String
+        },
+        gender:{
+            type:String
+        },
         date:{
             type:String
         },
@@ -293,6 +357,9 @@ const userSchema = mongoose.Schema({
     booking:[{
             name:{
                 type:String
+            },
+            old_flag:{
+                type:Boolean
             },
             payment_id:{
                 type:String
@@ -390,6 +457,9 @@ const userSchema = mongoose.Schema({
     degreephoto: {
         type: String
     },
+    estphoto: {
+        type: String
+    },
     verifyid: {
         type: Boolean
     },
@@ -450,6 +520,59 @@ const userSchema = mongoose.Schema({
     booking_fee: {
         type: String
     },
+    oldp:{
+        pcount:{
+            type:Number
+        },
+        dcount:{
+            type:Number
+        },
+        flag:{
+            type:Boolean
+        }
+    },
+
+    old_schedule_time_fixed: [{
+        max_count: {
+            type: Number
+        },
+        day: {
+            type: String
+        },
+        available:{
+            type: Number
+        },
+        booked:{
+            type: Number
+        },
+        reset_flag:{
+            type:Boolean
+        }
+    }],
+
+    old_schedule_time: [{
+        start: {
+            type: Object
+        },
+        end: {
+            type: Object
+        },
+        max_count: {
+            type: Object
+        },
+        day: {
+            type: String
+        },
+        available:{
+            type: Object
+        },
+        booked:{
+            type: Object
+        },
+        reset_flag:{
+            type:Boolean
+        }
+    }],
     schedule_time: [{
         start: {
             type: Object
@@ -468,6 +591,9 @@ const userSchema = mongoose.Schema({
         },
         booked:{
             type: Object
+        },
+        reset_flag:{
+            type:Boolean
         }
     }],
 

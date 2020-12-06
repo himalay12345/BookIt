@@ -123,19 +123,19 @@
                                     <div class="card-body">
                                         <div class="pro-widget-content">
                                             <div class="profile-info-widget">
-                                                <a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>" class="booking-doc-img">
+                                                <a href="/patient-profile/?pid=<%=patient.pid%>&doctorid=<%=locals.user.id%>" class="booking-doc-img">
                                                     <%if(patient.pid){%>
-                                                        <img class="avatar-img rounded-circle" src="<%=patient.pid.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
+                                                        <img class="avatar-img rounded-circle" src="<%=patient.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                         <%}else{%>
                                                         <img class="avatar-img rounded-circle" src="/img/profile.png" alt="User Image">
                                                         <%}%>
                                                 </a>
                                                 <div class="profile-det-info">
-                                                    <h3><a href="/patient-profile/?pid=<%=patient.pid._id%>&doctorid=<%=locals.user.id%>"><%=patient.name%></a></h3>
+                                                    <h3><a href="/patient-profile/?pid=<%=patient.pid%>&doctorid=<%=locals.user.id%>"><%=patient.name%></a></h3>
 
                                                     <div class="patient-details">
                                                         <h5><b>Patient ID :</b> P00<%=++c%></h5>
-                                                        <%if(patient.pid.contacts.city){%><h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> <%=patient.pid.contacts.city%></h5><%}%>
+                                                        <%if(patient.city){%><h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> <%=patient.city%></h5><%}%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,12 +144,12 @@
                                             <ul>
                                                 <li>Phone <span>+91 <%=patient.phone%></span></li>
                                                
-                                                <%if(patient.pid.dob){%>
+                                                <%if(patient.dob){%>
                                                     <%var newDateObject = new Date();
 
                                                     var newObjectCurrentYear = newDateObject.getFullYear();
                                                     
-                                                    var userDateObject = patient.pid.dob;
+                                                    var userDateObject = patient.dob;
                                                     
                                                     var userDateObjectPieces = userDateObject.split("/");
                                                     
@@ -158,8 +158,8 @@
                                                     var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
     
                                                     %>
-                                                    <li>Age <span><%=age%>Years,<%=patient.pid.gender%></span></li><%}%>
-                                                <%if(patient.pid){%><li>Blood Group <span><%=patient.pid.bloodgroup%></span></li><%}%>
+                                                    <li>Age <span><%=age%>Years,<%=patient.gender%></span></li><%}%>
+                                                <%if(patient.bloodgroup){%><li>Blood Group <span><%=patient.bloodgroup%></span></li><%}%>
                                             </ul>
                                         </div>
                                     </div>

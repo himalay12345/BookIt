@@ -14,7 +14,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar">
+        <div class="breadcrumb-bar lptop">
             <%console.log(locals.user)%>
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -86,67 +86,7 @@
                         <!-- /Profile Widget -->
 
                         <!-- Last Booking -->
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Last Booking</h4>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <%var n = user1.doctors.length-1;%>
-                                <%for(let j=0;j<2;j++){%>
-                                <li class="list-group-item">
-                                    <div class="media align-items-center">
-                                        <div class="mr-3">
-                                            <img alt="Image placeholder" src="<%=user1.doctors[n].did.avatar%>" onerror='this.src="/img/profile.png"' class="avatar rounded-circle">
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="d-block mb-0">Dr. <%=user1.doctors[n].did.name%> </h5>
-                                            <span class="d-block text-sm text-muted"><%=user1.doctors[n].did.department%></span>
-                                            <%var str2 = user1.doctors[n].date.split('-');%>
-                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
-                                                        <%var str1 = formatDate(str);%>
-                                                        <%function formatDate(d){%>
-                                                            <%var date = new Date(d);
-
-                                                            if ( isNaN( date .getTime() ) ) 
-                                                            {
-                                                               return d;
-                                                            }
-                                                            else
-                                                           {
-                                                             
-                                                             var month = new Array();
-                                                             month[0] = "Jan";
-                                                             month[1] = "Feb";
-                                                             month[2] = "Mar";
-                                                             month[3] = "Apr";
-                                                             month[4] = "May";
-                                                             month[5] = "Jun";
-                                                             month[6] = "Jul";
-                                                             month[7] = "Aug";
-                                                             month[8] = "Sept";
-                                                             month[9] = "Oct";
-                                                             month[10] = "Nov";
-                                                             month[11] = "Dec";
-                                                   
-                                                             day = date.getDate();
-                                                             
-                                                             if(day < 10)
-                                                             {
-                                                                day = "0"+day;
-                                                             }
-                                                             
-                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
-                                                             }
-                                                               %>
-                                                        <%}%>
-                                            <span class="d-block text-sm text-muted"><%=str1%> <%=user1.doctors[n--].time%></span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <%}%>
-                               
-                            </ul>
-                        </div>
+                   
                         <!-- /Last Booking -->
 
                     </div>
@@ -196,10 +136,10 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="/doctor-profile/?id=<%=user1.doctors[i].did._id%>" class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img rounded-circle" src="<%=user1.doctors[i].did.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
+                                                                        <a href="/doctor-profile/?id=<%=user1.doctors[i].did%>" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="<%=user1.doctors[i].davatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
                                                                         </a>
-                                                                        <a href="/doctor-profile/?id=<%=user1.doctors[i].did._id%>">Dr. <%=user1.doctors[i].did.name%> <span><%=user1.doctors[i].did.department%></span></a>
+                                                                        <a href="/doctor-profile/?id=<%=user1.doctors[i].did%>">Dr. <%=user1.doctors[i].dname%> <span><%=user1.doctors[i].ddept%></span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <%var str2 = user1.doctors[i].date.split('-');%>

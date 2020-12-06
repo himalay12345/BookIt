@@ -122,15 +122,15 @@
 
                                             <li>
                                                 <div class="comment">
-                                                    <img class="avatar rounded-circle" alt="User Image" src="<%=u.pid.avatar%>" onerror="this.src='/img/profile.png'">
+                                                    <img class="avatar rounded-circle" alt="User Image" src="<%=u.pavatar%>" onerror="this.src='/img/profile.png'">
                                                     <div class="comment-body">
                                                         <div class="meta-data">
-                                                            <span class="comment-author"><%=u.pid.name%></span>
+                                                            <span class="comment-author"><%=u.pname%></span>
                                                             <span class="comment-date">Reviewed on <%=u.createdAt.toDateString()%></span>
 
                                                             <%var avg = u.rating;%>
 
-                                                                <div class="review-count rating">
+                                                                <div class="review-count rating ratingll" style="margin-left: 80px !important;">
                                                                     <%if(avg>=1){%>
                                                                         <i class="fas fa-star filled"></i>
                                                                         <%}else{%>

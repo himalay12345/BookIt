@@ -18,6 +18,8 @@ const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 const bodyParser = require('body-parser');
 // const trackServer = require('http').Server(app);
+// const trackSockets = require('./config/track_socket').trackSockets(trackServer);
+// trackServer.listen(5000);
 const fs = require('fs');
 const https = require('https');
 var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
@@ -25,11 +27,10 @@ var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/l
     ca: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/chain.pem'),
     requestCert: false,     
     rejectUnauthorized: false },app);
-     
-// const trackServer = require('https').Server(app);
-
 const trackSockets = require('./config/track_socket').trackSockets(secureServer);
-secureServer.listen(5000);
+secureServer.listen(5000);   
+
+
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);

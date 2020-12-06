@@ -314,6 +314,87 @@ Version      : 1.0
         return false;
     });
 
+
+    $(".add-hours1").on('click', function() {
+
+        var hourscontent = '<div class="row form-row hours-cont">' +
+            '<div class="col-12 col-md-10">' +
+            '<div class="row form-row">' +
+            '<div class="col-12 col-md-3">' +
+            '<div class="form-group">' +
+            '<label>Start Time</label>' +
+            '<select class="form-control" name="start" required>' +
+            '<option>12.00 am</option>' +
+            '<option>1.00 am</option>' +
+            '<option>2.00 am</option>' +
+            '<option>3.00 am</option>' +
+            '<option>4.00 am</option>' +
+            '<option>5.00 am</option>' +
+            '<option>6.00 am</option>' +
+            '<option>7.00 am</option>' +
+            '<option>8.00 am</option>' +
+            '<option>9.00 am</option>' +
+            '<option>10.00 am</option>' +
+            '<option>11.00 am</option>' +
+            '<option>12.00 pm</option>' +
+            '<option>1.00 pm</option>' +
+            '<option>2.00 pm</option>' +
+            '<option>3.00 pm</option>' +
+            '<option>4.00 pm</option>' +
+            '<option>5.00 pm</option>' +
+            '<option>6.00 pm</option>' +
+            '<option>7.00 pm</option>' +
+            '<option>8.00 pm</option>' +
+            '<option>9.00 pm</option>' +
+            '<option>10.00 pm</option>' +
+            '<option>11.00 pm</option>' +
+            
+            '</select>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-12 col-md-3">' +
+            '<div class="form-group">' +
+            '<label>End Time</label>' +
+            '<select class="form-control" name="end">' +
+            '<option>12.00 am</option>' +
+            '<option>1.00 am</option>' +
+            '<option>2.00 am</option>' +
+            '<option>3.00 am</option>' +
+            '<option>4.00 am</option>' +
+            '<option>5.00 am</option>' +
+            '<option>6.00 am</option>' +
+            '<option>7.00 am</option>' +
+            '<option>8.00 am</option>' +
+            '<option>9.00 am</option>' +
+            '<option>10.00 am</option>' +
+            '<option>11.00 am</option>' +
+            '<option>12.00 pm</option>' +
+            '<option>1.00 pm</option>' +
+            '<option>2.00 pm</option>' +
+            '<option>3.00 pm</option>' +
+            '<option>4.00 pm</option>' +
+            '<option>5.00 pm</option>' +
+            '<option>6.00 pm</option>' +
+            '<option>7.00 pm</option>' +
+            '<option>8.00 pm</option>' +
+            '<option>9.00 pm</option>' +
+            '<option>10.00 pm</option>' +
+            '<option>11.00 pm</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            
+            '</div>' +
+            '</div>' +
+            '<div class="col-12 col-md-2"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>' +
+            '</div>';
+
+        $(".hours-info").append(hourscontent);
+        return false;
+    });
+
+
     // Content div min height set
 
     function resizeInnerDiv() {
