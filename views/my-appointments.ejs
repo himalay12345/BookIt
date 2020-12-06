@@ -403,10 +403,10 @@
 
                                                             
                                                                 <%if(str1 == alldoctors.doctors[i].date){%>
-                                                                    <%if(alldoctors.doctors[i].dsid){%>
+                                                                    <%if(alldoctors.doctors[i].did.staff_id){%>
                                                                 <td class="text-center"><a href="/patient-tracking/?id=<%=alldoctors.doctors[i].dsid%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a></td>
                                                                 <%}else{%>
-                                                                    <td class="text-center"><a style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:200px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>No Tracking Available</a></td>
+                                                                    <td class="text-center"><a style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:200px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>No Tracking</a></td>
                                                                     <%}%>
                                                                 <%}else{%>
                                                                     <td class="text-center"><a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a></td>
