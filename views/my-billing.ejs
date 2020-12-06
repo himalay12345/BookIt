@@ -325,7 +325,7 @@
                                                                 <td>
                                                                     <h2 class="table-avatar">
                                                                         <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did%>" class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].davatar%>" alt="User Image">
+                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].davatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                                         </a>
                                                                         <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did%>"><%=alldoctors.doctors[i].dname%><span><%=alldoctors.doctors[i].ddept%></span></a>
                                                                     </h2>

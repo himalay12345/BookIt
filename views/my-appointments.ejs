@@ -239,12 +239,14 @@
                                                             <td class="text-center"> <a href="" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color:#15558d;color:white;text-align: center;width:120px;height:45px;display: block;"><span><i class="fas fa-share" aria-hidden="true" style="margin-right: 8px;"></i></span>Upcoming</a></td>
                                                             <%}else{%>
 
+                                                                <%if(alldoctors.doctors[i].did != null){%>
                                                        <%if(alldoctors.doctors[i].did.staff_id){%>
                                                         <%if(str1 == alldoctors.doctors[i].date){%>
                                                         <a href="/patient-tracking/?id=<%=alldoctors.doctors[i].dsid%>&slotindex=<%=alldoctors.doctors[i].slotindex%>" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color: #C71585;height: 45px;color:white;text-align: center;width:100px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
                                                       
                                                         <%}else{%>
                                                             <a href="" style="padding:5px;padding-top:10px;border:1px solid grey;border-radius: 5px;background-color:forestgreen;color:white;text-align: center;width:100px;display: block;height: 45px;"><span><i class="fas fa-child" aria-hidden="true" style="margin-right: 8px;"></i></span>Visited</a>
+                                                        <%}%>
                                                         <%}%>
                                                         <%}%>
                                                         <%}%>
@@ -346,7 +348,8 @@
                                                                     
                                                                     <td>
                                                                         <%if(alldoctors.doctors[i].did && !alldoctors.doctors[i].old_flag){%>
-                                                                            <%if(alldoctors.doctors[i].did.staff_id.oldp != ''){%>
+                                                                            <%if(alldoctors.doctors[i].did.staff_id != undefined){%>
+                                                                            <%if(alldoctors.doctors[i].did.staff_id.oldp){%>
                                                                                 <%var count = alldoctors.doctors[i].did.staff_id.oldp.dcount%>
                                                                                 <%var str21 = alldoctors.doctors[i].date.split('-');%>
                                                                                 <%var str22 = str21[2]+'-'+str21[1]+'-'+str21[0];%>
@@ -372,10 +375,13 @@
                                                                 <a  href="/old-booking/?id=<%=alldoctors.doctors[i].did._id%>&type=own" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Consult free</a>
                                                             <%}%>
                                                                                     <%}%>
+                                                                                    <%}%>
 
                                                                                    
                                                                             <%}else{%>
+                                                                                <%if(alldoctors.doctors[i].did != null){%>
                                                                                 <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Book Again</a>
+                                                                                <%}%>
                                                                                 <%}%>
                                                                     </td>
                                                               
@@ -639,7 +645,9 @@
 
                                                                                    
                                                                             <%}else{%>
+                                                                                <%if(alldoctors.doctors[i].did != null){%>
                                                                                 <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Book Again</a>
+                                                                                <%}%>
                                                                                 <%}%>
                                                                     </td>
                                                                     <%var today = new Date();%>
