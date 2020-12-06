@@ -346,7 +346,7 @@
                                                                     
                                                                     <td>
                                                                         <%if(alldoctors.doctors[i].did && !alldoctors.doctors[i].old_flag){%>
-                                                                            <%if(alldoctors.doctors[i].did.staff_id.oldp.dcount){%>
+                                                                            <%if(alldoctors.doctors[i].did.staff_id.oldp != ''){%>
                                                                                 <%var count = alldoctors.doctors[i].did.staff_id.oldp.dcount%>
                                                                                 <%var str21 = alldoctors.doctors[i].date.split('-');%>
                                                                                 <%var str22 = str21[2]+'-'+str21[1]+'-'+str21[0];%>
