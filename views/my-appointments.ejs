@@ -227,7 +227,9 @@
                                                     var dayOfWeek = weekday[today.getDay()];%>
                                                     <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                      <div class="bottom-part" style="height: 50px;display: flex;justify-content: space-around;">
+                                                        <%if(alldoctors.doctors[i].did != null){%>
                                                         <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Book Again</a>
+                                                        <%}%>
                                                         <a href="/appointment-detail/?index=<%=i%>" class="btn btn-sm bg-info-light" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:90px;font-size:0.9rem;font-weight: bold;height: 45px;text-align: center6;">
                                                             <i class="far fa-eye"></i> View
                                                         </a>
@@ -497,7 +499,9 @@
                                                     var dayOfWeek = weekday[today.getDay()];%>
                                                     <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                      <div class="bottom-part" style="height: 50px;display: flex;justify-content: space-around;">
+                                                            <%if(alldoctors.doctors[i].did != null){%>
                                                         <a  href="/booking/?id=<%=alldoctors.doctors[i].did._id%>" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;left:40px;font-size:0.9rem;font-weight: bold;height: 45px;background-color: #15558d;color:white">Book Again</a>
+                                                        <%}%>
                                                         <a href="/appointment-detail/?index=<%=i%>" class="btn btn-sm bg-info-light" style="padding: 10px;border-radius: 5px;border:1px solid grey;top:0px;right:30px;width:90px;font-size:0.9rem;font-weight: bold;height: 45px;text-align: center6;">
                                                             <i class="far fa-eye"></i> View
                                                         </a>
