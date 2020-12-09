@@ -391,6 +391,12 @@
                                                                             </div>
                                                                     <%}%>
                                                                 </td>
+                                                                <td>
+                                                                    <a href="/user/payments/refund/?doctorid=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&id=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&index=<%=i%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&date=<%=alldoctors.doctors[i].date%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>" class="btn btn-sm bg-danger-light" style="width: 100%;">
+
+                                                                        <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    </a>
+                                                                </td>
                                                             </tr>
                                                             <%}%>
                                                         </tbody>

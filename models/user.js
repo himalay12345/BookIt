@@ -670,7 +670,7 @@ const userSchema = mongoose.Schema({
             type: String
 
         },
-        city:{
+        excity:{
             type: String
         }
     }]

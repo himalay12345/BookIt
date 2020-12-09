@@ -614,6 +614,11 @@ module.exports.confirmPay = async function(req, res) {
             const amount = doctor.booking_fee;
             const currency = 'INR';
             const vendor_amount = amount-(amount*0.04);
+           var stra = req.body.date.split('-');
+           var strb = stra[2]+'-'+stra[1]+'-'+stra[0];      
+           var bdate = new Date(strb);
+           bdate.setDate(bdate.getDate() + 1);
+           var ndate = bdate.getTime()/1000;
             
             const response = await razorpay.orders.create({
                 amount:amount*100,
@@ -624,7 +629,9 @@ module.exports.confirmPay = async function(req, res) {
                     {
                     account: doctor.accountid,
                     amount: vendor_amount*100,
-                    currency: "INR"
+                    currency: "INR",
+                    on_hold: 1,
+                    on_hold_until: ndate
                     
                     }
                 ]
@@ -633,7 +640,7 @@ module.exports.confirmPay = async function(req, res) {
         });
 
         let user = await User.findById(req.user.id);
-
+console.log(response);
 
         if (req.body.type == 'own') {
             user.name = req.body.name;
@@ -780,123 +787,123 @@ module.exports.offlineCancel = async function(req, res) {
 module.exports.refund = async function(req, res) {
 
     try {
-        console.log(req.body);
-                let user = await User.findById(req.body.doctorid);
+        console.log(req.query);
+                let user = await User.findById(req.query.doctorid);
                 let staff = await User.findById(user.staff_id);
                 let user1 = await User.findById(req.user.id);
                 
 
-                if(req.body.flag == 'yes')
-                {
+                // if(req.body.flag == 'yes')
+                // {
 
-                    // const razorpay1 = new Razorpay({
-                    //      key_id: env.razorpay_key_id,
-                        // key_secret: env.razorpay.key_secret
+                    const razorpay1 = new Razorpay({
+                        key_id: env.razorpay_key_id,
+                        key_secret: env.razorpay_key_secret
                         
-                    // });
-                    // var refund_amount = req.body.fee - 50 ;
+                    });
+                    var refund_amount = 10 ;
 
-                    // const response = await razorpay1.payments.refund(req.body.id,
+                    const response = await razorpay1.payments.refund(req.query.id,
                         
-                    //     {
-                    //         amount : refund_amount*100,
-                    //         speed : 'optimum'
-                    //     });
+                        {
+                            amount : refund_amount*100,
+                            speed : 'optimum'
+                        });
 
-                    // if(response.id && response.payment_id)
-                    // {
-                    //    let n1 = await User.update({ "_id" : user1._id, "doctors.payment_id": user1.doctors[req.body.index].payment_id }, {
-                    //         '$set': {
+                    if(response.id && response.payment_id)
+                    {
+                       let n1 = await User.update({ "_id" : user1._id, "doctors.payment_id": user1.doctors[req.query.index].payment_id }, {
+                            '$set': {
                                 
-                    //             'doctors.$.cancel': true
+                                'doctors.$.cancel': true
                                 
-                    //         }
-                    //     });
-                    //     let n2 = await User.update({ "_id" : req.body.doctorid, "patients.payment_id": user1.doctors[req.body.index].payment_id }, {
-                    //         '$set': {
+                            }
+                        });
+                        let n2 = await User.update({ "_id" : req.query.doctorid, "patients.payment_id": user1.doctors[req.query.index].payment_id }, {
+                            '$set': {
                                 
-                    //             'patients.$.cancel': true
+                                'patients.$.cancel': true
                                 
-                    //         }
-                    //     });
-                    //     let n3 = await User.update({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.body.index].payment_id }, {
-                    //         '$set': {
+                            }
+                        });
+                        let n3 = await User.update({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.query.index].payment_id }, {
+                            '$set': {
                                 
-                    //             'booking.$.cancel': true
+                                'booking.$.cancel': true
                                 
-                    //         }
-                    //     });
-                    //     if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
-                    //     {
-                    //         let available1 = [];
-                    //         let k = req.body.slotindex;
-                    //         let id = user.schedule_time[req.body.dayindex]._id;
+                            }
+                        });
+                        if(typeof(user.schedule_time[req.query.dayindex].start) == 'object')
+                        {
+                            let available1 = [];
+                            let k = req.query.slotindex;
+                            let id = user.schedule_time[req.query.dayindex]._id;
 
-                    //         let j = user.schedule_time[req.body.dayindex].available;
-                    //         var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
-                    //         console.log(a2);
-                    //         for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
-                    //             {
-                    //                 if(temp == k)
-                    //                 {
-                    //                     available1.push(a2+1);
-                    //                     continue;
-                    //                 }
-                    //                 var temp1 = parseInt(j[temp]);
-                    //                 available1.push(temp1);
-                    //             }
-                    //         let day = await User.update({ 'schedule_time._id': id }, {
-                    //             '$set': {
+                            let j = user.schedule_time[req.query.dayindex].available;
+                            var a2 = parseInt(user.schedule_time[req.query.dayindex].available[req.query.slotindex]);
+                            console.log(a2);
+                            for(var temp =0;temp<user.schedule_time[req.query.dayindex].start.length;temp++)
+                                {
+                                    if(temp == k)
+                                    {
+                                        available1.push(a2+1);
+                                        continue;
+                                    }
+                                    var temp1 = parseInt(j[temp]);
+                                    available1.push(temp1);
+                                }
+                            let day = await User.update({ 'schedule_time._id': id }, {
+                                '$set': {
                                     
-                    //                 'schedule_time.$.available': available1
+                                    'schedule_time.$.available': available1
                                     
-                    //             }
-                    //         });
-                    //         // user.schedule_time[0].available[0] = 5;
-                    //         user.save();
-                    //     }
-                    //     else{
-                    //         var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
+                                }
+                            });
+                            // user.schedule_time[0].available[0] = 5;
+                            user.save();
+                        }
+                        else{
+                            var a1 = parseInt(user.schedule_time[req.query.dayindex].available);
                             
-                    //         user.schedule_time[req.body.dayindex].available= a1 + 1 ;
-                    //         user.save();
+                            user.schedule_time[req.query.dayindex].available= a1 + 1 ;
+                            user.save();
 
-                    //     }
-                    //     user1.notification.push({
-                    //         type:'appointment-cancel',
-                    //         message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time ,
-                    //         flag:true,
-                    //         did:req.body.doctorid
-                    //     });
+                        }
+                        user1.notification.push({
+                            type:'appointment-cancel',
+                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time ,
+                            flag:true,
+                            did:req.query.doctorid
+                        });
                         
                         
-                    //     user1.save();
+                        user1.save();
                         
-                    //     client.messages 
-                    //     .create({ 
-                    //         body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
-                    //         from: 'whatsapp:+14155238886',       
-                    //         to: 'whatsapp:+91'+req.body.phone 
-                    //     }) 
-                    //     .then(message => console.log(message.sid)) 
-                    //     .done();
+                        // client.messages 
+                        // .create({ 
+                        //     body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
+                        //     from: 'whatsapp:+14155238886',       
+                        //     to: 'whatsapp:+91'+req.query.phone 
+                        // }) 
+                        // .then(message => console.log(message.sid)) 
+                        // .done();
 
-                    //     client.messages
-                    //     .create({
-                    //         body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
-                    //         from: '+12019755459',
-                    //         statusCallback: 'http://postb.in/1234abcd',
-                    //         to: '+91'+req.body.phone
-                    //     })
-                    //     .then(message => console.log(message.sid));
-                    //     appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
+                        client.messages
+                        .create({
+                            body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
+                            from: '+12019755459',
+                            statusCallback: 'http://postb.in/1234abcd',
+                            to: '+91'+req.query.phone
+                        })
+                        .then(message => console.log(message.sid));
+                        appointmentCancelAlert.newAlert(req.query.date,req.query.time,req.query.email,user,user1);
                         
-                    //     return res.render('refund',{
-                        //     title:'Refund',
-                    //         doctor:user,
-                    //         slotindex:req.body.slotindex,
-                    //         dayindex:req.body.dayindex
-                    //     });
+                        return res.render('refund',{
+                            title:'Refund',
+                            doctor:user,
+                            slotindex:req.query.slotindex,
+                            dayindex:req.query.dayindex
+                        });
                     // }
 
                     // else{
@@ -915,24 +922,25 @@ module.exports.refund = async function(req, res) {
                     //     })
                     // }
                         
-                }
+        //         }
 
-         else {
-            let doctors = await User.findById(req.user.id).populate({
-                path: 'doctors',
-                populate: {
-                    path: 'did',
-                    populate: { path: 'user' }
-                }
-            });
-            return res.render('my-billing', {
-                title: 'My Billings',
-                user: user1,
-                alldoctors: doctors
-            })
-        }
+        //  else {
+        //     let doctors = await User.findById(req.user.id).populate({
+        //         path: 'doctors',
+        //         populate: {
+        //             path: 'did',
+        //             populate: { path: 'user' }
+        //         }
+        //     });
+        //     return res.render('my-billing', {
+        //         title: 'My Billings',
+        //         user: user1,
+        //         alldoctors: doctors
+        //     })
+        // }
 
-    } catch (err) {
+    } 
+}catch (err) {
         console.log('Error', err);
         return;
     }
@@ -3374,7 +3382,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                         from: req.body.from[i],
                         to: req.body.to[i],
                         designation: req.body.designation[i],
-                        city:req.body.cityname[i]
+                        excity:req.body.excity[i]
                     });
                 }
             }
@@ -3386,7 +3394,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
                     from: req.body.from,
                     to: req.body.to,
                     designation: req.body.designation,
-                    city:req.body.cityname
+                    excity:req.body.excity
                 });
             }
 
