@@ -78,7 +78,7 @@ Version      : 1.0
             '<div class="col-12 col-md-6 col-lg-2">' +
             '<div class="form-group">' +
             '<label>City</label>' +
-            '<input type="text" placeholder="City" name="cityname" class="form-control">' +
+            '<input type="text" placeholder="City" name="excity" class="form-control">' +
             '</div>' +
             '</div>' +
             '<div class="col-12 col-md-6 col-lg-2">' +
