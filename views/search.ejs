@@ -337,15 +337,15 @@
                                                                             height: 19px;
                                                                             padding-top: 3px;
                                                                             padding-left: 6px;">
-                                                                        <%if(doctor.experience != ''){%>
-                                                                            <%var exp=doctor.experience[0].to-doctor.experience[0].from%>
+                                                                        <%if(doctor.wexperience){%>
+                                                                            
                                                                                 <a href="/doctor-profile/?id=<%=doctor._id%>" style="font-size: 0.8125rem; 
                                                                                     font-weight: 700;
                                                                                             
                                                                                             padding-left: 4px;
                                                                                             /* color: white; */
                                                                                             color: white">
-                                                                                    <%=exp%> Years Exp
+                                                                                    <%=doctor.wexperience%> Years Exp
                                                                                 </a>
                                                                                 <%}%>
                                                                     </h4>
@@ -387,8 +387,7 @@
                                                                             <%}%>
                                                                                 <%avg=sum/cnt;%>
                                                                                     <div class="rating" style=" margin-top: -9px;
-                                                                                    margin-left: 20px;
-                                                                                ">
+                                                                                    margin-left: 20px !important;">
                                                                                         <%if(avg>=1){%>
                                                                                             <i class="fas fa-star filled"></i>
                                                                                             <%}else{%>
@@ -542,6 +541,10 @@
 
                                                                                 <img src="<%=assetPath('img/specialities/eye.png')%>" class="img-fluid" alt="Speciality">
                                                                                 <% } %>
+                                                                                <% if(doctor.department== "Gynaecology"){ %>
+
+                                                                                    <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                    <% } %>
                                                                                     <% if(doctor.department== "Dermatology"){ %>
 
                                                                                         <img src="<%=assetPath('img/specialities/hair.jpg')%>" class="img-fluid" alt="Speciality">
@@ -560,7 +563,7 @@
                                                                                                                 <% } %>
                                                                                                                     <% if(doctor.department== "Orthopedic"){ %>
 
-                                                                                                                        <img src="<%=assetPath('img/specialities/specialities.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                                        <img src="<%=assetPath('img/specialities/bone.jpg')%>" class="img-fluid" alt="Speciality">
                                                                                                                         <% } %>
                                                                                                                             <% if(doctor.department== "Cardiologist"){ %>
 

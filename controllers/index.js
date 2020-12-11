@@ -194,7 +194,16 @@ module.exports.Doctors = async(req, res) => {
     })
 }
 module.exports.booking = async(req, res) => {
-    let doctor = await User.findById(req.query.id);
+    let doctor = await User.findOne({_id:req.query.id,booking_service:true});
+
+    if(!doctor)
+    {
+        return res.render('not-available',{
+            title:'Doctor Not Availble',
+            type:'Doctor'
+        })
+    }
+
     var today = new Date();
     today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');

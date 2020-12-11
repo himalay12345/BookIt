@@ -33,10 +33,10 @@ const development = {
             pass: 'Himalay@NIXXIT'
         }
     },
-    razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
-    // razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
-    razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
-    // razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
+    // razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
+    razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
+    // razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
+    razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
     google_client_id: '962720186337-l6gu83hkfs1qhh6f4vhv4ej0gad3e1ed.apps.googleusercontent.com',
     google_client_secret: 'OcauqQn-wvQezypG9ZMsJEf7',
     // google_callback_url: "/user/auth/google/callback",

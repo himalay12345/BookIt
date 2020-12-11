@@ -159,7 +159,8 @@
                             <!-- /Basic Information -->
 
                             <!-- About Me -->
-                            <div class="col-12 col-md-4" style="margin-left: -10px;">
+                            <div class="col-md-12" style="display:inline-flex !important;">
+                            <div class="col-md-4" style="margin-left: -10px;">
                                 <div class="form-group">
                                     <label>Department<span class="text-danger"></span></label>
                                     <select name="department" class="form-control select" >
@@ -170,7 +171,9 @@
 									<%if(locals.user.department == 'Dermatology'){%><option selected>Dermatology</option><%}else{%>
 										<option>Dermatology</option><%}%>
 									<%if(locals.user.department == 'Paediatrics'){%><option selected>Paediatrics</option><%}else{%>
-										<option>Paediatrics</option><%}%>
+                                        <option>Paediatrics</option><%}%>
+                                    <%if(locals.user.department == 'Gynaecology'){%><option selected>Gynaecology</option><%}else{%>
+                                            <option>Gynaecology</option><%}%>
 									<%if(locals.user.department == 'Urology'){%><option selected>Urology</option><%}else{%>
 										<option>Urology</option><%}%>	
 									<%if(locals.user.department == 'Neurology'){%><option selected>Neurology</option><%}else{%>
@@ -186,6 +189,14 @@
 									</select>
                                 </div>
                             </div>
+                             <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Total Working Experience(In Years) <span class="text-danger"></span></label>
+                                               <input type="Number" placeholder="Enter the no. of years" name="wexperience" value="<%=locals.user.wexperience%>" class="form-control">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
                             <div class="col-md-12 col-lg-12 col-xl-12" style="margin-left: -10px; padding-top: 10px;">
                                 <div class="card">
                                     <div class="card-body">
@@ -273,7 +284,7 @@
                                                         </div>
                                                         <input type="file" id="file-upload" name="clinicphoto" multiple>
                                                         <p class="text-center" style="margin-top: -20px;font-size: 0.9rem;">Drag and drop files here, or
-                                                            <a href="#" id="file-browser">browse</a> your computer.</p>
+                                                            <a href="#" id="file-browser">browse</a> your computer.Max 10 photos ( 2MB Max per image)</p>
                                                     </div>
 
                                                 </div>

@@ -299,7 +299,6 @@
                                                                     <th class="sth">Appt Date</th>
                                                                     <th class="sth">Purpose</th>
                                                                     <th class="sth">Type</th>
-                                                                    <th class="text-center sth">Paid Amount</th>
                                                                     <th class="text-center sth">Status</th>
                                                                    
                                                                 </tr>
@@ -370,7 +369,7 @@
                                                                   
                                                                     <td class="std2">New Patient</td>
                                                                    
-                                                                    <td class=" std2">Rs<%=patients.fee%></td>
+                                                                    
                                                                     
                                                                         
                                                                             <%if(patients.cancel == true){%>
@@ -411,7 +410,7 @@
                                                             </thead>
                                                             <tbody class="stbody">
                                                                 <%var c=0,z1=0,z2=0;%>
-
+                                                                <%if(staff && staff.booking.length>0){%>
                                                                     <%for(patients of staff.booking){%>
                                                                         <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -522,6 +521,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                     </form>
                                                                                                                                 </div>
                                                                                                                             </div>
+                                                                                                                            <%}%>
                                                                                                                             <%}%>
 
                                                             </tbody>

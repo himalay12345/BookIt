@@ -1632,9 +1632,25 @@ module.exports.deleteAccount = async(req, res) => {
     });
 
     let user = await User.findOne({ _id: req.user.id });
+   
+    if(user.type == 'Staff')
+    {
+        let staff = await User.findById(req.user.id);
+        if(staff)
+        {
+            // let prope1 = await User.deleteOne({ _id: user.staff_id });
+            staff.temp_phone = staff.phone;
+            staff.phone = "";
+            staff.password = "";
+            
+        }
 
-    if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
-        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+        staff.save()
+        req.flash('success', 'Account removed Successfully');
+
+
+        return res.redirect('/user/logout');
+
     }
 
     if (user.type == 'Doctor') {
@@ -1642,7 +1658,11 @@ module.exports.deleteAccount = async(req, res) => {
         let staff = await User.findById(user.staff_id);
         if(staff)
         {
-            let prope1 = await User.deleteOne({ _id: user.staff_id });
+            // let prope1 = await User.deleteOne({ _id: user.staff_id });
+            staff.temp_phone = staff.phone;
+            staff.phone = "";
+            staff.password = "";
+            
         }
 
         if (user.clinicphoto) {
@@ -1652,8 +1672,39 @@ module.exports.deleteAccount = async(req, res) => {
                 }
             }
         }
+        user.temp_phone = user.phone;
+        user.temp_email = user.email; 
+        user.phone = "";
+        user.email = "";
+        user.password = "";
+        user.booking_service = false;
+        user.approve1 = false;
+        user.approve2 = false;
+        user.accountid = "";
+
+
+        user.save();
+        staff.save();
+        req.flash('success', 'Account removed Successfully');
+
+
+        return res.redirect('/user/logout');
 
     }
+
+    if(user.type == 'Patient')
+    {
+
+    if(user.avatar)
+
+    {
+
+if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
+    fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+}
+    }
+}
+
 
 
 
@@ -3340,6 +3391,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
             user.phone = req.body.phone;
             user.gender = req.body.gender;
             user.dob = req.body.dob;
+            user.wexperience = req.body.wexperience,
             user.facebook = req.body.facebook;
             user.instagram = req.body.instagram;
             user.twitter = req.body.twitter;

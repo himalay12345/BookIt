@@ -457,7 +457,19 @@ const userSchema = mongoose.Schema({
     degreephoto: {
         type: String
     },
+    wexperience:{
+        type:Number
+    },
     estphoto: {
+        type: String
+    },
+    temp_phone: {
+        type: String
+    },
+    stemp_phone: {
+        type: String
+    },
+    temp_email: {
         type: String
     },
     verifyid: {

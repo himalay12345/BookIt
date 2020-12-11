@@ -72,8 +72,13 @@
 <img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
 <% } %>
 <% if(doctor.department== "Orthopedic"){ %>
-<img src="<%=assetPath('img/specialities/specialities.png')%>" class="img-fluid" alt="Speciality">
-<% } %>
+
+    <img src="<%=assetPath('img/specialities/bone.jpg')%>" class="img-fluid" alt="Speciality">
+    <% } %>
+    <% if(doctor.department== "Gynaecology"){ %>
+
+        <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" class="img-fluid" alt="Speciality">
+        <% } %>
 <% if(doctor.department== "Cardiologist"){ %>
 <img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
 <% } %>
