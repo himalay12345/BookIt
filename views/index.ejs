@@ -66,33 +66,70 @@
                     </div>
                     <div class="search-box sscreen">
                         <form action="/user/search-doctor" method="POST">
-                            <div class="form- search-location">
-
-                                <input type="text" name="location" id="searchkey" class="form-control searchul" placeholder="Search Location">
-                                <ul style="list-style: none;margin-left: -40px;width:280px;" class="displayNone position-absolute" id="searchul">
-                                    <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
-                                    <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
-                                    <li style="background-color:white;border:1px solid rgb(184, 181, 181);padding:8px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
-
-                                </ul>
-
-
+                            <div class="form-search-location">
+                                
+                                <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location">
+                              
+                                
+                                
                             </div>
 
-                            <div class="form- search-info msearch">
-
-                                <input type="text" name="keyword" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                            <div class="form-search-info msearch">
+                               
+                                <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                 <span class="form-text">Ex : Dental or Sugar Check up etc</span>
-                                <table class="table table-striped position-absolute">
-
-                                    <tbody id="myTable">
-
-                                    </tbody>
-                                </table>
+                               
                             </div>
-                            <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+                            <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
                         </form>
                     </div>
+                     <div class="displayNone" id="filter_box" style="overflow:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    visibility: visible;
+    opacity: 1;">
+                            <div id="header_filter" style="padding:10px ;">
+
+                                <i class="fas fa-times" style="font-size: 2rem;color:grey;" id="close_btn"></i>
+                                <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
+                            </div>
+                            <div class="card search-filter" style="display: block;">
+
+                                <form action="/user/filter" method="POST">
+                                    <div class="card-body">
+
+
+                                        <div class="filter-widget">
+                                           
+                                            <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+                                            <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                           
+                                        </div>
+                                        <div class="filter-widget">
+                                            <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
+                                                <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                                <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                                <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
+                
+                                                </ul>
+                                                <table class="table table-striped position-absolute" style="margin-left: -20px;">
+   
+                                                    <tbody id="myTable1">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                        <!-- <div class="btn-search">
+                                            <button type="submit" class="btn btn-block tcolor">Search</button>
+                                        </div> -->
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
                     <!-- /Search -->
 
                 </div>
@@ -216,18 +253,29 @@
                                     <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Tooth pain and other issues</p>
                                 </div>
                             </a>
+                            <a href="/specialist/?dep=Gynaecology">
+                                <div class="speicality-item text-center">
+                                    <div class="speicality-img">
+                                        <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                    </div>
+                                    <p>Gynaecology</p>
+                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Female specialist</p>
+                                </div>
+                            </a>
                             <!-- /Slider Item -->
 
                         </div>
                         <div class="view-all">
                             <a href="/specialist-all">
                                 <h3 style="text-align: end;
-                            margin-right: 14px;
+                            margin-right: 10px;
                             /* margin-bottom: -1pc; */
                             padding-top: -9px;
                             margin-top: -14px;
                             color: turquoise;
-                            font-size: 1.125rem;">View All</h3>
+                            padding:8px;
+                            font-size: 1rem;">View All</h3>
                             </a>
                         </div>
                         <!-- /Slider -->
@@ -582,12 +630,12 @@
                     margin-bottom: 15px;
                     font-size: 1.375rem;">Book Our Doctors</h3>
 
-                    <div class="common-consult" style="height:250px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+                    <div class="common-consult" style="height:265px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
 
 
                         <%for(let i=0; i<doctors.length;i++){%>
 
-                            <div class="img-cough-cold" style="width:180px;height: 260px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
+                            <div class="img-cough-cold" style="width:180px;height: 250px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
                                 <div style="height: 40%;">
 
                                     <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
@@ -802,10 +850,10 @@
 
             <section style="background-color: #fff;padding-top: 30px;margin-bottom: -10px;">
                 <div class="app-download--banner">
-                    <div class="app-download__top" style="height: 300px;width: 100%;">
+                    <div class="app-download__top" style="height: 400px;width: 100%;">
                         <div class="image">
                             <span class="LazyLoad is-visible">
-                            <img class="app-download__top__image" src="<%=assetPath('img/and.png')%>" style="height: 100%;width: 70%;margin-left: 50px;">
+                            <img class="app-download__top__image" src="<%=assetPath('img/and1.png')%>" style="height:400px;width: 70%;margin-left: 50px;">
                         </span>
                         </div>
                     </div>
@@ -814,10 +862,10 @@
 
                     <div class="app-download__bottom__message">
                         <div class="app-download__bottom__header" style="text-align: center;font-size: 1.5rem;font-weight: bold;margin-top: 20px;">Download the AarogyaHub app</div>
-                        <div class="app-download__bottom__subHeader" style="font-weight: bold;margin-top: -5px;margin-left: 20px;">Get Rs. 100 CashBack</div>
+                        <div class="app-download__bottom__subHeader" style="font-weight: bold;margin-top: -5px;margin-left: 20px;">Get Rs. 10 CashBack</div>
                     </div>
                     <ul class="margin--top--12" style="list-style: none;margin-top: 20px;">
-                        <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Get Rs. 100 Cashback</li>
+                        <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Get Rs. 10 Cashback</li>
                         <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Live Patient tracking System</li>
                         <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Exclusive healthcare packages</li>
                     </ul>
@@ -838,75 +886,187 @@
             <!-- /Main Wrapper -->
 
             <!-- jQuery -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script>
-                function updatesearch(key) {
-                    document.getElementById('searchkey').value = key;
-                    document.getElementById('searchul').classList.add('displayNone');
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+           <script>
+
+               function showsearch()
+               {
+                document.getElementById('searchkey1').focus();
+               
+        var fbox = document.getElementById('filter_box');
+      
+       
+        fbox.classList.remove('displayNone');
+
+               }
+               var fbox = document.getElementById('filter_box');
+               var close_btn = document.getElementById('close_btn');
+               close_btn.addEventListener('click',function(){
+            fbox.classList.add('displayNone');
+        })
+
+                function updatesearch(key)
+               {
+                document.getElementById('searchkey').value = key;
+                document.getElementById('searchul').classList.add('displayNone');
+               }
+
+               function updatesearch1(key)
+               {
+                document.getElementById('searchkey1').value = key;
+               }
+
+                $(document).click(function(event){
+                if (!$(event.target).hasClass('searchul')) {
+                    $("#searchul").addClass("displayNone");
                 }
+            });
+               document.getElementById('locationsearch').addEventListener('click',function()
+               {
+                   if(navigator.geolocation)
+                   {
+                       navigator.geolocation.getCurrentPosition(function(position)
+                       {
+                           console.log(position);
+                           $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                    console.log(data);
 
-                $(document).click(function(event) {
-                    if (!$(event.target).hasClass('searchul')) {
-                        $("#searchul").addClass("displayNone");
-                    }
-                });
-                document.getElementById('locationsearch').addEventListener('click', function() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(position) {
-                            console.log(position);
-                            $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
-                                console.log(data);
-                            })
+                       })
+                      
+                  })
+                   }
 
-                        })
-                    } else {
-                        console.log('geo not supported')
-                    }
-                })
-            </script>
-            <script>
-                $('#searchkd').on('keyup', function() {
-                    var value = $(this).val()
-                    console.log(value);
-                    var data = searchTable(value, <%-ar%>)
-                    buildTable(data);
-                })
+                   else{
+                       console.log('geo not supported')
+                   }
+               })
 
+               document.getElementById('locationsearch1').addEventListener('click',function()
+               {
+                   if(navigator.geolocation)
+                   {
+                       navigator.geolocation.getCurrentPosition(function(position)
+                       {
+                           console.log(position);
+                           $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                    document.getElementById('searchkey1').value = 'Dumka';
+                       })
+                      
+                  })
+                   }
 
-                function searchTable(value1, data) {
-                    var fdata = []
-                    $.each(data, function(key, value) {
-                            value1 = value1.toLowerCase();
-                            var name = value.name.toLowerCase();
-                            console.log(value1, name)
+                   else{
+                       console.log('geo not supported')
+                   }
+               })
 
-                            if (name.includes(value1) && value1 != '') {
-                                fdata.push(value)
-                            }
-                        }
-
-                    );
-
-                    return fdata;
-                }
+              
+               </script>
+               <script>
+                
+                
 
 
-                function buildTable(data) {
-                    var table = document.getElementById('myTable')
-                    table.innerHTML = ''
-                    for (var i = 0; i < data.length; i++) {
 
-                        var row = `<tr>
+$('#searchkd').on('keyup', function()
+{
+    var value = $(this).val()
+    console.log(value);
+    var data  = searchTable(value,<%-ar%>)
+    buildTable(data);
+})
+   
+
+function searchTable(value1,data){
+    var fdata = []
+    $.each(data, function( key, value ) {
+        value1 = value1.toLowerCase();
+        var name = value.name.toLowerCase();
+        console.log(value1,name)
+        
+        if(name.includes(value1) && value1 !='')
+        {
+            fdata.push(value)
+        }
+}
+
+);
+
+return fdata;
+}
+ 
+    
+function buildTable(data){
+    var table = document.getElementById('myTable')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+       
+        var row = `<tr>
                         <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
                         <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
                      
                    </tr>`
-                        table.innerHTML += row
-                    }
+        table.innerHTML += row
+    }
+    
+                  
+}
+    
+$('#searchkd1').on('keyup', function()
+{
+   
+    var value = $(this).val()
+    $('#searchul1').addClass('displayNone')
+    if(value == '')
+    {
+        $('#searchul1').removeClass('displayNone')
+    }
+    console.log(value);
+    var data  = searchTable(value,<%-ar%>)
+    buildTable1(data);
+})
+   
 
+function searchTable1(value1,data){
+    var fdata = []
+    $.each(data, function( key, value ) {
+        value1 = value1.toLowerCase();
+        var name = value.name.toLowerCase();
+        console.log(value1,name)
+        
+        if(name.includes(value1) && value1 !='')
+        {
+           
+            fdata.push(value)
+        }
+}
 
-                }
-            </script>
+);
+
+return fdata;
+}
+ 
+    
+function buildTable1(data){
+    var table = document.getElementById('myTable1')
+    table.innerHTML = ''
+    for (var i = 0; i < data.length; i++){
+       
+        var row = `<tr>
+                        <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
+                        <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
+                     
+                   </tr>`
+        table.innerHTML += row
+    }
+    
+                  
+}
+    
+                
+                   
+                
+               </script>
 
 
 

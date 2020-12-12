@@ -3918,9 +3918,19 @@ html.menu-opened body {
     min-height: 40px;
 }
 
+.ratingll {
+    list-style: none;
+    // margin: 0 0 7px;
+    margin: 0px -86px 7px !important;
+    padding: 0;
+    width: 100%;
+}
+
+
 .rating {
     list-style: none;
     margin: 0 0 7px;
+    // margin: 0px -86px 7px;
     padding: 0;
     width: 100%;
 }
@@ -8927,18 +8937,21 @@ html.menu-opened body {
         content: "Name";
     }
     .std:nth-of-type(2):before {
-        content: "Age";
+        content: "Gender";
     }
     .std:nth-of-type(3):before {
-        content: "Phone";
+        content: "Age";
     }
     .std:nth-of-type(4):before {
-        content: "Address";
+        content: "Phone";
     }
     .std:nth-of-type(5):before {
-        content: "Mode";
+        content: "Address";
     }
     .std:nth-of-type(6):before {
+        content: "Mode";
+    }
+    .std:nth-of-type(7):before {
         content: "Status";
     }
     .std3:nth-of-type(1):before {
@@ -9477,6 +9490,10 @@ html.menu-opened body {
     }
     .laptop-blood {
         display: none;
+    }
+
+    .rating{
+         margin: 0 0 7px !important; 
     }
     .mobile-sugar {
         display: block;
@@ -10202,3 +10219,31 @@ input:-webkit-autofill:focus {
     font-weight: normal !important;
     color: black !important;
 }
+
+ #myTable1{
+  padding-left: -30px !important;
+ } 
+#myTable1 tr {
+  background-color: white;
+  border-bottom: 1px solid #b8b5b5;
+
+  height: 30px !important; }
+
+#myTable1 tr img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-right: -30px; }
+
+#myTable1 tr td {
+  font-size: 1rem !important;
+  font-weight: bold;
+  margin-left: -30px !important;
+  padding: 5px !important; }
+
+#myTable1 tr td span {
+  font-size: 0.8rem !important;
+  font-weight: normal !important;
+  color: black !important; }

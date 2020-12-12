@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/checkout  30 Nov 2019 04:12:16 GMT -->
+
+<head>
+  
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Checkout</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+
+
+
+
+
+                                <div class="info-widget">
+                                    <h4 class="card-title">Patient Details</h4>
+
+                                    <div class="row">
+                                        <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about the Patient</h5>
+                                        <form action="/user/old-offline-pay" method="POST" style="width: 100%;">
+                                            <%var day,time,fee%>
+                                                <% day = locals.user.old_schedule_time[dayindex].day%>
+                                                    <% fee = doctor.booking_fee%>
+                                                        <%var today = new Date();%>
+                                                            <%var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];%>
+                                                                <%if(typeof(locals.user.old_schedule_time[dayindex].start) == 'string'){%>
+                                                                    <%time = locals.user.old_schedule_time[dayindex].start.toUpperCase()%>
+
+                                                                        <%}else{%>
+                                                                            <%time = locals.user.old_schedule_time[dayindex].start[slotindex].toUpperCase()%>
+                                                                                <%}%>
+
+                                                                                    <%if(locals.user.oldp.flag){%>
+                                                                                        <input type="hidden" name="fixed" value="true">
+                                                                                        <%}else{%>
+                                                                                            <input type="hidden" name="fixed" value="false">
+                                                                                            <%}%>
+                                                                                    <input type="hidden" name="day" value="<%=day%>">
+                                                                                    <input type="hidden" name="userid" value="<%=locals.user.id%>">
+                                                                                    <input type="hidden" name="date" value="<%=date%>">
+                                                                                    <input type="hidden" name="fee" value="<%=fee%>">
+                                                                                    <input type="hidden" name="time" value="<%=time%>">
+                                                                                    <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                                                                                    <input type="hidden" name="id" value="<%=id%>">
+                                                                                    <input type="hidden" name="booked" value="<%=booked%>">
+                                                                                    <input type="hidden" name="available" value="<%=available%>">
+                                                                                    <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                                                                    <input type="hidden" name="dayindex" value="<%=dayindex%>">
+
+                                                                                    <!-- <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group card-label">
+                                                                                            <label>C/O (optional)</label>
+                                                                                            <input class="form-control" type="text" placeholder="Enter name" name="cname" required>
+                                                                                        </div>
+                                                                                    </div> -->
+
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group card-label">
+                                                                                            <label>Name</label>
+                                                                                            <input class="form-control" type="text" placeholder="Enter name" name="name" required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group card-label">
+                                                                                            <label>Phone</label>
+                                                                                            <input class="form-control" type="text" placeholder="Enter phone number" name="phone">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group card-label">
+                                                                                            <label>Address</label>
+                                                                                            <input class="form-control" type="text" placeholder="Enter address" name="address" required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                   
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group card-label">
+                                                                                            <label>Age</label>
+                                                                                            <input class="form-control" type="number" placeholder="Enter age" name="age" required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12 col-md-12">
+                                                                                        <div class="form-group">
+                                                                                            <label style="font-size: 0.9rem!important;margin-left: 5px;">Gender <span class="text-danger"></span></label>
+                                                                                            <select name="gender" class="form-control select" required >
+                                                                                               
+                                                                                                <option>Male</option>
+                                                                                                
+                                                                                                <option>Female</option>
+                                                                                              
+                                                                                                <option>Others</option>
+                                                                                                </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="submit-section mt-4">
+                                                                                        <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Submit</button>
+                                                                                    </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+
+                                <!-- /Personal Information -->
+
+
+                                <!-- /Checkout Form -->
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5 col-lg-4 theiaStickySidebar">
+
+                        <!-- Booking Summary -->
+                        <div class="card booking-card">
+                            <div class="card-header">
+                                <h4 class="card-title">Booking Appointment</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Booking Doctor Info -->
+                                <div class="booking-doc-info">
+                                    <a href="/doctor-profile" class="booking-doc-img">
+                                        <img src="<%=doctor.avatar%>" alt="User Image">
+                                    </a>
+                                    <div class="booking-info">
+                                        <h4>
+                                            <a href="/doctor-profile">
+                                                <%=doctor.name%>
+                                            </a>
+                                        </h4>
+                                        <div class="rating">
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star filled"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span class="d-inline-block average-rating">35</span>
+                                        </div>
+                                        <div class="clinic-details">
+                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                                <%=doctor.contacts.city%>,
+                                                    <%=doctor.contacts.state%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Booking Doctor Info -->
+
+                                <div class="booking-summary">
+                                    <%var today = new Date();%>
+                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                        var yyyy = today.getFullYear();
+                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                        var dayOfWeek = weekday[today.getDay()];%>
+                                            <div class="booking-item-wrap">
+                                                <ul class="booking-date">
+                                                    <li>Date <span><%=date%></span></li>
+                                                    <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                                        <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
+
+                                                        <%}else{%>
+                                                            <li>Time <span><%=doctor.schedule_time[dayindex].start[0].toUpperCase()%></span></li>
+                                                            <%}%>
+                                                                <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
+                                                </ul>
+                                                <ul class="booking-fee">
+                                                    <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
+                                                    <!-- <li>G.S.T <span>Rs 10</span></li> -->
+                                                </ul>
+                                                <div class="booking-total">
+                                                    <ul class="booking-total-list">
+                                                        <li>
+                                                            <span>Total</span>
+                                                            <span class="total-cost">Rs <%=doctor.booking_fee%></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Booking Summary -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+   
+
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- AarogyaHub/checkout  30 Nov 2019 04:12:16 GMT -->
+
+</html>

@@ -105,7 +105,7 @@ console.log(daten);
 
 
 
-if(c>=30){
+if(c>=7){
     $('#smnextslide').css('display','none');
     return;
 }
@@ -185,7 +185,7 @@ today=date;
 }
 
 console.log(date1,date2,date3);
-if(c>=8){
+if(c>1){
     $('#nextslide').css('display','none');
     return;
 }
@@ -194,7 +194,8 @@ if(c>=0)
     $('#prevslide').css('display','block');
 }
 
-
+if(c==0)
+{
 let n1 = (c*3)+3+1;
 if(n1 > 7)
 {
@@ -272,7 +273,57 @@ $('.clearfix li:nth-child('+n3+')').css("order", '3');
 d3.addClass('displayBlock');
 
 
+}
 
+if(c==1)
+{
+    let n1 = (c*3)+3+1;
+    if(n1 > 7)
+    {
+        n1=n1%7;
+        if(n1==0)
+        {
+            n1=7;
+        }
+    }  
+    let p1 = n1-1;
+if(p1<=0)
+{
+    p1=7;
+}
+let p2 = p1-1;
+if(p2<=0)
+{
+    p2=7;
+}
+let p3 = p2-1;
+if(p3<=0)
+{
+    p3=7;
+}
+
+let d1 = $('#d'+n1);
+
+$(`#d${n1} a#checkme`).each(function(i, obj) {
+    obj.setAttribute('data-date',date1);
+});
+
+let d4 = $('#d'+p1);
+let d5 = $('#d'+p2);
+let d6 = $('#d'+p3);
+console.log(n1,p1,p2,p3)
+d4.removeClass('displayBlock');
+d4.addClass('displayNone');
+d5.removeClass('displayBlock');
+d5.addClass('displayNone');
+d6.removeClass('displayBlock');
+d6.addClass('displayNone');
+d1.removeClass('displayNone');
+$('.clearfix li:nth-child('+n1+')').css({"order": '1', 'float':'none','margin-left':'auto','margin-right':'auto'});
+d1.addClass('displayBlock');
+
+
+}
 console.log(c);
 
 

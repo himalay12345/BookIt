@@ -57,10 +57,62 @@
                             <input type="text" name="registration" placeholder="Enter Registration Number" value="<%=locals.user.registrations.registration%>"  class="form-control" required>
                         </div>
                     </div>
+                    <%if(locals.user.registrations.regCouncil){%>
                     <div class="col-12 col-md-12">
                         <div class="form-group">
-                            <label style="font-size: 0.85rem;">Registration Council</label>
-                            <input type="text" name="regCouncil" placeholder="Enter Registration Council" value="<%=locals.user.registrations.regCouncil%>" class="form-control" required>
+                            <label style="font-size: 0.85rem;">Your Selected Registration Council</label>
+                            <input type="text" name="regCouncil" placeholder="Enter Registration Council" value="<%=locals.user.registrations.regCouncil%>" class="form-control" required readonly>
+                        </div>
+                    </div>
+                    <%}%>
+                    <div class="col-12 col-md-12">
+                        <div class="form-group">
+                            <label style="font-size: 0.9rem!important;margin-left: 5px;">Registration Council <span class="text-danger"></span></label>
+                            <select name="regCouncil" class="form-control select" required >
+                               
+                                <option value="Andhra Pradesh Medical Council">Andhra Pradesh Medical Council</option>
+                                <option value="Arunachal Pradesh Medical Council">Arunachal Pradesh Medical Council</option>
+                                <option value="Assam Medical Council">Assam Medical Council</option>
+                                <option value="Bhopal Medical Council">Bhopal Medical Council</option>
+                                <option value="Bihar Medical Council">Bihar Medical Council</option>
+                                <option value="Bombay Medical Council">Bombay Medical Council</option>
+                                <option value="Chandigarh Medical Council">Chandigarh Medical Council</option>
+                                <option value="Chattisgarh Medical Council">Chattisgarh Medical Council</option>
+                                <option value="Delhi Medical Council">Delhi Medical Council</option>
+                                <option value="Goa Medical Council">Goa Medical Council</option>
+                                <option value="Gujarat Medical Council">Gujarat Medical Council</option>
+                                <option value="Haryana Medical Council">Haryana Medical Council</option>
+                                <option value="Himanchal Pradesh Medical Council">Himanchal Pradesh Medical Council</option>
+                                <option value="Hyderabad Medical Council">Hyderabad Medical Council</option>
+                                <option value="Jammu & Kashmir Medical Council">Jammu & Kashmir Medical Council</option>
+                                <option value="Jharkhand Medical Council">Jharkhand Medical Council</option>
+                                <option value="Karnataka Medical Council">Karnataka Medical Council</option>
+                                <option value="Madhya Pradesh Medical Council">Madhya Pradesh Medical Council</option>
+                                <option value="Madras Medical Council">Madras Medical Council</option>
+                                <option value="Mahakoshal Medical Council">Mahakoshal Medical Council</option>
+                                <option value="Maharashtra Medical Council">Maharashtra Medical Council</option>
+                                <option value="Manipur Medical Council">Manipur Medical Council</option>
+                                <option value="Medical Council of India">Medical Council of India</option>
+                                <option value="Medical Council of Tanganyika">Medical Council of Tanganyika</option>
+                                <option value="Mizoram Medical Council">Mizoram Medical Council</option>
+                                <option value="Mysore Medical Council">Mysore Medical Council</option>
+                                <option value="Nagaland Medical Council">Nagaland Medical Council</option>
+                                <option value="Orissa Council of Medical Registration">Orissa Council of Medical Registration</option>
+                                <option value="Pondicherry Medical Council">Pondicherry Medical Council</option>
+                                <option value="Punjab Medical Council">Punjab Medical Council</option>
+                                <option value="Rajasthan Medical Council">Rajasthan Medical Council</option>
+                                <option value="Sikkim Medical Council">Sikkim Medical Council</option>
+                                <option value="Tamil Nadu Medical Council">Tamil Nadu Medical Council</option>
+                                <option value="Telangana State Medical Council">Telangana State Medical Council</option>
+                                <option value="Travancore Cochin Medical Council, Trivandrum">Travancore Cochin Medical Council, Trivandrum</option>
+                                <option value="Tripura State Medical Council">Tripura State Medical Council</option>
+                                <option value="Uttar Pradesh Medical Council">Uttar Pradesh Medical Council</option>
+                                <option value="Uttarakhand Medical Council">Uttarakhand Medical Council</option>
+                                <option value="Vidharba Medical Council">Vidharba Medical Council</option>
+                                <option value="West Bengal Medical Council">West Bengal Medical Council</option>
+
+
+                                </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-12">

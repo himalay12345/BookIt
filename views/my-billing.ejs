@@ -194,32 +194,11 @@
                                         <div class="card-body sscreen" style="margin-top: -30px;">
                                             <%var c=1%>
                                             <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
-                                                <div id="popup1" class="overlay">
-                                                    <div class="popup">
-                                                        <form action="/user/payments/<%=alldoctors.payments[i].payment_id%>/refund" method="POST">
-                                                            <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
-                                                                <div class="form-group">
-                                                                    <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
-                                                                        <input type="hidden" name="id" value="<%=alldoctors.payments[i].payment_id%>">
-                                                                        <input type="hidden" name="doctorid" value="<%=alldoctors.doctors[i].did._id%>">
-                                                                        <input type="hidden" name="slotindex" value="<%=alldoctors.doctors[i].slotindex%>">
-                                                                        <input type="hidden" name="dayindex" value="<%=alldoctors.doctors[i].dayindex%>">
-                                                                        <input type="hidden" name="index" value="<%=i%>">
-                                                                        <input type="hidden" name="bid" value="<%=alldoctors.doctors[i]._id%>">
-                                                                        <input type="hidden" name="time" value="<%=alldoctors.doctors[i].time%>">
-                                                                        <input type="hidden" name="date" value="<%=alldoctors.doctors[i].date%>">
-                                                                        <input type="hidden" name="phone" value="<%=alldoctors.doctors[i].phone%>">
-                                                                        <input type="hidden" name="email" value="<%=alldoctors.doctors[i].email%>">
-                                                                        <input type="hidden" name="fee" value="<%=alldoctors.doctors[i].fee%>">
-                                                                            <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
-                                                                            <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
-                                                                </select>
-                                                                </div>
-                                                            </div>
-                                                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Continue</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                                <%if(alldoctors.doctors[i].old_flag){%>
+                                                    <%continue;%>
+                                                    <%}%>
+
+                                               
                                                 
                                             <div class="card-contents" style="height: 200px;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
                                                 <div class="head-part" style="height: 40px;border-bottom: 1px solid lightgrey;">
@@ -229,10 +208,10 @@
                                                 </div>
                                                 <div class="top-part" style="height: 110px;display:flex;flex-direction: row;">
                                                     <div class="top-img" style="width: 25%;height:100%;padding-top:10px;padding-left: 4px;">
-                                                        <img src="<%=alldoctors.doctors[i].did.avatar%>"style="height:50px;width:50px;border-radius:50%;">
+                                                        <img src="<%=alldoctors.doctors[i].davatar%>"style="height:50px;width:50px;border-radius:50%;">
                                                     </div>
                                                     <div class="top-content" style="width: 75%;height:100%;padding:10px;">
-                                                        <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].did.name%>, <%=alldoctors.doctors[i].did.department%></h5>
+                                                        <h5 style="font-weight: bold;font-size: 1rem;">Dr. <%=alldoctors.doctors[i].dname%>, <%=alldoctors.doctors[i].ddept%></h5>
                                                         <%var str2 = alldoctors.doctors[i].date.split('-');%>
                                                         <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
                                             <%var str1 = formatDate(str);%>
@@ -293,7 +272,7 @@
                                                     <%var strb = stra[2]+'-'+stra[1]+'-'+stra[0];%>      
                                                     <%var bdate = new Date(strb)%>
                                                     <%if(bdate > tdate){%>
-                                                    <%if(alldoctors.doctors[i].cancel == true){%>
+                                                    <!-- <%if(alldoctors.doctors[i].cancel == true){%>
                                                         <a href="#" class="btn btn-sm bg-danger" style="color: white;width: 100%;">
 
                                                             <i class="fas fa-print"></i> Cancellled
@@ -304,7 +283,7 @@
 
                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                         </a>
-                                                        <%}%>
+                                                        <%}%> -->
                                                         <%}else{%>
                                                             <div class="table-action">
                                                  
@@ -333,7 +312,9 @@
                                                         <tbody>
                                                             <%var c=0;%>
                                                             <%for(let i= alldoctors.doctors.length-1; i>=0 ;i--){%>
-                                                                
+                                                                <%if(alldoctors.doctors[i].old_flag){%>
+                                                                    <%continue;%>
+                                                                    <%}%>
                                                                 <%c++;%>
 
                                                               
@@ -343,10 +324,10 @@
                                                                 </td>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>" class="avatar avatar-sm mr-2">
-                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].did.avatar%>" alt="User Image">
+                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did%>" class="avatar avatar-sm mr-2">
+                                                                            <img class="avatar-img rounded-circle" src="<%=alldoctors.doctors[i].davatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                                         </a>
-                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did._id%>"><%=alldoctors.doctors[i].did.name%><span><%=alldoctors.doctors[i].did.department%></span></a>
+                                                                        <a href="/doctor-profile/?id=<%=alldoctors.doctors[i].did%>"><%=alldoctors.doctors[i].dname%><span><%=alldoctors.doctors[i].ddept%></span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>Rs<%=alldoctors.doctors[i].fee%></td>
@@ -401,25 +382,7 @@
                                                                     <%var bdate = new Date(strb)%>
                                                                     <%if(bdate > tdate){%>
                                                                     
-                                                                    <div class="table-action">
-                                                               
-                                                                      <%if(alldoctors.doctors[i].cancel == true){%>
-                                                                        <a href="#" class="btn btn-sm bg-danger" style="color: white;">
-
-                                                                            <i class="fas fa-print"></i> Cancellled
-                                                                        </a>
-                                                                        
-                                                                      <%}else{%>
-                                                                        
-                                                                     
-                                                                          <a data-target="#" id="popbtn" class="btn btn-sm bg-danger-light" data-0 ="<%=alldoctors.payments[i].payment_id%>" data-1="<%=alldoctors.doctors[i].did._id%>" data-2="<%=alldoctors.doctors[i].slotindex%>" data-3="<%=alldoctors.doctors[i].dayindex%>" data-4="<%=i%>" data-5="<%=alldoctors.doctors[i]._id%>" data-6="<%=alldoctors.doctors[i].time%>"data-7="<%=alldoctors.doctors[i].date%>"data-8="<%=alldoctors.doctors[i].phone%>" data-9="<%=alldoctors.doctors[i].email%>" data-10="<%=alldoctors.doctors[i].fee%>" >
-
-                                                                            <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        </a>
-                                                                        <%}%>
-                                                                       
-                                                                
-                                                                    </div>
+                                                                   
                                                                     <%}else{%>
                                                                         <div class="table-action">
                                                              
@@ -427,6 +390,12 @@
                                                                             <i class="fas fa-check-circle" style="margin-right: 5px;"></i>Confirm</span></h5>
                                                                             </div>
                                                                     <%}%>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="/user/payments/refund/?doctorid=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&id=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&index=<%=i%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&date=<%=alldoctors.doctors[i].date%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>" class="btn btn-sm bg-danger-light" style="width: 100%;">
+
+                                                                        <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                             <%}%>

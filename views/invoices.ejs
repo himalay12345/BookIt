@@ -136,10 +136,10 @@
                                                 </td>
                                                 <td class="std3">
                                                     <h2 class="table-avatar">
-                                                        <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
-                                                            <img class="avatar-img rounded-circle" src="<%=patients.pid.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
+                                                        <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
+                                                            <img class="avatar-img rounded-circle" src="<%=patients.avatar%>" onerror='this.src="/img/profile.png"' alt="User Image">
                                                         </a>
-                                                        <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=c%></span></a>
+                                                        <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=c%></span></a>
                                                     </h2>
                                                 </td>
                                                 <td class="std3">Rs <%=patients.fee%></td>

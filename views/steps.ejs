@@ -58,7 +58,7 @@
                                 <%}else{%>
                                 <%if(locals.user.step4==true){%>
                                 <div class="alert alert-info alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
-                                    <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a> You will recieve a confirmation message on your phone.
+                                    <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a> You will recieve a confirmation message on your phone once your account is activated.
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -130,6 +130,12 @@
                                                     </select>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="col-md-12 cmleft" style="display: inline-flex;margin-left: -50px;">
+                                                                            <div class="form-group col-sm-12">
+                                                                                <label class="control-label">Phone</label>
+                                                                                <input type="text" class="form-control gwidth" name="phone" placeholder="Enter your Phone" value="<%=locals.user.phone%>" required>
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="col-md-6 col-sm-12 gmargin" style="margin-left: -30px;display: inline-flex;">
                                                                             <div class="form-group col-sm-12">
                                                                                 <label style="font-size: 0.85rem;">Gender <span class="text-danger"></span></label>
@@ -143,6 +149,7 @@
                                                         </select>
                                                                             </div>
                                                                         </div>
+                                                                       
                                                                         <div class="col-md-6 cmleft" style="display: inline-flex;margin-left: -50px;">
                                                                             <div class="form-group col-sm-12">
                                                                                 <label class="control-label">City</label>
@@ -185,7 +192,7 @@
                                                                                 <span style="font-size: 0.9rem;"><a href="/profile-info">Change</a></span>
 
                                                                                 <p style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section B : Profile Verification</p>
-                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors identity proof, Registration proof.</p>
+                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Doctors identity proof, Registration proof, Establishment proof.</p>
                                                                                 <%if(locals.user.step2==true){%>
                                                                                     <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
                                                                                     <span style="font-size: 0.9rem;"><a href="/id-proof">Change</a></span>

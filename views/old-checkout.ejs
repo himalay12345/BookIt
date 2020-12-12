@@ -47,12 +47,7 @@
         <!-- Page Content -->
         <div class="content">
             <div class="container">
-                <div class="alert alert-danger alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
-                    <strong>Note!</strong> Book online only when you are ensure to visit the doctor. There is no cancellation of appointment and no money will be<a href="#" class="alert-link">  refunded.</a> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                            </div>
+
                 <div class="row">
                     <div class="col-md-7">
                         <div class="card">
@@ -65,19 +60,16 @@
                                 <div class="info-widget">
                                     <h4 class="card-title">Patient Details</h4>
                                     <div class="row">
-                                        <div class="col-md-11 col-11" style="border:1px solid lightgrey;border-radius:5px;padding:8px;margin-left:15px;margin-bottom: 15px;">
-                                            <div class="form-group" style="margin-bottom: 0px !important;">
-                                                <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: 15px;" checked onchange="display1();"><span><%=locals.user.name%></span></br>
-                                                <input type="radio" name="name" style="font-size: 0.8rem;margin-right: 8px;margin-bottom: -10px;" onchange="display();"><span>Someone Else</span>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
+                                    <%if(type == 'own'){%>
                                     <div class="row" id="ownp">
                                         <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about
                                             <%=locals.user.name%>
                                         </h5>
-                                        <form action="/user/confirm-pay" method="POST" style="width: 100%;">
+                                        <form action="/user/book-old-appointment" method="POST" style="width: 100%;">
                                             <input type="hidden" name="type" value="own">
+                                            <input type="hidden" name="fixed" value="<%=fixed%>">
                                             <input type="hidden" name="doctorid" value="<%=doctor._id%>">
                                             <input type="hidden" name="id" value="<%=id%>">
                                             <input type="hidden" name="booked" value="<%=booked%>">
@@ -90,7 +82,7 @@
                                                 <div class="form-group card-label">
                                                     <label>Name</label>
                                                     <%if(locals.user.name){%>
-                                                        <input class="form-control" type="text" name="name" value="<%=locals.user.name%>" required>
+                                                        <input class="form-control" type="text" name="name" value="<%=locals.user.name%>" required readonly>
                                                         <%}else{%>
                                                             <input class="form-control" type="text" name="name">
 
@@ -102,7 +94,7 @@
                                                 <div class="form-group card-label">
                                                     <label>Phone</label>
                                                     <%if(locals.user.phone){%>
-                                                        <input class="form-control" type="text" name="phone" value="<%=locals.user.phone%>" required>
+                                                        <input class="form-control" type="text" name="phone" value="<%=locals.user.phone%>" required readonly>
                                                         <%}else{%>
                                                             <input class="form-control" type="text" name="phone">
                                                             <%}%>
@@ -113,7 +105,7 @@
                                                 <div class="form-group card-label">
                                                     <label>Address</label>
                                                     <%if(locals.user.contacts.address){%>
-                                                        <input class="form-control" type="text" name="address" value="<%=locals.user.contacts.address%>" required>
+                                                        <input class="form-control" type="text" name="address" value="<%=locals.user.contacts.address%>" required readonly>
                                                         <%}else{%>
                                                             <input class="form-control" type="text" name="address">
                                                             <%}%>
@@ -123,7 +115,7 @@
                                                 <div class="form-group card-label">
                                                     <label>Age</label>
                                                     <%if(locals.user.age){%>
-                                                        <input class="form-control" type="number" name="age" value="<%=locals.user.age%>" required>
+                                                        <input class="form-control" type="number" name="age" value="<%=locals.user.age%>" required readonly>
                                                         <%}else{%>
                                                             <input class="form-control" type="number" name="age">
                                                             <%}%>
@@ -135,11 +127,13 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="row displayNone" id="patientp">
+                                    <%}else{%>
+                                    <div class="row" id="patientp">
                                         <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
-                                        <form action="/user/confirm-pay" method="POST" style="width: 100%;">
+                                        <form action="/user/book-old-appointment" method="POST" style="width: 100%;">
                                             <input type="hidden" name="doctorid" value="<%=doctor._id%>">
                                             <input type="hidden" name="id" value="<%=id%>">
+                                            <input type="hidden" name="fixed" value="<%=fixed%>">
                                             <input type="hidden" name="booked" value="<%=booked%>">
                                             <input type="hidden" name="available" value="<%=available%>">
                                             <input type="hidden" name="slotindex" value="<%=slotindex%>">
@@ -150,31 +144,31 @@
 
                                                 <div class="form-group card-label">
                                                     <label>Patients Full Name</label>
-                                                    <input class="form-control" type="text" name="pname" placeholder="Enter patient name" required>
+                                                    <input class="form-control" type="text" name="pname" value="<%=locals.user.others[n].name%>" placeholder="Enter patient name" required readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label>Patient Email (optional) </label>
-                                                    <input class="form-control" type="email" name="pemail" placeholder="Enter patient email">
+                                                    <input class="form-control" type="email" name="pemail" value="<%=locals.user.others[n].email%>" placeholder="Enter patient email" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Phone</label>
-                                                    <input class="form-control" type="text" name="pphone" placeholder="Enter patient phone" required>
+                                                    <input class="form-control" type="text" name="pphone" value="<%=locals.user.others[n].phone%>" placeholder="Enter patient phone" required readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Address</label>
-                                                    <input class="form-control" type="text" name="paddress" placeholder="Enter patient address" required>
+                                                    <input class="form-control" type="text" name="paddress" value="<%=locals.user.others[n].address%>" placeholder="Enter patient address" required readonly >
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Age</label>
-                                                    <input class="form-control" type="text" name="page" placeholder="Enter patient age" required>
+                                                    <input class="form-control" type="text" name="page" value="<%=locals.user.others[n].age%>" placeholder="Enter patient age" required readonly>
                                                 </div>
                                             </div>
 
@@ -183,7 +177,7 @@
                                             </div>
                                         </form>
                                     </div>
-
+                                    <%}%>
                                 </div>
 
 

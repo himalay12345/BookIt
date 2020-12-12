@@ -17,9 +17,20 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 const bodyParser = require('body-parser');
-const trackServer = require('http').Server(app);
-const trackSockets = require('./config/track_socket').trackSockets(trackServer);
-trackServer.listen(5000);
+// const trackServer = require('http').Server(app);
+// const trackSockets = require('./config/track_socket').trackSockets(trackServer);
+// trackServer.listen(5000);
+const fs = require('fs');
+const https = require('https');
+var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/chain.pem'),
+    requestCert: false,     
+    rejectUnauthorized: false },app);
+const trackSockets = require('./config/track_socket').trackSockets(secureServer);
+secureServer.listen(5000);   
+
+
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);
@@ -40,6 +51,7 @@ console.log('Patient Tracking server is running on port 5000');
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
 app.set("layout doctor_prescription_pad", false);
+// app.set("layout doctor-profile-settings", false);
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

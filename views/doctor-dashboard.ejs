@@ -299,7 +299,6 @@
                                                                     <th class="sth">Appt Date</th>
                                                                     <th class="sth">Purpose</th>
                                                                     <th class="sth">Type</th>
-                                                                    <th class="text-center sth">Paid Amount</th>
                                                                     <th class="text-center sth">Status</th>
                                                                    
                                                                 </tr>
@@ -316,13 +315,13 @@
                                                                     <td class="std2">
                                                                         <h2 class="table-avatar">
                                                                             
-                                                                            <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
+                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
                                                                                 
-                                                                                <img class="avatar-img rounded-circle" src="<%=patients.pid.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
+                                                                                <img class="avatar-img rounded-circle" src="<%=patients.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                                                </a>
                                                                               
 
-                                                                            <a href="/patient-profile/?pid=<%=patients.pid._id%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=++c%></span></a>
                                                                         </h2>
                                                                     </td>
                                                                     <%var str2 = patients.date.split('-');%>
@@ -366,20 +365,11 @@
                                                                     <td class="std2"><%=str1%><span class="d-block text-info"><%=patients.time%></span></td>
                                                                     <td class="std2">General</td>
                                                                     <%var zz = 0;%>
-                                                                    <%if(patients.type == 'own'){%>
-                                                                    <%for(u of patients.pid.doctors){%>
-                                                                        <%if(u.did == locals.user.id){%>
-                                                                            <%zz++;%>
-                                                                        <%}%>
-                                                                    <%}%>
+                                                                    
                                                                   
-                                                                    <%}%>
-                                                                    <%if(zz == 0){%>
                                                                     <td class="std2">New Patient</td>
-                                                                    <%}else{%>
-                                                                    <td class="std2">Old Patient</td>
-                                                                    <%}%>
-                                                                    <td class=" std2">Rs<%=patients.fee%></td>
+                                                                   
+                                                                    
                                                                     
                                                                         
                                                                             <%if(patients.cancel == true){%>
@@ -420,7 +410,7 @@
                                                             </thead>
                                                             <tbody class="stbody">
                                                                 <%var c=0,z1=0,z2=0;%>
-
+                                                                <%if(staff && staff.booking.length>0){%>
                                                                     <%for(patients of staff.booking){%>
                                                                         <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -490,7 +480,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                     <%}%>
                                                                                                                                                         <td class="text-right">
 
-                                                                                                                                                            <div class="table-action">
+                                                                                                                                                            <!-- <div class="table-action">
                                                                                                                                                                 <%if(patients.cancel == true){%>
                                                                                                                                                                     <a href="#" class="btn btn-sm bg-danger" style="color: white;">
 
@@ -503,7 +493,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                                                                                                                         </a>
                                                                                                                                                                         <%}%>
-                                                                                                                                                            </div>
+                                                                                                                                                            </div> -->
                                                                                                                                                         </td>
 
 
@@ -531,6 +521,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                     </form>
                                                                                                                                 </div>
                                                                                                                             </div>
+                                                                                                                            <%}%>
                                                                                                                             <%}%>
 
                                                             </tbody>

@@ -24,7 +24,7 @@
                                 <li  class="breadcrumb-item active" aria-current="page">Booking</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Booking</h2>
+                        <h2 class="breadcrumb-title">Old Patient Booking</h2>
                     </div>
                 </div>
             </div>
@@ -34,8 +34,10 @@
         <!-- Page Content -->
         <div class="content">
             <div class="container">
-                <form action="/user/book-appointment" method="POST">
+                <form action="/user/old-checkout/?type=<%=type%>&n=<%=n%>" method="POST">
                     <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                 
+
                     <div class="row">
                         <div class="col-12">
 
@@ -72,13 +74,8 @@
 <img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
 <% } %>
 <% if(doctor.department== "Orthopedic"){ %>
-
-    <img src="<%=assetPath('img/specialities/bone.jpg')%>" class="img-fluid" alt="Speciality">
-    <% } %>
-    <% if(doctor.department== "Gynaecology"){ %>
-
-        <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" class="img-fluid" alt="Speciality">
-        <% } %>
+<img src="<%=assetPath('img/specialities/specialities.png')%>" class="img-fluid" alt="Speciality">
+<% } %>
 <% if(doctor.department== "Cardiologist"){ %>
 <img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
 <% } %>
@@ -490,11 +487,13 @@ today=date;%>
                                                             <div class="col-md-12">
 
                                                                 <!-- Time Slot -->
+                                                                <%if(staff.oldp.flag){%>
+                                                                    <input type="hidden" name="fixed" value="false">
                                                                 <div class="time-slot" id="slots">
                                                                     <ul class="clearfix" style="display: flex;" id="md">
                                                                         <%var d1,d2,d3,d4,d5,d6,d7,count,t1,t2,t3,t4,t5,t6,t7;%>
                                                                             <%var x = 0%>
-                                                                                <%for(time of doctor.schedule_time){%>
+                                                                                <%for(time of staff.old_schedule_time){%>
 
                                                                                     <%var i = time.day.toUpperCase();%>
 
@@ -1009,7 +1008,7 @@ Not Available
                                                                     </ul>
                                                                     <ul class="clearfix" id="sm">
                                                                         <%var d1,d2,d3,d4,d5,d6,d7,count;%>
-                                                                            <%for(time of doctor.schedule_time){%>
+                                                                            <%for(time of staff.old_schedule_time){%>
 
                                                                                 <%var i = time.day.toUpperCase();%>
 
@@ -1496,7 +1495,339 @@ Not Available
                                                                                                                                                                                                                                     <%}%>
                                                                     </ul>
                                                                 </div>
+                                                                <%}else{%>
+                                                                    <input type="hidden" name="fixed" value="true">
+                                                                    <%var n1,n2,n3,n4,n5,n6,n7%>
+                                    <%var today = new Date();%>
+                                        <%for(var i=1;i<=7;i++){%>
+                                            <%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+if(i == 1)
+{
+n1=dayOfWeek.toUpperCase();
 
+}
+if(i == 2)
+{
+n2=dayOfWeek.toUpperCase();
+
+}
+if(i == 3)
+{
+n3=dayOfWeek.toUpperCase();
+
+}
+if(i == 4)
+{
+n4=dayOfWeek.toUpperCase();
+
+}
+if(i == 5)
+{
+n5=dayOfWeek.toUpperCase();
+
+}
+if(i == 6)
+{
+n6=dayOfWeek.toUpperCase();
+
+}
+if(i == 7)
+{
+n7=dayOfWeek.toUpperCase();
+
+}
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+                                                <%}%>
+                                                                    <div class="time-slot" id="slots">
+                                                                        <ul class="clearfix" style="display: flex;" id="md">
+                                                                            <%var d1,d2,d3,d4,d5,d6,d7,count,t1,t2,t3,t4,t5,t6,t7;%>
+                                                                                <%var x = 0%>
+                                                                                    <%for(time of staff.old_schedule_time_fixed){%>
+    
+                                                                                        <%var i = time.day.toUpperCase();%>
+    
+                                                                                            <%if(n1 == i){%>
+                                                                                                <%d1=time;t1=x++;
+    }%>
+    
+                                                                                                    <%if(n2 == i){%>
+                                                                                                        <%d2=time;t2=x++;}%>
+    
+                                                                                                            <%if(n3 == i){%>
+                                                                                                                <%d3=time;t3=x++;}%>
+    
+                                                                                                                    <%if(n4 == i){%>
+                                                                                                                        <%d4=time;t4=x++;}%>
+    
+                                                                                                                            <%if(n5 == i){%>
+                                                                                                                                <%d5=time;t5=x++;}%>
+    
+                                                                                                                                    <%if(n6 == i){%>
+                                                                                                                                        <%d6=time;t6=x++;}%>
+                                                                                                                                            <%if(n7 == i){%>
+                                                                                                                                                <%d7=time;t7=x++;}%>
+                                                                                                                                                    <%}%>
+    
+                                                                                                                                                        <%var date1,date2,date3,date4,date5,date6,date7;%>
+                                                                                                                                                            <%var today = new Date();%>
+                                                                                                                                                                <%for(var i=1;i<=7;i++){%>
+                                                                                                                                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()];
+    if(i==1)
+    {
+        date1 = dd+'-'+mm+'-'+yyyy;
+    }
+    
+    if(i==2)
+    {
+        date2 = dd+'-'+mm+'-'+yyyy;
+    }
+    
+    if(i==3)
+    {
+        date3 = dd+'-'+mm+'-'+yyyy;
+    }
+
+    if(i==4)
+    {
+        date4 = dd+'-'+mm+'-'+yyyy;
+    }
+    
+    if(i==5)
+    {
+        date5 = dd+'-'+mm+'-'+yyyy;
+    }
+    
+    if(i==6)
+    {
+        date6 = dd+'-'+mm+'-'+yyyy;
+    }
+    if(i==7)
+    {
+        date7 = dd+'-'+mm+'-'+yyyy;
+    }
+    
+    
+    var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+    var date = new Date(res);
+    today=date;%>
+    
+                                                                                                                                                                        <%}%>
+                                                                                                                                                                            <%console.log(date1,date2,date3)%>
+    
+    
+                                                                                                                                                                                <%var z=0;%>
+                                                                                                                                                                                   
+<li class="cloginbtn" id="d1">
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span>Show Seats</span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+<%z++%>
+<%var color = parseInt(d1.booked);%>
+<%for(var j= 1;j<=d1.available;j++){%>
+
+
+<%if(j<=color){%>
+<a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+<span style="font-size: 0.6rem;display:block;">Booked</span>
+</a>
+<%}else{%>
+<a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+id="checkme">
+<span><%=j%></span>
+</a>
+<%}%>
+
+
+<%}%>
+</div>
+
+
+</li>
+<li class="cloginbtn" id="d2">
+    <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+            <span>Show Seats</span>
+        </a>
+        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+            <%z++%>
+                <%var color = parseInt(d2.booked);%>
+                    <%for(var j= 1;j<=d2.available;j++){%>
+
+
+                        <%if(j<=color){%>
+                            <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                                <span style="font-size: 0.6rem;display:block;">Booked</span>
+                            </a>
+                            <%}else{%>
+                                <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-date="<%=date2%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                    id="checkme">
+                                    <span><%=j%></span>
+                                </a>
+                                <%}%>
+
+
+                                    <%}%>
+        </div>
+        
+
+</li>
+<li class="cloginbtn" id="d3">
+    <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+            <span>Show Seats</span>
+        </a>
+        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+            <%z++%>
+                <%var color = parseInt(d3.booked);%>
+                    <%for(var j= 1;j<=d3.available;j++){%>
+
+
+                        <%if(j<=color){%>
+                            <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                                <span style="font-size: 0.6rem;display:block;">Booked</span>
+                            </a>
+                            <%}else{%>
+                                <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=d3.available%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                   >
+                                    <span><%=j%></span>
+                                </a>
+                                <%}%>
+
+
+                                    <%}%>
+        </div>
+        
+
+</li>
+<li class="cloginbtn displayNone" id="d4">
+    <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+            <span>Show Seats</span>
+        </a>
+        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+            <%z++%>
+                <%var color = parseInt(d4.booked);%>
+                    <%for(var j= 1;j<=d4.available;j++){%>
+
+
+                        <%if(j<=color){%>
+                            <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                                <span style="font-size: 0.6rem;display:block;">Booked</span>
+                            </a>
+                            <%}else{%>
+                                <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-date="<%=date4%>" data-available="<%=d4.available%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                  >
+                                    <span><%=j%></span>
+                                </a>
+                                <%}%>
+
+
+                                    <%}%>
+        </div>
+        
+
+</li>
+<li class="cloginbtn displayNone" id="d5">
+    <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+            <span>Show Seats</span>
+        </a>
+        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+            <%z++%>
+                <%var color = parseInt(d5.booked);%>
+                    <%for(var j= 1;j<=d5.available;j++){%>
+
+
+                        <%if(j<=color){%>
+                            <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                                <span style="font-size: 0.6rem;display:block;">Booked</span>
+                            </a>
+                            <%}else{%>
+                                <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-date="<%=date5%>" data-available="<%=d5.available%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                   >
+                                    <span><%=j%></span>
+                                </a>
+                                <%}%>
+
+
+                                    <%}%>
+        </div>
+        
+
+</li>
+<li class="cloginbtn displayNone" id="d6">
+    <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+            <span>Show Seats</span>
+        </a>
+        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+            <%z++%>
+                <%var color = parseInt(d6.booked);%>
+                    <%for(var j= 1;j<=d6.available;j++){%>
+
+
+                        <%if(j<=color){%>
+                            <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                                <span style="font-size: 0.6rem;display:block;">Booked</span>
+                            </a>
+                            <%}else{%>
+                                <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-date="<%=date6%>" data-available="<%=d6.available%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                   >
+                                    <span><%=j%></span>
+                                </a>
+                                <%}%>
+
+
+                                    <%}%>
+        </div>
+        
+
+</li>
+<li class="cloginbtn displayNone" id="d7">
+    <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+            <span>Show Seats</span>
+        </a>
+        <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+            <%z++%>
+                <%var color = parseInt(d7.booked);%>
+                    <%for(var j= 1;j<=d7.available;j++){%>
+
+
+                        <%if(j<=color){%>
+                            <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                                <span style="font-size: 0.6rem;display:block;">Booked</span>
+                            </a>
+                            <%}else{%>
+                                <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-date="<%=date7%>" data-available="<%=d7.available%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                              >
+                                    <span><%=j%></span>
+                                </a>
+                                <%}%>
+
+
+                                    <%}%>
+        </div>
+        
+
+</li>
+
+                                                                                                                                                                                        
+                                                                <%}%>
                                                                 <!-- /Time Slot -->
 
                                                             </div>

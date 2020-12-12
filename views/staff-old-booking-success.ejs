@@ -22,7 +22,7 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Booking</li>
+                                <li class="breadcrumb-item active" aria-current="page">Success</li>
                             </ol>
                         </nav>
                         <h2 class="breadcrumb-title">Booking Success</h2>
@@ -45,17 +45,17 @@
                                 <div class="success-cont">
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
-                                    <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                        <p>Appointment booked with <strong>Dr. <%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start.toUpperCase()%> </strong></p>
+                                    <%if(typeof(locals.user.old_schedule_time[dayindex].start) == 'string'){%>
+                                        <p>Appointment booked with <strong>Dr. <%=doctor.name%></strong><br> on <strong><%=date%> at <%=locals.user.old_schedule_time[dayindex].start.toUpperCase()%> </strong></p>
 
                                         <%}else{%>
-                                            <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
+                                            <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=locals.user.old_schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
                                             <%}%>
                                                 <p>Your Booking Number alloted is
                                                     <%=seat%>
                                                 </p>
                                                 <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.Show the message at the clinic's front-desk.</p>
-                                                <a href="/staff-booking/?id=<%=locals.user.doctorid%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                                <a href="/staff-old-booking/?id=<%=locals.user.doctorid%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
                                                 <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
                                 </div>
                             </div>

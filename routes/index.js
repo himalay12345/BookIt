@@ -47,7 +47,7 @@ router.get('/establishment', passport.checkDoctorAuthentication, homeController.
 router.get('/favourites', passport.checkPatientAuthentication, homeController.favourites);
 router.get('/fees', passport.checkDoctorAuthentication, homeController.fees);
 router.get('/forgot-password', homeController.forgotPassword);
-router.get('/index-2', homeController.home2);
+router.get('/index-2', homeController.home);
 router.get('/invoice-view', passport.checkAuthentication, homeController.invoiceView);
 router.get('/invoices', passport.checkDoctorAuthentication, homeController.invoices);
 router.get('/id-proof', passport.checkDoctorAuthentication, homeController.idProof);
@@ -60,6 +60,8 @@ router.get('/medical-records', passport.checkPatientAuthentication, homeControll
 router.get('/my-billing', passport.checkPatientAuthentication, homeController.myBilling);
 router.get('/my-appointments', passport.checkPatientAuthentication, homeController.myAppointments);
 router.get('/notification-settings', passport.checkAuthentication, homeController.notificationSettings);
+router.get('/not-available', passport.checkAuthentication, homeController.notAvailable);
+router.get('/old-booking', homeController.oldBooking);
 router.get('/pay', passport.checkAuthentication, homeController.pay);
 router.post('/razorpay', homeController.razorPay);
 router.get('/refund', homeController.refund);
@@ -83,12 +85,15 @@ router.get('/staff-login', homeController.staffLogin);
 router.get('/staff-profile', passport.checkStaffAuthentication, homeController.staffProfile);
 router.get('/staff-forgot-password', homeController.staffForgotPassword);
 router.get('/staff-dashboard', passport.checkStaffAuthentication, homeController.staffDashboard);
+// router.get('/staff-add-doctor', passport.checkStaffAuthentication, homeController.staffAddDoctor);
 router.get('/staff-login-page', homeController.staffLoginPage);
 router.get('/staff-booking', passport.checkStaffAuthentication, homeController.staffBooking);
+router.get('/staff-old-booking', passport.checkStaffAuthentication, homeController.staffOldBooking);
 router.get('/steps', passport.checkDoctorAuthentication, homeController.steps)
 router.get('/term-condition', homeController.termCondition);
 router.get('/timing', passport.checkDoctorAuthentication, homeController.timing);
 router.get('/upload-documents', passport.checkDoctorAuthentication, homeController.uploadDocuments);
+router.get('/upload-eproof', passport.checkDoctorAuthentication, homeController.uploadEProof);
 router.get('/video-call', passport.checkAuthentication, homeController.videoCall);
 router.get('/voice-call', passport.checkAuthentication, homeController.voiceCall);
 router.post('/verify', homeController.verify);

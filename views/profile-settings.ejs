@@ -106,7 +106,7 @@
                                             <div class="form-group">
                                                 <label>Date of Birth</label>
                                                 <div class="cal-icon">
-                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" class="form-control datetimepicker" value="<%=locals.user.dob%>">
+                                                    <input type="text" placeholder="Enter Your Date of Birth" name="dob" value="<%=locals.user.dob%>" class="form-control datetimepicker" >
                                                 </div>
                                             </div>
                                         </div>
@@ -219,7 +219,7 @@
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-  
+    <!-- <script src="<%=assetPath('js/bootstrap-datetimepicker.min.js')%>"></script> -->
 
     <script>
         document.getElementById("imageUpload").onchange = function() {

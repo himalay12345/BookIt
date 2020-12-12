@@ -101,29 +101,48 @@ module.exports.Specialist = async function(req, res) {
         approve2: true,
         booking_service: true
     });
+    let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+    let ar = [];
+    for(i of doctors1)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
 
 
     return res.render('specialist', {
         doctors: doctors,
-        title: 'Specialist'
+        title: 'Specialist',
+        ar:JSON.stringify(ar)
     });
 
 }
-module.exports.SpecialistAll = (req, res) => {
+module.exports.SpecialistAll = async (req, res) => {
+    let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+    let ar = [];
+    for(i of doctors)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
     return res.render('specialist-all', {
-        title: 'Specialist All'
+        title: 'Specialist All',
+        ar:JSON.stringify(ar)
     })
 }
 
 module.exports.appointments = async(req, res) => {
 
-    let patients = await User.findById(req.user.id).populate({
-        path: 'patients',
-        populate: {
-            path: 'pid',
-            populate: { path: 'user', }
-        }
-    });
+    let patients = await User.findById(req.user.id)
     return res.render('appointments', {
         title: 'Appointments',
         allpatients: patients
@@ -156,14 +175,35 @@ module.exports.bankDetails = (req, res) => {
     })
 }
 module.exports.Doctors = async(req, res) => {
-    let doctors = await User.find({ approve1: true, approve2: true, booking_service: true });
+
+    let doctors = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+    let ar = [];
+    for(i of doctors)
+    {
+        ar.push({
+            name: i.name,
+            id : i.id,
+            dept: i.department,
+            avatar: i.avatar
+        });
+    }
     return res.render('doctors', {
         title: 'Doctors',
-        doctors: doctors
+        doctors: doctors,
+        ar:JSON.stringify(ar)
     })
 }
 module.exports.booking = async(req, res) => {
-    let doctor = await User.findById(req.query.id);
+    let doctor = await User.findOne({_id:req.query.id,booking_service:true});
+
+    if(!doctor)
+    {
+        return res.render('not-available',{
+            title:'Doctor Not Availble',
+            type:'Doctor'
+        })
+    }
+
     var today = new Date();
     today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
@@ -308,13 +348,7 @@ module.exports.doctorTermsAndCondition = (req, res) => {
 
 
 module.exports.doctorDashboard = async(req, res) => {
-    let patients = await User.findById(req.user.id).populate({
-        path: 'patients',
-        populate: {
-            path: 'pid',
-            populate: { path: 'user', }
-        }
-    });
+    let patients = await User.findById(req.user.id)
 
     let staff = await User.findById(patients.staff_id);
     return res.render('doctor-dashboard', {
@@ -334,12 +368,20 @@ module.exports.doctorProfile = async(req, res) => {
         }
     });
 
-    return res.render('doctor-profile', {
-        title: 'Profile',
-        doctor: doctor
-    })
+    if(doctor)
+    {
+        return res.render('doctor-profile', {
+            title: 'Profile',
+            doctor: doctor
+        })
+    }
+    else{
+        return res.render('not-available',{
+            title:'Doctor Not Available',
+            type:'Doctor'
+        })
+    }
 }
-
 module.exports.doctorProfileSettings = (req, res) => {
     return res.render('doctor-profile-settings', {
         title: 'Profile Settings'
@@ -399,10 +441,7 @@ module.exports.educational = (req, res) => {
 }
 
 module.exports.favourites = async(req, res) => {
-    let doctors = await User.findById(req.user.id).populate({
-        path: 'favourites',
-        populate: { path: 'user' }
-    });
+    let doctors = await User.findById(req.user.id)
     return res.render('favourites', {
         title: 'Favourites',
         doctors: doctors
@@ -448,6 +487,58 @@ module.exports.invoiceView = async(req, res) => {
 
     })
 }
+module.exports.oldBooking = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    let staff = await User.findById(doctor.staff_id);
+    var today = new Date();
+    today.setDate(today.getDate() - 1)
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    console.log(dayOfWeek);
+
+    if(staff.oldp.flag)
+    {
+    for (temp of staff.old_schedule_time) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+            if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
+            }
+
+            if (typeof(temp.booked) == 'number') {
+                temp.booked = 0;
+            } else {
+                temp.booked = [0, 0];
+            }
+        }
+    }
+}else{
+    for (temp of staff.old_schedule_time_fixed) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+          
+                temp.booked = 0;
+            
+
+           
+        }
+    }
+}
+
+
+
+    staff.save();
+
+    return res.render('old-booking', {
+        title: 'Old Pateint Booking',
+        doctor: doctor,
+        type:req.query.type,
+        n:req.query.n,
+        staff:staff
+    })
+
+}
 
 module.exports.prescriptionPad = async(req, res) => {
 
@@ -469,13 +560,7 @@ module.exports.prescriptionPad = async(req, res) => {
 }
 
 module.exports.invoices = async(req, res) => {
-    let patients = await User.findById(req.user.id).populate({
-        path: 'patients',
-        populate: {
-            path: 'pid',
-            populate: { path: 'user', }
-        }
-    });
+    let patients = await User.findById(req.user.id)
     return res.render('invoices', {
         title: 'Invoices',
         allpatients: patients
@@ -535,13 +620,7 @@ module.exports.livePatientTracking = async (req, res) => {
 }
 
 module.exports.myPatients = async(req, res) => {
-    let patients = await User.findById(req.user.id).populate({
-        path: 'patients',
-        populate: {
-            path: 'pid',
-            populate: { path: 'user', }
-        }
-    });
+    let patients = await User.findById(req.user.id)
     return res.render('my-patients', {
         title: 'My Patients',
         allpatients: patients
@@ -584,13 +663,7 @@ module.exports.medicalRecords = async(req, res) => {
 
 module.exports.myBilling = async(req, res) => {
     let user = await User.findById(req.user.id);
-    let doctors = await User.findById(req.user.id).populate({
-        path: 'doctors',
-        populate: {
-            path: 'did',
-            populate: { path: 'user' }
-        }
-    });
+    let doctors = await User.findById(req.user.id)
     return res.render('my-billing', {
         title: 'My Billings',
         user: user,
@@ -605,8 +678,12 @@ module.exports.myAppointments = async(req, res) => {
         path: 'doctors',
         populate: {
             path: 'did',
-            populate: { path: 'user' }
+            populate: { path: 'user',
+            path: 'staff_id',
+            populate: { path: 'user' }, },
+           
         }
+
     });
     return res.render('my-appointments', {
         title: 'My Appointments',
@@ -620,6 +697,12 @@ module.exports.notificationSettings = (req, res) => {
         title: 'Notifications Settings'
     })
 }
+module.exports.notAvailable = (req, res) => {
+    return res.render('not-available', {
+        title: 'Not Available'
+    })
+}
+
 
 
 
@@ -630,7 +713,10 @@ module.exports.patientDashboard = async(req, res) => {
         path: 'doctors',
         populate: {
             path: 'did',
-            populate: { path: 'user' }
+            populate: { path: 'user',
+            path: 'staff_id',
+            populate: { path: 'user' }, },
+           
         }
 
     });
@@ -776,19 +862,24 @@ module.exports.patientTracking = async(req, res) => {
 }
 
 module.exports.patientProfile = async(req, res) => {
-    let user = await User.findById(req.query.pid).populate({
-        path: 'doctors',
-        populate: {
-            path: 'did',
-            populate: { path: 'user' }
-        }
-    });
+    let user = await User.findById(req.query.pid)
+
     let doctor = await User.findById(req.query.doctorid);
-    return res.render('patient-profile', {
-        title: 'Patient Profile',
-        user1: user,
-        doctor: doctor
-    })
+    if(user)
+    {
+        return res.render('patient-profile', {
+            title: 'Patient Profile',
+            user1: user,
+            doctor: doctor
+        })
+    }
+
+    else{
+        return res.render('not-available',{
+            title:'Patient Not Availble',
+            type:'Patient'
+        })
+    }
 }
 
 
@@ -1135,7 +1226,7 @@ module.exports.staffBooking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     let user1 = await User.findById(req.user.id).populate('doctorid');
     var today = new Date();
-    today.setDate(today.getDate() - 1)
+    today.setDate(today.getDate())
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
@@ -1146,11 +1237,21 @@ module.exports.staffBooking = async(req, res) => {
 
     for (temp of doctor.schedule_time) {
         if (temp.day.toUpperCase() == dayOfWeek) {
-            if (typeof(temp.booked) == 'string') {
-                temp.booked = 0;
-            } else {
-                temp.booked = [0, 0];
+            temp.reset_flag = true;
+            continue;
+           
+        }
+
+        else{
+            if(temp.reset_flag == false)
+            {
+                if (typeof(temp.booked) == 'string') {
+                    temp.booked = 0;
+                } else {
+                    temp.booked = [0, 0];
+                }
             }
+
         }
     }
     // var todayd = new Date();
@@ -1169,6 +1270,54 @@ module.exports.staffBooking = async(req, res) => {
         title: 'Booking',
         doctor: doctor,
         user1: user1
+    })
+}
+module.exports.staffOldBooking = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    let user1 = await User.findById(req.user.id).populate('doctorid');
+    var today = new Date();
+    today.setDate(today.getDate() - 1)
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    console.log(dayOfWeek);
+
+
+    if(user1.oldp.flag)
+    {
+    for (temp of user1.old_schedule_time) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+            if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
+            }
+
+            if (typeof(temp.booked) == 'number') {
+                temp.booked = 0;
+            } else {
+                temp.booked = [0, 0];
+            }
+        }
+    }
+}else{
+    for (temp of user1.old_schedule_time_fixed) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+          
+                temp.booked = 0;
+            
+
+           
+        }
+    }
+}
+
+    user1.save();
+
+    return res.render('staff-old-booking', {
+        title: 'Old Pateint Booking',
+        doctor: doctor,
+        staff:user1
     })
 }
 
@@ -1201,6 +1350,11 @@ module.exports.timing = (req, res) => {
 
 module.exports.uploadDocuments = (req, res) => {
     return res.render('upload-documents', {
+        title: 'Upload Documents'
+    })
+}
+module.exports.uploadEProof = (req, res) => {
+    return res.render('establishment-proof', {
         title: 'Upload Documents'
     })
 }

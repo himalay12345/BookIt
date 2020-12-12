@@ -33,21 +33,21 @@ const development = {
             pass: 'Himalay@NIXXIT'
         }
     },
-    razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
-    // razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
-    razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
-    // razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
+    // razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
+    razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
+    // razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
+    razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
     google_client_id: '962720186337-l6gu83hkfs1qhh6f4vhv4ej0gad3e1ed.apps.googleusercontent.com',
     google_client_secret: 'OcauqQn-wvQezypG9ZMsJEf7',
     // google_callback_url: "/user/auth/google/callback",
-    google_callback_url:"http://www.aarogyahub.com/user/auth/google/callback",
+    google_callback_url:"https://aarogyahub.com/user/auth/google/callback",
     fb_client_id: '247163950066857',
     fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
     fb_callback_url: "/user/auth/facebook/callback",
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
     twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
     twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
-    twilio_auth_token: "cbd3157abe193d70a8e5557a2595673d",
+    twilio_auth_token: "eb88d830e6c104e726dc011b442eedd1",
     gmail_passw: 'Himalay@NIXXIT',
     morgan: {
         mode: 'dev',
@@ -95,5 +95,5 @@ const production = {
 }
 
 
-module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development : eval(process.env.AAROGYAHUB_ENVIRONMENT);
-// module.exports = development;
+// module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development : eval(process.env.AAROGYAHUB_ENVIRONMENT);
+module.exports = development;
