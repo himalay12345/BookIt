@@ -1957,13 +1957,17 @@
                     <form action="/user/update-schedule" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="sunday">
+                            
 
-                            <%var flag = false;var temp;%>
+                            <%var flag = false;var temp;var ct=0;%>
                                 <%for(day of user.schedule_time){
+                                    
                                 if(day.day == 'sunday'){
                                 flag=true;
                                 temp=day;
+                                break;
                             }%>
+                            <%ct+=1;%>
                                     <%}%>
                                         <%if(flag == true){%>
                                             <input type="hidden" name="id" value="<%=temp._id%>">
@@ -2358,7 +2362,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <%if(temp.booked == '0'){%>
                                                     <div class="col-12 col-md-2 "><label class="d-md-block d-sm-none d-none ">&nbsp;</label><a href="# " class="btn btn-danger trash "><i class="far fa-trash-alt "></i></a></div>
+                                                    <%}else{%>
+                                                    <p style="font-size:0.8rem;" id="nots-warn">*** You are not allowed to delete this slot as the bookings are already done in this slot for this week.If you want to make changes in the slot timing you can make but the booked patients will not be affected. </p>
+                                                    <input type="hidden" name="flag" value="true">
+                                                    <input type="hidden" name="index" value="<%=ct%>">
+                                                    
+                                                    <%}%>
                                                 </div>
                                                 <%}else{%>
                                                     <%for(let i=0;i<temp.start.length;i++){%>
@@ -2748,12 +2759,22 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-12 col-md-2 "><label class="d-md-block d-sm-none d-none ">&nbsp;</label><a href="# " class="btn btn-danger trash "><i class="far fa-trash-alt "></i></a></div>
-                                                        </div>
+                                                           
+                                                            <%if(temp.booked[i] == '0'){%>
+                                                                <div class="col-12 col-md-2 "><label class="d-md-block d-sm-none d-none ">&nbsp;</label><a href="# " class="btn btn-danger trash "><i class="far fa-trash-alt "></i></a></div>
+                                                                <%}else{%>
+                                                                <p style="font-size:0.8rem;" id="nots-warn">*** You are not allowed to delete this slot as the bookings are already done in this slot for this week.If you want to make changes in the slot timing you can make but the booked patients will not be affected. </p>
+                                                                <%if(i==0){%>
+                                                                <input type="hidden" name="flag" value="true">
+                                                                <input type="hidden" name="index" value="<%=ct%>">
+                                                                <%}%>
+                                                                
+                                                                <%}%>                                                        </div>
                                                         <%}%>
                                                             <%}%>
                                                                 <%}%>
                         </div>
+                        
                         <div class="add-more mb-3 ">
                             <a href="javascript:void(0); " class="add-hours "><i class="fa fa-plus-circle "></i> Add More</a>
                         </div>

@@ -2819,7 +2819,62 @@ module.exports.updateSchedule = async function(req, res) {
         user.schedule_time.pull({ _id: req.body.id });
         user.save();
         return res.redirect('back');
+    } 
+    
+    if(req.body.flag)
+    {
+        if(typeof(req.body.start) == 'string')
+        {
+            let day = await User.update({ 'schedule_time._id': req.body.id }, {
+                '$set': {
+                    'schedule_time.$.start': req.body.start,
+                    'schedule_time.$.end': req.body.end,
+                    'schedule_time.$.max_count': req.body.max_count,
+                    'schedule_time.$.available': req.body.max_count
+                }
+            });
+        
+        }
+
+        if(typeof(req.body.start) == 'object')
+        { 
+            let ar = [];
+            console.log('index is',req.body.index);
+           let user = await User.findById(req.user.id);
+           if(typeof(user.schedule_time[req.body.index].booked) == 'string' || typeof(user.schedule_time[req.body.index].booked) == 'number')
+           {
+            
+            ar.push(user.schedule_time[req.body.index].booked);
+            for(let i=0;i<req.body.start.length-1;i++)
+            {
+                ar.push(0);
+            }
+           }
+           if(typeof(user.schedule_time[req.body.index].booked) == 'object')
+           {
+            ar = user.schedule_time[req.body.index].booked;
+            for(let i=0;i<req.body.start.length-user.schedule_time[req.body.index].booked.length;i++)
+            {
+                ar.push(0);
+            }
+           }
+
+            let day = await User.update({ 'schedule_time._id': req.body.id }, {
+                '$set': {
+                    'schedule_time.$.start': req.body.start,
+                    'schedule_time.$.end': req.body.end,
+                    'schedule_time.$.max_count': req.body.max_count,
+                    'schedule_time.$.available': req.body.max_count,
+                    'schedule_time.$.booked': ar
+
+
+                }
+            });
+        
+        }
     }
+
+    else{
     let day = await User.update({ 'schedule_time._id': req.body.id }, {
         '$set': {
             'schedule_time.$.start': req.body.start,
@@ -2828,6 +2883,8 @@ module.exports.updateSchedule = async function(req, res) {
             'schedule_time.$.available': req.body.max_count
         }
     });
+
+}
 
 
     return res.redirect('back');

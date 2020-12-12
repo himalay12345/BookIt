@@ -222,7 +222,9 @@ module.exports.booking = async(req, res) => {
 
             if (typeof(temp.booked) == 'number') {
                 temp.booked = 0;
-            } else {
+            }
+            
+            if (typeof(temp.booked) == 'object'){
                 temp.booked = [0, 0];
             }
         }
@@ -1183,10 +1185,12 @@ module.exports.reviews = async(req, res) => {
 
 module.exports.scheduleTimings = async(req, res) => {
     let user = await User.findById(req.user.id).populate('schedule_time');
+    let staff = await User.findById(user.staff_id);
 
     return res.render('schedule-timings', {
         title: 'Schedule Timings',
-        user: user
+        user: user,
+        staff:staff
     })
 }
 module.exports.staffScheduleTimings = async(req, res) => {
@@ -1226,7 +1230,7 @@ module.exports.staffBooking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     let user1 = await User.findById(req.user.id).populate('doctorid');
     var today = new Date();
-    today.setDate(today.getDate())
+    today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
@@ -1237,23 +1241,41 @@ module.exports.staffBooking = async(req, res) => {
 
     for (temp of doctor.schedule_time) {
         if (temp.day.toUpperCase() == dayOfWeek) {
-            temp.reset_flag = true;
-            continue;
-           
-        }
-
-        else{
-            if(temp.reset_flag == false)
-            {
-                if (typeof(temp.booked) == 'string') {
-                    temp.booked = 0;
-                } else {
-                    temp.booked = [0, 0];
-                }
+            if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
             }
 
+            if (typeof(temp.booked) == 'number') {
+                temp.booked = 0;
+            }
+            
+            if (typeof(temp.booked) == 'object'){
+                temp.booked = [0, 0];
+            }
         }
     }
+
+
+
+    // for (temp of doctor.schedule_time) {
+    //     if (temp.day.toUpperCase() == dayOfWeek) {
+    //         temp.reset_flag = true;
+    //         continue;
+           
+    //     }
+
+    //     else{
+    //         if(temp.reset_flag == false)
+    //         {
+    //             if (typeof(temp.booked) == 'string') {
+    //                 temp.booked = 0;
+    //             } else {
+    //                 temp.booked = [0, 0];
+    //             }
+    //         }
+
+    //     }
+    // }
     // var todayd = new Date();
     // for (temp of user1.tracked) {
     //     if (todayd > temp.createdAt) {
