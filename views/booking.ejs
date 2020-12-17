@@ -165,7 +165,7 @@ today=date;%>
 
                             <!-- Schedule Widget -->
                             <div class="card booking-schedule schedule-widget">
-
+<%var td1,td2,td3,td4,td5,td6,td7;%>
                                 <!-- Schedule Header -->
                                 <div class="schedule-header">
                                     <div class="row">
@@ -174,7 +174,7 @@ today=date;%>
                                             <!-- Day Slot -->
                                             <div class="day-slot">
                                                 <ul id="md">
-                                                    <li  class="left-arrow">
+                                                    <li class="left-arrow">
                                                         <a data-count='0' onclick="prevSlide()" id="prevslide">
                                                             <i class="fa fa-chevron-left"></i>
                                                         </a>
@@ -196,11 +196,16 @@ today=date;%>
                                                                         <%if(k==0){%>
                                                                             <span>Today</span>
                                                                             <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                            <%td1=dd+'-'+mm+'-'+yyyy%>
                                                                             <%k++;continue;}%>
                                                                                 <%if(k==1){%>
                                                                                     <span>Tomorrow</span>
                                                                                     <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                                                    <%td2=dd+'-'+mm+'-'+yyyy%>
                                                                                     <%k++;continue;}else{%>
+                                                                                        <%if(k==2){%>
+                                                                                            <%td3=dd+'-'+mm+'-'+yyyy%>  
+                                                                                        <%}%>
                                                                                         <span><%=dayOfWeek%></span>
                                                                                         <%}%>
 
@@ -220,6 +225,15 @@ var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
 var date = new Date(res);
 today=date;%>
                                                                                 <li  id="li1" style="display: none;">
+                                                                                    <%if(i==0){%>
+                                                                                        <%td4=dd+'-'+mm+'-'+yyyy%>  
+                                                                                    <%}%>
+                                                                                    <%if(i==1){%>
+                                                                                        <%td5=dd+'-'+mm+'-'+yyyy%>  
+                                                                                    <%}%>
+                                                                                    <%if(i==2){%>
+                                                                                        <%td6=dd+'-'+mm+'-'+yyyy%>  
+                                                                                    <%}%>
                                                                                     <span><%=dayOfWeek%></span>
                                                                                     <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
                                                                                 </li>
@@ -239,6 +253,10 @@ today=date;%>
                                                                                     <span><%=dayOfWeek%></span>
                                                                                     <span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
                                                                                 </li>
+                                                                              
+                                                                                    <%td7=dd+'-'+mm+'-'+yyyy%>
+                                                                                    <%console.log('ndays are'+td1,td2,td3,td4,td5,td6,td7) %> 
+                                                                              
 
                                                                                     <!-- <%for(var i=0;i<3;i++){%>
                                                                                         <%var dd = String(today.getDate()).padStart(2, '0');
@@ -553,6 +571,19 @@ today=date;%>
 
                                                                                                                                                                             <%var z=0;%>
                                                                                                                                                                                 <%if(d1 != undefined){%>
+                                                                                                                                                                                    <%var hflag = false;%>
+                                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                            <%if(temp.date == td1){%>
+                                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                                        <li class="cloginbtn" id="d1">
+                                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                        </li>
+                                                                                                                                                                                        <%}else{%>
                                                                                                                                                                                     <li class="cloginbtn" id="d1">
 
                                                                                                                                                                                         <%if(typeof(d1.start) == 'string'){%>
@@ -609,6 +640,7 @@ today=date;%>
                                                                                                                                                                                                     </div>
                                                                                                                                                                                                     <%}}%>
                                                                                                                                                                                     </li>
+                                                                                                                                                                                    <%}%>
                                                                                                                                                                                     <%}else{%>
                                                                                                                                                                                         <li class="cloginbtn" id="d1">
                                                                                                                                                                                             <a class="timing tbcolor" href="#">
@@ -617,7 +649,19 @@ Not Available
                                                                                                                                                                                         </li>
                                                                                                                                                                                         <%}%>
                                                                                                                                                                                             <%if(d2 != undefined){%>
-
+                                                                                                                                                                                                <%var hflag = false;%>
+                                                                                                                                                                                                <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                    <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                        <%if(temp.date == td2){%>
+                                                                                                                                                                                                            <%hflag = true;%>
+                                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                <%if(hflag){%>
+                                                                                                                                                                                                    <li class="cloginbtn" id="d2">
+                                                                                                                                                                                                        <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                    <%}else{%>
                                                                                                                                                                                                 <li class="cloginbtn" id="d2">
                                                                                                                                                                                                     <%if(typeof(d2.start) == 'string'){%>
                                                                                                                                                                                                         <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
@@ -673,6 +717,7 @@ Not Available
                                                                                                                                                                                                                 </div>
                                                                                                                                                                                                                 <%}}%>
                                                                                                                                                                                                 </li>
+                                                                                                                                                                                                <%}%>
                                                                                                                                                                                                 <%}else{%>
                                                                                                                                                                                                     <li class="cloginbtn" id="d2">
                                                                                                                                                                                                         <a class="timing tbcolor" href="#">
@@ -681,6 +726,19 @@ Not Available
                                                                                                                                                                                                     </li>
                                                                                                                                                                                                     <%}%>
                                                                                                                                                                                                         <%if(d3 != undefined){%>
+                                                                                                                                                                                                            <%var hflag = false;%>
+                                                                                                                                                                                                            <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                                <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                                    <%if(temp.date == td3){%>
+                                                                                                                                                                                                                        <%hflag = true;%>
+                                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                                            <%if(hflag){%>
+                                                                                                                                                                                                                <li class="cloginbtn" id="d3">
+                                                                                                                                                                                                                    <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                                </li>
+                                                                                                                                                                                                                <%}else{%>
                                                                                                                                                                                                             <li class="cloginbtn" id="d3">
 
                                                                                                                                                                                                                 <%if(typeof(d3.start) == 'string'){%>
@@ -738,7 +796,7 @@ Not Available
 
 
                                                                                                                                                                                                             </li>
-
+                                                                                                                                                                                                            <%}%>
                                                                                                                                                                                                             <%}else{%>
                                                                                                                                                                                                                 <li class="cloginbtn" id="d3">
                                                                                                                                                                                                                     <a class="timing tbcolor" href="#">
@@ -747,6 +805,19 @@ Not Available
                                                                                                                                                                                                                 </li>
                                                                                                                                                                                                                 <%}%>
                                                                                                                                                                                                                     <%if(d4 != undefined){%>
+                                                                                                                                                                                                                        <%var hflag = false;%>
+                                                                                                                                                                                                                        <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                                            <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                                                <%if(temp.date == td4){%>
+                                                                                                                                                                                                                                    <%hflag = true;%>
+                                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                                                        <%if(hflag){%>
+                                                                                                                                                                                                                            <li class="cloginbtn" id="d4" style="display: none;">
+                                                                                                                                                                                                                                <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                            <%}else{%>
                                                                                                                                                                                                                         <li class="cloginbtn" style="display: none;" id="d4">
                                                                                                                                                                                                                             <%if(typeof(d4.start) == 'string'){%>
                                                                                                                                                                                                                                 <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
@@ -801,6 +872,7 @@ Not Available
                                                                                                                                                                                                                                         </div>
                                                                                                                                                                                                                                         <%}}%>
                                                                                                                                                                                                                         </li>
+                                                                                                                                                                                                                        <%}%>
                                                                                                                                                                                                                         <%}else{%>
                                                                                                                                                                                                                             <li class="cloginbtn" style="display: none;" id="d4">
                                                                                                                                                                                                                                 <a class="timing tbcolor" href="#">
@@ -809,6 +881,19 @@ Not Available
                                                                                                                                                                                                                             </li>
                                                                                                                                                                                                                             <%}%>
                                                                                                                                                                                                                                 <%if(d5 != undefined){%>
+                                                                                                                                                                                                                                    <%var hflag = false;%>
+                                                                                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                                                            <%if(temp.date == td5){%>
+                                                                                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                                                                                        <li class="cloginbtn" id="d5" style="display: none;">
+                                                                                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                        <%}else{%>
                                                                                                                                                                                                                                     <li class="cloginbtn" style="display: none;" id="d5">
                                                                                                                                                                                                                                         <%if(typeof(d5.start) == 'string'){%>
                                                                                                                                                                                                                                             <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
@@ -865,6 +950,7 @@ Not Available
                                                                                                                                                                                                                                                     <%}}%>
 
                                                                                                                                                                                                                                     </li>
+                                                                                                                                                                                                                                    <%}%>
                                                                                                                                                                                                                                     <%}else{%>
                                                                                                                                                                                                                                         <li class="cloginbtn" style="display: none;" id="d5">
                                                                                                                                                                                                                                             <a class="timing tbcolor" href="#">
@@ -873,6 +959,19 @@ Not Available
                                                                                                                                                                                                                                         </li>
                                                                                                                                                                                                                                         <%}%>
                                                                                                                                                                                                                                             <%if(d6 != undefined){%>
+                                                                                                                                                                                                                                                <%var hflag = false;%>
+                                                                                                                                                                                                                                                <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                                                                    <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                                                                        <%if(temp.date == td6){%>
+                                                                                                                                                                                                                                                            <%hflag = true;%>
+                                                                                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                                                                <%if(hflag){%>
+                                                                                                                                                                                                                                                    <li class="cloginbtn" id="d6" style="display: none;">
+                                                                                                                                                                                                                                                        <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                                    <%}else{%>
                                                                                                                                                                                                                                                 <li class="cloginbtn" style="display: none;" id="d6">
                                                                                                                                                                                                                                                     <%if(typeof(d6.start) == 'string'){%>
                                                                                                                                                                                                                                                         <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
@@ -931,6 +1030,7 @@ Not Available
                                                                                                                                                                                                                                                                 <%}}%>
 
                                                                                                                                                                                                                                                 </li>
+                                                                                                                                                                                                                                                <%}%>
                                                                                                                                                                                                                                                 <%}else{%>
                                                                                                                                                                                                                                                     <li class="cloginbtn" style="display: none;" id="d6">
                                                                                                                                                                                                                                                         <a class="timing tbcolor" href="#">
@@ -939,7 +1039,19 @@ Not Available
                                                                                                                                                                                                                                                     </li>
                                                                                                                                                                                                                                                     <%}%>
                                                                                                                                                                                                                                                         <%if(d7 != undefined){%>
-
+                                                                                                                                                                                                                                                            <%var hflag = false;%>
+                                                                                                                                                                                                                                                            <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                                                                                <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                                                                                    <%if(temp.date == td7){%>
+                                                                                                                                                                                                                                                                        <%hflag = true;%>
+                                                                                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                                                                                            <%if(hflag){%>
+                                                                                                                                                                                                                                                                <li class="cloginbtn" id="d7" style="display: none;">
+                                                                                                                                                                                                                                                                    <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                                                                                </li>
+                                                                                                                                                                                                                                                                <%}else{%>
                                                                                                                                                                                                                                                             <li class="cloginbtn" style="display: none;" id="d7">
                                                                                                                                                                                                                                                                 <%if(typeof(d7.start) == 'string'){%>
                                                                                                                                                                                                                                                                     <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
@@ -999,6 +1111,7 @@ Not Available
                                                                                                                                                                                                                                                                             <%}}%>
 
                                                                                                                                                                                                                                                             </li>
+                                                                                                                                                                                                                                                            <%}%>
                                                                                                                                                                                                                                                             <%}else{%>
                                                                                                                                                                                                                                                                 <li class="cloginbtn" style="display: none;" id="d7">
                                                                                                                                                                                                                                                                     <a class="timing tbcolor" href="#">
@@ -1037,6 +1150,19 @@ Not Available
 
                                                                                                                                                 <%var z=0;%>
                                                                                                                                                     <%if(d1 != undefined){%>
+                                                                                                                                                        <%var hflag = false;%>
+                                                                                                                                                        <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                            <%for(temp of doctor.holidays){%>
+                                                                                                                                                                <%if(temp.date == td1){%>
+                                                                                                                                                                    <%hflag = true;%>
+                                                                                                                                                                <%}%>
+                                                                                                                                                            <%}%>
+                                                                                                                                                        <%}%>
+                                                                                                                                                        <%if(hflag){%>
+                                                                                                                                                            <li class="cloginbtn" id="smd1">
+                                                                                                                                                                <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                            </li>
+                                                                                                                                                            <%}else{%>
                                                                                                                                                         <li class="cloginbtn" id="smd1">
                                                                                                                                                             <%var booked = d1.booked;%>
                                                                                                                                                                 <%var available = d1.available;%>
@@ -1099,6 +1225,7 @@ Not Available
                                                                                                                                                                                         </div>
                                                                                                                                                                                         <%}}%>
                                                                                                                                                         </li>
+                                                                                                                                                        <%}%>
                                                                                                                                                         <%}else{%>
                                                                                                                                                             <li class="cloginbtn" id="smd1">
                                                                                                                                                                 <a class="timing tbcolor" href="#">
@@ -1107,7 +1234,19 @@ Not Available
                                                                                                                                                             </li>
                                                                                                                                                             <%}%>
                                                                                                                                                                 <%if(d2 != undefined){%>
-
+                                                                                                                                                                    <%var hflag = false;%>
+                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                            <%if(temp.date == td2){%>
+                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                        <%}%>
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                        <li class="cloginbtn" id="smd2" style="display:none">
+                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                        </li>
+                                                                                                                                                                        <%}else{%>
                                                                                                                                                                     <li class="cloginbtn" id="smd2" style="display:none">
 
                                                                                                                                                                         <%if(typeof(d2.start) == 'string'){%>
@@ -1163,6 +1302,7 @@ Not Available
                                                                                                                                                                                     </div>
                                                                                                                                                                                     <%}}%>
                                                                                                                                                                     </li>
+                                                                                                                                                                    <%}%>
                                                                                                                                                                     <%}else{%>
                                                                                                                                                                         <li class="cloginbtn" id="smd2" style="display:none;">
                                                                                                                                                                             <a class="timing tbcolor" href="#">
@@ -1171,6 +1311,19 @@ Not Available
                                                                                                                                                                         </li>
                                                                                                                                                                         <%}%>
                                                                                                                                                                             <%if(d3 != undefined){%>
+                                                                                                                                                                                <%var hflag = false;%>
+                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                            <%if(temp.date == td3){%>
+                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                        <%}%>
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                        <li class="cloginbtn" id="smd3" style="display:none">
+                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                        </li>
+                                                                                                                                                                        <%}else{%>
                                                                                                                                                                                 <li class="cloginbtn" id="smd3" style="display:none;">
 
                                                                                                                                                                                     <%if(typeof(d3.start) == 'string'){%>
@@ -1226,6 +1379,7 @@ Not Available
 
 
                                                                                                                                                                                 </li>
+                                                                                                                                                                                <%}%>
 
                                                                                                                                                                                 <%}else{%>
                                                                                                                                                                                     <li class="cloginbtn" id="smd3" style="display:none;">
@@ -1235,6 +1389,19 @@ Not Available
                                                                                                                                                                                     </li>
                                                                                                                                                                                     <%}%>
                                                                                                                                                                                         <%if(d4 != undefined){%>
+                                                                                                                                                                                            <%var hflag = false;%>
+                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                            <%if(temp.date == td4){%>
+                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                        <%}%>
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                        <li class="cloginbtn" id="smd4" style="display:none">
+                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                        </li>
+                                                                                                                                                                        <%}else{%>
                                                                                                                                                                                             <li class="cloginbtn" id="smd4" style="display: none;">
 
                                                                                                                                                                                                 <%if(typeof(d4.start) == 'string'){%>
@@ -1293,6 +1460,7 @@ Not Available
                                                                                                                                                                                                             </div>
                                                                                                                                                                                                             <%}}%>
                                                                                                                                                                                             </li>
+                                                                                                                                                                                            <%}%>
                                                                                                                                                                                             <%}else{%>
                                                                                                                                                                                                 <li class="cloginbtn" style="display: none;" id="smd4">
                                                                                                                                                                                                     <a class="timing tbcolor" href="#">
@@ -1301,7 +1469,19 @@ Not Available
                                                                                                                                                                                                 </li>
                                                                                                                                                                                                 <%}%>
                                                                                                                                                                                                     <%if(d5 != undefined){%>
-
+                                                                                                                                                                                                        <%var hflag = false;%>
+                                                                                                                                                                                                        <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                                                            <%for(temp of doctor.holidays){%>
+                                                                                                                                                                                                                <%if(temp.date == td5){%>
+                                                                                                                                                                                                                    <%hflag = true;%>
+                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                                        <%if(hflag){%>
+                                                                                                                                                                                                            <li class="cloginbtn" id="smd5" style="display:none">
+                                                                                                                                                                                                                <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                            <%}else{%>
                                                                                                                                                                                                         <li class="cloginbtn" style="display: none;" id="smd5">
                                                                                                                                                                                                             <%if(typeof(d5.start) == 'string'){%>
                                                                                                                                                                                                                 <a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
@@ -1356,6 +1536,7 @@ Not Available
                                                                                                                                                                                                                         <%}}%>
 
                                                                                                                                                                                                         </li>
+                                                                                                                                                                                                        <%}%>
                                                                                                                                                                                                         <%}else{%>
                                                                                                                                                                                                             <li class="cloginbtn" style="display: none;" id="smd5">
                                                                                                                                                                                                                 <a class="timing tbcolor" href="#">
@@ -1364,7 +1545,19 @@ Not Available
                                                                                                                                                                                                             </li>
                                                                                                                                                                                                             <%}%>
                                                                                                                                                                                                                 <%if(d6 != undefined){%>
-
+                                                                                                                                                                                                                    <%var hflag = false;%>
+                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                            <%if(temp.date == td6){%>
+                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                        <%}%>
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                        <li class="cloginbtn" id="smd6" style="display:none">
+                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                        </li>
+                                                                                                                                                                        <%}else{%>
                                                                                                                                                                                                                     <li class="cloginbtn" style="display: none;" id="smd6">
                                                                                                                                                                                                                         <%if(typeof(d6.start) == 'string'){%>
                                                                                                                                                                                                                             <a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
@@ -1420,6 +1613,7 @@ Not Available
                                                                                                                                                                                                                                     <%}}%>
 
                                                                                                                                                                                                                     </li>
+                                                                                                                                                                                                                    <%}%>
                                                                                                                                                                                                                     <%}else{%>
                                                                                                                                                                                                                         <li class="cloginbtn" style="display: none;" id="smd6">
                                                                                                                                                                                                                             <a class="timing tbcolor" href="#">
@@ -1428,7 +1622,19 @@ Not Available
                                                                                                                                                                                                                         </li>
                                                                                                                                                                                                                         <%}%>
                                                                                                                                                                                                                             <%if(d7 != undefined){%>
-
+                                                                                                                                                                                                                                <%var hflag = false;%>
+                                                                                                                                                                    <%if(doctor.holidays.length>=1){%>
+                                                                                                                                                                        <%for(temp of doctor.holidays){%>
+                                                                                                                                                                            <%if(temp.date == td7){%>
+                                                                                                                                                                                <%hflag = true;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                        <%}%>
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                    <%if(hflag){%>
+                                                                                                                                                                        <li class="cloginbtn" id="smd7" style="display:none">
+                                                                                                                                                                            <a class="timing tbcolor" href="#">Doctor Not Available</a>
+                                                                                                                                                                        </li>
+                                                                                                                                                                        <%}else{%>
                                                                                                                                                                                                                                 <li class="cloginbtn" style="display: none;" id="smd7">
                                                                                                                                                                                                                                     <%if(typeof(d7.start) == 'string'){%>
                                                                                                                                                                                                                                         <a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
@@ -1487,6 +1693,7 @@ Not Available
                                                                                                                                                                                                                                                 <%}}%>
 
                                                                                                                                                                                                                                 </li>
+                                                                                                                                                                                                                                <%}%>
                                                                                                                                                                                                                                 <%}else{%>
                                                                                                                                                                                                                                     <li class="cloginbtn" style="display: none;" id="smd7">
                                                                                                                                                                                                                                         <a class="timing tbcolor" href="#">

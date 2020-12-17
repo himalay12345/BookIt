@@ -78,6 +78,146 @@ module.exports.verifyEmail = async(req, res) => {
     }
 }
 
+module.exports.pauseBookingService = async(req, res) => {
+
+   console.log(req.body);
+   let user = await User.findById(req.user.id);
+//    if(req.body.end < req.body.start)
+//    {
+//     req.flash('error','End date should not be greater than start date.')
+//     return res.redirect('back');
+//    }
+   if(req.body.start && req.body.end)
+   {
+    const sdate = req.body.start;
+    const edate = req.body.end;
+    const str1 = sdate.split("/").join("-");
+    const str1b = str1.split('-');
+    const str1a = str1b[2] + '-' + str1b[1] + '-' + str1b[0]
+    const str2 = edate.split("/").join("-");
+    const str2b = str2.split('-'); 
+    const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0]
+    console.log(str1a,str2a)
+   if(req.body.start == req.body.end)
+   {
+    user.holidays.push({
+        date:str1,
+        flag:false
+    });
+    for(temp of user.patients)
+    {
+        if(temp.date == str1)
+        {
+            let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                '$set': {
+                    
+                    'doctors.$.reschedule': true
+                    
+                }
+            });
+        }
+    }
+   }
+
+   else{
+    const addDays = (date, days = 1) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+      };
+      
+      const dateRange = (start, end, range = []) => {
+        if (start > end) return range;
+        const next = addDays(start, 1);
+        return dateRange(next, end, [...range, start]);
+      };
+      
+      const range = dateRange(new Date(str1a), new Date(str2a));
+      
+      console.log(range);
+      let range_date = range.map(date => date.toISOString().slice(0, 10));
+    //   console.log(range.map(date => date.toISOString().slice(0, 10)))
+      for(let i= 0;i<range_date.length;i++)
+      {
+         let a1 = range_date[i].split('-');
+         let a2 = a1[2]+ '-' + a1[1] + '-' + a1[0];
+         user.holidays.push({
+            date:a2,
+            flag:false
+        });
+        for(temp of user.patients)
+        {
+            if(temp.date == a2)
+            {
+                let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                    '$set': {
+                        
+                        'doctors.$.reschedule': true
+                        
+                    }
+                });
+            }
+        }
+        
+      }
+   }
+
+}
+
+
+
+
+   if(typeof(req.body.date)== 'object')
+   {
+    for(let i=0;i<req.body.date.length;i++)
+    {
+        user.holidays.push({
+            date:req.body.date[i],
+            flag:false
+        });
+        for(temp of user.patients)
+        {
+            if(temp.date == req.body.date[i])
+            {
+                let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                    '$set': {
+                        
+                        'doctors.$.reschedule': true
+                        
+                    }
+                });
+            }
+        }
+    }
+   }
+
+   if(typeof(req.body.date)== 'string')
+   {
+       console.log('hii')
+    user.holidays.push({
+        date:req.body.date,
+        flag:false
+    });
+    for(temp of user.patients)
+    {
+        if(temp.date == req.body.date)
+        {
+            let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                '$set': {
+                    
+                    'doctors.$.reschedule': true
+                    
+                }
+            });
+        }
+    }
+   }
+   
+   user.save();
+   req.flash('success','Booking service paused for the selected date.')
+   return res.redirect('back');
+}
+
 module.exports.updateProfile = async(req, res) => {
 
     let doctor = await User.findById(req.user.id);

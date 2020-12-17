@@ -185,6 +185,14 @@ const userSchema = mongoose.Schema({
     step4:{
         type: Boolean
     },
+    holidays:[{
+        date:{
+            type:String
+        },
+        flag:{
+            type:Boolean
+        }
+    }],
 
     payments:[{
         payment_id:{
@@ -239,6 +247,9 @@ const userSchema = mongoose.Schema({
         },
         davatar:{
             type:String
+        },
+        reschedule:{
+            type:Boolean
         },
         dname:{
             type:String
@@ -348,6 +359,7 @@ const userSchema = mongoose.Schema({
         email:{
             type:String
         },
+       
         phone:{
             type:String
         },
