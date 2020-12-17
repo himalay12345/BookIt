@@ -577,53 +577,6 @@
                     </div>
                 </a>
             </section>
-            <section class="health-concerns m30" style="margin-bottom: 20px;">
-                <div class="concerns">
-                    <h3 style="font-weight: 700; margin-left: 13px;
-                    margin-bottom: 15px;
-                    font-size: 1.375rem;">Online Consultation</h3>
-
-                    <div class="common-consult" style="height:270px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
-
-                        <% var count1=1 %>
-                            <%for(consult of consults) {%>
-                                <% if(count1>=10) {%>
-                                    <% break;} %>
-                                        <%count1++%>
-
-
-                                            <div class="img-cough-cold" style="min-height:260px;padding-bottom:5px;height:auto;width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                                                <div style="height: 50%;">
-                                                    <a href="/consult">
-                                                    <img src="<%=consult.consultavatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                                                </a>
-                                                </div>
-                                                <div style="height: 40%;padding: 5px; position: relative;">
-                                                    <h4 class="consultname" style="padding-top: 20px;">
-                                                        <%=consult.consultname %>
-                                                    </h4>
-                                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 6px;">₹
-                                                        <%=consult.consultprice %>
-                                                    </p>
-                                                    <a href="/coming-soon" style="color:#455A64;font-weight:bold;position:absolute;bottom:-10px;left: 7px;">Consult Now
-                                </a>
-
-                                                </div>
-
-                                            </div>
-                                            <% } %>
-
-
-
-
-
-
-                    </div>
-
-
-                </div>
-
-            </section>
             <section class="health-concerns" style="margin-bottom: 30px;">
                 <div class="concerns" style="margin-top: -14px;">
                     <h3 style="font-weight: 700; margin-left: 13px;
@@ -684,6 +637,54 @@
                 </div>
 
             </section>
+            <section class="health-concerns m30" style="margin-bottom: 20px;">
+                <div class="concerns">
+                    <h3 style="font-weight: 700; margin-left: 13px;
+                    margin-bottom: 15px;
+                    font-size: 1.375rem;">Online Consultation</h3>
+
+                    <div class="common-consult" style="height:270px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+
+                        <% var count1=1 %>
+                            <%for(consult of consults) {%>
+                                <% if(count1>=10) {%>
+                                    <% break;} %>
+                                        <%count1++%>
+
+
+                                            <div class="img-cough-cold" style="min-height:260px;padding-bottom:5px;height:auto;width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                                                <div style="height: 50%;">
+                                                    <a href="/consult">
+                                                    <img src="<%=consult.consultavatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                                </a>
+                                                </div>
+                                                <div style="height: 40%;padding: 5px; position: relative;">
+                                                    <h4 class="consultname" style="padding-top: 20px;">
+                                                        <%=consult.consultname %>
+                                                    </h4>
+                                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 6px;">₹
+                                                        <%=consult.consultprice %>
+                                                    </p>
+                                                    <a href="/coming-soon" style="color:#455A64;font-weight:bold;position:absolute;bottom:-10px;left: 7px;">Consult Now
+                                </a>
+
+                                                </div>
+
+                                            </div>
+                                            <% } %>
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+
+            </section>
+           
 
             <section style="height: 350px;">
                 <div>
