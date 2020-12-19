@@ -588,14 +588,13 @@
 
                         <%for(let i=0; i<doctors.length;i++){%>
 
-                            <div class="img-cough-cold" style="width:180px;height: 250px;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
-                                <div style="height: 40%;">
+                            <div class="img-cough-cold" style="width:180px;padding-bottom:10px;max-height: 260px;height:auto;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
+                                <div style="height: 53%;">
 
                                     <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
                                 </div>
-                                <div style="height: 60%;padding: 5px;position: relative;margin-top: 12px;
-                                    ">
-                                    <h4 style="font-weight: bold;margin-top: 29px;">
+                                <div style="height: 47%;padding: 5px;position: relative;">
+                                    <h4 style="font-weight: bold;margin-top: 10px;">
                                         Dr.
                                         <%=doctors[i].name%>
                                     </h4>
@@ -603,11 +602,11 @@
                                         font-size: 13px;">
                                         <%=doctors[i].department%>
                                     </h4>
-                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161; position: absolute;    top: 70px;
+                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;
                                         margin-left: 2px; ">₹
                                         <%=doctors[i].booking_fee%>
                                     </p>
-                                    <div style="position: absolute; display: inline-flex;">
+                                    <div style="position: absolute;bottom:5px; display: inline-flex;">
 
 
                                         <div style="border-radius: 2px;
