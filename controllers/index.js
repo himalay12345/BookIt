@@ -195,6 +195,7 @@ module.exports.Doctors = async(req, res) => {
 }
 module.exports.booking = async(req, res) => {
     let doctor = await User.findOne({_id:req.query.id,booking_service:true});
+    let ndoctor = await User.findOne({_id:req.query.id,booking_service:true});
 
     if(!doctor)
     {
@@ -236,7 +237,8 @@ module.exports.booking = async(req, res) => {
 
     return res.render('booking', {
         title: 'Booking',
-        doctor: doctor
+        doctor: doctor,
+        ndoctor:ndoctor
     })
 
 }
@@ -782,6 +784,22 @@ module.exports.razorPay = async(req, res) => {
 module.exports.refund = async(req, res) => {
     return res.render('refund', {
         title: 'Refund'
+    });
+}
+
+module.exports.refundCheckout = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    return res.render('refund-checkout', {
+        title: 'Refund',
+        doctor:doctor,
+        dayindex:req.query.dayindex,
+        slotindex:req.query.slotindex,
+        date:req.query.date,
+        fee:req.query.fee,
+        time:req.query.time,
+        id:req.query.id,
+        payid: req.query.payid,
+        email:req.query.email
     });
 }
 

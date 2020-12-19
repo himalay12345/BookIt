@@ -77,6 +77,17 @@
                                     <div class="col-md-12 col-lg-12">
                                         <h3 style="font-size: 1.1rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Pause Booking Service</h3>
                                         <h3 style="font-size: 0.9rem; font-weight: normal;border-bottom: 1px solid grey;padding-bottom: 10px;">If you are planning to take leave and you don't want the patients to book appointment online on those dates then we recommend you to pause the booking service on those dates. Pause booking service works in a way that whatever date you have chosen to pause the booking service only on those dates patients will not be able to book but they are free to book before or after those days you choosed to be on leave.Incase there is an emergency situation you had to go which was not pre planned and the online patients have also booked on those dates and then you can pause the booking on that dates, the online patients booked on those dates will get the full refund onto their account.</h3>
+                                        <%if(locals.user.holidays.length>0){%>
+                                        <h3 style="font-weight: bold;font-size: 1.1rem;">The dates choosed by you on which booking service is paused :-</h3>
+                                        <div style="border-bottom: 1px solid grey;padding-bottom: 10px;">
+                                           
+                                        <%for(days of locals.user.holidays){%>
+                                            <span style="display: inline-flex;"><%=days.date%></span><a href="/user/delete-date/?id=<%=days._id%>" style="position: static;margin-right: 20px;margin-left: 5px;margin-top: 5px;" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+                                            &nbsp;&nbsp;&nbsp;
+                                           
+                                        <%}%>
+                                        </div>
+                                        <%}%>
                                         <div class="col-md-12 nots-span" style="margin-top: 15px;">
                                        <form action = "/user/pause-booking-service" method="POST">
                                             <div class="schedule-nav">
@@ -94,19 +105,19 @@ var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
 var date = new Date(res);
 today=date;%>
                                                     <%if(k==0){%>
-                                                    <li class="nav-item dateli" style="display:inline-flex">
-                                                        <input type="checkbox" class="nav-link" id="c<%=i%>" name="date" value="<%=dd%>-<%=mm%>-<%=yyyy%>" style="margin-right: 5px;" multiple>Today</br><span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+                                                    <li class="nav-item dateli">
+                                                        <input type="checkbox"  id="c<%=i%>" name="date" value="<%=dd%>-<%=mm%>-<%=yyyy%>" style="margin-right: 5px;" multiple>Today</br><span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
                                                     </li>
                                                     <%k++;continue;%>
                                                     <%}%>
                                                     <%if(k==1){%>
-                                                        <li class="nav-item dateli" style="display: inline-flex;">
-                                                           <a class="nav-link" data-toggle="tab" href="" id="a<%=i%>" onclick="checkit(<%=i%>)"><input type="checkbox" id="c<%=i%>" name="date" value="<%=dd%>-<%=mm%>-<%=yyyy%>"style="margin-right: 5px;" multiple> Tomorrow</br><span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span></a>
+                                                        <li class="nav-item dateli">
+                                                           <input type="checkbox" id="c<%=i%>" name="date" value="<%=dd%>-<%=mm%>-<%=yyyy%>"style="margin-right: 5px;" multiple> Tomorrow</br><span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
                                                         </li>
                                                         <%k++;continue;%>
                                                         <%}else{%>
                                                             <li class="nav-item dateli">
-                                                                <a class="nav-link" data-toggle="tab" href="" id="a<%=i%>" onclick="checkit(<%=i%>)"><input type="checkbox" id="c<%=i%>" name="date" value="<%=dd%>-<%=mm%>-<%=yyyy%>"style="margin-right: 5px;" multiple><%=dayOfWeek%></br><span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span></a>
+                                                                <input type="checkbox" id="c<%=i%>" name="date" value="<%=dd%>-<%=mm%>-<%=yyyy%>"style="margin-right: 5px;" multiple><%=dayOfWeek%></br><span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
                                                             </li>
                                                             <%k++;}%>
 

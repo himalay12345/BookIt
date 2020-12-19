@@ -82,13 +82,9 @@ module.exports.pauseBookingService = async(req, res) => {
 
    console.log(req.body);
    let user = await User.findById(req.user.id);
-//    if(req.body.end < req.body.start)
-//    {
-//     req.flash('error','End date should not be greater than start date.')
-//     return res.redirect('back');
-//    }
-   if(req.body.start && req.body.end)
-   {
+
+
+
     const sdate = req.body.start;
     const edate = req.body.end;
     const str1 = sdate.split("/").join("-");
@@ -96,14 +92,34 @@ module.exports.pauseBookingService = async(req, res) => {
     const str1a = str1b[2] + '-' + str1b[1] + '-' + str1b[0]
     const str2 = edate.split("/").join("-");
     const str2b = str2.split('-'); 
-    const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0]
-    console.log(str1a,str2a)
+    const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0];
+    var str1c = new Date(str1a);
+    var str2c = new Date(str2a); 
+   if(str1c > str2c)
+   {
+    req.flash('error','End date should not be greater than start date.')
+    return res.redirect('back');
+   }
+   if(req.body.start && req.body.end)
+   {
    if(req.body.start == req.body.end)
    {
+
+    var nflag = false;
+    for(days of user.holidays)
+    {
+     if(days.date == str1)
+     {
+         nflag = true;
+         break;
+     }
+    }
+    if(!nflag){
     user.holidays.push({
         date:str1,
         flag:false
     });
+}
     for(temp of user.patients)
     {
         if(temp.date == str1)
@@ -141,10 +157,21 @@ module.exports.pauseBookingService = async(req, res) => {
       {
          let a1 = range_date[i].split('-');
          let a2 = a1[2]+ '-' + a1[1] + '-' + a1[0];
+         var nflag = false;
+         for(days of user.holidays)
+         {
+          if(days.date == a2)
+          {
+              nflag = true;
+              break;
+          }
+         }
+         if(!nflag){
          user.holidays.push({
             date:a2,
             flag:false
         });
+    }
         for(temp of user.patients)
         {
             if(temp.date == a2)
@@ -171,10 +198,22 @@ module.exports.pauseBookingService = async(req, res) => {
    {
     for(let i=0;i<req.body.date.length;i++)
     {
+
+        var nflag = false;
+        for(days of user.holidays)
+        {
+         if(days.date == req.body.date[i])
+         {
+             nflag = true;
+             break;
+         }
+        }
+        if(!nflag){
         user.holidays.push({
             date:req.body.date[i],
             flag:false
         });
+    }
         for(temp of user.patients)
         {
             if(temp.date == req.body.date[i])
@@ -194,10 +233,23 @@ module.exports.pauseBookingService = async(req, res) => {
    if(typeof(req.body.date)== 'string')
    {
        console.log('hii')
-    user.holidays.push({
-        date:req.body.date,
-        flag:false
-    });
+       var nflag = false;
+       for(days of user.holidays)
+       {
+        if(days.date == req.body.date)
+        {
+            nflag = true;
+            break;
+        }
+       }
+
+       if(!nflag)
+       {
+            user.holidays.push({
+                date:req.body.date,
+                flag:false
+            });
+       }
     for(temp of user.patients)
     {
         if(temp.date == req.body.date)
@@ -216,6 +268,13 @@ module.exports.pauseBookingService = async(req, res) => {
    user.save();
    req.flash('success','Booking service paused for the selected date.')
    return res.redirect('back');
+}
+
+module.exports.deleteDate = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.holidays.pull(req.query.id);
+    user.save();
+    return res.redirect('back');
 }
 
 module.exports.updateProfile = async(req, res) => {
@@ -769,9 +828,8 @@ module.exports.confirmPay = async function(req, res) {
                     {
                     account: doctor.accountid,
                     amount: vendor_amount*100,
-                    currency: "INR",
-                    on_hold: 1,
-                    on_hold_until: ndate
+                    currency: "INR"
+                   
                     
                     }
                 ]
@@ -941,13 +999,14 @@ module.exports.refund = async function(req, res) {
                         key_secret: env.razorpay_key_secret
                         
                     });
-                    var refund_amount = 10 ;
+                    var refund_amount = req.query.fee - 50 ;
 
                     const response = await razorpay1.payments.refund(req.query.id,
                         
                         {
                             amount : refund_amount*100,
-                            speed : 'optimum'
+                            speed : 'optimum',
+                            reverse_all : 1
                         });
 
                     if(response.id && response.payment_id)
