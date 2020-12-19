@@ -83,6 +83,10 @@
                             <option>General Physician</option><%}%>
                             <%if(locals.user.department == 'Ophthalmology'){%><option selected>Ophthalmology</option><%}else{%>
                             <option>Ophthalmology</option><%}%>
+                            <%if(locals.user.department == 'Gynaecology'){%><option selected>Gynaecology</option><%}else{%>
+                                <option>Gynaecology</option><%}%>
+                                <%if(locals.user.department == 'General Surgeon'){%><option selected>General Surgeon</option><%}else{%>
+                                    <option>General Surgeon</option><%}%>
                             <%if(locals.user.department == 'Dermatology'){%><option selected>Dermatology</option><%}else{%>
                                 <option>Dermatology</option><%}%>
                             <%if(locals.user.department == 'Paediatrics'){%><option selected>Paediatrics</option><%}else{%>

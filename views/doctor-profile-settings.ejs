@@ -174,6 +174,8 @@
                                         <option>Paediatrics</option><%}%>
                                     <%if(locals.user.department == 'Gynaecology'){%><option selected>Gynaecology</option><%}else{%>
                                             <option>Gynaecology</option><%}%>
+                                            <%if(locals.user.department == 'General Surgeon'){%><option selected>General Surgeon</option><%}else{%>
+                                                <option>General Surgeon</option><%}%>
 									<%if(locals.user.department == 'Urology'){%><option selected>Urology</option><%}else{%>
 										<option>Urology</option><%}%>	
 									<%if(locals.user.department == 'Neurology'){%><option selected>Neurology</option><%}else{%>
