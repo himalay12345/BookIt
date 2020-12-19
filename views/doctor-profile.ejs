@@ -78,15 +78,15 @@
                                                 height: 19px;
                                                 padding-top: 3px;
                                                 padding-left: 6px;">
-                                            <%if(doctor.experience != ''){%>
-                                                <%var exp=doctor.experience[0].to-doctor.experience[0].from%>
+                                            <%if(doctor.wexperience){%>
+                                              
                                                     <a href="/doctor-profile/?id=<%=doctor._id%>" style="font-size: 0.8125rem; 
                                                         font-weight: 700;
                                                                 
                                                                 padding-left: 4px;
                                                                 /* color: white; */
                                                                 color: white">
-                                                        <%=exp%> Years Exp
+                                                        <%=doctor.wexperience%> Years Exp
                                                     </a>
                                                     <%}%>
                                         </h4>
