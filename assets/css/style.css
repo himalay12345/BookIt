@@ -7756,6 +7756,8 @@ html.menu-opened body {
     margin-left: 21px; }
   .pzero {
     padding-right: 0px !important; }
+  .plzero {
+    padding-left: 0px !important; }
   .mzero {
     margin-left: 0px !important; }
   .m-50 {
@@ -7801,7 +7803,7 @@ html.menu-opened body {
   .laptop-blood {
     display: none; }
   .rating {
-    margin: 0 0 7px !important; }
+    margin: 20px 0 7px !important; }
   .mobile-sugar {
     display: block; }
   .laptop-sugar {

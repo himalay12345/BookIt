@@ -111,6 +111,18 @@
                                         </div>
                                         <div>
                                             <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="Gynaecology">
+											<span class="checkmark"></span> Gynaecology (Female Doctor)
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
+											<input type="checkbox" name="select_specialist" value="General Surgeon">
+											<span class="checkmark"></span> General Surgeon 
+										</label>
+                                        </div>
+                                        <div>
+                                            <label class="custom_check">
 											<input type="checkbox" name="select_specialist" value="Cardiologist">
 											<span class="checkmark"></span> Cardiologist (Heart)
 										</label>
@@ -216,6 +228,18 @@
                                         <input type="checkbox" name="select_specialist" value="Orthopedic">
                                         <span class="checkmark"></span> Orthopedic (Bone)
                                     </label>
+                                            </div>
+                                            <div>
+                                                <label class="custom_check">
+                                                <input type="checkbox" name="select_specialist" value="Gynaecology">
+                                                <span class="checkmark"></span> Gynaecology (Female Doctor)
+                                            </label>
+                                            </div>
+                                            <div>
+                                                <label class="custom_check">
+                                                <input type="checkbox" name="select_specialist" value="General Surgeon">
+                                                <span class="checkmark"></span> General Surgeon 
+                                            </label>
                                             </div>
                                             <div>
                                                 <label class="custom_check">
@@ -535,6 +559,10 @@
 
                                                                     <img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
                                                                     <% } %>
+                                                                    <% if(doctor.department== "General Surgeon"){ %>
+
+                                                                        <img src="<%=assetPath('img/specialities/surgery1.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                        <% } %>
 
                                                                         <% if(doctor.department== "Ophthalmology"){ %>
 

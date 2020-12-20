@@ -571,7 +571,11 @@ const userSchema = mongoose.Schema({
         },
         reset_flag:{
             type:Boolean
+        },
+        alt_flag:{
+            type:Boolean
         }
+
     }],
 
     old_schedule_time: [{
@@ -595,7 +599,11 @@ const userSchema = mongoose.Schema({
         },
         reset_flag:{
             type:Boolean
+        },
+        alt_flag:{
+            type:Boolean
         }
+
     }],
     schedule_time: [{
         start: {
@@ -617,6 +625,9 @@ const userSchema = mongoose.Schema({
             type: Object
         },
         reset_flag:{
+            type:Boolean
+        },
+        alt_flag:{
             type:Boolean
         }
     }],

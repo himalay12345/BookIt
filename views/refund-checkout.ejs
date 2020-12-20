@@ -34,10 +34,10 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                                <li class="breadcrumb-item active" aria-current="page">Cancel</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Checkout</h2>
+                        <h2 class="breadcrumb-title">Appointment Cancellation</h2>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="row">
                   
 
-                    <div class="col-md-7 col-lg-4 theiaStickySidebar">
+                    <div class="col-md-4 theiaStickySidebar">
 
                         <!-- Booking Summary -->
                         <div class="card booking-card">
@@ -144,6 +144,28 @@
                         </div>
                         <!-- /Booking Summary -->
 
+                    </div>
+                    <div class="col-md-8 plzero" style="padding-left:50px">
+                        <%if(rflag == 'true'){%>
+                        <div class="alert alert-danger alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
+                            <strong>Note!</strong> Cancellation is valid only for three days prior to your appointment date. Cancellation charges will be Rs 50.Once cancelled, the amount will be redirected to your bank account within 3-5 working days. 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="alert alert-danger alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
+                                            <strong>Note!</strong> Cancellation is only valid before your appointment date. Cancellation charges will be Rs 50.Once cancelled, the amount will be redirected to your bank account within 3-5 working days. 
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                                    </div>
+                                        <%}%>
+                            <h3 style="font-size:1.2rem;margin-top:50px;margin-bottom:20px" class="malert">Do you want to cancel the appointment?</h3>        
+                    <a  href="/user/payments/refund/?doctorid=<%=id%>&fee=<%=fee%>&id=<%=payid%>&dayindex=<%=dayindex%>&index=<%=i%>&slotindex=<%=slotindex%>&date=<%=date%>&time=<%=time%>&email=<%=email%>" class="btn btn-sm bg-danger-light malert" style="width: 300px;padding:10px;display:block;margin-bottom:50px">
+                        <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                       
                     </div>
                     
                 </div>
