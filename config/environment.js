@@ -47,7 +47,8 @@ const development = {
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
     twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
     twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
-    twilio_auth_token: "1908e2cce4c3f6d548d1f1ca8c34bab6",
+    twilio_auth_token: "4fab053fdd641e6505744dddd0e3942e",
+
     gmail_passw: 'Himalay@NIXXIT',
     morgan: {
         mode: 'dev',

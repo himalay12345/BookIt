@@ -1406,6 +1406,7 @@ module.exports.verifyPayment = async(req, res) => {
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + user.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
                         to: '+91' + req.query.phone
                     })
@@ -1605,6 +1606,7 @@ module.exports.verifyPayment = async(req, res) => {
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + user.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
                         to: '+91' + req.query.phone
                     })
