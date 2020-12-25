@@ -40,8 +40,10 @@ router.post('/staff-update-schedule', userController.staffUpdateSchedule);
 router.post('/staff-old-update-schedule', userController.staffOldUpdateSchedule);
 router.post('/verify-payment',userController.verifyPayment);
 router.get('/verify-email',userController.verifyEmail);
-router.get('/payments/refund',userController.refund)
+router.get('/payments/refund',userController.refund);
+router.post('/pause-booking-service',userController.pauseBookingService);
 router.post('/search-doctor',userController.searchDoctor);
+router.get('/delete-date',userController.deleteDate);
 router.post('/change-bank-account',userController.changeBankAccount);
 router.post('/set-booking-fee', userController.setBookingFee);
 router.post('/staff-set-booking-fee', userController.staffSetBookingFee);

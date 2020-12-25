@@ -8,6 +8,7 @@ const client = require('twilio')(config.accountSID, config.authToken);
 const crypto = require('crypto');
 const request = require('request');
 const appointmentAlert = require('../mailers/appointment-alert');
+const appointmentAlert1 = require('../mailers/appointment-cancel1');
 const appointmentCancelAlert = require('../mailers/appointment-cancel');
 const emailVerification = require('../mailers/email-verify');
 const Feedback = require('../models/disable_feedback');
@@ -76,6 +77,254 @@ module.exports.verifyEmail = async(req, res) => {
     } else {
         return res.redirect('/email-not-verified');
     }
+}
+
+module.exports.pauseBookingService = async(req, res) => {
+
+   console.log(req.body);
+   let user = await User.findById(req.user.id);
+
+
+
+    const sdate = req.body.start;
+    const edate = req.body.end;
+    const str1 = sdate.split("/").join("-");
+    const str1b = str1.split('-');
+    const str1a = str1b[2] + '-' + str1b[1] + '-' + str1b[0]
+    const str2 = edate.split("/").join("-");
+    const str2b = str2.split('-'); 
+    const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0];
+    var str1c = new Date(str1a);
+    var str2c = new Date(str2a); 
+   if(str1c > str2c)
+   {
+    req.flash('error','End date should not be greater than start date.')
+    return res.redirect('back');
+   }
+   if(req.body.start && req.body.end)
+   {
+   if(req.body.start == req.body.end)
+   {
+
+    var nflag = false;
+    for(days of user.holidays)
+    {
+     if(days.date == str1)
+     {
+         nflag = true;
+         break;
+     }
+    }
+    if(!nflag){
+    user.holidays.push({
+        date:str1,
+        flag:false
+    });
+}
+    for(temp of user.patients)
+    {
+        if(temp.date == str1)
+        {
+            let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                '$set': {
+                    
+                    'doctors.$.reschedule': true
+                    
+                }
+            });
+        }
+        client.messages
+            .create({
+                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                from: '+12019755459',
+                statusCallback: 'http://postb.in/1234abcd',
+                to: '+91' + temp.phone
+            })
+            .then(message => console.log(message.sid));
+            let patient = await User.findById(temp.pid);
+        if (temp.email) {
+            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+        }
+    }
+   }
+
+   else{
+    const addDays = (date, days = 1) => {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+      };
+      
+      const dateRange = (start, end, range = []) => {
+        if (start > end) return range;
+        const next = addDays(start, 1);
+        return dateRange(next, end, [...range, start]);
+      };
+      
+      const range = dateRange(new Date(str1a), new Date(str2a));
+      
+      console.log(range);
+      let range_date = range.map(date => date.toISOString().slice(0, 10));
+    //   console.log(range.map(date => date.toISOString().slice(0, 10)))
+      for(let i= 0;i<range_date.length;i++)
+      {
+         let a1 = range_date[i].split('-');
+         let a2 = a1[2]+ '-' + a1[1] + '-' + a1[0];
+         var nflag = false;
+         for(days of user.holidays)
+         {
+          if(days.date == a2)
+          {
+              nflag = true;
+              break;
+          }
+         }
+         if(!nflag){
+         user.holidays.push({
+            date:a2,
+            flag:false
+        });
+    }
+        for(temp of user.patients)
+        {
+            if(temp.date == a2)
+            {
+                let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                    '$set': {
+                        
+                        'doctors.$.reschedule': true
+                        
+                    }
+                });
+            }
+            client.messages
+            .create({
+                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                from: '+12019755459',
+                statusCallback: 'http://postb.in/1234abcd',
+                to: '+91' + temp.phone
+            })
+            .then(message => console.log(message.sid));
+            let patient = await User.findById(temp.pid);
+        if (temp.email) {
+            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+        }
+        }
+        
+      }
+   }
+
+}
+
+
+
+
+   if(typeof(req.body.date)== 'object')
+   {
+    for(let i=0;i<req.body.date.length;i++)
+    {
+
+        var nflag = false;
+        for(days of user.holidays)
+        {
+         if(days.date == req.body.date[i])
+         {
+             nflag = true;
+             break;
+         }
+        }
+        if(!nflag){
+        user.holidays.push({
+            date:req.body.date[i],
+            flag:false
+        });
+    }
+        for(temp of user.patients)
+        {
+            if(temp.date == req.body.date[i])
+            {
+                let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                    '$set': {
+                        
+                        'doctors.$.reschedule': true
+                        
+                    }
+                });
+            }
+            client.messages
+            .create({
+                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                from: '+12019755459',
+                statusCallback: 'http://postb.in/1234abcd',
+                to: '+91' + temp.phone
+            })
+            .then(message => console.log(message.sid));
+            let patient = await User.findById(temp.pid);
+        if (temp.email) {
+            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+        }
+        }
+    }
+   }
+
+   if(typeof(req.body.date)== 'string')
+   {
+       console.log('hii')
+       var nflag = false;
+       for(days of user.holidays)
+       {
+        if(days.date == req.body.date)
+        {
+            nflag = true;
+            break;
+        }
+       }
+
+       if(!nflag)
+       {
+            user.holidays.push({
+                date:req.body.date,
+                flag:false
+            });
+       }
+    for(temp of user.patients)
+    {
+        if(temp.date == req.body.date)
+        {
+            let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                '$set': {
+                    
+                    'doctors.$.reschedule': true
+                    
+                }
+            });
+            client.messages
+            .create({
+                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                from: '+12019755459',
+                statusCallback: 'http://postb.in/1234abcd',
+                to: '+91' + temp.phone
+            })
+            .then(message => console.log(message.sid));
+            let patient = await User.findById(temp.pid);
+        if (temp.email) {
+            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+        }
+
+        }
+    }
+   }
+   
+   user.save();
+   req.flash('success','Booking service paused for the selected date.')
+   return res.redirect('back');
+}
+
+module.exports.deleteDate = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.holidays.pull(req.query.id);
+    user.save();
+    return res.redirect('back');
 }
 
 module.exports.updateProfile = async(req, res) => {
@@ -417,49 +666,56 @@ module.exports.staffSetOldPatient = async function(req, res) {
         day:'Monday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     user.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Tuesday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     user.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Wednesday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     user.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Thursday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     user.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Friday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     user.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Saturday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     user.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Sunday',
         available:req.body.pcount,
         booked:'0',
-        reset_flag:'false'
+        reset_flag:false,
+        alt_flag:false
     })
     }
     user.save()
@@ -629,9 +885,8 @@ module.exports.confirmPay = async function(req, res) {
                     {
                     account: doctor.accountid,
                     amount: vendor_amount*100,
-                    currency: "INR",
-                    on_hold: 1,
-                    on_hold_until: ndate
+                    currency: "INR"
+                   
                     
                     }
                 ]
@@ -801,13 +1056,14 @@ module.exports.refund = async function(req, res) {
                         key_secret: env.razorpay_key_secret
                         
                     });
-                    var refund_amount = 10 ;
+                    var refund_amount = req.query.fee - 50 ;
 
                     const response = await razorpay1.payments.refund(req.query.id,
                         
                         {
                             amount : refund_amount*100,
-                            speed : 'optimum'
+                            speed : 'optimum',
+                            reverse_all : 1
                         });
 
                     if(response.id && response.payment_id)
@@ -1150,6 +1406,7 @@ module.exports.verifyPayment = async(req, res) => {
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + user.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
                         to: '+91' + req.query.phone
                     })
@@ -1349,6 +1606,7 @@ module.exports.verifyPayment = async(req, res) => {
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + user.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
                         to: '+91' + req.query.phone
                     })
@@ -1636,16 +1894,22 @@ module.exports.deleteAccount = async(req, res) => {
     if(user.type == 'Staff')
     {
         let staff = await User.findById(req.user.id);
+        let sdoctor = await User.findById(staff.doctorid);
         if(staff)
         {
             // let prope1 = await User.deleteOne({ _id: user.staff_id });
             staff.temp_phone = staff.phone;
             staff.phone = "";
             staff.password = "";
+            sdoctor.staff_id = undefined ;
+            sdoctor.staff_flag = false;
+            staff.save();
+            sdoctor.save();
             
         }
 
-        staff.save()
+
+
         req.flash('success', 'Account removed Successfully');
 
 
@@ -2819,7 +3083,62 @@ module.exports.updateSchedule = async function(req, res) {
         user.schedule_time.pull({ _id: req.body.id });
         user.save();
         return res.redirect('back');
+    } 
+    
+    if(req.body.flag)
+    {
+        if(typeof(req.body.start) == 'string')
+        {
+            let day = await User.update({ 'schedule_time._id': req.body.id }, {
+                '$set': {
+                    'schedule_time.$.start': req.body.start,
+                    'schedule_time.$.end': req.body.end,
+                    'schedule_time.$.max_count': req.body.max_count,
+                    'schedule_time.$.available': req.body.max_count
+                }
+            });
+        
+        }
+
+        if(typeof(req.body.start) == 'object')
+        { 
+            let ar = [];
+            console.log('index is',req.body.index);
+           let user = await User.findById(req.user.id);
+           if(typeof(user.schedule_time[req.body.index].booked) == 'string' || typeof(user.schedule_time[req.body.index].booked) == 'number')
+           {
+            
+            ar.push(user.schedule_time[req.body.index].booked);
+            for(let i=0;i<req.body.start.length-1;i++)
+            {
+                ar.push(0);
+            }
+           }
+           if(typeof(user.schedule_time[req.body.index].booked) == 'object')
+           {
+            ar = user.schedule_time[req.body.index].booked;
+            for(let i=0;i<req.body.start.length-user.schedule_time[req.body.index].booked.length;i++)
+            {
+                ar.push(0);
+            }
+           }
+
+            let day = await User.update({ 'schedule_time._id': req.body.id }, {
+                '$set': {
+                    'schedule_time.$.start': req.body.start,
+                    'schedule_time.$.end': req.body.end,
+                    'schedule_time.$.max_count': req.body.max_count,
+                    'schedule_time.$.available': req.body.max_count,
+                    'schedule_time.$.booked': ar
+
+
+                }
+            });
+        
+        }
     }
+
+    else{
     let day = await User.update({ 'schedule_time._id': req.body.id }, {
         '$set': {
             'schedule_time.$.start': req.body.start,
@@ -2828,6 +3147,8 @@ module.exports.updateSchedule = async function(req, res) {
             'schedule_time.$.available': req.body.max_count
         }
     });
+
+}
 
 
     return res.redirect('back');
@@ -2894,7 +3215,8 @@ module.exports.setScheduleTiming = async function(req, res) {
             max_count: req.body.max_count,
             available: req.body.max_count,
             booked: 0,
-            reset_flag:false
+            reset_flag:false,
+            alt_flag:false
         })
     }
 
@@ -2906,7 +3228,8 @@ module.exports.setScheduleTiming = async function(req, res) {
             max_count: req.body.max_count,
             available: req.body.max_count,
             booked: ['0', '0'],
-            reset_flag:false
+            reset_flag:false,
+            alt_flag:false
         });
 
     }
@@ -2935,7 +3258,8 @@ module.exports.staffSetScheduleTiming = async function(req, res) {
             max_count: req.body.max_count,
             available: req.body.max_count,
             booked: 0,
-            reset_flag:false
+            reset_flag:false,
+            alt_flag:false
         })
     }
 
@@ -2947,7 +3271,8 @@ module.exports.staffSetScheduleTiming = async function(req, res) {
             max_count: req.body.max_count,
             available: req.body.max_count,
             booked: ['0', '0'],
-            reset_flag:false
+            reset_flag:false,
+            alt_flag:false
         });
 
     }
@@ -2975,7 +3300,8 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
             max_count: user.oldp.pcount,
             available: user.oldp.pcount,
             booked: 0,
-            reset_flag:false
+            reset_flag:false,
+            alt_flag:false
         })
     }
 
@@ -2987,7 +3313,8 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
             max_count: user.oldp.pcount,
             available: user.oldp.pcount,
             booked: ['0', '0'],
-            reset_flag:false
+            reset_flag:false,
+            alt_flag:false
         });
 
     }

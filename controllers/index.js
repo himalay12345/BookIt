@@ -195,7 +195,8 @@ module.exports.Doctors = async(req, res) => {
     })
 }
 module.exports.booking = async(req, res) => {
-    let doctor = await User.findOne({ _id: req.query.id, booking_service: true });
+    let doctor = await User.findOne({_id:req.query.id,booking_service:true});
+    let ndoctor = await User.findOne({_id:req.query.id,booking_service:true});
 
     if (!doctor) {
         return res.render('not-available', {
@@ -204,37 +205,192 @@ module.exports.booking = async(req, res) => {
         })
     }
 
+    let user1 = await User.findById(doctor.staff_id);
     var today = new Date();
-    today.setDate(today.getDate() - 1)
+    // today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     var dayOfWeek = weekday[today.getDay()].toUpperCase();
     console.log(dayOfWeek);
+    var str = dd + '-' + mm + '-' + yyyy;
 
-
+if(user1)
+{
     for (temp of doctor.schedule_time) {
         if (temp.day.toUpperCase() == dayOfWeek) {
+            var vflag = true;
+            var vflag1 = false;
+       
             if (typeof(temp.booked) == 'string') {
+                if(temp.booked != '0')
+                {
+                    vflag1 = true;
+                }
+            }
+
+            if (typeof(temp.booked) == 'number') {
+                if(temp.booked != '0')
+                {
+                    vflag1 = true;
+                }
+            }
+            
+            if (typeof(temp.booked) == 'object'){
+                
+                for(temp2 of temp.booked)
+                {
+                    if(temp2 != '0')
+                    {
+                        vflag1 = true;
+                    }
+                    
+                }
+            }
+            
+            for(temp1 of user1.booking)
+            {
+                if(temp1.date == str)
+                {
+                    vflag = false;
+                }
+            }
+            console.log(vflag,vflag1)
+
+            if(vflag && vflag1)
+            {
+                if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+        
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+                    
+                    if (typeof(temp.booked) == 'object'){
+                        temp.booked = [0, 0];
+                    }
+
+                    
+            }
+            temp.reset_flag = true;
+           
+        }
+
+        else{
+            if(temp.reset_flag == true)
+            {
+                  if (typeof(temp.booked) == 'string') {
                 temp.booked = 0;
             }
 
             if (typeof(temp.booked) == 'number') {
                 temp.booked = 0;
-            } else {
+            }
+            
+            if (typeof(temp.booked) == 'object'){
                 temp.booked = [0, 0];
             }
+
+            temp.reset_flag = false;
+            temp.alt_flag = false;
+            }
+            
         }
     }
+}
 
+else{
+    for (temp of doctor.schedule_time) {
+        if (temp.day.toUpperCase() == dayOfWeek) {
+            var vflag = true;
+            var vflag1 = false;
+       
+            if (typeof(temp.booked) == 'string') {
+                if(temp.booked != '0')
+                {
+                    vflag1 = true;
+                }
+            }
 
+            if (typeof(temp.booked) == 'number') {
+                if(temp.booked != '0')
+                {
+                    vflag1 = true;
+                }
+            }
+            
+            if (typeof(temp.booked) == 'object'){
+                
+                for(temp2 of temp.booked)
+                {
+                    if(temp2 != '0')
+                    {
+                        vflag1 = true;
+                    }
+                    
+                }
+            }
+            
+            for(temp1 of doctor.patients)
+            {
+                if(temp1.date == str)
+                {
+                    vflag = false;
+                }
+            }
+            console.log(vflag,vflag1)
+
+            if(vflag && vflag1)
+            {
+                if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+        
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+                    
+                    if (typeof(temp.booked) == 'object'){
+                        temp.booked = [0, 0];
+                    }
+
+                    
+            }
+            temp.reset_flag = true;
+           
+        }
+
+        else{
+            if(temp.reset_flag == true)
+            {
+                  if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
+            }
+
+            if (typeof(temp.booked) == 'number') {
+                temp.booked = 0;
+            }
+            
+            if (typeof(temp.booked) == 'object'){
+                temp.booked = [0, 0];
+            }
+
+            temp.reset_flag = false;
+            temp.alt_flag = false;
+            }
+            
+        }
+    }
+}
 
     doctor.save();
 
     return res.render('booking', {
         title: 'Booking',
-        doctor: doctor
+        doctor: doctor,
+        ndoctor:ndoctor
     })
 
 }
@@ -780,6 +936,24 @@ module.exports.refund = async(req, res) => {
     });
 }
 
+module.exports.refundCheckout = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    return res.render('refund-checkout', {
+        title: 'Refund',
+        doctor:doctor,
+        dayindex:req.query.dayindex,
+        slotindex:req.query.slotindex,
+        date:req.query.date,
+        fee:req.query.fee,
+        time:req.query.time,
+        id:req.query.id,
+        payid: req.query.payid,
+        email:req.query.email,
+        i:req.query.index,
+        rflag:req.query.reschedule
+    });
+}
+
 module.exports.prescription = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
@@ -1172,10 +1346,12 @@ module.exports.reviews = async(req, res) => {
 
 module.exports.scheduleTimings = async(req, res) => {
     let user = await User.findById(req.user.id).populate('schedule_time');
+    let staff = await User.findById(user.staff_id);
 
     return res.render('schedule-timings', {
         title: 'Schedule Timings',
-        user: user
+        user: user,
+        staff:staff
     })
 }
 module.exports.staffScheduleTimings = async(req, res) => {
@@ -1215,39 +1391,97 @@ module.exports.staffBooking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     let user1 = await User.findById(req.user.id).populate('doctorid');
     var today = new Date();
-    today.setDate(today.getDate())
+    // today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     var dayOfWeek = weekday[today.getDay()].toUpperCase();
     console.log(dayOfWeek);
+    var str = dd + '-' + mm + '-' + yyyy;
 
 
     for (temp of doctor.schedule_time) {
         if (temp.day.toUpperCase() == dayOfWeek) {
-            temp.reset_flag = true;
-            continue;
-
-        } else {
-            if (temp.reset_flag == false) {
-                if (typeof(temp.booked) == 'string') {
-                    temp.booked = 0;
-                } else {
-                    temp.booked = [0, 0];
+            var vflag = true;
+            var vflag1 = false;
+       
+            if (typeof(temp.booked) == 'string') {
+                if(temp.booked != '0')
+                {
+                    vflag1 = true;
                 }
             }
 
+            if (typeof(temp.booked) == 'number') {
+                if(temp.booked != '0')
+                {
+                    vflag1 = true;
+                }
+            }
+            
+            if (typeof(temp.booked) == 'object'){
+                
+                for(temp2 of temp.booked)
+                {
+                    if(temp2 != '0')
+                    {
+                        vflag1 = true;
+                    }
+                    
+                }
+            }
+            
+            for(temp1 of user1.booking)
+            {
+                if(temp1.date == str)
+                {
+                    vflag = false;
+                }
+            }
+            console.log(vflag,vflag1)
+
+            if(vflag && vflag1)
+            {
+                if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+        
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+                    
+                    if (typeof(temp.booked) == 'object'){
+                        temp.booked = [0, 0];
+                    }
+
+                    
+            }
+            temp.reset_flag = true;
+           
+        }
+
+        else{
+            if(temp.reset_flag == true)
+            {
+                  if (typeof(temp.booked) == 'string') {
+                temp.booked = 0;
+            }
+
+            if (typeof(temp.booked) == 'number') {
+                temp.booked = 0;
+            }
+            
+            if (typeof(temp.booked) == 'object'){
+                temp.booked = [0, 0];
+            }
+
+            temp.reset_flag = false;
+            temp.alt_flag = false;
+            }
+            
         }
     }
-    // var todayd = new Date();
-    // for (temp of user1.tracked) {
-    //     if (todayd > temp.createdAt) {
-    //         user1.tracked.pull(temp._id);
-    //     }
-    // }
-
-    // user1.save()
 
 
     doctor.save();

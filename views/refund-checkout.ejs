@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+
+<head>
+   
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb-bar lptop" >
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Cancel</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Appointment Cancellation</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container">
+
+                <div class="row">
+                  
+
+                    <div class="col-md-4 theiaStickySidebar">
+
+                        <!-- Booking Summary -->
+                        <div class="card booking-card">
+                            <div class="card-header">
+                                <h4 class="card-title">Cancel Appointment</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Booking Doctor Info -->
+                                <div class="booking-doc-info">
+                                    <a href="/doctor-profile" class="booking-doc-img">
+                                        <img src="<%=doctor.avatar%>" alt="User Image">
+                                    </a>
+                                    <div class="booking-info">
+                                        <h4>
+                                            <a href="/doctor-profile">
+                                                <%=doctor.name%>
+                                            </a>
+                                        </h4>
+                                        <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                            <%for(review of doctor.reviews){%>
+                                                <%sum+=review.rating;%>
+                                                    <%}%>
+                                                        <%avg=sum/cnt;%>
+                                                            <div class="rating">
+                                                                <%if(avg>=1){%>
+                                                                    <i class="fas fa-star filled"></i>
+                                                                    <%}else{%>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <%}%>
+                                                                            <%if(avg>=2){%>
+                                                                                <i class="fas fa-star filled"></i>
+                                                                                <%}else{%>
+                                                                                    <i class="fas fa-star"></i>
+                                                                                    <%}%>
+                                                                                        <%if(avg>=3){%>
+                                                                                            <i class="fas fa-star filled"></i>
+                                                                                            <%}else{%>
+                                                                                                <i class="fas fa-star"></i>
+                                                                                                <%}%>
+                                                                                                    <%if(avg>=4){%>
+                                                                                                        <i class="fas fa-star filled"></i>
+                                                                                                        <%}else{%>
+                                                                                                            <i class="fas fa-star"></i>
+                                                                                                            <%}%>
+                                                                                                                <%if(avg>=5){%>
+                                                                                                                    <i class="fas fa-star filled"></i>
+                                                                                                                    <%}else{%>
+                                                                                                                        <i class="fas fa-star"></i>
+                                                                                                                        <%}%>
+                                                                                                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                                            </div>
+                                                            <div class="clinic-details">
+                                                                <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+                                                                    <%=doctor.contacts.city%> &nbsp;
+                                                                        <%=doctor.contacts.state%>
+                                                                </p>
+                                                            </div>
+                                    </div>
+                                </div>
+                                <!-- Booking Doctor Info -->
+
+                                <div class="booking-summary">
+                                    <div class="booking-item-wrap">
+                                        <ul class="booking-date">
+                                          
+                                            <li> Date <span><%=date%></span>
+                                                <li>Time <span><%=time.toUpperCase()%></span></li>
+
+                                                
+                                                        <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
+                                        </ul>
+                                        <ul class="booking-fee">
+                                            <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
+                                            <li>Cancellation Fee <span>Rs 50</span></li>
+                                            
+                                        </ul>
+                                        <div class="booking-total">
+                                            <ul class="booking-total-list">
+                                                <li>
+                                                    <span>Total</span>
+                                                    <%var total = doctor.booking_fee - 50 ;%>
+                                                    <span class="total-cost">Rs <%=total%></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Booking Summary -->
+
+                    </div>
+                    <div class="col-md-8 plzero" style="padding-left:50px">
+                        <%if(rflag == 'true'){%>
+                        <div class="alert alert-danger alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
+                            <strong>Note!</strong> Cancellation is valid only for three days prior to your appointment date. Cancellation charges will be Rs 50.Once cancelled, the amount will be redirected to your bank account within 3-5 working days. 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="alert alert-danger alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
+                                            <strong>Note!</strong> Cancellation is only valid before your appointment date. Cancellation charges will be Rs 50.Once cancelled, the amount will be redirected to your bank account within 3-5 working days. 
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                                    </div>
+                                        <%}%>
+                            <h3 style="font-size:1.2rem;margin-top:50px;margin-bottom:20px" class="malert">Do you want to cancel the appointment?</h3>        
+                    <a  href="/user/payments/refund/?doctorid=<%=id%>&fee=<%=fee%>&id=<%=payid%>&dayindex=<%=dayindex%>&index=<%=i%>&slotindex=<%=slotindex%>&date=<%=date%>&time=<%=time%>&email=<%=email%>" class="btn btn-sm bg-danger-light malert" style="width: 300px;padding:10px;display:block;margin-bottom:50px">
+                        <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                       
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+   
+    <script>
+        var own = document.getElementById('ownp');
+        var pat = document.getElementById('patientp');
+
+        function display() {
+            own.classList.add('displayNone');
+            pat.classList.remove('displayNone');
+        }
+
+        function display1() {
+            own.classList.remove('displayNone');
+            pat.classList.add('displayNone');
+        }
+    </script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+
+</html>
