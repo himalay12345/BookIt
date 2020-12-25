@@ -22,28 +22,30 @@ const bodyParser = require('body-parser');
 // trackServer.listen(5000);
 const fs = require('fs');
 const https = require('https');
-var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
+var secureServer = https.createServer({
+    key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/cert.pem'),
     ca: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/chain.pem'),
-    requestCert: false,     
-    rejectUnauthorized: false },app);
+    requestCert: false,
+    rejectUnauthorized: false
+}, app);
 const trackSockets = require('./config/track_socket').trackSockets(secureServer);
-secureServer.listen(5000);   
+secureServer.listen(5000);
 
 
 const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);
 
-if(env.name == 'development'){
+if (env.name == 'development') {
 
-app.use(sassMiddleware({
-    src:path.join(__dirname,env.asset_path,'scss'),
-    dest:path.join(__dirname,env.asset_path,'css'),
-    debug: true,
-    outputStyle:'extended',
-    prefix:'/css'
-}));
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
 }
 console.log('Patient Tracking server is running on port 5000');
 

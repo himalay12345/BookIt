@@ -28,7 +28,7 @@
                         <a href="index" style="font-size: 1.5rem;">Home</a>
 
                     </li>
-                    <li class="mdlist"  style="margin-left: 30px;">
+                    <li class="mdlist" style="margin-left: 30px;">
                         <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
                         <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
                     </li>
@@ -52,8 +52,11 @@
                     <li class="smlist" style="display: none;">
                         <a href="/privacy-policy">Policy</a>
                     </li>
+                    <li class="smlist" style="display: none;">
+                        <a href="/customer_service">Customer Service</a>
+                    </li>
 
-                   
+
 
 
                     <li class="mdlist">
@@ -124,15 +127,13 @@
 
                     <!-- Notifications -->
                     <li class="nav-item dropdown noti-dropdown bell">
-                       
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                            <i class="far fa-bell" style="color: black; "></i>  <%if(locals.user.notification){%><%if(locals.user.notification.length>0){%><span class="badge badge-pill"><%=locals.user.notification.length%></span>  <%}%> <%}%>
+                            <i class="far fa-bell" style="color: black; "></i> <span class="badge badge-pill">1</span>
                         </a>
-                      
                         <div class="dropdown-menu notifications">
                             <div class="topnav-dropdown-header">
                                 <span class="notification-title">Notifications</span>
-                                <!-- <a href="javascript:void(0)" class="clear-noti"> Clear All </a> -->
+                                <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
                             </div>
                             <div class="noti-content" style="padding-top:10px ;">
                                 <ul class="notification-list">
@@ -195,7 +196,7 @@
                             <div class="dropdown-menu profile-drop cloginbtns">
                                 <div class="user-header">
                                     <div class="avatar avatar-sm">
-                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image" class="avatar-img rounded-circle">
+                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath(' img/profile.png ')%>"' alt="User Image" class="avatar-img rounded-circle">
                                     </div>
                                     <div class="user-text">
                                         <h6>Dr.
@@ -206,14 +207,13 @@
                                 </div>
                                 <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
                                 <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
-                                <%if(locals.user.staff_id){%>
                                 <a class="dropdown-item" href="/live-patient-tracking/?id=<%=locals.user.id%>">Live Patient Tracking</a>
-                                <%}%>
+
                                 <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
                                 <a class="dropdown-item" href="/appointments">Appointments</a>
                                 <a class="dropdown-item" href="/my-patients">My Patients</a>
                                 <a class="dropdown-item" href="/invoices">Invoices</a>
-                                <a class="dropdown-item" href="/reviews">Reviews</a>
+                                <a class="dropdown-item" href="/reviews">Review</a>
                                 <a class="dropdown-item" href="/bank-details">Bank Account</a>
 
                                 <a class="dropdown-item" href="/settings">Settings</a>
@@ -229,7 +229,7 @@
                                     <div class="dropdown-menu profile-drop cloginbtns">
                                         <div class="user-header">
                                             <div class="avatar avatar-sm">
-                                                <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="<%=assetPath('img/profile.png')%>"' class="avatar-img rounded-circle">
+                                                <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="<%=assetPath(' img/profile.png ')%>"' class="avatar-img rounded-circle">
                                             </div>
                                             <div class="user-text">
                                                 <h6>
@@ -260,7 +260,7 @@
                                             <div class="dropdown-menu profile-drop cloginbtns">
                                                 <div class="user-header">
                                                     <div class="avatar avatar-sm">
-                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image" class="avatar-img rounded-circle">
+                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath(' img/profile.png ')%>"' alt="User Image" class="avatar-img rounded-circle">
                                                     </div>
                                                     <div class="user-text">
                                                         <h6>
@@ -272,7 +272,6 @@
                                                 <a class="dropdown-item" href="/staff-profile">My Profile</a>
                                                 <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
                                                 <a class="dropdown-item" href="/staff-schedule-timings">Schedule Timing</a>
-                                                <!-- <a class="dropdown-item" href="/staff-old-booking/?id=<%=locals.user.doctorid%>">Old Patient Booking</a> -->
                                                 <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
                                                 <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
                                                 <a class="dropdown-item" href="/settings">Settings</a>

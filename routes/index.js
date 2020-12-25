@@ -87,6 +87,8 @@ router.get('/staff-forgot-password', homeController.staffForgotPassword);
 router.get('/staff-dashboard', passport.checkStaffAuthentication, homeController.staffDashboard);
 // router.get('/staff-add-doctor', passport.checkStaffAuthentication, homeController.staffAddDoctor);
 router.get('/staff-login-page', homeController.staffLoginPage);
+router.get('/customer_service', homeController.customerService);
+
 router.get('/staff-booking', passport.checkStaffAuthentication, homeController.staffBooking);
 router.get('/staff-old-booking', passport.checkStaffAuthentication, homeController.staffOldBooking);
 router.get('/steps', passport.checkDoctorAuthentication, homeController.steps)

@@ -4,7 +4,7 @@
 <!-- doccure/doctor-dashboard  30 Nov 2019 04:12:03 GMT -->
 
 <head>
-    
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
 			<script src="/js/html5shiv.min.js"></script>
@@ -19,11 +19,11 @@
     <div class="main-wrapper">
 
         <!-- Header -->
-      
+
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar ssstop"  style="padding: 10px 0px !important;margin-top: 20px;">
+        <div class="breadcrumb-bar ssstop" style="padding: 10px 0px !important;margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6 col-12" style="margin-bottom: 15px;">
@@ -35,21 +35,21 @@
                         </nav>
                         <h2 class="breadcrumb-title">Dashboard</h2>
                     </div>
-                   <div style="display: flex;flex-direction: column;">  
-                    <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
-                        <div class="col-md-6 col-12 text-md-right ssmargin" style="margin-bottom:10px;max-width: 100%;margin-top: 10px;margin-left: 150px;">
-                            <a href="#" style="color: #ff1d58;margin-left:20px;font-size:1rem;font-weight: bold;color:white;background-color:rgb(0, 143, 24); padding: 8px 40px; border-radius: 5px;"><i class="fas fa-check mr-3"></i>Booking Service Activated</a>
-                        </div>
-                        <div class="col-md-6 col-12 text-md-right smargin" style="max-width: 100%;margin-top: 10px;margin-bottom:10px;margin-left: 150px;">
-                            <a href="/booking-service" style="color: #ff1d58;font-size:1rem;font-weight: bold;background-color: white; padding: 8px 60px; border-radius: 5px;"><i class="fas fa-hourglass" style="margin-right: 5px;"></i>Stop Booking Service</a>
-                        </div>
-                     <%}else{%>
-                        <div class="col-md-6 col-12 text-md-right" style="max-width: 100%;margin-top: 10px;margin-bottom:10px;margin-left: 150px;">
-                            <a href="/steps" style="color: #ff1d58;font-size:1rem;font-weight: bold;background-color: white; padding: 8px 60px; border-radius: 5px;">Activate Booking Service</a>
-                        </div>
-                    <%}%>
+                    <div style="display: flex;flex-direction: column;">
+                        <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
+                            <div class="col-md-6 col-12 text-md-right ssmargin" style="margin-bottom:10px;max-width: 100%;margin-top: 10px;margin-left: 150px;">
+                                <a href="#" style="color: #ff1d58;margin-left:20px;font-size:1rem;font-weight: bold;color:white;background-color:rgb(0, 143, 24); padding: 8px 40px; border-radius: 5px;"><i class="fas fa-check mr-3"></i>Booking Service Activated</a>
+                            </div>
+                            <div class="col-md-6 col-12 text-md-right smargin" style="max-width: 100%;margin-top: 10px;margin-bottom:10px;margin-left: 150px;">
+                                <a href="/booking-service" style="color: #ff1d58;font-size:1rem;font-weight: bold;background-color: white; padding: 8px 60px; border-radius: 5px;"><i class="fas fa-hourglass" style="margin-right: 5px;"></i>Stop Booking Service</a>
+                            </div>
+                            <%}else{%>
+                                <div class="col-md-6 col-12 text-md-right" style="max-width: 100%;margin-top: 10px;margin-bottom:10px;margin-left: 150px;">
+                                    <a href="/steps" style="color: #ff1d58;font-size:1rem;font-weight: bold;background-color: white; padding: 8px 60px; border-radius: 5px;">Activate Booking Service</a>
+                                </div>
+                                <%}%>
 
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,15 +103,15 @@
                                             </a>
                                         </li>
 
-                                       
-                                       
+
+
                                         <li>
                                             <a href="/my-patients">
                                                 <i class="fas fa-user-injured"></i>
                                                 <span>My Patients</span>
                                             </a>
                                         </li>
-                                       
+
                                         <li>
                                             <a href="/invoices">
                                                 <i class="fas fa-file-invoice"></i>
@@ -149,32 +149,34 @@
                                                         </div>
                                                     </div>
                                                     <%var today = new Date();%>
-                                                    <%var dd = String(today.getDate()).padStart(2, '0');
+                                                        <%var dd = String(today.getDate()).padStart(2, '0');
                                                     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                     var yyyy = today.getFullYear();
                                                     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                     var dayOfWeek = weekday[today.getDay()];
                                                     var n1  = dd +'-'+mm+'-'+yyyy%> %>
-                                                    <%var count = 0;%>
-                                                    <%for(patients of allpatients.patients){%>
-                                                        <%var today = patients.createdAt;%>
-                                                        <%var dd1 = String(today.getDate()).padStart(2, '0');
+                                                            <%var count = 0;%>
+                                                                <%for(patients of allpatients.patients){%>
+                                                                    <%var today = patients.createdAt;%>
+                                                                        <%var dd1 = String(today.getDate()).padStart(2, '0');
                                                         var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                         var yyyy1 = today.getFullYear();
                                                         var weekday1 = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                         var dayOfWeek1 = weekday[today.getDay()];
                                                         var n2 = dd1 +'-'+mm1+'-'+yyyy1%>
-                                                        <%if(n1 == n2){%>
-                                                            
-                                                           <%count++;%>
-                                                        <%}%>
-                                                       
-                                                    <%}%>
-                                                    <div class="dash-widget-info">
-                                                        <h6>Total Patient</h6>
-                                                        <h3><%=allpatients.patients.length%></h3>
-                                                        <p class="text-muted">Till Today</p>
-                                                    </div>
+                                                                            <%if(n1 == n2){%>
+
+                                                                                <%count++;%>
+                                                                                    <%}%>
+
+                                                                                        <%}%>
+                                                                                            <div class="dash-widget-info">
+                                                                                                <h6>Total Patient</h6>
+                                                                                                <h3>
+                                                                                                    <%=allpatients.patients.length%>
+                                                                                                </h3>
+                                                                                                <p class="text-muted">Till Today</p>
+                                                                                            </div>
                                                 </div>
                                             </div>
 
@@ -187,11 +189,13 @@
                                                     </div>
                                                     <div class="dash-widget-info">
                                                         <h6>Today Patient</h6>
-                                                        <h3><%=count%></h3>
+                                                        <h3>
+                                                            <%=count%>
+                                                        </h3>
                                                         <%var str = yyyy+'-'+mm+'-'+dd;%>
-                                                        <%var str1 = formatDate(str);%>
-                                                        <%function formatDate(d){%>
-                                                            <%var date = new Date(d);
+                                                            <%var str1 = formatDate(str);%>
+                                                                <%function formatDate(d){%>
+                                                                    <%var date = new Date(d);
 
                                                             if ( isNaN( date .getTime() ) ) 
                                                             {
@@ -224,8 +228,10 @@
                                                              return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
                                                              }
                                                                %>
-                                                        <%}%>
-                                                        <p class="text-muted"><%=str1%></p>
+                                                                        <%}%>
+                                                                            <p class="text-muted">
+                                                                                <%=str1%>
+                                                                            </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -239,8 +245,12 @@
                                                     </div>
                                                     <div class="dash-widget-info">
                                                         <h6>Appointments</h6>
-                                                        <h3><%=allpatients.patients.length%></h3>
-                                                        <p class="text-muted"><%=str1%></p>
+                                                        <h3>
+                                                            <%=allpatients.patients.length%>
+                                                        </h3>
+                                                        <p class="text-muted">
+                                                            <%=str1%>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,81 +264,84 @@
                             <div class="col-md-12">
                                 <h4 class="mb-4">Patient Appoinment</h4>
                                 <%var date;%>
-                                <div class="col-12 col-md-12" >
-                                    <form action="/user/doctor-sort-by-date" method="POST">
-                                    <div class="form-group" style="display: inline-flex;width: 100%;">
-                                        <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
-                                        <div class="cal-icon col-md-3" style="padding-right: 15px;">
-                                            <input type="text" placeholder="<%=date%>" name="date" class="form-control datetimepicker">
+                                    <div class="col-12 col-md-12">
+                                        <form action="/user/doctor-sort-by-date" method="POST">
+                                            <div class="form-group" style="display: inline-flex;width: 100%;">
+                                                <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
+                                                <div class="cal-icon col-md-3" style="padding-right: 15px;">
+                                                    <input type="text" placeholder="<%=date%>" name="date" class="form-control datetimepicker">
 
-                                        </div>
-                                        <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
 
 
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                                </div>
-                              
-                                <div class="appointment-tab">
 
-                                    <!-- Appointment Tab -->
-                                    <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
-                                        </li>
-                                    </ul>
+                                    <div class="appointment-tab">
 
-                                    <!-- /Appointment Tab -->
-                                    <%if(allpatients.patients == ''){%>
-                                        <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
-                                        <%}else{%>
-                             <div class="tab-content">
-                                <%var daten;%>
-                                       
-                                        <div class="tab-pane show active" id="upcoming-appointments">
-                                            <div class="card card-table mb-0">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover table-center mb-0 stable">
-                                                            <thead class="sthead">
-                                                                <tr class="str">
-                                                                    <th class="sth">Patient Name</th>
-                                                                    <th class="sth">Appt Date</th>
-                                                                    <th class="sth">Purpose</th>
-                                                                    <th class="sth">Type</th>
-                                                                    <th class="text-center sth">Status</th>
-                                                                   
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="stbody">
-                                                                <%var c=0,z=0;%>
-                                                                <%for(patients of allpatients.patients){%>
-                                                                    <%if(date!=undefined){%>
-                                                                        <%if(patients.date != date){%>
-                                                                            <%z++;continue;%>
-                                                                        <%}%>
-                                                                    <%}%>   
-                                                                <tr class="str">
-                                                                    <td class="std2">
-                                                                        <h2 class="table-avatar">
-                                                                            
-                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
+                                        <!-- Appointment Tab -->
+                                        <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
+                                            </li>
+                                        </ul>
+
+                                        <!-- /Appointment Tab -->
+                                        <%console.log(staff.booking.length)%>
+                                            <%if(allpatients.patients == ''){%>
+                                                <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
+                                                <%}else{%>
+
+                                                    <div class="tab-content">
+                                                        <%var daten;%>
+
+                                                            <div class="tab-pane show active" id="upcoming-appointments">
+                                                                <div class="card card-table mb-0">
+                                                                    <div class="card-body">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-hover table-center mb-0 stable">
+                                                                                <thead class="sthead">
+                                                                                    <tr class="str">
+                                                                                        <th class="sth">Patient Name</th>
+                                                                                        <th class="sth">Appt Date</th>
+                                                                                        <th class="sth">Purpose</th>
+                                                                                        <th class="sth">Type</th>
+                                                                                        <th class="text-center sth">Status</th>
+
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody class="stbody">
+                                                                                    <%var c=0,z=0;%>
+                                                                                        <%for(patients of allpatients.patients){%>
+                                                                                            <%if(date!=undefined){%>
+                                                                                                <%if(patients.date != date){%>
+                                                                                                    <%z++;continue;%>
+                                                                                                        <%}%>
+                                                                                                            <%}%>
+                                                                                                                <tr class="str">
+                                                                                                                    <td class="std2">
+                                                                                                                        <h2 class="table-avatar">
+
+                                                                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
                                                                                 
                                                                                 <img class="avatar-img rounded-circle" src="<%=patients.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                                                </a>
-                                                                              
 
-                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>"><%=patients.name%> <span>#PT00<%=++c%></span></a>
-                                                                        </h2>
-                                                                    </td>
-                                                                    <%var str2 = patients.date.split('-');%>
-                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
-                                                        <%var str1 = formatDate(str);%>
-                                                        <%function formatDate(d){%>
-                                                            <%var date = new Date(d);
+
+                                                                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>">
+                                                                                                                                <%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                                                                        </h2>
+                                                                                                                    </td>
+                                                                                                                    <%var str2 = patients.date.split('-');%>
+                                                                                                                        <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                                                                                            <%var str1 = formatDate(str);%>
+                                                                                                                                <%function formatDate(d){%>
+                                                                                                                                    <%var date = new Date(d);
 
                                                             if ( isNaN( date .getTime() ) ) 
                                                             {
@@ -361,126 +374,131 @@
                                                              return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
                                                              }
                                                                %>
-                                                        <%}%>
-                                                                    <td class="std2"><%=str1%><span class="d-block text-info"><%=patients.time%></span></td>
-                                                                    <td class="std2">General</td>
-                                                                    <%var zz = 0;%>
-                                                                    
-                                                                  
-                                                                    <td class="std2">New Patient</td>
-                                                                   
-                                                                    
-                                                                    
-                                                                        
-                                                                            <%if(patients.cancel == true){%>
-                                                                                <td class="std2"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
-                                                                                <%}else{%>
-                                                                                  <td class="std2"><span class="badge badge-pill bg-success-light">Confirm</span></td>
-                                                                                  <%}%>
+                                                                                                                                        <%}%>
+                                                                                                                                            <td class="std2">
+                                                                                                                                                <%=str1%><span class="d-block text-info"><%=patients.time%></span></td>
+                                                                                                                                            <td class="std2">General</td>
+                                                                                                                                            <%var zz = 0;%>
 
-                                                                           
-                                                                     
-                                                                </tr>
-                                                                <%}%>
-                                                              
-                                                            </tbody>
-                                                        </table>
-                                                        <%if(z==allpatients.patients.length){%>
-                                                            <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
-                                                        <%}%>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="today-appointments">
-                                            <div class="card card-table mb-0">
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover table-center mb-0 stable">
-                                                            <thead class="sthead">
-                                                                <tr class="str">
-                                                                    <th class="sth">Patient Name</th>
-                                                                    <th class="sth">Patient Age</th>
-                                                                    <th class="sth">Patient Phone</th>
-                                                                    <th class="sth">Patient Address</th>
-                                                                    <th class="sth">Booking Mode</th>
-                                                                    <th class="text-center sth">Status</th>
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="stbody">
-                                                                <%var c=0,z1=0,z2=0;%>
-                                                                <%if(staff && staff.booking.length>0){%>
-                                                                    <%for(patients of staff.booking){%>
-                                                                        <%var today = new Date();
+                                                                                                                                                <td class="std2">New Patient</td>
+
+
+
+
+                                                                                                                                                <%if(patients.cancel == true){%>
+                                                                                                                                                    <td class="std2"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                                                    <%}else{%>
+                                                                                                                                                        <td class="std2"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                                        <%}%>
+
+
+
+                                                                                                                </tr>
+                                                                                                                <%}%>
+
+                                                                                </tbody>
+                                                                            </table>
+                                                                            <%if(z==allpatients.patients.length){%>
+                                                                                <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                                                <%}%>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tab-pane" id="today-appointments">
+                                                                <div class="card card-table mb-0">
+                                                                    <div class="card-body">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-hover table-center mb-0 stable">
+                                                                                <thead class="sthead">
+                                                                                    <tr class="str">
+                                                                                        <th class="sth">Patient Name</th>
+                                                                                        <th class="sth">Patient Age</th>
+                                                                                        <th class="sth">Patient Phone</th>
+                                                                                        <th class="sth">Patient Address</th>
+                                                                                        <th class="sth">Booking Mode</th>
+                                                                                        <th class="text-center sth">Status</th>
+
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody class="stbody">
+
+                                                                                    <%var c=0,z1=0,z2=0;%>
+
+                                                                                        <%if(staff && staff.booking.length>0){%>
+
+                                                                                            <%for(patients of staff.booking){%>
+                                                                                                <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var dayOfWeek = weekday[today.getDay()];%>
-<%var st2 = patients.date.split('-');%>
-<%var st1 = st2[2]+'-'+st2[1]+'-'+st2[0];%>
-<%var today1 = new Date(st1);
+                                                                                                    <%var st2 = patients.date.split('-');%>
+                                                                                                        <%var st1 = st2[2]+'-'+st2[1]+'-'+st2[0];%>
+                                                                                                            <%var today1 = new Date(st1);
 var dd1= String(today1.getDate()).padStart(2, '0');
 var mm1 = String(today1.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy1 = today1.getFullYear();
 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var dayOfWeek = weekday[today1.getDay()];%>
-                                                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
-                                                                                    <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                                                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                                                                    <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
 
 
-                                                                                        <%if(daten != undefined){%>
-                                                                                            <%if(daten != patients.date){%>
-                                                                                                <%z1++;continue;%>
-                                                                                                    <%}%>
+                                                                                                                        <%if(daten != undefined){%>
+                                                                                                                            <%if(daten != patients.date){%>
+                                                                                                                                <%z1++;continue;%>
+                                                                                                                                    <%}%>
 
-                                                                                                        <%}else{%>
+                                                                                                                                        <%}else{%>
 
-                                                                                                            <%if(str1 != str2){%>
-                                                                                                                <%z1++;continue;%>
-                                                                                                                    <%}%>
-                                                                                                                        <%}%>
-
-                                                                                                                            <tr class="str">
-
-                                                                                                                                <td class="std">
-                                                                                                                                    <h2 class="table-avatar">
-
-
-                                                                                                                                        <a href="#">
-                                                                                                                                            <%=patients.name%> <span>#PT00<%=++c%></span></a>
-                                                                                                                                    </h2>
-                                                                                                                                </td>
-
-                                                                                                                                <td class="std">
-                                                                                                                                    <%=patients.age%>
-                                                                                                                                </td>
-
-                                                                                                                                <td class="std">
-                                                                                                                                    <%=patients.phone%>
-                                                                                                                                </td>
-
-                                                                                                                                <td class="std">
-                                                                                                                                    <%=patients.address%>
-                                                                                                                                </td>
-                                                                                                                                <%if(patients.type=='online'){%>
-                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
-                                                                                                                                    <%}else{%>
-                                                                                                                                        <td class="std"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
-
-                                                                                                                                        <%}%>
-
-
-
-                                                                                                                                            <%if(patients.cancel == true){%>
-                                                                                                                                                <td class="std"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
-                                                                                                                                                <%}else{%>
-                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                            <%if(str1 != str2){%>
+                                                                                                                                                <%z1++;continue;%>
                                                                                                                                                     <%}%>
-                                                                                                                                                        <td class="text-right">
+                                                                                                                                                        <%}%>
 
-                                                                                                                                                            <!-- <div class="table-action">
+                                                                                                                                                            <tr class="str">
+
+                                                                                                                                                                <td class="std">
+                                                                                                                                                                    <h2 class="table-avatar">
+
+
+                                                                                                                                                                        <a href="#">
+                                                                                                                                                                            <%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                                                                                                                    </h2>
+                                                                                                                                                                </td>
+
+                                                                                                                                                                <td class="std">
+                                                                                                                                                                    <%=patients.age%>
+                                                                                                                                                                </td>
+
+                                                                                                                                                                <td class="std">
+                                                                                                                                                                    <%=patients.phone%>
+                                                                                                                                                                </td>
+
+                                                                                                                                                                <td class="std">
+                                                                                                                                                                    <%=patients.address%>
+                                                                                                                                                                </td>
+                                                                                                                                                                <%if(patients.type=='online'){%>
+                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                                                                                                                    <%}else{%>
+                                                                                                                                                                        <td class="std"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+
+                                                                                                                                                                        <%}%>
+
+
+
+                                                                                                                                                                            <%if(patients.cancel == true){%>
+                                                                                                                                                                                <td class="std"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                                                                                <%}else{%>
+                                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                        <td class="text-right">
+
+                                                                                                                                                                                            <!-- <div class="table-action">
                                                                                                                                                                 <%if(patients.cancel == true){%>
                                                                                                                                                                     <a href="#" class="btn btn-sm bg-danger" style="color: white;">
 
@@ -494,51 +512,51 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                         </a>
                                                                                                                                                                         <%}%>
                                                                                                                                                             </div> -->
-                                                                                                                                                        </td>
+                                                                                                                                                                                        </td>
 
 
-                                                                                                                            </tr>
-                                                                                                                            <div id="popup1" class="overlay">
-                                                                                                                                <div class="popup">
-                                                                                                                                    <form action="/user/offline-cancel" id="form<%=c%>" method="POST">
-                                                                                                                                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
-                                                                                                                                            <div class="form-group">
-                                                                                                                                                <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
+                                                                                                                                                            </tr>
+                                                                                                                                                            <div id="popup1" class="overlay">
+                                                                                                                                                                <div class="popup">
+                                                                                                                                                                    <form action="/user/offline-cancel" id="form<%=c%>" method="POST">
+                                                                                                                                                                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                                                                                                                                                            <div class="form-group">
+                                                                                                                                                                                <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
 
-                                                                                                                                                <input type="hidden" name="slotindex" value="<%=patients.slot%>">
-                                                                                                                                                <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
+                                                                                                                                                                                <input type="hidden" name="slotindex" value="<%=patients.slot%>">
+                                                                                                                                                                                <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
 
-                                                                                                                                                <input type="hidden" name="bid" value="<%=patients._id%>">
+                                                                                                                                                                                <input type="hidden" name="bid" value="<%=patients._id%>">
 
-                                                                                                                                                <input type="hidden" name="phone" value="<%=patients.phone%>">
+                                                                                                                                                                                <input type="hidden" name="phone" value="<%=patients.phone%>">
 
-                                                                                                                                                <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
-                                                                                                                                                <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
-                                                                                                                                                </select>
-                                                                                                                                            </div>
-                                                                                                                                        </div>
-                                                                                                                                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
-                                                                                                                                    </form>
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                            <%}%>
-                                                                                                                            <%}%>
+                                                                                                                                                                                <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                                                                                                                                                <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                                                                                                                                                                </select>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
+                                                                                                                                                                    </form>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                            <%}%>
+                                                                                                                                                                <%}%>
 
-                                                            </tbody>
+                                                                                </tbody>
 
-                                                        </table>
-                                                        <%if(z1==locals.user.booking.length){%>
-                                                            <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
-                                                            <%}%>
+                                                                            </table>
+                                                                            <%if(z1==locals.user.booking.length){%>
+                                                                                <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                                                <%}%>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                      
-
-                                    </div> 
-                                    <%}%>
-                                </div>
+                                                    <%}%>
+                                    </div>
                             </div>
                         </div>
 
@@ -552,14 +570,14 @@ var dayOfWeek = weekday[today1.getDay()];%>
 
         <!-- Footer -->
         <%-include('footer');%>
-        <!-- /Footer -->
+            <!-- /Footer -->
 
     </div>
     <!-- /Main Wrapper -->
 
     <!-- jQuery -->
-    
-   
+
+
 
 </body>
 
