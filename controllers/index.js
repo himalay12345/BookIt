@@ -195,8 +195,8 @@ module.exports.Doctors = async(req, res) => {
     })
 }
 module.exports.booking = async(req, res) => {
-    let doctor = await User.findOne({_id:req.query.id,booking_service:true});
-    let ndoctor = await User.findOne({_id:req.query.id,booking_service:true});
+    let doctor = await User.findOne({ _id: req.query.id, booking_service: true });
+    let ndoctor = await User.findOne({ _id: req.query.id, booking_service: true });
 
     if (!doctor) {
         return res.render('not-available', {
@@ -216,181 +216,158 @@ module.exports.booking = async(req, res) => {
     console.log(dayOfWeek);
     var str = dd + '-' + mm + '-' + yyyy;
 
-if(user1)
-{
-    for (temp of doctor.schedule_time) {
-        if (temp.day.toUpperCase() == dayOfWeek) {
-            var vflag = true;
-            var vflag1 = false;
-       
-            if (typeof(temp.booked) == 'string') {
-                if(temp.booked != '0')
-                {
-                    vflag1 = true;
-                }
-            }
+    if (user1) {
+        for (temp of doctor.schedule_time) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
 
-            if (typeof(temp.booked) == 'number') {
-                if(temp.booked != '0')
-                {
-                    vflag1 = true;
-                }
-            }
-            
-            if (typeof(temp.booked) == 'object'){
-                
-                for(temp2 of temp.booked)
-                {
-                    if(temp2 != '0')
-                    {
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
                         vflag1 = true;
                     }
-                    
                 }
-            }
-            
-            for(temp1 of user1.booking)
-            {
-                if(temp1.date == str)
-                {
-                    vflag = false;
-                }
-            }
-            console.log(vflag,vflag1)
 
-            if(vflag && vflag1)
-            {
-                if (typeof(temp.booked) == 'string') {
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of user1.booking) {
+                    if (temp1.date == str) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
                         temp.booked = 0;
                     }
-        
+
                     if (typeof(temp.booked) == 'number') {
                         temp.booked = 0;
                     }
-                    
-                    if (typeof(temp.booked) == 'object'){
+
+                    if (typeof(temp.booked) == 'object') {
                         temp.booked = [0, 0];
                     }
 
-                    
-            }
-            temp.reset_flag = true;
-           
-        }
 
-        else{
-            if(temp.reset_flag == true)
-            {
-                  if (typeof(temp.booked) == 'string') {
-                temp.booked = 0;
-            }
-
-            if (typeof(temp.booked) == 'number') {
-                temp.booked = 0;
-            }
-            
-            if (typeof(temp.booked) == 'object'){
-                temp.booked = [0, 0];
-            }
-
-            temp.reset_flag = false;
-            temp.alt_flag = false;
-            }
-            
-        }
-    }
-}
-
-else{
-    for (temp of doctor.schedule_time) {
-        if (temp.day.toUpperCase() == dayOfWeek) {
-            var vflag = true;
-            var vflag1 = false;
-       
-            if (typeof(temp.booked) == 'string') {
-                if(temp.booked != '0')
-                {
-                    vflag1 = true;
                 }
-            }
+                temp.reset_flag = true;
 
-            if (typeof(temp.booked) == 'number') {
-                if(temp.booked != '0')
-                {
-                    vflag1 = true;
-                }
-            }
-            
-            if (typeof(temp.booked) == 'object'){
-                
-                for(temp2 of temp.booked)
-                {
-                    if(temp2 != '0')
-                    {
-                        vflag1 = true;
-                    }
-                    
-                }
-            }
-            
-            for(temp1 of doctor.patients)
-            {
-                if(temp1.date == str)
-                {
-                    vflag = false;
-                }
-            }
-            console.log(vflag,vflag1)
-
-            if(vflag && vflag1)
-            {
-                if (typeof(temp.booked) == 'string') {
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
                         temp.booked = 0;
                     }
-        
+
                     if (typeof(temp.booked) == 'number') {
                         temp.booked = 0;
                     }
-                    
-                    if (typeof(temp.booked) == 'object'){
+
+                    if (typeof(temp.booked) == 'object') {
                         temp.booked = [0, 0];
                     }
 
-                    
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
+
             }
-            temp.reset_flag = true;
-           
         }
+    } else {
+        for (temp of doctor.schedule_time) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
 
-        else{
-            if(temp.reset_flag == true)
-            {
-                  if (typeof(temp.booked) == 'string') {
-                temp.booked = 0;
-            }
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
 
-            if (typeof(temp.booked) == 'number') {
-                temp.booked = 0;
-            }
-            
-            if (typeof(temp.booked) == 'object'){
-                temp.booked = [0, 0];
-            }
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
 
-            temp.reset_flag = false;
-            temp.alt_flag = false;
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of doctor.patients) {
+                    if (temp1.date == str) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
+
             }
-            
         }
     }
-}
 
     doctor.save();
 
     return res.render('booking', {
         title: 'Booking',
         doctor: doctor,
-        ndoctor:ndoctor
+        ndoctor: ndoctor
     })
 
 }
@@ -940,17 +917,17 @@ module.exports.refundCheckout = async(req, res) => {
     let doctor = await User.findById(req.query.id);
     return res.render('refund-checkout', {
         title: 'Refund',
-        doctor:doctor,
-        dayindex:req.query.dayindex,
-        slotindex:req.query.slotindex,
-        date:req.query.date,
-        fee:req.query.fee,
-        time:req.query.time,
-        id:req.query.id,
+        doctor: doctor,
+        dayindex: req.query.dayindex,
+        slotindex: req.query.slotindex,
+        date: req.query.date,
+        fee: req.query.fee,
+        time: req.query.time,
+        id: req.query.id,
         payid: req.query.payid,
-        email:req.query.email,
-        i:req.query.index,
-        rflag:req.query.reschedule
+        email: req.query.email,
+        i: req.query.index,
+        rflag: req.query.reschedule
     });
 }
 
@@ -1351,7 +1328,7 @@ module.exports.scheduleTimings = async(req, res) => {
     return res.render('schedule-timings', {
         title: 'Schedule Timings',
         user: user,
-        staff:staff
+        staff: staff
     })
 }
 module.exports.staffScheduleTimings = async(req, res) => {
@@ -1405,81 +1382,71 @@ module.exports.staffBooking = async(req, res) => {
         if (temp.day.toUpperCase() == dayOfWeek) {
             var vflag = true;
             var vflag1 = false;
-       
+
             if (typeof(temp.booked) == 'string') {
-                if(temp.booked != '0')
-                {
+                if (temp.booked != '0') {
                     vflag1 = true;
                 }
             }
 
             if (typeof(temp.booked) == 'number') {
-                if(temp.booked != '0')
-                {
+                if (temp.booked != '0') {
                     vflag1 = true;
                 }
             }
-            
-            if (typeof(temp.booked) == 'object'){
-                
-                for(temp2 of temp.booked)
-                {
-                    if(temp2 != '0')
-                    {
+
+            if (typeof(temp.booked) == 'object') {
+
+                for (temp2 of temp.booked) {
+                    if (temp2 != '0') {
                         vflag1 = true;
                     }
-                    
+
                 }
             }
-            
-            for(temp1 of user1.booking)
-            {
-                if(temp1.date == str)
-                {
+
+            for (temp1 of user1.booking) {
+                if (temp1.date == str) {
                     vflag = false;
                 }
             }
-            console.log(vflag,vflag1)
+            console.log(vflag, vflag1)
 
-            if(vflag && vflag1)
-            {
+            if (vflag && vflag1) {
                 if (typeof(temp.booked) == 'string') {
-                        temp.booked = 0;
-                    }
-        
-                    if (typeof(temp.booked) == 'number') {
-                        temp.booked = 0;
-                    }
-                    
-                    if (typeof(temp.booked) == 'object'){
-                        temp.booked = [0, 0];
-                    }
+                    temp.booked = 0;
+                }
 
-                    
+                if (typeof(temp.booked) == 'number') {
+                    temp.booked = 0;
+                }
+
+                if (typeof(temp.booked) == 'object') {
+                    temp.booked = [0, 0];
+                }
+
+
             }
             temp.reset_flag = true;
-           
-        }
 
-        else{
-            if(temp.reset_flag == true)
-            {
-                  if (typeof(temp.booked) == 'string') {
-                temp.booked = 0;
+        } else {
+            if (temp.reset_flag == true) {
+                if (typeof(temp.booked) == 'string') {
+                    temp.booked = 0;
+                }
+
+                if (typeof(temp.booked) == 'number') {
+                    temp.booked = 0;
+                }
+
+                if (typeof(temp.booked) == 'object') {
+                    temp.booked = [0, 0];
+                }
+
+                temp.reset_flag = false;
+                temp.alt_flag = false;
             }
 
-            if (typeof(temp.booked) == 'number') {
-                temp.booked = 0;
-            }
-            
-            if (typeof(temp.booked) == 'object'){
-                temp.booked = [0, 0];
-            }
-
-            temp.reset_flag = false;
-            temp.alt_flag = false;
-            }
-            
         }
     }
 
