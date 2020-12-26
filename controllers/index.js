@@ -984,10 +984,25 @@ module.exports.pay = async(req, res) => {
 module.exports.patientTracking = async(req, res) => {
     if(req.isAuthenticated()){
         if (req.user.type == 'Staff') {
+
+            if(req.query.tid)
+            {
+                let user = await User.findById(req.user.id);
+                user.doctorid = req.query.tid;
+                user.save();
+            }
             let user = await User.findById(req.user.id).populate({
                 path: 'doctorid',
                 populate: {
                     path: 'user'
+                }
+            }).populate({
+                path:'doctorids',
+                populate:{
+                    path:'doctorid',
+                    populate:{
+                        path:'user'
+                    }
                 }
             });
     
@@ -1125,7 +1140,21 @@ module.exports.staffLoginPage = (req, res) => {
 }
 
 module.exports.staffDashboard = async(req, res) => {
-    let patients = await User.findById(req.user.id);
+    let patients = await User.findById(req.user.id).
+    populate({
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });
     return res.render('staff-dashboard', {
         title: 'My Dashboard',
         allpatients: patients
@@ -1143,19 +1172,50 @@ module.exports.staffSignup = async(req, res) => {
     if (req.body.type == 'email') {
         let doctor = await User.findById(req.body.id);
         if (req.body.otp == doctor.emailkey) {
+            if(req.isAuthenticated())
+            {
+                let user1 = await User.findById(req.user.id);
+                if(user1.doctorid)
+                {
+                    if(user1.doctorids.length == 0)
+                    {
+                        user1.doctorids.push({
+                            doctorid:user1.doctorid});
+                        user1.doctorids.push({
+                            doctorid:doctor._id});
+
+                    }
+
+                    else
+                    {
+                     user1.doctorids.push({
+                         doctorid:doctor._id}); 
+                        
+                    }
+                    doctor.staff_flag = true;
+                    doctor.staff_id = user1._id;
+                    user1.save();
+                    doctor.save();
+                    req.flash('success','Doctor Added successfully');
+                 return res.redirect('/staff-dashboard')
+                }
+            }
+            else{
             return res.render('staff-register', {
                 title: 'Staff Register',
                 phone: req.body.phone,
                 id: req.body.id,
                 type: 'email'
             });
+        }
         } else {
             req.flash('error', 'Wrong Otp');
             return res.render('doctor-phone-verify', {
                 title: 'Phone verification',
                 phone: req.body.phone,
                 id: req.body.id,
-                type: 'email'
+                type: 'email',
+                designation: req.body.designation
             })
 
         }
@@ -1175,12 +1235,42 @@ module.exports.staffSignup = async(req, res) => {
 
 
         if (data.status == 'approved') {
+            if(req.isAuthenticated())
+            {
+                let user1 = await User.findById(req.user.id);
+                if(user1.doctorid)
+                {
+                    if(user1.doctorids.length == 0)
+                    {
+                        user1.doctorids.push({
+                            doctorid:user1.doctorid});
+                        user1.doctorids.push({
+                            doctorid:doctor._id});
+
+                    }
+
+                    if(user1.doctorids.length>0)
+                    {
+                     user1.doctorids.push({
+                         doctorid:doctor._id}); 
+                        
+                    }
+                    doctor.staff_flag = true;
+                    doctor.staff_id = user1._id;
+                    user1.save();
+                    doctor.save();
+                    req.flash('success','Doctor Added successfully');
+                 return res.redirect('/staff-dashboard')
+                }
+            }
+            else{
             return res.render('set-password', {
                 title: 'Reset Pasword',
                 phone: req.body.phone,
                 id: req.body.id,
                 designation: req.body.designation
             });
+        }
 
         } else {
             req.flash('error', 'Wrong Otp');
@@ -1366,8 +1456,16 @@ module.exports.scheduleTimings = async(req, res) => {
     })
 }
 module.exports.staffScheduleTimings = async(req, res) => {
-    let user = await User.findById(req.user.id);
-    let user1 = await User.findById(user.doctorid).populate('schedule_time');
+    let user = await User.findById(req.user.id).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });;
+    let user1 = await User.findById(req.query.id).populate('schedule_time');
 
     return res.render('staff_schedule_timing', {
         title: 'Schedule Timings',
@@ -1398,9 +1496,54 @@ module.exports.socialMedia = (req, res) => {
     })
 }
 
+module.exports.staffBookingService = async (req, res) => {
+    let user = await User.findById(req.user.id).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });
+    let doctor = await User.findById(req.query.id);
+    return res.render('staff-booking-service', {
+        title: 'Booking-Service',
+        user:user,
+        doctor:doctor
+
+    })
+}
+
+module.exports.selectDoctor = async (req, res) => {
+    let user = await User.findById(req.user.id).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });
+    return res.render('doctor_select', {
+        title: 'Select Doctor',
+        user:user,
+        type:req.query.type
+
+    })
+}
+
 module.exports.staffBooking = async(req, res) => {
     let doctor = await User.findById(req.query.id);
-    let user1 = await User.findById(req.user.id).populate('doctorid');
+    let user1 = await User.findById(req.user.id).populate('doctorid').populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    })
     var today = new Date();
     // today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
@@ -1500,6 +1643,7 @@ module.exports.staffBooking = async(req, res) => {
     return res.render('staff-booking-page', {
         title: 'Booking',
         doctor: doctor,
+        doctor1:doctor,
         user1: user1
     })
 }
@@ -1607,12 +1751,17 @@ module.exports.verifyDoctor = async(req, res) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var check = re.test(String(req.body.phone).toLowerCase());
     if (check == true) {
-        let doctor = await User.findOne({ email: req.body.phone, type: 'Doctor', service: 'google', staff_flag: false });
+        let doctor = await User.findOne({ email: req.body.phone, type: 'Doctor', service: 'google',booking_service:true, staff_flag: false });
         if (doctor) {
+
+
             var key = Math.floor(100000 + Math.random() * 900000);
             emailVerification.newAlert(doctor, key, req.body.phone);
             doctor.emailkey = key;
             doctor.save();
+
+          
+      
 
 
             return res.render('doctor-phone-verify', {
@@ -1623,6 +1772,7 @@ module.exports.verifyDoctor = async(req, res) => {
                 designation:'Verify'
 
             });
+        
 
         } else {
 
@@ -1636,6 +1786,7 @@ module.exports.verifyDoctor = async(req, res) => {
             phone: req.body.phone,
             type: 'Doctor',
             staff_flag: false,
+            
             service: 'phone'
         });
 
@@ -1650,8 +1801,7 @@ module.exports.verifyDoctor = async(req, res) => {
                     channel: req.query.service
                 }).then((data) => {
 
-
-
+                
 
                     return res.render('doctor-phone-verify', {
                         title: 'Phone verification',
@@ -1660,6 +1810,7 @@ module.exports.verifyDoctor = async(req, res) => {
                         designation: 'Verify'
 
                     });
+                
                 });
         } else {
 

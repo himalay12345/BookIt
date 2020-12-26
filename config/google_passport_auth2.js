@@ -9,16 +9,17 @@ const env = require('./environment');
 passport.use(new googleStrategy({
         clientID: env.google_client_id,
         clientSecret: env.google_client_secret,
-        callbackURL: env.google_callback_url
+        callbackURL: env.google_callback_url,
+        passReqToCallback: true
     },
-    function(accessToken, refreshToken, profile, done) {
+    function(req,accessToken, refreshToken, profile, done) {
         User.findOne({ email: profile.emails[0].value , service: 'google' }).exec(function(err, user) {
             if (err) {
                 console.log('Error in google passport strategy', err);
                 return;
             }
 
-            console.log(profile);
+            console.log(req.query);
 
 
 

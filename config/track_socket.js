@@ -52,7 +52,8 @@ module.exports.trackSockets = function(socketServer)
                     time:new Date(),
                     name:staff.booking[x1+j].name,
                     status:'Waiting',
-                    slot:data.slot
+                    slot:data.slot,
+                    did:staff.doctorid
                 })
                 cname.push(staff.booking[x1+j].name);
                 j++;
@@ -77,7 +78,8 @@ module.exports.trackSockets = function(socketServer)
                     time:new Date(),
                     name:staff.booking[x1+j].name,
                     status:'Waiting',
-                    slot:data.slot
+                    slot:data.slot,
+                    did:staff.doctorid
                 })
                 cname.push(staff.booking[x1+j].name);
                 j++;
@@ -90,7 +92,8 @@ module.exports.trackSockets = function(socketServer)
                 time:new Date(),
                 name:data.name,
                 status:data.status,
-                slot:data.slot
+                slot:data.slot,
+                did:staff.doctorid
             })
     
             staff.save();
@@ -132,7 +135,8 @@ module.exports.trackSockets = function(socketServer)
                     time:new Date(),
                     name:data.name,
                     status:data.status,
-                    slot:data.slot
+                    slot:data.slot,
+                    did:staff.doctorid
                 })
         
                 staff.save();
@@ -180,7 +184,8 @@ module.exports.trackSockets = function(socketServer)
                     seat:b1++,
                     time:new Date(),
                     name:staff.booking[x1+j].name,
-                    status:'Waiting'
+                    status:'Waiting',
+                    did:staff.doctorid
                 })
                 cname.push(staff.booking[x1+j].name);
                 j++;
@@ -204,7 +209,8 @@ module.exports.trackSockets = function(socketServer)
                     seat:k,
                     time:new Date(),
                     name:staff.booking[x1+j].name,
-                    status:'Waiting'
+                    status:'Waiting',
+                    did:staff.doctorid
                 })
                 cname.push(staff.booking[x1+j].name);
                 j++;
@@ -216,7 +222,8 @@ module.exports.trackSockets = function(socketServer)
                 seat:data.seat,
                 time:new Date(),
                 name:data.name,
-                status:data.status
+                status:data.status,
+                did:staff.doctorid
             })
     
             staff.save();
@@ -257,7 +264,8 @@ module.exports.trackSockets = function(socketServer)
                     seat:data.seat,
                     time:new Date(),
                     name:data.name,
-                    status:data.status
+                    status:data.status,
+                    did:staff.doctorid
                 })
         
                 staff.save();

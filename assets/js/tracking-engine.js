@@ -255,11 +255,11 @@ class PatientTracking{
                         'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+t1
                     }));
         
-                    var h5 = h4.append($('<h5>',{
-                        'html':data.cname[i]
-                    }));
+                    // var h5 = h4.append($('<h5>',{
+                    //     'html':data.cname[i]
+                    // }));
         
-                    var a = h5.append($('<a class="displayNone uongoing">Ongoing</a>'));
+                    var a = h4.append($('<a class="displayNone uongoing">Ongoing</a>'));
                     
         
                     var h2 = a.append($('<h2 class="b_red uwaiting"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h2>'));
@@ -284,11 +284,11 @@ class PatientTracking{
                     'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+data.data.seat
                 }));
     
-                var h5 = h4.append($('<h5>',{
-                    'html':data.data.name
-                }));
+                // var h5 = h4.append($('<h5>',{
+                //     'html':data.data.name
+                // }));
     
-                var a = h5.append($('<a class = "uongoing" >Ongoing</a>'));
+                var a = h4.append($('<a class = "uongoing" >Ongoing</a>'));
                 var h2 = a.append($('<h2 class="b_red uwaiting displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h2>'));
 
     
@@ -378,11 +378,11 @@ class PatientTracking{
                         'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+data.seat
                     }));
         
-                    var h5 = h4.append($('<h5>',{
-                        'html':data.name
-                    }));
+                    // var h5 = h4.append($('<h5>',{
+                    //     'html':data.name
+                    // }));
         
-                    var a = h5.append($('<a class="uongoing">Ongoing</a>'));
+                    var a = h4.append($('<a class="uongoing">Ongoing</a>'));
                     
                     var h2 = a.append($('<h2 class="b_red uwaiting displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h2>'));
 
@@ -452,11 +452,11 @@ class PatientTracking{
                         'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+t1
                     }));
         
-                    var h5 = h4.append($('<h5>',{
-                        'html':data.cname[i]
-                    }));
+                    // var h5 = h4.append($('<h5>',{
+                    //     'html':data.cname[i]
+                    // }));
         
-                    var a = h5.append($('<a class="displayNone uongoing'+data.data.slot+'">Ongoing</a>'));
+                    var a = h4.append($('<a class="displayNone uongoing'+data.data.slot+'">Ongoing</a>'));
                     
         
                     var h2 = a.append($('<h2 class="b_red uwaiting'+data.data.slot+'"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h2>'));
@@ -479,11 +479,11 @@ class PatientTracking{
                     'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+data.data.seat
                 }));
     
-                var h5 = h4.append($('<h5>',{
-                    'html':data.data.name
-                }));
+                // var h5 = h4.append($('<h5>',{
+                //     'html':data.data.name
+                // }));
     
-                var a = h5.append($('<a class = "uongoing'+data.data.slot+'" >Ongoing</a>'));
+                var a = h4.append($('<a class = "uongoing'+data.data.slot+'" >Ongoing</a>'));
                 var h2 = a.append($('<h2 class="b_red uwaiting'+data.data.slot+' displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h2>'));
 
     
@@ -574,11 +574,11 @@ class PatientTracking{
                         'html':'<span><i class="fas fa-user-md"></i></span>Patient No. '+data.seat
                     }));
         
-                    var h5 = h4.append($('<h5>',{
-                        'html':data.name
-                    }));
+                    // var h5 = h4.append($('<h5>',{
+                    //     'html':data.name
+                    // }));
         
-                    var a = h5.append($('<a class="uongoing'+data.slot+'">Ongoing</a>'));
+                    var a = h4.append($('<a class="uongoing'+data.slot+'">Ongoing</a>'));
                     
                     var h2 = a.append($('<h2 class="b_red uwaiting'+data.slot+' displayNone"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h2>'));
 

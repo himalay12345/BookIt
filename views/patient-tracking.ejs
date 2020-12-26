@@ -16,7 +16,7 @@
         <!-- Breadcrumb -->
         <%if(locals.user){%>
         <%if(locals.user.type == 'Staff'){%>
-        <div class="breadcrumb-bar"  style="padding: 10px 0px !important;margin-top: 20px;">
+        <div class="breadcrumb-bar position-relative"  style="padding: 10px 0px !important;margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-6 col-12" style="margin-bottom: 15px;">
@@ -28,6 +28,24 @@
                         </nav>
                         <h2 class="breadcrumb-title">Patient Tracking system</h2>
                     </div>
+                    <%if(locals.user){%>
+                    <%if(locals.user.doctorids.length>0){%>
+                        <div class="col-md-4 col-12 d-md-block position-absolute" style="top:20px;right:2%;">
+                            <div class="sort-by">
+                                <span class="sort-title">Switch Doctor</span>
+                                <span class="sortby-fliter">
+                                        <select class="select" style="width:auto !important;" onchange="location = this.value;">
+                                            <option>Select</option>
+                                            <%for(doc of user1.doctorids){%>
+                                               <option style="width:auto !important;" class="sorting" value="/patient-tracking/?tid=<%=doc.doctorid._id%>"><%=doc.doctorid.name%></option>
+                                            <%}%>
+                                            
+                                        </select>
+                                    </span>
+                            </div>
+                        </div>
+                        <%}%>
+                        <%}%>
                    
                    
                 </div>
@@ -49,6 +67,78 @@
                         
                         <%if(locals.user){%>
                       <%if(locals.user.type == 'Staff'){%>
+                        <div class="col-md-12" style="width:100%;">
+                            <div class="card">
+                                        <div class="card-body">
+                                            <div class="booking-doc-info">
+                                                <a href="/doctor-profile/?id=<%=user1.doctorid._id%>" class="booking-doc-img">
+        <img src="<%=user1.doctorid.avatar%>" alt="User Image">
+        </a>
+                                                <div class="booking-info">
+                                                    <h4>
+                                                        <a href="/doctor-profile/?id=<%=user1.doctorid._id%>">
+                                                            <%=user1.doctorid.name%>
+                                                        </a>
+                                                    </h4>
+                                                    <p class="doc-department">
+                                                        <% if(user1.doctorid.department== "General Physician"){ %>
+                                                            <img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
+                                                            <% } %>
+        
+                                                                <% if(user1.doctorid.department== "Ophthalmology"){ %>
+                                                                    <img src="<%=assetPath('img/specialities/eye.png')%>" class="img-fluid" alt="Speciality">
+                                                                    <% } %>
+                                                                        <% if(user1.doctorid.department== "Dermatology"){ %>
+                                                                            <img src="<%=assetPath('img/specialities/hair.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                            <% } %>
+                                                                                <% if(user1.doctorid.department== "Paediatrics"){ %>
+                                                                                    <img src="<%=assetPath('img/specialities/child.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                    <% } %>
+                                                                                        <% if(user1.doctorid.department== "Urology"){ %>
+                                                                                            <img src="<%=assetPath('img/specialities/brain.png')%>" class="img-fluid" alt="Speciality">
+                                                                                            <% } %>
+                                                                                                <% if(user1.doctorid.department== "Neurology"){ %>
+                                                                                                    <img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                    <% } %>
+                                                                                                    <% if(user1.doctorid.department== "Orthopedic"){ %>
+        
+                                                                                                        <img src="<%=assetPath('img/specialities/bone.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                        <% } %>
+                                                                                                        <% if(user1.doctorid.department== "Gynaecology"){ %>
+                                                                                                    
+                                                                                                            <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                            <% } %>
+                                                                                                                <% if(user1.doctorid.department== "Cardiologist"){ %>
+                                                                                                                    <img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                                    <% } %>
+                                                                                                                        <% if(user1.doctorid.department== "Dentist"){ %>
+                                                                                                                            <img src="<%=assetPath('img/specialities/teeth.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                                            <% } %>
+                                                                                                                                <%=user1.doctorid.department%>
+        
+                                                    </p>
+                                                    <div class="rating">
+                                                        <i class="fas fa-star filled"></i>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <i class="fas fa-star filled"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span class="d-inline-block average-rating">35</span>
+                                                    </div>
+                                                    <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
+                                                        <%=user1.doctorid.booking_fee%>
+                                                    </p>
+        
+        
+                                                    <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
+                                                        <%=user1.doctorid.contacts.city%>&nbsp;
+                                                            <%=user1.doctorid.contacts.state%>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                         <div class="row" id="patient_track" style="padding-top: 15px;padding-left:10px;">
                             <div class="col-md-12">
@@ -114,7 +204,8 @@
                                                                     var yyyy = today.getFullYear();
                                                                     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                                     var dayOfWeek = weekday[today.getDay()];%>
-                                                                    <%var today = patients.createdAt;
+                                                                    <%var a11 = patients.date.split('-');%>
+                                                                    <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                                                     var dd1= String(today.getDate()).padStart(2, '0');
                                                                     var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                                     var yyyy1 = today.getFullYear();
@@ -123,7 +214,7 @@
                                                                     <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                     <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                                     
-                                                                    <%if(str1 != str2 || patients.cancel != false){%>
+                                                                    <%if(str1 != str2 || patients.cancel != false || patients.did != user1.doctorid.id){%>
                                                                         <%b++;continue;%>
                                                                     <%}%>
                                                                    <tr class="str">
@@ -222,7 +313,8 @@
                                                                         var yyyy = today.getFullYear();
                                                                         var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                                         var dayOfWeek = weekday[today.getDay()];%>
-                                                                        <%var today = patients.createdAt;
+                                                                        <%var a11 = patients.date.split('-');%>
+                                                                    <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                                                         var dd1= String(today.getDate()).padStart(2, '0');
                                                                         var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                                         var yyyy1 = today.getFullYear();
@@ -231,7 +323,7 @@
                                                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                                         
-                                                                        <%if(str1 != str2 || patients.slot != i1 || patients.cancel != false){%>
+                                                                        <%if(str1 != str2 || patients.slot != i1 || patients.cancel != false || patients.did != user1.doctorid.id){%>
                                                                             <%b++;z1++;continue;%>
                                                                         <%}%>
                                                                        <tr class="str">
@@ -337,7 +429,7 @@
                                                     <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                     <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                     
-                                                    <%if(str1 != str2){%>
+                                                    <%if(str1 != str2 || u.did != user1.doctorid.id){%>
                                                         <%continue;%>
                                                     <%}%>
                                                     
@@ -382,7 +474,8 @@
                                                         var yyyy = today.getFullYear();
                                                         var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                         var dayOfWeek = weekday[today.getDay()];%>
-                                                        <%var today = user1.booking[i].createdAt;
+                                                        <%var a11 = user1.booking[i].date.split('-');%>
+                                                        <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                                         var dd1= String(today.getDate()).padStart(2, '0');
                                                         var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                         var yyyy1 = today.getFullYear();
@@ -391,7 +484,7 @@
                                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                         
-                                                        <%if(str1 != str2 || user1.booking[i].cancel != false){%>
+                                                        <%if(str1 != str2 || user1.booking[i].cancel != false || user1.booking[i].did != user1.doctorid.id){%>
                                                             <%continue;%>
                                                         <%}%>
 
@@ -435,7 +528,7 @@
                                                             <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                             <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                             
-                                                            <%if(str1 != str2 || u.slot != i1){%>
+                                                            <%if(str1 != str2 || u.slot != i1 || u.did != user1.doctorid.id){%>
 
                                                                 <%continue;%>
                                                             <%}%>
@@ -481,7 +574,8 @@
                                                                 var yyyy = today.getFullYear();
                                                                 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                                 var dayOfWeek = weekday[today.getDay()];%>
-                                                                <%var today = user1.booking[i].createdAt;
+                                                                <%var a11 = user1.booking[i].date.split('-');%>
+                                                                <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                                                 var dd1= String(today.getDate()).padStart(2, '0');
                                                                 var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                                 var yyyy1 = today.getFullYear();
@@ -490,7 +584,7 @@
                                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                 <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                                 
-                                                                <%if(str1 != str2|| user1.booking[i].slot != i1 || user1.booking[i].cancel != false){%>
+                                                                <%if(str1 != str2|| user1.booking[i].slot != i1 || user1.booking[i].cancel != false || user1.booking[i].did != user1.doctorid.id){%>
                                                                     <%continue;%>
                                                                 <%}%>
         
@@ -552,14 +646,14 @@
                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                         
-                                        <%if(str1 != str2){%>
+                                        <%if(str1 != str2 || u.did != user1.doctorid.id){%>
                                             <%continue;%>
                                         <%}%>
                                         
                                         <li class="patient-li">
                                             <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
                                             <%last=u.seat%>
-                                            <h5><%=u.name%></h5>
+                                            <!-- <h5><%=u.name%></h5> -->
                                             <a class="displayNone uongoing">Ongoing</a>
                                             <%if(u.status == 'Waiting'){%>
                                                 <h2 class="b_red uwaiting"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
@@ -597,7 +691,8 @@
                                             var yyyy = today.getFullYear();
                                             var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                             var dayOfWeek = weekday[today.getDay()];%>
-                                            <%var today = user1.booking[i].createdAt;
+                                            <%var a11 = user1.booking[i].date.split('-');%>
+                                            <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                             var dd1= String(today.getDate()).padStart(2, '0');
                                             var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                             var yyyy1 = today.getFullYear();
@@ -606,7 +701,7 @@
                                             <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                             <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                             
-                                            <%if(str1 != str2 || user1.booking[i].cancel != false){%>
+                                            <%if(str1 != str2 || user1.booking[i].cancel != false || user1.booking[i].did != user1.doctorid.id){%>
                                                 <%continue;%>
                                             <%}%>
 
@@ -614,7 +709,7 @@
                                                 <%var c1 = user1.booking[i].seat;%>
                                             <li class="patient-li upcoming-li" data-index="<%=c1%>">
                                                 <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
-                                                <h5><%=user1.booking[i].name%></h5>
+                                                <!-- <h5><%=user1.booking[i].name%></h5> -->
                                                 
                                             </li>
                                             <%}%>
@@ -652,14 +747,14 @@
                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                 <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                 
-                                                <%if(str1 != str2 || u.slot != i1 ){%>
+                                                <%if(str1 != str2 || u.slot != i1 || u.did != user1.doctorid.id){%>
                                                     <%continue;%>
                                                 <%}%>
                                                 
                                                 <li class="patient-li">
                                                     <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
                                                     <%last=u.seat%>
-                                                    <h5><%=u.name%></h5>
+                                                    <!-- <h5><%=u.name%></h5> -->
                                                     <a class="displayNone uongoing<%=i1%>">Ongoing</a>
                                                     <%if(u.status == 'Waiting'){%>
                                                         <h2 class="b_red uwaiting<%=i1%>"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
@@ -697,7 +792,8 @@
                                                     var yyyy = today.getFullYear();
                                                     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                     var dayOfWeek = weekday[today.getDay()];%>
-                                                    <%var today = user1.booking[i].createdAt;
+                                                    <%var a11 = user1.booking[i].date.split('-');%>
+                                                    <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                                     var dd1= String(today.getDate()).padStart(2, '0');
                                                     var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                     var yyyy1 = today.getFullYear();
@@ -706,7 +802,7 @@
                                                     <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                     <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                     
-                                                    <%if(str1 != str2 || user1.booking[i].slot != i1){%>
+                                                    <%if(str1 != str2 || user1.booking[i].slot != i1 || user1.booking[i].did != user1.doctorid.id){%>
                                                         <%continue;%>
                                                     <%}%>
         
@@ -714,7 +810,7 @@
                                                         <%var c1 = user1.booking[i].seat;%>
                                                     <li class="patient-li upcoming-li<%=i1%>" data-index="<%=c1%>">
                                                         <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
-                                                        <h5><%=user1.booking[i].name%></h5>
+                                                        <!-- <h5><%=user1.booking[i].name%></h5> -->
                                                         
                                                     </li>
                                                     <%}%>
@@ -769,14 +865,14 @@
                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                         
-                                        <%if(str1 != str2){%>
+                                        <%if(str1 != str2 || u.did != user1.doctorid.id){%>
                                             <%continue;%>
                                         <%}%>
                                         
                                         <li class="patient-li">
                                             <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
                                             <%last=u.seat%>
-                                            <h5><%=u.name%></h5>
+                                            <!-- <h5><%=u.name%></h5> -->
                                             <a class="displayNone uongoing">Ongoing</a>
                                             <%if(u.status == 'Waiting'){%>
                                                 <h2 class="b_red uwaiting"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
@@ -814,7 +910,8 @@
                                             var yyyy = today.getFullYear();
                                             var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                             var dayOfWeek = weekday[today.getDay()];%>
-                                            <%var today = user1.booking[i].createdAt;
+                                            <%var a11 = user1.booking[i].date.split('-');%>
+                                            <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                             var dd1= String(today.getDate()).padStart(2, '0');
                                             var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                             var yyyy1 = today.getFullYear();
@@ -823,7 +920,7 @@
                                             <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                             <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                             
-                                            <%if(str1 != str2 || user1.booking[i].cancel != false){%>
+                                            <%if(str1 != str2 || user1.booking[i].cancel != false || user1.booking[i].did != user1.doctorid.id){%>
                                                 <%continue;%>
                                             <%}%>
 
@@ -831,7 +928,7 @@
                                                 <%var c1 = user1.booking[i].seat;%>
                                             <li class="patient-li upcoming-li" data-index="<%=c1%>">
                                                 <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
-                                                <h5><%=user1.booking[i].name%></h5>
+                                                <!-- <h5><%=user1.booking[i].name%></h5> -->
                                                 
                                             </li>
                                             <%}%>
@@ -869,14 +966,14 @@
                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                 <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                 
-                                                <%if(str1 != str2 || u.slot != i1 ){%>
+                                                <%if(str1 != str2 || u.slot != i1 || u.did != user1.doctorid.id){%>
                                                     <%continue;%>
                                                 <%}%>
                                                 
                                                 <li class="patient-li">
                                                     <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=u.seat%></h4>
                                                     <%last=u.seat%>
-                                                    <h5><%=u.name%></h5>
+                                                    <!-- <h5><%=u.name%></h5> -->
                                                     <a class="displayNone uongoing<%=i1%>">Ongoing</a>
                                                     <%if(u.status == 'Waiting'){%>
                                                         <h2 class="b_red uwaiting<%=i1%>"><span><i class="fas fa-hourglass" aria-hidden="true" style="margin-right: 8px;"></i></span>Waiting</h3>
@@ -914,7 +1011,8 @@
                                                     var yyyy = today.getFullYear();
                                                     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                     var dayOfWeek = weekday[today.getDay()];%>
-                                                    <%var today = user1.booking[i].createdAt;
+                                                    <%var a11 = user1.booking[i].date.split('-');%>
+                                                    <%var today = new Date(a11[2]+'-'+a11[1]+'-'+a11[0]);
                                                     var dd1= String(today.getDate()).padStart(2, '0');
                                                     var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
                                                     var yyyy1 = today.getFullYear();
@@ -923,7 +1021,7 @@
                                                     <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                     <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                                     
-                                                    <%if(str1 != str2 || user1.booking[i].slot != i1){%>
+                                                    <%if(str1 != str2 || user1.booking[i].slot != i1 || user1.booking[i].did != user1.doctorid.id){%>
                                                         <%continue;%>
                                                     <%}%>
         
@@ -931,7 +1029,7 @@
                                                         <%var c1 = user1.booking[i].seat;%>
                                                     <li class="patient-li upcoming-li<%=i1%>" data-index="<%=c1%>">
                                                         <h4><span><i class="fas fa-user-md"></i></span>Patient No. <%=user1.booking[i].seat%></h4>
-                                                        <h5><%=user1.booking[i].name%></h5>
+                                                        <!-- <h5><%=user1.booking[i].name%></h5> -->
                                                         
                                                     </li>
                                                     <%}%>

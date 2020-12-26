@@ -269,12 +269,33 @@
                                                         <p class="text-muted mb-0">Medical Staff</p>
                                                     </div>
                                                 </div>
+                                                <%var aflag = false;%>
+                                                <%if(locals.user.doctorids.length>0){%>
+                                                    <%aflag = true;%>
+                                                    <%}%>
                                                 <a class="dropdown-item" href="/staff-profile">My Profile</a>
                                                 <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
-                                                <a class="dropdown-item" href="/staff-schedule-timings">Schedule Timing</a>
+                                                <%if(aflag){%>
+                                                <a class="dropdown-item" href="/select-doctor/?type=schedule">Schedule Timing</a>
+                                                <%}else{%>
+                                                    <a class="dropdown-item" href="/staff-schedule-timings/?id=<%=locals.user.doctorid%>">Schedule Timing</a>
+                                                    <%}%>
+                                                    <%if(aflag){%>
+                                                        <a class="dropdown-item" href="/select-doctor/?type=bservice">Pause/Resume Booking</a>
+                                                        <%}else{%>
+                                                            <a class="dropdown-item" href="/staff-booking-service/?id=<%=locals.user.doctorid%>">Pause/Resume Booking</a>
+                                                            <%}%>
                                                 <!-- <a class="dropdown-item" href="/staff-old-booking/?id=<%=locals.user.doctorid%>">Old Patient Booking</a> -->
-                                                <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
-                                                <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                    <%if(aflag){%>
+                                                        <a class="dropdown-item" href="/select-doctor/?type=booking">Book Appointment</a>
+                                                        <%}else{%>
+                                                            <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
+                                                            <%}%>
+                                                            <%if(aflag){%>
+                                                                <a class="dropdown-item" href="/select-doctor/?type=tracking">Track Patient</a>
+                                                                <%}else{%>
+                                                                    <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                                    <%}%>
                                                 <a class="dropdown-item" href="/settings">Settings</a>
                                                 <a class="dropdown-item" href="/user/logout">Logout</a>
                                             </div>

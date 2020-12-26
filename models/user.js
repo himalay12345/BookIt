@@ -219,6 +219,12 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
     },
 
+    doctorids:[{
+        doctorid:{
+            type: mongoose.Schema.Types.ObjectId
+        },
+    }],
+
    others:[{
     name : {
         type:String
@@ -422,6 +428,9 @@ const userSchema = mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId
 
             },
+            did:{
+                type: mongoose.Schema.Types.ObjectId
+            },
             
             createdAt: { type: Date, default: Date.now }
 
@@ -445,6 +454,9 @@ const userSchema = mongoose.Schema({
         status:{
             type:String
         },
+            did:{
+                type: mongoose.Schema.Types.ObjectId
+            },
         createdAt: { type: Date, default: Date.now }
 
     }],

@@ -18,7 +18,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar setting-top" style="padding-top: 40px !important;">
+        <div class="breadcrumb-bar setting-top position-relative" style="padding-top: 40px !important;">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -30,8 +30,25 @@
                         </nav>
                         <h2 class="breadcrumb-title">Booking</h2>
                     </div>
+                    <%if(locals.user.doctorids.length>0){%>
+                    <div class="col-md-4 col-12 d-md-block position-absolute" style="top:50px;right:2%;">
+                        <div class="sort-by">
+                            <span class="sort-title">Switch Doctor</span>
+                            <span class="sortby-fliter">
+                                    <select class="select" style="width:auto !important;" onchange="location = this.value;">
+                                        <option>Select</option>
+                                        <%for(doc of user1.doctorids){%>
+                                           <option style="width:auto !important;" class="sorting" value="/staff-booking/?id=<%=doc.doctorid._id%>"><%=doc.doctorid.name%></option>
+                                        <%}%>
+                                        
+                                    </select>
+                                </span>
+                        </div>
+                    </div>
+                    <%}%>
                 </div>
             </div>
+         
         </div>
         <!-- /Breadcrumb -->
 
@@ -1498,7 +1515,7 @@ Not Available
                         let ih = 0;
                         let index=0;
                         let sid;%>
-                       <%for(days of user1.doctorid.schedule_time){%>
+                       <%for(days of doctor1.schedule_time){%>
                         <%console.log(index,ih)%>
                             <%if(days.day.toUpperCase() == dayOfWeek){%>
                                 <%index=ih;sid = days._id;break;%>
@@ -1506,12 +1523,12 @@ Not Available
                             <%}ih++;}%>
                             <%console.log(index,ih)%>
                         <form action="/user/add-more-seats" method="POST">
-                            <input type="hidden" name="did" value="<%=user.doctorid%>">
+                            <input type="hidden" name="did" value="<%=doctor1._id%>">
                         <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Add Seats</label>
                         <a id="submore" style="padding:8.8px 20px;border:1px solid grey;margin-right: -3px;margin-left: 30px;cursor:pointer;"onclick="minus();" class="tcolor">-</a>
                         <input type="text" id="add_more" name="more" value="0" style="width: 50px;padding:5px;padding-left: 18px;outline: none !important;border:1px solid grey;">
                         <a id="admore" style="padding:8.8px 20px;border:1px solid grey;margin-left: -3px;cursor:pointer;"onclick="add();" class="tcolor">+</a>
-                        <%if(typeof(user1.doctorid.schedule_time[index].start) == 'string'){%>
+                        <%if(typeof(doctor1.schedule_time[index].start) == 'string'){%>
                         <button type="submit" class="btn btn-primary submit-btn msbtn adbtn" style="min-width:0px !important;width:80px;margin-left: 30px;">Add</button>
                         <%}else{%>
                             <a href="#popup2" class="btn btn-primary submit-btn msbtn adbtn" style="min-width:0px !important;width:80px;margin-left: 30px;color:white">Add</a>
@@ -1523,14 +1540,14 @@ Not Available
                                     <div class="col-12 col-md-12 position-relative" style="margin-left: -0.9375rem;margin-top:20px;margin-bottom: 20px;">
                                         <div id="header_filter" style="padding:10px;margin-top: -40px;
                                         position: absolute;right:-15px;">
-                                <a href="/staff-booking/?id=<%=user1.doctorid._id%>"><i class="fas fa-times" style="font-size: 1.5rem;color:grey;cursor: pointer;" id="close_btn"></i></a>
+                                <a href="/staff-booking/?id=<%=doctor1._id%>"><i class="fas fa-times" style="font-size: 1.5rem;color:grey;cursor: pointer;" id="close_btn"></i></a>
                             </div>
                                         <div class="form-">
                                             <label style="color: rgb(138, 138, 138);">Which slot you want to add the seat?</label>
                                            
                                                     <select name="slot" class="form-control select1">
-                                        <%for(let ik=0;ik<user1.doctorid.schedule_time[index].start.length;ik++){%>
-                                            <option value="<%=ik%>">Slot <%=user1.doctorid.schedule_time[index].start[ik]%>-<%=user1.doctorid.schedule_time[index].end[ik]%></option>
+                                        <%for(let ik=0;ik<doctor1.schedule_time[index].start.length;ik++){%>
+                                            <option value="<%=ik%>">Slot <%=doctor1.schedule_time[index].start[ik]%>-<%=doctor1.schedule_time[index].end[ik]%></option>
                                         <%}%>
                                         </select>
                                         </div>
@@ -1558,10 +1575,10 @@ var yyyy = today.getFullYear();
 var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 var dayOfWeek = weekday[today.getDay()];
 console.log(dayOfWeek)%>
-                                                            <%for(let i2 = 0 ; i2< user1.doctorid.schedule_time.length; i2++){%>
-                                                                <%if(user1.doctorid.schedule_time[i2].day.toUpperCase() == dayOfWeek.toUpperCase()){%>
-                                                                    <%if(typeof(user1.doctorid.schedule_time[i2].start)!='string'){%>
-                                                                        <%slots = user1.doctorid.schedule_time[i2].start.length;sindex=i2%>
+                                                            <%for(let i2 = 0 ; i2< doctor1.schedule_time.length; i2++){%>
+                                                                <%if(doctor1.schedule_time[i2].day.toUpperCase() == dayOfWeek.toUpperCase()){%>
+                                                                    <%if(typeof(doctor1.schedule_time[i2].start)!='string'){%>
+                                                                        <%slots = doctor1.schedule_time[i2].start.length;sindex=i2%>
                                                                             <%}%>
                                                                                 <%}%>
 
@@ -1609,7 +1626,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
 
 
                                                                                                                                         <%if(daten != undefined){%>
-                                                                                                                                            <%if(daten != patients.date || patients.old_flag){%>
+                                                                                                                                            <%if(daten != patients.date || patients.old_flag || patients.did != doctor1.id){%>
                                                                                                                                                 <%z1++;z31++;continue;%>
                                                                                                                                                     <%}%>
 
@@ -1618,6 +1635,12 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                             <%if(str1 != str2 || patients.old_flag){%>
                                                                                                                                                                 <%z1++;z31++;continue;%>
                                                                                                                                                                     <%}%>
+                                                                                                                                                                    <%var a1 = patients.did;%>
+                                                                                                                                                                    <%var a2 = doctor1.id;%>
+                                                                                                                                                                    <%if(a1 != a2){%>
+                                                                                                                                                                        <%=console.log(a1,a2)%>
+                                                                                                                                                                        <%z1++;z31++;continue;%>
+                                                                                                                                                                            <%}%>
                                                                                                                                                                         <%}%>
 
                                                                                                                                                                             <tr class="str">
@@ -1675,12 +1698,12 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                                     <%if(patients.cancel != true){%>
                                                                                                                                                                                                         
                                                                                                                                                                                                         <td>
-                                                                                                                                                                                                            <a href="/invoice-view/?id=<%=locals.user.doctorid%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
+                                                                                                                                                                                                            <a href="/invoice-view/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
                                                                                                                                                                                                             <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Print Bill</span>
                                                                                                                                                                                                         </a>
                                                                                                                                                                                                         </td>
                                                                                                                                                                                                         <td>
-                                                                                                                                                                                                            <a href="/prescription-pad/?id=<%=locals.user.doctorid%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
+                                                                                                                                                                                                            <a href="/prescription-pad/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
                                                                                                                                                                                                             <span ><i class="fas fa-newspaper" style="margin-right: 5px;"></i>Prescription</span>
                                                                                                                                                                                                         </a>
                                                                                                                                                                                                         </td>
@@ -1744,7 +1767,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                 <%for(let i1 =0 ;i1<slots;i1++){%>
                                                                                                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
                                                                                                         <li class="nav-item" style="width: 100%;">
-                                                                                                            <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab"><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=user1.doctorid.schedule_time[sindex].start[i1].toUpperCase()%> - <%=user1.doctorid.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
+                                                                                                            <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab"><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
                                                                                                         </li>
                                                                                                     </ul>
                                                                                                     <div class="card card-table mb-0">
@@ -1791,13 +1814,13 @@ var dayOfWeek = weekday[today.getDay()];%>
 
 
                                                                                                                                                 <%if(daten != undefined){%>
-                                                                                                                                                    <%if(daten != patients.date || patients.slot != i1 || patients.old_flag){%>
+                                                                                                                                                    <%if(daten != patients.date || patients.slot != i1 || patients.old_flag || patients.did != doctor1.id){%>
                                                                                                                                                         <%z1++;z3++;continue;%>
                                                                                                                                                             <%}%>
 
                                                                                                                                                                 <%}else{%>
 
-                                                                                                                                                                    <%if(str1 != str2 || patients.slot != i1 || patients.old_flag){%>
+                                                                                                                                                                    <%if(str1 != str2 || patients.slot != i1 || patients.old_flag || patients.did != doctor1.id){%>
                                                                                                                                                                         <%z1++;z3++;continue;%>
                                                                                                                                                                             <%}%>
                                                                                                                                                                                 <%}%>
@@ -1856,14 +1879,14 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                                                                                                         <%}%>
                                                                                                                                                                                                          <%if(patients.cancel != true){%>
                                                                                                                                                                                                 <td>
-                                                                                                                                                                                                    <a href="/invoice-view/?id=<%=locals.user.doctorid%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
+                                                                                                                                                                                                    <a href="/invoice-view/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
                                                                                                                                                                                                     <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Print Bill</span>
                                                                                                                                                                                                 </a>
                                                                                                                                                                                                 </td>
                                                                                                                                                                                                 <%}%>
                                                                                                                                                                                                 <%if(patients.cancel != true){%>
                                                                                                                                                                                                 <td>
-                                                                                                                                                                                                    <a href="/prescription-pad/?id=<%=locals.user.doctorid%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
+                                                                                                                                                                                                    <a href="/prescription-pad/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
                                                                                                                                                                                                     <span ><i class="fas fa-newspaper" style="margin-right: 5px;"></i>Prescription</span>
                                                                                                                                                                                                 </a>
                                                                                                                                                                                                 </td>

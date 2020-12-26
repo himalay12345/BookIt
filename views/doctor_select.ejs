@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/booking  30 Nov 2019 04:12:16 GMT -->
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li  class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li  class="breadcrumb-item active" aria-current="page">Select Doctor</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">All Doctors</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container">
+               
+                    <div class="row">
+                       
+                        <div class="col-md-12 ">
+                            <div class="clinic-booking " style="margin-top: 15px;">
+                                <%var i=0;%>
+                                <%for(doc of user.doctorids){%>
+                                    <%if(type == 'booking'){%>
+                                <a class="apt-btn tcolor " href="/staff-booking/?id=<%=doc.doctorid._id%>" style="width: 50%;;">Dr. <%=doc.doctorid.name%></a>
+                                <%}%>
+                                <%if(type == 'schedule'){%>
+                                    <a class="apt-btn tcolor " href="/staff-schedule-timings/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                    <%}%>
+                                    <%if(type == 'tracking'){%>
+                                        <a class="apt-btn tcolor " href="/patient-tracking/?tid=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                        <%}%>
+                                        <%if(type == 'bservice'){%>
+                                            <a class="apt-btn tcolor " href="/staff-booking-service/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                            <%}%>
+                                <%i++;%>
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+            
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    
+
+
+</body>
+
+<!-- doccure/booking  30 Nov 2019 04:12:16 GMT -->
+
+</html>

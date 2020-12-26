@@ -16,7 +16,10 @@ router.post('/create-staff-session', passport.authenticate('local', {
     failureRedirect: '/staff-login-page'
 }), userController.createStaffSession);
 router.get('/logout', userController.destroySession);
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile email'] }));
+router.get('/auth/google', function(req, res, next) {
+    req.session.info = req.query;
+    next();
+ },passport.authenticate('google', { scope: ['profile email'] }));
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), userController.popup);
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), userController.popup);

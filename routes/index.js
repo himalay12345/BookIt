@@ -81,9 +81,11 @@ router.get('/schedule-timings', passport.checkDoctorAuthentication, homeControll
 router.get('/staff-schedule-timings', passport.checkStaffAuthentication, homeController.staffScheduleTimings);
 router.get('/search', homeController.search);
 router.get('/social-media', passport.checkAuthentication, homeController.socialMedia);
+router.get('/select-doctor', homeController.selectDoctor);
 router.get('/settings', passport.checkAuthentication, homeController.settings);
 router.get('/staff-login', homeController.staffLogin);
 router.get('/staff-profile', passport.checkStaffAuthentication, homeController.staffProfile);
+router.get('/staff-booking-service', passport.checkStaffAuthentication, homeController.staffBookingService);
 router.get('/staff-forgot-password', homeController.staffForgotPassword);
 router.get('/staff-dashboard', passport.checkStaffAuthentication, homeController.staffDashboard);
 // router.get('/staff-add-doctor', passport.checkStaffAuthentication, homeController.staffAddDoctor);

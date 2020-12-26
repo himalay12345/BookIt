@@ -207,7 +207,7 @@ module.exports.approveDocuments = async(req, res) => {
         {
             client.messages
             .create({
-               body: 'Hii Dr.'+users.name+'! Your request of bank account change in doccure is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable http://localhost:4000/booking-service',
+               body: 'Hii Dr.'+users.name+'! Your request of bank account change in AarogyaHub is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable https://aarogyahub.com/booking-service',
                from: '+12019755459',
                statusCallback: 'http://postb.in/1234abcd',
                to: '+91'+users.phone
@@ -253,7 +253,7 @@ module.exports.approveRequestedBank = async(req, res) => {
         {
             client.messages
             .create({
-               body: 'Hii Dr.'+users.name+'! Your request of bank account change in doccure is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable http://localhost:4000/booking-service',
+               body: 'Hii Dr.'+users.name+'! Your request of bank account change in Aarogyahub is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable https://aarogyahub.com/booking-service',
                from: '+12019755459',
                statusCallback: 'http://postb.in/1234abcd',
                to: '+91'+users.phone
@@ -296,7 +296,7 @@ module.exports.approveBank = async(req, res) => {
             {
                 client.messages
                 .create({
-                   body: 'Hii Dr.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Doccure. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link http://localhost:4000/doctor-dashboard',
+                   body: 'Hii Dr.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Aarpgyahub. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link https://aarogyahub.com/doctor-dashboard',
                    from: '+12019755459',
                    statusCallback: 'http://postb.in/1234abcd',
                    to: '+91'+users.phone
@@ -306,7 +306,7 @@ module.exports.approveBank = async(req, res) => {
     
             if(users.email)
             {
-            serviceStartAlert.newAlert(user,users.email);
+            serviceStartAlert.newAlert(users,users.email);
             }
             return res.render('a-application-request', {
                 title: 'Application Request',

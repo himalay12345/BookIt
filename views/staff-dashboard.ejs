@@ -44,9 +44,44 @@
             <div class="container-fluid">
 
                 <div class="row">
+                    <div class="col-md-3 col-lg-3 col-xl-3 theiaStickySidebar ">
 
+                        <!-- Profile Sidebar -->
+                        <h2 class="text-center">Our Doctors</h2>
+                        <div class="profile-sidebar">
+                          
+                            <div class="dashboard-widget lscreen">
+                             
+                                <nav class="dashboard-menu">
+                                    <ul>
+                                        <%if(locals.user.doctorids.length == 0){%>
+                                            <li class="active">
+                                                <a href="/doctor-dashboard">
+                                                    <i class="fas fa-user-md"></i>
+                                                    <span>Dr. <%=allpatients.doctorid.name%></span>
+                                                </a>
+                                            </li>
+                                            <%}else{%>
+                                             <%for(pat of allpatients.doctorids){%>
+                                        <li class="active">
+                                            <a href="/doctor-dashboard">
+                                                <i class="fas fa-user-md"></i>
+                                                <span>Dr. <%=pat.doctorid.name%></span>
+                                            </a>
+                                        </li>
+                                        <%}%>  
+                                        
+                                        <%}%>
 
-                    <div class="col-md-12 col-lg-12 col-xl-12 position-relative">
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- /Profile Sidebar -->
+
+                    </div>
+
+                    <div class="col-md-9 col-lg-9 col-xl-9 position-relative">
 
                         <div class="row">
                             <div class="col-md-12">

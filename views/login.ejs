@@ -31,10 +31,11 @@
                                     <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Login">
                                 </div>
                                 <div class="col-md-12 col-lg-6 login-right">
-                                    <div class="login-header">
+                                    <div class="login-header" style="display: inline-flex;justify-content: space-between; width: 100%;">
                                         <h3>Login <span>AarogyaHub</span></h3>
+                                        <a class="btn btn-primary btn-block login-btn" href="/staff-login-page" style="width: 120px;color:white"> Staff Login</a>
                                     </div>
-                                    <%var booked,id,doctorid,available,slotindex,dayindex,flag;%>
+                                    <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
                                         <form action="/user/create-session" method="POST">
                                             <input type="hidden" name="doctorid" value="<%=doctorid%>">
                                             <input type="hidden" name="id" value="<%=id%>">
@@ -43,6 +44,8 @@
                                             <input type="hidden" name="slotindex" value="<%=slotindex%>">
                                             <input type="hidden" name="dayindex" value="<%=dayindex%>">
                                             <input type="hidden" name="flag" value="<%=flag%>">
+                                            <input type="hidden" name="date" value="<%=date%>">
+                                            <input type="hidden" name="type" value="<%=type%>">
                                             <div class="form-group form-focus">
                                                 <input type="text" name="phone" class="form-control floating" required>
                                                 <label class="focus-label">Mobile number</label>
@@ -55,18 +58,25 @@
                                                 <a class="forgot-link" href="/forgot-password">Forgot Password ?</a>
                                             </div>
                                             <button class="btn btn-primary btn-block btn-lg login-btn  " style="background-color: #478e8e !important; border: none !important;" type="submit">Login</button>
+                                            <div class="row form-row social-login" style="margin-top:15px;">
+                                                <!-- <div class="col-6">
+                                                    <a href="/user/auth/facebook" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
+                                                </div> -->
+                                               <%if(type=='booking'){%>
+                                                <div class="col-12">
+                                                    <a href="/user/auth/google/?doctorid=<%=doctorid%>&id=<%=id%>&booked=<%=booked%>&available=<%=available%>&slotindex=<%=slotindex%>&dayindex=<%=dayindex%>&flag=<%=flag%>&date=<%=date%>&type=<%=type%>" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
+                                                </div>
+                                                <%}else{%>
+                                                    <div class="col-12">
+                                                    <a href="/user/auth/google" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
+                                                </div>
+                                                    <%}%>
+                                            </div>
                                             <div class="login-or">
                                                 <span class="or-line"></span>
                                                 <span class="span-or">or</span>
                                             </div>
-                                            <div class="row form-row social-login">
-                                                <!-- <div class="col-6">
-                                                    <a href="/user/auth/facebook" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
-                                                </div> -->
-                                                <div class="col-12">
-                                                    <a href="/user/auth/google" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
-                                                </div>
-                                            </div>
+                                            <a class="btn btn-primary btn-block btn-lg login-btn" href="/register" style="background-color: #478e8e !important; border: none !important;">Sign Up</a>
                                             <div class="text-center dont-have">Don’t have an account? <a href="/register">Register</a></div>
                                         </form>
                                 </div>

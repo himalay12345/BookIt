@@ -14,6 +14,7 @@ const emailVerification = require('../mailers/email-verify');
 const Feedback = require('../models/disable_feedback');
 const Path = require('path');
 const env = require('../config/environment');
+const { VariableContext } = require('twilio/lib/rest/serverless/v1/service/environment/variable');
 
 
 module.exports.create = async(req, res) => {
@@ -63,8 +64,13 @@ module.exports.createStaff = async(req, res) => {
 }
 
 module.exports.createStaffSession = async(req, res) => {
-
+    if(req.user.doctorids.length>0)
+    {
+        return res.redirect('/select-doctor/?type=booking');
+    }
+else{
     return res.redirect(`/staff-booking/?id=${req.user.doctorid}`);
+}
 }
 
 module.exports.verifyEmail = async(req, res) => {
@@ -81,99 +87,152 @@ module.exports.verifyEmail = async(req, res) => {
 
 module.exports.pauseBookingService = async(req, res) => {
 
-   console.log(req.body);
-   let user = await User.findById(req.user.id);
-
-
-
-    const sdate = req.body.start;
-    const edate = req.body.end;
-    const str1 = sdate.split("/").join("-");
-    const str1b = str1.split('-');
-    const str1a = str1b[2] + '-' + str1b[1] + '-' + str1b[0]
-    const str2 = edate.split("/").join("-");
-    const str2b = str2.split('-'); 
-    const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0];
-    var str1c = new Date(str1a);
-    var str2c = new Date(str2a); 
-   if(str1c > str2c)
-   {
-    req.flash('error','End date should not be greater than start date.')
-    return res.redirect('back');
-   }
-   if(req.body.start && req.body.end)
-   {
-   if(req.body.start == req.body.end)
-   {
-
-    var nflag = false;
-    for(days of user.holidays)
+  if(req.user.type == 'Doctor')
+  {
+    console.log(req.body);
+    let user = await User.findById(req.user.id);
+ 
+ 
+ 
+     const sdate = req.body.start;
+     const edate = req.body.end;
+     const str1 = sdate.split("/").join("-");
+     const str1b = str1.split('-');
+     const str1a = str1b[2] + '-' + str1b[1] + '-' + str1b[0]
+     const str2 = edate.split("/").join("-");
+     const str2b = str2.split('-'); 
+     const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0];
+     var str1c = new Date(str1a);
+     var str2c = new Date(str2a); 
+    if(str1c > str2c)
     {
-     if(days.date == str1)
+     req.flash('error','End date should not be greater than start date.')
+     return res.redirect('back');
+    }
+    if(req.body.start && req.body.end)
+    {
+    if(req.body.start == req.body.end)
+    {
+ 
+     var nflag = false;
+     for(days of user.holidays)
      {
-         nflag = true;
-         break;
+      if(days.date == str1)
+      {
+          nflag = true;
+          break;
+      }
+     }
+     if(!nflag){
+     user.holidays.push({
+         date:str1,
+         flag:false
+     });
+ }
+     for(temp of user.patients)
+     {
+         if(temp.date == str1)
+         {
+             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 '$set': {
+                     
+                     'doctors.$.reschedule': true
+                     
+                 }
+             });
+         }
+         client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
      }
     }
-    if(!nflag){
-    user.holidays.push({
-        date:str1,
-        flag:false
-    });
-}
-    for(temp of user.patients)
-    {
-        if(temp.date == str1)
-        {
-            let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
-                '$set': {
-                    
-                    'doctors.$.reschedule': true
-                    
-                }
-            });
-        }
-        client.messages
-            .create({
-                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
-                from: '+12019755459',
-                statusCallback: 'http://postb.in/1234abcd',
-                to: '+91' + temp.phone
-            })
-            .then(message => console.log(message.sid));
-            let patient = await User.findById(temp.pid);
-        if (temp.email) {
-            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
-        }
+ 
+    else{
+     const addDays = (date, days = 1) => {
+         const result = new Date(date);
+         result.setDate(result.getDate() + days);
+         return result;
+       };
+       
+       const dateRange = (start, end, range = []) => {
+         if (start > end) return range;
+         const next = addDays(start, 1);
+         return dateRange(next, end, [...range, start]);
+       };
+       
+       const range = dateRange(new Date(str1a), new Date(str2a));
+       
+       console.log(range);
+       let range_date = range.map(date => date.toISOString().slice(0, 10));
+     //   console.log(range.map(date => date.toISOString().slice(0, 10)))
+       for(let i= 0;i<range_date.length;i++)
+       {
+          let a1 = range_date[i].split('-');
+          let a2 = a1[2]+ '-' + a1[1] + '-' + a1[0];
+          var nflag = false;
+          for(days of user.holidays)
+          {
+           if(days.date == a2)
+           {
+               nflag = true;
+               break;
+           }
+          }
+          if(!nflag){
+          user.holidays.push({
+             date:a2,
+             flag:false
+         });
+     }
+         for(temp of user.patients)
+         {
+             if(temp.date == a2)
+             {
+                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                     '$set': {
+                         
+                         'doctors.$.reschedule': true
+                         
+                     }
+                 });
+             }
+             client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+         }
+         
+       }
     }
-   }
-
-   else{
-    const addDays = (date, days = 1) => {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-      };
-      
-      const dateRange = (start, end, range = []) => {
-        if (start > end) return range;
-        const next = addDays(start, 1);
-        return dateRange(next, end, [...range, start]);
-      };
-      
-      const range = dateRange(new Date(str1a), new Date(str2a));
-      
-      console.log(range);
-      let range_date = range.map(date => date.toISOString().slice(0, 10));
-    //   console.log(range.map(date => date.toISOString().slice(0, 10)))
-      for(let i= 0;i<range_date.length;i++)
-      {
-         let a1 = range_date[i].split('-');
-         let a2 = a1[2]+ '-' + a1[1] + '-' + a1[0];
+ 
+ }
+ 
+    if(typeof(req.body.date)== 'object')
+    {
+     for(let i=0;i<req.body.date.length;i++)
+     {
+ 
          var nflag = false;
          for(days of user.holidays)
          {
-          if(days.date == a2)
+          if(days.date == req.body.date[i])
           {
               nflag = true;
               break;
@@ -181,150 +240,345 @@ module.exports.pauseBookingService = async(req, res) => {
          }
          if(!nflag){
          user.holidays.push({
-            date:a2,
-            flag:false
-        });
+             date:req.body.date[i],
+             flag:false
+         });
+     }
+         for(temp of user.patients)
+         {
+             if(temp.date == req.body.date[i])
+             {
+                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                     '$set': {
+                         
+                         'doctors.$.reschedule': true
+                         
+                     }
+                 });
+             }
+             client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+         }
+     }
     }
-        for(temp of user.patients)
-        {
-            if(temp.date == a2)
-            {
-                let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
-                    '$set': {
-                        
-                        'doctors.$.reschedule': true
-                        
-                    }
-                });
-            }
-            client.messages
-            .create({
-                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
-                from: '+12019755459',
-                statusCallback: 'http://postb.in/1234abcd',
-                to: '+91' + temp.phone
-            })
-            .then(message => console.log(message.sid));
-            let patient = await User.findById(temp.pid);
-        if (temp.email) {
-            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
-        }
-        }
-        
-      }
-   }
-
-}
-
-
-
-
-   if(typeof(req.body.date)== 'object')
-   {
-    for(let i=0;i<req.body.date.length;i++)
+ 
+    if(typeof(req.body.date)== 'string')
     {
-
+        console.log('hii')
         var nflag = false;
         for(days of user.holidays)
         {
-         if(days.date == req.body.date[i])
+         if(days.date == req.body.date)
          {
              nflag = true;
              break;
          }
         }
-        if(!nflag){
-        user.holidays.push({
-            date:req.body.date[i],
-            flag:false
-        });
-    }
-        for(temp of user.patients)
+ 
+        if(!nflag)
         {
-            if(temp.date == req.body.date[i])
-            {
-                let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
-                    '$set': {
-                        
-                        'doctors.$.reschedule': true
-                        
-                    }
-                });
-            }
-            client.messages
-            .create({
-                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
-                from: '+12019755459',
-                statusCallback: 'http://postb.in/1234abcd',
-                to: '+91' + temp.phone
-            })
-            .then(message => console.log(message.sid));
-            let patient = await User.findById(temp.pid);
-        if (temp.email) {
-            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+             user.holidays.push({
+                 date:req.body.date,
+                 flag:false
+             });
         }
-        }
+     for(temp of user.patients)
+     {
+         if(temp.date == req.body.date)
+         {
+             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 '$set': {
+                     
+                     'doctors.$.reschedule': true
+                     
+                 }
+             });
+             client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+ 
+         }
+     }
     }
-   }
+    
+    user.save();
+    req.flash('success','Booking service paused for the selected date.')
+    return res.redirect('back');
+  }
 
-   if(typeof(req.body.date)== 'string')
-   {
-       console.log('hii')
-       var nflag = false;
-       for(days of user.holidays)
-       {
-        if(days.date == req.body.date)
-        {
-            nflag = true;
-            break;
-        }
-       }
-
-       if(!nflag)
-       {
-            user.holidays.push({
-                date:req.body.date,
-                flag:false
-            });
-       }
-    for(temp of user.patients)
+  if(req.user.type == 'Staff')
+  {
+    console.log(req.body);
+    let user = await User.findById(req.query.id);
+ 
+ 
+ 
+     const sdate = req.body.start;
+     const edate = req.body.end;
+     const str1 = sdate.split("/").join("-");
+     const str1b = str1.split('-');
+     const str1a = str1b[2] + '-' + str1b[1] + '-' + str1b[0]
+     const str2 = edate.split("/").join("-");
+     const str2b = str2.split('-'); 
+     const str2a = str2b[2] + '-' + str2b[1] + '-' + str2b[0];
+     var str1c = new Date(str1a);
+     var str2c = new Date(str2a); 
+    if(str1c > str2c)
     {
-        if(temp.date == req.body.date)
-        {
-            let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
-                '$set': {
-                    
-                    'doctors.$.reschedule': true
-                    
-                }
-            });
-            client.messages
-            .create({
-                body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
-                from: '+12019755459',
-                statusCallback: 'http://postb.in/1234abcd',
-                to: '+91' + temp.phone
-            })
-            .then(message => console.log(message.sid));
-            let patient = await User.findById(temp.pid);
-        if (temp.email) {
-            appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
-        }
-
-        }
+     req.flash('error','End date should not be greater than start date.')
+     return res.redirect('back');
     }
-   }
-   
-   user.save();
-   req.flash('success','Booking service paused for the selected date.')
-   return res.redirect('back');
+    if(req.body.start && req.body.end)
+    {
+    if(req.body.start == req.body.end)
+    {
+ 
+     var nflag = false;
+     for(days of user.holidays)
+     {
+      if(days.date == str1)
+      {
+          nflag = true;
+          break;
+      }
+     }
+     if(!nflag){
+     user.holidays.push({
+         date:str1,
+         flag:false
+     });
+ }
+     for(temp of user.patients)
+     {
+         if(temp.date == str1)
+         {
+             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 '$set': {
+                     
+                     'doctors.$.reschedule': true
+                     
+                 }
+             });
+         }
+         client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+     }
+    }
+ 
+    else{
+     const addDays = (date, days = 1) => {
+         const result = new Date(date);
+         result.setDate(result.getDate() + days);
+         return result;
+       };
+       
+       const dateRange = (start, end, range = []) => {
+         if (start > end) return range;
+         const next = addDays(start, 1);
+         return dateRange(next, end, [...range, start]);
+       };
+       
+       const range = dateRange(new Date(str1a), new Date(str2a));
+       
+       console.log(range);
+       let range_date = range.map(date => date.toISOString().slice(0, 10));
+     //   console.log(range.map(date => date.toISOString().slice(0, 10)))
+       for(let i= 0;i<range_date.length;i++)
+       {
+          let a1 = range_date[i].split('-');
+          let a2 = a1[2]+ '-' + a1[1] + '-' + a1[0];
+          var nflag = false;
+          for(days of user.holidays)
+          {
+           if(days.date == a2)
+           {
+               nflag = true;
+               break;
+           }
+          }
+          if(!nflag){
+          user.holidays.push({
+             date:a2,
+             flag:false
+         });
+     }
+         for(temp of user.patients)
+         {
+             if(temp.date == a2)
+             {
+                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                     '$set': {
+                         
+                         'doctors.$.reschedule': true
+                         
+                     }
+                 });
+             }
+             client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+         }
+         
+       }
+    }
+ 
+ }
+ 
+    if(typeof(req.body.date)== 'object')
+    {
+     for(let i=0;i<req.body.date.length;i++)
+     {
+ 
+         var nflag = false;
+         for(days of user.holidays)
+         {
+          if(days.date == req.body.date[i])
+          {
+              nflag = true;
+              break;
+          }
+         }
+         if(!nflag){
+         user.holidays.push({
+             date:req.body.date[i],
+             flag:false
+         });
+     }
+         for(temp of user.patients)
+         {
+             if(temp.date == req.body.date[i])
+             {
+                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                     '$set': {
+                         
+                         'doctors.$.reschedule': true
+                         
+                     }
+                 });
+             }
+             client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+         }
+     }
+    }
+ 
+    if(typeof(req.body.date)== 'string')
+    {
+        console.log('hii')
+        var nflag = false;
+        for(days of user.holidays)
+        {
+         if(days.date == req.body.date)
+         {
+             nflag = true;
+             break;
+         }
+        }
+ 
+        if(!nflag)
+        {
+             user.holidays.push({
+                 date:req.body.date,
+                 flag:false
+             });
+        }
+     for(temp of user.patients)
+     {
+         if(temp.date == req.body.date)
+         {
+             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 '$set': {
+                     
+                     'doctors.$.reschedule': true
+                     
+                 }
+             });
+             client.messages
+             .create({
+                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+                 from: '+12019755459',
+                 statusCallback: 'http://postb.in/1234abcd',
+                 to: '+91' + temp.phone
+             })
+             .then(message => console.log(message.sid));
+             let patient = await User.findById(temp.pid);
+         if (temp.email) {
+             appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
+         }
+ 
+         }
+     }
+    }
+    
+    user.save();
+    req.flash('success','Booking service paused for the selected date.')
+    return res.redirect('back');
+  }
 }
 
 module.exports.deleteDate = async(req, res) => {
+    if(req.user.type == 'Staff')
+    {
+        let user = await User.findById(req.query.did);
+       
+        user.holidays.pull(req.query.id);
+        user.save();
+        return res.redirect('back');
+    }
+    if(req.user.type == 'Doctor'){
     let user = await User.findById(req.user.id);
     user.holidays.pull(req.query.id);
     user.save();
     return res.redirect('back');
+    }
 }
 
 module.exports.updateProfile = async(req, res) => {
@@ -547,7 +801,7 @@ module.exports.addMoreSeat = async(req, res) => {
 module.exports.createSession = async function(req, res) {
 
     console.log(req.body);
-    if (req.body.flag == 'true') {
+    if (req.body.flag == 'true' && req.body.type == 'booking') {
 
         let doctor = await User.findById(req.body.doctorid);
         return res.render('checkout', {
@@ -557,7 +811,9 @@ module.exports.createSession = async function(req, res) {
             slotindex: req.body.slotindex,
             dayindex: req.body.dayindex,
             id: req.body.id,
-            doctor: doctor
+            doctor: doctor,
+            date:req.body.date,
+            flag:'true'
 
         });
     } else {
@@ -584,6 +840,7 @@ module.exports.createSession = async function(req, res) {
 
 module.exports.popup = async function(req, res) {
     let user = await User.findById(req.user.id);
+    console.log(req.session.info);
 
     if (!user.type) {
         return res.redirect('/#popup1');
@@ -597,17 +854,19 @@ module.exports.popup = async function(req, res) {
                 return res.redirect('/steps');
             }
         } else {
-            if (req.body.flag == 'true') {
+            if (req.session.info.flag == 'true' && req.session.info.type == 'booking') {
 
-                let doctor = await User.findById(req.body.doctorid);
+                let doctor = await User.findById(req.session.info.doctorid);
                 return res.render('checkout', {
                     title: 'Checkout',
-                    booked: req.body.booked,
-                    available: req.body.available,
-                    slotindex: req.body.slotindex,
-                    dayindex: req.body.dayindex,
-                    id: req.body.id,
-                    doctor: doctor
+                    booked: req.session.info.booked,
+                    available: req.session.info.available,
+                    slotindex: req.session.info.slotindex,
+                    dayindex: req.session.info.dayindex,
+                    id: req.session.info.id,
+                    doctor: doctor,
+                    date:req.session.info.date,
+                    flag:req.session.info.flag
 
                 });
             } else {
@@ -619,23 +878,47 @@ module.exports.popup = async function(req, res) {
 }
 
 module.exports.manageBookingService = async(req, res) => {
-    let user = await User.findById(req.user.id);
-    if (req.body.flag == 'disable') {
-        Feedback.create({
-            did: user._id,
-            value: req.body.reason,
-            description: req.body.description
-        });
-        user.booking_service = false;
-        user.save();
-        req.flash('success', 'Booking Service deactivated successfully');
-    } else {
-        user.booking_service = true;
-        user.save();
-        req.flash('success', 'Booking Service activated successfully');
+    if(req.user.type == 'Doctor')
+    {
+        let user = await User.findById(req.user.id);
+        if (req.body.flag == 'disable') {
+            Feedback.create({
+                did: user._id,
+                value: req.body.reason,
+                description: req.body.description
+            });
+            user.booking_service = false;
+            user.save();
+            req.flash('success', 'Booking Service deactivated successfully');
+        } else {
+            user.booking_service = true;
+            user.save();
+            req.flash('success', 'Booking Service activated successfully');
+        }
+
+        return res.redirect('back');
     }
 
-    return res.redirect('back');
+    if(req.user.type == 'Staff')
+    {
+        let user = await User.findById(req.query.id);
+        if (req.body.flag == 'disable') {
+            Feedback.create({
+                did: user._id,
+                value: req.body.reason,
+                description: req.body.description
+            });
+            user.booking_service = false;
+            user.save();
+            req.flash('success', 'Booking Service deactivated successfully');
+        } else {
+            user.booking_service = true;
+            user.save();
+            req.flash('success', 'Booking Service activated successfully');
+        }
+
+        return res.redirect('back');
+    }
 }
 
 module.exports.updateType = async function(req, res) {
@@ -869,6 +1152,24 @@ module.exports.confirmPay = async function(req, res) {
             const payment_capture = 1;
             const amount = doctor.booking_fee;
             const currency = 'INR';
+            var notes;
+            if (req.body.type == 'own') {
+                notes = {
+                    patient_name: req.body.name,
+                    patient_age:req.body.age,
+                    patient_phone:req.body.phone,
+                    patient_address:req.body.address
+                }
+            }
+            if (req.body.type == 'other') {
+                notes = {
+                    patient_name: req.body.pname,
+                    patient_age:req.body.page,
+                    patient_phone:req.body.pphone,
+                    patient_address:req.body.paddress
+                }
+            }
+           
             const vendor_amount = amount-(amount*0.04);
            var stra = req.body.date.split('-');
            var strb = stra[2]+'-'+stra[1]+'-'+stra[0];      
@@ -881,6 +1182,7 @@ module.exports.confirmPay = async function(req, res) {
                 currency,
                 receipt: shortid.generate(),
                 payment_capture,
+                notes,
                 transfers: [
                     {
                     account: doctor.accountid,
@@ -961,6 +1263,14 @@ module.exports.offlineCancel = async function(req, res) {
                     path:'doctorid',
                     populate:{
                         path:'user'
+                    }
+                }).populate({
+                    path:'doctorids',
+                    populate:{
+                        path:'doctorid',
+                        populate:{
+                            path:'user'
+                        }
                     }
                 });
                 let user = await User.findById(user1.doctorid);
@@ -1146,7 +1456,7 @@ module.exports.refund = async function(req, res) {
 
                         client.messages
                         .create({
-                            body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
+                            body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +staff.phone+ '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
                             from: '+12019755459',
                             statusCallback: 'http://postb.in/1234abcd',
                             to: '+91'+req.query.phone
@@ -1306,7 +1616,8 @@ module.exports.verifyPayment = async(req, res) => {
                             day: req.query.day,
                             fee: req.query.fee,
                             slot: req.query.slotindex,
-                            seat: b
+                            seat: b,
+                            did:user._id
                         });
                         staff.save();
                     }
@@ -1370,7 +1681,8 @@ module.exports.verifyPayment = async(req, res) => {
                             day: req.query.day,
                             fee: req.query.fee,
                             slot: req.query.slotindex,
-                            seat: b
+                            seat: b,
+                            did:user._id
                         });
                         staff.save();
                     }
@@ -1384,7 +1696,7 @@ module.exports.verifyPayment = async(req, res) => {
                 });
                 patient.notification.push({
                     type: 'appointment-success',
-                    message: 'Your Apointment is confirmed with Dr. ' + user.name + ' on ' + req.query.date + ' at ' + req.query.time,
+                    message: 'Your Appointment is confirmed with Dr. ' + user.name + ' on ' + req.query.date + ' at ' + req.query.time,
                     flag: true,
                     did: req.query.doctorid
                 });
@@ -1404,7 +1716,7 @@ module.exports.verifyPayment = async(req, res) => {
 
                 client.messages
                     .create({
-                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + user.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
+                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
                         alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
@@ -1414,6 +1726,18 @@ module.exports.verifyPayment = async(req, res) => {
                 if (req.query.email) {
                     appointmentAlert.newAlert(req.query.date, req.query.time, req.query.email, user, patient);
                 }
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + user.phone
+                })
+                .then(message => console.log(message.sid));
+            if (user.email) {
+                appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,b,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
+            }
 
 
 
@@ -1503,7 +1827,8 @@ module.exports.verifyPayment = async(req, res) => {
                             date: req.query.date,
                             day: req.query.day,
                             fee: req.query.fee,
-                            seat: k1
+                            seat: k1,
+                            did:user._id
                         });
                         staff.save();
                     }
@@ -1568,7 +1893,8 @@ module.exports.verifyPayment = async(req, res) => {
                             date: req.query.date,
                             day: req.query.day,
                             fee: req.query.fee,
-                            seat: k1
+                            seat: k1,
+                            did:user._id
                         });
                         staff.save();
                     }
@@ -1604,7 +1930,7 @@ module.exports.verifyPayment = async(req, res) => {
 
                 client.messages
                     .create({
-                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + user.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
+                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
                         alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
@@ -1614,6 +1940,19 @@ module.exports.verifyPayment = async(req, res) => {
                 if (req.query.email) {
                     appointmentAlert.newAlert(req.query.date, req.query.time, req.query.email, user, patient);
                 }
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + user.phone
+                })
+                .then(message => console.log(message.sid));
+            if (user.email) {
+                appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,k1,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
+            }
+
 
                 return res.render('booking-success', {
                     title: 'Booking-Success',
@@ -1875,7 +2214,10 @@ module.exports.bookAppointment = async(req, res) => {
         dayindex:req.body.dayindex,
         id:req.body.id,
         doctor:doctor,
-        flag:true
+        doctorid:req.body.doctorid,
+        date: req.body.date,
+        flag:true,
+        type:'booking'
 
         });
     }
@@ -2140,7 +2482,8 @@ module.exports.offlinePay = async(req, res) => {
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: b,
-                    gender:req.body.gender
+                    gender:req.body.gender,
+                    did:user._id
                 });
                 staff.refresh_flag = false;
 
@@ -2199,7 +2542,8 @@ module.exports.offlinePay = async(req, res) => {
                     gender:req.body.gender,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
-                    seat: k1
+                    seat: k1,
+                    did:user._id
                 });
                 staff.refresh_flag = false;
                 staff.save();
@@ -2227,7 +2571,7 @@ module.exports.offlinePay = async(req, res) => {
 
             }
         } else {
-            return res.redirect(`/booking/?id=${req.user.doctorid}`);
+            return res.redirect(`/booking/?id=${req.body.doctorid}`);
 
         }
 
@@ -2295,7 +2639,8 @@ module.exports.oldOfflinePay = async(req, res) => {
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: b,
-                    gender:req.body.gender
+                    gender:req.body.gender,
+                    did:user._id
                 });
                 staff.refresh_flag = false;
 
@@ -2355,7 +2700,8 @@ module.exports.oldOfflinePay = async(req, res) => {
                     gender:req.body.gender,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
-                    seat: k1
+                    seat: k1,
+                    did:user._id
                 });
                 staff.refresh_flag = false;
                 staff.save();
@@ -2414,7 +2760,8 @@ module.exports.oldOfflinePay = async(req, res) => {
                     gender:req.body.gender,
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
-                    seat: k1
+                    seat: k1,
+                    did:user._id
                 });
                 staff.refresh_flag = false;
                 staff.save();
@@ -2559,7 +2906,8 @@ module.exports.bookOldAppointment = async(req, res) => {
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: b,
-                    gender:req.body.gender
+                    gender:req.body.gender,
+                    did:user._id
                 });
             
             }else{
@@ -2622,7 +2970,8 @@ module.exports.bookOldAppointment = async(req, res) => {
                     dayindex: req.body.dayindex,
                     fee: req.body.fee,
                     seat: b,
-                    gender:req.body.gender
+                    gender:req.body.gender,
+                    did:user._id
                 });
             }
                
@@ -2635,7 +2984,7 @@ module.exports.bookOldAppointment = async(req, res) => {
 
                   client.messages
                   .create({
-                     body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                     body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user1.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                      from: '+12019755459',
                      statusCallback: 'http://postb.in/1234abcd',
                      to: '+91'+req.body.phone
@@ -2736,7 +3085,8 @@ module.exports.bookOldAppointment = async(req, res) => {
                         dayindex: req.body.dayindex,
                         fee: req.body.fee,
                         seat: k1,
-                        gender:req.body.gender
+                        gender:req.body.gender,
+                        did:user._id
                     });
                 
                 }else{
@@ -2799,7 +3149,8 @@ module.exports.bookOldAppointment = async(req, res) => {
                         dayindex: req.body.dayindex,
                         fee: req.body.fee,
                         seat: k1,
-                        gender:req.body.gender
+                        gender:req.body.gender,
+                        did:user._id
                     });
                 }
                    
@@ -2812,7 +3163,7 @@ module.exports.bookOldAppointment = async(req, res) => {
     
                       client.messages
                       .create({
-                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user1.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                          from: '+12019755459',
                          statusCallback: 'http://postb.in/1234abcd',
                          to: '+91'+req.body.phone
@@ -2908,7 +3259,8 @@ module.exports.bookOldAppointment = async(req, res) => {
                         dayindex: req.body.dayindex,
                         fee: req.body.fee,
                         seat: k1,
-                        gender:req.body.gender
+                        gender:req.body.gender,
+                        did:user._id
                     });
                 
                 }else{
@@ -2971,7 +3323,8 @@ module.exports.bookOldAppointment = async(req, res) => {
                         dayindex: req.body.dayindex,
                         fee: req.body.fee,
                         seat: k1,
-                        gender:req.body.gender
+                        gender:req.body.gender,
+                        did:user._id
                     });
                 }
                    
@@ -2984,7 +3337,7 @@ module.exports.bookOldAppointment = async(req, res) => {
     
                       client.messages
                       .create({
-                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user1.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                          from: '+12019755459',
                          statusCallback: 'http://postb.in/1234abcd',
                          to: '+91'+req.body.phone
@@ -3032,7 +3385,7 @@ module.exports.setBookingFee = async function(req, res) {
 }
 
 module.exports.staffSetBookingFee = async function(req, res) {
-    let user = await User.findById(req.user.doctorid);
+    let user = await User.findById(req.query.id);
     user.booking_fee = req.body.fee;
     user.save();
 
@@ -3158,7 +3511,7 @@ module.exports.staffUpdateSchedule = async function(req, res) {
 
 
     if ((!req.body.start) || (!req.body.end)) {
-        let user = await User.findById(req.user.doctorid);
+        let user = await User.findById(req.query.id);
         user.schedule_time.pull({ _id: req.body.id });
         user.save();
         return res.redirect('back');
@@ -3245,7 +3598,15 @@ module.exports.setScheduleTiming = async function(req, res) {
 
 module.exports.staffSetScheduleTiming = async function(req, res) {
 
-    let user = await User.findById(req.user.doctorid);
+    var user;
+    if(req.user.doctorids.length>0)
+    {
+        user = await User.findById(req.query.id);
+    }
+    else{
+
+    user = await User.findById(req.user.doctorid);
+    }
 
 
 
@@ -3541,11 +3902,20 @@ module.exports.sortByDate = async(req, res) => {
 
     if (req.body.flag == 'true') {
         let doctor = await User.findById(req.user.doctorid);
-        let user1 = await User.findById(req.user.id).populate('doctorid');
+        let user1 = await User.findById(req.user.id).populate('doctorid').populate({
+            path:'doctorids',
+            populate:{
+                path:'doctorid',
+                populate:{
+                    path:'user'
+                }
+            }
+        });;
 
         return res.render('staff-booking-page', {
             title: 'Book Appointment',
             doctor: doctor,
+            doctor1: doctor,
             daten: str,
             user1: user1
         })

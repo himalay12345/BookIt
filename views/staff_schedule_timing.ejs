@@ -25,7 +25,7 @@
         <!-- /Header -->
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
+        <div class="breadcrumb-bar setting-bread position-relative" style="margin-top: 20px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
@@ -37,6 +37,22 @@
                         </nav>
                         <h2 class="breadcrumb-title">Schedule Timings</h2>
                     </div>
+                    <%if(locals.user.doctorids.length>0){%>
+                        <div class="col-md-4 col-12 d-md-block position-absolute" style="top:20px;right:2%;">
+                            <div class="sort-by">
+                                <span class="sort-title">Switch Doctor</span>
+                                <span class="sortby-fliter">
+                                        <select class="select" style="width:auto !important;" onchange="location = this.value;">
+                                            <option>Select</option>
+                                            <%for(doc of user.doctorids){%>
+                                               <option style="width:auto !important;" class="sorting" value="/staff-schedule-timings/?id=<%=doc.doctorid._id%>"><%=doc.doctorid.name%></option>
+                                            <%}%>
+                                            
+                                        </select>
+                                    </span>
+                            </div>
+                        </div>
+                        <%}%>
                 </div>
             </div>
         </div>
@@ -47,6 +63,78 @@
             <div class="container-fluid">
 
                 <div class="row">
+                    <div class="col-md-12" style="width:100%;">
+                    <div class="card">
+                                <div class="card-body">
+                                    <div class="booking-doc-info">
+                                        <a href="/doctor-profile/?id=<%=user1._id%>" class="booking-doc-img">
+<img src="<%=user1.avatar%>" alt="User Image">
+</a>
+                                        <div class="booking-info">
+                                            <h4>
+                                                <a href="/doctor-profile/?id=<%=user1._id%>">
+                                                    <%=user1.name%>
+                                                </a>
+                                            </h4>
+                                            <p class="doc-department">
+                                                <% if(user1.department== "General Physician"){ %>
+                                                    <img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
+                                                    <% } %>
+
+                                                        <% if(user1.department== "Ophthalmology"){ %>
+                                                            <img src="<%=assetPath('img/specialities/eye.png')%>" class="img-fluid" alt="Speciality">
+                                                            <% } %>
+                                                                <% if(user1.department== "Dermatology"){ %>
+                                                                    <img src="<%=assetPath('img/specialities/hair.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                    <% } %>
+                                                                        <% if(user1.department== "Paediatrics"){ %>
+                                                                            <img src="<%=assetPath('img/specialities/child.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                            <% } %>
+                                                                                <% if(user1.department== "Urology"){ %>
+                                                                                    <img src="<%=assetPath('img/specialities/brain.png')%>" class="img-fluid" alt="Speciality">
+                                                                                    <% } %>
+                                                                                        <% if(user1.department== "Neurology"){ %>
+                                                                                            <img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
+                                                                                            <% } %>
+                                                                                            <% if(user1.department== "Orthopedic"){ %>
+
+                                                                                                <img src="<%=assetPath('img/specialities/bone.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                <% } %>
+                                                                                                <% if(user1.department== "Gynaecology"){ %>
+                                                                                            
+                                                                                                    <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                    <% } %>
+                                                                                                        <% if(user1.department== "Cardiologist"){ %>
+                                                                                                            <img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                            <% } %>
+                                                                                                                <% if(user1.department== "Dentist"){ %>
+                                                                                                                    <img src="<%=assetPath('img/specialities/teeth.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                                    <% } %>
+                                                                                                                        <%=user1.department%>
+
+                                            </p>
+                                            <div class="rating">
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star"></i>
+                                                <span class="d-inline-block average-rating">35</span>
+                                            </div>
+                                            <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
+                                                <%=user1.booking_fee%>
+                                            </p>
+
+
+                                            <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
+                                                <%=user1.contacts.city%>&nbsp;
+                                                    <%=user1.contacts.state%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                     <div class="col-md-12 col-lg-12 col-xl-12">
@@ -626,7 +714,7 @@
                                         <h4 class="card-title">Set Booking Appointment Charges</h4>
                                         <div class="profile-box">
                                             <div class="row">
-                                                <form action="/user/staff-set-booking-fee" method="POST">
+                                                <form action="/user/staff-set-booking-fee/?id=<%=user1._id%>" method="POST">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <div class="col-md-12 col-sm-12" style="margin-left: -15px;">
                                                             <div class="form-group col-sm-12">
@@ -655,7 +743,7 @@
                                         <h4 class="card-title">Only For Old Patients</h4>
                                         <div class="profile-box">
                                             <div class="row">
-                                                <form action="/user/staff-set-old-patient" method="POST">
+                                                <form action="/user/staff-set-old-patient/?id=<%=user1._id%>" method="POST">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <div class="col-md-12 col-sm-12" style="margin-left: -15px;">
                                                             <div class="form-group col-sm-12">
@@ -1841,7 +1929,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2016,7 +2104,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2190,7 +2278,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2364,7 +2452,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2538,7 +2626,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2712,7 +2800,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -2886,7 +2974,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-schedule-timing" method="POST">
+                    <form action="/user/staff-set-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -3066,7 +3154,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="sunday">
 
@@ -3888,7 +3976,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="monday">
 
@@ -4705,7 +4793,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="tuesday">
 
@@ -5523,7 +5611,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="wednesday">
 
@@ -6340,7 +6428,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="thursday">
 
@@ -7157,7 +7245,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="friday">
 
@@ -7975,7 +8063,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-update-schedule" method="POST">
+                    <form action="/user/staff-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="saturday">
 
@@ -8792,7 +8880,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -8890,7 +8978,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -8987,7 +9075,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -9084,7 +9172,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -9181,7 +9269,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -9278,7 +9366,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -9375,7 +9463,7 @@
 						</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/user/staff-set-old-schedule-timing" method="POST">
+                    <form action="/user/staff-set-old-schedule-timing/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <div class="row form-row hours-cont">
                                 <div class="col-12 col-md-12">
@@ -9478,7 +9566,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="sunday">
 
@@ -9852,7 +9940,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="monday">
 
@@ -10226,7 +10314,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="tuesday">
 
@@ -10600,7 +10688,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="wednesday">
 
@@ -10974,7 +11062,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="thursday">
 
@@ -11348,7 +11436,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="friday">
 
@@ -11722,7 +11810,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="/user/staff-old-update-schedule" method="POST">
+                    <form action="/user/staff-old-update-schedule/?id=<%=user1._id%>" method="POST">
                         <div class="hours-info">
                             <input type="hidden" name="day" value="saturday">
 
