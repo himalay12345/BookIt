@@ -19,13 +19,13 @@ const development = {
     session_cookie_key:  process.env.SESSION_COOKIE_KEY,
     db:  process.env.DB,
     smtp: {
-        host: "smtpout.secureserver.net",  
+        host: "smtpout.secureserver.net",
         secure: true,
         secureConnection: false,
         tls: {
-            ciphers:'SSLv3'
+            ciphers: 'SSLv3'
         },
-        requireTLS:true,
+        requireTLS: true,
         port: 465,
         debug: true,
         auth: {
@@ -64,13 +64,13 @@ const production = {
     session_cookie_key: process.env.SESSION_COOKIE_KEY,
     db: process.env.DB,
     smtp: {
-        host: "smtpout.secureserver.net",  
+        host: "smtpout.secureserver.net",
         secure: true,
         secureConnection: false,
         tls: {
-            ciphers:'SSLv3'
+            ciphers: 'SSLv3'
         },
-        requireTLS:true,
+        requireTLS: true,
         port: 465,
         debug: true,
         auth: {

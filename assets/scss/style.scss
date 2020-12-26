@@ -151,6 +151,10 @@
     background-color: #006400;
 }
 
+.cutomer-mobile {
+    display: none;
+}
+
 .patient-li h3 {
     font-size: 1.1rem;
     display: block;
@@ -3925,7 +3929,6 @@ html.menu-opened body {
     padding: 0;
     width: 100%;
 }
-
 
 .rating {
     list-style: none;
@@ -8674,6 +8677,9 @@ html.menu-opened body {
     .card-header {
         padding: .75rem 1.25rem;
     }
+    .cutomer-mobile {
+        display: block;
+    }
     .smargin {
         margin-left: 20px !important;
     }
@@ -9494,9 +9500,8 @@ html.menu-opened body {
     .laptop-blood {
         display: none;
     }
-
-    .rating{
-         margin: 20px 0 7px !important; 
+    .rating {
+        margin: 20px 0 7px !important;
     }
     .mobile-sugar {
         display: block;
@@ -10223,30 +10228,34 @@ input:-webkit-autofill:focus {
     color: black !important;
 }
 
- #myTable1{
-  padding-left: -30px !important;
- } 
-#myTable1 tr {
-  background-color: white;
-  border-bottom: 1px solid #b8b5b5;
+#myTable1 {
+    padding-left: -30px !important;
+}
 
-  height: 30px !important; }
+#myTable1 tr {
+    background-color: white;
+    border-bottom: 1px solid #b8b5b5;
+    height: 30px !important;
+}
 
 #myTable1 tr img {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  margin-left: 15px;
-  margin-top: 5px;
-  margin-right: -30px; }
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-right: -30px;
+}
 
 #myTable1 tr td {
-  font-size: 1rem !important;
-  font-weight: bold;
-  margin-left: -30px !important;
-  padding: 5px !important; }
+    font-size: 1rem !important;
+    font-weight: bold;
+    margin-left: -30px !important;
+    padding: 5px !important;
+}
 
 #myTable1 tr td span {
-  font-size: 0.8rem !important;
-  font-weight: normal !important;
-  color: black !important; }
+    font-size: 0.8rem !important;
+    font-weight: normal !important;
+    color: black !important;
+}

@@ -131,6 +131,9 @@
   color: white;
   background-color: #006400; }
 
+.cutomer-mobile {
+  display: none; }
+
 .patient-li h3 {
   font-size: 1.1rem;
   display: block;
@@ -7174,6 +7177,8 @@ html.menu-opened body {
     margin-top: -20px; }
   .card-header {
     padding: .75rem 1.25rem; }
+  .cutomer-mobile {
+    display: block; }
   .smargin {
     margin-left: 20px !important; }
   .ssmargin {
