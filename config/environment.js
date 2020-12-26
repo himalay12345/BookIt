@@ -45,9 +45,9 @@ const development = {
     fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
     fb_callback_url: "/user/auth/facebook/callback",
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
-    twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
-    twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
-    twilio_auth_token: "4fab053fdd641e6505744dddd0e3942e",
+    twilio_sid:  process.env.TW_SID,
+    twilio_account_sid:  process.env.TW_ASID,
+    twilio_auth_token: process.env.TW_AUTH,
 
     gmail_passw: 'Himalay@NIXXIT',
     morgan: {
