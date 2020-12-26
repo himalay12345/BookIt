@@ -16,42 +16,40 @@ const accessLogStream = rfs.createStream('access.log', {
 const development = {
     name: 'development',
     asset_path: './assets',
-    session_cookie_key:  process.env.SESSION_COOKIE_KEY,
-    db:  process.env.DB,
+    session_cookie_key: 'aarogya@123',
+    db: 'Aarogyahub',
     smtp: {
-        host: "smtpout.secureserver.net",
+        host: "smtpout.secureserver.net",  
         secure: true,
         secureConnection: false,
         tls: {
-            ciphers: 'SSLv3'
+            ciphers:'SSLv3'
         },
-        requireTLS: true,
+        requireTLS:true,
         port: 465,
         debug: true,
         auth: {
-            user:process.env.SMTP_USER,
-            pass:process.env.SMTP_PASSWORD
-
+            user: 'support@aarogyahub.com',
+            pass: 'Himalay@NIXXIT'
         }
     },
-
-    // razorpay_key_id: process.env.RAZOR_TEST_KEY,
-    razorpay_key_id:  process.env.RAZOR_LIVE_KEY,
-    // razorpay_key_secret:  process.env.RAZOR_TEST_SECRET,
-    razorpay_key_secret: process.env.RAZOR_LIVE_SECRET,
-    google_client_id:  process.env.G_CLIENTID,
-    google_client_secret:  process.env.G_CLIENTSECRET,
-    // google_callback_url:  process.env.G_TESTCALLBACK,
-    google_callback_url: process.env.G_LIVECALLBACK,
-    fb_client_id:  process.env.FB_CLIENTID,
-    fb_client_secret:  process.env.FB_CLIENTSECRET,
-    fb_callback_url: process.env.FB_CALLBACK,
+    // razorpay_key_id: 'rzp_test_KPgD2YFDnBI7Ib',
+    razorpay_key_id: 'rzp_live_JBEggrx7YLvrh2',
+    // razorpay_key_secret: 'dlb3M9b3nEWXU6TYSzRlDhTJ',
+    razorpay_key_secret: '24qtmFj0IqbCVjpj3aofbyaN',
+    google_client_id: '962720186337-l6gu83hkfs1qhh6f4vhv4ej0gad3e1ed.apps.googleusercontent.com',
+    google_client_secret: 'OcauqQn-wvQezypG9ZMsJEf7',
+    // google_callback_url: "/user/auth/google/callback",
+    google_callback_url:"https://aarogyahub.com/user/auth/google/callback",
+    fb_client_id: '247163950066857',
+    fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
+    fb_callback_url: "/user/auth/facebook/callback",
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
-    twilio_sid:process.env. TW_SID,
-    twilio_account_sid:process.env. TW_ASID,
-    twilio_auth_token: process.env.TW_AUTH,
+    twilio_sid: "VA8bd100c88cde205a490376c7a1a6273a",
+    twilio_account_sid: "AC072f252c5635d5be8d199882a12ea742",
+    twilio_auth_token: "4fab053fdd641e6505744dddd0e3942e",
 
-    gmail_passw: process.env.G_PASSWORD,
+    gmail_passw: 'Himalay@NIXXIT',
     morgan: {
         mode: 'dev',
         options: { stream: accessLogStream }
@@ -64,13 +62,13 @@ const production = {
     session_cookie_key: process.env.SESSION_COOKIE_KEY,
     db: process.env.DB,
     smtp: {
-        host: "smtpout.secureserver.net",
+        host: "smtpout.secureserver.net",  
         secure: true,
         secureConnection: false,
         tls: {
-            ciphers: 'SSLv3'
+            ciphers:'SSLv3'
         },
-        requireTLS: true,
+        requireTLS:true,
         port: 465,
         debug: true,
         auth: {
