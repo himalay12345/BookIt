@@ -222,7 +222,7 @@ const userSchema = mongoose.Schema({
     doctorids:[{
         doctorid:{
             type: mongoose.Schema.Types.ObjectId
-        },
+        }
     }],
 
    others:[{

@@ -847,7 +847,7 @@
                                 <h2 class="text-center font-weight-bolder"style="font-size:2.8rem;color:white" >Welcome To The Online Patient Tracking System</h2>
                             </div>
                             <div class="patient_tracking_display mdisplay">
-                                <%var last=0;%>
+                                <%var last=0,did;%>
                                 <ul id="patient-ul" class="sscreenul">
                                     <%for(u of user1.tracked){%>
                                         <%var today = new Date();
@@ -865,7 +865,7 @@
                                         <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                         <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                         
-                                        <%if(str1 != str2 || u.did != user1.doctorid.id){%>
+                                        <%if(str1 != str2 || u.did != did){%>
                                             <%continue;%>
                                         <%}%>
                                         
@@ -920,7 +920,7 @@
                                             <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                             <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
                                             
-                                            <%if(str1 != str2 || user1.booking[i].cancel != false || user1.booking[i].did != user1.doctorid.id){%>
+                                            <%if(str1 != str2 || user1.booking[i].cancel != false || user1.booking[i].did != did){%>
                                                 <%continue;%>
                                             <%}%>
 

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/booking  30 Nov 2019 04:12:16 GMT -->
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"> -->
+
+
+    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS -->
+   
+    <link rel="stylesheet" href="https://aarogyahub.com/css/bootstrap.min.css">
+
+    
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://aarogyahub.com/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://aarogyahub.com/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css">
+
+
+    <link rel="stylesheet" href="https://aarogyahub.com/plugins/fontawesome/css/all.min.css">
+
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="https://aarogyahub.com/css/style1.css">
+    <link rel="stylesheet" href="https://aarogyahub.com/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+</head>
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper" >
+
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+     
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content" >
+            <style>
+                @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900');
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(file:..///fonts/MaterialIcons-Regular.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.html) format('woff2'), url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+            </style>
+            <div class="container">
+                <form action="/user/staff-book-appointment" method="POST">
+                    <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="booking-doc-info">
+                                        <a href="/doctor-profile/?id=<%=doctor._id%>" class="booking-doc-img">
+<img src="<%=doctor.avatar%>" alt="User Image">
+</a>
+                                        <div class="booking-info">
+                                            <h4>
+                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                    <%=doctor.name%>
+                                                </a>
+                                            </h4>
+                                          
+                                            <div class="rating">
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star filled"></i>
+                                                <i class="fas fa-star"></i>
+                                                <span class="d-inline-block average-rating">35</span>
+                                            </div>
+                                            <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
+                                                <%=doctor.booking_fee%>
+                                            </p>
+
+
+                                            <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
+                                                <%=doctor.contacts.city%>&nbsp;
+                                                    <%=doctor.contacts.state%>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Schedule Widget -->
+                           
+                </form>
+                <!-- /Submit Section -->
+
+                <div class="tab-pane show active position-relative" id="upcoming-appointments">
+                    <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                        <li class="nav-item" style="width: 100%;">
+                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Today Appointments</a>
+                        </li>
+                    </ul>
+                   
+                        </div>
+                    </form>
+                    </div>
+                    <%var slots=0,sindex=0;%>
+                        <%var daten;%>
+
+                            <%if(daten != undefined){%>
+                                <%var daten1 = daten.split('-');
+var daten2 = daten1[1]+'-'+daten1[0]+'-'+daten1[2];%>
+                                    <%var today = new Date(daten2);%>
+                                        <%console.log(today)%>
+                                            <%}else{%>
+                                                <%var today = new Date();%>
+                                                    <%}%>
+                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+console.log(dayOfWeek)%>
+                                                            <%for(let i2 = 0 ; i2< doctor1.schedule_time.length; i2++){%>
+                                                                <%if(doctor1.schedule_time[i2].day.toUpperCase() == dayOfWeek.toUpperCase()){%>
+                                                                    <%if(typeof(doctor1.schedule_time[i2].start)!='string'){%>
+                                                                        <%slots = doctor1.schedule_time[i2].start.length;sindex=i2%>
+                                                                            <%}%>
+                                                                                <%}%>
+
+                                                                                    <%}%>
+                                                                                        <%if(slots <= 1){%>
+                                                                                            <div class="card card-table mb-0">
+                                                                                                <div class="card-body">
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-hover table-center mb-0 stable">
+                                                                                                            <thead class="sthead">
+                                                                                                                <tr class="str">
+                                                                                                                    <th class="sth">Name</th>
+                                                                                                                    <th class="sth">Gender</th>
+                                                                                                                    <th class="sth">Age</th>
+                                                                                                                    <th class="sth">Phone</th>
+                                                                                                                    <th class="sth">Address</th>
+                                                                                                                    <th class="sth">Booking Mode</th>
+                                                                                                                    <th class="text-center sth">Status</th>
+                                                                                                                    
+
+                                                                                                                </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody class="stbody">
+                                                                                                                <%var c=0,z1=0,z2=0;z31=0;%>
+
+                                                                                                                    <%for(patients of user1.booking){%>
+                                                                                                                        <%var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];%>
+<%var st2 = patients.date.split('-');%>
+<%var st1 = st2[2]+'-'+st2[1]+'-'+st2[0];%>
+<%var today1 = new Date(st1);
+var dd1= String(today1.getDate()).padStart(2, '0');
+var mm1 = String(today1.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy1 = today1.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today1.getDay()];%>
+                                                                                                                                <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                                                                                    <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+
+
+                                                                                                                                        <%if(daten != undefined){%>
+                                                                                                                                            <%if(daten != patients.date || patients.old_flag || patients.did != doctor1.id){%>
+                                                                                                                                                <%z1++;z31++;continue;%>
+                                                                                                                                                    <%}%>
+
+                                                                                                                                                        <%}else{%>
+
+                                                                                                                                                            <%if(str1 != str2 || patients.old_flag){%>
+                                                                                                                                                                <%z1++;z31++;continue;%>
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                    <%var a1 = patients.did;%>
+                                                                                                                                                                    <%var a2 = doctor1.id;%>
+                                                                                                                                                                    <%if(a1 != a2){%>
+                                                                                                                                                                        <%=console.log(a1,a2)%>
+                                                                                                                                                                        <%z1++;z31++;continue;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                        <%}%>
+
+                                                                                                                                                                            <tr class="str">
+
+                                                                                                                                                                                <td class="std">
+                                                                                                                                                                                    <h2 class="table-avatar">
+
+
+                                                                                                                                                                                        <a href="#">
+                                                                                                                                                                                            <%=patients.name%> <%if(patients.cancel != true){%><span>#PT00<%=++c%></span>
+                                                                                                                                                                                            <%}%></a>
+                                                                                                                                                                                    </h2>
+                                                                                                                                                                                </td>
+                                                                                                                                                                                <td class="std">
+                                                                                                                                                                                    <%if(patients.gender){%>
+                                                                                                                                                                                        <%if(patients.gender=='Male'){%>
+                                                                                                                                                                                            M
+                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                        <%if(patients.gender=='Female'){%>
+                                                                                                                                                                                            F
+                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                        <%if(patients.gender=='Others'){%>
+                                                                                                                                                                                            O
+                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                    
+                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                </td>
+
+                                                                                                                                                                                <td class="std">
+                                                                                                                                                                                    <%=patients.age%>
+                                                                                                                                                                                </td>
+
+                                                                                                                                                                                <td class="std">
+                                                                                                                                                                                    <%=patients.phone%>
+                                                                                                                                                                                </td>
+
+                                                                                                                                                                                <td class="std">
+                                                                                                                                                                                    <%=patients.address%>
+                                                                                                                                                                                </td>
+                                                                                                                                                                                <%if(patients.type=='online'){%>
+                                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                                                                                                                                    <%}else{%>
+                                                                                                                                                                                        <td class="std"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+
+                                                                                                                                                                                        <%}%>
+
+
+
+                                                                                                                                                                                            <%if(patients.cancel == true){%>
+                                                                                                                                                                                                <td class="std"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                                                                                                <%}else{%>
+                                                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                                                                                    <%}%>
+
+                                                                                                                                                                                                   
+                                                                                                                                                                                                      
+
+
+                                                                                                                                                                            </tr>
+                                                                                                                                                                            <div id='popup<%=z31%>' class="overlay">
+                                                                                                                                                                                <div class="popup">
+                                                                                                                                                                                    <form action="/user/offline-cancel" id="form<%=c%>" method="POST">
+                                                                                                                                                                                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                                                                                                                                                                            <div class="form-group">
+                                                                                                                                                                                                <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
+
+                                                                                                                                                                                                <input type="hidden" name="slotindex" value="<%=patients.slot%>">
+                                                                                                                                                                                                <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
+
+                                                                                                                                                                                                <input type="hidden" name="bid" value="<%=user1.booking[z31]._id%>">
+
+                                                                                                                                                                                                <input type="hidden" name="phone" value="<%=patients.phone%>">
+
+                                                                                                                                                                                                <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                                                                                                                                                                <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                                                                                                                                                                                </select>
+                                                                                                                                                                                            </div>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
+                                                                                                                                                                                    </form>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                            <%z31++;%>
+                                                                                                                                                                            <%}%>
+
+                                                                                                            </tbody>
+
+                                                                                                        </table>
+                                                                                                        <%if(z1==user1.booking.length){%>
+                                                                                                            <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                                                                            <%}%>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <%}else{%>
+                                                                                                <%for(let i1 =0 ;i1<slots;i1++){%>
+                                                                                                    <ul class="nav nav-tabs nav-tabs-solid  text-center">
+                                                                                                        <li class="nav-item" style="width: 100%;">
+                                                                                                            <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab"><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                    <div class="card card-table mb-0">
+                                                                                                        <div class="card-body">
+                                                                                                           
+                                                                                                                    <div class="table-responsive">
+                                                                                                             
+                                                                                                                <table class="table table-hover table-center mb-0 stable">
+                                                                                                                    <thead class="sthead">
+                                                                                                                        <tr class="str">
+                                                                                                                            <th class="sth">Name</th>
+                                                                                                                            <th class="sth">Gender</th>
+                                                                                                                            <th class="sth">Age</th>
+                                                                                                                            <th class="sth">Phone</th>
+                                                                                                                            <th class="sth">Address</th>
+                                                                                                                            <th class="sth">Booking Mode</th>
+                                                                                                                            <th class="text-center sth">Status</th>
+                                                                                                                            <th class="sth">Bill</th>
+                                                                                                                            <th class="sth">Prescription</th>
+                                                                                                                            <th class="text-center sth">Cancel</th>
+
+                                                                                                                        </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody class="stbody">
+                                                                                                                        <%var c=0,z1=0,z2=0;z3=0;%>
+
+                                                                                                                            <%for(patients of user1.booking){%>
+                                                                                                                                <%var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];%>
+<%var st2 = patients.date.split('-');%>
+<%var st1 = st2[2]+'-'+st2[1]+'-'+st2[0];%>
+<%var today = new Date(st1);
+var dd1= String(today.getDate()).padStart(2, '0');
+var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy1 = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];%>
+                                                                                                                                        <%var str1 = dd+'-'+mm+'-'+yyyy;%>
+                                                                                                                                            <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+
+
+                                                                                                                                                <%if(daten != undefined){%>
+                                                                                                                                                    <%if(daten != patients.date || patients.slot != i1 || patients.old_flag || patients.did != doctor1.id){%>
+                                                                                                                                                        <%z1++;z3++;continue;%>
+                                                                                                                                                            <%}%>
+
+                                                                                                                                                                <%}else{%>
+
+                                                                                                                                                                    <%if(str1 != str2 || patients.slot != i1 || patients.old_flag || patients.did != doctor1.id){%>
+                                                                                                                                                                        <%z1++;z3++;continue;%>
+                                                                                                                                                                            <%}%>
+                                                                                                                                                                                <%}%>
+
+                                                                                                                                                                                    <tr class="str">
+
+                                                                                                                                                                                        <td class="std">
+                                                                                                                                                                                            <h2 class="table-avatar">
+
+                                                                                                                                                                                            
+                                                                                                                                                                                                <a href="#">
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    <%=patients.name%> 
+                                                                                                                                                                                                    <%if(patients.cancel != true){%><span>#PT00<%=++c%></span>
+                                                                                                                                                                                                    <%}%></a>
+                                                                                                                                                                                            </h2>
+                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                        <td class="std">
+                                                                                                                                                                                            <%if(patients.gender){%>
+                                                                                                                                                                                                <%if(patients.gender=='Male'){%>
+                                                                                                                                                                                                    M
+                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                <%if(patients.gender=='Female'){%>
+                                                                                                                                                                                                    F
+                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                <%if(patients.gender=='Others'){%>
+                                                                                                                                                                                                    O
+                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                            
+                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                        <td class="std">
+                                                                                                                                                                                            <%=patients.age%>
+                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                        <td class="std">
+                                                                                                                                                                                            <%=patients.phone%>
+                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                        <td class="std">
+                                                                                                                                                                                            <%=patients.address%>
+                                                                                                                                                                                        </td>
+                                                                                                                                                                                        <%if(patients.type=='online'){%>
+                                                                                                                                                                                            <td class="std"><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                                                                                                                                            <%}else{%>
+                                                                                                                                                                                                <td class="std"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+
+                                                                                                                                                                                                <%}%>
+
+                                                                                                                                                                                                <%if(patients.cancel == true){%>
+                                                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                                                                                                    <%}else{%>
+                                                                                                                                                                                                        <td class="std"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                                                                                        <%}%>
+                                                                                                                                                                                                         <%if(patients.cancel != true){%>
+                                                                                                                                                                                                <td>
+                                                                                                                                                                                                    <a href="/invoice-view/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
+                                                                                                                                                                                                    <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Print Bill</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                                </td>
+                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                <%if(patients.cancel != true){%>
+                                                                                                                                                                                                <td>
+                                                                                                                                                                                                    <a href="/prescription-pad/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
+                                                                                                                                                                                                    <span ><i class="fas fa-newspaper" style="margin-right: 5px;"></i>Prescription</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                                </td>
+                                                                                                                                                                                                <%}%>
+
+
+
+
+                                                                                                                                                                                                  
+                                                                                                                                                                                                                <td class="text-right">
+
+                                                                                                                                                                                                                    <div class="table-action">
+                                                                                                                                                                                                                        <%if(patients.cancel == true){%>
+                                                                                                                                                                                                                            <a href="#" class="btn btn-sm bg-danger" style="color: white;">
+
+                                                                                                                                                                                                                                <i class="fas fa-print"></i>                                                                                                                                                                                                                                Cancellled
+                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                            <%}else{%>
+
+                                                                                                                                                                                                                                <a href="#popup<%=z3%><%=i1%>" class="btn btn-sm bg-danger-light">
+
+                                                                                                                                                                                                                                    <i class="fas fa-print"></i>                                                                                                                                                                                                                                    Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                </td>
+                                                                                                                                                                                   
+
+                                                                                                                                                                                    </tr>
+                                                                                                                                                                                    <div id='popup<%=z3%><%=i1%>' class="overlay">
+                                                                                                                                                                                        <div class="popup">
+                                                                                                                                                                                            <form action="/user/offline-cancel" id="form<%=c%>" method="POST">
+                                                                                                                                                                                                <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                                                        <label style="color: rgb(138, 138, 138);">Do you really want to cancel the appointment?</label></br>
+
+                                                                                                                                                                                                        <input type="hidden" name="slotindex" value="<%=patients.slot%>">
+                                                                                                                                                                                                        <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
+
+                                                                                                                                                                                                        <input type="hidden" name="bid" value="<%=user1.booking[z3]._id%>">
+
+                                                                                                                                                                                                        <input type="hidden" name="phone" value="<%=patients.phone%>">
+
+                                                                                                                                                                                                        <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                                                                                                                                                                        <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                                                                                                                                                                                        </select>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                                <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
+                                                                                                                                                                                            </form>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                    <%z3++%>
+                                                                                                                                                                                    <%}%>
+
+                                                                                                                    </tbody>
+
+                                                                                                                </table>
+                                                                                                                <%if(z1==user1.booking.length){%>
+                                                                                                                    <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this slot.</h2>
+                                                                                                                    <%}%>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <%}%>
+                                                                                                        <%}%>
+                </div>
+
+                </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->         <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+   
+   
+
+
+</body>
+
+<!-- AarogyaHub/booking  30 Nov 2019 04:12:16 GMT -->
+
+</html>

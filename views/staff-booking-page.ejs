@@ -30,7 +30,7 @@
                         </nav>
                         <h2 class="breadcrumb-title">Booking</h2>
                     </div>
-                    <%if(locals.user.doctorids.length>0){%>
+                    <%if(user1.doctorids.length>0){%>
                     <div class="col-md-4 col-12 d-md-block position-absolute" style="top:50px;right:2%;">
                         <div class="sort-by">
                             <span class="sort-title">Switch Doctor</span>
@@ -1483,6 +1483,7 @@ Not Available
                             </div>
                 </form>
                 <!-- /Submit Section -->
+              
 
                 <div class="tab-pane show active position-relative" id="upcoming-appointments">
                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
@@ -1490,11 +1491,12 @@ Not Available
                             <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Today Appointments</a>
                         </li>
                     </ul>
+
                     <div class="col-12 col-md-12" style="margin-top: 15px;">
                         <form action="/user/sort-by-date" method="POST">
                             <div class="form-group" style="display: inline-flex;width: 100%;">
                                 <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
-                                <div class="cal-icon col-md-3" style="padding-right: 15px;">
+                                <div class="cal-icon col-md-2" style="padding-right: 15px;">
                                     <input type="text" placeholder="<%=daten%>" name="date" class="form-control datetimepicker">
                                     <input type="hidden" name="flag" value="true">
                                 </div>
@@ -1505,7 +1507,8 @@ Not Available
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-12 smadd" style="position: absolute;top:65px;left:60%;display: inline-flex;width: 100%;">
+
+                    <div class="col-md-12 smadd" style="position: absolute;top:65px;left:45%;display: inline-flex;width: 100%;">
                         <%var today = new Date();
                         var dd = String(today.getDate()).padStart(2, '0');
                         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -1555,9 +1558,12 @@ Not Available
                                     <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
                                 </form>
                             </div>
+                           
                         </div>
                     </form>
                     </div>
+                    <a href="/pdf/?id=<%=doctor1._id%>"><img src="/img/pdf.png" style="height:40px;width:200px;position: absolute;right: 0;top:70px"></a>
+
                     <%var slots=0,sindex=0;%>
                         <%var daten;%>
 
@@ -1606,7 +1612,7 @@ console.log(dayOfWeek)%>
                                                                                                             <tbody class="stbody">
                                                                                                                 <%var c=0,z1=0,z2=0;z31=0;%>
 
-                                                                                                                    <%for(patients of locals.user.booking){%>
+                                                                                                                    <%for(patients of user1.booking){%>
                                                                                                                         <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -1738,7 +1744,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                                 <input type="hidden" name="slotindex" value="<%=patients.slot%>">
                                                                                                                                                                                                 <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
 
-                                                                                                                                                                                                <input type="hidden" name="bid" value="<%=locals.user.booking[z31]._id%>">
+                                                                                                                                                                                                <input type="hidden" name="bid" value="<%=user1.booking[z31]._id%>">
 
                                                                                                                                                                                                 <input type="hidden" name="phone" value="<%=patients.phone%>">
 
@@ -1757,7 +1763,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                             </tbody>
 
                                                                                                         </table>
-                                                                                                        <%if(z1==locals.user.booking.length){%>
+                                                                                                        <%if(z1==user1.booking.length){%>
                                                                                                             <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
                                                                                                             <%}%>
                                                                                                     </div>
@@ -1794,7 +1800,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                     <tbody class="stbody">
                                                                                                                         <%var c=0,z1=0,z2=0;z3=0;%>
 
-                                                                                                                            <%for(patients of locals.user.booking){%>
+                                                                                                                            <%for(patients of user1.booking){%>
                                                                                                                                 <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -1926,7 +1932,7 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                                                                                                         <input type="hidden" name="slotindex" value="<%=patients.slot%>">
                                                                                                                                                                                                         <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
 
-                                                                                                                                                                                                        <input type="hidden" name="bid" value="<%=locals.user.booking[z3]._id%>">
+                                                                                                                                                                                                        <input type="hidden" name="bid" value="<%=user1.booking[z3]._id%>">
 
                                                                                                                                                                                                         <input type="hidden" name="phone" value="<%=patients.phone%>">
 
@@ -1945,7 +1951,7 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                     </tbody>
 
                                                                                                                 </table>
-                                                                                                                <%if(z1==locals.user.booking.length){%>
+                                                                                                                <%if(z1==user1.booking.length){%>
                                                                                                                     <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this slot.</h2>
                                                                                                                     <%}%>
                                                                                                             </div>

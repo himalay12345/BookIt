@@ -2185,6 +2185,47 @@ module.exports.payment = async(req, res) => {
 
 }
 
+module.exports.removeDoctor = async(req, res) => {
+    if(req.body.flag == 'yes')
+    {
+        let staff = await User.findById(req.user.id);
+        console.log(req.body)
+        if(staff.doctorids.length>1)
+        {
+            if(staff.doctorids.length == 2)
+            {
+            let doctor = await User.findById(req.body.did);
+            staff.doctorids.pull(req.body.id);
+            doctor.staff_flag = false;
+            doctor.staff_id = undefined;
+            staff.doctorid = staff.doctorids[0].doctorid;
+            var id = staff.doctorids[0]._id;
+            staff.doctorids.pull(id);
+            staff.save();
+            doctor.save();
+            return res.redirect('back')
+            }
+
+            else{
+                let doctor = await User.findById(req.body.did);
+                staff.doctorids.pull(req.body.id);
+                doctor.staff_flag = false;
+                doctor.staff_id = undefined;
+                staff.doctorid = staff.doctorids[0].doctorid;
+                staff.save();
+                doctor.save();
+                return res.redirect('back')
+            }
+        }
+
+      
+    }
+
+    else{
+        return res.redirect('back');
+    }
+}
+
 module.exports.bookAppointment = async(req, res) => {
 
 
@@ -3895,12 +3936,27 @@ module.exports.changeBankAccount = async(req, res) => {
 
 
 module.exports.sortByDate = async(req, res) => {
-    let patients = await User.findById(req.user.id);
+    let patients = await User.findById(req.user.id).
+    populate({
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });;
     const date = req.body.date;
     const str = date.split("/").join("-");
     console.log(str);
 
     if (req.body.flag == 'true') {
+        
         let doctor = await User.findById(req.user.doctorid);
         let user1 = await User.findById(req.user.id).populate('doctorid').populate({
             path:'doctorids',
@@ -3920,10 +3976,16 @@ module.exports.sortByDate = async(req, res) => {
             user1: user1
         })
     } else {
+        let user1;
+        if(req.query.id)
+        {
+        user1 = await User.findById(req.query.id);
+        }
         return res.render('staff-dashboard', {
             title: 'My Dashboard',
             allpatients: patients,
-            date: str
+            date: str,
+            user1:user1
         })
     }
 

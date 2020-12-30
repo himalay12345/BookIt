@@ -55,19 +55,39 @@
                                 <nav class="dashboard-menu">
                                     <ul>
                                         <%if(locals.user.doctorids.length == 0){%>
-                                            <li class="active">
+                                            <li>
                                                 <a href="/doctor-dashboard">
                                                     <i class="fas fa-user-md"></i>
                                                     <span>Dr. <%=allpatients.doctorid.name%></span>
                                                 </a>
                                             </li>
                                             <%}else{%>
+                                                <%var i=0;%>
                                              <%for(pat of allpatients.doctorids){%>
-                                        <li class="active">
-                                            <a href="/doctor-dashboard">
+                                        <li style="display: inline-flex;position: relative;width:100%;">
+                                            <a href="/staff-dashboard/?id=<%=pat.doctorid._id %>">
                                                 <i class="fas fa-user-md"></i>
                                                 <span>Dr. <%=pat.doctorid.name%></span>
                                             </a>
+                                            <a href="#popup<%=i%>" style="margin-top: 10px;position: absolute;right:10px;" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt" style="color:white !important;margin-top: -10px;margin-left: -8px;"></i></a>
+                                            <div id='popup<%=i%>' class="overlay">
+                                                <div class="popup">
+                                                    <form action="/user/remove-doctor" id="form<%=i%>" method="POST">
+                                                        <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                                            <div class="form-group">
+                                                                <label style="color: rgb(138, 138, 138);">Do you really want to remove the doctor?</label></br>
+
+                                                                <input type="hidden" name="did" value="<%=pat.doctorid._id%>">
+                                                                <input type="hidden" name="id" value="<%=pat._id%>">
+                                                                <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                                <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </li>
                                         <%}%>  
                                         
@@ -82,8 +102,181 @@
                     </div>
 
                     <div class="col-md-9 col-lg-9 col-xl-9 position-relative">
-
+                        <%if(locals.user.doctorids.length>0){%>
+                            <div class="col-md-12" style="width:100%;">
+                                <div class="card">
+                                            <div class="card-body">
+                                                <div class="booking-doc-info">
+                                                    <a href="/doctor-profile/?id=<%=user1._id%>" class="booking-doc-img">
+            <img src="<%=user1.avatar%>" alt="User Image">
+            </a>
+                                                    <div class="booking-info">
+                                                        <h4>
+                                                            <a href="/doctor-profile/?id=<%=user1._id%>">
+                                                                <%=user1.name%>
+                                                            </a>
+                                                        </h4>
+                                                        <p class="doc-department">
+                                                            <% if(user1.department== "General Physician"){ %>
+                                                                <img src="<%=assetPath('img/specialities/physical.jfif')%>" class="img-fluid" alt="Speciality">
+                                                                <% } %>
+            
+                                                                    <% if(user1.department== "Ophthalmology"){ %>
+                                                                        <img src="<%=assetPath('img/specialities/eye.png')%>" class="img-fluid" alt="Speciality">
+                                                                        <% } %>
+                                                                            <% if(user1.department== "Dermatology"){ %>
+                                                                                <img src="<%=assetPath('img/specialities/hair.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                <% } %>
+                                                                                    <% if(user1.department== "Paediatrics"){ %>
+                                                                                        <img src="<%=assetPath('img/specialities/child.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                        <% } %>
+                                                                                            <% if(user1.department== "Urology"){ %>
+                                                                                                <img src="<%=assetPath('img/specialities/brain.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                <% } %>
+                                                                                                    <% if(user1.department== "Neurology"){ %>
+                                                                                                        <img src="<%=assetPath('img/specialities/specialities-03.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                        <% } %>
+                                                                                                        <% if(user1.department== "Orthopedic"){ %>
+            
+                                                                                                            <img src="<%=assetPath('img/specialities/bone.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                            <% } %>
+                                                                                                            <% if(user1.department== "Gynaecology"){ %>
+                                                                                                        
+                                                                                                                <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                                <% } %>
+                                                                                                                    <% if(user1.department== "Cardiologist"){ %>
+                                                                                                                        <img src="<%=assetPath('img/specialities/heart.jpg')%>" class="img-fluid" alt="Speciality">
+                                                                                                                        <% } %>
+                                                                                                                            <% if(user1.department== "Dentist"){ %>
+                                                                                                                                <img src="<%=assetPath('img/specialities/teeth.png')%>" class="img-fluid" alt="Speciality">
+                                                                                                                                <% } %>
+                                                                                                                                    <%=user1.department%>
+            
+                                                        </p>
+                                                        <div class="rating">
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star filled"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <span class="d-inline-block average-rating">35</span>
+                                                        </div>
+                                                        <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
+                                                            <%=user1.booking_fee%>
+                                                        </p>
+            
+            
+                                                        <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i>
+                                                            <%=user1.contacts.city%>&nbsp;
+                                                                <%=user1.contacts.state%>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        <%}%>
+                        <%if(locals.user.doctorids.length>0){%>
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="card dash-card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="dash-widget dct-border-rht">
+                                                    <%var counts=0;%>
+                                                            <%for(let i1=0;i1<allpatients.booking.length;i1++){%>
+                                                               
+                                                                <%if(allpatients.booking[i1].did == user1.id){%>
+                                                                    <%console.log(allpatients.booking[i1].did,user1.id)%>
+                                                                    <%counts++%>
+                                                                <%}%>
+                                                                <%}%>
+                                                    <div class="circle-bar circle-bar1">
+                                                        <div class="circle-graph1" data-percent="<%=counts%>">
+                                                            <img src="<%=assetPath('img/icon-01.png')%>" class="img-fluid" alt="patient">
+                                                        </div>
+                                                    </div>
+                                                    <%var today = new Date();%>
+                                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+                                                    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                    var dayOfWeek = weekday[today.getDay()];
+                                                    var n1  = dd +'-'+mm+'-'+yyyy%> %>
+                                                            <%var count = 0;%>
+                                                                <%for(patients of allpatients.booking){%>
+                                                                    <%var today = patients.createdAt;%>
+                                                                        <%var dd1 = String(today.getDate()).padStart(2, '0');
+                                                        var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy1 = today.getFullYear();
+                                                        var weekday1 = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                                        var dayOfWeek1 = weekday[today.getDay()];
+                                                        var n2 = dd1 +'-'+mm1+'-'+yyyy1%>
+                                                                            <%if(n1 == n2 && patients.did == user1.id){%>
+
+                                                                                <%count++;%>
+                                                                                    <%}%>
+
+                                                                                        <%}%>
+                                                                                            <div class="dash-widget-info">
+                                                                                                <h6>Total Patient</h6>
+                                                                                                <h3>
+                                                                                                    <%=counts%>
+                                                                                                </h3>
+                                                                                                <p class="text-muted">Till Today</p>
+                                                                                            </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="dash-widget dct-border-rht">
+                                                    <div class="circle-bar circle-bar2">
+                                                        <div class="circle-graph2" data-percent="<%=count%>">
+                                                            <img src="<%=assetPath('img/icon-02.png')%>" class="img-fluid" alt="Patient">
+                                                        </div>
+                                                    </div>
+                                                    <div class="dash-widget-info">
+                                                        <h6>Today Patient</h6>
+                                                        <h3>
+                                                            <%=count%>
+                                                        </h3>
+                                                        <p class="text-muted">
+                                                            <%=dd%>-
+                                                                <%=mm%>-
+                                                                    <%=yyyy%>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 col-lg-4">
+                                                <div class="dash-widget">
+                                                    <div class="circle-bar circle-bar3">
+                                                        <div class="circle-graph3" data-percent="<%=allpatients.booking.length%>">
+                                                            <img src="<%=assetPath('img/icon-03.png')%>" class="img-fluid" alt="Patient">
+                                                        </div>
+                                                    </div>
+                                                    <div class="dash-widget-info">
+                                                        <h6>Appointments</h6>
+                                                        <h3>
+                                                            <%=counts%>
+                                                        </h3>
+                                                        <p class="text-muted">
+                                                            <%=dd%>-
+                                                                <%=mm%>-
+                                                                    <%=yyyy%>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%}else{%>
+                          <div class="row">
                             <div class="col-md-12">
                                 <div class="card dash-card">
                                     <div class="card-body">
@@ -172,13 +365,16 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>   
+                        <%}%>
+
+                       
 
                         <div class="row">
                             <div class="col-md-12">
                                 <h4 class="mb-4">Patient Appoinment</h4>
                                 <div class="col-12 col-md-12">
-                                    <form action="/user/sort-by-date" method="POST">
+                                    <form action="/user/sort-by-date/?id=<%=user1._id%>" method="POST">
                                         <div class="form-group" style="display: inline-flex;width: 100%;">
                                             <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
                                             <div class="cal-icon col-md-3" style="padding-right: 15px;">
@@ -212,6 +408,7 @@
                                                                             <th class="sth">Patient Phone</th>
                                                                             <th class="sth">Patient Address</th>
                                                                             <th class="sth">Appt Date</th>
+                                                                            <th class="sth">Booking Date</th>
                                                                            
                                                                             <th class="text-center sth">Status</th>
 
@@ -222,11 +419,19 @@
                                                                             <%var date;%>
                                                                                 <%for(patients of allpatients.booking){%>
                                                                                     <%if(date != undefined){%>
-                                                                                        <%if(date != patients.date){%>
+                                                                                        <%console.log(date)%>
+                                                                                        <%if(date != patients.date || patients.did != user1.id){%>
+                                                                                            <%console.log(date, patients.date)%>
                                                                                             <%z++;continue;%>
                                                                                                 <%}%>
-
-                                                                                                    <%}%>
+                                                                                               
+                                                                                                    <%}else{%>
+                                                                                                        <%if(patients.did != user1.id){%>
+                                                                                                            <%z++;continue;%>
+                                                                                                        <%}%>
+                                                                                                       
+                                                                                                        <%}%>
+                                                                                                        <%console.log(patients.did, user1.id)%>
                                                                                                         <tr class="str">
                                                                                                             <td class="std1">
                                                                                                                 <h2 class="table-avatar">
@@ -245,6 +450,8 @@
                                                                                                             </td>
                                                                                                             <td class="std1">
                                                                                                                 <%=patients.date%><span class="d-block text-info"><%=patients.time%></span></td>
+                                                                                                                <td class="std1">
+                                                                                                                    <%=patients.createdAt.toDateString()%></td>
 
 
 

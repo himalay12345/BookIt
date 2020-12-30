@@ -45,10 +45,10 @@ const development = {
     fb_client_secret: 'c522c88a2060f9d8861cf47228f1964d',
     fb_callback_url: "/user/auth/facebook/callback",
     fb_profile_fields: ['id', 'displayName', 'picture.type(large)', 'email'],
-    twilio_sid:  process.env.TW_SID,
-    twilio_account_sid:  process.env.TW_ASID,
+    twilio_sid:process.env. TW_SID,
+    twilio_account_sid:process.env. TW_ASID,
     twilio_auth_token: process.env.TW_AUTH,
-
+   
     gmail_passw: 'Himalay@NIXXIT',
     morgan: {
         mode: 'dev',

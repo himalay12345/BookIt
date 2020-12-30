@@ -3,14 +3,65 @@ const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
 const Test = require('../models/test');
 const Consult = require('../models/consult');
-
+const pdf = require('html-pdf');
+const path = require('path');
+const ejs = require('ejs');
+const fs = require('fs');
 const shortid = require('shortid');
 const Razorpay = require('razorpay');
 const env = require('../config/environment');
 const emailVerification = require('../mailers/email-otp');
 
+ 
 
+module.exports.pdf = async(req, res) => {
+    try {
+        let doctor = await User.findById(req.query.id);
+        let user1 =  await User.findById(req.user.id).populate('doctorid').populate({
+    path:'doctorids',
+    populate:{
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }
+})
 
+const data = {
+  
+    doctor: doctor,
+    doctor1:doctor,
+    user1: user1
+   
+   
+}; 
+        
+        const filePathName = path.resolve(__dirname, '../views/bookingpdf.ejs');
+        const htmlString = fs.readFileSync(filePathName).toString();
+        let  options = { format: 'Letter',timeout:60000 };
+        const ejsData = ejs.render(htmlString, data);
+        // return await pdf.create(ejsData, options).toFile('generatedfile1.pdf',(err, response) => {
+        //     if (err) return console.log(err);
+        //     return response;
+        // });
+        return await pdf.create(ejsData,options).toStream(function (err, stream) {
+            if (err) return res.end(err.stack);
+          res.setHeader('Content-type', 'application/pdf');
+        //   res.setHeader('Content-disposition', 'attachment; filename=export-from-html.pdf'); 
+          res.setHeader('Content-Length', ''+stream.length);
+          stream.pipe(res);
+        });
+        
+        // return await pdf.create(ejsData,options).toBuffer(function (err, buffer) {
+        //     if (err) return res.send(err);
+        //     res.type('pdf');
+        //     res.end(buffer, 'binary');
+        // });
+       
+    } catch (err) {
+        console.log("Error processing request: " + err);
+    }
+}
 
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
@@ -733,7 +784,7 @@ module.exports.livePatientTracking = async(req, res) => {
     }
 
     if (typeof(doctor.schedule_time[index].start) == 'string') {
-        return res.redirect(`/patient-tracking/?id=${doctor.staff_id}&slotindex=`)
+        return res.redirect(`/patient-tracking/?id=${doctor.staff_id}&did=${doctor._id}&slotindex=`)
     }
 
     if (typeof(doctor.schedule_time[index].start) == 'object') {
@@ -1013,8 +1064,8 @@ module.exports.patientTracking = async(req, res) => {
         return res.render('patient-tracking', {
             title: 'Track patients',
             user1: user,
-            slotnumber: req.query.slotindex
-
+            slotnumber: req.query.slotindex,
+            did:req.query.did
         })
     }
 }
@@ -1106,6 +1157,11 @@ module.exports.staffLoginPage = (req, res) => {
 }
 
 module.exports.staffDashboard = async(req, res) => {
+    let doctors;
+    if(req.query.id)
+    {
+        doctors = await User.findById(req.query.id);
+    }
     let patients = await User.findById(req.user.id).
     populate({
         path:'doctorid',
@@ -1123,7 +1179,8 @@ module.exports.staffDashboard = async(req, res) => {
     });
     return res.render('staff-dashboard', {
         title: 'My Dashboard',
-        allpatients: patients
+        allpatients: patients,
+        user1:doctors
     })
 }
 
@@ -1500,6 +1557,7 @@ module.exports.selectDoctor = async (req, res) => {
 }
 
 module.exports.staffBooking = async(req, res) => {
+    
     let doctor = await User.findById(req.query.id);
     let user1 = await User.findById(req.user.id).populate('doctorid').populate({
         path:'doctorids',

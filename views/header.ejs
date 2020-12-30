@@ -260,7 +260,7 @@
                                             <div class="dropdown-menu profile-drop cloginbtns">
                                                 <div class="user-header">
                                                     <div class="avatar avatar-sm">
-                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath(' img/profile.png ')%>"' alt="User Image" class="avatar-img rounded-circle">
+                                                        <img src="<%=locals.user.avatar%>"   class="avatar-img rounded-circle" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
                                                     </div>
                                                     <div class="user-text">
                                                         <h6>
@@ -274,7 +274,11 @@
                                                     <%aflag = true;%>
                                                     <%}%>
                                                 <a class="dropdown-item" href="/staff-profile">My Profile</a>
-                                                <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
+                                                <%if(aflag){%>
+                                                <a class="dropdown-item" href="/staff-dashboard/?id=<%=locals.user.doctorids[0].doctorid%>">My Dashboard</a>
+                                                <%}else{%>
+                                                    <a class="dropdown-item" href="/staff-dashboard">My Dashboard</a>
+                                                    <%}%>
                                                 <%if(aflag){%>
                                                 <a class="dropdown-item" href="/select-doctor/?type=schedule">Schedule Timing</a>
                                                 <%}else{%>
