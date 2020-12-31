@@ -2471,7 +2471,14 @@ module.exports.staffOldCheckout = async(req, res) => {
 
 module.exports.offlinePay = async(req, res) => {
     let staff = await User.findById(req.user.id);
-    let user = await User.findById(req.body.doctorid);
+    let user;
+    if(req.query.id)
+    {
+        user = await User.findById(req.query.id);
+
+    }else{
+        user = await User.findById(req.body.doctorid);
+    }
     if (req.user.type == 'Staff') {
         if (staff.refresh_flag == true) {
             if (typeof(user.schedule_time[req.body.dayindex].start) == 'object') {
@@ -2542,15 +2549,24 @@ module.exports.offlinePay = async(req, res) => {
                 //   .then(message => console.log(message.sid));     
 
                 console.log(req.body.date)
-                return res.render('staff-booking-success', {
-                    doctor: user,
-                    title: 'Booking-Success',
-                    seat: b,
-                    slotindex: req.body.slotindex,
-                    dayindex: req.body.dayindex,
-                    date: req.body.date,
+                // return res.render('staff-booking-success', {
+                //     doctor: user,
+                //     title: 'Booking-Success',
+                //     seat: b,
+                //     slotindex: req.body.slotindex,
+                //     dayindex: req.body.dayindex,
+                //     date: req.body.date,
 
-                });
+                // });
+                req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${b} `)
+                return res.render('staff-booking-page',{
+
+                        title: 'Booking',
+                        doctor: user,
+                        doctor1:user,
+                        user1: staff
+                  
+                })
 
             }
 
@@ -2600,19 +2616,28 @@ module.exports.offlinePay = async(req, res) => {
 
 
 
-                return res.render('staff-booking-success', {
-                    doctor: user,
-                    title: 'Booking-Success',
-                    seat: k1,
+                // return res.render('staff-booking-success', {
+                //     doctor: user,
+                //     title: 'Booking-Success',
+                //     seat: k1,
                    
-                    dayindex: req.body.dayindex,
-                    date: req.body.date,
+                //     dayindex: req.body.dayindex,
+                //     date: req.body.date,
 
-                });
+                // });
+                req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${k1} `)
+                return res.render('staff-booking-page',{
+
+                        title: 'Booking',
+                        doctor: user,
+                        doctor1:user,
+                        user1: staff
+                  
+                })
 
             }
         } else {
-            return res.redirect(`/booking/?id=${req.body.doctorid}`);
+            return res.redirect(`/staff-booking/?id=${req.query.id}`);
 
         }
 

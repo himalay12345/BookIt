@@ -2009,11 +2009,11 @@ var dayOfWeek = weekday[today.getDay()];%>
 <script>
     <%if(flash.success && flash.success.length>0){%>
     new Noty({
-        theme: 'metroui ',
+        theme: 'metroui',
         text: '<%=flash.success%>',
         type: 'success',
         layout: 'topRight',
-        timeout: 3000
+        timeout: 50000
     }).show();
     <%}%>
     <%if(flash.error && flash.error.length>0){%>

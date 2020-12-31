@@ -62,7 +62,7 @@
 
                                     <div class="row">
                                         <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about the Patient</h5>
-                                        <form action="/user/offline-pay" method="POST" style="width: 100%;">
+                                        <form action="/user/offline-pay/?id=<%=doctor._id%>" method="POST" style="width: 100%;">
                                             <%var day,time,fee%>
                                                 <% day = doctor.schedule_time[dayindex].day%>
                                                     <% fee = doctor.booking_fee%>
@@ -114,20 +114,20 @@
                                                                                     <div class="col-md-12 col-sm-12">
                                                                                         <div class="form-group card-label">
                                                                                             <label>Address</label>
-                                                                                            <input class="form-control" type="text" placeholder="Enter address" name="address" required>
+                                                                                            <input class="form-control" type="text" placeholder="Enter address" name="address">
                                                                                         </div>
                                                                                     </div>
                                                                                    
                                                                                     <div class="col-md-12 col-sm-12">
                                                                                         <div class="form-group card-label">
                                                                                             <label>Age</label>
-                                                                                            <input class="form-control" type="number" placeholder="Enter age" name="age" required>
+                                                                                            <input class="form-control" type="number" placeholder="Enter age" name="age">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-12 col-md-12">
                                                                                         <div class="form-group">
                                                                                             <label style="font-size: 0.9rem!important;margin-left: 5px;">Gender <span class="text-danger"></span></label>
-                                                                                            <select name="gender" class="form-control select" required >
+                                                                                            <select name="gender" class="form-control select">
                                                                                                
                                                                                                 <option>Male</option>
                                                                                                 
