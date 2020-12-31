@@ -33,7 +33,7 @@
 <body>
 
     <!-- Main Wrapper -->
-    <div class="main-wrapper" >
+    <div class="main-wrapper" style="font-family: Arial, Helvetica, sans-serif !important;page-break-inside: avoid !important" >
 
         <!-- Header -->
 
@@ -45,17 +45,7 @@
 
         <!-- Page Content -->
         <div class="content" >
-            <style>
-                @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900');
-@font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(file:..///fonts/MaterialIcons-Regular.eot);
-    /* For IE6-8 */
-    src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.html) format('woff2'), url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
-}
-            </style>
+       
             <div class="container">
                 <form action="/user/staff-book-appointment" method="POST">
                     <input type="hidden" name="doctorid" value="<%=doctor._id%>">
@@ -65,14 +55,13 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="booking-doc-info">
-                                        <a href="/doctor-profile/?id=<%=doctor._id%>" class="booking-doc-img">
-<img src="<%=doctor.avatar%>" alt="User Image">
+                                        
 </a>
                                         <div class="booking-info">
                                             <h4>
-                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                             
                                                     <%=doctor.name%>
-                                                </a>
+                                              
                                             </h4>
                                           
                                             <div class="rating">
@@ -102,10 +91,10 @@
                 </form>
                 <!-- /Submit Section -->
 
-                <div class="tab-pane show active position-relative" id="upcoming-appointments">
+                <div class="tab-pane show active position-relative" id="upcoming-appointments" style="margin-left: -30px !important;">
                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
                         <li class="nav-item" style="width: 100%;">
-                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Today Appointments</a>
+                            <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Today Appointments (<%=new Date().toDateString()%>)</a>
                         </li>
                     </ul>
                    
@@ -138,7 +127,7 @@ console.log(dayOfWeek)%>
 
                                                                                     <%}%>
                                                                                         <%if(slots <= 1){%>
-                                                                                            <div class="card card-table mb-0">
+                                                                                            <div class="card card-table mb-0" style="margin-left: -20px !important;padding-left: 15px !important;padding-right: 15px !important;">
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive">
                                                                                                         <table class="table table-hover table-center mb-0 stable">
@@ -201,9 +190,9 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                     <h2 class="table-avatar">
 
 
-                                                                                                                                                                                        <a href="#">
-                                                                                                                                                                                            <%=patients.name%> <%if(patients.cancel != true){%><span>#PT00<%=++c%></span>
-                                                                                                                                                                                            <%}%></a>
+                                                                                                                                                                                
+                                                                                                                                                                                            <span style="margin-right: 8px;">#PT00<%=++c%></span> <%=patients.name%> <%if(patients.cancel != true){%>
+                                                                                                                                                                                            <%}%>
                                                                                                                                                                                     </h2>
                                                                                                                                                                                 </td>
                                                                                                                                                                                 <td class="std">

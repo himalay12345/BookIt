@@ -2559,14 +2559,7 @@ module.exports.offlinePay = async(req, res) => {
 
                 // });
                 req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${b} `)
-                return res.render('staff-booking-page',{
-
-                        title: 'Booking',
-                        doctor: user,
-                        doctor1:user,
-                        user1: staff
-                  
-                })
+                res.redirect(`/staff-booking/?id=${user._id}`)
 
             }
 
@@ -2626,14 +2619,8 @@ module.exports.offlinePay = async(req, res) => {
 
                 // });
                 req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${k1} `)
-                return res.render('staff-booking-page',{
-
-                        title: 'Booking',
-                        doctor: user,
-                        doctor1:user,
-                        user1: staff
-                  
-                })
+               
+                res.redirect(`/staff-booking/?id=${user._id}`)
 
             }
         } else {

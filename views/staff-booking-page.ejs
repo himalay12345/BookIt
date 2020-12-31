@@ -1562,7 +1562,7 @@ Not Available
                         </div>
                     </form>
                     </div>
-                    <a href="/pdf/?id=<%=doctor1._id%>"><img src="/img/pdf.png" style="height:40px;width:200px;position: absolute;right: 0;top:70px"></a>
+                    <a href="/pdf/?id=<%=doctor1._id%>" ><img src="/img/pdf.png" class="npdf" style="height:40px;width:200px;position: absolute;right: 0;top:70px"></a>
 
                     <%var slots=0,sindex=0;%>
                         <%var daten;%>
@@ -1590,7 +1590,7 @@ console.log(dayOfWeek)%>
 
                                                                                     <%}%>
                                                                                         <%if(slots <= 1){%>
-                                                                                            <div class="card card-table mb-0">
+                                                                                            <div class="card card-table mb-0 mpdf">
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive">
                                                                                                         <table class="table table-hover table-center mb-0 stable">
@@ -2013,7 +2013,7 @@ var dayOfWeek = weekday[today.getDay()];%>
         text: '<%=flash.success%>',
         type: 'success',
         layout: 'topRight',
-        timeout: 50000
+        timeout: 7000
     }).show();
     <%}%>
     <%if(flash.error && flash.error.length>0){%>

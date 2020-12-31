@@ -7605,6 +7605,10 @@ html.menu-opened body {
   .bell {
     position: absolute;
     right: 62%; }
+  .npdf {
+    top: 207px !important; }
+  .mpdf {
+    margin-top: 70px !important; }
   .hideinphone {
     position: absolute;
     right: 0%; }
