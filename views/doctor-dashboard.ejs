@@ -293,13 +293,14 @@
 
                                         <!-- /Appointment Tab -->
                                        
-                                            <%if(allpatients.patients == ''){%>
+                                        <%console.log(allpatients.patients.length);%>
+                                            <%if(allpatients.patients == '' && staff.booking.length<=0){%>
                                                 <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
                                                 <%}else{%>
-
+                                                  
                                                     <div class="tab-content">
                                                         <%var daten;%>
-
+                                                      
                                                             <div class="tab-pane show active" id="upcoming-appointments">
                                                                 <div class="card card-table mb-0">
                                                                     <div class="card-body">
@@ -406,7 +407,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                           
                                                             <div class="tab-pane" id="today-appointments">
                                                                 <div class="card card-table mb-0">
                                                                     <div class="card-body">
@@ -426,10 +427,11 @@
                                                                                 <tbody class="stbody">
 
                                                                                     <%var c=0,z1=0,z2=0;%>
-
+                                                                                   
                                                                                         <%if(staff && staff.booking.length>0){%>
 
                                                                                             <%for(patients of staff.booking){%>
+                                                                                                <%console.log('hello');%>
                                                                                                 <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -446,6 +448,7 @@ var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
 var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                 <%var str1 = dd+'-'+mm+'-'+yyyy;%>
                                                                                                                     <%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+                                                                                                                    <%console.log(str1,str2)%>
 
 
                                                                                                                         <%if(daten != undefined){%>
