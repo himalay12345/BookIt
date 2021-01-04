@@ -5,6 +5,7 @@ const router = express.Router();
 router.use('/admin', require('./admin'));
 router.use('/user', require('./user'));
 router.use('/test', require('./test'));
+router.use('/api', require('./api'));
 const homeController = require('../controllers/index');
 
 router.get('/', homeController.home);
