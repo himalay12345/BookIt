@@ -111,7 +111,7 @@ module.exports.addBilling = (req, res) => {
     })
 }
 module.exports.consult = async(req, res) => {
-    let doctors = await User.find({ type: "Doctor" });
+    let doctors = await User.find({ type: "Doctor",booking_service:"true" });
     let consults = await Consult.find({});
 
     return res.render('consult', {
