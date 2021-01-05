@@ -2549,17 +2549,17 @@ module.exports.offlinePay = async(req, res) => {
                 //   .then(message => console.log(message.sid));     
 
                 console.log(req.body.date)
-                // return res.render('staff-booking-success', {
-                //     doctor: user,
-                //     title: 'Booking-Success',
-                //     seat: b,
-                //     slotindex: req.body.slotindex,
-                //     dayindex: req.body.dayindex,
-                //     date: req.body.date,
+                return res.render('staff-booking-success', {
+                    doctor: user,
+                    title: 'Booking-Success',
+                    seat: b,
+                    slotindex: req.body.slotindex,
+                    dayindex: req.body.dayindex,
+                    date: req.body.date,
 
-                // });
-                req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${b} `)
-                res.redirect(`/staff-booking/?id=${user._id}`)
+                });
+                // req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${b} `)
+                // res.redirect(`/staff-booking/?id=${user._id}`)
 
             }
 
@@ -2609,18 +2609,18 @@ module.exports.offlinePay = async(req, res) => {
 
 
 
-                // return res.render('staff-booking-success', {
-                //     doctor: user,
-                //     title: 'Booking-Success',
-                //     seat: k1,
+                return res.render('staff-booking-success', {
+                    doctor: user,
+                    title: 'Booking-Success',
+                    seat: k1,
                    
-                //     dayindex: req.body.dayindex,
-                //     date: req.body.date,
+                    dayindex: req.body.dayindex,
+                    date: req.body.date,
 
-                // });
-                req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${k1} `)
+                });
+                // req.flash('success',`Seat booked successfully of ${req.body.name} for date : ${req.body.date} . The Appointment No. is ${k1} `)
                
-                res.redirect(`/staff-booking/?id=${user._id}`)
+                // res.redirect(`/staff-booking/?id=${user._id}`)
 
             }
         } else {

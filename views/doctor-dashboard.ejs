@@ -287,10 +287,10 @@
                                         <!-- Appointment Tab -->
                                         <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+                                                <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Online Bookings</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
+                                                <a class="nav-link" href="#today-appointments" data-toggle="tab">All Bookings</a>
                                             </li>
                                         </ul>
 
@@ -404,7 +404,7 @@
                                                                                 </tbody>
                                                                             </table>
                                                                             <%if(z==allpatients.patients.length){%>
-                                                                                <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                                                <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No online patients visited on this date.</h2>
                                                                                 <%}%>
                                                                         </div>
                                                                     </div>
@@ -434,7 +434,7 @@
                                                                                         <%if(staff && staff.booking.length>0){%>
 
                                                                                             <%for(patients of staff.booking){%>
-                                                                                                <%console.log('hello');%>
+                                                                                             
                                                                                                 <%var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -454,8 +454,9 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                     <%console.log(str1,str2)%>
 
 
-                                                                                                                        <%if(daten != undefined){%>
-                                                                                                                            <%if(daten != patients.date){%>
+                                                                                                                        <%if(date != undefined){%>
+                                                                                                                           
+                                                                                                                            <%if(date != patients.date){%>
                                                                                                                                 <%z1++;continue;%>
                                                                                                                                     <%}%>
 

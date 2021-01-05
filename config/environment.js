@@ -48,7 +48,6 @@ const development = {
     twilio_sid:process.env. TW_SID,
     twilio_account_sid:process.env. TW_ASID,
     twilio_auth_token: process.env.TW_AUTH,
-   
     
    
     gmail_passw: 'Himalay@NIXXIT',
