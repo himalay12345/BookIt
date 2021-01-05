@@ -1839,8 +1839,20 @@ module.exports.verifyDoctor = async(req, res) => {
 
 module.exports.verify = async(req, res) => {
 
+    if(req.body.phone.length>10)
+    {
+        req.flash('error', 'Please do not use (+91 or 0) before your phone number.');
+        return res.redirect('back');
+    }
+
     if (req.body.type == 'forgot') {
-        let user = await User.findOne({ phone: req.body.phone, service: 'phone', type: 'Staff' });
+        let user;
+        if(req.body.designation == 'Staff'){
+        user = await User.findOne({ phone: req.body.phone, service: 'phone', type: 'Staff' });
+        }
+        else{
+            user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+        }
         console.log(user)
         if (!user) {
             req.flash('error', 'No account linked with this phone number.');

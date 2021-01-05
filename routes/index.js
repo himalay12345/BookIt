@@ -33,7 +33,7 @@ router.get('/chat-doctor', passport.checkAuthentication, homeController.chatDoct
 router.get('/checkout', passport.checkAuthentication, homeController.checkout);
 router.get('/components', passport.checkAuthentication, homeController.components);
 router.get('/delete-account', passport.checkAuthentication, homeController.deleteAccount);
-router.get('/doctor-change-password', passport.checkDoctorAuthentication, homeController.doctorChangePassword);
+router.get('/doctor-change-password', passport.checkAuthentication, homeController.doctorChangePassword);
 router.get('/doctor-terms-and-condition', passport.checkDoctorAuthentication, homeController.doctorTermsAndCondition);
 router.get('/doctor-dashboard', passport.checkDoctorAuthentication, homeController.doctorDashboard);
 router.get('/doctor-profile', homeController.doctorProfile);

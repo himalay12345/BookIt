@@ -2312,7 +2312,7 @@ module.exports.deleteAccount = async(req, res) => {
             staff.temp_phone = staff.phone;
             staff.phone = "";
             staff.password = "";
-            
+            staff.save();
         }
 
         if (user.clinicphoto) {
@@ -2334,7 +2334,7 @@ module.exports.deleteAccount = async(req, res) => {
 
 
         user.save();
-        staff.save();
+       
         req.flash('success', 'Account removed Successfully');
 
 
@@ -3749,7 +3749,7 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
 
 
 module.exports.changePassword = async(req, res) => {
-    let user = await User.findOne({ phone: req.body.phone });
+    let user = await User.findOne({ phone: req.body.phone, service:'phone' });
     if (req.body.old != user.password) {
         req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
@@ -3768,7 +3768,7 @@ module.exports.changePassword = async(req, res) => {
 }
 
 module.exports.docchangePassword = async(req, res) => {
-    let user = await User.findOne({ phone: req.body.phone });
+    let user = await User.findOne({ phone: req.body.phone , service:'phone' });
     if (req.body.old != user.password) {
         req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
@@ -3796,14 +3796,14 @@ module.exports.resetPassword = async(req, res) => {
     }
 
     if (req.body.designation == 'Staff') {
-        let user = await User.findOne({ phone: req.body.phone, type: 'Staff' });
+        let user = await User.findOne({ phone: req.body.phone, type: 'Staff',service:'phone' });
         user.password = req.body.password;
         user.save();
 
         req.flash('success', 'Password reset successfully');
         return res.redirect('/staff-login-page');
     } else {
-        let user = await User.findOne({ phone: req.body.phone, type: 'Patient' });
+        let user = await User.findOne({ phone: req.body.phone , service:'phone'});
         user.password = req.body.password;
         user.save();
 
