@@ -802,7 +802,7 @@ module.exports.createSession = async function(req, res) {
 
     console.log(req.body);
     if (req.body.flag == 'true' && req.body.type == 'booking') {
-
+        let user = await User.findById(req.user.id);
         let doctor = await User.findById(req.body.doctorid);
         return res.render('checkout', {
             title: 'Checkout',
@@ -813,7 +813,8 @@ module.exports.createSession = async function(req, res) {
             id: req.body.id,
             doctor: doctor,
             date:req.body.date,
-            flag:'true'
+            flag:'true',
+            user:user
 
         });
     } else {
@@ -857,6 +858,7 @@ module.exports.popup = async function(req, res) {
             if (req.session.info.flag == 'true' && req.session.info.type == 'booking') {
 
                 let doctor = await User.findById(req.session.info.doctorid);
+                let user = await User.findById(req.user.id);
                 return res.render('checkout', {
                     title: 'Checkout',
                     booked: req.session.info.booked,
@@ -866,7 +868,8 @@ module.exports.popup = async function(req, res) {
                     id: req.session.info.id,
                     doctor: doctor,
                     date:req.session.info.date,
-                    flag:req.session.info.flag
+                    flag:req.session.info.flag,
+                    user:user
 
                 });
             } else {
