@@ -68,7 +68,7 @@ module.exports.removeFlag  = async(req, res) => {
         let doctor = await User.findById(req.user.id);
         
         let user1 = await User.findById('5fed7d54b882d3f8223c58ac');
-        
+        doctor.staff_id = user
         
         
         if(user1.doctorid)
