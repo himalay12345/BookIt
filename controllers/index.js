@@ -63,6 +63,45 @@ const data = {
     }
 }
 
+module.exports.removeFlag  = async(req, res) => {
+    
+        let doctor = await User.findById(req.user.id);
+        let user1 = await User.findById(doctor.staff_id);
+        
+        if(user1.doctorid)
+        {
+            if(user1.doctorids.length == 0)
+            {
+                user1.doctorids.push({
+                    doctorid:user1.doctorid});
+                user1.doctorids.push({
+                    doctorid:doctor._id});
+                    doctor.staff_flag = true;
+                    doctor.staff_id = user1._id;
+                    user1.save();
+                    doctor.save();
+                    req.flash('success','Doctor Added successfully');
+                 return res.redirect('back')
+
+            }
+
+            if(user1.doctorids.length>0)
+            {
+             user1.doctorids.push({
+                 doctorid:doctor._id}); 
+                 doctor.staff_flag = true;
+                 doctor.staff_id = user1._id;
+                 user1.save();
+                 doctor.save();
+                 req.flash('success','Doctor Added successfully');
+              return res.redirect('back')
+                
+            }
+           
+        }
+    
+    
+}
 module.exports.home = async(req, res) => {
     let doctors = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
     let ar = [];
@@ -1220,7 +1259,7 @@ module.exports.staffSignup = async(req, res) => {
                     user1.save();
                     doctor.save();
                     req.flash('success','Doctor Added successfully');
-                 return res.redirect('/staff-dashboard')
+                 return res.redirect(`/staff-dashboard/?id=${doctor._id}`)
                 }
             }
             else{
@@ -1254,13 +1293,16 @@ module.exports.staffSignup = async(req, res) => {
                 code: req.body.otp
             });
 
-        console.log(req.body.id);
+        console.log(req.body.add);
 
 
         if (data.status == 'approved') {
+            console.log('hii')
             if(req.isAuthenticated())
             {
+                console.log('hii1')
                 let user1 = await User.findById(req.user.id);
+                let doctor = await User.findById(req.body.id);
                 if(user1.doctorid)
                 {
                     if(user1.doctorids.length == 0)
@@ -1272,7 +1314,7 @@ module.exports.staffSignup = async(req, res) => {
 
                     }
 
-                    if(user1.doctorids.length>0)
+                    else
                     {
                      user1.doctorids.push({
                          doctorid:doctor._id}); 
@@ -1283,10 +1325,11 @@ module.exports.staffSignup = async(req, res) => {
                     user1.save();
                     doctor.save();
                     req.flash('success','Doctor Added successfully');
-                 return res.redirect('/staff-dashboard')
+                 return res.redirect(`/staff-dashboard/?id=${doctor._id}`)
                 }
             }
             else{
+                console.log('hii2')
             return res.render('set-password', {
                 title: 'Reset Pasword',
                 phone: req.body.phone,
@@ -1550,7 +1593,7 @@ module.exports.selectDoctor = async (req, res) => {
     });
     return res.render('doctor_select', {
         title: 'Select Doctor',
-        user:user,
+        user1:user,
         type:req.query.type
 
     })
@@ -1814,7 +1857,18 @@ module.exports.verifyDoctor = async(req, res) => {
                     channel: req.query.service
                 }).then((data) => {
 
-                
+                if(req.body.add == 'true')
+                {
+                   
+                    return res.render('doctor-phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        id: doctor._id,
+                        designation: 'Staff'
+
+                    });
+                }
+                else{
 
                     return res.render('doctor-phone-verify', {
                         title: 'Phone verification',
@@ -1823,6 +1877,7 @@ module.exports.verifyDoctor = async(req, res) => {
                         designation: 'Verify'
 
                     });
+                }
                 
                 });
         } else {

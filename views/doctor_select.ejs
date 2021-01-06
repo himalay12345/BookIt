@@ -47,7 +47,7 @@
                         <div class="col-md-12 ">
                             <div class="clinic-booking " style="margin-top: 15px;">
                                 <%var i=0;%>
-                                <%for(doc of user.doctorids){%>
+                                <%for(doc of user1.doctorids){%>
                                     <%if(type == 'booking'){%>
                                 <a class="apt-btn tcolor " href="/staff-booking/?id=<%=doc.doctorid._id%>" style="width: 50%;;">Dr. <%=doc.doctorid.name%></a>
                                 <%}%>

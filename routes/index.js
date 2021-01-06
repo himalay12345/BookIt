@@ -65,6 +65,7 @@ router.get('/not-available', passport.checkAuthentication, homeController.notAva
 router.get('/old-booking', homeController.oldBooking);
 router.get('/pay', passport.checkAuthentication, homeController.pay);
 router.post('/razorpay', homeController.razorPay);
+router.get('/remove-flag', homeController.removeFlag);
 router.get('/refund', homeController.refund);
 router.get('/refund-checkout', homeController.refundCheckout);
 router.get('/patient-dashboard', passport.checkPatientAuthentication, homeController.patientDashboard);
