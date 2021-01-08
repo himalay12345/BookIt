@@ -1187,7 +1187,7 @@ module.exports.settings = (req, res) => {
     })
 }
 module.exports.staffLogin = (req, res) => {
-    return res.render('staff-login', {
+    return res.render('staff-create', {
         title: 'Staff Login'
     })
 }
