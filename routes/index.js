@@ -130,6 +130,7 @@ router.get('/doctors', homeController.Doctors);
 
 router.post('/verify-user', homeController.verifyUser);
 router.post('/user-signup', homeController.userSignup);
+router.get('/fail',homeController.fail);
 
 
 

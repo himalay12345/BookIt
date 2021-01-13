@@ -2623,3 +2623,9 @@ module.exports.userSignup = async function(req, res) {
 
 }
 
+module.exports.fail = async function(req, res) {
+    res.json({
+        ststus:false,
+        msg:'Invalid Username/Password'
+    })
+}
