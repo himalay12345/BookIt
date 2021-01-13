@@ -4367,20 +4367,21 @@ module.exports.createUserAccount = async function(req, res) {
                 type:'Patient'
             })
 
-            if(user1 || req.body.authkey != process.env.authkey)
+            if(user1)
             {
-                if(user1)
-                {
+                
                 res.json({
                     status:false,
                     msg:'User Already Exists'
                 })
-            }else{
+            }
+            if(req.body.authkey != process.env.authkey)
+           {
                 res.json({
                     status:false,
                     msg:'Not verified User'
                 })
-            }
+            
             }
             else{
                 let user = await User.create({
