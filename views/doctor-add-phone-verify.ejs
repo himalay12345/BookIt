@@ -63,7 +63,7 @@
                                     </div>
 
                                     <!-- Register Form -->
-                                    <form action="/staff-signup" method="POST">
+                                    <form action="/staff-add-doctor" method="POST">
                                         <!-- <div class="form-group form-focus">
 												<input type="text" class="form-control floating">
 												<label class="focus-label">Name</label>
@@ -99,12 +99,12 @@
                                     </div>
 
 
-                                    <form id="myform" method="POST" action="/verify-doctor/?service=call">
+                                    <form id="myform" method="POST" action="/verify-add-doctor/?service=call">
                                         <input type="hidden" name="phone" value="<%=phone%>">
                                         <input type="hidden" name="id" value="<%=id%>">
                                        
                                     </form>
-                                    <form id="myform1" method="POST" action="/verify-doctor/?service=sms">
+                                    <form id="myform1" method="POST" action="/verify-add-doctor/?service=sms">
                                         <input type="hidden" name="phone" value="<%=phone%>">
                                         <input type="hidden" name="id" value="<%=id%>">
                                        

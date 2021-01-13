@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
     
 	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
-	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 </head>
 
 
@@ -55,11 +57,16 @@
                                             <input type="password" id="password" name="password" class="form-control floating" required>
                                             <label class="focus-label">Create Password</label>
                                         </div>
+                                        <div class="form-group form-focus">
+                                            <input type="password" id="password" name="cpassword" class="form-control floating" required>
+                                            <label class="focus-label">Confirm Password</label>
+                                        </div>
                                         <div class="form-group">
                                             <label style="color: rgb(138, 138, 138);">Are you a ?</label>
                                             <select name="type" class="form-control select1" required>
+                                            <option value="Patient">Patient</option>
 											<option value="Doctor">Doctor</option>
-											<option value="Patient">Patient</option>
+											
 											</select>
                                         </div>
                                         <div class="text-right">
@@ -99,6 +106,27 @@
 
   
     <script src="<%=assetPath('js/script.js')%>"></script>  
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
 
 </body>
 

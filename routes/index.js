@@ -12,6 +12,7 @@ router.get('/', homeController.home);
 
 router.get('/add-billing', passport.checkDoctorAuthentication, homeController.addBilling);
 router.get('/add-bank', passport.checkDoctorAuthentication, homeController.addBank);
+router.get('/add-doctor', passport.checkStaffAuthentication, homeController.addDoctor);
 
 router.get('/add-prescription', passport.checkDoctorAuthentication, homeController.addPrescription);
 router.get('/appointments', passport.checkDoctorAuthentication, homeController.appointments);
@@ -28,6 +29,9 @@ router.get('/consult', homeController.consult);
 router.get('/test', homeController.test);
 router.get('/test1', homeController.test1);
 router.get('/coming-soon', homeController.comingSoon);
+router.post('/create-account', homeController.createAccount);
+router.post('/create-new-password', homeController.createNewPassword);
+router.post('/change-password', homeController.changePasswordPost);
 router.get('/change-bank-account', passport.checkDoctorAuthentication, homeController.changeBankAccount);
 router.get('/chat-doctor', passport.checkAuthentication, homeController.chatDoctor);
 router.get('/checkout', passport.checkAuthentication, homeController.checkout);
@@ -105,9 +109,16 @@ router.get('/upload-eproof', passport.checkDoctorAuthentication, homeController.
 router.get('/video-call', passport.checkAuthentication, homeController.videoCall);
 router.get('/voice-call', passport.checkAuthentication, homeController.voiceCall);
 router.post('/verify', homeController.verify);
+router.post('/verify-new', homeController.verifyNew);
+router.post('/verify-forgot', homeController.verifyForgot);
+router.post('/verify-staff-forgot', homeController.verifyStaffForgot);
 router.post('/verify-doctor', homeController.verifyDoctor);
+router.post('/verify-add-doctor', homeController.verifyAddDoctor);
+router.post('/verify-doctor-mobile', homeController.verifyDoctorMobile);
 router.post('/signup', homeController.signUp);
 router.post('/staff-signup', homeController.staffSignup);
+router.post('/staff-add-doctor', homeController.staffAddDoctor);
+router.post('/staff-signup-new', homeController.staffSignupNew);
 router.get('/specialist', homeController.Specialist);
 router.get('/specialist-all', homeController.SpecialistAll);
 router.get('/terms', passport.checkDoctorAuthentication, homeController.terms);
@@ -115,6 +126,10 @@ router.get('/doc-register', homeController.docRegister);
 router.get('/bank-details', passport.checkDoctorAuthentication, homeController.bankDetails);
 router.get('/doctors', homeController.Doctors);
 
+// ---------------------------------------------------
+
+router.post('/verify-user', homeController.verifyUser);
+router.post('/user-signup', homeController.userSignup);
 
 
 

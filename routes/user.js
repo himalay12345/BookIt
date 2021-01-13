@@ -12,6 +12,7 @@ router.post('/create-staff', userController.createStaff);
 router.post('/create-session', passport.authenticate('local', {
     failureRedirect: '/login'
 }), userController.createSession);
+
 router.post('/create-staff-session', passport.authenticate('local', {
     failureRedirect: '/staff-login-page'
 }), userController.createStaffSession);
@@ -42,6 +43,7 @@ router.post('/update-schedule', userController.updateSchedule);
 router.post('/staff-update-schedule', userController.staffUpdateSchedule);
 router.post('/staff-old-update-schedule', userController.staffOldUpdateSchedule);
 router.post('/verify-payment',userController.verifyPayment);
+router.post('/verification',userController.verification);
 router.get('/verify-email',userController.verifyEmail);
 router.get('/payments/refund',userController.refund);
 router.post('/pause-booking-service',userController.pauseBookingService);
@@ -54,6 +56,7 @@ router.post('/staff-set-booking-fee', userController.staffSetBookingFee);
 router.post('/staff-old-checkout', userController.staffOldCheckout);
 router.post('/doctor-profile/update', userController.doctorProfileUpdate);
 router.post('/reset-password', userController.resetPassword);
+router.post('/reset-staff-password', userController.resetStaffPassword);
 router.post('/change-password', userController.changePassword);
 router.post('/doc-change-password', userController.docchangePassword);
 router.post('/bank-details', userController.bankDetails);
@@ -80,5 +83,10 @@ router.get('/delete-award', userController.deleteAward);
 router.get('/delete-experience', userController.deleteExperience);
 router.get('/delete-education', userController.deleteEducation);
 router.get('/delete-clinic-photo', userController.deleteClinicPhoto);
-
+// -------------------------------------------
+router.post('/check-authentication',userController.checkAuthentication);
+router.post('/create-user-account',userController.createUserAccount);
+router.post('/create-user-session', passport.authenticate('local', {
+    failureRedirect: '/login'
+}), userController.createUserSession);
 module.exports = router;

@@ -19,6 +19,15 @@ const { VariableContext } = require('twilio/lib/rest/serverless/v1/service/envir
 
 module.exports.create = async(req, res) => {
     let davatar = path.join(__dirname, '..', '/assets/img/bg.png');
+    if(req.body.password != req.body.cpassword)
+    {
+        req.flash('error','Passwords do not match')
+        return res.render('register', {
+            title: 'Register',
+            phone: req.body.phone,
+            type: req.body.type
+        });
+    }
     let user = await User.create({
         name: req.body.name,
         phone: req.body.phone,
@@ -1341,6 +1350,7 @@ module.exports.offlineCancel = async function(req, res) {
                     return res.render('staff-booking-page',{
                         title:'Staff Booking Page',
                         doctor:user,
+                        doctor1:user,
                          user1: user1,
                        title:'Book Apointment'
                     });
@@ -1515,12 +1525,24 @@ module.exports.refund = async function(req, res) {
     }
 }
 
+module.exports.verification = async(req, res) => {
+ const secret = '1234567890'
+ console.log('triggered');
+ console.log(req.body);
+ res.json({status : 'ok'});
+}
+
+
 module.exports.verifyPayment = async(req, res) => {
     // const secret = '12345678'
 
 
     let user = await User.findById(req.query.doctorid);
-    let staff = await User.findById(user.staff_id);
+    let staff;
+    if(user.staff_id != null)
+    {
+    staff = await User.findById(user.staff_id);
+    }
     let patient = await User.findById(req.query.userid);
 
 
@@ -1719,7 +1741,7 @@ module.exports.verifyPayment = async(req, res) => {
 
                 client.messages
                     .create({
-                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
+                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
                         alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
@@ -1751,7 +1773,11 @@ module.exports.verifyPayment = async(req, res) => {
                     slotindex: req.query.slotindex,
                     dayindex: req.query.dayindex,
                     date: req.query.date,
-                    user: patient
+                    user: patient,
+                    name: req.query.name,
+                    address: req.query.address,
+                    phone: req.query.phone,
+                    age: req.query.age
                 });
 
             }
@@ -1933,7 +1959,7 @@ module.exports.verifyPayment = async(req, res) => {
 
                 client.messages
                     .create({
-                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. Please show this SMS at the clinic front-desk before your appointment.',
+                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. Please show this SMS at the clinic front-desk before your appointment.',
                         from: '+12019755459',
                         alphanumeric_id : "AarogyaHub",
                         statusCallback: 'http://postb.in/1234abcd',
@@ -1964,7 +1990,11 @@ module.exports.verifyPayment = async(req, res) => {
                     // slotindex: req.query.slotindex,
                     dayindex: req.query.dayindex,
                     date: req.query.date,
-                    user: patient
+                    user: patient,
+                    name: req.query.name,
+                    address: req.query.address,
+                    phone: req.query.phone,
+                    age: req.query.age
                 });
 
             }
@@ -3795,21 +3825,32 @@ module.exports.resetPassword = async(req, res) => {
         })
     }
 
-    if (req.body.designation == 'Staff') {
-        let user = await User.findOne({ phone: req.body.phone, type: 'Staff',service:'phone' });
-        user.password = req.body.password;
-        user.save();
-
-        req.flash('success', 'Password reset successfully');
-        return res.redirect('/staff-login-page');
-    } else {
         let user = await User.findOne({ phone: req.body.phone , service:'phone'});
         user.password = req.body.password;
         user.save();
 
         req.flash('success', 'Password reset successfully');
         return res.redirect('/login');
+    
+}
+
+module.exports.resetStaffPassword = async(req, res) => {
+    if (req.body.password != req.body.confirm) {
+        req.flash('error', 'Passwords do not match!');
+        return res.render('set-password', {
+            title: 'Reset-password',
+            phone: req.body.phone
+        })
     }
+
+   
+        let user = await User.findOne({ phone: req.body.phone, type: 'Staff',service:'phone' });
+        user.password = req.body.password;
+        user.save();
+
+        req.flash('success', 'Password reset successfully');
+        return res.redirect('/staff-login-page');
+    
 }
 
 module.exports.uploadId = async function(req, res) {
@@ -4287,3 +4328,87 @@ module.exports.doctorProfileUpdate = async function(req, res) {
     }
 
 }
+
+// -------------------------------------------------
+
+module.exports.checkAuthentication = async function(req, res) {
+let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+if(user)
+{
+    res.json({
+        status:true
+    })
+}
+
+else{
+    res.json({
+        status:false
+    })
+}
+}
+
+
+module.exports.createUserAccount = async function(req, res) {
+ 
+       
+        if(req.body.password != req.body.cpassword)
+        {
+           res.json({
+               password:'mismatch',
+               msg:'Password Do Not Match'
+           })
+        }
+
+        else{
+            
+            let user1 = await User.findOne({
+                phone:req.body.phone,
+                service:'phone',
+                type:'Patient'
+            })
+
+            if(user1 || req.body.authkey != process.env.authkey)
+            {
+                if(user1)
+                {
+                res.json({
+                    status:false,
+                    msg:'User Already Exists'
+                })
+            }else{
+                res.json({
+                    status:false,
+                    msg:'Not verified User'
+                })
+            }
+            }
+            else{
+                let user = await User.create({
+                    name: req.body.name,
+                    phone: req.body.phone,
+                    email:req.body.email,
+                    password: req.body.password,     
+                    service: 'phone',
+                    type: 'Patient'
+                });
+            
+               
+               res.json({
+                   status:true,
+                   msg:'Account Created Successfully',
+                   user:user
+               })
+            }
+        
+    }
+    
+}
+
+module.exports.createUserSession = async function(req, res) {
+    let user = await User.findById(req.user.id)
+    res.json({
+        user:user
+    })
+
+}
+

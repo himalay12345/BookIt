@@ -58,7 +58,7 @@
                                     </div>
 
                                     <!-- Register Form -->
-                                    <form action="/staff-signup-new" method="POST">
+                                    <form action="/create-new-password" method="POST">
                                         <!-- <div class="form-group form-focus">
 												<input type="text" class="form-control floating">
 												<label class="focus-label">Name</label>
@@ -93,12 +93,12 @@
                                     </div>
 
 
-                                    <form id="myform" method="POST" action="/verify-doctor-mobile/?service=call">
+                                    <form id="myform" method="POST" action="/verify-staff-forgot/?service=call">
                                         <input type="hidden" name="phone" value="<%=phone%>">
                                         <input type="hidden" name="id" value="<%=id%>">
                                        
                                     </form>
-                                    <form id="myform1" method="POST" action="/verify-doctor-mobile/?service=sms">
+                                    <form id="myform1" method="POST" action="/verify-staff-forgot/?service=sms">
                                         <input type="hidden" name="phone" value="<%=phone%>">
                                         <input type="hidden" name="id" value="<%=id%>">
                                        

@@ -55,7 +55,7 @@
                                     </div>
 
                                     <!-- Register Form -->
-                                    <form action="/signup" method="POST">
+                                    <form action="/create-account" method="POST">
                                      
                                         <div class="form-group">
                                             <label for="text" style="margin-left: 5px; font-weight: bold;">OTP</label>
@@ -76,11 +76,11 @@
                                     </div>
 
 
-                                    <form id="myform" method="POST" action="/verify/?service=call">
+                                    <form id="myform" method="POST" action="/verify-new/?service=call">
                                         <input type="hidden" name="phone" value="<%=phone%>">
                                         <input type="hidden" name="type" value="<%=type%>">
                                     </form>
-                                    <form id="myform1" method="POST" action="/verify/?service=sms">
+                                    <form id="myform1" method="POST" action="/verify-new/?service=sms">
                                         <input type="hidden" name="phone" value="<%=phone%>">
                                         <input type="hidden" name="type" value="<%=type%>">
                                     </form>

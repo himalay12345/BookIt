@@ -152,6 +152,11 @@ module.exports.addBilling = (req, res) => {
         title: 'Add Billing'
     })
 }
+module.exports.addDoctor = (req, res) => {
+    return res.render('staff-login', {
+        title: 'Add Doctor'
+    })
+}
 module.exports.consult = async(req, res) => {
     let doctors = await User.find({ type: "Doctor",booking_service:"true" });
     let consults = await Consult.find({});
@@ -1385,6 +1390,210 @@ module.exports.staffSignup = async(req, res) => {
 
 
 }
+module.exports.staffAddDoctor = async(req, res) => {
+    if (req.body.type == 'email') {
+        let doctor = await User.findById(req.body.id);
+        if (req.body.otp == doctor.emailkey) {
+           
+                let user1 = await User.findById(req.user.id);
+                if(user1.doctorid)
+                {
+                    if(user1.doctorids.length == 0)
+                    {
+                        user1.doctorids.push({
+                            doctorid:user1.doctorid});
+                        user1.doctorids.push({
+                            doctorid:doctor._id});
+
+                    }
+
+                    else
+                    {
+                     user1.doctorids.push({
+                         doctorid:doctor._id}); 
+                        
+                    }
+                    doctor.staff_flag = true;
+                    doctor.staff_id = user1._id;
+                    user1.save();
+                    doctor.save();
+                    req.flash('success','Doctor Added successfully');
+                 return res.redirect(`/staff-dashboard/?id=${doctor._id}`)
+                }
+            
+           
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('doctor-add-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id: req.body.id,
+                type: 'email',
+                designation: req.body.designation
+            })
+
+        }
+    }
+
+   
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
+        console.log(req.body.add);
+
+
+        if (data.status == 'approved') {
+           
+            
+              
+                let user1 = await User.findById(req.user.id);
+                let doctor = await User.findById(req.body.id);
+                if(user1.doctorid)
+                {
+                    if(user1.doctorids.length == 0)
+                    {
+                        user1.doctorids.push({
+                            doctorid:user1.doctorid});
+                        user1.doctorids.push({
+                            doctorid:doctor._id});
+
+                    }
+
+                    else
+                    {
+                     user1.doctorids.push({
+                         doctorid:doctor._id}); 
+                        
+                    }
+                    doctor.staff_flag = true;
+                    doctor.staff_id = user1._id;
+                    user1.save();
+                    doctor.save();
+                    req.flash('success','Doctor Added successfully');
+                 return res.redirect(`/staff-dashboard/?id=${doctor._id}`)
+                }
+            
+          
+
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('doctor-add-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id: req.body.id,
+                designation: req.body.designation
+            })
+
+        }
+    
+}
+module.exports.createNewPassword = async(req, res) => {
+  
+    
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
+      
+
+
+        if (data.status == 'approved') {
+            return res.render('staff-set-password', {
+                title: 'Reset Pasword',
+                phone: req.body.phone,
+                id: req.body.id,
+                designation: req.body.designation
+            });
+        
+
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id: req.body.id,
+                designation: req.body.designation
+            })
+
+        }
+    
+
+
+
+}
+module.exports.staffSignupNew = async(req, res) => {
+
+    if (req.body.type == 'email') {
+        let doctor = await User.findById(req.body.id);
+        if (req.body.otp == doctor.emailkey) {
+           
+            
+            return res.render('staff-register', {
+                title: 'Staff Register',
+                phone: req.body.phone,
+                id: req.body.id,
+                type: 'email'
+            });
+        
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id: req.body.id,
+                type: 'email',
+                designation: req.body.designation
+            })
+
+        }
+    }
+    else{
+
+
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+
+        console.log(req.body.id);
+
+
+        if (data.status == 'approved') {
+            return res.render('staff-register', {
+                title: 'Staff Register',
+                phone: req.body.phone,
+                id: req.body.id
+            });
+
+        } else {
+            req.flash('error', 'Wrong Otp');
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                id: req.body.id
+            })
+
+        }
+    
+    }
+
+
+}
 
 module.exports.signUp = async(req, res) => {
 
@@ -1498,6 +1707,65 @@ module.exports.signUp = async(req, res) => {
     }
 
 
+}
+
+module.exports.changePasswordPost = async(req, res) => {
+    console.log(req.body.type)
+    let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+
+
+    if (data.status == 'approved') {
+        return res.render('set-password', {
+            title: 'Reset Pasword',
+            phone: req.body.phone
+        });
+
+    } else {
+        req.flash('error', 'Wrong Otp');
+        return res.render('forgot-verify', {
+            title: 'Phone verification',
+            phone: req.body.phone,
+            type: req.body.type
+        })
+
+    }
+}
+module.exports.createAccount = async(req, res) => {
+  
+
+    let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+
+
+    if (data.status == 'approved') {
+        return res.render('register', {
+            title: 'Register',
+            phone: req.body.phone,
+            type: req.body.type
+        });
+
+    } else {
+        req.flash('error', 'Wrong Otp');
+        return res.render('phone-verify', {
+            title: 'Phone verification',
+            phone: req.body.phone,
+            type: req.body.type
+        })
+
+    }
 }
 
 module.exports.reviews = async(req, res) => {
@@ -1895,6 +2163,86 @@ module.exports.verifyDoctor = async(req, res) => {
 
 }
 
+module.exports.verifyDoctorMobile = async(req, res) => {
+
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var check = re.test(String(req.body.phone).toLowerCase());
+    if (check == true) {
+        let doctor = await User.findOne({ email: req.body.phone, type: 'Doctor', service: 'google',booking_service:true, staff_flag: false });
+        if (doctor) {
+
+
+            var key = Math.floor(100000 + Math.random() * 900000);
+            emailVerification.newAlert(doctor, key, req.body.phone);
+            doctor.emailkey = key;
+            doctor.save();
+
+          
+      
+
+
+            return res.render('doctor-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                type: 'email',
+                id: doctor._id,
+                designation: 'Verify'
+
+            });
+        
+
+        } else {
+
+            req.flash('error', 'Either No Doctor account is associated with this number or Staff account already created.')
+            return res.redirect('back');
+        }
+
+
+    } else {
+        let doctor = await User.findOne({
+            phone: req.body.phone,
+            type: 'Doctor',
+            staff_flag: false,
+            
+            service: 'phone'
+        });
+
+
+        if (doctor) {
+            client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then((data) => {
+
+               
+       
+
+                    return res.render('doctor-phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        id: doctor._id,
+                        designation: 'Verify'
+
+                    });
+                
+                
+                });
+        } else {
+
+            req.flash('error', 'Either No Doctor account is associated with this number or Staff account already created.')
+            return res.redirect('back');
+        }
+    }
+
+
+
+
+}
+
 module.exports.verify = async(req, res) => {
 
     if(req.body.phone.length>10)
@@ -2013,3 +2361,265 @@ module.exports.verify = async(req, res) => {
     }
 
 }
+// -------------------------------------------
+module.exports.verifyAddDoctor = async(req,res) => {
+
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var check = re.test(String(req.body.phone).toLowerCase());
+    if (check == true) {
+        let doctor = await User.findOne({ email: req.body.phone, type: 'Doctor', service: 'google',booking_service:true, staff_flag: false });
+        if (doctor) {
+
+
+            var key = Math.floor(100000 + Math.random() * 900000);
+            emailVerification.newAlert(doctor, key, req.body.phone);
+            doctor.emailkey = key;
+            doctor.save();
+
+          
+      
+
+
+            return res.render('doctor-add-phone-verify', {
+                title: 'Phone verification',
+                phone: req.body.phone,
+                type: 'email',
+                id: doctor._id,
+                designation: 'Verify'
+
+            });
+        
+
+        } else {
+
+            req.flash('error', 'Either No Doctor account is associated with this number or Staff account already created.')
+            return res.redirect('back');
+        }
+
+
+    } else {
+        let doctor = await User.findOne({
+            phone: req.body.phone,
+            type: 'Doctor',
+            staff_flag: false,
+            
+            service: 'phone'
+        });
+
+
+        if (doctor) {
+            client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: req.query.service
+                }).then((data) => {
+
+              
+                    return res.render('doctor-add-phone-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        id: doctor._id,
+                        designation: 'Staff'
+
+                    });
+                
+               
+                
+                });
+        } else {
+
+            req.flash('error', 'Either No Doctor account is associated with this number or Staff account already created.')
+            return res.redirect('back');
+        }
+    }
+
+}
+module.exports.verifyForgot = async(req,res) => {
+    let user;
+    
+        user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+
+    console.log(user)
+    if (!user) {
+        req.flash('error', 'No account linked with this phone number.');
+        return res.redirect('back');
+    } else {
+        console.log(req.body.type)
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.query.service
+            }).then((data) => {
+
+                
+
+                    return res.render('forgot-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        type: req.body.type
+
+                    });
+
+                
+            });
+    }
+
+}
+
+
+module.exports.verifyStaffForgot = async(req,res) => {
+
+    let user = await User.findOne({ phone: req.body.phone, service: 'phone', type: 'Staff' });
+    
+    if (!user) {
+        req.flash('error', 'No account linked with this phone number.');
+        return res.redirect('back');
+    } else {
+        console.log(req.body.type)
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.query.service
+            }).then((data) => {
+
+                
+
+
+                    return res.render('doctor-forgot-verify', {
+                        title: 'Phone verification',
+                        phone: req.body.phone,
+                        type: req.body.type,
+                        designation: req.body.designation
+
+                    });
+
+                
+            });
+    }
+
+
+
+}
+
+module.exports.verifyNew = async(req,res) => {
+    if(req.body.phone.length>10)
+    {
+        req.flash('error', 'Please do not use (+91 or 0) before your phone number.');
+        return res.redirect('back');
+    }
+    
+    let user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+
+    if (user) {
+        req.flash('error', 'Account already linked with this mobile number');
+        return res.redirect('back');
+    } else {
+
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.query.service
+            }).then((data) => {
+                // console.log(data);
+                return res.render('phone-verify', {
+                    title: 'Phone verification',
+                    phone: req.body.phone,
+                    type: req.body.type
+
+                });
+            });
+
+    }
+}
+
+// ------------------------------------------------------------
+
+
+module.exports.verifyUser = async function(req, res) {
+    if(req.body.phone.length>10)
+    {
+        res.json({
+            length:true
+        })
+    }
+
+    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+    if(user)
+    {
+        res.json({
+            status:false,
+            msg:'User Already Exists'
+        })
+    }
+    else{
+        client
+        .verify
+        .services(config.serviceID)
+        .verifications
+        .create({
+            to: `+91${req.body.phone}`,
+            channel: req.body.service
+        }).then((data) => {
+           if(data)
+           {
+           res.json({
+               status:true,
+               msg:'Otp sent Successfully'
+           })
+        }
+        else{
+            res.json({
+                status:false,
+                msg:'Otp not sent'
+            })
+        }
+        });
+    }
+    
+        
+
+    
+}
+
+module.exports.userSignup = async function(req, res) {
+
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+    
+    
+        if (data.status == 'approved') {
+            res.json({
+                status:true,
+                msg:'Otp Verified Successfully',
+                data:data
+            })
+    
+        } else {
+            res.json({
+                status:false,
+                msg:'Otp Not Verified'
+            })
+    
+        }
+    
+
+}
+
