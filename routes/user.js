@@ -87,6 +87,7 @@ router.get('/delete-clinic-photo', userController.deleteClinicPhoto);
 router.post('/check-authentication',userController.checkAuthentication);
 router.post('/create-user-account',userController.createUserAccount);
 router.post('/create-user-session', passport.authenticate('local', {
-    failureRedirect: '/login'
+    failureRedirect: res.json({status:true,
+        msg:'Invalid Username or Password'})
 }), userController.createUserSession);
 module.exports = router;
