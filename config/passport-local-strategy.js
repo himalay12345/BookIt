@@ -16,10 +16,10 @@ passport.use(new localStrategy({
 
                 
                 req.flash('error', 'Invalid Username/Password');
-                res.json({
-                    status:true,
-                    msg:'Invalid Username or Password'
-                })
+                // res.json({
+                //     status:true,
+                //     msg:'Invalid Username or Password'
+                // })
                 return done(null, false);
             }
 
