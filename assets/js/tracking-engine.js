@@ -8,8 +8,8 @@ class PatientTracking{
         this.userId = userId;
         this.userName = userName;
 
-        this.socket = io.connect('http://localhost:4000')
-        // this.socket = io.connect('https://aarogyahub.com:5000');
+        // this.socket = io.connect('http://localhost:4000')
+        this.socket = io.connect('https://aarogyahub.com:5000');
 
         if(this.userId)
         {
