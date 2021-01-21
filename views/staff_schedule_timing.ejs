@@ -751,20 +751,20 @@
                                                         <div class="col-md-12 col-sm-12" style="margin-left: -15px;">
                                                             <div class="form-group col-sm-12">
                                                                 <label for="booking">How many old patients doctor see in a day?</label></br>
-                                                                <input type="number" name="pcount" class="form-control" value="<%=locals.user.oldp.pcount%>" id="" placeholder="Enter the no. of patients">
+                                                                <input type="number" name="pcount" class="form-control" value="<%=user1.oldp.pcount%>" id="" placeholder="Enter the no. of patients">
                                                             </div>
                                                              <div class="form-group col-sm-12">
                                                                 <label for="booking">What is the maximum no. of days a patient can visit the doctor for free consultation?</label></br>
-                                                                <input type="number" name="dcount" class="form-control" value="<%=locals.user.oldp.dcount%>" id="" placeholder="Enter the no. of days">
+                                                                <input type="number" name="dcount" class="form-control" value="<%=user1.oldp.dcount%>" id="" placeholder="Enter the no. of days">
                                                             </div>
                                                             <div class="form-group col-sm-12">
                                                                 <label for="booking" style="margin-bottom: 10px;">Is there any fix timing in which doctor see the old patients?</label></br>
-                                                                <%if(locals.user.oldp.flag == true){%>
+                                                                <%if(user1.oldp.flag == true){%>
                                                                     <span><input type="radio" name="flag" value="true"  onchange="showSchedule('yes')" checked></span><span style="margin-left: 5px;">Yes</span></br>
                                                                 <%}else{%>
                                                                     <span><input type="radio" name="flag" value="true"  onchange="showSchedule('yes')"></span><span style="margin-left: 5px;">Yes</span></br>
                                                                 <%}%>
-                                                                <%if(locals.user.oldp.flag == false){%>
+                                                                <%if(user1.oldp.flag == false){%>
                                                                 <span><input type="radio" name="flag" value="false"  onchange="showSchedule('no')" checked></span><span style="margin-left: 5px;">No</span>
                                                                 <%}else{%>
                                                                     <span><input type="radio" name="flag" value="false"  onchange="showSchedule('no')"></span><span style="margin-left: 5px;">No</span>
@@ -791,7 +791,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                     
-                                        <%if(locals.user.oldp.flag == true){%>
+                                        <%if(user1.oldp.flag == true){%>
                                         <div class="row" id="old_schedule" >
                                            
                                             <div class="col-md-12">
@@ -840,7 +840,7 @@
 
                                                         <div id="slot_sunday1" class="tab-pane fade show active">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'sunday'){
                                                             flag=true;
                                                             temp=day;
@@ -911,7 +911,7 @@
                                                         <!-- Monday Slot -->
                                                         <div id="slot_monday1" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'monday'){
                                                             flag=true;
                                                             temp=day;
@@ -983,7 +983,7 @@
                                                         <!-- Tuesday Slot -->
                                                         <div id="slot_tuesday1" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'tuesday'){
                                                             flag=true;
                                                             temp=day;
@@ -1054,7 +1054,7 @@
                                                         <!-- Wednesday Slot -->
                                                         <div id="slot_wednesday1" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'wednesday'){
                                                             flag=true;
                                                             temp=day;
@@ -1125,7 +1125,7 @@
                                                         <!-- Thursday Slot -->
                                                         <div id="slot_thursday1" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'thursday'){
                                                             flag=true;
                                                             temp=day;
@@ -1196,7 +1196,7 @@
                                                         <!-- Friday Slot -->
                                                         <div id="slot_friday1" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'friday'){
                                                             flag=true;
                                                             temp=day;
@@ -1270,7 +1270,7 @@
                                                         <!-- Saturday Slot -->
                                                         <div id="slot_saturday1" class="tab-pane fade">
                                                             <%var flag = false;var temp;%>
-                                                                <%for(day of user.old_schedule_time){
+                                                                <%for(day of user1.old_schedule_time){
                                                             if(day.day == 'saturday'){
                                                             flag=true;
                                                             temp=day;
@@ -1393,7 +1393,7 @@
     
                                                             <div id="slot_sunday1" class="tab-pane fade show active">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'sunday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -1464,7 +1464,7 @@
                                                             <!-- Monday Slot -->
                                                             <div id="slot_monday1" class="tab-pane fade">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'monday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -1536,7 +1536,7 @@
                                                             <!-- Tuesday Slot -->
                                                             <div id="slot_tuesday1" class="tab-pane fade">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'tuesday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -1607,7 +1607,7 @@
                                                             <!-- Wednesday Slot -->
                                                             <div id="slot_wednesday1" class="tab-pane fade">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'wednesday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -1678,7 +1678,7 @@
                                                             <!-- Thursday Slot -->
                                                             <div id="slot_thursday1" class="tab-pane fade">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'thursday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -1749,7 +1749,7 @@
                                                             <!-- Friday Slot -->
                                                             <div id="slot_friday1" class="tab-pane fade">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'friday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -1823,7 +1823,7 @@
                                                             <!-- Saturday Slot -->
                                                             <div id="slot_saturday1" class="tab-pane fade">
                                                                 <%var flag = false;var temp;%>
-                                                                    <%for(day of user.old_schedule_time){
+                                                                    <%for(day of user1.old_schedule_time){
                                                                 if(day.day == 'saturday'){
                                                                 flag=true;
                                                                 temp=day;
@@ -9574,7 +9574,7 @@
                             <input type="hidden" name="day" value="sunday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                                 if(day.day == 'sunday'){
                                 flag=true;
                                 temp=day;
@@ -9948,7 +9948,7 @@
                             <input type="hidden" name="day" value="monday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                             if(day.day == 'monday'){
                             flag=true;
                             temp=day;
@@ -10322,7 +10322,7 @@
                             <input type="hidden" name="day" value="tuesday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                             if(day.day == 'tuesday'){
                             flag=true;
                             temp=day;
@@ -10696,7 +10696,7 @@
                             <input type="hidden" name="day" value="wednesday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                             if(day.day == 'wednesday'){
                             flag=true;
                             temp=day;
@@ -11070,7 +11070,7 @@
                             <input type="hidden" name="day" value="thursday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                             if(day.day == 'thursday'){
                             flag=true;
                             temp=day;
@@ -11444,7 +11444,7 @@
                             <input type="hidden" name="day" value="friday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                             if(day.day == 'friday'){
                             flag=true;
                             temp=day;
@@ -11818,7 +11818,7 @@
                             <input type="hidden" name="day" value="saturday">
 
                             <%var flag = false;var temp;%>
-                                <%for(day of user.old_schedule_time){
+                                <%for(day of user1.old_schedule_time){
                             if(day.day == 'saturday'){
                             flag=true;
                             temp=day;

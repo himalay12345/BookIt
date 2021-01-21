@@ -229,7 +229,7 @@
                                     <div class="dropdown-menu profile-drop cloginbtns">
                                         <div class="user-header">
                                             <div class="avatar avatar-sm">
-                                                <img src="<%=locals.user.avatar%>" alt="User Image" onerror='this.src="<%=assetPath(' img/profile.png ')%>"' class="avatar-img rounded-circle">
+                                                <img src="<%=locals.user.avatar%>" alt="User Image" class="avatar-img rounded-circle" onerror='this.src="<%=assetPath('img/profile.png')%>"' >
                                             </div>
                                             <div class="user-text">
                                                 <h6>
@@ -289,7 +289,14 @@
                                                         <%}else{%>
                                                             <a class="dropdown-item" href="/staff-booking-service/?id=<%=locals.user.doctorid%>">Pause/Resume Booking</a>
                                                             <%}%>
-                                                <!-- <a class="dropdown-item" href="/staff-old-booking/?id=<%=locals.user.doctorid%>">Old Patient Booking</a> -->
+                                                    <%if(aflag){%>
+                                                        <a class="dropdown-item" href="/select-doctor/?type=oldbooking">Old Patient Booking</a>
+                                                        <%}else{%>
+                                                       
+                                                            <%if(locals.user.old_flag){%>
+                                                                <a class="dropdown-item" href="/staff-old-booking/?id=<%=locals.user.doctorid%>">Old Patient Booking</a>
+                                                                <%}%>
+                                                            <%}%>     
                                                     <%if(aflag){%>
                                                         <a class="dropdown-item" href="/select-doctor/?type=booking">Book Appointment</a>
                                                         <%}else{%>

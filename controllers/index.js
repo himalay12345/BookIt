@@ -716,54 +716,369 @@ module.exports.invoiceView = async(req, res) => {
 
     })
 }
-module.exports.oldBooking = async(req, res) => {
+
+module.exports.invoiceUserView = async(req, res) => {
+
     let doctor = await User.findById(req.query.id);
-    let staff = await User.findById(doctor.staff_id);
+    return res.render('invoice-user-view', {
+        title: 'Invoice View',
+        doctor: doctor,
+        order: req.query.order,
+        date: req.query.date,
+        fee: req.query.fee,
+        name: req.query.name,
+        age: req.query.age,
+        phone: req.query.phone,
+        address: req.query.address,
+        gender: req.query.gender,
+        free: req.query.free,
+        layout: 'invoice-user-view'
+
+    })
+}
+module.exports.oldBooking = async(req, res) => {
+    console.log('hello')
+    let doctor = await User.findOne({ _id: req.query.id, booking_service: true });
+    let ndoctor = await User.findOne({ _id: req.query.id, booking_service: true });
+
+    if (!doctor) {
+        return res.render('not-available', {
+            title: 'Doctor Not Availble',
+            type: 'Doctor'
+        })
+    }
+
+    let user1 = await User.findById(doctor.staff_id);
     var today = new Date();
-    today.setDate(today.getDate() - 1)
+    // today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     var dayOfWeek = weekday[today.getDay()].toUpperCase();
     console.log(dayOfWeek);
+    var str = dd + '-' + mm + '-' + yyyy;
 
-    if (staff.oldp.flag) {
-        for (temp of staff.old_schedule_time) {
+    if (user1) {
+        console.log('hello1'+doctor.oldp.flag)
+        if(doctor.oldp.flag){
+        for (temp of doctor.old_schedule_time) {
+            
             if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
+
                 if (typeof(temp.booked) == 'string') {
-                    temp.booked = 0;
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
                 }
 
                 if (typeof(temp.booked) == 'number') {
-                    temp.booked = 0;
-                } else {
-                    temp.booked = [0, 0];
+                    if (temp.booked != 0) {
+                        vflag1 = true;
+                    }
                 }
-            }
-        }
-    } else {
-        for (temp of staff.old_schedule_time_fixed) {
-            if (temp.day.toUpperCase() == dayOfWeek) {
 
-                temp.booked = 0;
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of user1.booking) {
+                    if (temp1.date == str && temp1.did == doctor.id && temp1.old_flag == true) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
 
 
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
 
             }
         }
     }
+        else{
+            for (temp of doctor.old_schedule_time_fixed) {
+            
+                if (temp.day.toUpperCase() == dayOfWeek) {
+                    var vflag = true;
+                    var vflag1 = false;
+    
+                    if (typeof(temp.booked) == 'string') {
+                        if (temp.booked != '0') {
+                            vflag1 = true;
+                        }
+                    }
+    
+                    if (typeof(temp.booked) == 'number') {
+                        if (temp.booked != 0) {
+                            vflag1 = true;
+                        }
+                    }
+    
+                    if (typeof(temp.booked) == 'object') {
+    
+                        for (temp2 of temp.booked) {
+                            if (temp2 != '0') {
+                                vflag1 = true;
+                            }
+    
+                        }
+                    }
+    
+                    for (temp1 of user1.booking) {
+                        if (temp1.date == str && temp1.did == doctor.id && temp1.old_flag == true) {
+                            vflag = false;
+                        }
+                    }
+                    console.log(vflag, vflag1)
+    
+                    if (vflag && vflag1) {
+                        if (typeof(temp.booked) == 'string') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'number') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'object') {
+                            temp.booked = [0, 0];
+                        }
+    
+    
+                    }
+                    temp.reset_flag = true;
+                    console.log(temp.reset_flag)
+    
+                } else {
+                    if (temp.reset_flag == true) {
+                        if (typeof(temp.booked) == 'string') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'number') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'object') {
+                            temp.booked = [0, 0];
+                        }
+    
+                        temp.reset_flag = false;
+                        temp.alt_flag = false;
+                    }
+    
+                }
+            }
+        }
+    } else {
+        if(doctor.oldp.flag){
+        for (temp of doctor.old_schedule_time) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
+
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != 0) {
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of doctor.patients) {
+                    if (temp1.date == str && doctor.id && temp1.old_flag == true) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
+
+            }
+        }
+    }else{
+        for (temp of doctor.old_schedule_time_fixed) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
+
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        console.log('hii1')
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != 0) {
+                        console.log('hii')
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            console.log('hii12')
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of doctor.patients) {
+                    if (temp1.date == str && doctor.id && temp1.old_flag == true) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
+
+            }
+        }
+    }
+    }
+    
+
+    doctor.save();
+
+  
+
+  
 
 
 
-    staff.save();
+   
 
     return res.render('old-booking', {
         title: 'Old Pateint Booking',
         doctor: doctor,
+        doctor1:doctor,
         type: req.query.type,
         n: req.query.n,
-        staff: staff
+        staff: user1
     })
 
 }
@@ -1519,7 +1834,7 @@ module.exports.createNewPassword = async(req, res) => {
 
         } else {
             req.flash('error', 'Wrong Otp');
-            return res.render('doctor-phone-verify', {
+            return res.render('doctor-forgot-verify', {
                 title: 'Phone verification',
                 phone: req.body.phone,
                 id: req.body.id,
@@ -1976,49 +2291,354 @@ module.exports.staffBooking = async(req, res) => {
     })
 }
 module.exports.staffOldBooking = async(req, res) => {
-    let doctor = await User.findById(req.query.id);
-    let user1 = await User.findById(req.user.id).populate('doctorid');
+    
+    
+    let doctor = await User.findOne({ _id: req.query.id, booking_service: true });
+    let ndoctor = await User.findOne({ _id: req.query.id, booking_service: true });
+
+   
+
+    let user1 = await User.findById(req.user.id).populate('doctorid').populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });;
     var today = new Date();
-    today.setDate(today.getDate() - 1)
+    // today.setDate(today.getDate() - 1)
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
     var dayOfWeek = weekday[today.getDay()].toUpperCase();
     console.log(dayOfWeek);
+    var str = dd + '-' + mm + '-' + yyyy;
 
-
-    if (user1.oldp.flag) {
-        for (temp of user1.old_schedule_time) {
+    if (user1) {
+        console.log('hello1'+doctor.oldp.flag)
+        if(doctor.oldp.flag){
+            
+        for (temp of doctor.old_schedule_time) {
+            
             if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
+
                 if (typeof(temp.booked) == 'string') {
-                    temp.booked = 0;
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
                 }
 
                 if (typeof(temp.booked) == 'number') {
-                    temp.booked = 0;
-                } else {
-                    temp.booked = [0, 0];
+                    if (temp.booked != 0) {
+                        vflag1 = true;
+                    }
                 }
-            }
-        }
-    } else {
-        for (temp of user1.old_schedule_time_fixed) {
-            if (temp.day.toUpperCase() == dayOfWeek) {
 
-                temp.booked = 0;
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of user1.booking) {
+                    if (temp1.date == str && temp1.did == doctor.id && temp1.old_flag == true) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
 
 
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
 
             }
         }
     }
+        else{
+            for (temp of doctor.old_schedule_time_fixed) {
+            
+                if (temp.day.toUpperCase() == dayOfWeek) {
+                    var vflag = true;
+                    var vflag1 = false;
+    
+                    if (typeof(temp.booked) == 'string') {
+                        if (temp.booked != '0') {
+                            console.log('hii1')
+                            vflag1 = true;
+                        }
+                    }
+    
+                    if (typeof(temp.booked) == 'number') {
+                        if (temp.booked != 0) {
+                            console.log('hii2')
+                            vflag1 = true;
+                        }
+                    }
+    
+                    if (typeof(temp.booked) == 'object') {
+    
+                        for (temp2 of temp.booked) {
+                            if (temp2 != '0') {
+                                console.log('hii3')
+                                vflag1 = true;
+                            }
+    
+                        }
+                    }
+    
+                    for (temp1 of user1.booking) {
+                        if (temp1.date == str && temp1.did == doctor.id && temp1.old_flag == true) {
+                            vflag = false;
+                        }
+                    }
+                    console.log(vflag, vflag1)
+    
+                    if (vflag && vflag1) {
+                        if (typeof(temp.booked) == 'string') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'number') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'object') {
+                            temp.booked = [0, 0];
+                        }
+    
+    
+                    }
+                    temp.reset_flag = true;
+                    console.log(temp.reset_flag)
+    
+                } else {
+                    if (temp.reset_flag == true) {
+                        if (typeof(temp.booked) == 'string') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'number') {
+                            temp.booked = 0;
+                        }
+    
+                        if (typeof(temp.booked) == 'object') {
+                            temp.booked = [0, 0];
+                        }
+    
+                        temp.reset_flag = false;
+                        temp.alt_flag = false;
+                    }
+    
+                }
+            }
+        }
+    } else {
+        if(doctor.oldp.flag){
+        for (temp of doctor.old_schedule_time) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
 
-    user1.save();
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of doctor.patients) {
+                    if (temp1.date == str && temp1.old_flag == true ) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
+
+            }
+        }
+    }else{
+        for (temp of doctor.old_schedule_time_fixed) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
+
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        console.log('hii')
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != 0) {
+                        console.log('hii1')
+                        vflag1 = true;
+                    }
+                }
+
+                if (typeof(temp.booked) == 'object') {
+
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            console.log('hii2')
+                            vflag1 = true;
+                        }
+
+                    }
+                }
+
+                for (temp1 of doctor.patients) {
+                    if (temp1.date == str && temp1.old_flag == true) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
+
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+
+                }
+                temp.reset_flag = true;
+
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
+
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
+
+            }
+        }
+    }
+    }
+    
+
+    doctor.save();
+
+  
+
+  
+
+
+
+   
 
     return res.render('staff-old-booking', {
-        title: 'Old Pateint Booking',
+        title: 'Old Patient Booking',
         doctor: doctor,
+        doctor1:doctor,
+        doctor2:doctor,
         staff: user1
     })
 }
@@ -2555,7 +3175,7 @@ module.exports.verifyUser = async function(req, res) {
         })
     }
 
-    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+    let user = await User.findOne({phone:req.body.phone,service:'phone'})
     if(user)
     {
         res.json({

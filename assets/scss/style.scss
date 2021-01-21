@@ -8105,6 +8105,7 @@ html.menu-opened body {
     }
     .sidebar-overlay.opened {
         display: block;
+        z-index:1000;
     }
     .about-content {
         margin-bottom: 30px;

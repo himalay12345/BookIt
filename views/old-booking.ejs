@@ -126,8 +126,8 @@
                                                                                                                                     <%}%>
                                                                                                                                         <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
                                                                         </div>
-                                                                        <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; RS
-                                                                            <%=doctor.booking_fee%>
+                                                                        <p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp;
+                                                                           Free As A Old Patient
                                                                         </p>
 
 
@@ -161,12 +161,7 @@ var dayOfWeek = weekday[today.getDay()];
 var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
 var date = new Date(res);
 today=date;%>
-                            <div class="alert alert-info alert-dismissible fade show malert" role="alert" style="margin-top: 15px;">
-                                    <strong>Note!</strong> You are allowed to book online on the present day (<%=dd%>-<%=mm%>-<%=yyyy%>) and the next day (<%=dd1%>-<%=mm1%>-<%=yyyy1%>) <a href="#" class="alert-link"> only.</a> 
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                                            </div>
+                         
 
                             <!-- Schedule Widget -->
                             <div class="card booking-schedule schedule-widget">
@@ -177,16 +172,16 @@ today=date;%>
                                         <div class=" col-sm-12 col-md-12">
 
                                             <!-- Day Slot -->
-                                            <div class="day-slot">
+                                            <div class="day-slot text-center">
                                                 <ul id="md">
-                                                    <li  class="left-arrow">
-                                                        <a data-count='0' onclick="prevSlide()" id="prevslide">
+                                                    <!-- <li class="left-arrow displayNone>
+                                                        <a data-count='0' onclick="prevSlide()" id="prevslide" class="displayNone">
                                                             <i class="fa fa-chevron-left"></i>
                                                         </a>
-                                                    </li>
+                                                    </li> -->
                                                     <% var today = new Date();%>
                                                         <%var k=0%>
-                                                            <%for(var i=0;i<3;i++){%>
+                                                            <%for(var i=0;i<1;i++){%>
                                                                 <%var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
@@ -378,15 +373,15 @@ today=date;%>
 
 
 
-                                                                                                                                                                                    <li  class="right-arrow">
+                                                                                                                                                                                    <li  class="right-arrow displayNone">
                                                                                                                                                                                         <a data-count='0' onclick="nextSlide()" id="nextslide">
                                                                                                                                                                                             <i class="fa fa-chevron-right"></i>
                                                                                                                                                                                         </a>
                                                                                                                                                                                     </li>
                                                 </ul>
                                                 <ul id="sm">
-                                                    <li  class="left-arrow">
-                                                        <a data-count='0' onclick="smprevSlide()" id="smprevslide">
+                                                    <li  class="left-arrow displayNone">
+                                                        <a data-count='0' onclick="smprevSlide()" id="smprevslide" class="displayNone">
                                                             <i class="fa fa-chevron-left"></i>
                                                         </a>
                                                     </li>
@@ -427,7 +422,7 @@ today=date;%>
 
 
                                                                                 <%}%>
-                                                                                    <li  class="right-arrow">
+                                                                                    <li  class="right-arrow displayNone">
                                                                                         <a data-count='1' onclick="smnextSlide()" id="smnextslide">
                                                                                             <i class="fa fa-chevron-right"></i>
                                                                                         </a>
@@ -495,13 +490,13 @@ today=date;%>
                                                             <div class="col-md-12">
 
                                                                 <!-- Time Slot -->
-                                                                <%if(staff.oldp.flag){%>
+                                                                <%if(doctor.oldp.flag){%>
                                                                     <input type="hidden" name="fixed" value="false">
                                                                 <div class="time-slot" id="slots">
                                                                     <ul class="clearfix" style="display: flex;" id="md">
                                                                         <%var d1,d2,d3,d4,d5,d6,d7,count,t1,t2,t3,t4,t5,t6,t7;%>
                                                                             <%var x = 0%>
-                                                                                <%for(time of staff.old_schedule_time){%>
+                                                                                <%for(time of doctor.old_schedule_time){%>
 
                                                                                     <%var i = time.day.toUpperCase();%>
 
@@ -569,7 +564,7 @@ today=date;%>
                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                     <%var color = parseInt(d1.booked);%>
-                                                                                                                                                                                                        <%for(var j= 1;j<=d1.available;j++){%>
+                                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                             <%if(j<=color){%>
@@ -578,7 +573,7 @@ today=date;%>
                                                                                                                                                                                                                     <span style="font-size: 0.6rem;display:block;">Booked</span>
                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
                                                                                                                                                                                                                         id="checkme">
                                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                                     </a>
@@ -595,7 +590,7 @@ today=date;%>
                                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                             <%var color = parseInt(d1.booked[i]);%>
-                                                                                                                                                                                                                <%for(var j= 1;j<=d1.available[i];j++){%>
+                                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -604,7 +599,7 @@ today=date;%>
                                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
                                                                                                                                                                                                                                 id="checkme">
                                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                                             </a>
@@ -625,7 +620,7 @@ Not Available
                                                                                                                                                                                         <%}%>
                                                                                                                                                                                             <%if(d2 != undefined){%>
 
-                                                                                                                                                                                                <li class="cloginbtn" id="d2">
+                                                                                                                                                                                                <li class="cloginbtn displayNone" id="d2">
                                                                                                                                                                                                     <%if(typeof(d2.start) == 'string'){%>
                                                                                                                                                                                                         <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
                                                                                                                                                                                                             <span><%=d2.start.toUpperCase()%></span> -
@@ -634,7 +629,7 @@ Not Available
                                                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                 <%var color = parseInt(d2.booked);%>
-                                                                                                                                                                                                                    <%for(var j= 1;j<=d2.available;j++){%>
+                                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                                         <%if(j<=color){%>
                                                                                                                                                                                                                             <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;cursor:no-drop">
@@ -642,7 +637,7 @@ Not Available
                                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d2.id%>" data-date="<%=date2%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d2.id%>" data-date="<%=date2%>" data-booked="<%=d2.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
                                                                                                                                                                                                                                     id="checkme">
                                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                                 </a>
@@ -660,7 +655,7 @@ Not Available
                                                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                         <%var color = parseInt(d2.booked[i]);%>
-                                                                                                                                                                                                                            <%for(var j= 1;j<=d2.available[i];j++){%>
+                                                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -669,7 +664,7 @@ Not Available
                                                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-date="<%=date2%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-date="<%=date2%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
                                                                                                                                                                                                                                             id="checkme">
                                                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                                                         </a>
@@ -688,7 +683,7 @@ Not Available
                                                                                                                                                                                                     </li>
                                                                                                                                                                                                     <%}%>
                                                                                                                                                                                                         <%if(d3 != undefined){%>
-                                                                                                                                                                                                            <li class="cloginbtn" id="d3">
+                                                                                                                                                                                                            <li class="cloginbtn displayNone" id="d3">
 
                                                                                                                                                                                                                 <%if(typeof(d3.start) == 'string'){%>
                                                                                                                                                                                                                     <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
@@ -697,7 +692,7 @@ Not Available
                                                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                             <%var color = parseInt(d3.booked);%>
-                                                                                                                                                                                                                                <%for(var j= 1;j<=d3.available;j++){%>
+                                                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -706,8 +701,8 @@ Not Available
                                                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=d3.available%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
-                                                                                                                                                                                                                                                id="">
+                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                                                id="checkme">
                                                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                             <%}%>
@@ -723,7 +718,7 @@ Not Available
                                                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                                     <%var color = parseInt(d3.booked[i]);%>
-                                                                                                                                                                                                                                        <%for(var j= 1;j<=d3.available[i];j++){%>
+                                                                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -732,8 +727,8 @@ Not Available
                                                                                                                                                                                                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=d3.available%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
-                                                                                                                                                                                                                                                        id="">
+                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                                                        id="checkme">
                                                                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                     <%}%>
@@ -763,7 +758,7 @@ Not Available
                                                                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                                         <%var color = parseInt(d4.booked);%>
-                                                                                                                                                                                                                                            <%for(var j= 1;j<=d4.available;j++){%>
+                                                                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -772,7 +767,7 @@ Not Available
                                                                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                                         <%}%>
@@ -788,7 +783,7 @@ Not Available
                                                                                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                                 <%var color = parseInt(d4.booked[i]);%>
-                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d4.available[i];j++){%>
+                                                                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                         <%if(j<=color){%>
@@ -797,7 +792,7 @@ Not Available
                                                                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                                 <%}%>
@@ -824,7 +819,7 @@ Not Available
                                                                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                                                     <%var color = parseInt(d5.booked);%>
-                                                                                                                                                                                                                                                        <%for(var j= 1;j<=d5.available;j++){%>
+                                                                                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -833,7 +828,7 @@ Not Available
                                                                                                                                                                                                                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                                     <%}%>
@@ -851,7 +846,7 @@ Not Available
                                                                                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                                                             <%var color = parseInt(d5.booked[i]);%>
-                                                                                                                                                                                                                                                                <%for(var j= 1;j<=d5.available[i];j++){%>
+                                                                                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -860,7 +855,7 @@ Not Available
                                                                                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                                                             <%}%>
@@ -889,7 +884,7 @@ Not Available
                                                                                                                                                                                                                                                         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                                                 <%var color = parseInt(d6.booked);%>
-                                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d6.available;j++){%>
+                                                                                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
 
@@ -899,7 +894,7 @@ Not Available
                                                                                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                                                 <%}%>
@@ -917,7 +912,7 @@ Not Available
                                                                                                                                                                                                                                                                 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                                                                         <%var color = parseInt(d6.booked[i]);%>
-                                                                                                                                                                                                                                                                            <%for(var j= 1;j<=d6.available[i];j++){%>
+                                                                                                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -926,7 +921,7 @@ Not Available
                                                                                                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                                                                         <%}%>
@@ -956,7 +951,7 @@ Not Available
                                                                                                                                                                                                                                                                     <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                                                                             <%var color = parseInt(d7.booked);%>
-                                                                                                                                                                                                                                                                                <%for(var j= 1;j<=d7.available;j++){%>
+                                                                                                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -965,7 +960,7 @@ Not Available
                                                                                                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                                                                             <%}%>
@@ -985,7 +980,7 @@ Not Available
                                                                                                                                                                                                                                                                             <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                                                                                     <%var color = parseInt(d7.booked[i]);%>
-                                                                                                                                                                                                                                                                                        <%for(var j= 1;j<=d7.available[i];j++){%>
+                                                                                                                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -994,7 +989,7 @@ Not Available
                                                                                                                                                                                                                                                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                                                                     <%}%>
@@ -1016,7 +1011,7 @@ Not Available
                                                                     </ul>
                                                                     <ul class="clearfix" id="sm">
                                                                         <%var d1,d2,d3,d4,d5,d6,d7,count;%>
-                                                                            <%for(time of staff.old_schedule_time){%>
+                                                                            <%for(time of doctor.old_schedule_time){%>
 
                                                                                 <%var i = time.day.toUpperCase();%>
 
@@ -1045,11 +1040,7 @@ Not Available
                                                                                                                                                 <%var z=0;%>
                                                                                                                                                     <%if(d1 != undefined){%>
                                                                                                                                                         <li class="cloginbtn" id="smd1">
-                                                                                                                                                            <%var booked = d1.booked;%>
-                                                                                                                                                                <%var available = d1.available;%>
-                                                                                                                                                                    <%var id = d1._id%>
-                                                                                                                                                                        <%var doctor = d1%>
-
+                                                                                                                                                          
                                                                                                                                                                             <%if(typeof(d1.start) == 'string'){%>
                                                                                                                                                                                 <a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
                                                                                                                                                                                     <span><%=d1.start.toUpperCase()%></span> - <span><%=d1.end.toUpperCase()%></span>
@@ -1057,7 +1048,7 @@ Not Available
                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction:row;flex-wrap: wrap;">
                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                         <%var color = parseInt(d1.booked);%>
-                                                                                                                                                                                            <%for(var j= 1;j<=d1.available;j++){%>
+                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                 <%if(j<=color){%>
                                                                                                                                                                                                     <a class="timing tbcolor" data-id="<%=d1.id%>" data-date="<=date1%>" data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
@@ -1065,7 +1056,7 @@ Not Available
                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                     </a>
                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d1.id%>" data-date="<%=date1%>" data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d1.id%>" data-date="<%=date1%>" data-booked="<%=d1.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;"
                                                                                                                                                                                                             id="checkme">
                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                         </a>
@@ -1084,7 +1075,7 @@ Not Available
                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                 <%var color = parseInt(d1.booked[i]);%>
 
-                                                                                                                                                                                                    <%for(var j= 1;j<=d1.available[i];j++){%>
+                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                         <%if(j<=color){%>
@@ -1093,7 +1084,7 @@ Not Available
                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                             </a>
                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d1.id%>" data-date="<%=date1%>" data-booked="<%=d1.booked%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;"
+                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d1.id%>" data-date="<%=date1%>" data-booked="<%=d1.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;"
                                                                                                                                                                                                                     id="checkme">
                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                 </a>
@@ -1124,7 +1115,7 @@ Not Available
                                                                                                                                                                             <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                     <%var color = parseInt(d2.booked);%>
-                                                                                                                                                                                        <%for(var j= 1;j<=d2.available;j++){%>
+                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                             <%if(j<=color){%>
@@ -1133,7 +1124,7 @@ Not Available
                                                                                                                                                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                 </a>
                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px !important;" id="checkme">
+                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px !important;" id="checkme">
                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                     </a>
 
@@ -1151,7 +1142,7 @@ Not Available
                                                                                                                                                                                     <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                             <%var color = parseInt(d2.booked[i]);%>
-                                                                                                                                                                                                <%for(var j= 1;j<=d2.available[i];j++){%>
+                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                     <%if(j<=color){%>
                                                                                                                                                                                                         <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
@@ -1159,7 +1150,7 @@ Not Available
                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                         </a>
                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
+                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                             </a>
 
@@ -1187,7 +1178,7 @@ Not Available
                                                                                                                                                                                         <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                 <%var color = parseInt(d3.booked);%>
-                                                                                                                                                                                                    <%for(var j= 1;j<=d3.available;j++){%>
+                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                         <%if(j<=color){%>
                                                                                                                                                                                                             <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
@@ -1195,7 +1186,7 @@ Not Available
                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                             </a>
                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-available="<%=d3.available%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                 <%}%>
@@ -1213,7 +1204,7 @@ Not Available
                                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                         <%var color = parseInt(d3.booked[i]);%>
-                                                                                                                                                                                                            <%for(var j= 1;j<=d3.available[i];j++){%>
+                                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                                 <%if(j<=color){%>
                                                                                                                                                                                                                     <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
@@ -1221,7 +1212,7 @@ Not Available
                                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-available="<%=d3.available%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                         <%}%>
@@ -1251,14 +1242,14 @@ Not Available
                                                                                                                                                                                                     <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                             <%var color = parseInt(d4.booked);%>
-                                                                                                                                                                                                                <%for(var j= 1;j<=d4.available;j++){%>
+                                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
                                                                                                                                                                                                                     <%if(j<=color){%>
                                                                                                                                                                                                                         <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
 
                                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                             <%}%>
@@ -1279,7 +1270,7 @@ Not Available
                                                                                                                                                                                                             <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                     <%var color = parseInt(d4.booked[i]);%>
-                                                                                                                                                                                                                        <%for(var j= 1;j<=d4.available[i];j++){%>
+                                                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                             <%if(j<=color){%>
@@ -1288,7 +1279,7 @@ Not Available
                                                                                                                                                                                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=d4.available%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                     <%}%>
@@ -1317,7 +1308,7 @@ Not Available
                                                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                         <%var color = parseInt(d5.booked);%>
-                                                                                                                                                                                                                            <%for(var j= 1;j<=d5.available;j++){%>
+                                                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                                                 <%if(j<=color){%>
                                                                                                                                                                                                                                     <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
@@ -1325,7 +1316,7 @@ Not Available
                                                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                         <%}%>
@@ -1343,7 +1334,7 @@ Not Available
                                                                                                                                                                                                                         <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                 <%var color = parseInt(d5.booked[i]);%>
-                                                                                                                                                                                                                                    <%for(var j= 1;j<=d5.available[i];j++){%>
+                                                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                         <%if(j<=color){%>
@@ -1352,7 +1343,7 @@ Not Available
                                                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=d5.available%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                 <%}%>
@@ -1380,14 +1371,14 @@ Not Available
                                                                                                                                                                                                                             <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                 <%z++%>
                                                                                                                                                                                                                                     <%var color = parseInt(d6.booked);%>
-                                                                                                                                                                                                                                        <%for(var j= 1;j<=d6.available;j++){%>
+                                                                                                                                                                                                                                        <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
                                                                                                                                                                                                                                             <%if(j<=color){%>
                                                                                                                                                                                                                                                 <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
 
                                                                                                                                                                                                                                                     <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                    <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                         <span><%=j%></span>
                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                     <%}%>
@@ -1406,7 +1397,7 @@ Not Available
                                                                                                                                                                                                                                     <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                         <%z++%>
                                                                                                                                                                                                                                             <%var color = parseInt(d6.booked[i]);%>
-                                                                                                                                                                                                                                                <%for(var j= 1;j<=d6.available[i];j++){%>
+                                                                                                                                                                                                                                                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                     <%if(j<=color){%>
@@ -1415,7 +1406,7 @@ Not Available
                                                                                                                                                                                                                                                             <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                                         <%}else{%>
-                                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=d6.available%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                            <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                 <span><%=j%></span>
                                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                                             <%}%>
@@ -1444,7 +1435,7 @@ Not Available
                                                                                                                                                                                                                                         <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                             <%z++%>
                                                                                                                                                                                                                                                 <%var color = parseInt(d7.booked);%>
-                                                                                                                                                                                                                                                    <%for(var j= 1;j<=d7.available;j++){%>
+                                                                                                                                                                                                                                                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
                                                                                                                                                                                                                                                         <%if(j<=color){%>
                                                                                                                                                                                                                                                             <a class="timing tbcolor" style="width: 40px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
@@ -1452,7 +1443,7 @@ Not Available
                                                                                                                                                                                                                                                                 <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                             </a>
                                                                                                                                                                                                                                                             <%}else{%>
-                                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                     <span><%=j%></span>
                                                                                                                                                                                                                                                                 </a>
                                                                                                                                                                                                                                                                 <%}%>
@@ -1472,7 +1463,7 @@ Not Available
                                                                                                                                                                                                                                                 <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
                                                                                                                                                                                                                                                     <%z++%>
                                                                                                                                                                                                                                                         <%var color = parseInt(d7.booked[i]);%>
-                                                                                                                                                                                                                                                            <%for(var j= 1;j<=d7.available[i];j++){%>
+                                                                                                                                                                                                                                                            <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                                                                                                                                                                                                                                                                 <%if(j<=color){%>
@@ -1481,7 +1472,7 @@ Not Available
                                                                                                                                                                                                                                                                         <span style="font-size: 0.5rem;">Booked</span>
                                                                                                                                                                                                                                                                     </a>
                                                                                                                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=d7.available%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="">
+                                                                                                                                                                                                                                                                        <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 40px; height:40px;margin-left: 5px;" id="checkme">
                                                                                                                                                                                                                                                                             <span><%=j%></span>
                                                                                                                                                                                                                                                                         </a>
                                                                                                                                                                                                                                                                         <%}%>
@@ -1558,7 +1549,7 @@ today=date;%>
                                                                         <ul class="clearfix" style="display: flex;" id="md">
                                                                             <%var d1,d2,d3,d4,d5,d6,d7,count,t1,t2,t3,t4,t5,t6,t7;%>
                                                                                 <%var x = 0%>
-                                                                                    <%for(time of staff.old_schedule_time_fixed){%>
+                                                                                    <%for(time of doctor.old_schedule_time_fixed){%>
     
                                                                                         <%var i = time.day.toUpperCase();%>
     
@@ -1644,7 +1635,8 @@ today=date;%>
 <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
 <%z++%>
 <%var color = parseInt(d1.booked);%>
-<%for(var j= 1;j<=d1.available;j++){%>
+<%console.log('booking',+d1.booked)%>
+<%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
 <%if(j<=color){%>
@@ -1653,7 +1645,7 @@ today=date;%>
 <span style="font-size: 0.6rem;display:block;">Booked</span>
 </a>
 <%}else{%>
-<a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=d1.available%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+<a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
 id="checkme">
 <span><%=j%></span>
 </a>
@@ -1665,14 +1657,14 @@ id="checkme">
 
 
 </li>
-<li class="cloginbtn" id="d2">
+<li class="cloginbtn displayNone" id="d2">
     <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
             <span>Show Seats</span>
         </a>
         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
             <%z++%>
                 <%var color = parseInt(d2.booked);%>
-                    <%for(var j= 1;j<=d2.available;j++){%>
+                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                         <%if(j<=color){%>
@@ -1681,7 +1673,7 @@ id="checkme">
                                 <span style="font-size: 0.6rem;display:block;">Booked</span>
                             </a>
                             <%}else{%>
-                                <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-date="<%=date2%>" data-available="<%=d2.available%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-date="<%=date2%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
                                     id="checkme">
                                     <span><%=j%></span>
                                 </a>
@@ -1693,14 +1685,14 @@ id="checkme">
         
 
 </li>
-<li class="cloginbtn" id="d3">
+<li class="cloginbtn displayNone" id="d3">
     <a class="timing tbcolor" onclick="showSeats('<%=z%>')">
             <span>Show Seats</span>
         </a>
         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
             <%z++%>
                 <%var color = parseInt(d3.booked);%>
-                    <%for(var j= 1;j<=d3.available;j++){%>
+                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                         <%if(j<=color){%>
@@ -1709,7 +1701,7 @@ id="checkme">
                                 <span style="font-size: 0.6rem;display:block;">Booked</span>
                             </a>
                             <%}else{%>
-                                <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=d3.available%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
                                    >
                                     <span><%=j%></span>
                                 </a>
@@ -1728,7 +1720,7 @@ id="checkme">
         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
             <%z++%>
                 <%var color = parseInt(d4.booked);%>
-                    <%for(var j= 1;j<=d4.available;j++){%>
+                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                         <%if(j<=color){%>
@@ -1737,7 +1729,7 @@ id="checkme">
                                 <span style="font-size: 0.6rem;display:block;">Booked</span>
                             </a>
                             <%}else{%>
-                                <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-date="<%=date4%>" data-available="<%=d4.available%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-date="<%=date4%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
                                   >
                                     <span><%=j%></span>
                                 </a>
@@ -1756,7 +1748,7 @@ id="checkme">
         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
             <%z++%>
                 <%var color = parseInt(d5.booked);%>
-                    <%for(var j= 1;j<=d5.available;j++){%>
+                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                         <%if(j<=color){%>
@@ -1765,7 +1757,7 @@ id="checkme">
                                 <span style="font-size: 0.6rem;display:block;">Booked</span>
                             </a>
                             <%}else{%>
-                                <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-date="<%=date5%>" data-available="<%=d5.available%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-date="<%=date5%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
                                    >
                                     <span><%=j%></span>
                                 </a>
@@ -1784,7 +1776,7 @@ id="checkme">
         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
             <%z++%>
                 <%var color = parseInt(d6.booked);%>
-                    <%for(var j= 1;j<=d6.available;j++){%>
+                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                         <%if(j<=color){%>
@@ -1792,8 +1784,8 @@ id="checkme">
 
                                 <span style="font-size: 0.6rem;display:block;">Booked</span>
                             </a>
-                            <%}else{%>
-                                <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-date="<%=date6%>" data-available="<%=d6.available%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                            <%}else{%> 
+                                <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-date="<%=date6%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
                                    >
                                     <span><%=j%></span>
                                 </a>
@@ -1812,7 +1804,7 @@ id="checkme">
         <div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
             <%z++%>
                 <%var color = parseInt(d7.booked);%>
-                    <%for(var j= 1;j<=d7.available;j++){%>
+                    <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
 
 
                         <%if(j<=color){%>
@@ -1821,7 +1813,7 @@ id="checkme">
                                 <span style="font-size: 0.6rem;display:block;">Booked</span>
                             </a>
                             <%}else{%>
-                                <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-date="<%=date7%>" data-available="<%=d7.available%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-date="<%=date7%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
                               >
                                     <span><%=j%></span>
                                 </a>
@@ -1833,12 +1825,300 @@ id="checkme">
         
 
 </li>
-
+                                                                        </ul>
                                                                                                                                                                                         
-                                                                <%}%>
+                                                              
                                                                 <!-- /Time Slot -->
 
+                                                                    <ul class="clearfix"  id="sm">
+                                                                        <%var d1,d2,d3,d4,d5,d6,d7,count,t1,t2,t3,t4,t5,t6,t7;%>
+                                                                            <%var x = 0%>
+                                                                                <%for(time of doctor.old_schedule_time_fixed){%>
+
+                                                                                    <%var i = time.day.toUpperCase();%>
+
+                                                                                        <%if(n1 == i){%>
+                                                                                            <%d1=time;t1=x++;
+}%>
+
+                                                                                                <%if(n2 == i){%>
+                                                                                                    <%d2=time;t2=x++;}%>
+
+                                                                                                        <%if(n3 == i){%>
+                                                                                                            <%d3=time;t3=x++;}%>
+
+                                                                                                                <%if(n4 == i){%>
+                                                                                                                    <%d4=time;t4=x++;}%>
+
+                                                                                                                        <%if(n5 == i){%>
+                                                                                                                            <%d5=time;t5=x++;}%>
+
+                                                                                                                                <%if(n6 == i){%>
+                                                                                                                                    <%d6=time;t6=x++;}%>
+                                                                                                                                        <%if(n7 == i){%>
+                                                                                                                                            <%d7=time;t7=x++;}%>
+                                                                                                                                                <%}%>
+
+                                                                                                                                                    <%var date1,date2,date3,date4,date5,date6,date7;%>
+                                                                                                                                                        <%var today = new Date();%>
+                                                                                                                                                            <%for(var i=1;i<=7;i++){%>
+                                                                                                                                                                <%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+if(i==1)
+{
+    date1 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==2)
+{
+    date2 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==3)
+{
+    date3 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==4)
+{
+    date4 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==5)
+{
+    date5 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==6)
+{
+    date6 = dd+'-'+mm+'-'+yyyy;
+}
+if(i==7)
+{
+    date7 = dd+'-'+mm+'-'+yyyy;
+}
+
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+                                                                                                                                                                    <%}%>
+                                                                                                                                                                        <%console.log(date1,date2,date3)%>
+
+
+                                                                                                                                                                            <%var z=0;%>
+                                                                                                                                                                               
+<li class="cloginbtn" id="smd1">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span>Show Seats</span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+<%z++%>
+<%var color = parseInt(d1.booked);%>
+<%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+<%if(j<=color){%>
+<a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+<span style="font-size: 0.6rem;display:block;">Booked</span>
+</a>
+<%}else{%>
+<a class="timing tbcolor" data-id="<%=d1.id%>" data-booked="<%=d1.booked%>" data-date="<%=date1%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+id="checkme">
+<span><%=j%></span>
+</a>
+<%}%>
+
+
+<%}%>
+</div>
+
+
+</li>
+<li class="cloginbtn displayNone" id="smd2">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+        <span>Show Seats</span>
+    </a>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+            <%var color = parseInt(d2.booked);%>
+                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+                    <%if(j<=color){%>
+                        <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                            <span style="font-size: 0.6rem;display:block;">Booked</span>
+                        </a>
+                        <%}else{%>
+                            <a class="timing tbcolor" data-id="<%=d2.id%>" data-booked="<%=d2.booked%>" data-date="<%=date2%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;"
+                                id="checkme">
+                                <span><%=j%></span>
+                            </a>
+                            <%}%>
+
+
+                                <%}%>
+    </div>
+    
+
+</li>
+<li class="cloginbtn displayNone" id="smd3">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+        <span>Show Seats</span>
+    </a>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+            <%var color = parseInt(d3.booked);%>
+                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+                    <%if(j<=color){%>
+                        <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                            <span style="font-size: 0.6rem;display:block;">Booked</span>
+                        </a>
+                        <%}else{%>
+                            <a class="timing tbcolor" data-id="<%=d3.id%>" data-booked="<%=d3.booked%>" data-date="<%=date3%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
+                               >
+                                <span><%=j%></span>
+                            </a>
+                            <%}%>
+
+
+                                <%}%>
+    </div>
+    
+
+</li>
+<li class="cloginbtn displayNone" id="smd4">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+        <span>Show Seats</span>
+    </a>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+            <%var color = parseInt(d4.booked);%>
+                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+                    <%if(j<=color){%>
+                        <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                            <span style="font-size: 0.6rem;display:block;">Booked</span>
+                        </a>
+                        <%}else{%>
+                            <a class="timing tbcolor" data-id="<%=d4.id%>" data-booked="<%=d4.booked%>" data-date="<%=date4%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
+                              >
+                                <span><%=j%></span>
+                            </a>
+                            <%}%>
+
+
+                                <%}%>
+    </div>
+    
+
+</li>
+<li class="cloginbtn displayNone" id="smd5">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+        <span>Show Seats</span>
+    </a>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+            <%var color = parseInt(d5.booked);%>
+                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+                    <%if(j<=color){%>
+                        <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                            <span style="font-size: 0.6rem;display:block;">Booked</span>
+                        </a>
+                        <%}else{%>
+                            <a class="timing tbcolor" data-id="<%=d5.id%>" data-booked="<%=d5.booked%>" data-date="<%=date5%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
+                               >
+                                <span><%=j%></span>
+                            </a>
+                            <%}%>
+
+
+                                <%}%>
+    </div>
+    
+
+</li>
+<li class="cloginbtn displayNone" id="smd6">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+        <span>Show Seats</span>
+    </a>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+            <%var color = parseInt(d6.booked);%>
+                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+                    <%if(j<=color){%>
+                        <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                            <span style="font-size: 0.6rem;display:block;">Booked</span>
+                        </a>
+                        <%}else{%> 
+                            <a class="timing tbcolor" data-id="<%=d6.id%>" data-booked="<%=d6.booked%>" data-date="<%=date6%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
+                               >
+                                <span><%=j%></span>
+                            </a>
+                            <%}%>
+
+
+                                <%}%>
+    </div>
+    
+
+</li>
+<li class="cloginbtn displayNone" id="smd7">
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+        <span>Show Seats</span>
+    </a>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+            <%var color = parseInt(d7.booked);%>
+                <%for(var j= 1;j<=doctor.oldp.pcount;j++){%>
+
+
+                    <%if(j<=color){%>
+                        <a class="timing tbcolorn tcolors" style="width: 50px; color: white !important; background-color: #478e8e !important; height:40px;margin-left: 5px;">
+
+                            <span style="font-size: 0.6rem;display:block;">Booked</span>
+                        </a>
+                        <%}else{%>
+                            <a class="timing tbcolor" data-id="<%=d7.id%>" data-booked="<%=d7.booked%>" data-date="<%=date7%>" data-available="<%=doctor.oldp.pcount%>" data-slot-index="<%=i%>" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 50px; height:40px;margin-left: 5px;" id="checkme"
+                          >
+                                <span><%=j%></span>
+                            </a>
+                            <%}%>
+
+
+                                <%}%>
+    </div>
+    
+
+</li>
+
+                                                                    </ul>                                                                                                                                                                                   
+                                                          
+                                                            <!-- /Time Slot -->
+                                                            
+
+                                                       
+                                                                
+
                                                             </div>
+                                                            <%}%>
 
                                                         </div>
                                                     </div>
@@ -1849,7 +2129,7 @@ id="checkme">
 
                             <!-- Submit Section -->
                             <div class="submit-section proceed-btn text-right">
-                                <button type="submit" id="submit_btn" class="btn btn-primary submit-btn tcolor" disabled>Proceed to Pay</button>
+                                <button type="submit" id="submit_btn" class="btn btn-primary submit-btn tcolor" disabled>Proceed to Checkout</button>
 
 
                             </div>

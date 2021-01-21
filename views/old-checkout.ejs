@@ -117,6 +117,19 @@
                                                             <%}%>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-size: 0.8rem;margin-left:5px;">Gender</label>
+                                                    <select name="gender" class="form-control select">
+                                                        <%if(locals.user.gender == 'Male '){%><option selected>Male</option><%}else{%>
+                                                        <option>Male</option><%}%>
+                                                        <%if(locals.user.gender == 'Female '){%><option selected>Female</option><%}else{%>
+                                                        <option>Female</option><%}%>
+                                                        <%if(locals.user.gender == 'Others '){%><option selected>Others</option><%}else{%>
+                                                        <option>Others</option><%}%>
+                                                        </select>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label>Age</label>
@@ -129,7 +142,7 @@
                                                 </div>
                                             </div>
                                             <div class="submit-section mt-4">
-                                                <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Proceed to checkout</button>
+                                                <button type="submit" class="btn btn-primary submit-btn" style="margin-left: 10px !important;">Confirm & Submit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -150,36 +163,49 @@
 
                                                 <div class="form-group card-label">
                                                     <label>Patients Full Name</label>
-                                                    <input class="form-control" type="text" name="pname" value="<%=locals.user.others[n].name%>" placeholder="Enter patient name" required readonly>
+                                                    <input class="form-control" type="text" name="name" value="<%=locals.user.others[n].name%>" placeholder="Enter patient name" required readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label>Patient Email (optional) </label>
-                                                    <input class="form-control" type="email" name="pemail" value="<%=locals.user.others[n].email%>" placeholder="Enter patient email" readonly>
+                                                    <input class="form-control" type="email" name="email" value="<%=locals.user.others[n].email%>" placeholder="Enter patient email" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Phone</label>
-                                                    <input class="form-control" type="text" name="pphone" value="<%=locals.user.others[n].phone%>" placeholder="Enter patient phone" required readonly>
+                                                    <input class="form-control" type="text" name="phone" value="<%=locals.user.others[n].phone%>" placeholder="Enter patient phone" required readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Address</label>
-                                                    <input class="form-control" type="text" name="paddress" value="<%=locals.user.others[n].address%>" placeholder="Enter patient address" required readonly >
+                                                    <input class="form-control" type="text" name="address" value="<%=locals.user.others[n].address%>" placeholder="Enter patient address" required readonly >
+                                                </div>
+                                            </div>
+                                             <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-size: 0.8rem;margin-left:5px;">Gender</label>
+                                                    <select name="gender" class="form-control select">
+                                                        <%if(locals.user.others[n].gender == 'Male '){%><option selected>Male</option><%}else{%>
+                                                        <option>Male</option><%}%>
+                                                        <%if(locals.user.others[n].gender == 'Female '){%><option selected>Female</option><%}else{%>
+                                                        <option>Female</option><%}%>
+                                                        <%if(locals.user.others[n].gender == 'Others '){%><option selected>Others</option><%}else{%>
+                                                        <option>Others</option><%}%>
+                                                        </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Age</label>
-                                                    <input class="form-control" type="text" name="page" value="<%=locals.user.others[n].age%>" placeholder="Enter patient age" required readonly>
+                                                    <input class="form-control" type="text" name="age" value="<%=locals.user.others[n].age%>" placeholder="Enter patient age" required readonly>
                                                 </div>
                                             </div>
 
                                             <div class="submit-section mt-4" style="margin-left: 10px !important;">
-                                                <button type="submit" class="btn btn-primary submit-btn ml-4">Procced to checkout</button>
+                                                <button type="submit" class="btn btn-primary submit-btn ml-4">Confirm & Submit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -268,23 +294,17 @@
                                     <div class="booking-item-wrap">
                                         <ul class="booking-date">
                                             <li>Date <span><%=date%></span></li>
-                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
-                                                <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
 
-                                                <%}else{%>
-                                                    <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
-                                                    <%}%>
-                                                        <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
                                         </ul>
                                         <ul class="booking-fee">
-                                            <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
+                                            <li>Booking Fee :<span>No Fee</span></li>
                                             <!-- <li>G.S.T <span>Rs 10</span></li> -->
                                         </ul>
                                         <div class="booking-total">
                                             <ul class="booking-total-list">
                                                 <li>
                                                     <span>Total</span>
-                                                    <span class="total-cost">Rs <%=doctor.booking_fee%></span>
+                                                    <span class="total-cost">Free (Old Patient)</span>
                                                 </li>
                                             </ul>
                                         </div>

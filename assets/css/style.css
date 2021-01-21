@@ -6754,7 +6754,8 @@ html.menu-opened body {
   .call-wrapper {
     height: calc(100vh - 140px); }
   .sidebar-overlay.opened {
-    display: block; }
+    display: block;
+    z-index: 1000; }
   .about-content {
     margin-bottom: 30px; } }
 

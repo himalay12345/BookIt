@@ -25,6 +25,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), userController.popup);
 router.post('/add-more-seats',passport.checkStaffAuthentication,userController.addMoreSeat);
+router.post('/old-add-more-seats',passport.checkStaffAuthentication,userController.oldAddMoreSeat);
 router.post('/profile/update', userController.profileUpdate);
 router.post('/update-type', userController.updateType);
 router.post('/update-profile',userController.updateProfile);
@@ -70,6 +71,7 @@ router.post('/offline-pay',userController.offlinePay);
 router.post('/old-offline-pay',userController.oldOfflinePay);
 router.post('/offline-cancel',userController.offlineCancel);
 router.post('/sort-by-date',userController.sortByDate);
+router.post('/old-sort-by-date',userController.oldSortByDate);
 router.post('/doctor-sort-by-date',userController.doctorSortByDate);
 router.get('/add-favourite',passport.checkAuthentication, userController.addFavourite);
 router.post('/upload-id', userController.uploadId);

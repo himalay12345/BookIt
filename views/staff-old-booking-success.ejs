@@ -53,18 +53,23 @@
                                 <div class="success-cont">
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
-                                    <%if(typeof(locals.user.old_schedule_time[dayindex].start) == 'string'){%>
-                                        <p>Appointment booked with <strong>Dr. <%=doctor.name%></strong><br> on <strong><%=date%> at <%=locals.user.old_schedule_time[dayindex].start.toUpperCase()%> </strong></p>
-
-                                        <%}else{%>
-                                            <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> at <%=locals.user.old_schedule_time[dayindex].start[slotindex].toUpperCase()%> </strong></p>
-                                            <%}%>
-                                                <p>Your Booking Number alloted is
+                                  
+                                            <p>Appointment booked with <strong>Dr.<%=doctor.name%></strong><br> on <strong><%=date%> as a old patient. </strong></p>
+                                           
+                                                <p>Your Appointment number  is
                                                     <%=seat%>
                                                 </p>
                                                 <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.Show the message at the clinic's front-desk.</p>
-                                                <a href="/staff-old-booking/?id=<%=locals.user.doctorid%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
-                                                <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
+                                                <%if(locals.user.type == 'Staff'){%>
+                                                    <a href="/staff-old-booking/?id=<%=doctor._id%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                                <%}else{%>
+                                                <a href="/my-appointments" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                                <%}%>
+                                                <%if(locals.user.type == 'Staff'){%>
+                                                <a href="/staff-dashboard/?id=<%=doctor._id%>" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
+                                                <%}else{%>
+                                                    <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
+                                                    <%}%>
                                 </div>
                             </div>
                         </div>

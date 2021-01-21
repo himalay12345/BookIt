@@ -510,7 +510,7 @@
                                                                         padding-left: 17px;
                                                                         border-radius: 12px;
                                                                         background-color: #eeeeee82;">
-                                                                        <a href="doctor-profile/?id=<%=doctor._id%>" style="color:#478e8e;
+                                                                        <a href="/doctor-profile/?id=<%=doctor._id%>" style="color:#478e8e;
                                                                     font-weight: 700;
                                                                     font-size: 0.8125rem;
                                                                    text-align: center;
@@ -546,7 +546,7 @@
                                             <div class="doctor-widget pb-4 mb-2 pt-2 lscreen" style="border-bottom: 1px solid lightgrey;">
                                                 <div class="doc-info-left">
                                                     <div class="doctor-img">
-                                                        <a href="doctor-profile/?id=<%=doctor._id%>">
+                                                        <a href="/doctor-profile/?id=<%=doctor._id%>">
                                                 <img src="<%=doctor.avatar%>" class="img-fluid"  style="width: 100%;height: 100%;" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
                                             </a>
                                                     </div>
@@ -554,7 +554,7 @@
                                                         <div id="depinline" style="display: inline-flex;">
                                                             <div style="margin-right: 40px;">
                                                                 <h4 class="doc-name">
-                                                                    <a href="doctor-profile/?id=<%=doctor._id%>">
+                                                                    <a href="/doctor-profile/?id=<%=doctor._id%>">
                                                                         <%=doctor.name%>
                                                                     </a>
                                                                 </h4>
@@ -715,7 +715,7 @@
                                                                                         <i class="far fa-bookmark"></i>
                                                                                     </a>
                                                                                     <%}%>
-                                                                                        <a class="view-pro-btn" href="doctor-profile/?id=<%=doctor._id%>" style="width:78%;">View Profile</a>
+                                                                                        <a class="view-pro-btn" href="/doctor-profile/?id=<%=doctor._id%>" style="width:78%;">View Profile</a>
                                                                                         <!-- <a href="/chat" class="btn btn-white msg-btn">
                                                                                     <i class="far fa-comment-alt"></i>
                                                                                 </a>

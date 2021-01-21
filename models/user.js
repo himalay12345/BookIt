@@ -239,6 +239,9 @@ const userSchema = mongoose.Schema({
     age:{
         type:String
     },
+    gender:{
+        type:String
+    },
     address:{
         type:String
     }
@@ -246,6 +249,9 @@ const userSchema = mongoose.Schema({
    }],
     doctors:[{
         payment_id:{
+            type:String
+        },
+        seat:{
             type:String
         },
         did:{
@@ -302,10 +308,19 @@ const userSchema = mongoose.Schema({
         email:{
             type:String
         },
+        age:{
+            type:String
+        },
+        gender:{
+            type:String
+        },
         cancel:{
             type:Boolean
         },
         phone:{
+            type:String
+        },
+        address:{
             type:String
         },
         createdAt: { type: Date, default: Date.now }
@@ -313,6 +328,9 @@ const userSchema = mongoose.Schema({
 
     patients:[{
         payment_id:{
+            type:String
+        },
+        seat:{
             type:String
         },
         
@@ -336,6 +354,9 @@ const userSchema = mongoose.Schema({
             type:String
         },
         bloodgroup:{
+            type:String
+        },
+        age:{
             type:String
         },
         gender:{
@@ -367,6 +388,9 @@ const userSchema = mongoose.Schema({
         },
        
         phone:{
+            type:String
+        },  
+        address:{
             type:String
         },
         createdAt: { type: Date, default: Date.now }
@@ -549,6 +573,9 @@ const userSchema = mongoose.Schema({
     },
     biodata: {
         type: String
+    },
+    old_flag:{
+        type: Boolean
     },
     clinicphoto: [{
         type: String

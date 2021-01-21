@@ -54,6 +54,7 @@ router.get('/fees', passport.checkDoctorAuthentication, homeController.fees);
 router.get('/forgot-password', homeController.forgotPassword);
 router.get('/index-2', homeController.home);
 router.get('/invoice-view', passport.checkAuthentication, homeController.invoiceView);
+router.get('/invoice-user-view', passport.checkAuthentication, homeController.invoiceUserView);
 router.get('/invoices', passport.checkDoctorAuthentication, homeController.invoices);
 router.get('/id-proof', passport.checkDoctorAuthentication, homeController.idProof);
 router.get('/login', homeController.login);

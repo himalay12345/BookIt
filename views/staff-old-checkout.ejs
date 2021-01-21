@@ -70,7 +70,11 @@
                                         <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about the Patient</h5>
                                         <form action="/user/old-offline-pay" method="POST" style="width: 100%;">
                                             <%var day,time,fee%>
-                                                <% day = locals.user.old_schedule_time[dayindex].day%>
+                                            <%if(doctor.oldp.flag){%>
+                                                <% day = doctor.old_schedule_time[dayindex].day%>
+                                            <%}else{%>
+                                                <% day = doctor.old_schedule_time_fixed[dayindex].day%>
+                                                <%}%>
                                                     <% fee = doctor.booking_fee%>
                                                         <%var today = new Date();%>
                                                             <%var dd = String(today.getDate()).padStart(2, '0');
@@ -78,14 +82,19 @@
                                                     var yyyy = today.getFullYear();
                                                     var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                                                     var dayOfWeek = weekday[today.getDay()];%>
-                                                                <%if(typeof(locals.user.old_schedule_time[dayindex].start) == 'string'){%>
-                                                                    <%time = locals.user.old_schedule_time[dayindex].start.toUpperCase()%>
+                                                    <%if(doctor.oldp.flag){%>
+                                                                <%if(typeof(doctor.old_schedule_time[dayindex].start) == 'string'){%>
+                                                                    <%time = doctor.old_schedule_time[dayindex].start.toUpperCase()%>
 
                                                                         <%}else{%>
-                                                                            <%time = locals.user.old_schedule_time[dayindex].start[slotindex].toUpperCase()%>
+                                                                            <%time = doctor.old_schedule_time[dayindex].start[slotindex].toUpperCase()%>
                                                                                 <%}%>
+                                                                                <%}else{%>
+                                                                                   <%time = 'Today'%>
+                                                                                    <%}%>
 
-                                                                                    <%if(locals.user.oldp.flag){%>
+
+                                                                                    <%if(doctor.oldp.flag){%>
                                                                                         <input type="hidden" name="fixed" value="true">
                                                                                         <%}else{%>
                                                                                             <input type="hidden" name="fixed" value="false">
@@ -219,6 +228,7 @@
                                             <div class="booking-item-wrap">
                                                 <ul class="booking-date">
                                                     <li>Date <span><%=date%></span></li>
+                                                    <%if(doctor.oldp.flag){%>
                                                     <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
                                                         <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
 
@@ -226,16 +236,17 @@
                                                             <li>Time <span><%=doctor.schedule_time[dayindex].start[0].toUpperCase()%></span></li>
                                                             <%}%>
                                                                 <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
+                                                                    <%}%>
                                                 </ul>
                                                 <ul class="booking-fee">
-                                                    <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
+                                                    <li>Booking Fee <span>Free</span></li>
                                                     <!-- <li>G.S.T <span>Rs 10</span></li> -->
                                                 </ul>
                                                 <div class="booking-total">
                                                     <ul class="booking-total-list">
                                                         <li>
                                                             <span>Total</span>
-                                                            <span class="total-cost">Rs <%=doctor.booking_fee%></span>
+                                                            <span class="total-cost">Free</span>
                                                         </li>
                                                     </ul>
                                                 </div>

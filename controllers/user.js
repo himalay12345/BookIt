@@ -31,14 +31,29 @@ module.exports.create = async(req, res) => {
     let user = await User.create({
         name: req.body.name,
         phone: req.body.phone,
+        email:req.body.email,
         password: req.body.password,
         avatar: davatar,
         service: 'phone',
         type: req.body.type
     });
+    const rand = Math.floor((Math.random() * 100) + 54);
+            
+            if (req.body.email) {
+                
+                    console.log('sent');
+                    user.emailkey = rand;
+                    emailVerification.newAlert(user, rand, req.body.email);
+                    user.email = req.body.email;
+                    user.emailverify = false;
+                    user.save();
+            }
+                
+                   
 
     req.flash('success', 'Account created successfully.Please Login!');
     return res.redirect('/login');
+
 }
 
 module.exports.createStaff = async(req, res) => {
@@ -807,6 +822,51 @@ module.exports.addMoreSeat = async(req, res) => {
     
 }
 
+
+module.exports.oldAddMoreSeat = async(req, res) => {
+    let user = await User.findById(
+        req.body.did);
+ 
+  var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    let i = 0;
+    let index;
+    let sid;
+    console.log(req.body)
+    
+    if(parseInt(req.body.more)>0)
+    {
+
+        var a = parseInt(user.oldp.pcount);
+        a = a + parseInt(req.body.more);
+        
+
+        user.oldp.pcount = a;
+        console.log(a,user.oldp.pcount)
+
+        user.save()
+        console.log(a,user.oldp.pcount)
+
+    return res.redirect('back');
+    }
+
+    else{
+        req.flash('error','Please enter the value greater than 0 ')
+        return res.redirect('back');
+    }
+
+    
+
+
+
+   
+    
+}
+
 module.exports.createSession = async function(req, res) {
 
     console.log(req.body);
@@ -953,10 +1013,19 @@ module.exports.updateType = async function(req, res) {
 module.exports.staffSetOldPatient = async function(req, res) {
     console.log(req.body);
     let user = await User.findById(req.user.id);
-    user.oldp = req.body;
+    let doctor = await User.findById(req.query.id);
+    doctor.oldp = req.body;
+    doctor.old_flag = true;
+    if(user.doctorids.length == 0 && user.old_flag != true){
+    user.old_flag = true;
+    user.save()
+    }
     if(req.body.flag == 'false')
     {
-    user.old_schedule_time_fixed.push({
+        if(doctor.old_schedule_time_fixed.length == 0)
+        {
+
+        doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Monday',
         available:req.body.pcount,
@@ -964,7 +1033,7 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    user.old_schedule_time_fixed.push({
+    doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Tuesday',
         available:req.body.pcount,
@@ -972,7 +1041,7 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    user.old_schedule_time_fixed.push({
+    doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Wednesday',
         available:req.body.pcount,
@@ -980,7 +1049,7 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    user.old_schedule_time_fixed.push({
+    doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Thursday',
         available:req.body.pcount,
@@ -988,7 +1057,7 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    user.old_schedule_time_fixed.push({
+    doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Friday',
         available:req.body.pcount,
@@ -996,7 +1065,7 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    user.old_schedule_time_fixed.push({
+    doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Saturday',
         available:req.body.pcount,
@@ -1004,7 +1073,7 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    user.old_schedule_time_fixed.push({
+    doctor.old_schedule_time_fixed.push({
         max_count:req.body.pcount,
         day:'Sunday',
         available:req.body.pcount,
@@ -1012,8 +1081,8 @@ module.exports.staffSetOldPatient = async function(req, res) {
         reset_flag:false,
         alt_flag:false
     })
-    }
-    user.save()
+    }}
+    doctor.save()
     return res.redirect('back');
 
 }
@@ -1169,6 +1238,7 @@ module.exports.confirmPay = async function(req, res) {
                 notes = {
                     patient_name: req.body.name,
                     patient_age:req.body.age,
+                    patient_gender:req.body.gender,
                     patient_phone:req.body.phone,
                     patient_address:req.body.address
                 }
@@ -1178,7 +1248,8 @@ module.exports.confirmPay = async function(req, res) {
                     patient_name: req.body.pname,
                     patient_age:req.body.page,
                     patient_phone:req.body.pphone,
-                    patient_address:req.body.paddress
+                    patient_address:req.body.paddress,
+                    patient_gender:req.body.pgender
                 }
             }
            
@@ -1215,6 +1286,7 @@ console.log(response);
             user.name = req.body.name;
             user.phone = req.body.phone;
             user.age = req.body.age;
+            user.gender = req.body.gender;
             user.contacts.address = req.body.address;
         }
 
@@ -1224,7 +1296,8 @@ console.log(response);
                 email: req.body.pemail,
                 phone: req.body.pphone,
                 address: req.body.paddress,
-                age: req.body.page
+                age: req.body.page,
+                gender:req.body.pgender
 
             });
         }
@@ -1379,7 +1452,7 @@ module.exports.refund = async function(req, res) {
                         key_secret: env.razorpay_key_secret
                         
                     });
-                    var refund_amount = req.query.fee - 50 ;
+                    var refund_amount = req.query.fee - 20 ;
 
                     const response = await razorpay1.payments.refund(req.query.id,
                         
@@ -1592,6 +1665,7 @@ module.exports.verifyPayment = async(req, res) => {
                         dob:patient.dob,
                         gender:patient.gender,
                         bloodgroup:patient.bloodgroup,
+                        address: req.query.address,
                         name: req.query.name,
                         email: req.query.email,
                         phone: req.query.phone,
@@ -1599,6 +1673,8 @@ module.exports.verifyPayment = async(req, res) => {
                         date: req.query.date,
                         day: req.query.day,
                         fee: req.query.fee,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         type: req.query.type,
                         seat: b
 
@@ -1614,11 +1690,14 @@ module.exports.verifyPayment = async(req, res) => {
                         dsid:user.staff_id,
                         name: req.query.name,
                         email: req.query.email,
+                        address: req.query.address,
                         dayindex: req.query.dayindex,
                         slotindex: req.query.slotindex,
                         phone: req.query.phone,
                         time: req.query.time,
                         date: req.query.date,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         day: req.query.day,
                         fee: req.query.fee,
                         type: req.query.type,
@@ -1632,10 +1711,11 @@ module.exports.verifyPayment = async(req, res) => {
                             name: req.query.name,
                             address: req.query.address,
                             phone: req.query.phone,
+                            gender:req.query.gender,
                             age: req.query.age,
                             cancel: false,
                             type: 'online',
-                            gender:patient.gender,
+                           
                             time: req.query.time,
                             date: req.query.date,
                             day: req.query.day,
@@ -1663,7 +1743,10 @@ module.exports.verifyPayment = async(req, res) => {
                         date: req.query.date,
                         day: req.query.day,
                         fee: req.query.fee,
+                        address: req.query.address,
                         type: req.query.type,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         seat: b
 
                     });
@@ -1673,12 +1756,15 @@ module.exports.verifyPayment = async(req, res) => {
                         did: req.query.doctorid,
                         name: req.query.name,
                         email: req.query.email,
+                        address: req.query.address,
                         phone: req.query.phone,
                         davatar:user.avatar,
                         dname:user.name,
                         ddept:user.department,
                         cname:user.clinicname,
                         dsid:user.staff_id,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         time: req.query.time,
                         dayindex: req.query.dayindex,
                         slotindex: req.query.slotindex,
@@ -1697,9 +1783,10 @@ module.exports.verifyPayment = async(req, res) => {
                             name: req.query.name,
                             address: req.query.address,
                             phone: req.query.phone,
+                            gender:req.query.gender,
                             age: req.query.age,
                             cancel: false,
-                            gender:patient.gender,
+                          
                             type: 'online',
                             time: req.query.time,
                             date: req.query.date,
@@ -1770,6 +1857,7 @@ module.exports.verifyPayment = async(req, res) => {
                     title: 'Booking-Success',
                     doctor: user,
                     seat: b,
+
                     slotindex: req.query.slotindex,
                     dayindex: req.query.dayindex,
                     date: req.query.date,
@@ -1806,12 +1894,15 @@ module.exports.verifyPayment = async(req, res) => {
                         email: req.query.email,
                         city:patient.contacts.city,
                         dob:patient.dob,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         bloodgroup:patient.bloodgroup,
                         gender:patient.gender,
                         phone: req.query.phone,
                         time: req.query.time,
                         avatar:patient.avatar,
                         date: req.query.date,
+                        address: req.query.address,
                         day: req.query.day,
                         fee: req.query.fee,
                         type: req.query.type,
@@ -1823,6 +1914,8 @@ module.exports.verifyPayment = async(req, res) => {
                         cancel: false,
                         did: req.query.doctorid,
                         name: req.query.name,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         email: req.query.email,
                         phone: req.query.phone,
                         time: req.query.time,
@@ -1830,6 +1923,7 @@ module.exports.verifyPayment = async(req, res) => {
                         dname:user.name,
                         ddept:user.department,
                         cname:user.clinicname,
+                        address: req.query.address,
                         dsid:user.staff_id,
                         date: req.query.date,
                         dayindex: req.query.dayindex,
@@ -1848,9 +1942,10 @@ module.exports.verifyPayment = async(req, res) => {
                             name: req.query.name,
                             address: req.query.address,
                             phone: req.query.phone,
-                            age: req.query.age,
+                            gender:req.query.gender,
+                        age: req.query.age,
                             cancel: false,
-                            gender:patient.gender,
+                          
                             type: 'online',
                             time: req.query.time,
                             date: req.query.date,
@@ -1875,9 +1970,12 @@ module.exports.verifyPayment = async(req, res) => {
                         dob:patient.dob,
                         bloodgroup:patient.bloodgroup,
                         gender:patient.gender,
+                        address: req.query.address,
                         avatar:patient.avatar,
                         date: req.query.date,
                         day: req.query.day,
+                         gender:req.query.gender,
+                        age: req.query.age,
                         fee: req.query.fee,
                         type: req.query.type,
                         seat: k1
@@ -1891,12 +1989,15 @@ module.exports.verifyPayment = async(req, res) => {
                         email: req.query.email,
                         phone: req.query.phone,
                         davatar:user.avatar,
+                        address: req.query.address,
                         dname:user.name,
                         ddept:user.department,
                         cname:user.clinicname,
                         dsid:user.staff_id,
                         time: req.query.time,
                         date: req.query.date,
+                        gender:req.query.gender,
+                        age: req.query.age,
                         dayindex: req.query.dayindex,
                         // slotindex: req.query.slotindex,
                         day: req.query.day,
@@ -1914,11 +2015,12 @@ module.exports.verifyPayment = async(req, res) => {
                             name: req.query.name,
                             address: req.query.address,
                             phone: req.query.phone,
+                            gender:req.query.gender,
                             age: req.query.age,
                             cancel: false,
                             type: 'online',
                             time: req.query.time,
-                            gender:patient.gender,
+                           
                             date: req.query.date,
                             day: req.query.day,
                             fee: req.query.fee,
@@ -2234,6 +2336,10 @@ module.exports.removeDoctor = async(req, res) => {
             staff.doctorid = staff.doctorids[0].doctorid;
             var id = staff.doctorids[0]._id;
             staff.doctorids.pull(id);
+            if(!staff.old_flag)
+            {
+                staff.old_flag = true;
+            }
             staff.save();
             doctor.save();
             return res.redirect('back')
@@ -2675,14 +2781,14 @@ module.exports.oldOfflinePay = async(req, res) => {
     if (req.user.type == 'Staff') {
         if (staff.refresh_flag == true) {
             if(req.body.fixed == 'true'){
-            if (typeof(staff.old_schedule_time[req.body.dayindex].start) == 'object') {
+            if (typeof(user.old_schedule_time[req.body.dayindex].start) == 'object') {
                 let available = [];
                 let booked = [];
                 let k = req.body.slotindex;
                 let i = req.body.available.split(',');
                 let a = parseInt(i[k]);
                 a = a - 1;
-                for (var temp = 0; temp <staff.old_schedule_time[req.body.dayindex].start.length; temp++) {
+                for (var temp = 0; temp <user.old_schedule_time[req.body.dayindex].start.length; temp++) {
                     if (temp == k) {
                         available.push(a);
                         continue;
@@ -2691,10 +2797,10 @@ module.exports.oldOfflinePay = async(req, res) => {
                     available.push(temp1);
                 }
                 let j = req.body.booked.split(',');
-                let bd = staff.old_schedule_time[req.body.dayindex].booked[req.body.slotindex];
+                let bd = user.old_schedule_time[req.body.dayindex].booked[req.body.slotindex];
                 let b = parseInt(bd);
                 b = b + 1;
-                for (var temp = 0; temp < staff.old_schedule_time[req.body.dayindex].start.length; temp++) {
+                for (var temp = 0; temp < user.old_schedule_time[req.body.dayindex].start.length; temp++) {
                     if (temp == req.body.slotindex) {
                         booked.push(b);
                         continue;
@@ -2744,7 +2850,7 @@ module.exports.oldOfflinePay = async(req, res) => {
                 //   .then(message => console.log(message.sid));     
 
                 console.log(req.body.date)
-                return res.render('staff-booking-success', {
+                return res.render('staff-old-booking-success', {
                     doctor: user,
                     title: 'Booking-Success',
                     seat: b,
@@ -2756,8 +2862,8 @@ module.exports.oldOfflinePay = async(req, res) => {
 
             }
 
-            if (typeof(staff.old_schedule_time[req.body.dayindex].start) == 'string') {
-                let bd1 = staff.old_schedule_time[req.body.dayindex].booked;
+            if (typeof(user.old_schedule_time[req.body.dayindex].start) == 'string') {
+                let bd1 = user.old_schedule_time[req.body.dayindex].booked;
                 let k1 = parseInt(bd1);
                 k1 += 1;
                 var k2 = parseInt(req.body.available);
@@ -2817,20 +2923,25 @@ module.exports.oldOfflinePay = async(req, res) => {
         }
         else{
          
-                let bd1 = staff.old_schedule_time_fixed[req.body.dayindex].booked;
+                let bd1 = user.old_schedule_time_fixed[req.body.dayindex].booked;
                 let k1 = parseInt(bd1);
                 k1 += 1;
                 var k2 = parseInt(req.body.available);
                 k2 -= 1;
 
-
-                let day = await User.update({ 'old_schedule_time_fixed._id': req.body.id }, {
+            console.log(req.body.id)
+                let dayy = await User.update({ 'old_schedule_time_fixed._id': req.body.id }, {
                     '$set': {
                         'old_schedule_time_fixed.$.booked': k1
                             //   'schedule_time.$.available': k2,
 
                     }
+                  
                 });
+                console.log(dayy)
+                
+                user.old_schedule_time_fixed[req.body.dayindex].booked = k1;
+                user.save();
 
                 staff.booking.push({
                     name: req.body.name,
@@ -2851,6 +2962,7 @@ module.exports.oldOfflinePay = async(req, res) => {
                 });
                 staff.refresh_flag = false;
                 staff.save();
+
 
                 //   client.messages
                 //   .create({
@@ -2890,12 +3002,12 @@ module.exports.oldOfflinePay = async(req, res) => {
 
 
 module.exports.bookOldAppointment = async(req, res) => {
-    let staff = await User.findById(req.user.id);
-    let user = await User.findById(req.body.doctorid);
-    let user1 = await User.findById(user.staff_id);
+    let user = await User.findById(req.user.id);
+    let user1 = await User.findById(req.body.doctorid);
+    let staff = await User.findById(user1.staff_id);
     console.log(req.body.type)
   
-        if (staff.refresh_flag == true) {
+        if (user.refresh_flag == true) {
             console.log('hi',req.body.fixed)
             if(req.body.fixed == 'false'){
             if (typeof(user1.old_schedule_time[req.body.dayindex].start) == 'object') {
@@ -2933,15 +3045,17 @@ module.exports.bookOldAppointment = async(req, res) => {
                     }
                 });
                 if (req.body.type == 'own') {
-                user.patients.push({
+                user1.patients.push({
                     payment_id: 'none',
                     cancel: false,
                     pid: req.user.id,
-                    avatar:staff.avatar,
-                    city:staff.contacts.city,
-                    dob:staff.dob,
-                    gender:staff.gender,
-                    bloodgroup:staff.bloodgroup,
+                    avatar:user.avatar,
+                    city:user.contacts.city,
+                    dob:user.dob,
+                    gender:req.body.gender,
+                    age: req.body.age,
+                    address: req.body.address,
+                    bloodgroup:user.bloodgroup,
                     name: req.body.name,
                     old_flag:true,
                     email: req.body.email,
@@ -2954,15 +3068,16 @@ module.exports.bookOldAppointment = async(req, res) => {
                     seat: b
 
                 });
-                staff.doctors.push({
+                user.doctors.push({
                     payment_id: 'none',
                     cancel: false,
-                    did: user._id,
-                    davatar:user.avatar,
-                    dname:user.name,
-                    ddept:user.department,
-                    cname:user.clinicname,
-                    dsid:user.staff_id,
+                    did: user1._id,
+                    davatar:user1.avatar,
+                    dname:user1.name,
+                    ddept:user1.department,
+                    cname:user1.clinicname,
+                    address: req.body.address,
+                    dsid:user1.staff_id,
                     old_flag:true,
                     name: req.body.name,
                     email: req.body.email,
@@ -2973,11 +3088,13 @@ module.exports.bookOldAppointment = async(req, res) => {
                     date: req.body.date,
                     day: req.body.day,
                     fee: req.body.fee,
+                    gender:req.body.gender,
+                    age: req.body.age,
                     type: req.body.type,
                     seat: b
 
                 });
-                user1.booking.push({
+                staff.booking.push({
                     name: req.body.name,
                     address: req.body.address,
                     phone: req.body.phone,
@@ -2993,55 +3110,60 @@ module.exports.bookOldAppointment = async(req, res) => {
                     fee: req.body.fee,
                     seat: b,
                     gender:req.body.gender,
-                    did:user._id
+                    did:user1._id
                 });
             
             }else{
-                user.patients.push({
+                user1.patients.push({
                     payment_id: 'none',
                     cancel: false,
                     pid: req.user.id,
-                    avatar:staff.avatar,
-                    city:staff.contacts.city,
-                    dob:staff.dob,
-                    gender:staff.gender,
-                    bloodgroup:staff.bloodgroup,
+                    avatar:user.avatar,
+                    city:user.contacts.city,
+                    dob:user.dob,
+                    gender:req.body.gender,
+                        age: req.body.age,
+                    bloodgroup:user.bloodgroup,
                     name: req.body.name,
                     old_flag:true,
                     email: req.body.email,
                     phone: req.body.phone,
                     time: req.body.time,
                     date: req.body.date,
+                    address: req.body.address,
                     day: req.body.day,
                     fee: req.body.fee,
                     type: req.body.type,
                     seat: b
 
                 });
-                staff.doctors.push({
+                user.doctors.push({
                     payment_id: 'none',
                     cancel: false,
-                    did: user._id,
-                    davatar:user.avatar,
-                    dname:user.name,
-                    ddept:user.department,
-                    cname:user.clinicname,
-                    dsid:user.staff_id,
+                    did: user1._id,
+                    davatar:user1.avatar,
+                    dname:user1.name,
+                    ddept:user1.department,
+                    cname:user1.clinicname,
+                    dsid:user1.staff_id,
                     old_flag:true,
                     name: req.body.name,
                     email: req.body.email,
                     dayindex: req.body.dayindex,
+                    address: req.body.address,
                     slotindex: req.body.slotindex,
                     phone: req.body.phone,
                     time: req.body.time,
                     date: req.body.date,
                     day: req.body.day,
                     fee: req.body.fee,
+                    gender:req.body.gender,
+                        age: req.body.age,
                     type: req.body.type,
                     seat: b
 
                 });
-                user1.booking.push({
+                staff.booking.push({
                     name: req.body.name,
                     address: req.body.address,
                     phone: req.body.phone,
@@ -3057,11 +3179,11 @@ module.exports.bookOldAppointment = async(req, res) => {
                     fee: req.body.fee,
                     seat: b,
                     gender:req.body.gender,
-                    did:user._id
+                    did:user1._id
                 });
             }
                
-                staff.refresh_flag = false;
+                user.refresh_flag = false;
               
                 user1.save();
                 staff.save();
@@ -3070,18 +3192,18 @@ module.exports.bookOldAppointment = async(req, res) => {
 
                   client.messages
                   .create({
-                     body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user1.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                     body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                      from: '+12019755459',
                      statusCallback: 'http://postb.in/1234abcd',
                      to: '+91'+req.body.phone
                    })
                   .then(message => console.log(message.sid)); 
                   if (req.body.email) {
-                    appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, staff);
+                    appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user1, user);
                 }    
                 console.log(req.body.date)
-                return res.render('staff-booking-success', {
-                    doctor: user,
+                return res.render('staff-old-booking-success', {
+                    doctor: user1,
                     title: 'Booking-Success',
                     seat: b,
                     slotindex: req.body.slotindex,
@@ -3112,17 +3234,19 @@ module.exports.bookOldAppointment = async(req, res) => {
                 console.log(k1);
 
                 if (req.body.type == 'own') {
-                    user.patients.push({
+                    user1.patients.push({
                         payment_id: 'none',
                         cancel: false,
                         pid: req.user.id,
-                        avatar:staff.avatar,
-                        city:staff.contacts.city,
-                        dob:staff.dob,
-                        gender:staff.gender,
-                        bloodgroup:staff.bloodgroup,
+                        avatar:user.avatar,
+                        city:user.contacts.city,
+                        dob:user.dob,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        bloodgroup:user.bloodgroup,
                         name: req.body.name,
                         old_flag:true,
+                        address: req.body.address,
                         email: req.body.email,
                         phone: req.body.phone,
                         time: req.body.time,
@@ -3133,15 +3257,16 @@ module.exports.bookOldAppointment = async(req, res) => {
                         seat: k1
     
                     });
-                    staff.doctors.push({
+                    user.doctors.push({
                         payment_id: 'none',
                         cancel: false,
-                        did: user._id,
-                        davatar:user.avatar,
-                        dname:user.name,
-                        ddept:user.department,
-                        cname:user.clinicname,
-                        dsid:user.staff_id,
+                        did: user1._id,
+                        davatar:user1.avatar,
+                        dname:user1.name,
+                        ddept:user1.department,
+                        cname:user1.clinicname,
+                        dsid:user1.staff_id,
+                        address: req.body.address,
                         old_flag:true,
                         name: req.body.name,
                         email: req.body.email,
@@ -3151,12 +3276,14 @@ module.exports.bookOldAppointment = async(req, res) => {
                         time: req.body.time,
                         date: req.body.date,
                         day: req.body.day,
+                        gender:req.body.gender,
+                        age: req.body.age,
                         fee: req.body.fee,
                         type: req.body.type,
                         seat: k1
     
                     });
-                    user1.booking.push({
+                    staff.booking.push({
                         name: req.body.name,
                         address: req.body.address,
                         phone: req.body.phone,
@@ -3172,42 +3299,45 @@ module.exports.bookOldAppointment = async(req, res) => {
                         fee: req.body.fee,
                         seat: k1,
                         gender:req.body.gender,
-                        did:user._id
+                        did:user1._id
                     });
                 
                 }else{
-                    user.patients.push({
+                    user1.patients.push({
                         payment_id: 'none',
                         cancel: false,
                         pid: req.user.id,
-                        avatar:staff.avatar,
-                        city:staff.contacts.city,
-                        dob:staff.dob,
-                        gender:staff.gender,
-                        bloodgroup:staff.bloodgroup,
+                        avatar:user.avatar,
+                        city:user.contacts.city,
+                        dob:user.dob,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        bloodgroup:user.bloodgroup,
                         name: req.body.name,
                         old_flag:true,
                         email: req.body.email,
                         phone: req.body.phone,
                         time: req.body.time,
                         date: req.body.date,
+                        address: req.body.address,
                         day: req.body.day,
                         fee: req.body.fee,
                         type: req.body.type,
                         seat: k1
     
                     });
-                    staff.doctors.push({
+                    user.doctors.push({
                         payment_id: 'none',
                         cancel: false,
-                        did: user._id,
-                        davatar:user.avatar,
-                        dname:user.name,
-                        ddept:user.department,
-                        cname:user.clinicname,
-                        dsid:user.staff_id,
+                        did: user1._id,
+                        davatar:user1.avatar,
+                        dname:user1.name,
+                        ddept:user1.department,
+                        cname:user1.clinicname,
+                        dsid:user1.staff_id,
                         old_flag:true,
                         name: req.body.name,
+                        address: req.body.address,
                         email: req.body.email,
                         dayindex: req.body.dayindex,
                         // slotindex: req.body.slotindex,
@@ -3216,11 +3346,13 @@ module.exports.bookOldAppointment = async(req, res) => {
                         date: req.body.date,
                         day: req.body.day,
                         fee: req.body.fee,
+                        gender:req.body.gender,
+                        age: req.body.age,
                         type: req.body.type,
                         seat: k1
     
                     });
-                    user1.booking.push({
+                    satff.booking.push({
                         name: req.body.name,
                         address: req.body.address,
                         phone: req.body.phone,
@@ -3236,11 +3368,11 @@ module.exports.bookOldAppointment = async(req, res) => {
                         fee: req.body.fee,
                         seat: k1,
                         gender:req.body.gender,
-                        did:user._id
+                        did:user1._id
                     });
                 }
                    
-                    staff.refresh_flag = false;
+                    user.refresh_flag = false;
                    
                     user1.save();
                     staff.save();
@@ -3249,20 +3381,20 @@ module.exports.bookOldAppointment = async(req, res) => {
     
                       client.messages
                       .create({
-                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user1.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                          from: '+12019755459',
                          statusCallback: 'http://postb.in/1234abcd',
                          to: '+91'+req.body.phone
                        })
                       .then(message => console.log(message.sid)); 
                       if (req.body.email) {
-                        appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, staff);
+                        appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user1, user);
                     }    
     
 
                     console.log('id is',req.body.id);
-                return res.render('staff-booking-success', {
-                    doctor: user,
+                return res.render('staff-old-booking-success', {
+                    doctor: user1,
                     title: 'Booking-Success',
                     seat: k1,
                     old_flag:true,
@@ -3286,15 +3418,17 @@ module.exports.bookOldAppointment = async(req, res) => {
                 console.log(k1);
 
                 if (req.body.type == 'own') {
-                    user.patients.push({
+                    user1.patients.push({
                         payment_id: 'none',
                         cancel: false,
                         pid: req.user.id,
-                        avatar:staff.avatar,
-                        city:staff.contacts.city,
-                        dob:staff.dob,
-                        gender:staff.gender,
-                        bloodgroup:staff.bloodgroup,
+                        avatar:user.avatar,
+                        city:user.contacts.city,
+                        dob:user.dob,
+                        gender:req.body.gender,
+                        address: req.body.address,
+                        age: req.body.age,
+                        bloodgroup:user.bloodgroup,
                         name: req.body.name,
                         old_flag:true,
                         email: req.body.email,
@@ -3307,15 +3441,16 @@ module.exports.bookOldAppointment = async(req, res) => {
                         seat: k1
     
                     });
-                    staff.doctors.push({
+                    user.doctors.push({
                         payment_id: 'none',
                         cancel: false,
-                        did: user._id,
-                        davatar:user.avatar,
-                        dname:user.name,
-                        ddept:user.department,
-                        cname:user.clinicname,
-                        dsid:user.staff_id,
+                        did: user1._id,
+                        address: req.body.address,
+                        davatar:user1.avatar,
+                        dname:user1.name,
+                        ddept:user1.department,
+                        cname:user1.clinicname,
+                        dsid:user1.staff_id,
                         old_flag:true,
                         name: req.body.name,
                         email: req.body.email,
@@ -3327,10 +3462,12 @@ module.exports.bookOldAppointment = async(req, res) => {
                         day: req.body.day,
                         fee: req.body.fee,
                         type: req.body.type,
+                        gender:req.body.gender,
+                        age: req.body.age,
                         seat: k1
     
                     });
-                    user1.booking.push({
+                    staff.booking.push({
                         name: req.body.name,
                         address: req.body.address,
                         phone: req.body.phone,
@@ -3346,20 +3483,22 @@ module.exports.bookOldAppointment = async(req, res) => {
                         fee: req.body.fee,
                         seat: k1,
                         gender:req.body.gender,
-                        did:user._id
+                        did:user1._id
                     });
                 
                 }else{
-                    user.patients.push({
+                    user1.patients.push({
                         payment_id: 'none',
                         cancel: false,
                         pid: req.user.id,
-                        avatar:staff.avatar,
-                        city:staff.contacts.city,
-                        dob:staff.dob,
-                        gender:staff.gender,
-                        bloodgroup:staff.bloodgroup,
+                        avatar:user.avatar,
+                        city:user.contacts.city,
+                        dob:user.dob,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        bloodgroup:user.bloodgroup,
                         name: req.body.name,
+                        address: req.body.address,
                         old_flag:true,
                         email: req.body.email,
                         phone: req.body.phone,
@@ -3371,15 +3510,15 @@ module.exports.bookOldAppointment = async(req, res) => {
                         seat: k1
     
                     });
-                    staff.doctors.push({
+                    user.doctors.push({
                         payment_id: 'none',
                         cancel: false,
-                        did: user._id,
-                        davatar:user.avatar,
-                        dname:user.name,
-                        ddept:user.department,
-                        cname:user.clinicname,
-                        dsid:user.staff_id,
+                        did: user1._id,
+                        davatar:user1.avatar,
+                        dname:user1.name,
+                        ddept:user1.department,
+                        cname:user1.clinicname,
+                        dsid:user1.staff_id,
                         old_flag:true,
                         name: req.body.name,
                         email: req.body.email,
@@ -3388,13 +3527,16 @@ module.exports.bookOldAppointment = async(req, res) => {
                         phone: req.body.phone,
                         time: req.body.time,
                         date: req.body.date,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        address: req.body.address,
                         day: req.body.day,
                         fee: req.body.fee,
                         type: req.body.type,
                         seat: k1
     
                     });
-                    user1.booking.push({
+                    staff.booking.push({
                         name: req.body.name,
                         address: req.body.address,
                         phone: req.body.phone,
@@ -3410,11 +3552,11 @@ module.exports.bookOldAppointment = async(req, res) => {
                         fee: req.body.fee,
                         seat: k1,
                         gender:req.body.gender,
-                        did:user._id
+                        did:user1._id
                     });
                 }
                    
-                    staff.refresh_flag = false;
+                    user.refresh_flag = false;
                    
                     user1.save();
                     staff.save();
@@ -3423,20 +3565,20 @@ module.exports.bookOldAppointment = async(req, res) => {
     
                       client.messages
                       .create({
-                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ '. The clinic details are ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user1.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                          from: '+12019755459',
                          statusCallback: 'http://postb.in/1234abcd',
                          to: '+91'+req.body.phone
                        })
                       .then(message => console.log(message.sid)); 
                       if (req.body.email) {
-                        appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, staff);
+                        appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user1, user);
                     }    
     
 
                     console.log('id is',req.body.id);
-                return res.render('staff-booking-success', {
-                    doctor: user,
+                return res.render('staff-old-booking-success', {
+                    doctor: user1,
                     title: 'Booking-Success',
                     seat: k1,
                     old_flag:true,
@@ -3618,18 +3760,19 @@ module.exports.staffUpdateSchedule = async function(req, res) {
 module.exports.staffOldUpdateSchedule = async function(req, res) {
 
     let user = await User.findById(req.user.id);
+    let doctor = await User.findById(req.user.doctorid);
     if ((!req.body.start) || (!req.body.end)) {
       
-        user.old_schedule_time.pull({ _id: req.body.id });
-        user.save();
+        doctor.old_schedule_time.pull({ _id: req.body.id });
+        doctor.save();
         return res.redirect('back');
     }
     let day = await User.update({ 'old_schedule_time._id': req.body.id }, {
         '$set': {
             'old_schedule_time.$.start': req.body.start,
             'old_schedule_time.$.end': req.body.end,
-            'old_schedule_time.$.max_count': user.oldp.pcount,
-            'old_schedule_time.$.available': user.oldp.pcount
+            'old_schedule_time.$.max_count': doctor.oldp.pcount,
+            'old_schedule_time.$.available': doctor.oldp.pcount
         }
     });
 
@@ -3735,12 +3878,13 @@ module.exports.staffSetScheduleTiming = async function(req, res) {
 module.exports.staffSetOldScheduleTiming = async function(req, res) {
 
     let user = await User.findById(req.user.id);
+    let doctor = await User.findById(req.query.id);
 
 
 
 
     if (typeof(req.body.start) == 'string') {
-        user.old_schedule_time.push({
+        doctor.old_schedule_time.push({
             start: req.body.start,
             end: req.body.end,
             day: req.body.day,
@@ -3753,7 +3897,7 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
     }
 
     if (typeof(req.body.start) == 'object') {
-        user.old_schedule_time.push({
+        doctor.old_schedule_time.push({
             day: req.body.day,
             start: req.body.start,
             end: req.body.end,
@@ -3768,7 +3912,7 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
 
 
 
-    user.save();
+    doctor.save();
     console.log(req.body);
 
     return res.redirect('back');
@@ -4006,14 +4150,14 @@ module.exports.sortByDate = async(req, res) => {
                 path:'user'
             }
         }
-    });;
+    });
     const date = req.body.date;
     const str = date.split("/").join("-");
     console.log(str);
 
     if (req.body.flag == 'true') {
         
-        let doctor = await User.findById(req.user.doctorid);
+        let doctor = await User.findById(req.query.id);
         let user1 = await User.findById(req.user.id).populate('doctorid').populate({
             path:'doctorids',
             populate:{
@@ -4046,7 +4190,61 @@ module.exports.sortByDate = async(req, res) => {
     }
 
 }
+module.exports.oldSortByDate = async(req, res) => {
+    let patients = await User.findById(req.user.id).
+    populate({
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+    console.log(str);
 
+    if (req.body.flag == 'true') {
+        
+        let doctor = await User.findById(req.query.id);
+        let user1 = await User.findById(req.user.id).populate('doctorid').populate({
+            path:'doctorids',
+            populate:{
+                path:'doctorid',
+                populate:{
+                    path:'user'
+                }
+            }
+        });;
+
+        return res.render('staff-old-booking', {
+            title: 'Book Old Appointment',
+            doctor: doctor,
+            doctor1: doctor,
+            daten: str,
+            staff: user1
+        })
+    } else {
+        let user1;
+        if(req.query.id)
+        {
+        user1 = await User.findById(req.query.id);
+        }
+        return res.render('staff-dashboard', {
+            title: 'My Dashboard',
+            allpatients: patients,
+            date: str,
+            user1:user1
+        })
+    }
+
+}
 module.exports.doctorSortByDate = async(req, res) => {
     let patients = await User.findById(req.user.id).populate({
         path: 'patients',
@@ -4114,10 +4312,11 @@ module.exports.profileUpdate = async function(req, res) {
             }
 
             const rand = Math.floor((Math.random() * 100) + 54);
-            user.emailkey = rand;
+            
             if (req.body.email != '') {
-                if (!user.emailverify) {
+                if (!user.emailkey) {
                     console.log('sent');
+                    user.emailkey = rand;
                     emailVerification.newAlert(user, rand, req.body.email);
                     user.email = req.body.email;
                     user.emailverify = false;
@@ -4128,6 +4327,7 @@ module.exports.profileUpdate = async function(req, res) {
                     emailVerification.newAlert(user, rand, req.body.email);
                     user.email = req.body.email;
                     user.emailverify = false;
+                    user.emailkey = rand;
                 }
             }
 
@@ -4332,7 +4532,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 // -------------------------------------------------
 
 module.exports.checkAuthentication = async function(req, res) {
-let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+let user = await User.findOne({phone:req.body.phone,service:'phone'})
 if(user)
 {
     res.json({
@@ -4363,8 +4563,7 @@ module.exports.createUserAccount = async function(req, res) {
             
             let user1 = await User.findOne({
                 phone:req.body.phone,
-                service:'phone',
-                type:'Patient'
+                service:'phone'
             })
 
             if(user1)

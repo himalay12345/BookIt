@@ -68,7 +68,11 @@
 										<div class="col-md-6">
 											<p class="invoice-details">
 												<strong>Appointment No:</strong> #<%=order%> <br>
-												<strong>Issued:</strong> <%=date%>
+                                                <strong>Issued:</strong> <%=date%><br>
+                                                <%if(free=='true'){%>
+                                                    <td class="text-center">Booked As A Old Patient</td>
+                                                    <%}%>	
+                                                
 											</p>
 										</div>
 									</div>
@@ -79,7 +83,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Invoice From</strong>
+												<strong class="customer-text">Appointment Booked With</strong>
 												<p class="invoice-details invoice-details-two text-left" style="float: left !important;">
 													<b>Dr.<%=doctor.name%> </b><br>
 													<b><%=doctor.clinicname%></b> <br>
@@ -138,15 +142,15 @@
 														<tr>
 															<td>General Consultation</td>
 															<td class="text-center">1</td>
-															<td class="text-center">Rs 0</td>
-															<td class="text-right">Rs <%=fee%></td>
+                                                          
+                                                            <%if(free=='true'){%>
+                                                                <td class="text-center">Free</td>
+                                                                <%}else{%>	
+                                                            <td class="text-center">Rs 0</td>
+                                                            <td class="text-right">Rs <%=fee%></td>
+                                                            <%}%>		
 														</tr>
-														<!-- <tr>
-															<td>Video Call Booking</td>
-															<td class="text-center">1</td>
-															<td class="text-center">$0</td>
-															<td class="text-right">$250</td>
-														</tr> -->
+													
 													</tbody>
 												</table>
 											</div>
@@ -156,16 +160,24 @@
 												<table class="invoice-table-two table">
 													<tbody>
 													<tr>
-														<th>Subtotal:</th>
-														<td><span>Rs <%=fee%></span></td>
+                                                        <th>Subtotal:</th>
+                                                        <%if(free=='true'){%>
+                                                            <td class="text-center">Free</td>
+                                                            <%}else{%>	
+                                                        <td><span>Rs <%=fee%></span></td>
+                                                        <%}%>		
 													</tr>
 													<!-- <tr>
 														<th>Discount:</th>
 														<td><span>-10%</span></td>
 													</tr> -->
 													<tr>
-														<th>Total Amount:</th>
-														<td><span>Rs <%=fee%></span></td>
+                                                        <th>Total Amount:</th>
+                                                        <%if(free=='true'){%>
+                                                            <td class="text-center">Free</td>
+                                                            <%}else{%>
+                                                        <td><span>Rs <%=fee%></span></td>
+                                                        <%}%>	
 													</tr>
 													</tbody>
 												</table>

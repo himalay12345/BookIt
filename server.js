@@ -53,6 +53,7 @@ console.log('Patient Tracking server is running on port 5000');
 
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
+app.set("layout invoice-user-view", false);
 app.set("layout doctor_prescription_pad", false);
 // app.set("layout doctor-profile-settings", false);
 app.use(bodyParser.json());

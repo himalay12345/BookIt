@@ -124,6 +124,19 @@
                                                             <%}%>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-size: 0.8rem;margin-left:5px;">Gender</label>
+                                                    <select name="gender" class="form-control select">
+                                                        <%if(locals.user.gender == 'Male '){%><option selected>Male</option><%}else{%>
+                                                        <option>Male</option><%}%>
+                                                        <%if(locals.user.gender == 'Female '){%><option selected>Female</option><%}else{%>
+                                                        <option>Female</option><%}%>
+                                                        <%if(locals.user.gender == 'Others '){%><option selected>Others</option><%}else{%>
+                                                        <option>Others</option><%}%>
+                                                        </select>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label>Age</label>
@@ -176,6 +189,17 @@
                                                     <input class="form-control" type="text" name="paddress" placeholder="Enter patient address" required>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-size: 0.8rem;margin-left:5px;">Gender</label>
+                                                    <select name="pgender" class="form-control select">
+                                                        
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                        <option>Others</option>
+                                                        </select>
+                                                </div>
+                                            </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
                                                     <label> Patient Age</label>
@@ -184,7 +208,7 @@
                                             </div>
 
                                             <div class="submit-section mt-4" style="margin-left: 10px !important;">
-                                                <button type="submit" class="btn btn-primary submit-btn ml-4">Procced to checkout</button>
+                                                <button type="submit" class="btn btn-primary submit-btn ml-4">Proceed To Pay</button>
                                             </div>
                                         </form>
                                     </div>
