@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Booking Pdf</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/img/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<%var daten;%>
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Name</th>
+								<th class="column2">Gender</th>
+								<th class="column3">Age</th>
+								<th class="column4">Phone</th>
+								<th class="column5">Address</th>
+								<th class="column6">Booking Mode</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%var c=0,z1=0,z2=0;z31=0;%>
+							<%for(patients of user1.booking){%>
+								<%var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];%>
+<%var st2 = patients.date.split('-');%>
+<%var st1 = st2[2]+'-'+st2[1]+'-'+st2[0];%>
+<%var today1 = new Date(st1);
+var dd1= String(today1.getDate()).padStart(2, '0');
+var mm1 = String(today1.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy1 = today1.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today1.getDay()];%>
+										<%var str1 = dd+'-'+mm+'-'+yyyy;%>
+											<%var str2 = dd1+'-'+mm1+'-'+yyyy1;%>
+
+
+												<%if(daten != undefined){%>
+													<%if(daten != patients.date || patients.old_flag || patients.did != doctor1.id){%>
+														<%z1++;z31++;continue;%>
+															<%}%>
+
+																<%}else{%>
+
+																	<%if(str1 != str2 || patients.old_flag){%>
+																		<%z1++;z31++;continue;%>
+																			<%}%>
+																			<%var a1 = patients.did;%>
+																			<%var a2 = doctor1.id;%>
+																			<%if(a1 != a2){%>
+																				<%=console.log(a1,a2)%>
+																				<%z1++;z31++;continue;%>
+																					<%}%>
+																				<%}%>
+								<tr>
+									<td class="column1"><%=patients.name%></td>
+									<td class="column2"> <%if(patients.gender){%>
+										<%if(patients.gender=='Male'){%>
+											M
+										<%}%>
+										<%if(patients.gender=='Female'){%>
+											F
+										<%}%>
+										<%if(patients.gender=='Others'){%>
+											O
+										<%}%>
+									
+									<%}%></td>
+									<td class="column3"><%=patients.age%></td>
+									<td class="column4"><%=patients.phone%></td>
+									<td class="column5"><%=patients.address%></td>
+									<%if(patients.type=='online'){%>
+										<td class="column6">Online</td>
+										<%}else{%>
+											<td class="column6">Offline</td>
+											<%}%>
+								</tr>
+								<%}%>
+							
+								
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
+
+</body>
+</html>

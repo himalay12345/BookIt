@@ -20,6 +20,7 @@ router.get('/app-coming-soon', homeController.appComingSoon);
 router.get('/appointment-detail', passport.checkPatientAuthentication, homeController.appointmentDetail);
 router.get('/blank-page', passport.checkAuthentication, homeController.blankPage);
 router.get('/booking', homeController.booking);
+router.get('/booking-pdf', homeController.bookingPdf);
 router.get('/booking-success', passport.checkAuthentication, homeController.bookingSuccess);
 router.get('/booking-service', passport.checkDoctorAuthentication, homeController.bookingServiceSetting);
 router.get('/calendar', passport.checkAuthentication, homeController.calendar);

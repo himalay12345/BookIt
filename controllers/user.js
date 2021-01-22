@@ -2611,6 +2611,31 @@ module.exports.staffOldCheckout = async(req, res) => {
 module.exports.offlinePay = async(req, res) => {
     let staff = await User.findById(req.user.id);
     let user;
+    let price;
+    if(!req.body.price)
+    {
+        price = req.body.fee
+    }
+    if(req.body.price)
+    {
+        if(req.body.price == '1')
+        {
+            price = req.body.fee
+        }
+
+        if(req.body.price == '2')
+        {
+            price = 'Free'
+        }
+
+        
+        if(req.body.price == '3')
+        {
+            price = req.body.price_description
+        }
+
+
+    }
     if(req.query.id)
     {
         user = await User.findById(req.query.id);
@@ -2618,6 +2643,7 @@ module.exports.offlinePay = async(req, res) => {
     }else{
         user = await User.findById(req.body.doctorid);
     }
+   console.log(req.body)
     if (req.user.type == 'Staff') {
         if (staff.refresh_flag == true) {
             if (typeof(user.schedule_time[req.body.dayindex].start) == 'object') {
@@ -2667,7 +2693,7 @@ module.exports.offlinePay = async(req, res) => {
                     day: req.body.day,
                     slot: req.body.slotindex,
                     dayindex: req.body.dayindex,
-                    fee: req.body.fee,
+                    fee: price,
                     seat: b,
                     gender:req.body.gender,
                     did:user._id
@@ -2730,7 +2756,7 @@ module.exports.offlinePay = async(req, res) => {
                     day: req.body.day,
                     gender:req.body.gender,
                     dayindex: req.body.dayindex,
-                    fee: req.body.fee,
+                    fee: price,
                     seat: k1,
                     did:user._id
                 });
@@ -4541,9 +4567,40 @@ if(user)
 }
 
 else{
-    res.json({
-        status:false
-    })
+    if(req.body.phone.length>10)
+    {
+        res.json({
+            length:true
+        })
+    }
+
+  
+
+        client
+        .verify
+        .services(config.serviceID)
+        .verifications
+        .create({
+            to: `+91${req.body.phone}`,
+            channel: 'sms'
+        }).then((data) => {
+           if(data)
+           {
+           res.json({
+               status:true,
+               msg:'Otp sent Successfully'
+           })
+        }
+        else{
+            res.json({
+                status:false,
+                msg:'Otp not sent'
+            })
+        }
+        });
+    
+    
+        
 }
 }
 

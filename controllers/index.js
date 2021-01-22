@@ -63,6 +63,43 @@ const data = {
     }
 }
 
+
+module.exports.bookingPdf = async(req, res) => {
+    try {
+        let doctor = await User.findById(req.query.id);
+        let user1 =  await User.findById(req.user.id).populate('doctorid').populate({
+    path:'doctorids',
+    populate:{
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }
+})
+var date,str;
+if(req.query.date)
+{
+date = req.query.date;
+    str = date.split("/").join("-");
+}
+
+return res.render('booking-pdf',{
+   title:'Booking Pdf',
+    doctor: doctor,
+    doctor1:doctor,
+    user1: user1,
+   layout:'booking-pdf',
+   daten:str
+   
+}); 
+        
+        
+       
+    } catch (err) {
+        console.log("Error processing request: " + err);
+    }
+}
+
 module.exports.removeFlag  = async(req, res) => {
     
         let doctor = await User.findById(req.user.id);
@@ -1086,7 +1123,8 @@ module.exports.oldBooking = async(req, res) => {
 module.exports.prescriptionPad = async(req, res) => {
 
     let doctor = await User.findById(req.query.id);
-    return res.render('doctor_prescription_pad', {
+    let staff = await User.findById(req.user.id);
+    return res.render('general_prescription_pad', {
         title: 'Invoice View',
         doctor: doctor,
         order: req.query.order,
@@ -1097,7 +1135,8 @@ module.exports.prescriptionPad = async(req, res) => {
         phone: req.query.phone,
         address: req.query.address,
         gender: req.query.gender,
-        layout: 'doctor_prescription_pad'
+        staff:staff,
+        layout: 'general_prescription_pad'
 
     })
 }
@@ -3245,7 +3284,7 @@ module.exports.userSignup = async function(req, res) {
 
 module.exports.fail = async function(req, res) {
     res.json({
-        ststus:false,
+        status:false,
         msg:'Invalid Username/Password'
     })
 }

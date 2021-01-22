@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Booking Pdf</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/img/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+        <div class="content"  style="padding-left: 0px !important; padding-right: 0px !important;">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="offset-lg-2" style="width: 100% !important;margin-left: 0px !important;">
+                        <div class="invoice-content">
+                            
+                            
+                            <!-- Invoice Item -->
+                            <div class="invoice-item" style="margin-bottom: 30px;margin-top: 0px;padding-bottom:10px;border-bottom: 5px double rgb(155, 95, 95);">
+                                <div class="row" style="width: 100% !important;">
+                                    <div class="col-md-4" style="width: 35% !important;"> 
+                                        <div class="invoice-info">
+                                          
+                                             
+                                                <div style="margin-top: 0px;margin-left:30px;font-size: 2.5rem;"><i class="fas fa-hospital"></i></div>
+                                          
+                                            
+                                            <p class="invoice-details invoice-details-two text-left" style="float: left !important;color:black;">
+                                                <b style="font-family: Bradley Hand, cursive;font-size: 1.6rem;">Dr.<%=doctor.name%> </b><br>
+                                                <b>
+                                                    <%var i=0;%>
+                                                    <%for(exp of doctor.education){%>
+                                                        <%if(i>=2){%>
+                                                        <%break;}%>
+                                                        <%=exp.degree.toUpperCase()%>
+                                                        <%i++;%>
+                                                        <%}%>
+                                                    (<%=doctor.department%>)</b> <br>
+                                                    <%for(let j=i;j<doctor.education.length;j++){%>
+                                                        <b><%=doctor.education[j].degree.toUpperCase()%>&nbsp;(<%=doctor.department%>)</b></br>
+                                                        <%}%>
+                                                        <%for(exp1 of doctor.experience){%>
+                                                <b>Ex <%=exp1.designation%> <%=exp1.institutionname%>, <%=exp1.city%></b></br>
+                                                <%}%>
+                                                <b>Regn. No. : <%=doctor.registrations.registration%></b></br>
+                                                <b>Ph.No. - <%=staff.phone%></b></br>
+                                              
+
+                                                
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="width: 45% !important;margin-left: -35px;">
+                                        <div class="invoice-info invoice-info2">
+                                            <div class="col-md-12" style="width: 100%!important;margin-left: auto !important;">
+                                              <div style="border:2px solid grey;margin-top:20px;padding:5px 0px">
+                                                  <div style="border-bottom:2px solid grey;"><p style="text-align: center;font-weight: bold;color:red">House calls regreted</p></div>
+                                                  <div style="border-bottom:2px solid grey;"><p style="text-align: center;font-weight: bold;color:red">E.C.G by appointment</p></div>
+                                                  <div style="border-bottom:2px solid grey;"><p style="text-align: center;font-weight: bold;color:red">Nebuliser facility available</p></div>
+                                                  <div><p style="text-align: center;font-weight: bold;color:red">No Emergency facility available</p></div>
+                                              </div>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="width: 20% !important;margin-left: -35px;">
+                                        <div class="invoice-info invoice-info2">
+                                            <div class="col-md-12" style="width: 100%!important;margin-left: auto !important;">
+                                                <div class="navbar-brand logo text-right">
+                                                    <img src="<%=assetPath('img/aalogo.png')%>" style="height:90px;width:210px" alt="logo">
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="invoice-item invoice-table-wrap" style="height:900px !important;">
+                                <style>
+                                    .dpad h5:after{
+content:'<%=name%>';
+display:inline-block;
+width:80%; height:100%;
+margin-right:-100%;
+margin-top:10px;
+margin-left: 5px;
+border-bottom:2px dotted grey;
+}
+.dmpad h5:after{
+content:'';
+display:inline-block;
+width:20%; height:100%;
+margin-right:-100%;
+margin-top:10px;
+margin-left: 5px;
+border-bottom:2px dotted grey;
+}
+.dmpad h4:after{
+content:'<%=date%>';
+display:inline-block;
+width:70%; height:100%;
+margin-right:-100%;
+margin-top:5px;
+margin-left: 5px;
+border-bottom:2px dotted grey;
+}
+.ddmpad h4:after{
+content:'<%=address%>';
+display:inline-block;
+width:80%; height:100%;
+margin-right:-100%;
+margin-top:15px;
+margin-left: 5px;
+border-bottom:2px dotted grey;
+}
+.dpad h3:after{
+content:'';
+display:inline-block;
+width:80%; height:100%;
+margin-right:-100%;
+margin-top:25px;
+margin-left: 5px;
+border-bottom:2px solid grey;
+}
+.dpad h2:after{
+content:'';
+display:inline-block;
+width:80%; height:100%;
+margin-right:-100%;
+margin-top:25px;
+margin-left: 5px;
+border-bottom:2px solid grey;
+}
+                                    .ddpad h5:after{
+content:'<%=date%>';
+display:inline-block;
+width:75%; height:100%;
+margin-right:-100%;
+margin-top:10px;
+margin-left: 10px;
+border-bottom:2px solid grey;
+
+}
+
+.ddpad h4:after{
+content:'<%=age%>/<%=gender%>';
+display:inline-block;
+width:30%; height:100%;
+margin-right:-100%;
+margin-top:15px;
+margin-left: 10px;
+border-bottom:2px dotted grey;
+}
+.ddpad h3:after{
+content:'<%=gender%>';
+display:inline-block;
+width:75%; height:100%;
+margin-right:-100%;
+margin-top:10px;
+margin-left: 10px;
+border-bottom:2px dotted grey;
+}
+.ddpad h2:after{
+content:'';
+display:inline-block;
+width:75%; height:100%;
+margin-right:-100%;
+margin-top:25px;
+margin-left: 10px;
+border-bottom:2px solid grey;
+}
+                                </style>
+                                <div class="row">
+                                
+                                    <div class="col-md-8 dmpad"style="width: 70% !important;">
+                                        <h5 style="font-weight: bold;font-size: 1rem;">Ref.  </h5>
+                                       
+                                    </div>
+                                    <div class="col-md-4 dmpad"style="width: 30% !important;">
+                                        <h4 style="font-weight: bold;font-size: 1rem;">Date  </h5>
+                                       
+                                    </div>
+                                    <div style="width: 100% !important;border-bottom: 3px solid grey;display: inline-flex;margin-left: -15px;padding-bottom: 20px;" class="col-md-12">
+                                    <div class="col-md-5 dpad" style="width: 45% !important;">
+                                        <h5 style="font-weight: bold;font-size: 1rem;">Name : </h5>
+                                       
+                                    </div>
+                                    <div class="col-md-2 ddpad" style="width: 25% !important;">
+                                      
+                                        <h4 style="font-weight: bold;font-size: 1rem;">Age/Sex :</h5>
+                                        
+                                    </div>
+                                    <div class="col-md-5 ddmpad" style="width: 45% !important;">
+                                         <h4 style="font-weight: bold;font-size: 1rem;">Add : </h5>
+                                    </div>
+                                </div>
+                                    <div style="height:900px !important;width: 100% !important;margin-top: 0px;display:inline-flex">
+                                        <div class="col-md-2" style="padding-top:20px;border-right:3px solid grey;width: 25% !important;height: 900px !important;">
+                                            <p style="margin-bottom:5px;font-weight:bold;">Temp : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">Wt : </p>
+                                            <p style="margin-bottom:50px;font-weight:bold;">SPO2 : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;text-decoration: underline;"> O/E </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">Pulse : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">BP : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">Chest : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">CVS : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">CNS : </p>
+                                            <p style="margin-bottom:20px;font-weight:bold;">P/A : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">Inv : </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*TLC/DLC </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*Hb% </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*ESR </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*UR/E </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*B.Sugar </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*BMP </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*Paracheck </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*Widal </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*Satya Pf/Fv </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*S.Uric acid </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*S.creat </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*SGOT/SGPT </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*CBC </p>
+                                            <p style="margin-bottom:5px;font-weight:bold;">*AEC</p>
+                                            
+                                        </div>
+                                        <div class="col-md-10" style="width: 75% !important;">
+                                            <div style="margin-top:350px;text-align: center;border:2px solid grey;width: 100px !important;margin-left:180px;">
+                                                <p style="font-weight: bold;border-bottom: 2px solid grey;">URINE</p>
+                                                <p style="font-weight: bold;">STOOL</p>
+                                            </div>
+                                            <div style="margin-top:-40px;position:absolute;text-align: center;border:2px solid grey;width: 130px !important;margin-left:330px;display: inline-flex;">
+                                                <p style="font-weight: bold;border-right: 2px solid grey;width:25%;">P</p>
+                                                <p style="font-weight: bold;border-right: 2px solid grey;;width:25%;">I</p>
+                                                <p style="font-weight: bold;border-right: 2px solid grey;;width:25%;">CY</p>
+                                                <p style="font-weight: bold;;width:25%;">O</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>	
+	</div>
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
+
+</body>
+</html>
