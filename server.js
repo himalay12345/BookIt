@@ -18,6 +18,7 @@ const flash = require('connect-flash');
 const customMiddleware = require('./config/noty');
 const bodyParser = require('body-parser');
 const pdf = require('html-pdf');
+const jwt = require('jsonwebtoken');
 
 const trackServer = require('http').Server(app);
 const trackSockets = require('./config/track_socket').trackSockets(trackServer);
@@ -58,6 +59,7 @@ app.set("layout general_prescription_pad", false);
 app.set("layout booking-pdf", false);
 // app.set("layout doctor-profile-settings", false);
 app.use(bodyParser.json());
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(env.asset_path));
@@ -99,6 +101,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 app.use(flash());
 app.use(customMiddleware.setFlash);
+// app.use(customMiddleware.authenticateToken);
 app.use('/', require('./routes/index'));
 
 app.listen(port, function(err) {

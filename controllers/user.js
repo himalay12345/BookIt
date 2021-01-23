@@ -14,6 +14,7 @@ const emailVerification = require('../mailers/email-verify');
 const Feedback = require('../models/disable_feedback');
 const Path = require('path');
 const env = require('../config/environment');
+const jwt = require('jsonwebtoken');
 const { VariableContext } = require('twilio/lib/rest/serverless/v1/service/environment/variable');
 
 
@@ -4648,12 +4649,19 @@ module.exports.createUserAccount = async function(req, res) {
                     service: 'phone',
                     type: 'Patient'
                 });
+
+                const user1 = {
+                    username:user.phone
+                }
+                const accessToken = generateAccessToken(user1);
             
                
                res.json({
+                   accessToken:accessToken,
                    status:true,
                    msg:'Account Created Successfully',
                    user:user
+                   
                })
             }
         
@@ -4662,10 +4670,33 @@ module.exports.createUserAccount = async function(req, res) {
 }
 
 module.exports.createUserSession = async function(req, res) {
-    let user = await User.findById(req.user.id)
+    let user1 = await User.findOne({_id:req.user.id,service:'phone',type:'Patient'})
+    const user = {
+        username:user1.phone
+    }
+    const accessToken = generateAccessToken(user);
+    // const refreshToken = jwt.sign(user,'1234')
     res.json({
-        user:user
+        accessToken:accessToken,
+        // refreshToken:refreshToken,
+        user:user1
+        
     })
 
 }
+
+module.exports.demo = async function(req,res){
+    let user =  await User.findOne({phone:req.user.username,service:'phone',type:'Patient'})
+    res.json({
+        user:user.phone
+    })
+}
+
+
+function generateAccessToken(user)
+{
+    return jwt.sign(user,'123456')
+}
+
+
 

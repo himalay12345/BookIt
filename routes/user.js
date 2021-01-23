@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const jwt = require('../config/noty');
 
 
 
@@ -86,6 +87,7 @@ router.get('/delete-experience', userController.deleteExperience);
 router.get('/delete-education', userController.deleteEducation);
 router.get('/delete-clinic-photo', userController.deleteClinicPhoto);
 // -------------------------------------------
+router.get('/validate-user',jwt.authenticateToken, userController.demo);
 router.post('/check-authentication',userController.checkAuthentication);
 router.post('/create-user-account',userController.createUserAccount);
 router.post('/create-user-session', passport.authenticate('local', {
