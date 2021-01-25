@@ -1599,7 +1599,10 @@ console.log(dayOfWeek)%>
                                                                                 <%}%>
 
                                                                                     <%}%>
+                                                                                    
                                                                                         <%if(slots <= 1){%>
+                                                                                            <%var c=0,z1=0,z2=0;z31=0,count1=0,count2=0,count3=0,count=0;%>
+                                                                                            <span><a href="/user/auth/google" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a></span> 
                                                                                             <div class="card card-table mb-0 mpdf">
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive">
@@ -1613,14 +1616,16 @@ console.log(dayOfWeek)%>
                                                                                                                     <th class="sth">Address</th>
                                                                                                                     <th class="sth">Booking Mode</th>
                                                                                                                     <th class="text-center sth">Status</th>
+                                                                                                                    <th class="sth">Amount</th>
                                                                                                                     <th>Bill</th>
                                                                                                                     <th>Prescription</th>
+                                                                                                                     <th class="text-center sth">Edit</th>
                                                                                                                     <th>Cancel</th>
 
                                                                                                                 </tr>
                                                                                                             </thead>
                                                                                                             <tbody class="stbody">
-                                                                                                                <%var c=0,z1=0,z2=0;z31=0;%>
+                                                                                                                
 
                                                                                                                     <%for(patients of user1.booking){%>
                                                                                                                         <%var today = new Date();
@@ -1710,6 +1715,20 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                                 <%}else{%>
                                                                                                                                                                                                     <td class="std"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                                                                                                                                     <%}%>
+                                                                                                                                                                                                    <td class="std">
+                                                                                                                                                                                                        <%if(patients.fee=='Free'){%>
+                                                                                                                                                                                                            <%count2++;%>
+                                                                                                                                                                                                    <%=patients.fee%>
+                                                                                                                                                                                                        <%}else{%>
+                                                                                                                                                                                                            <%if(patients.fee == doctor1.booking_fee){%>
+                                                                                                                                                                                                                <%count1++;%>
+                                                                                                                                                                                                                <%}else{%>
+                                                                                                                                                                                                                    <%count3++;%>
+                                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                                    <%count=count+parseInt(patients.fee)%>
+                                                                                                                                                                                                            Rs <%=patients.fee%>
+                                                                                                                                                                                                            <%}%>
+                                                                                                                                                                                                    </td>
 
                                                                                                                                                                                                     <%if(patients.cancel != true){%>
                                                                                                                                                                                                         
@@ -1724,6 +1743,13 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                                         </a>
                                                                                                                                                                                                         </td>
                                                                                                                                                                                                         <%}%>
+                                                                                                                                                                                                       
+                                                                                                                                                                                                       
+        
+                                                                                                                                                                                                            <td class="text-right">
+                                                                                                                                                                                                                <a href="/edit-patient/?id=<%=patients._id%>&index=<%=z31%>&did=<%=patients.did%>" class="btn btn-sm bg-dark" style="color: white;width:110px !important">
+                                                                                                                                                                                                                    <span ><i class="fas fa-pencil" style="margin-right: 5px;"></i>Edit</span>
+                                                                                                                                                                                                                </td>
                                                                                                                                                                                                         <td class="text-right">
 
                                                                                                                                                                                                             <div class="table-action">
@@ -1780,10 +1806,15 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <%}else{%>
+                                                                                                <%var c=0,z1=0,z2=0;z3=0,count1=0,count2=0,count3=0,count=0;%>
                                                                                                 <%for(let i1 =0 ;i1<slots;i1++){%>
                                                                                                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
                                                                                                         <li class="nav-item" style="width: 100%;">
-                                                                                                            <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab"><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.schedule_time[sindex].end[i1].toUpperCase()%></span></a>
+                                                                                                            <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab">
+                                                                                                                <span style="margin-right: 30px;"> Slot <%=i1+1%> </span>
+                                                                                                                 <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.schedule_time[sindex].end[i1].toUpperCase()%></span>
+                                                                                                                <span><a href="/user/auth/google" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
+                                                                                                                </a>
                                                                                                         </li>
                                                                                                     </ul>
                                                                                                     <div class="card card-table mb-0">
@@ -1810,7 +1841,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                         </tr>
                                                                                                                     </thead>
                                                                                                                     <tbody class="stbody">
-                                                                                                                        <%var c=0,z1=0,z2=0;z3=0;%>
+                                                                                                                       
 
                                                                                                                             <%for(patients of user1.booking){%>
                                                                                                                                 <%var today = new Date();
@@ -1897,8 +1928,15 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                                                                                                         <%}%>
                                                                                                                                                                                                     <td class="std">
                                                                                                                                                                                                         <%if(patients.fee=='Free'){%>
-                                                                                                                                                                                                        <%=patients.fee%>
+                                                                                                                                                                                                            <%count2++;%>
+                                                                                                                                                                                                    <%=patients.fee%>
                                                                                                                                                                                                         <%}else{%>
+                                                                                                                                                                                                            <%if(patients.fee == doctor1.booking_fee){%>
+                                                                                                                                                                                                                <%count1++;%>
+                                                                                                                                                                                                                <%}else{%>
+                                                                                                                                                                                                                    <%count3++;%>
+                                                                                                                                                                                                                    <%}%>
+                                                                                                                                                                                                                    <%count=count+parseInt(patients.fee)%>
                                                                                                                                                                                                             Rs <%=patients.fee%>
                                                                                                                                                                                                             <%}%>
                                                                                                                                                                                                     </td>
@@ -1982,7 +2020,14 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                     <%}%>
                                                                                                         <%}%>
                 </div>
-
+                <div class="col-md-12" style="display:inline-flex;margin-bottom:50px;margin-left:50px;">
+                <div class="col-md-5" style="margin-top:50px;">
+                    <a href="/user/auth/google" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a>
+                </div>
+                  <div class="col-md-5" style="margin-top:50px;margin-left:20px;">
+                    <a href="/today-bill/?total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>" style="font-weight: bold;" class="btn bg-primary btn-block"><i class="fab fa-bill mr-1"></i> Generate Today Bill</a>
+                </div>
+            </div>
                 </div>
                 </div>
 

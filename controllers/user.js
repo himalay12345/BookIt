@@ -4556,6 +4556,50 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
 }
 
+module.exports.editPatient = async function(req, res) {
+    let user = await User.findById(req.query.did)
+    console.log(req.body)
+    let price;
+    if(!req.body.price)
+    {
+        price = user.booking_fee
+    }
+    if(req.body.price)
+    {
+        if(req.body.price == '1')
+        {
+            price = user.booking_fee
+        }
+
+        if(req.body.price == '2')
+        {
+            price = 'Free'
+        }
+
+        
+        if(req.body.price == '3')
+        {
+            price = req.body.price_description
+        }
+    }
+
+    let n1 = await User.update({ "booking._id": req.query.id }, {
+        '$set': {
+            
+            'booking.$.name': req.body.name,
+            'booking.$.phone': req.body.phone,
+            'booking.$.address': req.body.address,
+            'booking.$.age': req.body.age,
+            'booking.$.fee': price,
+            'booking.$.gender': req.body.gender
+            
+            
+        }
+    });
+    req.flash('success','Updated');
+    res.redirect(`/staff-booking/?id=${user._id}`)
+}
+
 // -------------------------------------------------
 
 module.exports.checkAuthentication = async function(req, res) {

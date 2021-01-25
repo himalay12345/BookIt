@@ -668,7 +668,10 @@ const userSchema = mongoose.Schema({
         },
         alt_flag:{
             type:Boolean
-        }
+        },
+        booking_over:[{
+            type:Number
+        }]
     }],
 
     education: [{

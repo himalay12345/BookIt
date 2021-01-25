@@ -3169,6 +3169,29 @@ module.exports.verifyStaffForgot = async(req,res) => {
 
 }
 
+module.exports.editPatient = async(req,res) => {
+    let user = await User.findById(req.query.did);
+    return res.render('edit-patient',{
+        title:'Edit Patient',
+        doctor:user,
+        index:req.query.index,
+        id:req.query.id
+    })
+
+}
+
+module.exports.todayBill = async(req,res) => {
+   
+    return res.render('today-bill',{
+        title:'Today Bilings',
+        count1:req.query.full,
+        count2:req.query.free,
+        count3:req.query.partial,
+        count:req.query.total,
+    })
+
+}
+
 module.exports.verifyNew = async(req,res) => {
     if(req.body.phone.length>10)
     {
@@ -3253,7 +3276,7 @@ module.exports.verifyUser = async function(req, res) {
 }
 
 module.exports.userSignup = async function(req, res) {
-
+try{
         let data = await client
             .verify
             .services(config.serviceID)
@@ -3262,7 +3285,11 @@ module.exports.userSignup = async function(req, res) {
                 to: `+91${req.body.phone}`,
                 code: req.body.otp
             });
-    
+        
+    res.status(404).json({
+        status:'expired',
+        msg:'Otp expired'
+    })
     
         if (data.status == 'approved') {
             res.json({
@@ -3278,6 +3305,16 @@ module.exports.userSignup = async function(req, res) {
             })
     
         }
+
+    }
+    catch(err)
+    {
+        console.log('error',err)
+         res.status(404).json({
+        status:'expired',
+        msg:'Otp expired'
+    })
+    }
     
 
 }

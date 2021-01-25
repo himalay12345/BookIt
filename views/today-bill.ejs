@@ -1,0 +1,167 @@
+<!DOCTYPE html> 
+<html lang="en">
+	<head>
+		<title>
+			<%=title%>
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta name="theme-color" content="#478e8e">
+		<link href="img/favicon.png" rel="icon">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="<%=assetPath('css/bootstrap-datetimepicker.min.css')%>">
+	 <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+	 <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+	 <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+		<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+
+		<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+	</head>
+	
+<!-- doccure/invoice-view  30 Nov 2019 04:12:19 GMT -->
+
+	<body>
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+		
+			<!-- Header -->
+		
+			<!-- /Header -->
+			
+			<!-- Breadcrumb -->
+			<!-- <div class="breadcrumb-bar lptop">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Invoice View</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Invoice View</h2>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- /Breadcrumb -->
+			
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-lg-8 offset-lg-2">
+							<div class="invoice-content">
+								<div class="invoice-item">
+									<div class="row">
+										<div class="col-md-6" style="margin-bottom: 15px;">
+											<div class="navbar-brand logo">
+												<img src="<%=assetPath('img/aalogo.png')%>" style="height:90px;width:210px" alt="logo">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<p class="invoice-details">
+												
+												<strong>Today Billing:</strong> &nbsp;<%=new Date().toDateString()%>
+											</p>
+										</div>
+									</div>
+								</div>
+								
+							
+								<div class="invoice-item invoice-table-wrap">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="table-responsive">
+												<table class="invoice-table table table-bordered">
+													<thead>
+                                                        <%var sum = parseInt(count1)+parseInt(count2)+parseInt(count3)%>
+														<tr>
+															<th>Description</th>
+															<th class="text-center">Total Number of patients</th>
+															<th class="text-center">Fully Paid Patients</th>
+                                                            <th class="text-right">Free Patients</th>
+                                                            <th class="text-right">Partial Fee paid Patients</th>
+                                                            <th class="text-right">Total Amount</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>General Consultation</td>
+															<td class="text-center"><%=sum%></td>
+                                                            <td class="text-center"><%=count1%></td>
+                                                            <td class="text-center"><%=count2%></td>
+                                                            <td class="text-center"><%=count3%></td>
+															<td class="text-right">Rs <%=count%></td>
+														</tr>
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="col-md-6 col-xl-4 ml-auto">
+											<div class="table-responsive">
+												<table class="invoice-table-two table">
+													<tbody>
+													<tr>
+														<th>Subtotal:</th>
+														<td><span>Rs <%=count%></span></td>
+													</tr>
+													<!-- <tr>
+														<th>Discount:</th>
+														<td><span>-10%</span></td>
+													</tr> -->
+													<tr>
+														<th>Total Amount:</th>
+														<td><span>Rs <%=count%></span></td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /Invoice Item -->
+								
+								<!-- Invoice Information -->
+								<!-- <div class="other-info">
+									<h4>Other information</h4>
+									<p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
+								</div> -->
+								<!-- /Invoice Information -->
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>		
+			<!-- /Page Content -->
+   
+			<!-- Footer -->
+			
+			<!-- /Footer -->
+		   
+		</div>
+		<script src="<%=assetPath('js/jquery.min.js')%>"></script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="<%=assetPath('js/popper.min.js')%>"></script>
+		<script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+		<script src="<%=assetPath('js/script1.js')%>"></script>
+
+		<!-- /Main Wrapper -->
+	  
+		<!-- jQuery -->
+	
+	</body>
+
+<!-- doccure/invoice-view  30 Nov 2019 04:12:20 GMT -->
+</html>
