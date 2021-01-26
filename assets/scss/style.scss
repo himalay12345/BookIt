@@ -8107,6 +8107,52 @@ html.menu-opened body {
         display: block;
         z-index:1000;
     }
+
+    .notab{
+        display:none !important;
+    }
+
+    .tabview{
+        display:block !important;
+    }
+
+    .tabfilter{
+        height:85px !important;
+    }
+
+    .tsearch{
+        margin-top:10px;
+        width:65%;
+    }
+
+    .tfilter{
+        margin-top:80px !important;
+    }
+
+    .tright{
+    max-width:185px !important;
+    }
+
+    .taddbtn{
+        min-width:100px !important;
+    }
+
+    .popup{
+        width:70% !important;
+    }
+
+    .tbadd{
+        left:51% !important;
+    }
+
+    .toverf{
+        overflow-x: auto !important;
+    }
+
+    .tpadding{
+        padding:12px 16px !important;
+    }
+
     .about-content {
         margin-bottom: 30px;
     }
@@ -8158,11 +8204,11 @@ html.menu-opened body {
     }
     .main-nav>li>a>span {
         color: #fff;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     .main-nav>li>a>b {
         color: #fff;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
     .main-nav>li {
         margin-top: 0px;

@@ -22,12 +22,15 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	<%var daten;%>
 	
 	<div class="limiter">
+	
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100">
-					<%var daten;%>
+					<h2 class="text-center" style="color:white;margin-bottom:15px;"><%=daten%></h2>
+				
 					<table>
 						<thead>
 							<tr class="table100-head">
@@ -36,7 +39,8 @@
 								<th class="column3">Age</th>
 								<th class="column4">Phone</th>
 								<th class="column5">Address</th>
-								<th class="column6">Booking Mode</th>
+								<th class="column6">Amount</th>
+								<th class="column7">Booking Mode</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -94,10 +98,11 @@ var dayOfWeek = weekday[today1.getDay()];%>
 									<td class="column3"><%=patients.age%></td>
 									<td class="column4"><%=patients.phone%></td>
 									<td class="column5"><%=patients.address%></td>
+									<td class="column6"><%=patients.fee%></td>
 									<%if(patients.type=='online'){%>
-										<td class="column6">Online</td>
+										<td class="column7">Online</td>
 										<%}else{%>
-											<td class="column6">Offline</td>
+											<td class="column7">Offline</td>
 											<%}%>
 								</tr>
 								<%}%>

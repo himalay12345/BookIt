@@ -1162,7 +1162,8 @@ module.exports.login = (req, res) => {
         return res.redirect('/')
     }
     return res.render('login', {
-        title: 'Login'
+        title: 'Login',
+        signup:'true'
     })
 }
 
@@ -3188,6 +3189,7 @@ module.exports.todayBill = async(req,res) => {
         count2:req.query.free,
         count3:req.query.partial,
         count:req.query.total,
+        date:req.query.date
     })
 
 }

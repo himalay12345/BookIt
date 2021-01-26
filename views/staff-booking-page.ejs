@@ -462,7 +462,7 @@ today=date;%>
 
                                                 <%}%>
                                                     <!-- Schedule Content -->
-                                                    <div class="schedule-cont">
+                                                    <div class="schedule-cont" style="margin-left:35px;">
                                                         <div class="row">
                                                             <div class="col-md-12">
 
@@ -1510,7 +1510,7 @@ Not Available
                                     <input type="text" placeholder="<%=daten%>" name="date" class="form-control datetimepicker">
                                     <input type="hidden" name="flag" value="true">
                                 </div>
-                                <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
+                                <button type="submit" class="btn btn-primary submit-btn msbtn taddbtn">Sort</button>
 
 
 
@@ -1572,7 +1572,7 @@ Not Available
                         </div>
                     </form>
                     </div>
-                    <a href="/booking-pdf/?id=<%=doctor1._id%>&date=<%=daten%>" ><img src="/img/pdf.png" class="npdf" style="height:40px;width:200px;position: absolute;right: 0;top:70px"></a>
+                    <%var count1=0,count2=0,count3=0,count=0;%>
 
                     <%var slots=0,sindex=0;%>
                         <%var daten;%>
@@ -1601,9 +1601,9 @@ console.log(dayOfWeek)%>
                                                                                     <%}%>
                                                                                     
                                                                                         <%if(slots <= 1){%>
-                                                                                            <%var c=0,z1=0,z2=0;z31=0,count1=0,count2=0,count3=0,count=0;%>
-                                                                                            <span><a href="/user/auth/google" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a></span> 
-                                                                                            <div class="card card-table mb-0 mpdf">
+                                                                                            <%var c=0,z1=0,z2=0;z31=0;%>
+                                                                                            <span><a href="#" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a></span> 
+                                                                                            <div class="card card-table mb-0 mpdf toverf">
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive">
                                                                                                         <table class="table table-hover table-center mb-0 stable">
@@ -1806,18 +1806,18 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <%}else{%>
-                                                                                                <%var c=0,z1=0,z2=0;z3=0,count1=0,count2=0,count3=0,count=0;%>
+                                                                                                <%var c=0,z1=0,z2=0;z3=0;%>
                                                                                                 <%for(let i1 =0 ;i1<slots;i1++){%>
                                                                                                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
                                                                                                         <li class="nav-item" style="width: 100%;">
                                                                                                             <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab">
                                                                                                                 <span style="margin-right: 30px;"> Slot <%=i1+1%> </span>
                                                                                                                  <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.schedule_time[sindex].end[i1].toUpperCase()%></span>
-                                                                                                                <span><a href="/user/auth/google" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
+                                                                                                                <span><a href="#" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
                                                                                                                 </a>
                                                                                                         </li>
                                                                                                     </ul>
-                                                                                                    <div class="card card-table mb-0">
+                                                                                                    <div class="card card-table mb-0 toverf">
                                                                                                         <div class="card-body">
                                                                                                            
                                                                                                                     <div class="table-responsive">
@@ -2021,11 +2021,14 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                         <%}%>
                 </div>
                 <div class="col-md-12" style="display:inline-flex;margin-bottom:50px;margin-left:50px;">
-                <div class="col-md-5" style="margin-top:50px;">
-                    <a href="/user/auth/google" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a>
+                <div class="col-md-5" style="margin-top:60px;">
+                    <a href="/booking-pdf/?id=<%=doctor1._id%>&date=<%=daten%>&total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>" style="background-color: tomato;border-radius: 3px;
+                        font-weight: bold;
+                        /* margin-top: 39px; */
+                        padding: 8px 75px;" ><i class="fas fa-pdf"></i>Download Pdf</a>
                 </div>
                   <div class="col-md-5" style="margin-top:50px;margin-left:20px;">
-                    <a href="/today-bill/?total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>" style="font-weight: bold;" class="btn bg-primary btn-block"><i class="fab fa-bill mr-1"></i> Generate Today Bill</a>
+                    <a href="/today-bill/?total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>&date=<%=daten%>" style="font-weight: bold;" class="btn bg-primary btn-block"><i class="fab fa-bill mr-1"></i> Generate Today Bill</a>
                 </div>
             </div>
                 </div>

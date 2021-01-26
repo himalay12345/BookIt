@@ -115,11 +115,17 @@
                     </div>
                 </li>
                 <%if(locals.user){%>
-
+                    <%var signup;%>
                     <%}else{%>
+                        <%if(signup!='true'){%>
+                            <li class="nav-item">
+                                <a class="nav-link header-login" href="/login">Login </a>
+                            </li>
+                            <%}else{%>
                         <li class="nav-item">
-                            <a class="nav-link header-login" href="/login">Login </a>
+                            <a class="nav-link header-login" href="/register">Sign Up </a>
                         </li>
+                        <%}%>
                         <%}%>
             </ul>
             <%if(locals.user){%>

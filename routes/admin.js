@@ -6,6 +6,9 @@ const adminController = require('../controllers/admin');
 
 router.get('/appointment-list',passport.checkAdminAuthentication, adminController.appointmentList);
 router.get('/application-request',passport.checkAdminAuthentication, adminController.applicationRequest);
+router.get('/premium-doctor',passport.checkAdminAuthentication, adminController.premium);
+router.get('/add-premium',passport.checkAdminAuthentication, adminController.addPremium);
+router.get('/remove-premium',passport.checkAdminAuthentication, adminController.removePremium);
 router.get('/account-change',passport.checkAdminAuthentication, adminController.accountChange);
 router.post('/approve-documents',passport.checkAdminAuthentication, adminController.approveDocuments);
 router.post('/approve-bank',passport.checkAdminAuthentication, adminController.approveBank);

@@ -68,7 +68,13 @@
 										<div class="col-md-6">
 											<p class="invoice-details">
 												
-												<strong>Today Billing:</strong> &nbsp;<%=new Date().toDateString()%>
+												<strong>Today Billing:</strong> &nbsp;
+												<%console.log(date)%>
+												<%if(date == ''){%>
+													<%=new Date().toDateString()%>
+													<%}else{%>
+														<%=date%>
+													<%}%>
 											</p>
 										</div>
 									</div>

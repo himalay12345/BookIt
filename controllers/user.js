@@ -53,7 +53,8 @@ module.exports.create = async(req, res) => {
                    
 
     req.flash('success', 'Account created successfully.Please Login!');
-    return res.redirect('/login');
+    // return res.redirect('/login');
+    return res.redirect(307, '/user/create-session');
 
 }
 
@@ -2398,6 +2399,7 @@ module.exports.bookAppointment = async(req, res) => {
         doctorid:req.body.doctorid,
         date: req.body.date,
         flag:true,
+        signup:'true',
         type:'booking'
 
         });

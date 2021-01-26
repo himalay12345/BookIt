@@ -504,7 +504,7 @@ today=date;%>
 
                                                 <%}%>
                                                     <!-- Schedule Content -->
-                                                    <div class="schedule-cont">
+                                                    <div class="schedule-cont" style="margin-left:35px;">
                                                         <div class="row">
                                                             <div class="col-md-12">
 
@@ -2168,14 +2168,14 @@ id="checkme">
                                     <input type="text" placeholder="<%=daten%>" name="date" class="form-control datetimepicker">
                                     <input type="hidden" name="flag" value="true">
                                 </div>
-                                <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
+                                <button type="submit" class="btn btn-primary submit-btn msbtn taddbtn">Sort</button>
 
 
 
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-12 smadd" style="position: absolute;top:65px;left:60%;display: inline-flex;width: 100%;">
+                    <div class="col-md-12 smadd tbadd" style="position: absolute;top:65px;left:60%;display: inline-flex;width: 100%;">
                         <%var today = new Date();
                         var dd = String(today.getDate()).padStart(2, '0');
                         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -2255,7 +2255,7 @@ console.log(dayOfWeek)%>
 
                                                                                     <%}%>
                                                                                         <%if(slots <= 1){%>
-                                                                                            <div class="card card-table mb-0">
+                                                                                            <div class="card card-table mb-0 toverf">
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive">
                                                                                                         <table class="table table-hover table-center mb-0 stable">
@@ -2435,7 +2435,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                             <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab"><span style="margin-right: 30px;"> Slot <%=i1+1%> </span> <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.old_schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.old_schedule_time[sindex].end[i1].toUpperCase()%></span></a>
                                                                                                         </li>
                                                                                                     </ul>
-                                                                                                    <div class="card card-table mb-0">
+                                                                                                    <div class="card card-table mb-0 toverf">
                                                                                                         <div class="card-body">
                                                                                                            
                                                                                                                     <div class="table-responsive">
@@ -2634,14 +2634,14 @@ var dayOfWeek = weekday[today.getDay()];%>
                                         <input type="text" placeholder="<%=daten%>" name="date" class="form-control datetimepicker">
                                         <input type="hidden" name="flag" value="true">
                                     </div>
-                                    <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
+                                    <button type="submit" class="btn btn-primary submit-btn msbtn taddbtn">Sort</button>
     
     
     
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-12 smadd" style="position: absolute;top:65px;left:60%;display: inline-flex;width: 100%;">
+                        <div class="col-md-12 smadd tbadd" style="position: absolute;top:65px;left:60%;display: inline-flex;width: 100%;">
                             <%var today = new Date();
                             var dd = String(today.getDate()).padStart(2, '0');
                             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -2691,7 +2691,7 @@ var dayOfWeek = weekday[today.getDay()];%>
     console.log(dayOfWeek)%>
                                                               
                                                                                             
-                                                                                                <div class="card card-table mb-0">
+                                                                                                <div class="card card-table mb-0 toverf">
                                                                                                     <div class="card-body">
                                                                                                         <div class="table-responsive">
                                                                                                             <table class="table table-hover table-center mb-0 stable">

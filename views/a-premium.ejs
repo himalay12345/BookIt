@@ -322,9 +322,7 @@
                                                 <th>Doctor Name</th>
                                                 <th>Speciality</th>
                                                 <th>Member Since</th>
-                                                <th>Premim</th>
                                                 <th>Application Status</th>
-                                                
 
                                             </tr>
                                         </thead>
@@ -340,12 +338,8 @@
                                                 <td><%=u.department%></td>
 
                                                 <td><%=u.createdAt.toDateString()%> <br><small></small></td>
-                                                <%if(!u.premium){%>
-                                                    <td><a href="/admin/add-premium/?id=<%=u._id%>" >Add</a></td>
-                                                    <%}else{%>
-                                                        <td><a href="/admin/remove-premium/?id=<%=u._id%>" style="color:red">Remove</a></td>
-                                                        <%}%>
-                                             
+
+                                                
 
                                                 <td>
                                                     <%if(u.approve2 == true && u.approve1 == true){%>

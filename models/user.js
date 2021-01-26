@@ -724,6 +724,9 @@ const userSchema = mongoose.Schema({
     emailverify:{
         type:Boolean
     },
+    premium:{
+        type:Boolean
+    },
 
     emailkey:{
         type:String

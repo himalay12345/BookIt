@@ -35,6 +35,28 @@ module.exports.applicationRequest = async(req, res) => {
         user: user
     })
 }
+
+module.exports.addPremium = async(req, res) => {
+    let user = await User.findOne({ step4: true, _id:req.query.id });
+    user.premium = true;
+    user.save();
+    return res.redirect('back');
+}
+
+module.exports.removePremium = async(req, res) => {
+    let user = await User.findOne({ step4: true, _id:req.query.id });
+    user.premium = false;
+    user.save();
+    return res.redirect('back');
+}
+
+module.exports.premium = async(req, res) => {
+    let user = await User.find({ step4: true ,premium:true});
+    return res.render('a-premium', {
+        title: 'Premium Doctor',
+        user: user
+    })
+}
 module.exports.accountChange = async(req, res) => {
     let user = await User.find({ account_change: true });
     return res.render('a-account-change', {
