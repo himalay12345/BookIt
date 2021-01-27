@@ -39,11 +39,13 @@
                                 <div class="col-md-7 col-lg-6 login-left">
                                     <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Register">
                                 </div>
-                                <div class="col-md-12 col-lg-6 login-right">
-                                    <div class="login-header">
-                                        <h3>Register</h3>
+                                <div class="col-md-12 col-lg-6 login-right" style="padding-left:0px;padding-right:0px;">
+                                    <div class="login-header" style="display: inline-flex; width: 100%;padding:0px 100px;border-bottom:1px solid rgba(128, 128, 128, 0.452);margin-bottom: 40px;;">
+                                        <a style="font-size:1rem;color:black;" href="/login">Login</a>
+                                        <a style="font-size:1rem;margin-left:50px;font-weight:bold;font-size:1.1rem;color:#478e8e;border-bottom: 2px solid #478e8e;" href="/register">Register</a>
+                                        <!-- <a class="btn btn-primary btn-block login-btn" href="/staff-login-page" style="width: 120px;color:white"> Staff Login</a> -->
                                     </div>
-                                   
+                                   <div style="padding-left: 15px;padding-right: 15px;">
                                     <!-- Register Form -->
                                     <form action="/verify-new/?service=sms" method="POST">
 
@@ -69,6 +71,7 @@
                                             </div>
                                         </div>
                                     </form>
+                                </div>
                                     <!-- /Register Form -->
 
                                 </div>

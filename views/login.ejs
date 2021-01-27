@@ -36,12 +36,14 @@
                                 <div class="col-md-7 col-lg-6 login-left">
                                     <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Login">
                                 </div>
-                                <div class="col-md-12 col-lg-6 login-right">
-                                    <div class="login-header" style="display: inline-flex;justify-content: space-between; width: 100%;">
-                                        <h3>Login <span>AarogyaHub</span></h3>
-                                        <a class="btn btn-primary btn-block login-btn" href="/staff-login-page" style="width: 120px;color:white"> Staff Login</a>
+                                <div class="col-md-12 col-lg-6 login-right" style="padding-left:0px;padding-right:0px;">
+                                    <div class="login-header" style="display: inline-flex; width: 100%;padding:0px 100px;border-bottom:1px solid rgba(128, 128, 128, 0.452);margin-bottom: 40px;;">
+                                        <a style="border-bottom: 2px solid #478e8e;font-weight:bold;font-size:1.1rem;color:#478e8e;" href="/login">Login</a>
+                                        <a style="font-size:1rem;margin-left:50px;color:black;" href="/register">Register</a>
+                                        <!-- <a class="btn btn-primary btn-block login-btn" href="/staff-login-page" style="width: 120px;color:white"> Staff Login</a> -->
                                     </div>
                                     <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
+                                    <div style="padding-left: 15px;padding-right: 15px;">
                                         <form action="/user/create-session" method="POST">
                                             <input type="hidden" name="doctorid" value="<%=doctorid%>">
                                             <input type="hidden" name="id" value="<%=id%>">
@@ -86,6 +88,7 @@
                                             <!-- <a class="btn btn-primary btn-block btn-lg login-btn" href="/register" style="background-color: #478e8e !important; border: none !important;">Sign Up</a> -->
                                             <div class="text-center dont-have">Don’t have an account? <a href="/register">Register</a></div>
                                         </form>
+                                    </div>
                                 </div>
                             </div>
 

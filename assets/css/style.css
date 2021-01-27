@@ -6876,7 +6876,8 @@ html.menu-opened body {
     height: auto; }
   .login-right {
     margin: 0 15px;
-    padding: 15px; }
+    padding: 15px;
+    margin-top: -70px; }
   .chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-name,
   .chat-cont-left .chat-users-list a.media .media-body > div:first-child .user-last-chat {
     max-width: 250px; }
