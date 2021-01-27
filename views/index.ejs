@@ -27,10 +27,12 @@
                                 <%if(locals.user){%>
                                     <input type="hidden" name="user" value="<%=locals.user.id%>">
                                     <%}%>
-                                        <select name="type" class="form-control select1">
+                                        <select name="type" class="form-control select1" style="margin-bottom: 15px;">
+                                            <option value="Patient">Patient</option>
                                 <option value="Doctor">Doctor</option>
-                                <option value="Patient">Patient</option>
+                               
                             </select>
+                            <span style="font-size: 0.9rem;margin-top:15px;margin-left:5px;">By signing up, I agree to</span> <span><a class="forgot-link" href="/term-condition" style="color:blue">terms & condition</a></span>
                             </div>
                         </div>
                         <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
