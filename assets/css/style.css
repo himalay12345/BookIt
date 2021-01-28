@@ -7655,6 +7655,8 @@ html.menu-opened body {
     min-width: 61px;
     height: 47px;
     padding: 0; }
+  .wsm100 {
+    width: 100% !important; }
   .phoneul {
     position: absolute;
     top: 75px;

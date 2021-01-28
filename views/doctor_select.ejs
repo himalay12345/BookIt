@@ -49,20 +49,20 @@
                                 <%var i=0,j=0;%>
                                 <%for(doc of user1.doctorids){%>
                                     <%if(type == 'booking'){%>
-                                <a class="apt-btn tcolor " href="/staff-booking/?id=<%=doc.doctorid._id%>" style="width: 50%;;">Dr. <%=doc.doctorid.name%></a>
+                                <a class="apt-btn tcolor wsm100" href="/staff-booking/?id=<%=doc.doctorid._id%>" style="width: 50%;;">Dr. <%=doc.doctorid.name%></a>
                                 <%}%>
                                 <%if(type == 'schedule'){%>
-                                    <a class="apt-btn tcolor " href="/staff-schedule-timings/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                    <a class="apt-btn tcolor wsm100" href="/staff-schedule-timings/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
                                     <%}%>
                                     <%if(type == 'tracking'){%>
-                                        <a class="apt-btn tcolor " href="/patient-tracking/?tid=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                        <a class="apt-btn tcolor wsm100" href="/patient-tracking/?tid=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
                                         <%}%>
                                         <%if(type == 'bservice'){%>
-                                            <a class="apt-btn tcolor " href="/staff-booking-service/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                            <a class="apt-btn tcolor wsm100" href="/staff-booking-service/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
                                             <%}%>
                                             <%if(type == 'oldbooking'){%>
                                                 <%if(doc.doctorid.old_flag){%>
-                                                <a class="apt-btn tcolor" href="/staff-old-booking/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
+                                                <a class="apt-btn tcolor wsm100" href="/staff-old-booking/?id=<%=doc.doctorid._id%>" style="width: 50%;">Dr. <%=doc.doctorid.name%></a>
                                                 
                                                 <%}else{%>
                                                     <%j++%>

@@ -974,6 +974,7 @@ input[type=password] {
     display: none;
 }
 
+
 #max {
     margin-top: 50px;
     padding: 9px 25px 5px;
@@ -9308,6 +9309,10 @@ html.menu-opened body {
         min-width: 61px;
         height: 47px;
         padding: 0;
+    }
+
+    .wsm100{
+        width:100% !important;
     }
     .phoneul {
         position: absolute;
