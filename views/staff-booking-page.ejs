@@ -1806,8 +1806,9 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <%}else{%>
-                                                                                                <%var c=0,z1=0,z2=0;z3=0;%>
+                                                                                               
                                                                                                 <%for(let i1 =0 ;i1<slots;i1++){%>
+                                                                                                    <%var c=0,z1=0,z2=0;z3=0;%>
                                                                                                     <ul class="nav nav-tabs nav-tabs-solid  text-center">
                                                                                                         <li class="nav-item" style="width: 100%;">
                                                                                                             <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab">
@@ -1993,6 +1994,7 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                                                                                                         <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
 
                                                                                                                                                                                                         <input type="hidden" name="bid" value="<%=user1.booking[z3]._id%>">
+                                                                                                                                                                                                        <%console.log(z3)%>
 
                                                                                                                                                                                                         <input type="hidden" name="phone" value="<%=patients.phone%>">
 
@@ -2021,14 +2023,14 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                         <%}%>
                 </div>
                 <div class="col-md-12" style="display:inline-flex;margin-bottom:50px;margin-left:50px;">
-                <div class="col-md-5" style="margin-top:60px;">
+                <div class="col-md-5 col-sm-12 pdftopm" style="margin-top:60px;">
                     <a href="/booking-pdf/?id=<%=doctor1._id%>&date=<%=daten%>&total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>" style="background-color: tomato;border-radius: 3px;
                         font-weight: bold;
                         /* margin-top: 39px; */
-                        padding: 8px 75px;" ><i class="fas fa-pdf"></i>Download Pdf</a>
+                        padding: 8px 75px;" class="pdfbtn" ><i class="fas fa-pdf"></i>Download Pdf</a>
                 </div>
-                  <div class="col-md-5" style="margin-top:50px;margin-left:20px;">
-                    <a href="/today-bill/?total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>&date=<%=daten%>" style="font-weight: bold;" class="btn bg-primary btn-block"><i class="fab fa-bill mr-1"></i> Generate Today Bill</a>
+                  <div class="col-md-5 col-sm-12 billmleft" style="margin-top:50px;margin-left:20px;">
+                    <a href="/today-bill/?total=<%=count%>&full=<%=count1%>&free=<%=count2%>&partial=<%=count3%>&date=<%=daten%>" style="font-weight: bold;" class="btn bg-primary btn-block billbtn"><i class="fab fa-bill mr-1"></i> Generate Today Bill</a>
                 </div>
             </div>
                 </div>
