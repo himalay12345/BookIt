@@ -9004,13 +9004,13 @@ html.menu-opened body {
         content: "Address";
     }
     .std:nth-of-type(6):before {
-        content: "Mode";
+        content: "Type";
     }
     .std:nth-of-type(7):before {
-        content: "Status";
+        content: "Mode";
     }
     .std:nth-of-type(8):before {
-        content: "Amount";
+        content: "Status";
     }
     .std3:nth-of-type(1):before {
         content: "Invoice No.";
@@ -9036,10 +9036,10 @@ html.menu-opened body {
     .std2:nth-of-type(4):before {
         content: "Type";
     }
+    // .std2:nth-of-type(5):before {
+    //     content: "Amount";
+    // }
     .std2:nth-of-type(5):before {
-        content: "Amount";
-    }
-    .std2:nth-of-type(6):before {
         content: "Status";
     }
     .sstd:nth-of-type(1):before {

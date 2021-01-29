@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+
+ 
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+    
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="/settings">Settings</a></li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Delete Account</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="container settings-header col-md-12" style="width:95.5%;height:60px;border-bottom:0.5px solid lightgrey;background-color: white;margin-top: 10px;margin-bottom: -30px;border-radius: 0;">
+            <h3 style="font-size: 1rem;font-weight: bold;"><a href="/settings">Settings</a></h3>
+        </div>
+        <div class="content">
+           
+            <div class="container-fluid">
+
+                <div class="row">
+                    
+                    <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
+                        <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
+                            <%if(locals.user.service != 'google'){%>
+                                <li><a href="/doctor-change-password">Change Password</a></li>
+                                <%}%>   
+                                <%if(locals.user.service != 'google'){%>
+                                    <li><a href="/two-factor">2-Factor Authentication</a></li>
+                                    <%}%>  
+                                <%if(locals.user.type != 'Staff'){%>
+                                    <li><a href="/notification-settings">Notification Settings</a></li>
+                                    <%}%>      
+                            <%if(locals.user.type == 'Doctor'){%>
+                                <li><a href="/booking-service">Booking Service</a></li>
+                            <%}%>
+                            <li><a href="/delete-account"><b>Delete Account</b></a></li>
+                            <li><a href="/user/logout" style="color: red;">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-10 col-lg-10 col-xl-10 settings-content change-pass-content" style="margin-left:-20px;border-left: 0.5px solid lighgrey;">
+                        <div class="card change-pass-card" style="border-radius: 0;border:0;">
+                            <div class="card-body" style="padding: 2.2rem;">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Two Factor Authentication</h3>
+                                        <h3 style="font-size: 0.8rem; font-weight: bold;">For better security & privacy enable 2-Factor verification so that on every login you will recieve an otp and if otp is entered correct then only you can login. </h3>
+                                        <!-- Change Password Form -->
+                                       
+                                        <!-- /Change Password Form -->
+
+                                    </div>
+                                    <form action="/two-factor" method="POST">
+                                        <%console.log(locals.user.twofactor)%>
+                                        <%if(locals.user.twofactor == true){%>
+                                    <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;">
+                                   
+                                        <span style="margin-right: 15px;"><input type="checkbox" name="flag" value="enable" checked onchange="check(this)" class="form-check cb"></span>
+                                        <span><b><p style="margin-top: -5px;">Enabled</p></b>
+                                        </div>
+                                        <%}else{%>
+                                            <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;">
+                                   
+                                                <span style="margin-right: 15px;"><input type="checkbox" name="flag" value="enable" onchange="check(this)"  class="form-check cb"></span>
+                                                <span><b><p style="margin-top: -5px;">Enable</p></b>
+                                                </div>
+                                            <%}%>
+                                        <%if(locals.user.twofactor != true){%>
+                                        <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
+                                        <span style="margin-right: 15px;"><input type="checkbox" value="disable" name="flag" onchange="check(this)" data-type="disabled" class="form-check cb" checked></span>
+                                        <span><b><p style="margin-top: -5px;">Disabled</p></b>
+                                        </div>
+                                        <%}else{%>
+
+                                            <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
+                                                <span style="margin-right: 15px;"><input type="checkbox" value="disable" name="flag" onchange="check(this)" data-type="disabled" class="form-check cb"></span>
+                                                <span><b><p style="margin-top: -5px;">Disabled</p></b>
+                                                </div>
+                                            <%}%>
+                                        <div class="submit-section">
+                                            <button type="submit" class="btn btn-primary submit-btn" style="margin-bottom:50px;">Save Changes</button>
+                                        </div>
+                                    </form>
+                                   
+                                </div>
+                               
+                            </div>
+                            
+                        </div>
+                      
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+         
+         function check(element){
+
+if(element.checked){
+var options = document.getElementById('options');
+  var checkboxes = document.getElementsByClassName('cb');
+    for(var i=0;i<checkboxes.length;i++){
+       if(checkboxes[i]!=element)
+         checkboxes[i].checked = false;
+    }
+    if(element.getAttribute('data-type')=='disabled')
+    {
+        options.classList.toggle('displayNone');
+    }
+}
+}
+
+
+function check1(element){
+
+if(element.checked){
+var options = document.getElementById('texta');
+  var checkboxes = document.getElementsByClassName('cb1');
+    for(var i=0;i<checkboxes.length;i++){
+       if(checkboxes[i]!=element)
+         checkboxes[i].checked = false;
+    }
+    if(element.getAttribute('data-type')=='others')
+    {
+        options.classList.toggle('displayNone');
+    }
+}
+}
+    </script>
+  
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+
+</html>

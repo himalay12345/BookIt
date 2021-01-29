@@ -45,7 +45,7 @@
                                     </div>
                                     <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
                                     <div style="padding-left: 15px;padding-right: 15px;">
-                                        <form action="/user/create-session" method="POST">
+                                        <form action="/user/check-two-factor" method="POST">
                                             <input type="hidden" name="doctorid" value="<%=doctorid%>">
                                             <input type="hidden" name="id" value="<%=id%>">
                                             <input type="hidden" name="booked" value="<%=booked%>">

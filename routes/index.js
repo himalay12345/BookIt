@@ -92,6 +92,12 @@ router.get('/schedule-timings', passport.checkDoctorAuthentication, homeControll
 router.get('/staff-schedule-timings', passport.checkStaffAuthentication, homeController.staffScheduleTimings);
 router.get('/search', homeController.search);
 router.get('/social-media', passport.checkAuthentication, homeController.socialMedia);
+router.get('/two-factor', passport.checkAuthentication, homeController.twoFactorSetting);
+router.post('/two-factor',passport.checkAuthentication,homeController.twoFactor);
+router.post('/verify-2factor',passport.checkAuthentication,homeController.verify2Factor)
+router.post('/verify-2factor1',homeController.verify2Factor1)
+router.post('/enable-2factor',passport.checkAuthentication, homeController.enable2Factor)
+router.post('/enable-2factorverify', homeController.enable2FactorVerify)
 router.get('/select-doctor', homeController.selectDoctor);
 router.get('/settings', passport.checkAuthentication, homeController.settings);
 router.get('/staff-login', homeController.staffLogin);

@@ -34,6 +34,7 @@ router.post('/update-medical-registration',userController.updateMedicalRegistrat
 router.post('/update-education',userController.updateEducation);
 router.post('/update-establishment',userController.updateEstablishment);
 router.post('/confirm-pay',userController.confirmPay);
+router.post('/check-two-factor',userController.checkTwoFactor);
 router.post('/manage-booking-service',userController.manageBookingService);
 router.post('/manage-notification',userController.manageNotification);
 router.post('/doctor-review',passport.checkAuthentication,userController.doctorReview);

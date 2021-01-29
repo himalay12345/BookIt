@@ -2330,6 +2330,153 @@ module.exports.staffBooking = async(req, res) => {
         user1: user1
     })
 }
+
+module.exports.enable2Factor = async(req, res) => {
+    let data = await client
+    .verify
+    .services(config.serviceID)
+    .verificationChecks
+    .create({
+        to: `+91${req.body.phone}`,
+        code: req.body.otp
+    });
+
+
+if (data.status == 'approved') {
+    let user = await User.findById(req.user.id)
+    if(req.body.flag == 'enable'){
+    user.twofactor = true;
+    user.save();
+    }else{
+        user.twofactor = false;
+        user.save();
+    }
+    if(req.body.flag == 'enable'){
+    req.flash('success','2-Factor Authentication Activated')
+    }else{
+        req.flash('error','2-Factor Authentication Deactivated')
+    }
+    return res.redirect('/two-factor')
+
+} else {
+    req.flash('error','Wrong OTP')
+    return res.render('verify-otp',{
+        title:'Verify OTP',
+        flag:req.body.flag,
+        phone:req.body.phone
+    })
+
+}
+
+}
+
+module.exports.enable2FactorVerify = async(req, res) => {
+    let data = await client
+    .verify
+    .services(config.serviceID)
+    .verificationChecks
+    .create({
+        to: `+91${req.body.phone}`,
+        code: req.body.otp
+    });
+
+
+if (data.status == 'approved') {
+    if (req.body.type == 'Staff')
+    {
+        return res.redirect(307, '/user/create-staff-session');
+    }
+    else{
+    
+    return res.redirect(307, '/user/create-session');
+    }
+
+} else {
+    req.flash('error','Wrong OTP')
+    return res.render('verify-otp1',{
+        title:'Verify OTP',
+        flag:req.body.flag,
+        phone:req.body.phone,
+        password:req.body.password,
+        type:req.body.type
+    })
+
+}
+
+}
+
+module.exports.verify2Factor = async(req, res) => {
+
+    client
+    .verify
+    .services(config.serviceID)
+    .verifications
+    .create({
+        to: `+91${req.body.phone}`,
+        channel: req.query.service
+    }).then((data) => {
+        // console.log(data);
+        return res.render('verify-otp',{
+            title:'Verify OTP',
+            flag:req.body.flag,
+            phone:req.body.phone
+        })
+    });
+}
+module.exports.verify2Factor1 = async(req, res) => {
+
+    client
+    .verify
+    .services(config.serviceID)
+    .verifications
+    .create({
+        to: `+91${req.body.phone}`,
+        channel: req.query.service
+    }).then((data) => {
+        // console.log(data);
+        return res.render('verify-otp1',{
+            title:'Verify OTP',
+            flag:req.body.flag,
+            phone:req.body.phone,
+            password:req.body.password,
+            type:req.body.type
+        })
+    });
+}
+
+
+module.exports.twoFactorSetting = async(req, res) => {
+    return res.render('two-factor',{
+        title:'2-Factor Authentication'
+    })
+}
+
+module.exports.twoFactor = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    if(req.body.flag)
+    {
+        console.log(req.body)
+       
+            client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${user.phone}`,
+                channel: 'sms'
+            }).then((data) => {
+                // console.log(data);
+                return res.render('verify-otp',{
+                    title:'Verify OTP',
+                    flag:req.body.flag,
+                    phone:user.phone
+                })
+            });
+
+           
+        
+    }
+}
 module.exports.staffOldBooking = async(req, res) => {
     
     

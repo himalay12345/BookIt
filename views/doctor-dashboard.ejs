@@ -390,8 +390,12 @@
                                                                                                                                             <td class="std2">General</td>
                                                                                                                                             <%var zz = 0;%>
 
-
+                                                                                                                                                <%if(!patients.old_flag){%>
+                                                                                                                                                
                                                                                                                                                 <td class="std2">New Patient</td>
+                                                                                                                                                <%}else{%>
+                                                                                                                                                    <td class="std2">Old Patient</td>
+                                                                                                                                                    <%}%>
 
 
 
@@ -425,9 +429,11 @@
                                                                                 <thead class="sthead">
                                                                                     <tr class="str">
                                                                                         <th class="sth">Patient Name</th>
+                                                                                        <th class="sth">Booking Gender</th>
                                                                                         <th class="sth">Patient Age</th>
                                                                                         <th class="sth">Patient Phone</th>
                                                                                         <th class="sth">Patient Address</th>
+                                                                                        <th class="sth">Type</th>
                                                                                         <th class="sth">Booking Mode</th>
                                                                                         <th class="text-center sth">Status</th>
 
@@ -483,10 +489,14 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                             <%=patients.name%> <span>#PT00<%=++c%></span></a>
                                                                                                                                                                     </h2>
                                                                                                                                                                 </td>
-
+                                                                                                                                                                <td class="std">
+                                                                                                                                                                    <%=patients.gender%>
+                                                                                                                                                                </td>
                                                                                                                                                                 <td class="std">
                                                                                                                                                                     <%=patients.age%>
                                                                                                                                                                 </td>
+
+                                                                                                                                                             
 
                                                                                                                                                                 <td class="std">
                                                                                                                                                                     <%=patients.phone%>
@@ -495,6 +505,12 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                 <td class="std">
                                                                                                                                                                     <%=patients.address%>
                                                                                                                                                                 </td>
+                                                                                                                                                                <%if(!patients.old_flag){%>
+                                                                                                                                                
+                                                                                                                                                                    <td class="std">New Patient</td>
+                                                                                                                                                                    <%}else{%>
+                                                                                                                                                                        <td class="std">Old Patient</td>
+                                                                                                                                                                        <%}%>
                                                                                                                                                                 <%if(patients.type=='online'){%>
                                                                                                                                                                     <td class="std"><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
                                                                                                                                                                     <%}else{%>

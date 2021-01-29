@@ -58,6 +58,51 @@ module.exports.create = async(req, res) => {
 
 }
 
+module.exports.checkTwoFactor = async(req, res) => {
+let user = await User.findOne({phone:req.body.phone,password:req.body.password,service:'phone'})
+console.log(user.type,user.twofactor)
+if(user)
+{
+if(user.twofactor == true)
+{
+    client
+    .verify
+    .services(config.serviceID)
+    .verifications
+    .create({
+        to: `+91${req.body.phone}`,
+        channel: 'sms'
+    }).then((data) => {
+        // console.log(data);
+        return res.render('verify-otp1',{
+            title:'Verify OTP',
+            phone:req.body.phone,
+            password:req.body.password,
+            flag:'check',
+            type:user.type
+        })
+    });
+   
+}
+
+else{
+    if(user.type == 'Staff')
+    {
+        return res.redirect(307, '/user/create-staff-session'); 
+
+    }
+    else{
+    return res.redirect(307, '/user/create-session'); 
+    } 
+}
+}
+
+else{
+    req.flash('error','Invalid Username/Password')
+    return res.redirect('back');
+}
+}
+
 module.exports.createStaff = async(req, res) => {
 
     let doctor = await User.findById(req.body.id);
@@ -1849,6 +1894,15 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + staff.phone
+                })
+                .then(message => console.log(message.sid));
             if (user.email) {
                 appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,b,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
             }
@@ -2080,6 +2134,15 @@ module.exports.verifyPayment = async(req, res) => {
                     alphanumeric_id : "AarogyaHub",
                     statusCallback: 'http://postb.in/1234abcd',
                     to: '+91' + user.phone
+                })
+                .then(message => console.log(message.sid));
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + staff.phone
                 })
                 .then(message => console.log(message.sid));
             if (user.email) {
@@ -3221,7 +3284,7 @@ module.exports.bookOldAppointment = async(req, res) => {
 
                   client.messages
                   .create({
-                     body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                     body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                      from: '+12019755459',
                      statusCallback: 'http://postb.in/1234abcd',
                      to: '+91'+req.body.phone
@@ -3410,7 +3473,7 @@ module.exports.bookOldAppointment = async(req, res) => {
     
                       client.messages
                       .create({
-                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
+                         body: 'CONFIRMED Free Consultation Appointment for '+ req.body.date  + ' with Dr. ' + user1.name+ '. The clinic details are ' +user1.clinicname+ ', ' +user1.cliniccity+ ', '  +user1.clinicaddr+ ', Ph: +91' +staff.phone+ '. Please show this SMS at the clinic front-desk before your appointment.',
                          from: '+12019755459',
                          statusCallback: 'http://postb.in/1234abcd',
                          to: '+91'+req.body.phone

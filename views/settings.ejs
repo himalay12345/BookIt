@@ -65,6 +65,9 @@
                             <%if(locals.user.service != 'google'){%>
                             <li><a href="/doctor-change-password">Change Password</a></li>
                             <%}%>
+                            <%if(locals.user.service != 'google'){%>
+                                <li><a href="/two-factor">2-Factor Authentication</a></li>
+                                <%}%>
                             <%if(locals.user.type != 'Staff'){%>
                                 <li><a href="/notification-settings">Notification Settings</a></li>
                                 <%}%>

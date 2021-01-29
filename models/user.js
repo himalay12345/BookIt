@@ -15,6 +15,9 @@ const userSchema = mongoose.Schema({
     dob: {
         type: String
     },
+    twofactor:{
+        type:Boolean
+    },
     bloodgroup: {
         type: String
     },
