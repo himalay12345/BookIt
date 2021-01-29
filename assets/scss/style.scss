@@ -9125,6 +9125,11 @@ html.menu-opened body {
         transition: 0.5s ease;
         cursor: pointer;
     }
+
+    .no_margin_left
+    {
+        margin-left:0px !important;
+    }
     .no-show-mobile {
         display: none;
     }

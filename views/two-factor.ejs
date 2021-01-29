@@ -37,7 +37,7 @@
                                 <li class="breadcrumb-item active" aria-current="page"><a href="/settings">Settings</a></li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Delete Account</h2>
+                        <h2 class="breadcrumb-title">2-Factor Authentication</h2>
                     </div>
                 </div>
             </div>
@@ -100,13 +100,13 @@
                                                 </div>
                                             <%}%>
                                         <%if(locals.user.twofactor != true){%>
-                                        <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
+                                        <div class="col-md-3 nots-span no_margin_left" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
                                         <span style="margin-right: 15px;"><input type="checkbox" value="disable" name="flag" onchange="check(this)" data-type="disabled" class="form-check cb" checked></span>
                                         <span><b><p style="margin-top: -5px;">Disabled</p></b>
                                         </div>
                                         <%}else{%>
 
-                                            <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
+                                            <div class="col-md-3 nots-span no_margin_left" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
                                                 <span style="margin-right: 15px;"><input type="checkbox" value="disable" name="flag" onchange="check(this)" data-type="disabled" class="form-check cb"></span>
                                                 <span><b><p style="margin-top: -5px;">Disabled</p></b>
                                                 </div>
