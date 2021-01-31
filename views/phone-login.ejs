@@ -32,7 +32,7 @@
 
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-
+                        <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
                         <!-- Register Content -->
                         <div class="account-content">
                             <div class="row align-items-center justify-content-center">
@@ -51,6 +51,15 @@
 
                                         <div class="form-group form-focus">
                                             <input type="text" name="phone" class="form-control floating">
+                                            <input type="hidden" name="doctorid" value="<%=doctorid%>">
+                                            <input type="hidden" name="id" value="<%=id%>">
+                                            <input type="hidden" name="booked" value="<%=booked%>">
+                                            <input type="hidden" name="available" value="<%=available%>">
+                                            <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                            <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                            <input type="hidden" name="flag" value="<%=flag%>">
+                                            <input type="hidden" name="date" value="<%=date%>">
+                                            <input type="hidden" name="type" value="<%=type%>">
                                             <label class="focus-label">Mobile Number</label>
                                         </div>
 

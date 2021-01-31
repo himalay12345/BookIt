@@ -98,6 +98,7 @@ router.post('/verify-2factor',passport.checkAuthentication,homeController.verify
 router.post('/verify-2factor1',homeController.verify2Factor1)
 router.post('/enable-2factor',passport.checkAuthentication, homeController.enable2Factor)
 router.post('/enable-2factorverify', homeController.enable2FactorVerify)
+router.get('/encrypt-password',homeController.encryptPassword)
 router.get('/select-doctor', homeController.selectDoctor);
 router.get('/settings', passport.checkAuthentication, homeController.settings);
 router.get('/staff-login', homeController.staffLogin);

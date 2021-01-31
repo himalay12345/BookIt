@@ -1,29 +1,45 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 passport.use(new localStrategy({
     usernameField: 'phone',
     passReqToCallback: true
 }, function(req, phone, password, done) {
-        User.findOne({ phone: phone , service:'phone' }, function(err, user) {
+        User.findOne({ phone: phone , service:'phone' }, async function(err, user) {
             if (err) {
                 console.log('Error in finding patient data in passport', err);
                 return done(err);
             }
 
+            if( user && user.encrypt)
+            {
+               
+                let isEqual = await bcrypt.compare(password,user.password)
+               
+                if(isEqual){
+                    console.log('hii');
+                    return done(null, user);
+                }
+                else{
+                
+                    req.flash('error', 'Invalid Username/Password');
+                    return done(null, false);
+                }
+            }
+
+            else{
+
             if (!user || user.password != password) {
 
                 
                 req.flash('error', 'Invalid Username/Password');
-                // res.json({
-                //     status:true,
-                //     msg:'Invalid Username or Password'
-                // })
                 return done(null, false);
             }
 
             return done(null, user);
+        }
         });
     
 }));

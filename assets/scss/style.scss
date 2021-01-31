@@ -9125,7 +9125,9 @@ html.menu-opened body {
         transition: 0.5s ease;
         cursor: pointer;
     }
-
+#dlist{
+    max-height:350px !important;
+}
     .no_margin_left
     {
         margin-left:0px !important;

@@ -38,6 +38,7 @@
                     <div class="col-md-8 offset-md-2">
 
                         <!-- Register Content -->
+                        <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
                         <div class="account-content">
                             <div class="row align-items-center justify-content-center">
                                 <div class="col-md-7 col-lg-6 login-left">
@@ -61,6 +62,14 @@
                                             <label for="text" style="margin-left: 5px; font-weight: bold;">OTP</label>
                                             <input type="text" name="otp" id="text" style="font-size: 0.9rem;" class="form-control floating" placeholder="Please enter here the 6 digit OTP to verify ">
                                             <input type="hidden" name="phone" value="<%=phone%>">
+                                            <input type="hidden" name="doctorid" value="<%=doctorid%>">
+                                            <input type="hidden" name="id" value="<%=id%>">
+                                            <input type="hidden" name="booked" value="<%=booked%>">
+                                            <input type="hidden" name="available" value="<%=available%>">
+                                            <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                            <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                            <input type="hidden" name="flag" value="<%=flag%>">
+                                            <input type="hidden" name="date" value="<%=date%>">
                                             <input type="hidden" name="type" value="<%=type%>">
                                            
                                         </div>
@@ -78,10 +87,27 @@
 
                                     <form id="myform" method="POST" action="/verify-new/?service=call">
                                         <input type="hidden" name="phone" value="<%=phone%>">
+                                     
+                                        <input type="hidden" name="doctorid" value="<%=doctorid%>">
+                                        <input type="hidden" name="id" value="<%=id%>">
+                                        <input type="hidden" name="booked" value="<%=booked%>">
+                                        <input type="hidden" name="available" value="<%=available%>">
+                                        <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                        <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                        <input type="hidden" name="flag" value="<%=flag%>">
+                                        <input type="hidden" name="date" value="<%=date%>">
                                         <input type="hidden" name="type" value="<%=type%>">
                                     </form>
                                     <form id="myform1" method="POST" action="/verify-new/?service=sms">
                                         <input type="hidden" name="phone" value="<%=phone%>">
+                                        <input type="hidden" name="doctorid" value="<%=doctorid%>">
+                                        <input type="hidden" name="id" value="<%=id%>">
+                                        <input type="hidden" name="booked" value="<%=booked%>">
+                                        <input type="hidden" name="available" value="<%=available%>">
+                                        <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                        <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                        <input type="hidden" name="flag" value="<%=flag%>">
+                                        <input type="hidden" name="date" value="<%=date%>">
                                         <input type="hidden" name="type" value="<%=type%>">
                                     </form>
 

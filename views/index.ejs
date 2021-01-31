@@ -1104,6 +1104,7 @@ $('#searchkd').on('keyup', function()
 {
     var value = $(this).val()
     console.log(value);
+    
     var data  = searchTable(value,<%-ar%>)
     buildTable(data);
 })
@@ -1146,7 +1147,7 @@ function buildTable(data){
     
 $('#searchkd1').on('keyup', function()
 {
-   
+   var valuesliced;
     var value = $(this).val()
     $('#searchul1').addClass('displayNone')
     if(value == '')
@@ -1154,9 +1155,101 @@ $('#searchkd1').on('keyup', function()
         $('#searchul1').removeClass('displayNone')
     }
     console.log(value);
+    
+    if(value.length>=3)
+    {
+        if(value.length>=3)
+        {
+        valuesliced = value.toString().slice(0,3);
+        console.log(valuesliced)
+        }
+      
+   
+    if(valuesliced == 'dr.' && value.length>=4)
+    {
+        valuesliced = value.toString().slice(0,4);
+        if(valuesliced == 'dr. '){
+        var data  = searchTabledr1(value,<%-ar%>)
+        }else{
+            var data  = searchTabledr(value,<%-ar%>) 
+        } 
+        buildTable1(data); 
+    }
+    if(valuesliced == 'dr ')
+    {
+        var data  = searchTabledr(value,<%-ar%>) 
+        buildTable1(data); 
+    }
+    if(valuesliced == 'Dr.')
+    {
+        var data  = searchTabledr(value,<%-ar%>) 
+        buildTable1(data); 
+    }
+    if(valuesliced == 'Dr.' && value.length>=4)
+    {
+        valuesliced = value.toString().slice(0,4);
+        if(valuesliced == 'Dr. '){
+            var data  = searchTabledr1(value,<%-ar%>) 
+        }else{
+            var data  = searchTabledr1(value,<%-ar%>) 
+        } 
+        
+        buildTable1(data); 
+    }
+    if(valuesliced == 'Dr ')
+    {
+        var data  = searchTabledr(value,<%-ar%>) 
+        buildTable1(data); 
+    }
+    else{
     var data  = searchTable(value,<%-ar%>)
     buildTable1(data);
+}
+}
+
+else{
+    var data  = searchTable(value,<%-ar%>)
+    buildTable1(data);
+}
 })
+
+function searchTabledr(value1,data){
+    var fdata = []
+    var value2 = value1.slice(3);
+    $.each(data, function( key, value ) {
+        value2 = value2.toLowerCase();
+        var name = value.name.toLowerCase();
+        console.log(value2,name)
+        
+        if(name.includes(value2) && value2 !='')
+        {
+            fdata.push(value)
+        }
+}
+
+);
+
+return fdata;
+}
+
+function searchTabledr1(value1,data){
+    var fdata = []
+    var value2 = value1.slice(4);
+    $.each(data, function( key, value ) {
+        value2 = value2.toLowerCase();
+        var name = value.name.toLowerCase();
+        console.log(value2,name)
+        
+        if(name.includes(value2) && value2 !='')
+        {
+            fdata.push(value)
+        }
+}
+
+);
+
+return fdata;
+}
    
 
 function searchTable1(value1,data){

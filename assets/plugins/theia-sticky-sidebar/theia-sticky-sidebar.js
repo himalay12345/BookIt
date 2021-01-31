@@ -370,4 +370,4 @@
     }
 })(jQuery);
 
-//# sourceMappingURL=maps/theia-sticky-sidebar.js.map
+

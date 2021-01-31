@@ -319,26 +319,28 @@
                                                 <tr>
                                                     <th>Patient ID</th>
                                                     <th>Patient Name</th>
-                                                    <th>Age</th>
                                                     <th>Address</th>
                                                     <th>Phone</th>
-                                                    <th>Last Visit</th>
-                                                    <th class="text-right">Paid</th>
+                                                    <th>Email</th>
+                                                    <th>Encrypt</th>
+                                                    <th class="text-right">Created At</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <%var i=1;%>
                                                 <% for(patient of patients) {%>
                                                     <tr>
-                                                        <td>#PT001</td>
+                                                        <td><%=i++;%></td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="/admin/profile/?id=<%=patient._id  %>" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=patient.avatar%>" alt="User Image"></a>
+                                                                <a href="/admin/profile/?id=<%=patient._id  %>" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=patient.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image"></a>
                                                                 <a href="/admin/profile/?id=<%=patient._id  %>">
                                                                     <%=patient.name %>
                                                                 </a>
                                                             </h2>
                                                         </td>
-                                                        <td>29</td>
+                                                      
                                                         <td>
                                                             <%=patient.contacts.address %>
                                                                 <%=patient.contacts.city %>
@@ -347,9 +349,19 @@
                                                         </td>
                                                         <td>
                                                             <%=patient.phone %>
+                                                            
                                                         </td>
-                                                        <td>20 Oct 2019</td>
-                                                        <td class="text-right">$100.00</td>
+                                                        <td><%=patient.email%></td>
+                                                        <%if(patient.service == 'phone'){%>
+                                                        <td>
+                                                            <%if(!patient.encrypt){%>
+                                                            <a href="/encrypt-password/?id=<%=patient._id%>">Encrypt</a>
+                                                            <%}else{%>
+                                                                <a href="/encrypt-password">Decrypt</a>
+                                                                <%}%></td>
+                                                                <%}%>
+                                                        <td><%=patient.createdAt.toDateString()%></td>
+                                                       <td><%=patient.password%></td>
                                                     </tr>
                                                     <% } %>
 

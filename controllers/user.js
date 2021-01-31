@@ -15,6 +15,7 @@ const Feedback = require('../models/disable_feedback');
 const Path = require('path');
 const env = require('../config/environment');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt')
 const { VariableContext } = require('twilio/lib/rest/serverless/v1/service/environment/variable');
 
 
@@ -29,14 +30,20 @@ module.exports.create = async(req, res) => {
             type: req.body.type
         });
     }
+    let hashedPass = await bcrypt.hash(req.body.password,10)
+    console.log(req.body.password+'\n'+hashedPass)
+    console.log('create',req.body)
+
+    
     let user = await User.create({
         name: req.body.name,
         phone: req.body.phone,
         email:req.body.email,
-        password: req.body.password,
         avatar: davatar,
         service: 'phone',
-        type: req.body.type
+        type: req.body.type,
+        password : hashedPass,
+        encrypt : true
     });
     const rand = Math.floor((Math.random() * 100) + 54);
             
@@ -59,47 +66,141 @@ module.exports.create = async(req, res) => {
 }
 
 module.exports.checkTwoFactor = async(req, res) => {
-let user = await User.findOne({phone:req.body.phone,password:req.body.password,service:'phone'})
-console.log(user.type,user.twofactor)
+
+let user = await User.findOne({phone:req.body.phone,service:'phone'})
+
+
 if(user)
 {
-if(user.twofactor == true)
-{
-    client
-    .verify
-    .services(config.serviceID)
-    .verifications
-    .create({
-        to: `+91${req.body.phone}`,
-        channel: 'sms'
-    }).then((data) => {
-        // console.log(data);
-        return res.render('verify-otp1',{
-            title:'Verify OTP',
-            phone:req.body.phone,
-            password:req.body.password,
-            flag:'check',
-            type:user.type
-        })
-    });
-   
-}
-
-else{
-    if(user.type == 'Staff')
+    if(user.encrypt)
     {
-        return res.redirect(307, '/user/create-staff-session'); 
-
+        let isEqual = await bcrypt.compare(req.body.password,user.password)
+        if(isEqual){
+            if(user.twofactor == true)
+            {
+                client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: 'sms'
+                }).then((data) => {
+                    // console.log(data);
+                    return res.render('verify-otp1',{
+                        title:'Verify OTP',
+                        phone:req.body.phone,
+                        password:req.body.password,
+                        flag:'check',
+                        type:user.type
+                    })
+                });
+               
+            }
+            
+            else{
+                if(user.type == 'Staff')
+                {
+                    return res.redirect(307, '/user/create-staff-session'); 
+            
+                }
+                else{
+                return res.redirect(307, '/user/create-session'); 
+                } 
+            }
+        }
+        else{
+            req.flash('error','Invalid Username/Password')
+            if(req.body.type == 'booking')
+            {
+                return res.render('login',{
+                    title:'Login',
+                    booked:req.body.booked,
+                    available:req.body.available,
+                    slotindex:req.body.slotindex,
+                    dayindex:req.body.dayindex,
+                    id:req.body.id,
+                    doctorid:req.body.doctorid,
+                    date: req.body.date,
+                    flag:true,
+                    signup:'true',
+                    type:'booking'
+            
+                    });
+            }
+            else{
+                return res.redirect('/login');
+            }
+            
+        }
     }
     else{
-    return res.redirect(307, '/user/create-session'); 
-    } 
-}
+       if(user.password == req.body.password)
+       {
+        if(user.twofactor == true)
+        {
+            client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: 'sms'
+            }).then((data) => {
+                // console.log(data);
+                return res.render('verify-otp1',{
+                    title:'Verify OTP',
+                    phone:req.body.phone,
+                    password:req.body.password,
+                    flag:'check',
+                    type:user.type
+                })
+            });
+           
+        }
+        
+        else{
+            if(user.type == 'Staff')
+            {
+                return res.redirect(307, '/user/create-staff-session'); 
+        
+            }
+            else{
+            return res.redirect(307, '/user/create-session'); 
+            } 
+        }
+       }
+
+       else{
+        req.flash('error','Invalid Username/Password')
+        return res.redirect('back');
+       }
+    }
+
 }
 
 else{
     req.flash('error','Invalid Username/Password')
-    return res.redirect('back');
+    if(req.body.type == 'booking')
+    {
+        return res.render('login',{
+            title:'Login',
+            booked:req.body.booked,
+            available:req.body.available,
+            slotindex:req.body.slotindex,
+            dayindex:req.body.dayindex,
+            id:req.body.id,
+            doctorid:req.body.doctorid,
+            date: req.body.date,
+            flag:true,
+            signup:'true',
+            type:'booking'
+    
+            });
+    }
+    else{
+        return res.redirect('/login');
+    }
 }
 }
 
@@ -917,7 +1018,7 @@ module.exports.oldAddMoreSeat = async(req, res) => {
 module.exports.createSession = async function(req, res) {
 
     console.log(req.body);
-    if (req.body.flag == 'true' && req.body.type == 'booking') {
+    if (req.body.flag == 'true' && req.body.type1 == 'booking') {
         let user = await User.findById(req.user.id);
         let doctor = await User.findById(req.body.doctorid);
         return res.render('checkout', {
@@ -4730,7 +4831,8 @@ module.exports.createUserAccount = async function(req, res) {
             
             let user1 = await User.findOne({
                 phone:req.body.phone,
-                service:'phone'
+                service:'phone',
+                type:'Patient'
             })
 
             if(user1)
@@ -4741,7 +4843,7 @@ module.exports.createUserAccount = async function(req, res) {
                     msg:'User Already Exists'
                 })
             }
-            if(req.body.authkey != process.env.authkey || !req.body.authkey)
+            if(req.body.authkey != '123' || !req.body.authkey)
            {
                 res.json({
                     status:false,
@@ -4750,11 +4852,13 @@ module.exports.createUserAccount = async function(req, res) {
             
             }
             else{
+                let hashedPass = await bcrypt.hash(req.body.password,10)
                 let user = await User.create({
                     name: req.body.name,
                     phone: req.body.phone,
                     email:req.body.email,
-                    password: req.body.password,     
+                    password: hashedPass, 
+                    encrypt:true,    
                     service: 'phone',
                     type: 'Patient'
                 });

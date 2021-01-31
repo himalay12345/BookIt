@@ -37,13 +37,18 @@
                                 <div class="col-md-7 col-lg-6 login-left">
                                     <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Login">
                                 </div>
+                                <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
                                 <div class="col-md-12 col-lg-6 login-right" style="padding-left:0px;padding-right:0px;">
                                     <div class="login-header" style="display: inline-flex; width: 100%;padding:0px 100px;border-bottom:1px solid rgba(128, 128, 128, 0.452);margin-bottom: 40px;;">
-                                        <a style="border-bottom: 2px solid #478e8e;font-weight:bold;font-size:1.1rem;color:#478e8e;" href="/login">Login</a>
-                                        <a style="font-size:1rem;margin-left:50px;color:black;" href="/register">Register</a>
+                                        <a style="border-bottom: 2px solid #478e8e;font-weight:bold;font-size:1.1rem;color:#478e8e" href="/login">Login</a>
+                                        <%if(type=='booking'){%>
+                                        <a style="font-size:1rem;margin-left:50px;color:black;" href="/register/?doctorid=<%=doctorid%>&id=<%=id%>&booked=<%=booked%>&available=<%=available%>&slotindex=<%=slotindex%>&dayindex=<%=dayindex%>&flag=<%=flag%>&date=<%=date%>&type=<%=type%>">Register</a>
+                                        <%}else{%>
+                                            <a style="font-size:1rem;margin-left:50px;color:black;" href="/register">Register</a>
+                                        <%}%>
                                         <!-- <a class="btn btn-primary btn-block login-btn" href="/staff-login-page" style="width: 120px;color:white"> Staff Login</a> -->
                                     </div>
-                                    <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
+                                   
                                     <div style="padding-left: 15px;padding-right: 15px;">
                                         <form action="/user/check-two-factor" method="POST">
                                             <input type="hidden" name="doctorid" value="<%=doctorid%>">
@@ -54,7 +59,7 @@
                                             <input type="hidden" name="dayindex" value="<%=dayindex%>">
                                             <input type="hidden" name="flag" value="<%=flag%>">
                                             <input type="hidden" name="date" value="<%=date%>">
-                                            <input type="hidden" name="type" value="<%=type%>">
+                                            <input type="hidden" name="type1" value="<%=type%>">
                                             <div class="form-group form-focus">
                                                 <input type="text" name="phone" class="form-control floating" required>
                                                 <label class="focus-label">Mobile number</label>
@@ -87,7 +92,11 @@
                                                     <%}%>
                                             </div>
                                             <!-- <a class="btn btn-primary btn-block btn-lg login-btn" href="/register" style="background-color: #478e8e !important; border: none !important;">Sign Up</a> -->
-                                            <div class="text-center dont-have">Don’t have an account? <a href="/register">Register</a></div>
+                                            <%if(type=='booking'){%>
+                                            <div class="text-center dont-have">Don’t have an account? <a href="/register/?doctorid=<%=doctorid%>&id=<%=id%>&booked=<%=booked%>&available=<%=available%>&slotindex=<%=slotindex%>&dayindex=<%=dayindex%>&flag=<%=flag%>&date=<%=date%>&type=<%=type%>">Register</a></div>
+                                            <%}else{%>
+                                                <div class="text-center dont-have">Don’t have an account? <a href="/register">Register</a></div>
+                                                <%}%>
                                         </form>
                                     </div>
                                 </div>

@@ -33,6 +33,7 @@
 
                         <!-- Register Content -->
                         <div class="account-content">
+                            <%var booked,id,doctorid,available,slotindex,dayindex,flag,type,date;%>
                             <div class="row align-items-center justify-content-center">
                                 <div class="col-md-7 col-lg-6 login-left">
                                     <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Register">
@@ -44,6 +45,16 @@
 
                                     <!-- Register Form -->
                                     <form action="/user/create" method="POST">
+                                        <input type="hidden" name="doctorid" value="<%=doctorid%>">
+                                        <input type="hidden" name="id" value="<%=id%>">
+                                        <input type="hidden" name="booked" value="<%=booked%>">
+                                        <input type="hidden" name="available" value="<%=available%>">
+                                        <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                        <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                        <input type="hidden" name="flag" value="<%=flag%>">
+                                        <input type="hidden" name="date" value="<%=date%>">
+                                        <input type="hidden" name="type1" value="<%=type%>">
+                                     
                                         <div class="form-group form-focus">
 
                                             <input type="text" id="mobile" name="phone" value="<%=phone%>" required class="form-control floating" readonly>

@@ -11,6 +11,7 @@ const shortid = require('shortid');
 const Razorpay = require('razorpay');
 const env = require('../config/environment');
 const emailVerification = require('../mailers/email-otp');
+const bcrypt = require('bcrypt')
 
  
 
@@ -150,7 +151,8 @@ module.exports.home = async(req, res) => {
             name: i.name,
             id: i.id,
             dept: i.department,
-            avatar: i.avatar
+            avatar: i.avatar,
+            address:i.clinicaddr
         });
     }
 
@@ -1526,9 +1528,28 @@ module.exports.register = (req, res) => {
     if (req.isAuthenticated()) {
         return res.redirect('/')
     }
+    if(req.query.type == 'booking')
+    {
+    return res.render('phone-login', {
+        title: 'Register',
+        booked: req.query.booked,
+        available: req.query.available,
+        slotindex: req.query.slotindex,
+        dayindex: req.query.dayindex,
+        id: req.query.id,
+        doctorid: req.query.doctorid,
+        date:req.query.date,
+        type:req.query.type,
+        flag:req.query.flag
+
+    })
+}
+
+else{
     return res.render('phone-login', {
         title: 'Register'
-    })
+    });
+}
 }
 
 
@@ -2106,10 +2127,21 @@ module.exports.createAccount = async(req, res) => {
 
 
     if (data.status == 'approved') {
+        console.log('register',req.body)
         return res.render('register', {
             title: 'Register',
             phone: req.body.phone,
-            type: req.body.type
+            type: req.body.type,
+            booked: req.body.booked,
+            available: req.body.available,
+            slotindex: req.body.slotindex,
+            dayindex: req.body.dayindex,
+            id: req.body.id,
+            doctorid: req.body.doctorid,
+            date:req.body.date,
+            flag:req.body.flag
+
+            
         });
 
     } else {
@@ -2117,7 +2149,16 @@ module.exports.createAccount = async(req, res) => {
         return res.render('phone-verify', {
             title: 'Phone verification',
             phone: req.body.phone,
-            type: req.body.type
+            type: req.body.type,
+            booked: req.body.booked,
+            available: req.body.available,
+            slotindex: req.body.slotindex,
+            dayindex: req.body.dayindex,
+            id: req.body.id,
+            doctorid: req.body.doctorid,
+            date:req.body.date,
+            flag:req.body.flag
+
         })
 
     }
@@ -2223,6 +2264,20 @@ module.exports.selectDoctor = async (req, res) => {
         type:req.query.type
 
     })
+}
+
+module.exports.encryptPassword = async(req, res) => {
+    let user = await User.findById(req.query.id);
+    let password = user.password;
+    let hashedPass = await bcrypt.hash(password,10)
+    console.log(password+'\n'+hashedPass)
+
+    user.password = hashedPass;
+    user.encrypt = true;
+    user.save();
+
+    return res.redirect('back')
+
 }
 
 module.exports.staffBooking = async(req, res) => {
@@ -3363,11 +3418,20 @@ module.exports.verifyNew = async(req,res) => {
                 to: `+91${req.body.phone}`,
                 channel: req.query.service
             }).then((data) => {
-                // console.log(data);
+                console.log('verify',req.body)
                 return res.render('phone-verify', {
                     title: 'Phone verification',
                     phone: req.body.phone,
-                    type: req.body.type
+                    type: req.body.type,
+                    booked: req.body.booked,
+                    available: req.body.available,
+                    slotindex: req.body.slotindex,
+                    dayindex: req.body.dayindex,
+                    id: req.body.id,
+                    doctorid: req.body.doctorid,
+                    date:req.body.date,
+                    flag:req.body.flag
+
 
                 });
             });
@@ -3435,10 +3499,7 @@ try{
                 code: req.body.otp
             });
         
-    res.status(404).json({
-        status:'expired',
-        msg:'Otp expired'
-    })
+    
     
         if (data.status == 'approved') {
             res.json({
