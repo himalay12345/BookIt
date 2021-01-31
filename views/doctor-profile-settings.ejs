@@ -123,7 +123,7 @@
                                             <div class="form-group">
                                                 <label>Mobile Number <span class="text-danger"></span></label>
                                                 <%if(locals.user.service == 'phone'){%>
-                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control"  >
+                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control" readonly >
                                                 <%}else{%>
                                                 <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control"  >
                                                 <%}%>
