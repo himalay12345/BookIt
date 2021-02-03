@@ -13,7 +13,8 @@ router.get('/', homeController.home);
 router.get('/add-billing', passport.checkDoctorAuthentication, homeController.addBilling);
 router.get('/add-bank', passport.checkDoctorAuthentication, homeController.addBank);
 router.get('/add-doctor', passport.checkStaffAuthentication, homeController.addDoctor);
-
+router.post('/add-entries', passport.checkStaffAuthentication, homeController.addEntries);
+router.get('/add-bill', passport.checkStaffAuthentication, homeController.addBill);
 router.get('/add-prescription', passport.checkDoctorAuthentication, homeController.addPrescription);
 router.get('/appointments', passport.checkDoctorAuthentication, homeController.appointments);
 router.get('/app-coming-soon', homeController.appComingSoon);
@@ -21,6 +22,7 @@ router.get('/appointment-detail', passport.checkPatientAuthentication, homeContr
 router.get('/blank-page', passport.checkAuthentication, homeController.blankPage);
 router.get('/booking', homeController.booking);
 router.get('/booking-pdf', homeController.bookingPdf);
+router.get('/billing-pdf', homeController.billingPdf);
 router.get('/booking-success', passport.checkAuthentication, homeController.bookingSuccess);
 router.get('/booking-service', passport.checkDoctorAuthentication, homeController.bookingServiceSetting);
 router.get('/calendar', passport.checkAuthentication, homeController.calendar);
@@ -71,6 +73,7 @@ router.get('/my-appointments', passport.checkPatientAuthentication, homeControll
 router.get('/notification-settings', passport.checkAuthentication, homeController.notificationSettings);
 router.get('/not-available', passport.checkAuthentication, homeController.notAvailable);
 router.get('/old-booking', homeController.oldBooking);
+router.get('/add-entries', passport.checkStaffAuthentication, homeController.addEntry);
 router.get('/pay', passport.checkAuthentication, homeController.pay);
 router.post('/razorpay', homeController.razorPay);
 router.get('/remove-flag', homeController.removeFlag);

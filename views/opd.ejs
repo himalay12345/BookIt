@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/login  30 Nov 2019 04:12:20 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https:/cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+</head>
+
+<body class="account-page">
+    
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <%-include('header');%>
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid" style="margin-top: 70px;">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+
+                        <!-- Login Tab Content -->
+                        <div class="account-content" style="margin-left: -50px !important;min-height: 50vh;">
+                           <h2 style="margin-top: -50px !important;font-weight:bold;text-decoration: underline;margin-bottom: 30px;;">Add Entries</h2>
+                           <%for(days of locals.user.entries){%>
+                            <span style="display: inline-flex;"><%=days.entry%></span><a href="/user/delete-entry/?id=<%=days._id%>" style="position: static;margin-right: 20px;margin-left: 5px;margin-top: 5px;" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+                            &nbsp;&nbsp;&nbsp;
+                           
+                        <%}%>
+                           <form action="/add-entries" method="POST">
+                            <div class="entry_box">
+                            <div style="display:inline-flex;width:100%;">
+                            <input type="text" name="entry" placeholder="Enter the name of the entry" style="width:50%;margin-bottom:5px;" class="form-control">
+                            <!-- <div class="col-12 col-md-2 col-lg-1" style="margin-top: -30px !important;"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div> -->
+                            </div>
+                            </div>
+                            <div class="add-more" style="margin-top: 15px;">
+                                <a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+                            </div>
+                            <div class="submit-section submit-btn-bottom">
+                                <button type="submit" id="submit_button" class="btn btn-primary submit-btn">Submit</button>
+                            </div>
+                        </form>
+                        </div>
+                        <!-- /Login Tab Content -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+   
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+
+          $(".entry_box").on('click', '.trash', function() {
+        $(this).closest('.newentry').remove();
+        return false;
+    });
+        $(".add-more").on('click', function() {
+            var entry = '  <div style="display:inline-flex;width:100%;" class="newentry">'+
+                '<input type="text" name="entry" placeholder="Enter the name of the entry" style="width:50%;margin-bottom:5px;" class="form-control">'+
+                ' <div class="col-12 col-md-2 col-lg-1" style="margin-top: -30px !important;"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="#" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>'+
+                '</div>'
+            $(".entry_box").append(entry);
+            console.log('hii')
+            return false;
+        });
+        
+    </script>
+
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- AarogyaHub/login  30 Nov 2019 04:12:20 GMT -->
+
+</html>

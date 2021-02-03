@@ -298,12 +298,22 @@
                                                             <%if(locals.user.old_flag){%>
                                                                 <a class="dropdown-item" href="/staff-old-booking/?id=<%=locals.user.doctorid%>">Old Patient Booking</a>
                                                                 <%}%>
-                                                            <%}%>     
+                                                            <%}%> 
+                                                              
                                                     <%if(aflag){%>
                                                         <a class="dropdown-item" href="/select-doctor/?type=booking">Book Appointment</a>
                                                         <%}else{%>
                                                             <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
                                                             <%}%>
+                                                            <%if(locals.user.premium){%>
+                                                                <a class="dropdown-item" href="/add-entries">Add Entries</a>
+                                                                <%}%>  
+                                                                <%if(locals.user.premium && locals.user.entries.length>0){%>
+                                                                    <a class="dropdown-item" href="/add-bill">Reception Billing</a>
+                                                                    <%}%>  
+                                                                    <%if(locals.user.premium && locals.user.entries.length>0){%>
+                                                                        <a class="dropdown-item" href="/add-bill">Lab Billing</a>
+                                                                        <%}%>  
                                                             <%if(aflag){%>
                                                                 <a class="dropdown-item" href="/select-doctor/?type=tracking">Track Patient</a>
                                                                 <%}else{%>

@@ -21,6 +21,36 @@ const userSchema = mongoose.Schema({
     encrypt:{
         type:Boolean
     },
+    entries:[{
+       entry:{
+           type:String
+       } 
+    }],
+    billings:[{
+        name:{
+            type: String  
+        },
+        address:{
+            type: String  
+        },
+        phone:{
+            type:Number
+        },
+        date:{
+            type: String  
+        },
+        dues:{
+            type:Number
+        },
+        service:[{
+            type:Object
+        }],
+        amount:[{
+            type:Object
+        }],
+       createdAt:{type: Date, default: Date.now}
+   
+    }],
     bloodgroup: {
         type: String
     },

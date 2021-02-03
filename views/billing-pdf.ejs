@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Booking Pdf</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/img/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	
+	<div class="limiter">
+	
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<h2 class="text-center" style="color:white;margin-bottom:15px;"><%=date%></h2>
+				<%var cnt =0;%>
+					<table>
+						<thead>
+							<tr class="table100-head">
+                                <th class="columna1">Patient Name</th>
+                                <th class="columna2">Patient Phone</th>
+                                <%var z1=3%>
+                                <%for(days of locals.user.entries){%>
+                                    <th class="columna<%=z1++%>"><%=days.entry%></th>
+                                    
+                                    <%cnt++%>
+                                    <%}%>
+                                    <th class="columna<%=z1++%>">Dues</th>
+                                  
+
+							</tr>
+						</thead>
+                        <tbody>
+                            <%var j= 0;%>
+                             <%for(let u of locals.user.billings){%>
+                                <%if(u.date!=date){%>
+                                    <%continue;%>
+                                <%}%>
+                             <tr style="padding: 0px !important;">
+                                 <td class="columna1">
+                                 <input type="text" name="name" value="<%=u.name%>" placeholder="Patient Name" style="margin-bottom:5px;font-weight: bold;background-color: transparent;" class="form-control" readonly>
+                             </td>
+                             <td class="columna2">
+                                 <input type="text" name="address" value="<%=u.address%>" placeholder="Patient Phone" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                             </td>
+                             <%var z2=3%>
+                             <%for(let i=0;i<cnt;i++){%>
+                                 <%if(locals.user.entries[i].entry == 'Remarks' || locals.user.entries[i].entry == 'remarks'){%>
+                                    <%if(u.amount[i] == 0){%>
+                                        <td class="columna<%=z2++%>">
+                                            <input type="text" name="amount" value="No Remarks" placeholder="Write Here" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                                        </td>
+                                    <%}else{%>
+                                        <td class="columna<%=z2++%>">
+                                            <input type="text" name="amount" value="<%=u.amount[i]%>" placeholder="Write Here" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                                        </td>
+                                    <%}%>    
+                                        
+                                
+                                 <%}else{%>
+                                  
+                                     <td class="columna<%=z2++%>">
+                                        <%if(u.amount[i]==0){%>
+                                        
+                                                <input type="text" name="amount" value="0" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                                          
+                                        <%}else{%>
+                                          
+                                                <input type="text" name="amount" value="<%=u.amount[i]%>" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                                          
+                                        <%}%>
+                                     </td>
+                                     <%}%>
+                               
+                                     <input type="hidden" name="service" value="<%=locals.user.entries[i].entry%>" style="margin-bottom:5px;background-color: transparent;"class="form-control" readonly>
+                                 
+                                 <%}%>
+                                 <td class="columna<%=z2++%>">
+                                    
+                                    <%if(u.dues== undefined){%>
+                                        <input type="text" name="dues" value="0" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                                        <%}else{%>
+                                        <input type="text" name="dues" value="<%=u.dues%>" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;background-color: transparent;"class="form-control" readonly>
+                                        <%}%>
+                             </td>
+                                
+                        
+                             </tr>
+                      
+                         <%j++%>
+                             <%}%>
+                            
+                            <%var res = 0%>
+                             <tr class="newst">
+                                 <td class="columnb1">
+                                 <input type="text" name="name" value="Sub Total : " style="margin-bottom:5px;font-weight:bold" class="form-control cform">
+                             </td>
+                             <td class="columna2">
+                                 </td>
+
+                             <%var z3=3;%>
+                             <%var tot = total.split(',');%>
+                             <%for(let i=0;i<cnt;i++){%>
+                                 <%if(locals.user.entries[i].entry == 'Remarks' || locals.user.entries[i].entry == 'remarks'){%>
+                                 <td class="columna<%=z3++%>">
+                                    
+                                 </td>
+                                 <%}else{%>
+                                     <td class="columna<%=z3++%>">
+                             <%res = res +  parseInt(tot[i])%>
+                                         <input type="text" name="amount" value="Rs <%=tot[i]%>" placeholder="Amount" style="margin-bottom:5px;font-weight:bold" class="form-control cform">
+                                     </td>
+                             <%}%>
+                               
+                                     <input type="hidden" name="service" value="<%=locals.user.entries[i].entry%>" style="margin-bottom:5px;font-weight:bold" class="form-control">
+                                 
+                                 <%}%>
+                                 <%res= res- dues%>
+                                 <td class="columna<%=z3++%>">
+                                     <input type="text" name="dues" value="Rs <%=dues%>" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;" class="form-control">
+                                 </td>
+                             </tr>
+                             
+                             <tr class="newst">
+                                <td class="columnb1">
+                                <input type="text" name="name" value="Grand Total : " style="margin-bottom:5px;font-weight:bold" class="form-control cform">
+                            </td>
+                            <td class="columna2">
+                                </td>
+
+                            <%var z3=3;%>
+                            
+                            <%for(let i=0;i<cnt;i++){%>
+                                <%if(locals.user.entries[i].entry == 'Remarks' || locals.user.entries[i].entry == 'remarks'){%>
+                                <td class="columna<%=z3++%>">
+                                   
+                                </td>
+                                <%}else{%>
+                                    <td class="columna<%=z3++%>">
+                                       
+                                    </td>
+                            <%}%>
+                              
+                                    <input type="hidden" name="service" value="<%=locals.user.entries[i].entry%>" style="margin-bottom:5px;font-weight:bold" class="form-control">
+                                
+                                <%}%>
+                                <td class="columna<%=z3++%>">
+                                    <input type="text" name="dues" value="Rs <%=res%>" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;" class="form-control">
+                                </td>
+                            </tr>
+                                
+                         </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+<!--===============================================================================================-->	
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
+
+</body>
+</html>

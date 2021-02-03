@@ -37,7 +37,7 @@ module.exports.applicationRequest = async(req, res) => {
 }
 
 module.exports.addPremium = async(req, res) => {
-    let user = await User.findOne({ step4: true, _id:req.query.id });
+    let user = await User.findOne({_id:req.query.id });
     user.premium = true;
     user.save();
     return res.redirect('back');
@@ -464,6 +464,13 @@ module.exports.patientList = async(req, res) => {
     let user = await User.find({ type: "Patient" });
     return res.render('a-patient-list', {
         title: 'Patient List',
+        patients: user
+    })
+}
+module.exports.staffList = async(req, res) => {
+    let user = await User.find({ type: "Staff" });
+    return res.render('a-staff', {
+        title: 'Staff List',
         patients: user
     })
 }

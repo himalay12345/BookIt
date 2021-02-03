@@ -209,10 +209,12 @@ module.exports.createStaff = async(req, res) => {
     let doctor = await User.findById(req.body.id);
 
     if (req.body.password == req.body.cpassword) {
+        let hashedPass = await bcrypt.hash(req.body.password,10)
         let user = await User.create({
             name: req.body.name,
             phone: req.body.phone,
-            password: req.body.password,
+            password: hashedPass,
+            encrypt:true,
             type: req.body.type,
             doctorid: req.body.id,
             service: 'phone'
@@ -1600,7 +1602,7 @@ module.exports.refund = async function(req, res) {
                         key_secret: env.razorpay_key_secret
                         
                     });
-                    var refund_amount = req.query.fee - 20 ;
+                    var refund_amount = req.query.fee - 50 ;
 
                     const response = await razorpay1.payments.refund(req.query.id,
                         
@@ -2484,6 +2486,71 @@ module.exports.payment = async(req, res) => {
 
 
 
+}
+module.exports.webhooks = async(req, res) => {
+    const secret_key = '12345678'
+    const data = crypto.createHmac('sha256', secret_key)
+    data.update(JSON.stringify(req.body))
+    const digest = data.digest('hex')
+    if (digest === req.headers['x-razorpay-signature']) {
+        console.log('request is legit')
+        //we can store detail in db and send the response
+        res.json({
+            status: 'ok'
+        })
+    } else {
+        res.status(400).send('Invalid signature');
+    }   
+}
+
+module.exports.addBill = async(req, res) => {
+    console.log(req.body)
+    let user = await User.findById(req.user.id);
+    user.billings.push({
+        name:req.body.name,
+        address:req.body.address,
+        amount:req.body.amount,
+        service:req.body.service,
+        date:req.body.date,
+        dues:req.body.dues
+    })
+
+    user.save();
+    return res.redirect('back')
+}
+
+
+module.exports.updateBill = async(req, res) => {
+    console.log(req.body)
+    let day = await User.update({ 'billings._id': req.body.id }, {
+        '$set': {
+            'billings.$.name': req.body.name,
+            'billings.$.address': req.body.address,
+            'billings.$.amount': req.body.amount,
+            'billings.$.service': req.body.service,
+            'billings.$.dues': req.body.dues
+           
+
+        }
+    });
+    req.flash('success','Updated')
+    return res.redirect('back')
+}
+
+
+module.exports.deleteBill = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.billings.pull(req.query.id);
+    user.save();
+    req.flash('success','Deleted')
+    return res.redirect('back')
+}
+module.exports.deleteEntry = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.entries.pull(req.query.id);
+    user.save();
+    req.flash('success','Deleted')
+    return res.redirect('back')
 }
 
 module.exports.removeDoctor = async(req, res) => {
@@ -4117,40 +4184,83 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
 
 module.exports.changePassword = async(req, res) => {
     let user = await User.findOne({ phone: req.body.phone, service:'phone' });
-    if (req.body.old != user.password) {
+
+    let isEqual;
+    if(user.encrypt){
+    isEqual = await bcrypt.compare(req.body.old,user.password)
+    }
+
+    else
+    {
+    if(user.password == req.body.old)
+    isEqual = true;
+
+    else
+    isEqual = false;
+    }
+    if (isEqual) {
+        if (req.body.password != req.body.confirm) {
+            req.flash('error', 'Passwords do not match!')
+            return res.redirect('back');
+        }
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
+        user.save();
+    
+        req.flash('success', 'Password changed successfully!');
+        return res.redirect('back');
+    }
+    else{
         req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
     }
 
-    if (req.body.password != req.body.confirm) {
-        req.flash('error', 'Passwords do not match!')
-        return res.redirect('back');
-    }
-
-    user.password = req.body.password;
-    user.save();
-
-    req.flash('success', 'Password changed successfully!');
-    return res.redirect('back');
+  
 }
 
 module.exports.docchangePassword = async(req, res) => {
     let user = await User.findOne({ phone: req.body.phone , service:'phone' });
-    if (req.body.old != user.password) {
+    let isEqual;
+    if(user.encrypt){
+    isEqual = await bcrypt.compare(req.body.old,user.password)
+    }
+
+    else
+    {
+    if(user.password == req.body.old)
+    isEqual = true;
+
+    else
+    isEqual = false;
+    }
+    console.log(isEqual)
+    if (isEqual) {
+        if (req.body.password != req.body.confirm) {
+            req.flash('error', 'Passwords do not match!')
+            return res.redirect('back');
+        }
+    
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
+        user.save();
+    
+        req.flash('success', 'Password changed successfully!');
+        return res.redirect('back');
+    }
+    else{
         req.flash('error', 'Wrong Old Password!');
         return res.redirect('back');
     }
 
-    if (req.body.password != req.body.confirm) {
-        req.flash('error', 'Passwords do not match!')
-        return res.redirect('back');
-    }
-
-    user.password = req.body.password;
-    user.save();
-
-    req.flash('success', 'Password changed successfully!');
-    return res.redirect('back');
+  
 }
 
 module.exports.resetPassword = async(req, res) => {
@@ -4163,7 +4273,13 @@ module.exports.resetPassword = async(req, res) => {
     }
 
         let user = await User.findOne({ phone: req.body.phone , service:'phone'});
-        user.password = req.body.password;
+
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
         user.save();
 
         req.flash('success', 'Password reset successfully');
@@ -4182,7 +4298,12 @@ module.exports.resetStaffPassword = async(req, res) => {
 
    
         let user = await User.findOne({ phone: req.body.phone, type: 'Staff',service:'phone' });
-        user.password = req.body.password;
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
         user.save();
 
         req.flash('success', 'Password reset successfully');
@@ -4327,7 +4448,20 @@ module.exports.changeBankAccount = async(req, res) => {
     }
 }
 
+module.exports.billingSortByDate = async(req, res) => {
+   
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+    console.log(str);
 
+        return res.render('add-bill', {
+            title: 'Add Bill',
+          
+            date: str
+        })
+    
+
+}
 module.exports.sortByDate = async(req, res) => {
     let patients = await User.findById(req.user.id).
     populate({
@@ -4818,7 +4952,7 @@ else{
 
 module.exports.createUserAccount = async function(req, res) {
  
-       
+
         if(req.body.password != req.body.cpassword)
         {
            res.json({

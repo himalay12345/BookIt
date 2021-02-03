@@ -48,6 +48,7 @@ router.post('/staff-old-update-schedule', userController.staffOldUpdateSchedule)
 router.post('/verify-payment',userController.verifyPayment);
 router.post('/verification',userController.verification);
 router.get('/verify-email',userController.verifyEmail);
+router.get('/webhooks/razorpay',userController.webhooks);
 router.get('/payments/refund',userController.refund);
 router.post('/pause-booking-service',userController.pauseBookingService);
 router.post('/search-doctor',userController.searchDoctor);
@@ -88,6 +89,11 @@ router.get('/delete-experience', userController.deleteExperience);
 router.get('/delete-education', userController.deleteEducation);
 router.get('/delete-clinic-photo', userController.deleteClinicPhoto);
 router.post('/edit-patient',userController.editPatient)
+router.post('/add-bill',userController.addBill)
+router.post('/billing-sort-by-date',userController.billingSortByDate)
+router.post('/update-bill',userController.updateBill)
+router.get('/delete-bill',userController.deleteBill)
+router.get('/delete-entry',userController.deleteEntry)
 // -------------------------------------------
 router.get('/validate-user',jwt.authenticateToken, userController.demo);
 router.post('/check-authentication',userController.checkAuthentication);

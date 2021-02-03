@@ -47,6 +47,7 @@ router.get('/lock-screen',passport.checkAdminAuthentication, adminController.loc
 router.get('/login', adminController.login);
 router.get('/a-test',passport.checkAdminAuthentication, adminController.test);
 router.get('/patient-list',passport.checkAdminAuthentication, adminController.patientList);
+router.get('/staff-list',passport.checkAdminAuthentication, adminController.staffList);
 router.get('/profile',passport.checkAdminAuthentication, adminController.profile);
 router.get('/phone-login',adminController.phoneLogin)
 router.post('/verify',adminController.verify);

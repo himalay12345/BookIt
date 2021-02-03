@@ -100,6 +100,33 @@ return res.render('booking-pdf',{
         console.log("Error processing request: " + err);
     }
 }
+module.exports.billingPdf = async(req, res) => {
+    try {
+        let user1 =  await User.findById(req.user.id)
+var date,str;
+if(req.query.date)
+{
+date = req.query.date;
+    str = date.split("/").join("-");
+}
+
+return res.render('billing-pdf',{
+   title:'Billing Pdf',
+    user1: user1,
+   layout:'billing-pdf',
+   date:req.query.date,
+   pcount:req.query.pcount,
+   dues:req.query.dues,
+   total:req.query.total
+   
+}); 
+        
+        
+       
+    } catch (err) {
+        console.log("Error processing request: " + err);
+    }
+}
 
 module.exports.removeFlag  = async(req, res) => {
     
@@ -2227,6 +2254,42 @@ module.exports.socialMedia = (req, res) => {
     return res.render('social-media', {
         title: 'Social Media'
     })
+}
+
+module.exports.addBill= (req, res) => {
+    return res.render('add-bill', {
+        title: 'Add Bill'
+    })
+}
+module.exports.addEntry = (req, res) => {
+    return res.render('opd', {
+        title: 'Add Entries'
+    })
+}
+
+module.exports.addEntries = async (req, res) => {
+    let user = await User.findById(req.user.id);
+    console.log(req.body)
+   if(typeof(req.body.entry) == 'string')
+   {
+    user.entries.push({
+        entry:req.body.entry})
+    user.save();
+    req.flash('success','Entry Added')
+    return res.redirect('back')
+   }
+
+   if(typeof(req.body.entry) == 'object')
+   {
+       for(let i=0;i<req.body.entry.length;i++)
+       {
+        user.entries.push({
+            entry:req.body.entry[i]})
+       }
+       user.save()
+       req.flash('success','Entries Added')
+       return res.redirect('back')     
+   }
 }
 
 module.exports.staffBookingService = async (req, res) => {
