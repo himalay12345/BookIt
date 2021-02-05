@@ -427,12 +427,24 @@ module.exports.addconsult = (req, res) => {
     })
 }
 module.exports.index = async(req, res) => {
-    let doctors = await User.find({ type: "Doctor" });
+    let doctors = await User.find({ type: "Doctor" , booking_service:true});
     let patients = await User.find({ type: "Patient" });
+    let patients1 = await User.find({ type: "Patient" }).populate({
+        path:'doctors',
+        populate:{
+            path:'did',
+            populate:{
+                path:'user'
+            }
+        }
+    });
+    let staff = await User.find({ type: "Staff" });
     return res.render('a-index', {
         title: 'Admin',
         doctors: doctors,
-        patients: patients
+        patients: patients,
+        patients1: patients1,
+        staff:staff
     })
 }
 module.exports.formValidation = (req, res) => {

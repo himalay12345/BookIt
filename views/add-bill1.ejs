@@ -40,7 +40,7 @@
                            <h2 style="margin-top: -50px !important;font-weight:bold;text-decoration: underline;margin-bottom: 30px;font-size:1.1rem">Add Bill (<%=new Date().toDateString()%>)</h2>
                             </div>
                             <div style="margin-top:-60px;margin-left: 80px;">
-                                <form action="/user/billing-sort-by-date" method="POST">
+                                <form action="/user/billing-sort-by-date1" method="POST">
                                     <div class="form-group" style="display: inline-flex;width: 150%;">
                                         <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
                                         <div class="cal-icon col-md-3" style="padding-right: 15px;">
@@ -63,21 +63,17 @@
                 var n1  = dd +'-'+mm+'-'+yyyy%> %>
                            <div class="card card-table mb-0">
                             <div class="card-body">
-                                <%var cnt =0,dues=0%>
-                                <%var ar = [];%>
+                                <%var cnt =0;%>
+                                <%var amt=0;%>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-center mb-0 stable">
                                         <thead class="sthead">
                                             <tr class="str">
                                                 <th class="sth">S.No.</th>
-                                                <th class="sth">Patient Name</th>
-                                                <th class="sth">Patient Address</th>
-                                                <%for(days of locals.user.entries){%>
-                                                    <th class="sth"><%=days.entry%></th>
-                                                    
-                                                    <%cnt++%>
-                                                    <%}%>
-                                                    <th class="sth">Dues</th>
+                                                <th class="sth">Name</th>
+                                                <th class="sth">Address</th>
+                                                <th class="sth">Amount</th>
+                                                    <th class="sth">Remarks</th>
                                                     <th class="sth">Save</th>
                                                     <th class="sth">Reset</th>
 
@@ -86,7 +82,7 @@
                                         </thead>
                                         <tbody class="nopadtable">
                                            <%var j= 0;%>
-                                            <%for(let u of locals.user.billings){%>
+                                            <%for(let u of locals.user.billings1){%>
                                                 <%console.log(date)%>
                                                 <%if(date == undefined){%>
                                                     <%if(u.date!=n1){%>
@@ -97,7 +93,7 @@
                                                         <%continue;%>
                                                     <%}%>
                                                     <%}%>
-                                                <form action="/user/update-bill/?date=<%=date%>" method="POST">
+                                                <form action="/user/update-bill1/?date=<%=date%>" method="POST">
                                             <tr style="padding: 0px !important;" class="nopadtable">
                                                 <td style="padding: 0px !important;padding-left: 15px !important;">
                                                    <span style="margin-left: 15px;font-weight: bold;"> <%=j+1%>.</span>
@@ -108,62 +104,19 @@
                                             <td style="padding: 0px !important;padding-left: 2px !important;">
                                                 <input type="text" name="address" value="<%=u.address%>" placeholder="Patient Phone" style="margin-bottom:5px;margin-top:5px;font-weight: bold;" class="form-control">
                                             </td>
-                                            <%for(let i=0;i<cnt;i++){%>
-                                                <%if(locals.user.entries[i].entry == 'Remarks' || locals.user.entries[i].entry == 'remarks'){%>
-                                                    
-                                                 <%if(u.amount[i] == 0){%>
-                                                    <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                        <input type="text" name="amount" value="No Remarks" placeholder="Write Here" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 250px !important;" class="form-control">
-                                                    </td>
-                                                <%}else{%>
-                                                    <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                        <input type="text" name="amount" value="<%=u.amount[i]%>" placeholder="Write Here" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 250px !important;"" class="form-control">
-                                                    </td>
-                                                <%}%>      
-                                              
-                                                <%}else{%>
-                                                    <%if(j==0){%>
-                                                        <%if(u.amount[i]!= 0){%>
-                                                            <%ar.push(parseInt(u.amount[i]))%>
-                                                            <%}else{%>
-                                                                <%ar.push(0)%>
-                                                                <%}%>
-                                                      
-                                                    <%}else{%>
-                                                       
-                                                            <%console.log(u.amount[i])%>
-                                                            <%var temp = ar[i];%>
-                                                            <%if(u.amount[i]!= 0){%>
-                                                          
-                                                            <%ar[i] = parseInt(temp) + parseInt(u.amount[i])%>
-                                                            <%}else{%>
-                                                                <%ar[i] = temp%>
-                                                                <%}%>
-                                                          
-                                                        <%}%>
-                                                        <%if(u.amount[i]==0){%>
-                                                            <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                                <input type="text" name="amount" value="0" placeholder="Amount" style="margin-bottom:5px;margin-top:5px;font-weight: bold;" class="form-control">
-                                                            </td>
-                                                        <%}else{%>
-                                                            <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                                <input type="text" name="amount" value="<%=u.amount[i]%>" placeholder="Amount" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width:80px !important" class="form-control">
-                                                            </td>
-                                                        <%}%>
-                                                   
-                                                    <%}%>
-                                              
-                                                    <input type="hidden" name="service" value="<%=locals.user.entries[i].entry%>" style="margin-bottom:5px;margin-top:5px;" class="form-control">
-                                                
-                                                <%}%>
+                             <%amt = amt + u.amount%>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                    <%dues+=u.dues;%>
-                                                 <%if(u.dues== undefined){%>
-                                                    <input type="text" name="dues" value="0" placeholder="Amount" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 80px !important;" class="form-control">
-                                                <%}else{%>
-                                                    <input type="text" name="dues" value="<%=u.dues%>" placeholder="Amount" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 80px !important;" class="form-control">
-                                                <%}%>
+                                                 
+                                                 
+                                                    <input type="text" name="amount" value="<%=u.amount%>" placeholder="Amount" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 150px !important;" class="form-control">
+                                               
                                             </td>
+                                            <td style="padding: 0px !important;padding-left: 2px !important;">
+                                                 
+                                                 
+                                                <input type="text" name="remarks" value="<%=u.remarks%>" placeholder="Remarks" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 350px !important;" class="form-control">
+                                           
+                                        </td>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
                                                     <%if(date != undefined){%>
                                                         <input type="hidden" name="date" value="<%=date%>" style="margin-bottom:5px;margin-top:5px;" class="form-control">
@@ -178,7 +131,7 @@
                                                     </button>
                                                 </td>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;padding-right: 15px !important;">
-                                                <a href="/user/delete-bill/?id=<%=u.id%>&date=<%=date%>" class="btn btn-sm bg-danger-light">
+                                                <a href="/user/delete-bill1/?id=<%=u.id%>&date=<%=date%>" class="btn btn-sm bg-danger-light">
 
                                                     <i class="fas fa-trash-alt"></i> Delete&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </a>
@@ -189,36 +142,28 @@
                                         </form>
                                         <%j++%>
                                             <%}%>
-                                            <%console.log('dues is'+dues)%>
-                                            <%console.log(ar,j)%>
-                                            <form action="/user/add-bill/?date=<%=date%>" method="POST">
+                                          
+                                            <form action="/user/add-bill1/?date=<%=date%>" method="POST">
                                             <tr>
                                                 <td style="padding: 0px !important;padding-left: 15px !important;">
                                                     <span style="margin-left: 15px;font-weight: bold;"> <%=j+1%>.</span>
                                                      </td>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                <input type="text" name="name" placeholder="Patient Name" style="margin-bottom:5px;margin-top:5px;" class="form-control cform">
+                                                <input type="text" name="name" placeholder="Name" style="margin-bottom:5px;margin-top:5px;width:250px;" class="form-control cform">
                                             </td>
                                             <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                <input type="text" name="address" placeholder="Patient Phone" style="margin-bottom:5px;margin-top:5px;" class="form-control cform">
+                                                <input type="text" name="address" placeholder="Phone" style="margin-bottom:5px;margin-top:5px;" class="form-control cform">
                                             </td>
-                                            <%for(let i=0;i<cnt;i++){%>
-                                                <%if(locals.user.entries[i].entry == 'Remarks' || locals.user.entries[i].entry == 'remarks'){%>
+                                          
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                    <input type="text" name="amount" placeholder="Write Here"  style="margin-bottom:5px;margin-top:5px;" class="form-control cform">
+                                                    <input type="text" name="amount" placeholder="Amount"  style="margin-bottom:5px;margin-top:5px;width:150px;" class="form-control cform">
                                                 </td>
-                                                <%}else{%>
-                                                    <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                        <input type="text" name="amount" placeholder="Amount"  style="margin-bottom:5px;margin-top:5px;" class="form-control cform">
-                                                    </td>
-                                            <%}%>
                                               
-                                                    <input type="hidden" name="service"  value="<%=locals.user.entries[i].entry%>" style="margin-bottom:5px;margin-top:5px;" class="form-control">
+                                                    <td style="padding: 0px !important;padding-left: 2px !important;">
+                                                        <input type="text" name="remarks" placeholder="Write Here"  style="margin-bottom:5px;margin-top:5px;width:350px;" class="form-control cform">
+                                                    </td>
+                                            
                                                 
-                                                <%}%>
-                                                <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                    <input type="text" name="dues"  placeholder="Amount" style="margin-bottom:5px;margin-top:5px;" class="form-control">
-                                                </td>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
                                                     <%if(date != undefined){%>
                                                         <input type="hidden" name="date" value="<%=date%>" style="margin-bottom:5px;margin-top:5px;" class="form-control">
@@ -255,7 +200,7 @@
                     
                            <div class="card card-table mb-0">
                             <div class="card-body">
-                                <%var cnt1 =0,dues1=0,exp=0;%>
+                                <%var cnt1 =0,exp=0;%>
                               
                                 <div class="table-responsive">
                                     <table class="table table-hover table-center mb-0 stable">
@@ -273,7 +218,7 @@
                                         </thead>
                                         <tbody class="nopadtable">
                                            <%var j1= 0;%>
-                                            <%for(let u1 of locals.user.expenses){%>
+                                            <%for(let u1 of locals.user.expenses1){%>
                                                 <%console.log(date)%>
                                                 <%if(date == undefined){%>
                                                     <%if(u1.date!=n1){%>
@@ -284,33 +229,26 @@
                                                         <%continue;%>
                                                     <%}%>
                                                     <%}%>
-                                                <form action="/user/update-expenses/?date=<%=date%>" method="POST">
+                                                <form action="/user/update-expenses1/?date=<%=date%>" method="POST">
                                             <tr style="padding: 0px !important;" class="nopadtable">
                                                 <td style="padding: 0px !important;padding-left: 15px !important;">
                                                    <span style="margin-left: 15px;font-weight: bold;"> <%=j1+1%>.</span>
                                                     </td>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                <input type="text" name="name" value="<%=u1.name%>" placeholder="Name" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 250px !important;" class="form-control">
+                                                <input type="text" name="name" value="<%=u1.name%>" placeholder="Name" style="margin-bottom:5px;margin-top:5px;font-weight: bold;" class="form-control">
                                             </td>
                                             <td style="padding: 0px !important;padding-left: 2px !important;">
                                                 <input type="text" name="amount" value="<%=u1.amount%>" placeholder="Amount" style="margin-bottom:5px;margin-top:5px;font-weight: bold;" class="form-control">
                                             </td>
-                                            <%if(!u1.amount){%>
+                                            
                                                 <%exp = exp + u1.amount%>
-                                            <%}else{%>
-                                                <%exp = exp + parseInt(u1.amount)%>
-                                                <%}%>
-                                          
+
                                                     
-                                                 <%if(u1.remarks == ''){%>
+                                               
                                                     <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                        <input type="text" name="remarks" value="No Remarks" placeholder="Write Here" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 250px !important;" class="form-control">
+                                                        <input type="text" name="remarks" value="<%=u1.remarks%>" placeholder="Write Here" style="margin-bottom:5px;margin-top:5px;font-weight: bold;" class="form-control">
                                                     </td>
-                                                <%}else{%>
-                                                    <td style="padding: 0px !important;padding-left: 2px !important;">
-                                                        <input type="text" name="remarks" value="<%=u1.remarks%>" placeholder="Write Here" style="margin-bottom:5px;margin-top:5px;font-weight: bold;width: 250px !important;"" class="form-control">
-                                                    </td>
-                                                <%}%>      
+                                              
                                 
                                                 
                                                 <td style="padding: 0px !important;padding-left: 2px !important;">
@@ -326,7 +264,7 @@
                                                     </button>
                                                 </td>
                                                 <td style="padding: 0px !important;padding-left: 2px !important;padding-right: 15px !important;">
-                                                <a href="/user/delete-expenses/?id=<%=u1.id%>&date=<%=date%>" class="btn btn-sm bg-danger-light">
+                                                <a href="/user/delete-expenses1/?id=<%=u1.id%>&date=<%=date%>" class="btn btn-sm bg-danger-light">
 
                                                     <i class="fas fa-trash-alt"></i> Delete&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </a>
@@ -338,7 +276,7 @@
                                         <%j1++%>
                                             <%}%>
                                             
-                                            <form action="/user/add-expenses/?date=<%=date%>" method="POST">
+                                            <form action="/user/add-expenses1/?date=<%=date%>" method="POST">
                                             <tr>
                                                 <td style="padding: 0px !important;padding-left: 15px !important;">
                                                     <span style="margin-left: 15px;font-weight: bold;"> <%=j1+1%>.</span>
@@ -389,12 +327,12 @@
                            </div>
                            <div class="col-md-5 col-sm-12 pdftopm" style="margin-top:60px;">
                             <%if(date == undefined){%>
-                                <a href="/billing-pdf/?date=<%=n1%>&pcount=<%=j%>&dues=<%=dues%>&total=<%=ar%>&exp=<%=exp%>" style="background-color: tomato;border-radius: 3px;
+                                <a href="/billing-pdf1/?date=<%=n1%>&pcount=<%=j%>&total=<%=amt%>&exp=<%=exp%>" style="background-color: tomato;border-radius: 3px;
                                     font-weight: bold;
                                     /* margin-top: 39px; */
                                     padding: 8px 75px;" class="pdfbtn" ><i class="fas fa-pdf"></i>Download Pdf</a>
                             <%}else{%>
-                                <a href="/billing-pdf/?date=<%=date%>&pcount=<%=j%>&dues=<%=dues%>&total=<%=ar%>&exp=<%=exp%>" style="background-color: tomato;border-radius: 3px;
+                                <a href="/billing-pdf1/?date=<%=date%>&pcount=<%=j%>&total=<%=amt%>&exp=<%=exp%>" style="background-color: tomato;border-radius: 3px;
                                     font-weight: bold;
                                     /* margin-top: 39px; */
                                     padding: 8px 75px;" class="pdfbtn" ><i class="fas fa-pdf"></i>Download Pdf</a>

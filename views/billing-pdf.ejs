@@ -35,7 +35,7 @@
 						<thead>
 							<tr class="table100-head">
                                 <th class="columna1">Patient Name</th>
-                                <th class="columna2">Patient Phone</th>
+                                <th class="columna2">Patient Address</th>
                                 <%var z1=3%>
                                 <%for(days of locals.user.entries){%>
                                     <th class="columna<%=z1++%>"><%=days.entry%></th>
@@ -137,7 +137,34 @@
                                      <input type="text" name="dues" value="Rs <%=dues%>" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;" class="form-control">
                                  </td>
                              </tr>
-                             
+                             <tr class="newst">
+                                <td class="columnb1">
+                                <input type="text" name="name" value="Total Expenses : " style="margin-bottom:5px;font-weight:bold" class="form-control cform">
+                            </td>
+                            <td class="columna2">
+                                </td>
+
+                            <%var z3=3;%>
+                            
+                            <%for(let i=0;i<cnt;i++){%>
+                                <%if(locals.user.entries[i].entry == 'Remarks' || locals.user.entries[i].entry == 'remarks'){%>
+                                <td class="columna<%=z3++%>">
+                                   
+                                </td>
+                                <%}else{%>
+                                    <td class="columna<%=z3++%>">
+                                       
+                                    </td>
+                            <%}%>
+                              
+                                    <input type="hidden" name="service" value="<%=locals.user.entries[i].entry%>" style="margin-bottom:5px;font-weight:bold" class="form-control">
+                                
+                                <%}%>
+                                <%res = res - exp%>
+                                <td class="columna<%=z3++%>">
+                                    <input type="text" name="dues" value="Rs <%=exp%>" placeholder="Amount" style="margin-bottom:5px;font-weight: bold;" class="form-control">
+                                </td>
+                            </tr>
                              <tr class="newst">
                                 <td class="columnb1">
                                 <input type="text" name="name" value="Grand Total : " style="margin-bottom:5px;font-weight:bold" class="form-control cform">

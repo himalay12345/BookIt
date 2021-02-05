@@ -90,9 +90,19 @@ router.get('/delete-education', userController.deleteEducation);
 router.get('/delete-clinic-photo', userController.deleteClinicPhoto);
 router.post('/edit-patient',userController.editPatient)
 router.post('/add-bill',userController.addBill)
+router.post('/add-expenses',userController.addExpenses)
 router.post('/billing-sort-by-date',userController.billingSortByDate)
 router.post('/update-bill',userController.updateBill)
+router.post('/update-expenses',userController.updateExpenses)
 router.get('/delete-bill',userController.deleteBill)
+router.get('/delete-expenses',userController.deleteExpenses)
+router.post('/add-bill1',userController.addBill1)
+router.post('/add-expenses1',userController.addExpenses1)
+router.post('/billing-sort-by-date1',userController.billingSortByDate1)
+router.post('/update-bill1',userController.updateBill1)
+router.post('/update-expenses1',userController.updateExpenses1)
+router.get('/delete-bill1',userController.deleteBill1)
+router.get('/delete-expenses1',userController.deleteExpenses1)
 router.get('/delete-entry',userController.deleteEntry)
 // -------------------------------------------
 router.get('/validate-user',jwt.authenticateToken, userController.demo);

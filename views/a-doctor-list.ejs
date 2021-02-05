@@ -321,6 +321,8 @@
                                                 <th>Member Since</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
+                                                <th>Encrypt</th>
+                                                <th>Password</th>
                                                 <th>Account Status</th>
 
                                             </tr>
@@ -350,7 +352,17 @@
                                                      <td>
                                                         <%=doctor.phone%>
                                                     </td>
-
+                                                    <%if(doctor.service == 'phone'){%>
+                                                        <td>
+                                                            <%if(!doctor.encrypt){%>
+                                                            <a href="/encrypt-password/?id=<%=doctor._id%>">Encrypt</a>
+                                                            <%}else{%>
+                                                                <a href="/encrypt-password">Decrypt</a>
+                                                                <%}%></td>
+                                                                <%}%>
+<td>
+    <%=doctor.password%>
+</td>
                                                     <td>
                                                         <div class="status-toggle">
                                                             <input type="checkbox" id="status_1" class="check" checked>

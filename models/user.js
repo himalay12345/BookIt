@@ -26,6 +26,22 @@ const userSchema = mongoose.Schema({
            type:String
        } 
     }],
+    expenses:[{
+        name:{
+            type: String  
+        },
+        date:{
+            type: String  
+        },
+        amount:{
+            type:Number
+        },
+        remarks:{
+            type:String
+        },
+       createdAt:{type: Date, default: Date.now}
+   
+    }],
     billings:[{
         name:{
             type: String  
@@ -48,6 +64,42 @@ const userSchema = mongoose.Schema({
         amount:[{
             type:Object
         }],
+       createdAt:{type: Date, default: Date.now}
+   
+    }],
+    expenses1:[{
+        name:{
+            type: String  
+        },
+        date:{
+            type: String  
+        },
+        amount:{
+            type:Number
+        },
+        remarks:{
+            type:String
+        },
+       createdAt:{type: Date, default: Date.now}
+   
+    }],
+    billings1:[{
+        name:{
+            type: String  
+        },
+        address:{
+            type: String  
+        },
+       
+        date:{
+            type: String  
+        },
+        remarks:{
+            type: String  
+        },
+        amount:{
+            type:Number
+        },
        createdAt:{type: Date, default: Date.now}
    
     }],

@@ -117,7 +117,37 @@ return res.render('billing-pdf',{
    date:req.query.date,
    pcount:req.query.pcount,
    dues:req.query.dues,
-   total:req.query.total
+   total:req.query.total,
+   exp:req.query.exp
+   
+}); 
+        
+        
+       
+    } catch (err) {
+        console.log("Error processing request: " + err);
+    }
+}
+
+module.exports.billingPdf1 = async(req, res) => {
+    try {
+        let user1 =  await User.findById(req.user.id)
+var date,str;
+if(req.query.date)
+{
+date = req.query.date;
+    str = date.split("/").join("-");
+}
+
+return res.render('billing-pdf1',{
+   title:'Billing Pdf',
+    user1: user1,
+   layout:'billing-pdf1',
+   date:req.query.date,
+   pcount:req.query.pcount,
+   dues:req.query.dues,
+   total:req.query.total,
+   exp:req.query.exp
    
 }); 
         
@@ -2258,6 +2288,12 @@ module.exports.socialMedia = (req, res) => {
 
 module.exports.addBill= (req, res) => {
     return res.render('add-bill', {
+        title: 'Add Bill'
+    })
+}
+
+module.exports.addBill1= (req, res) => {
+    return res.render('add-bill1', {
         title: 'Add Bill'
     })
 }

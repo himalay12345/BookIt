@@ -15,6 +15,7 @@ router.get('/add-bank', passport.checkDoctorAuthentication, homeController.addBa
 router.get('/add-doctor', passport.checkStaffAuthentication, homeController.addDoctor);
 router.post('/add-entries', passport.checkStaffAuthentication, homeController.addEntries);
 router.get('/add-bill', passport.checkStaffAuthentication, homeController.addBill);
+router.get('/lab-bill', passport.checkStaffAuthentication, homeController.addBill1);
 router.get('/add-prescription', passport.checkDoctorAuthentication, homeController.addPrescription);
 router.get('/appointments', passport.checkDoctorAuthentication, homeController.appointments);
 router.get('/app-coming-soon', homeController.appComingSoon);
@@ -23,6 +24,7 @@ router.get('/blank-page', passport.checkAuthentication, homeController.blankPage
 router.get('/booking', homeController.booking);
 router.get('/booking-pdf', homeController.bookingPdf);
 router.get('/billing-pdf', homeController.billingPdf);
+router.get('/billing-pdf1', homeController.billingPdf1);
 router.get('/booking-success', passport.checkAuthentication, homeController.bookingSuccess);
 router.get('/booking-service', passport.checkDoctorAuthentication, homeController.bookingServiceSetting);
 router.get('/calendar', passport.checkAuthentication, homeController.calendar);

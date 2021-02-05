@@ -2516,12 +2516,99 @@ module.exports.addBill = async(req, res) => {
     })
 
     user.save();
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+
+    
+    
+    return res.render('add-bill', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
     return res.redirect('back')
+}
+}
+
+module.exports.addBill1 = async(req, res) => {
+    console.log(req.body)
+    let user = await User.findById(req.user.id);
+    user.billings1.push({
+        name:req.body.name,
+        address:req.body.address,
+        amount:req.body.amount,
+        remarks:req.body.remarks,
+        date:req.body.date
+    })
+
+    user.save();
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+
+    
+    
+    return res.render('add-bill1', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+
+module.exports.addExpenses = async(req, res) => {
+    console.log(req.body)
+    let user = await User.findById(req.user.id);
+    user.expenses.push({
+        name:req.body.name,
+        amount:req.body.amount,
+        date:req.body.date,
+        remarks:req.body.remarks
+    })
+
+    user.save();
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    console.log(req.query.date)
+    return res.render('add-bill', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+module.exports.addExpenses1 = async(req, res) => {
+    console.log(req.body)
+    let user = await User.findById(req.user.id);
+    user.expenses1.push({
+        name:req.body.name,
+        amount:req.body.amount,
+        date:req.body.date,
+        remarks:req.body.remarks
+    })
+
+    user.save();
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    console.log(req.query.date)
+    return res.render('add-bill1', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
 }
 
 
 module.exports.updateBill = async(req, res) => {
     console.log(req.body)
+   
     let day = await User.update({ 'billings._id': req.body.id }, {
         '$set': {
             'billings.$.name': req.body.name,
@@ -2534,8 +2621,93 @@ module.exports.updateBill = async(req, res) => {
         }
     });
     req.flash('success','Updated')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+
+    return res.render('add-bill', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
     return res.redirect('back')
 }
+}
+module.exports.updateBill1 = async(req, res) => {
+    console.log(req.body)
+   
+    let day = await User.update({ 'billings1._id': req.body.id }, {
+        '$set': {
+            'billings1.$.name': req.body.name,
+            'billings1.$.address': req.body.address,
+            'billings1.$.amount': req.body.amount,
+            'billings1.$.remarks': req.body.remarks
+           
+
+        }
+    });
+    req.flash('success','Updated')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+
+    return res.render('add-bill1', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+ 
+
+
+module.exports.updateExpenses = async(req, res) => {
+    console.log(req.body)
+    let day = await User.update({ 'expenses._id': req.body.id }, {
+        '$set': {
+            'expenses.$.name': req.body.name,
+            'expenses.$.remarks': req.body.remarks,
+            'expenses.$.amount': req.body.amount
+
+        }
+    });
+    req.flash('success','Updated')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    return res.render('add-bill', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+
+module.exports.updateExpenses1 = async(req, res) => {
+    console.log(req.body)
+    let day = await User.update({ 'expenses1._id': req.body.id }, {
+        '$set': {
+            'expenses1.$.name': req.body.name,
+            'expenses1.$.remarks': req.body.remarks,
+            'expenses1.$.amount': req.body.amount
+
+        }
+    });
+    req.flash('success','Updated')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    return res.render('add-bill1', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+
 
 
 module.exports.deleteBill = async(req, res) => {
@@ -2543,7 +2715,66 @@ module.exports.deleteBill = async(req, res) => {
     user.billings.pull(req.query.id);
     user.save();
     req.flash('success','Deleted')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    return res.render('add-bill', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
     return res.redirect('back')
+}
+}
+
+module.exports.deleteBill1 = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.billings1.pull(req.query.id);
+    user.save();
+    req.flash('success','Deleted')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    return res.render('add-bill1', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+
+module.exports.deleteExpenses = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.expenses.pull(req.query.id);
+    user.save();
+    req.flash('success','Deleted')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    return res.render('add-bill', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
+}
+module.exports.deleteExpenses1 = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.expenses1.pull(req.query.id);
+    user.save();
+    req.flash('success','Deleted')
+    var date;
+    if(req.query.date){
+    date = req.query.date;
+    return res.render('add-bill1', {
+        title: 'Add Bill',
+        date:date
+    })
+}else{
+    return res.redirect('back')
+}
 }
 module.exports.deleteEntry = async(req, res) => {
     let user = await User.findById(req.user.id);
@@ -4455,6 +4686,20 @@ module.exports.billingSortByDate = async(req, res) => {
     console.log(str);
 
         return res.render('add-bill', {
+            title: 'Add Bill',
+          
+            date: str
+        })
+    
+
+}
+module.exports.billingSortByDate1 = async(req, res) => {
+   
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+    console.log(str);
+
+        return res.render('add-bill1', {
             title: 'Add Bill',
           
             date: str

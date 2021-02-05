@@ -239,38 +239,41 @@ tbody tr:hover {
 }
 
 .columna2 {
-  width: 200px;
+  width: 150px;
 }
 
 .columna3 {
-  width: 150px;
+  width: 120px;
 }
 
 .columna4 {
-  width: 150px;
+  width: 120px;
 }
 
 .columna5 {
-  width: 150px;
+  width: 120px;
 }
 
 .columna6 {
-  width: 150px;
+  width: 120px;
 }
 .columna7 {
-  width: 150px;
+  width: 140px;
 }
 .columna8 {
-  width: 200px;
+  width: 300px;
  
  
 }
 .columna9 {
-  width: 200px;
+  width: 170px;
+  padding-right: 10px;
  
-  padding-right: 62px;
-}
 
+}
+.nopadtable td{
+  padding:0px 0px!important;
+}
 
 
 @media screen and (max-width: 992px) {
