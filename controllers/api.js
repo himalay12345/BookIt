@@ -20,13 +20,15 @@ module.exports.home = async (req, res) => {
 
     let consults = await Consult.find({});
     let tests = await Test.find({});
-    data.push({
-       doctors,
-       consults,
-       tests
-    });
+  
+   
 
-    res.status(200).json(data);
+    res.json({
+
+        doctors:doctors,
+        consults:consults,
+        tests: tests
+    });
 }
 
 module.exports.specialist = async (req, res) => {
@@ -52,5 +54,7 @@ module.exports.specialist = async (req, res) => {
 
    
 
-    res.status(200).json(doctors);
+    res.json({
+        doctors:doctors
+    });
 }
