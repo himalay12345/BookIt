@@ -103,6 +103,14 @@ const userSchema = mongoose.Schema({
        createdAt:{type: Date, default: Date.now}
    
     }],
+    tests:[{
+        testname:{
+            type:String
+        },
+        testprice:{
+            type:Number
+        }
+    }],
     bloodgroup: {
         type: String
     },

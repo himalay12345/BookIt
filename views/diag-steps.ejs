@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+
+        <div class="content setting-bread" style="padding:0px !important;margin-top: 20px;">
+
+            <div class="container-fluid" style="padding-left: 0px;padding-right: 0px;">
+
+                <div class="row">
+
+                    <div class="col-md-2 settings pass-setting" style="background-color: white;margin-left: 15px;border-right: 1px solid lightgray;">
+                        <ul style="list-style: none;margin-left: -40px;margin-top: 5px;">
+                            <li style="border-bottom: 1px solid black;font-weight: 700;"><a href="/doctor-profile-settings">My profile</a></li>
+                            <li style="border-bottom: 1px solid black;font-weight: 700;"><a href="/settings">Settings</a></li>
+                            <li style="border-bottom: 1px solid black;"><a href="/user/logout" style="color: red;">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-10 col-lg-10 col-xl-10 settings-content change-pass-content" style="margin-left:-15px;border-left: 0.5px solid lighgrey;">
+                        <div class="card" style="border-radius: 0;border:0;">
+                            <div class="card-body" style="padding:0rem;">
+                                <%if(locals.user.approve == true){%>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 15px;">
+                                        <strong>Note!</strong> Your document is <a href="#" class="alert-link">verifed.</a>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <%}else{%>
+                                <%if(locals.user.step4==true){%>
+                                <div class="alert alert-info alert-dismissible fade show malert" role="alert" style="margin-top: 15px;z-index:1000;">
+                                    <strong>Note!</strong> Your document will be soon <a href="#" class="alert-link">verifed.</a> You will recieve a confirmation message on your phone once your account is activated.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                            </div>
+                                            <%}%>
+                                                <%}%>
+
+                                                    <div class="row mstep">
+                                                        <%if(locals.user.step1!= true){%>
+                                                            <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;">
+
+                                                                <!-- Change Password Form -->
+                                                                <form action="/diagonistic/update-profile" enctype="multipart/form-data" method="POST">
+                                                                    <input type="hidden" name="id" value="<%=locals.user.id%>">
+                                                                    <h2 style="font-size: 1.6rem;margin-top: 20px;">Hello ! Lets build your dedicated profile.</h2>
+                                                                    <p style="margin-top: 20px;">Section A : Diagonistic/Lab Details</p>
+                                                                    <div class="col-md-10 col-sm-12">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <div class="change-avatar">
+                                                                                    <div class="profile-img">
+                                                                                        <img src="<%=locals.user.avatar%>" id="image" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
+                                                                                    </div>
+                                                                                    <div class="upload-img">
+                                                                                        <div class="change-photo-btn upload-sm-btn">
+                                                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                                                        </div>
+                                                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group" style="margin-left: -15px;">
+                                                                            <label style="font-size: 0.85rem;">Diagonistic/Lab Name <span class="text-danger"></span></label>
+                                                                          
+                                                                            <div class="col-md-11" style="margin-left: -15px;">
+                                                                                <input type="text" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;" placeholder="Enter  Name" name="name" class="form-control minput" value="<%=locals.user.name%>" required>
+
+                                                                            </div>
+                                                                        </div>
+                                                                       
+                                                                        <div class="col-md-12 cmleft" style="display: inline-flex;margin-left: -50px;">
+                                                                            <div class="form-group col-sm-12">
+                                                                                <label class="control-label">Phone</label>
+                                                                                <input type="text" class="form-control gwidth" name="phone" placeholder="Enter your Phone" value="<%=locals.user.phone%>" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-11" style="margin-left: -30px;">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Address</label>
+                                                                                <input type="text" class="form-control" name="address" placeholder="Enter your address" value="<%=locals.user.contacts.address%>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12 cmleft" style="display: inline-flex;margin-left: -50px;">
+                                                                            <div class="form-group col-sm-12">
+                                                                                <label class="control-label">City</label>
+                                                                                <input type="text" class="form-control gwidth" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-11" style="margin-left: -30px;">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">State / Province</label>
+                                                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-11" style="margin-left: -30px;">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Postal Code</label>
+                                                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;">
+                                                                            <button type="submit" id="submit_button" class="btn btn-primary submit-btn bmargin btwidth" style="border-radius: 5px;width: 360px;margin-left: -90px;">Continue</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <!-- /Change Password Form -->
+
+                                                            </div>
+                                                            <%}else{%>
+                                                                <div class="col-md-6 col-lg-6" style="margin-left: 30px;margin-top: 15px;padding-right: 100px">
+                                                                    <%if(locals.user.approve == true){%>
+                                                                        <h2 style="font-size: 1.6rem;margin-top: 20px;">Welcome Dr.
+                                                                            <%=locals.user.name%> on AarogyaHub!</h2>
+                                                                        <p style="margin-top:0px;">Your profile is now live and the patients are on the way to book the appointments.</p>
+                                                                        <%}else{%>
+                                                                            <h2 style="font-size: 1.6rem;margin-top: 20px;">Great Progress!</h2>
+                                                                            <p style="margin-top:0px;">Your profile is just few steps away from getting live.</p>
+                                                                            <%}%>
+                                                                                <p style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section A : Diagonistic/Lab Details</p>
+                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;"> Diagonistic/Lab establishment details.</p>
+                                                                                <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                <span style="font-size: 0.9rem;"><a href="/diagonistic/profile-info">Change</a></span>
+
+                                                                                <p style="font-size: 0.85rem;color:grey;margin-top: 30px;">Section B : Diagonistic/Lab Verification</p>
+                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;">Establishment proof</p>
+                                                                                <%if(locals.user.step2==true){%>
+                                                                                    <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                    <span style="font-size: 0.9rem;"><a href="/diagonistic/establishment">Change</a></span>
+                                                                                    <%}else{%>
+                                                                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
+                                                                                            <a href="/diagonistic/establishment" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>
+                                                                                        </div>
+                                                                                        <%}%>
+                                                                                            <%if(locals.user.step2==true){%>
+
+                                                                                                <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section C : Start getting patients</p>
+                                                                                                <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Terms & Condition.</p>
+                                                                                                <%if(locals.user.step3==true){%>
+                                                                                                    <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                                    <span style="font-size: 0.9rem;"><a href="/diagonistic/terms">Change</a></span>
+                                                                                                    <%}else{%>
+
+                                                                                                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
+                                                                                                            <a href="/diagonistic/terms" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>
+                                                                                                        </div>
+                                                                                                        <%}%>
+                                                                                                            <%}else{%>
+
+                                                                                                                <p style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section C : Start getting patients</p>
+                                                                                                                <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Timing, Fees ,Terms & Condition.</p>
+
+                                                                                                                <%}%>
+                                                                                                                    <%if(locals.user.step3==true){%>
+
+                                                                                                                        <p class="grey" style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section D : Add Bank Details</p>
+                                                                                                                        <p class="black" style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
+                                                                                                                        <%if(locals.user.step4==true){%>
+                                                                                                                            <span><i class="fas fa-check-circle" style="font-size: 0.9rem;color: green;margin-right:2px;margin-top: 10px;"></i></span>
+                                                                                                                            <span style="font-size: 0.9rem;"><a href="/diagonistic/add-bank">Change</a></span>
+                                                                                                                            <%}else{%>
+
+                                                                                                                                <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;margin-left: 0px;height: 30px;margin-bottom: -10px;">
+                                                                                                                                    <a href="/diagonistic/add-bank" id="submit_button" class="btn btn-primary submit-btn" style="color:white;border-radius: 5px;width: 150px;margin-left: 0px;margin-top: -10px;">Continue</a>
+                                                                                                                                </div>
+                                                                                                                                <%}%>
+                                                                                                                                    <%}else{%>
+
+                                                                                                                                        <p style="font-size: 0.85rem;color:lightgrey;margin-top: 30px;">Section D : Add Bank Details</p>
+                                                                                                                                        <p style="font-size: 0.95rem;margin-top: -12px;font-weight: 500;margin-bottom: -5px;color: lightgrey;">Bank Name, Account Number, IFSC Code.</p>
+
+                                                                                                                                        <%}%>
+
+
+                                                                </div>
+
+                                                                <%}%>
+                                                                    <div class="col-md-6 pass-setting" style="height:140vh;background-image:url('/img/test3.jpg');background-size: cover;background-repeat: no-repeat;margin-top: -180px;margin-left: -30px;">
+
+                                                                    </div>
+                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+        document.getElementById("imageUpload").onchange = function() {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                // get loaded data and render thumbnail.
+                document.getElementById("image").src = e.target.result;
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+        };
+    </script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- AarogyaHub/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+
+</html>

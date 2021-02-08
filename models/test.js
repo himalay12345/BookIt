@@ -22,7 +22,7 @@ const testSchema = mongoose.Schema({
         type: String
 
     },
-    testdiscripation: {
+    testdescription: {
         type: String
 
     },
@@ -30,6 +30,14 @@ const testSchema = mongoose.Schema({
         type: String
     },
     testavatar: {
+        type: String
+
+    },
+    testsample: {
+        type: String
+
+    },
+    testfast: {
         type: String
 
     },

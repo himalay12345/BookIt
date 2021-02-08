@@ -69,9 +69,12 @@ module.exports.deletetest = async function(req, res) {
 
     let test = await Test.findOne({ _id: req.query.id });
 
+    if(test.testavatar)
+    {
 
     fs.unlinkSync(path.join(__dirname, '..', test.testavatar));
     // console.log(path.join(__dirname,'..','\assets',property.avatar[0]))
+}
 
 
     let prope = await Test.deleteOne({ _id: req.query.id });
@@ -163,12 +166,17 @@ module.exports.atest = async function(req, res) {
             }
             let test = await Test.create({
                 testname: req.body.testname,
-                testprice: req.body.testprice
+                testprice: req.body.testprice,
+                testdescription:req.body.testdescription,
+                testfast:req.body.fast,
+                testsample:req.body.sample
 
             });
-
+            if(req.file)
+            {
             let newPath = Test.avatarPath + '/' + req.file.filename;
             test.testavatar = newPath;
+            }
 
             test.save();
             console.log(test);

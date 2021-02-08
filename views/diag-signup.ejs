@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/register  30 Nov 2019 04:12:20 GMT -->
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+</head>
+
+
+<body class="account-page">
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Page Content -->
+        <div class="content setting-bread" style="padding-top: 100px!important;">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+
+                        <!-- Register Content -->
+                        <div class="account-content">
+                           
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-md-7 col-lg-6 login-left">
+                                    <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Register">
+                                </div>
+                                <div class="col-md-12 col-lg-6 login-right">
+                                    <div class="login-header">
+                                        <h3>Register</h3>
+                                    </div>
+
+                                    <!-- Register Form -->
+                                    <form action="/diagonistic/create" method="POST">
+                                       
+                                        <div class="form-group form-focus">
+
+                                            <input type="text" id="mobile" name="phone" value="<%=phone%>" required class="form-control floating" readonly>
+                                            <label class="focus-label">Mobile Number</label>
+                                        </div>
+                                       
+                                        
+                                       
+                                        <div class="form-group form-focus">
+                                            <input type="password" id="password" name="password" class="form-control floating" required>
+                                            <label class="focus-label">Create Password</label>
+                                        </div>
+                                        <div class="form-group form-focus">
+                                            <input type="password" id="password" name="cpassword" class="form-control floating" required>
+                                            <label class="focus-label">Confirm Password</label>
+                                        </div>
+                                       
+                                        <div class="text-left">
+                                            <span style="font-size: 0.9rem;;">By signing up, I agree to</span> <span><a class="forgot-link" href="/term-condition" style="color:blue">terms & condition</a></span>
+                                        </div>
+                                       
+                                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
+
+                                    </form>
+                                    <!-- /Register Form -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Register Content -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+  
+    <script src="<%=assetPath('js/script.js')%>"></script>  
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+
+</body>
+
+<!-- AarogyaHub/register  30 Nov 2019 04:12:20 GMT -->
+
+</html>

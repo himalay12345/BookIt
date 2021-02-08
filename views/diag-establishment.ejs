@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+  
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+     
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+    
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="col-md-12 col-lg-12 col-xl-12 setting-bread pzero" style="margin-left:-15px;border-left: 0.5px solid lighgrey;margin-top: 20px;">
+        <div class="card" style="border-radius: 0;border:0;">
+        <div class="card-body" style="padding:0rem;">
+        <div class="row position-relative mzero">
+           
+        <div class="col-md-6 col-lg-6 mzero pzero" style="margin-left: 150px;margin-top: 30px;">
+            <h2 style="font-size: 1.5rem;margin-top: 20px;font-weight: 700;">Establishment Proof</h2>
+            <form action="/diagonistic/upload-eproof" method="POST" enctype="multipart/form-data" id="edit_form">
+                <input type="hidden" name="id" value="<%=locals.user.id%>">
+                <!-- Basic Information -->
+                <div class="card p-10" style="margin-left: -15px;margin-top: 50px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Verify Establishment Proof</h4>
+                        <div class="row form-row">
+                          
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="change-avatar">
+                                        <div class="profile-img">
+                                            <img src="<%=locals.user.estphoto%>" id="image" onerror='this.src="<%=assetPath('img/med2.png')%>"' alt="User Image">
+                                        </div>
+                                        <div class="upload-img">
+                                            <div class="change-photo-btn">
+                                                <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                <%if(locals.user.estphoto){%>
+                                                    <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                <%}else{%>
+                                                    <input type="file" class="upload" name="avatar" id="imageUpload" required>
+                                                <%}%>
+                                                
+                                            </div>
+                                            <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.85rem;font-weight: 700;border-bottom:1px solid lightgrey;padding-bottom: 5px;">Please upload your clinic registration proof. Only licensed and legit doctor are allowed to be listed in our website.</p>
+                           
+                        </div>
+                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;height: 40px;">
+                            <a href="/diagonistic/steps" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="color:white;border-radius: 5px;width: 100px;left:8%;margin-top: -5px;">Back</a>
+                        </div>
+                        <div class="submit-section submit-btn-bottom" style="margin-top: 25px;display: inline-flex;height: 40px;">
+                            <button type="submit" id="submit_button" class="btn btn-primary submit-btn position-absolute" style="border-radius: 5px;width: 100px;right:8%;margin-top: -5px;">Submit</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4" style="margin-left:-50px;margin-top: 20px;">
+            <div class="note">
+                <i class="fas fa-lightbulb" style="color:#6DBCAE;font-size: 0.8rem;"></i>
+                <p style="font-size: 0.8rem; color: #439485;font-weight: 700;">Lots of patients are looking for health checkups on AarogyaHub. Verify your credentials and reach out to them.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+        document.getElementById("imageUpload").onchange = function () {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("image").src = e.target.result;
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
+};
+    </script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- doccure/doctor-change-password  30 Nov 2019 04:12:36 GMT -->
+
+</html>

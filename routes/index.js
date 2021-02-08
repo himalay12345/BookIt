@@ -6,6 +6,7 @@ router.use('/admin', require('./admin'));
 router.use('/user', require('./user'));
 router.use('/test', require('./test'));
 router.use('/api', require('./api'));
+router.use('/diagonistic', require('./diagonistic'));
 const homeController = require('../controllers/index');
 
 router.get('/', homeController.home);
