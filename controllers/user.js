@@ -5069,7 +5069,7 @@ module.exports.doctorProfileUpdate = async function(req, res) {
 
             const rand = Math.floor((Math.random() * 100) + 54);
             user.emailkey = rand;
-            if (!user.emailverify) {
+            if (!user.emailverify && user.service == 'phone') {
                 console.log('sent');
                 emailVerification.newAlert(user, rand, req.body.email);
                 user.email = req.body.email;

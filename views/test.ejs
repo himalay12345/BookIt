@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
     <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
-    
+    <link rel="stylesheet" href="<%=assetPath('css/newslider.css')%>">   
 	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
 	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
 </head>
@@ -84,7 +84,7 @@
                     <div class="row justify-content-center" style="margin-top: -40px;">
                         <div class="col-md-11">
                             <!-- Slider -->
-                            <div class="specialities-slider slider">
+                            <div class="specialities-slider slider sp-slider">
                                 <a href="/specialist/?dep=General Physician">
                                     <div class="speicality-item text-center">
                                         <div class="speicality-img">
@@ -197,14 +197,16 @@
                     </div>
                 </div>
             </section>
-            <section class="test-prices position-relative" style="margin-top: -52px;padding-right: 100px;height:250px;">
+            <section class="test-prices position-relative" style="margin-top: 0px;padding-right: 100px;height:250px;">
                 <div class="test-div" style="overflow-x: hidden;">
-                    <div class="test-header" style="margin-left:83px ;">
+                    <div class="test-header" style="margin-left:83px ;position:relative">
                         <h2 style="font-weight: 700;">Top Booked Diagonistics Test</h2>
+                        <a href="/diagonistic/all-tests" style="position: absolute;top:0px;right:20px;font-size: 1.2rem;font-weight: bolder;text-decoration: underline;">View All</a>
+                        
                     </div>
                     <div class="test-price" style="background-color: white;overflow: hidden;width:100%; padding-left: 80px;padding-right: 0px;">
 
-                        <div class="doctor-slider test-slider slider">
+                        <div class="doctor-slider test-slider slider" style="margin-top: 25px;">
                             <%for(tests of test) {%>
                                 <div class="test1" id="dt1" style="transition: all 5s ease;width:80%; display: inline-block; cursor: pointer; height:185px; border-radius: 3px; margin:5px 5px 15px 0px;border:1px solid grey; ">
                                     <div class="test-des " style="height: 146px; ">
@@ -212,9 +214,7 @@
                                             <h3 class="test-anno ">
                                                 <%=tests.testname%>
                                             </h3>
-                                            <p class="test-debo ">
-                                                <%=tests.testdescription%>
-                                            </p>
+                                           
                                             <p class="test-ally ">₹
                                                 <%=tests.testprice%>
                                             </p>
@@ -237,6 +237,47 @@
 
                     </div>
                 </div>
+            </section>
+            <section class="test-prices position-relative" style="margin-top: 50px;padding-right: 60px;height:400px;">
+                <div class="test-div" style="overflow-x: hidden;">
+                    <div class="test-header" style="margin-left:83px ;position: relative;">
+                        <h2 style="font-weight: 700;margin-bottom: 20px;">Diagonistics Centres & Labs</h2>
+                        <a href="/diagonistic/all-labs" style="position: absolute;top:0px;right:20px;font-size: 1.2rem;font-weight: bolder;text-decoration: underline;">View All</a>
+
+                    </div>
+                    <div class="test-price" style="overflow: hidden;width:100%; padding-left: 80px;padding-right: 0px;">
+
+                       
+                        <div class="row">
+                            <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+                                <div class="MultiCarousel-inner">
+                                    <%for(let u of labs){%>
+                                    <div class="item" style="">
+                                        <div class="pad15"style="padding:5px !important;min-height:285px;height:auto;width: 180px !important;" >
+                                            <a href="/diagonistic/lab-profile/?id=<%=u._id%>"><img src="<%=u.avatar%>" style="height:200px;width:170px;"></a>
+                                            <a  href="/diagonistic/lab-profile/?id=<%=u._id%>" class="lead" style="font-size: 1rem;color:black;font-weight: bold;margin-top: 10px!important;display: block;"><%=u.name%></a>
+                                           
+                                           
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                   
+                                </div>
+                                <button class="btn btn-primary leftLst"><</button>
+                                <button class="btn btn-primary rightLst">></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
             </section>
 
             <section style="margin-top: 50px;height: 650px;">
@@ -1932,6 +1973,114 @@
     <script src="<%=assetPath('js/script1.js')%>"></script>
 
     <script src="<%=assetPath('js/script.js')%>"></script>
+<script>
+    $(document).ready(function () {
+    var itemsMainDiv = ('.MultiCarousel');
+    var itemsDiv = ('.MultiCarousel-inner');
+    var itemWidth = "";
+
+    $('.leftLst, .rightLst').click(function () {
+        var condition = $(this).hasClass("leftLst");
+        if (condition)
+            click(0, this);
+        else
+            click(1, this)
+    });
+
+    ResCarouselSize();
+
+
+
+
+    $(window).resize(function () {
+        ResCarouselSize();
+    });
+
+    //this function define the size of the items
+    function ResCarouselSize() {
+        var incno = 0;
+        var dataItems = ("data-items");
+        var itemClass = ('.item');
+        var id = 0;
+        var btnParentSb = '';
+        var itemsSplit = '';
+        var sampwidth = $(itemsMainDiv).width();
+        var bodyWidth = $('body').width();
+        $(itemsDiv).each(function () {
+            id = id + 1;
+            var itemNumbers = $(this).find(itemClass).length;
+            btnParentSb = $(this).parent().attr(dataItems);
+            itemsSplit = btnParentSb.split(',');
+            $(this).parent().attr("id", "MultiCarousel" + id);
+
+
+            if (bodyWidth >= 1200) {
+                incno = itemsSplit[3];
+                itemWidth = sampwidth / incno;
+            }
+            else if (bodyWidth >= 992) {
+                incno = itemsSplit[2];
+                itemWidth = sampwidth / incno;
+            }
+            else if (bodyWidth >= 768) {
+                incno = itemsSplit[1];
+                itemWidth = sampwidth / incno;
+            }
+            else {
+                incno = itemsSplit[0];
+                itemWidth = sampwidth / incno;
+            }
+            $(this).css({ 'transform': 'translateX(0px)', 'width': itemWidth * itemNumbers });
+            $(this).find(itemClass).each(function () {
+                $(this).outerWidth(itemWidth);
+            });
+
+            $(".leftLst").addClass("over");
+            $(".rightLst").removeClass("over");
+
+        });
+    }
+
+
+    //this function used to move the items
+    function ResCarousel(e, el, s) {
+        var leftBtn = ('.leftLst');
+        var rightBtn = ('.rightLst');
+        var translateXval = '';
+        var divStyle = $(el + ' ' + itemsDiv).css('transform');
+        var values = divStyle.match(/-?[\d\.]+/g);
+        var xds = Math.abs(values[4]);
+        if (e == 0) {
+            translateXval = parseInt(xds) - parseInt(itemWidth * s);
+            $(el + ' ' + rightBtn).removeClass("over");
+
+            if (translateXval <= itemWidth / 2) {
+                translateXval = 0;
+                $(el + ' ' + leftBtn).addClass("over");
+            }
+        }
+        else if (e == 1) {
+            var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+            translateXval = parseInt(xds) + parseInt(itemWidth * s);
+            $(el + ' ' + leftBtn).removeClass("over");
+
+            if (translateXval >= itemsCondition - itemWidth / 2) {
+                translateXval = itemsCondition;
+                $(el + ' ' + rightBtn).addClass("over");
+            }
+        }
+        $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+    }
+
+    //It is used to get some elements from btn
+    function click(ell, ee) {
+        var Parent = "#" + $(ee).parent().attr("id");
+        var slide = $(Parent).attr("data-slide");
+        ResCarousel(ell, Parent, slide);
+    }
+
+});
+</script>
 
     <script>
         function changeText(a) {

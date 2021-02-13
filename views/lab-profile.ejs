@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+      
+        <section class="laptop-sugar" style="margin-top: 70px;">
+            <div class="search-box lscreen" style="margin-left:70px;">
+                <form action="/user/search-doctor" method="POST">
+                    <div class="form- search-location">
+    
+                        <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
+                        <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
+                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
+    
+                        </ul>
+    
+    
+                    </div>
+    
+                    <div class="form- search-info msearch">
+                        <!-- <span class="form-text" style="margin-top: -20px;">Ex : Dental or Sugar Check up etc</span> -->
+                        <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                        <table class="table table-striped position-absolute" style="margin-top: 3px;">
+    
+                            <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
+    
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+                </form>
+            </div>
+            <div class="search-box sscreen">
+                <form action="/user/search-doctor" method="POST">
+                    <div class="form-search-location">
+                        
+                        <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location">
+                      
+                        
+                        
+                    </div>
+    
+                    <div class="form-search-info msearch">
+                       
+                        <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                        <!-- <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
+                       
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
+                </form>
+            </div>
+             <div class="displayNone filter_box" id="filter_box" style="overflow-y:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            visibility: visible;
+    opacity: 1;">
+                    <div id="header_filter" style="padding:10px ;">
+    
+                        <i class="fas fa-times" style="font-size: 2rem;color:grey;" id="close_btn"></i>
+                        <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
+                    </div>
+                    <div class="card search-filter" style="display: block;">
+    
+                        <form action="/user/filter" method="POST">
+                            <div class="card-body">
+    
+    
+                                <div class="filter-widget">
+                                   
+                                    <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+                                    <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                                   
+                                </div>
+                                <div class="filter-widget">
+                                    <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
+                                        <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                        <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                        <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
+        
+                                        </ul>
+                                        <table class="table table-striped position-absolute" style="margin-left: -20px;">
+    
+                                            <tbody id="myTable1">
+                                                
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <!-- <div class="btn-search">
+                                    <button type="submit" class="btn btn-block tcolor">Search</button>
+                                </div> -->
+    
+                            </div>
+                        </form>
+                    </div>
+    
+                </div>
+            <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    
+                   
+                    <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;">
+                        <div class="col-md-8" style="display: inline-flex;width: 100%;margin-bottom: 50px;">
+                        <div class="col-md-4" style=" height:35%; left: 20px;">
+                            <a href="/"><img src="<%=lab.avatar%>" style="width: 100%;height: 250px;"></a>
+
+                        </div>
+                        <div class="col-md-8" style="height: 100%; left: 20px">
+                            <div class="lip-heading">
+                                <h2><%=lab.name%></h2>
+                                <p><%=lab.contacts.address%>, <%=lab.contacts.city%></p>
+                            </div>
+                            <!-- <div class="certi" style="display: inline-flex;">
+                                <div class="certi-logo" style="margin-left: -4px;">
+                                    <img src="<%=assetPath('img/patients/certi2.png')%>" style="height: 37px;">
+                                </div>
+                                <div class="certi-heading">
+                                    <h4 style="font-weight: 800; margin-top: 11px; margin-left: 6px;">Certified Labs</h4>
+                                </div>
+                            </div>
+                            <div class="lip-sec" style="margin-left: -42px;">
+                                <ul class="lip-ul" style="list-style:none">
+                                    <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span> <span style="line-height: 30px; margin-left:10px;">Free Home Sample Pickup
+                            </span</li>
+                            <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> E-Reports on next day
+                            </span</li>
+                            <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> 100% Secured with Accuracy
+                            </span</li>                    
+                        </ul>
+                    </div> -->
+                    <!-- <div class=" col-md-12 lip-block" style="height: 60px;position: relative; display: inline-flex; border-top: 1px solid black; border-bottom: 1px solid black;">
+                        <div class="lips-price" style="margin-left: -7px;" >
+                            <h3 style="margin-top: 13px;margin-left: 0px;">₹ 400</h3>
+                            <p style="margin-top:-12px; margin-left:-2px"><span style="margin-left: 2px; color: #558B2F">+</span><span style="color: #558B2F">10% Health Cashback*</span> </p>
+                            </div>
+                            <div class="lip-add" style="border: 1px solid black; height: 39px;width: 109px;left: 303px;
+                    margin-top: 13px;
+                    border-radius: 3px;position: absolute;">
+                                <h4 style="text-align: center; padding-top: 7px;">Add Cart</h4>
+
+                            </div>
+                            <div class="lip-add" style="border: 1px solid #fff; position: absolute; height: 39px;width: 116px; left: 422px;
+                    margin-top: 13px;
+                    border-radius: 3px;
+                    background-color: #4DD0E1">
+                                <h4 style="text-align: center; padding-top: 7px;color: white;
+                        font-weight: 800; color: #fff; cursor: pointer;">Book Now</h4>
+
+                            </div>
+                        </div> -->
+                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
+                            <div class="imgs">
+                                <img src="<%=assetPath('img/patients/first1.jfif')%>" style="height: 45px; width: 40px;">
+                            </div>
+                            <div class="imgs-heading" style="margin-left: 15px;">
+                                <h4 style="font-weight: 800;"> Home sample collection for FREE</h4>
+                                <p style="font-weight: 400;line-height: 17px;
+                        margin-top: -6px;">A certified professional will collect your sample from a location of your preference.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
+                            <div class="imgs">
+                                <img src="<%=assetPath('img/patients/e12.png')%>" style="height: 45px; width: 40px;">
+                            </div>
+                            <div class="imgs-heading" style="margin-left: 15px;">
+                                <h4 style="font-weight: 800;">
+                                    Digital reports</h4>
+                                <p style="font-weight: 400;line-height: 17px;
+                        margin-top: -6px;">Access your reports anytime on your AarogyaHub account. We will email you a copy.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
+                            <div class="imgs">
+                                <img src="<%=assetPath('img/patients/offer.jpg')%>" style="height: 45px; width: 40px;">
+                            </div>
+                            <div class="imgs-heading" style="margin-left: 15px;">
+                                <h4 style="font-weight: 800;">
+                                    Offers and affordable prices</h4>
+                                <p style="font-weight: 400;line-height: 17px;
+                        margin-top: -6px;">Get great discounts and offers on tests and packages</p>
+                            </div>
+                        </div>
+
+
+
+                        </div>
+                        <div class="col-md-11" style="position: absolute;top:60%;margin-left: 30px;">
+                            <div class="" style="border:3px solid #478e8e;padding: 5px 10px;margin-bottom: 20px;">
+                                <span style="font-size:2rem;font-weight: bolder;color:#e36d25;">Available Tests</span>
+                                <span style="position:absolute;right:10%;font-size:1.5rem;font-weight: bolder;"><%=lab.tests.length%> Tests</span>
+                            </div>
+                            <div>
+                                <%for(let u of lab.tests){%>
+                                <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
+                                    <div style="width: 10%;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
+                                    <div style="width: 70%;">
+                                        <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
+                                        <h3 style="font-size: 1rem;">Rs <%=u.testprice%></h3>
+                                    </div>
+                                    <div style="width: 20%;">
+                                        <a href="" class="btn btn-primary" style="border-radius: 3px !important;width:110px !important;padding:5px 5px !important;min-width: none !important;margin-top: 7px;font-weight: bolder;">Select</a>
+                                    </div>
+                                </div>
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" >
+                <div class="col-md-12" style="height: 0%; position:relative;margin-bottom: 50px;">
+    <h2 style="font-weight: bold;">Popular Health Packages</h2>
+    <section>
+        <div>
+           
+            <div class="second-heading " style="display: inline-flex; margin-left:-30px;margin-top: 12px; margin-bottom: 25px; ">
+                <ul style="list-style: none; display: inline-flex;">
+                    <a>
+                        <li class="active-popular1" id="featured" data-count='1;' onclick="changeDiv(1);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px;font-size: 0.8rem; ">
+                            Featured Checkup</li>
+                    </a>
+
+                    <a>
+                        <li class="active-popular" id="Diabetes" data-count='2;' onclick="changeDiv(2);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; font-size: 0.8rem; ">
+                            Diabetes Care</li>
+                    </a>
+                    <a>
+                        <li class="active-popular" id="women" data-count='3;' onclick="changeDiv(3);" style="border: 1px solid black;cursor:pointer;margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px; font-size: 0.8rem; ">
+                            Women's Care</li>
+                    </a>
+                    <!-- <a>
+                        <li class="active-popular" id="mens" data-count='4;' onclick="changeDiv(4);" style="border: 1px solid black;cursor:pointer; margin-right: 24px; border-radius: 30px; padding-left: 25px; padding-right: 25px; padding-top: 7px;font-size: 0.8rem;  ">
+                            Men's Health</li>
+                    </a> -->
+                </ul>
+            </div>
+            <div class="doctor-slider slider ccdoctorslider filter_box" id="div1" style="padding-left: 20px; padding-right: 20px;height: 550px;overflow: auto;">
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged for all Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Young Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 699
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">114 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 3399
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">100 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 1899
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/old.jpg')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                        <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-slider slider ccdoctorslider displayNone" id="div2" style="padding-left: 20px; padding-right: 20px;">
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged for all Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Young Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 699
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">114 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 3399
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">100 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 1899
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/old.jpg')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                        <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-slider slider ccdoctorslider displayNone" id="div3" style="padding-left: 20px; padding-right: 20px;">
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged for all Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Young Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 699
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">114 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 3399
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">100 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 1899
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/old.jpg')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                        <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-slider slider ccdoctorslider displayNone" id="div4" style="padding-left: 90px; padding-right: 90px;">
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Comprehensive Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged for all Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 2999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Young Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 699
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/look1.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 41-60 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">114 test Included</p>
+                        </div>
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 3399
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/health3.jfif')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured">Active Professional Health Checkup</h3>
+                        <p class="para-p">ideals for individual aged 21-40 Years.></p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">100 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 899
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="feautred-div" style="border: 1px solid #0000001f;border-top-left-radius: 9px;
+    border-top-right-radius: 9px;">
+                    <div class="featured-img" style="height: 40%;">
+                        <a href="/"><img src="<%=assetPath('img/patients/health2.jpg')%>" style="width: 100%;height: 100%;"></a>
+                    </div>
+                    <div class="featured-para" style="height: 20%;">
+                        <h3 class="para-featured"> Health Old Citizen Checkup</h3>
+                        <p class="para-p">ideals for individual aged for 40-100 Years.</p>
+                    </div>
+                    <div class="featured-paraTest" style="height:15% ;margin-bottom: 26px;margin-top: 27px;">
+                        <div class="test-number">
+                            <p class="included-test">60 test Included</p>
+                        </div>
+
+                    </div>
+                    <div class="featured-last" style="height:25% ; position: relative;">
+                        <span class="health-price">
+                ₹ 3999
+            </span>
+                        <a class="health-book">
+                            <span class="books-health">Book Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                </div>
+            </div>
+               
+
+            </div>
+          
+
+            <!-- Footer -->
+           
+                <!-- /Footer -->
+
+    </div>
+    </section>
+    <!-- /Main Wrapper -->
+    <section class="mobile-sugar">
+        <div class=" Sugar" style="height: 200px; margin-top:3px;background-size: cover; position: relative; margin-bottom: 31px;background-image:linear-gradient(transparent,95%,white) ,url('/img/patients/v4.jpg');">
+
+            <div class="pric-health" style="    
+            margin-top: -3px;
+            margin-left: -17px;
+            font-family: unset;
+            font-weight: 700;
+            height: 23px;
+            width: 61px;
+            position: absolute;
+            left: 0.875rem;
+            border-radius: 5px;
+            bottom: -15px;
+            left: 28px;
+            ">
+                <p class="price-healths" style="color:grey;text-decoration: line-through;"> ₹ 300</p>
+            </div>
+            <div class="pric-health" style="    
+            margin-top: -3px;
+            margin-left: -17px;
+            font-family: unset;
+            font-weight: 700;
+            height: 23px;
+            width: 61px;
+            position: absolute;
+            left: 0.875rem;
+            border-radius: 5px;
+            bottom: -15px;
+            left: 91px;
+            background-color: #B94085;">
+                <p class="price-healths"> ₹ 200</p>
+            </div>
+
+        </div>
+        <div class="Pregnancy" style="margin-bottom: 17px;">
+            <h3 style="margin-left: 8px;
+            font-weight: 700;">Diabetes Test</h3>
+        </div>
+        <div class="col-sm-12 test-type" style="display: inline-flex;">
+            <div class="col-sm-4" style="display:inline-flex">
+                <div class="col-sm-2" style="height: 54px;
+                width: 54px; border-radius: 7px; background-image: url('/img/patients/p3.png'); background-size: cover; background-color:#a93e65;">
+
+                </div>
+                <div class="col-sm-1" style="width: 117px; margin-left: -4px;">
+                    <p style="line-height: 17px;"><span style="font-weight: 800;
+                        font-size: 19px;
+                        margin-left: 1px;">3</span><span style="margin-left: 3px;">Test Included</span></p>
+                </div>
+
+            </div>
+            <div class="col-sm-4" style="display:inline-flex; margin-left: -70px;">
+                <div class="col-sm-2" style="height: 54px;
+                width: 54px; border-radius: 7px; background-image: url('/img/patients/p5.jpg'); background-size: cover; background-color:#a93e65;">
+
+                </div>
+                <div class="col-sm-1" style="width: 100px;">
+                    <p style="line-height: 17px;"><span style="font-weight: 800;
+                        font-size: 19px;
+                        margin-left: 1px;">100+</span><span style="margin-left: 3px;">Booked in 10 Last Days </span></p>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div style="margin-left: 3px; margin-top: 12px;">
+            <h3 style="font-weight: 600; margin-left: 7px;"> This package covers</h3>
+            <ul style="font-family: system-ui;
+            font-weight: 500;">
+                <li>Measurment:Complete Blood Count</li>
+                <li>A1C Test</li>
+                <li>Glucose levels in Body</li>
+            </ul>
+        </div>
+
+        <div style="background-color: #EEEEEE;">
+            <div class="col-sm-12">
+                <h3 style="text-align: center;
+                padding-top: 15px;
+                font-size: 1.125rem;
+            ">Why should you choose this Package?</h3>
+            </div>
+
+
+
+            <div class="col-sm-12" style="display: inline-flex; height: 200px;margin-top: 15px;">
+
+                <div class="col-sm-6">
+                    <img src="<%=assetPath('img/patients/v2.jpg')%>" style="height: 70px; width: 70px; border-radius: 0.6rem;;">
+                    <p style="font-size: 0.875rem;
+                    margin-top: 8px;">if your a male or female above 40 years of age.</p>
+                </div>
+                <div class="col-sm-6">
+                    <img src="<%=assetPath('img/patients/v3.jpg')%>" style="height:70px; width:70px; border-radius: 0.6rem;;">
+                    <p style="font-size: 0.875rem;
+                    margin-top: 8px;"> To help evaluate lifestyle changes and health risks.</p>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-12">
+            <div class="col-sm-12 last" style="border: 1px solid #BDBDBD;
+            margin-bottom: 8px;
+            border-radius: 0.6rem;;
+            margin-top: 16px;">
+                <div style="display: inline-flex;margin-top: 18px;height: auto;">
+                    <div class=" col-sm-4 ">
+                        <img src="<%=assetPath('img/patients/l3.png')%> " style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
+                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Sample Pickup at home</p>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <img src="<%=assetPath('img/patients/l1.jpg ')%>" style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
+                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Online reports in 24-48 hours</p>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <img src="<%=assetPath('img/patients/l2.png ')%>" style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
+                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Reports analysis by top doctors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 text-center position-sticky" style="bottom:0px">
+            <a class="btn" style="text-align: center;padding: 8px;background-color: #FF5722;margin-top: 18px; border-radius:27px;color:white;margin-bottom: 20px;width:186px; ">
+               Book Now
+            </a>
+
+        </div>
+
+    </section>
+    <%-include('footer');%>
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+        function show(count) {
+            var up = document.querySelectorAll("#up");
+            var down = document.querySelectorAll("#down");
+            var test = document.getElementById("test");
+            var prep = document.getElementById("prep");
+            var result = document.getElementById("result");
+
+            if (count == 0) {
+                test.classList.toggle('displayNone');
+                down[count].classList.toggle('displayNone');
+                up[count].classList.toggle('displayNone');
+
+            }
+            if (count == 1) {
+                prep.classList.toggle('displayNone');
+                down[count].classList.toggle('displayNone');
+                up[count].classList.toggle('displayNone');
+            }
+            if (count == 2) {
+                result.classList.toggle('displayNone');
+                down[count].classList.toggle('displayNone');
+                up[count].classList.toggle('displayNone');
+
+            }
+        }
+
+        function hide(count) {
+
+
+            var up = document.querySelectorAll("#up");
+            var down = document.querySelectorAll("#down");
+            var test = document.getElementById("test");
+            var prep = document.getElementById("prep");
+            var result = document.getElementById("result");
+
+            if (count == 0) {
+                test.classList.add('displayNone');
+                up[count].classList.add('displayNone');
+                down[count].classList.remove('displayNone');
+
+            }
+            if (count == 1) {
+                prep.classList.add('displayNone');
+                up[count].classList.add('displayNone');
+                down[count].classList.remove('displayNone');
+
+            }
+            if (count == 2) {
+                result.classList.add('displayNone');
+                up[count].classList.add('displayNone');
+                down[count].classList.remove('displayNone');
+            }
+
+
+
+        }
+    </script>
+    <script>
+        function changeDiv(count) {
+            var div1 = document.getElementById('div1');
+            var div2 = document.getElementById('div2');
+            var div3 = document.getElementById('div3');
+            var div4 = document.getElementById('div4');
+
+            var featured = document.getElementById('featured');
+            var diabetes = document.getElementById('Diabetes');
+            var women = document.getElementById('women');
+            var mens = document.getElementById('mens');
+
+
+            if (count == 1) {
+                div1.classList.remove('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.add('displayNone');
+                featured.classList.add('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+
+            }
+            if (count == 2) {
+                div1.classList.add('displayNone');
+                div2.classList.remove('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.add('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.add('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+            }
+            if (count == 3) {
+                div1.classList.add('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.remove('displayNone');
+                div4.classList.add('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.add('active-popular1');
+                mens.classList.remove('active-popular1');
+
+
+            }
+            if (count == 4) {
+                div1.classList.add('displayNone');
+                div2.classList.add('displayNone');
+                div3.classList.add('displayNone');
+                div4.classList.remove('displayNone');
+                featured.classList.remove('active-popular1');
+                diabetes.classList.remove('active-popular1');
+                women.classList.remove('active-popular1');
+                mens.classList.add('active-popular1');
+
+            }
+
+
+        }
+    </script>
+
+    <!-- jQuery -->
+  
+
+
+
+</body>
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:53 GMT -->
+
+</html>

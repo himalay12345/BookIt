@@ -608,12 +608,13 @@ module.exports.chatDoctor = async(req, res) => {
     })
 }
 module.exports.test = async(req, res) => {
-    let test = await Test.find({})
+    let test = await Test.find({});
+    let labs = await User.find({type:'Diagonistic'});
     return res.render('test', {
 
         title: 'Tests',
-        test: test
-
+        test: test,
+        labs:labs
 
     })
 

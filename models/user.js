@@ -859,12 +859,35 @@ let storage = multer.diskStorage({
         cb(null, path.join(__dirname, '..', AVATAR_PATH));
     },
     filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
+        // cb(null, file.fieldname + '-' + Date.now());
+        if(file.originalname){
+            file.uploaded_name = Date.now() + file.originalname.replace(/ /g, "_").toLowerCase();
+            var file_name=Date.now() + file.originalname.replace(/ /g, "_").toLowerCase();
+
+            console.log(file);
+            var ext = file.mimetype.split('/')[1];
+            cb(null, file_name);
+    }
+    else
+    {
+            cb(null,  file.fieldname + '-' + Date.now()  + path.extname(file.originalname));
+    }
     }
 });
 
 //static function
-userSchema.statics.uploadedAvatar = multer({ storage: storage }).fields([
+userSchema.statics.uploadedAvatar = multer({ storage: storage ,
+    fileFilter: function (req, file, cb) {
+        var ext=path.extname(file.originalname);
+        if(file.fieldname && (file.fieldname=="avatar" || file.fieldname=="clinicphoto")){
+            var validExtensions = ['.jpg','.png','.jpeg',".gif",".JPG",".PNG",".JPEG",".GIF"];
+            if (validExtensions.indexOf(ext) < 0) {
+              return cb(new Error('Allowed image extentions are jpg,png,jpeg and gif'))
+            }
+        }
+       
+        cb(null, true)
+   }}).fields([
     { name: 'avatar', maxCount: 1 },
     { name: 'clinicphoto', maxCount: 10 }
 ]);

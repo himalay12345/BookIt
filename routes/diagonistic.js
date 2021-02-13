@@ -26,7 +26,11 @@ router.post('/bank-details', diagController.bankDetails);
 router.get('/add-test', diagController.addTest);
 router.post('/add-test', diagController.addTestData);
 router.get('/delete-test', diagController.deleteTest);
-router.get('/update-test', diagController.updateTest);
+router.post('/update-test', diagController.updateTest);
+router.get('/lab-profile',diagController.labProfile)
+router.get('/all-tests',diagController.allTests)
+router.get('/all-labs',diagController.allLabs)
+router.get('/select-lab',diagController.selectLab)
 
 
 module.exports = router;

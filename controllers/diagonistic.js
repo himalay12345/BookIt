@@ -3,6 +3,8 @@ const config = require('../config/twilio');
 const client = require('twilio')(config.accountSID, config.authToken);
 let User = require('../models/user');
 let Test = require('../models/test');
+const fs = require('fs')
+const path = require('path')
 
 module.exports.register = async (req, res) => {
     return res.render('diag-register',{
@@ -297,6 +299,7 @@ module.exports.deleteTest = async(req, res) => {
 }
 
 module.exports.updateTest = async(req, res) => {
+    console.log(req.body);
     let n1 = await User.update({ "tests._id" : req.query.id}, {
         '$set': {
             
@@ -306,4 +309,60 @@ module.exports.updateTest = async(req, res) => {
         }
     });
     return res.redirect('back')
+}
+
+module.exports.labProfile = async(req, res) => {
+    let lab = await User.findById(req.query.id);
+
+    return res.render('lab-profile',{
+        title:'Lab Profile',
+        lab:lab
+    })
+
+}
+
+
+module.exports.allTests = async(req, res) => {
+    let test = await Test.find({});
+    let lab = await User.find({type:'Diagonistic'});
+
+
+    return res.render('all-tests',{
+        title:'All Tests',
+        tests:test,
+        labs:lab
+    })
+
+}
+
+module.exports.allLabs = async(req, res) => {
+    let lab = await User.find({type:'Diagonistic'});
+
+    return res.render('all-labs',{
+        title:'All Labs',
+        labs:lab
+    })
+
+}
+
+
+
+module.exports.selectLab = async(req, res) => {
+    let data =[];
+    let lab = await User.find({type:'Diagonistic'});
+    for(let u of lab)
+    {
+        for(let u1 of u.tests)
+        {
+            if(u1.testname.trim()  == req.query.testname.trim() ){
+                console.log(u1.testname,req.query.testname)
+                data.push(u)
+                
+            }
+        }
+    }
+
+  return res.json({
+      doctors:data
+  })
 }

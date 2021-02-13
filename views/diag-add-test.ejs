@@ -76,36 +76,59 @@
                         <!-- /Profile Sidebar -->
 
                     </div>
-                    <div class="col-md-7 col-lg-8 col-xl-9">
-                        <div class="row">
-                            <h2 style="text-align:center !important;text-decoration:underline;">Add tests</h2>
-                        </div>
+                    <div class="col-md-7 col-lg-8 col-xl-9" style="background-color: white;padding: 15px;">
+                       <%if(locals.user.tests.length>0){%>
                         <div class="">
-                            <h2>Test Added</h2>
-                            <ul>
-                               
+                            <div class="row"style="text-align:center;margin-left:30px;" >
+                                <h2 style="text-align:center !important;">Recently Added tests</h2>
+                            </div>
+                            <!-- <h2>Test Added</h2> -->
+                            <ul style="list-style: none;width: 100%;">
+                               <%var i1 =0%>
                             <%for(t1 of locals.user.tests){%>
-                                <li>
-                                    <input type="checkbox" name="testname" value="<%=t1.testname%>" checked ><%=t1.testname%>
-                                    <input type="text" name="testprice" value="<%=t1.testprice%>">
-                                    <a href="/diagonistic/delete-test/?id=<%=t1.id%>">Delete</a>
-                                     <a href="/diagonistic/update-test/?id=<%=t1.id%>">Update</a>
+                                <form action="/diagonistic/update-test/?id=<%=t1.id%>" method="POST">
+                                <li style="border:1px solid grey;padding:5px;display:inline-flex;width:100%;">
+                                    <input type="checkbox" class="timing" name="testname" value="<%=t1.testname%>" style="margin-left: 10px;margin-right:10px;margin-top: 5px;" checked ><%=t1.testname%>
+                                    <input type="text" name="testprice" class="form-control" value="<%=t1.testprice%>"style="width:30%;margin-left: 10px;">
+                                    <input type="hidden" name="index"  value="<%=i1++%>" >
+                                    <a href="/diagonistic/delete-test/?id=<%=t1.id%>" class="btn btn-sm bg-danger" style="color: white;margin-left:15px;width:150px !important;padding-top: 10px;font-size: 1rem;;">
+                                    <i class="fas fa-trash"></i> 
+                                    Delete</a>
+                                     <button type="submit" class="btn btn-primary btn-block btn-lg login-btn" style="margin-left: 15px;width:150px !important">Update</a>
                                 </li>
+                            </form>
                             <%}%>
                            
                        
                         </ul>
                         </div>
+                        <%}%>
                         <div class="">
-                            <ul>
+                            <div class="row"style="text-align:center;margin-left:30px;" >
+                                <h2 style="text-align:center !important;">Add tests</h2>
+                            </div>
+                            <ul style="list-style: none;width: 50%;">
                                 <form action="/diagonistic/add-test" method="POST">
                             <%for(t of tests){%>
-                                <li>
-                                    <input type="checkbox" name="testname" value="<%=t.testname%>"><%=t.testname%>
-                                    <input type="text" name="testprice">
-                                </li>
+                                <%var flag = false;%>
+                                     <%for(t1 of locals.user.tests){%>
+                                        <%if(t1.testname == t.testname){%>
+                                            <%flag = true;%>
+                                        <%}%>
+                                        <%}%>
+                                        <%if(flag){%>
+                                            <li class="displayNone">
+                                                <input type="checkbox" name="testname" value="<%=t.testname%>"><%=t.testname%>
+                                                <input type="text" name="testprice">
+                                            </li>
+                                        <%}else{%>
+                                            <li style="border:1px solid grey;padding:5px;display:inline-flex;width:100%;">
+                                                <input type="checkbox" name="testname" value="<%=t.testname%>" class="" onclick="showprice()"  style="margin-left: 10px;margin-right:10px;margin-top: 5px;"><%=t.testname%>
+                                                <input type="text" name="testprice" class="form-control" style="width:50%;margin-left: 15px;">
+                                            </li><%}%>
+                              
                             <%}%>
-                            <button type="submit"></button>
+                            <button type="submit" class="btn btn-primary submit-btn" style="margin-top: 30px;">Submit</button>
                         </form>
                         </ul>
                         </div>
