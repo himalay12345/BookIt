@@ -4,6 +4,133 @@ const Consult = require('../models/consult');
 
 
 
+
+
+
+module.exports.home = async (req, res) => {
+    let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
+    let data = [];
+    let doctors = [];
+    let p_doctors = [];
+    
+    for (i of doctor) {
+        if(i.premium)
+        {
+            p_doctors.push( {
+                name: i.name,
+                id: i.id,
+                department: i.department,
+                avatar: i.avatar,
+                fee:i.booking_fee,
+                contacts:i.contacts,
+                
+                premium:i.premium
+            });
+        }
+        else{
+        doctors.push( {
+            name: i.name,
+            id: i.id,
+            department: i.department,
+            avatar: i.avatar,
+            fee:i.booking_fee,
+            premium:i.premium
+        });
+    }
+    }
+
+    let consults = await Consult.find({});
+    let tests = await Test.find({});
+  
+   
+
+    res.json({
+        premium_doctors:p_doctors,
+        doctors:doctors,
+        consults:consults,
+        tests: tests
+    });
+}
+
+module.exports.doctors = async (req, res) => {
+    let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
+ 
+    let doctors = [];
+    let p_doctors = [];
+  
+    for (i of doctor) {
+    let avgrating = 0,cnt=0;
+       for(j of i.reviews)
+       {
+        avgrating = avgrating+j.rating;
+        cnt++;
+       }
+       let rating = parseInt(avgrating/cnt);
+       let specialisations;
+       let specialisation;
+       let specfirst = null;
+       let education;
+       if(i.education.length>0)
+       {
+           education = i.education[0].degree;
+       }
+       if(i.specialisation != undefined)
+       {
+       specialisations = i.specialisation;
+       specialisation = specialisations.split(',');
+       specfirst = specialisation[0]
+       }
+       if(i.premium){
+        p_doctors.push( {
+            name: i.name,
+            experience:i.wexperience,
+            contacts:i.contacts,
+            clinicphotos:i.clinicphoto,
+            services:i.services,
+            department: i.department,
+            education:education,
+            specialist:specfirst,
+            fee:i.booking_fee,
+            clinicname:i.clinicname,
+            clinicaddr:i.clinicaddr,
+            id: i.id,
+            staff_flag:true,
+            avatar: i.avatar,
+            ratings:rating,
+            rating_count:cnt,
+            premium:i.premium
+        });
+       }
+
+       else{
+        doctors.push( {
+            name: i.name,
+            experience:i.wexperience,
+            department: i.department,
+            education:education,
+            specialist:specfirst,
+            fee:i.booking_fee,
+            clinicaddr:i.clinicaddr,
+            id: i.id,
+            staff_flag:true,
+            avatar: i.avatar,
+            ratings:rating,
+            rating_count:cnt,
+            premium:i.premium
+        });
+       }
+       
+    }
+
+   
+
+    res.json({
+        status:'true',
+        premium_doctors:p_doctors,
+        doctors:doctors
+    });
+}
+
 module.exports.doctorProfile = async (req, res) => {
     let i = await User.findById(req.body.id);
  
@@ -22,7 +149,6 @@ module.exports.doctorProfile = async (req, res) => {
    
 
     res.json({
-        status:true,
         avatar: i.avatar,
             name: i.name,
             education:i.education,
@@ -34,6 +160,7 @@ module.exports.doctorProfile = async (req, res) => {
             fee:i.booking_fee,
             id: i.id,
             experience:i.experience,
+            experience_count:i.wexperience,
             awards:i.awards,
            clinicname:i.clinicname,
            clinicaddr:i.clinicaddr,
@@ -45,6 +172,7 @@ module.exports.doctorProfile = async (req, res) => {
             premium:i.premium
     });
 }
+
 module.exports.booking = async (req, res) => {
     let i = await User.findById(req.body.id);
     if (!i) {
@@ -242,136 +370,9 @@ module.exports.booking = async (req, res) => {
 }
 
 
-module.exports.home = async (req, res) => {
-    let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
-    let data = [];
-    let doctors = [];
-    
-    for (i of doctor) {
-        
-        doctors.push( {
-            name: i.name,
-            id: i.id,
-            department: i.department,
-            avatar: i.avatar,
-            fee:i.booking_fee,
-            contacts:i.contacts
-        });
-    }
 
-    let consults = await Consult.find({});
-    let tests = await Test.find({});
-  
-   
 
-    res.json({
 
-        doctors:doctors,
-        consults:consults,
-        tests: tests
-    });
-}
 
-module.exports.specialist = async (req, res) => {
-    let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true ,department:req.body.id});
- 
-    let doctors = [];
-  
-    for (i of doctor) {
-    let avgrating = 0,cnt=0;
-       for(j of i.reviews)
-       {
-        avgrating = avgrating+j.rating;
-        cnt++;
-       }
-       let rating = parseInt(avgrating/cnt);
-       let specialisations;
-       let specialisation;
-       let specfirst = null;
-       let education;
-       if(i.education.length>0)
-       {
-           education = i.education[0].degree;
-       }
-       if(i.specialisation != undefined)
-       {
-       specialisations = i.specialisation;
-       specialisation = specialisations.split(',');
-       specfirst = specialisation[0]
-       }
-        doctors.push( {
-            name: i.name,
-            experience:i.wexperience,
-            department: i.department,
-            education:education,
-            specialist:specfirst,
-            fee:i.booking_fee,
-            clinicaddr:i.clinicaddr,
-            id: i.id,
-            staff_flag:true,
-            avatar: i.avatar,
-            ratings:rating,
-            rating_count:cnt
-        });
-    }
-
-   
-
-    res.json({
-        status:'true',
-        doctors:doctors
-    });
-}
-
-module.exports.doctors = async (req, res) => {
-    let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
- 
-    let doctors = [];
-  
-    for (i of doctor) {
-    let avgrating = 0,cnt=0;
-       for(j of i.reviews)
-       {
-        avgrating = avgrating+j.rating;
-        cnt++;
-       }
-       let rating = parseInt(avgrating/cnt);
-       let specialisations;
-       let specialisation;
-       let specfirst = null;
-       let education;
-       if(i.education.length>0)
-       {
-           education = i.education[0].degree;
-       }
-       if(i.specialisation != undefined)
-       {
-       specialisations = i.specialisation;
-       specialisation = specialisations.split(',');
-       specfirst = specialisation[0]
-       }
-        doctors.push( {
-            name: i.name,
-            experience:i.wexperience,
-            department: i.department,
-            education:education,
-            specialist:specfirst,
-            fee:i.booking_fee,
-            clinicaddr:i.clinicaddr,
-            id: i.id,
-            staff_flag:true,
-            avatar: i.avatar,
-            ratings:rating,
-            rating_count:cnt
-        });
-    }
-
-   
-
-    res.json({
-        status:'true',
-        doctors:doctors
-    });
-}
 
 

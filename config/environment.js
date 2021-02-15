@@ -42,8 +42,8 @@ const development = {
     google_client_id:  process.env.G_CLIENTID,
     google_client_secret:  process.env.G_CLIENTSECRET,
     // google_callback_url:  process.env.G_TESTCALLBACK,
-    google_callback_url:  '/user/auth/google/callback',
-    // google_callback_url: process.env.G_LIVECALLBACK,
+    // google_callback_url:  '/user/auth/google/callback',
+    google_callback_url: process.env.G_LIVECALLBACK,
     fb_client_id:  process.env.FB_CLIENTID,
     fb_client_secret:  process.env.FB_CLIENTSECRET,
     fb_callback_url: process.env.FB_CALLBACK,
@@ -99,5 +99,5 @@ const production = {
 }
 
 
-module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development : eval(process.env.AAROGYAHUB_ENVIRONMENT);
-// module.exports = development;
+// module.exports = eval(process.env.AAROGYAHUB_ENVIRONMENT == undefined) ? development : eval(process.env.AAROGYAHUB_ENVIRONMENT);
+module.exports = development;

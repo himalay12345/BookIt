@@ -20,20 +20,22 @@ const bodyParser = require('body-parser');
 const pdf = require('html-pdf');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
 
-const trackServer = require('http').Server(app);
-const trackSockets = require('./config/track_socket').trackSockets(trackServer);
-trackServer.listen(5000);
+// const trackServer = require('http').Server(app);
+// const trackSockets = require('./config/track_socket').trackSockets(trackServer);
+// trackServer.listen(5000);
 
-// const fs = require('fs');
-// const https = require('https');
-// var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
-//     cert: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/cert.pem'),
-//     ca: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/chain.pem'),
-//     requestCert: false,     
-//     rejectUnauthorized: false },app);
-// const trackSockets = require('./config/track_socket').trackSockets(secureServer);
-// secureServer.listen(5000);   
+const fs = require('fs');
+const https = require('https');
+var secureServer = https.createServer({ key: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/aarogyahub.com/chain.pem'),
+    requestCert: false,     
+    rejectUnauthorized: false },app);
+const trackSockets = require('./config/track_socket').trackSockets(secureServer);
+secureServer.listen(5000);   
 
 
 const sassMiddleware = require('node-sass-middleware');
@@ -104,6 +106,24 @@ app.use(flash());
 app.use(customMiddleware.setFlash);
 // app.use(customMiddleware.authenticateToken);
 app.use('/', require('./routes/index'));
+
+const swaggerOptions = {
+    swaggerDefinition:{
+        info:{
+            title:'Home Page Api',
+            version:'1.0.0'
+        }
+    },
+    apis:['./routes/api.js']
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+// console.log(swaggerDocs);
+var options2 = {
+    explorer: true
+  };
+
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs,options2))
 
 app.listen(port, function(err) {
     if (err) {
