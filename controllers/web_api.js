@@ -106,10 +106,14 @@ module.exports.doctors = async (req, res) => {
         doctors.push( {
             name: i.name,
             experience:i.wexperience,
+            contacts:i.contacts,
+            clinicphotos:i.clinicphoto,
+            services:i.services,
             department: i.department,
             education:education,
             specialist:specfirst,
             fee:i.booking_fee,
+            clinicname:i.clinicname,
             clinicaddr:i.clinicaddr,
             id: i.id,
             staff_flag:true,
@@ -366,6 +370,89 @@ module.exports.booking = async (req, res) => {
             ratings:rating,
             rating_count:cnt,
             premium:i.premium
+    });
+}
+
+module.exports.specialist = async (req, res) => {
+    let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true ,department:req.body.department});
+ 
+    let doctors = [];
+    let p_doctors = [];
+  
+    for (i of doctor) {
+    let avgrating = 0,cnt=0;
+       for(j of i.reviews)
+       {
+        avgrating = avgrating+j.rating;
+        cnt++;
+       }
+       let rating = parseInt(avgrating/cnt);
+       let specialisations;
+       let specialisation;
+       let specfirst = null;
+       let education;
+       if(i.education.length>0)
+       {
+           education = i.education[0].degree;
+       }
+       if(i.specialisation != undefined)
+       {
+       specialisations = i.specialisation;
+       specialisation = specialisations.split(',');
+       specfirst = specialisation[0]
+       }
+       if(i.premium){
+        p_doctors.push( {
+            name: i.name,
+            experience:i.wexperience,
+            contacts:i.contacts,
+            clinicphotos:i.clinicphoto,
+            services:i.services,
+            department: i.department,
+            education:education,
+            specialist:specfirst,
+            fee:i.booking_fee,
+            clinicname:i.clinicname,
+            clinicaddr:i.clinicaddr,
+            id: i.id,
+            staff_flag:true,
+            avatar: i.avatar,
+            ratings:rating,
+            rating_count:cnt,
+            premium:i.premium
+        });
+       }
+
+       else{
+        doctors.push( {
+            name: i.name,
+            experience:i.wexperience,
+            contacts:i.contacts,
+            clinicphotos:i.clinicphoto,
+            services:i.services,
+            department: i.department,
+            education:education,
+            specialist:specfirst,
+            fee:i.booking_fee,
+            clinicname:i.clinicname,
+            clinicaddr:i.clinicaddr,
+            id: i.id,
+            staff_flag:true,
+            avatar: i.avatar,
+            ratings:rating,
+            rating_count:cnt,
+            premium:i.premium
+        });
+       }
+       
+    }
+
+   
+
+    res.json({
+        status:'true',
+        premium_doctors:p_doctors,
+        doctors:doctors
     });
 }
 

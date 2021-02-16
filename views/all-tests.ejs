@@ -130,7 +130,7 @@
                                 <span style="position:absolute;right:10%;font-size:1.1rem;font-weight: bolder;margin-top: 15px;color:#575557"><%=tests.length%> tests</span>
                             </div>
                             <div>
-                               
+                               <%var i=0%>
                                 <%for(let u of tests){%>
                                     <%var cnt=0%>
                                 <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
@@ -152,7 +152,7 @@
                                     <form action="">
                                         <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
                                     <div style="width: 20%;">
-                                        <a  class="btn btn-primary" onclick="display()" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
+                                        <a  class="btn btn-primary" id="select_new" data-count="<%=i++%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
                                     </div>
                                 </form>
                                 </div>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="col-md-5" style="padding-left: 100px;">
-                        <div id="select_lab" class="">
+                        <div id="select_lab">
                             <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
                             <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
                             <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
@@ -180,111 +180,24 @@
 
     </div>
     </section>
-    <div class="col-md-12 _3oqPe displayNone" style="display: inline-flex;">
+    <div class="col-md-12 _3oqPe displayNone show_all_labs" style="display: inline-flex;">
     
         <div class="col-md-12 jss48" style="overflow-y: auto;">
           
     <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;">
-        <svg viewBox="0 0 24 24" style="height: 50px;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+        <svg onclick="removeLab()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
         
         <h2 style="color:#575557;font-size: 1.5rem;padding-bottom: 0px;font-weight: bolder;">Select Lab</h2>
-        
-        <label>
-        <div id="lab_card"  class="" style="display: inline-flex;padding:10px;border:1px solid rgb(194, 193, 193);border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;">
-            <div style="display: 20%;">
-                <img src="/img/bg.jpg" style="width:150px;height:80px;border-radius: 5px;">
-            </div>
-            <div style="display: 75%;margin-left: 10px;">
-                <h2 style="font-size: 1.2rem;font-weight: bolder;">Prateek Lab</h2>
-                <p style="margin-top:-5px;color:black;font-weight:bold;font-size: 0.9rem;">Rs 500</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Doctor Gali, Napik Para</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Dumka</p>
-            </div>
-            <div class="display:5%;">
-                <input type="radio" id="rlab" name="lab" value="name" style="height:22px;width:40px;">
-            </div>
-        </div>
-    </label></br>
-    <label>
-        <div id="lab_card"  class="" style="display: inline-flex;padding:10px;border:1px solid rgb(194, 193, 193);border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;">
-            <div style="display: 20%;">
-                <img src="/img/bg.jpg" style="width:150px;height:80px;border-radius: 5px;">
-            </div>
-            <div style="display: 75%;margin-left: 10px;">
-                <h2 style="font-size: 1.2rem;font-weight: bolder;">Prateek Lab</h2>
-                <p style="margin-top:-5px;color:black;font-weight:bold;font-size: 0.9rem;">Rs 500</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Doctor Gali, Napik Para</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Dumka</p>
-            </div>
-            <div class="display:5%;">
-                <input type="radio" id="rlab" name="lab" value="name" style="height:22px;width:40px;">
-            </div>
-        </div>
-    </label></br>
-    <label>
-        <div id="lab_card"  class="" style="display: inline-flex;padding:10px;border:1px solid rgb(194, 193, 193);border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;">
-            <div style="display: 20%;">
-                <img src="/img/bg.jpg" style="width:150px;height:80px;border-radius: 5px;">
-            </div>
-            <div style="display: 75%;margin-left: 10px;">
-                <h2 style="font-size: 1.2rem;font-weight: bolder;">Prateek Lab</h2>
-                <p style="margin-top:-5px;color:black;font-weight:bold;font-size: 0.9rem;">Rs 500</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Doctor Gali, Napik Para</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Dumka</p>
-            </div>
-            <div class="display:5%;">
-                <input type="radio" id="rlab" name="lab" value="name" style="height:22px;width:40px;">
-            </div>
-        </div>
-    </label></br>
-    <label>
-        <div id="lab_card"  class="" style="display: inline-flex;padding:10px;border:1px solid rgb(194, 193, 193);border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;">
-            <div style="display: 20%;">
-                <img src="/img/bg.jpg" style="width:150px;height:80px;border-radius: 5px;">
-            </div>
-            <div style="display: 75%;margin-left: 10px;">
-                <h2 style="font-size: 1.2rem;font-weight: bolder;">Prateek Lab</h2>
-                <p style="margin-top:-5px;color:black;font-weight:bold;font-size: 0.9rem;">Rs 500</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Doctor Gali, Napik Para</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Dumka</p>
-            </div>
-            <div class="display:5%;">
-                <input type="radio" id="rlab" name="lab" value="name" style="height:22px;width:40px;">
-            </div>
-        </div>
-    </label></br>
-    <label>
-        <div id="lab_card"  class="" style="display: inline-flex;padding:10px;border:1px solid rgb(194, 193, 193);border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;">
-            <div style="display: 20%;">
-                <img src="/img/bg.jpg" style="width:150px;height:80px;border-radius: 5px;">
-            </div>
-            <div style="display: 75%;margin-left: 10px;">
-                <h2 style="font-size: 1.2rem;font-weight: bolder;">Prateek Lab</h2>
-                <p style="margin-top:-5px;color:black;font-weight:bold;font-size: 0.9rem;">Rs 500</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Doctor Gali, Napik Para</p>
-                <p style="margin-top: -20px !important;color:grey;font-size: 0.9rem;">Dumka</p>
-            </div>
-            <div class="display:5%;">
-                <input type="radio" id="rlab" name="lab" value="name" style="height:22px;width:40px;">
-            </div>
-        </div>
-    </label></br>
-       <label>
-        <div id="lab_card" class="popup" style="display: inline-flex;padding:10px;border:1px solid grey;border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;">
-            <div style="display: 20%;">
-                <img src="/img/bg.jpg" style="width:150px;height:80px;border-radius: 5px;">
-            </div>
-            <div style="display: 75%;margin-left: 10px;">
-                <h2 style="font-size: 1.2rem;">Prateek Lab</h2>
-                <p style="margin-top:-5px;color:black;font-weight:bold;">Rs 500</p>
-                <p style="margin-top: -15px !important;color:grey;">Doctor Gali, Napik Para</p>
-                <p style="margin-top: -15px !important;color:grey;">Dumka</p>
-            </div>
-            <div class="display:5%;">
-                <input type="radio" id="rlab" name="lab" value="name" style="height:22px;width:40px;">
-            </div>
-        </div>
-    </label>
+        <form action="/diagonistic/select-lab" method="POST">
+        <div  style="height: 100vh;">  
+            <div id="displayLab" style="height: 90%;overflow-y: auto;"></div>
+            <div style="background-color:white;width: 100%;position:sticky;bottom:5px;height: 10%;">
+                <button type="submit" class="btn btn-primary" style="width:100%;font-size:1.3rem;font-weight: bold;color:white;z-index: 1000;">Select Lab</button>
+            </div>      
+</div>
+</form>
+
+
     </div>
 </div>
 </div>
@@ -433,37 +346,49 @@
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
     <script src="<%=assetPath('js/script.js')%>"></script>
+   
     <script>
-       function display(){
-        var_3oqPe
-       }
-    </script>
-    <script>
-        var nasaImages = $("#lab-image");
-var testname = $("#testname");
-var pageInput = $("#page")
+         var selectlab = $("#select_lab"); 
+         var show_all = $(".show_all_labs");
+         var testname = document.querySelectorAll('#testname');
+        var displaylab = $("#displayLab");
 
-$("form button").click(function (e) {
+
+function removeLab()
+{
+    selectlab.removeClass('displayNone');
+    show_all.addClass('displayNone'); 
+}
+var selectnew = document.querySelectorAll('#select_new');
+for(let i=0;i<selectnew.length;i++)
+{
+    selectnew[i].addEventListener('click',function (e) {
     e.preventDefault();
     
-    let tname= testname.val();
-   
+    selectlab.addClass('displayNone');
+    show_all.removeClass('displayNone');
+    
+    let tname= testname[i].value;
+   console.log(tname)
 
     let url = "http://localhost:4000/diagonistic/select-lab/?testname=" + tname;
     
     $.get(url, function (data) {
-        let labs = data.labs;
-        
-        console.log(labs);
-        $("#show_lab").remove();
-
-        for (let lab of labs) {
-            console.log(lab);
-            nasaImages.append('<img src="' + photo.img_src + '" alt="' + photo.id + '">');
+       
+        console.log(data.doctors);
+        $('#displayLab label').html('');
+        for (let lab of data.doctors) {
+     
+            var addlab = '<label><div id="lab_card"><div class="dis20"><img src="'+ lab.avatar +'"></div><div class="dis75"><h2 class="dish2">'+lab.name + '</h2><p class="disp1">Rs '+ lab.price + '</p><p class="disp2"> '  + lab.address + '</p><p class="disp2">' + lab.city + '</p></div><div class="dis5"><input type="radio" id="rlab" name="labname" value="'+ tname + '" class="disinp"></div></div></label></br>'
+            $('#displayLab').append(addlab);
         }
+
+        
     });
 
 });
+}
+
 
     </script>
 

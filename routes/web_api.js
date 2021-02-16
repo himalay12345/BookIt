@@ -15,6 +15,7 @@ router.post('/home',webApiController.home);
 router.post('/doctors',webApiController.doctors);
 router.post('/doctor-profile',webApiController.doctorProfile);
 router.post('/booking',webApiController.booking);
+router.post('/specialist',webApiController.specialist);
 
 
 module.exports = router;

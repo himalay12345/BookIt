@@ -361,6 +361,15 @@
   scrollbar-width: none;
   /* Firefox */ }
 
+.jss488::-webkit-scrollbar {
+  display: none !important; }
+
+.jss488 {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */ }
+
 .mobile-Pregnancy {
   display: none; }
 
@@ -369,6 +378,49 @@
 
 .lthenex {
   display: none; }
+
+#lab_card {
+  display: inline-flex;
+  padding: 10px;
+  border: 1px solid #c2c1c1;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 5px; }
+
+.dis20 {
+  display: 20%; }
+
+.dis20 img {
+  width: 150px;
+  height: 80px;
+  border-radius: 5px; }
+
+.dis75 {
+  display: 75%;
+  margin-left: 10px; }
+
+.dis5 {
+  display: 5%; }
+
+.disinp {
+  height: 22px;
+  width: 40px; }
+
+.dish2 {
+  font-size: 1.2rem;
+  font-weight: bolder; }
+
+.disp1 {
+  margin-top: -5px;
+  color: black;
+  font-weight: bold;
+  font-size: 0.9rem; }
+
+.disp2 {
+  margin-top: -20px !important;
+  color: grey;
+  font-size: 0.9rem; }
 
 .active-popular1 {
   background-color: #3ac5fc;

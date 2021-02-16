@@ -31,6 +31,7 @@ router.get('/lab-profile',diagController.labProfile)
 router.get('/all-tests',diagController.allTests)
 router.get('/all-labs',diagController.allLabs)
 router.get('/select-lab',diagController.selectLab)
+router.post('/select-lab',diagController.selectLab1)
 
 
 module.exports = router;

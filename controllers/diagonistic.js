@@ -356,7 +356,13 @@ module.exports.selectLab = async(req, res) => {
         {
             if(u1.testname.trim()  == req.query.testname.trim() ){
                 console.log(u1.testname,req.query.testname)
-                data.push(u)
+                data.push({
+                    name:u.name,
+                    avatar:u.avatar,
+                    price:u1.testprice,
+                    address:u.contacts.address,
+                    city:u.contacts.city
+                })
                 
             }
         }
@@ -365,4 +371,9 @@ module.exports.selectLab = async(req, res) => {
   return res.json({
       doctors:data
   })
+}
+
+module.exports.selectLab1 = async(req, res) => {
+    console.log(req.body);
+    return res.redirect('back')
 }
