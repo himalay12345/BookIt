@@ -307,7 +307,7 @@ module.exports.pauseBookingService = async(req, res) => {
      {
          if(temp.date == str1)
          {
-             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+             let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                  '$set': {
                      
                      'doctors.$.reschedule': true
@@ -371,7 +371,7 @@ module.exports.pauseBookingService = async(req, res) => {
          {
              if(temp.date == a2)
              {
-                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                      '$set': {
                          
                          'doctors.$.reschedule': true
@@ -422,7 +422,7 @@ module.exports.pauseBookingService = async(req, res) => {
          {
              if(temp.date == req.body.date[i])
              {
-                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                      '$set': {
                          
                          'doctors.$.reschedule': true
@@ -470,7 +470,7 @@ module.exports.pauseBookingService = async(req, res) => {
      {
          if(temp.date == req.body.date)
          {
-             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+             let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                  '$set': {
                      
                      'doctors.$.reschedule': true
@@ -545,7 +545,7 @@ module.exports.pauseBookingService = async(req, res) => {
      {
          if(temp.date == str1)
          {
-             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+             let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                  '$set': {
                      
                      'doctors.$.reschedule': true
@@ -609,7 +609,7 @@ module.exports.pauseBookingService = async(req, res) => {
          {
              if(temp.date == a2)
              {
-                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                      '$set': {
                          
                          'doctors.$.reschedule': true
@@ -660,7 +660,7 @@ module.exports.pauseBookingService = async(req, res) => {
          {
              if(temp.date == req.body.date[i])
              {
-                 let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+                 let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                      '$set': {
                          
                          'doctors.$.reschedule': true
@@ -708,7 +708,7 @@ module.exports.pauseBookingService = async(req, res) => {
      {
          if(temp.date == req.body.date)
          {
-             let n1 = await User.update({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
+             let n1 = await User.updateOne({ "_id" : temp.pid, "doctors.payment_id": temp.payment_id }, {
                  '$set': {
                      
                      'doctors.$.reschedule': true
@@ -920,7 +920,7 @@ module.exports.addMoreSeat = async(req, res) => {
         if(typeof(user.schedule_time[index].start) == 'string')
     {
         let value = parseInt(user.schedule_time[index].available)+ parseInt(req.body.more);
-        let day = await User.update({ 'schedule_time._id': sid }, {
+        let day = await User.updateOne({ 'schedule_time._id': sid }, {
                         '$set': {
                             
                             'schedule_time.$.available': value
@@ -945,7 +945,7 @@ module.exports.addMoreSeat = async(req, res) => {
                     available.push(temp1);
                 }
 
-                let day = await User.update({ 'schedule_time._id': sid }, {
+                let day = await User.updateOne({ 'schedule_time._id': sid }, {
                     '$set': {
                         
                         'schedule_time.$.available': available
@@ -1514,7 +1514,7 @@ module.exports.offlineCancel = async function(req, res) {
                 if(req.body.flag == 'yes')
                 {
 
-                       let n1 = await User.update({ "_id" : user1._id, "booking._id": req.body.bid}, {
+                       let n1 = await User.updateOne({ "_id" : user1._id, "booking._id": req.body.bid}, {
                             '$set': {
                                 
                                 'booking.$.cancel': true
@@ -1541,7 +1541,7 @@ module.exports.offlineCancel = async function(req, res) {
                                     var temp1 = parseInt(j[temp]);
                                     available1.push(temp1);
                                 }
-                            let day = await User.update({ 'schedule_time._id': id }, {
+                            let day = await User.updateOne({ 'schedule_time._id': id }, {
                                 '$set': {
                                     
                                     'schedule_time.$.available': available1
@@ -1614,21 +1614,21 @@ module.exports.refund = async function(req, res) {
 
                     if(response.id && response.payment_id)
                     {
-                       let n1 = await User.update({ "_id" : user1._id, "doctors.payment_id": user1.doctors[req.query.index].payment_id }, {
+                       let n1 = await User.updateOne({ "_id" : user1._id, "doctors.payment_id": user1.doctors[req.query.index].payment_id }, {
                             '$set': {
                                 
                                 'doctors.$.cancel': true
                                 
                             }
                         });
-                        let n2 = await User.update({ "_id" : req.query.doctorid, "patients.payment_id": user1.doctors[req.query.index].payment_id }, {
+                        let n2 = await User.updateOne({ "_id" : req.query.doctorid, "patients.payment_id": user1.doctors[req.query.index].payment_id }, {
                             '$set': {
                                 
                                 'patients.$.cancel': true
                                 
                             }
                         });
-                        let n3 = await User.update({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.query.index].payment_id }, {
+                        let n3 = await User.updateOne({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.query.index].payment_id }, {
                             '$set': {
                                 
                                 'booking.$.cancel': true
@@ -1654,7 +1654,7 @@ module.exports.refund = async function(req, res) {
                                     var temp1 = parseInt(j[temp]);
                                     available1.push(temp1);
                                 }
-                            let day = await User.update({ 'schedule_time._id': id }, {
+                            let day = await User.updateOne({ 'schedule_time._id': id }, {
                                 '$set': {
                                     
                                     'schedule_time.$.available': available1
@@ -1798,7 +1798,7 @@ module.exports.verifyPayment = async(req, res) => {
                     var temp1 = parseInt(j[temp]);
                     booked.push(temp1);
                 }
-                let day = await User.update({ 'schedule_time._id': req.query.id }, {
+                let day = await User.updateOne({ 'schedule_time._id': req.query.id }, {
                     '$set': {
                         'schedule_time.$.booked': booked
                             //   'schedule_time.$.available': available,
@@ -2037,7 +2037,7 @@ module.exports.verifyPayment = async(req, res) => {
                 k2 -= 1;
 
 
-                let day = await User.update({ 'schedule_time._id': req.query.id }, {
+                let day = await User.updateOne({ 'schedule_time._id': req.query.id }, {
                     '$set': {
                         'schedule_time.$.booked': k1
                             //   'schedule_time.$.available': k2,
@@ -2315,7 +2315,7 @@ module.exports.payment = async(req, res) => {
             var temp1 = parseInt(j[temp]);
             booked.push(temp1);
         }
-        let day = await User.update({ 'schedule_time._id': req.body.id }, {
+        let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
             '$set': {
                 'schedule_time.$.booked': booked,
                 'schedule_time.$.available': available,
@@ -2350,7 +2350,7 @@ module.exports.payment = async(req, res) => {
 
             });
         } else {
-            // let day = await User.update({ 'others._id': req.body.pid }, {
+            // let day = await User.updateOne({ 'others._id': req.body.pid }, {
             //     '$set': {
             //         'others.$.': booked,
             //         'others.$.available': available,
@@ -2405,7 +2405,7 @@ module.exports.payment = async(req, res) => {
         k2 -= 1;
 
 
-        let day = await User.update({ 'schedule_time._id': req.body.id }, {
+        let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
             '$set': {
                 'schedule_time.$.booked': k1,
                 'schedule_time.$.available': k2,
@@ -2609,7 +2609,7 @@ module.exports.addExpenses1 = async(req, res) => {
 module.exports.updateBill = async(req, res) => {
     console.log(req.body)
    
-    let day = await User.update({ 'billings._id': req.body.id }, {
+    let day = await User.updateOne({ 'billings._id': req.body.id }, {
         '$set': {
             'billings.$.name': req.body.name,
             'billings.$.address': req.body.address,
@@ -2636,7 +2636,7 @@ module.exports.updateBill = async(req, res) => {
 module.exports.updateBill1 = async(req, res) => {
     console.log(req.body)
    
-    let day = await User.update({ 'billings1._id': req.body.id }, {
+    let day = await User.updateOne({ 'billings1._id': req.body.id }, {
         '$set': {
             'billings1.$.name': req.body.name,
             'billings1.$.address': req.body.address,
@@ -2664,7 +2664,7 @@ module.exports.updateBill1 = async(req, res) => {
 
 module.exports.updateExpenses = async(req, res) => {
     console.log(req.body)
-    let day = await User.update({ 'expenses._id': req.body.id }, {
+    let day = await User.updateOne({ 'expenses._id': req.body.id }, {
         '$set': {
             'expenses.$.name': req.body.name,
             'expenses.$.remarks': req.body.remarks,
@@ -2687,7 +2687,7 @@ module.exports.updateExpenses = async(req, res) => {
 
 module.exports.updateExpenses1 = async(req, res) => {
     console.log(req.body)
-    let day = await User.update({ 'expenses1._id': req.body.id }, {
+    let day = await User.updateOne({ 'expenses1._id': req.body.id }, {
         '$set': {
             'expenses1.$.name': req.body.name,
             'expenses1.$.remarks': req.body.remarks,
@@ -3138,7 +3138,7 @@ module.exports.offlinePay = async(req, res) => {
                     var temp1 = parseInt(j[temp]);
                     booked.push(temp1);
                 }
-                let day = await User.update({ 'schedule_time._id': req.body.id }, {
+                let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
                     '$set': {
                         'schedule_time.$.booked': booked
                             //   'schedule_time.$.available': available,
@@ -3201,7 +3201,7 @@ module.exports.offlinePay = async(req, res) => {
                 k2 -= 1;
 
 
-                let day = await User.update({ 'schedule_time._id': req.body.id }, {
+                let day = await User.updateOneOne({ 'schedule_time._id': req.body.id }, {
                     '$set': {
                         'schedule_time.$.booked': k1
                             //   'schedule_time.$.available': k2,
@@ -3299,7 +3299,7 @@ module.exports.oldOfflinePay = async(req, res) => {
                     var temp1 = parseInt(j[temp]);
                     booked.push(temp1);
                 }
-                let day = await User.update({ 'old_schedule_time._id': req.body.id }, {
+                let day = await User.updateOne({ 'old_schedule_time._id': req.body.id }, {
                     '$set': {
                         'old_schedule_time.$.booked': booked
                             //   'schedule_time.$.available': available,
@@ -3361,7 +3361,7 @@ module.exports.oldOfflinePay = async(req, res) => {
                 k2 -= 1;
 
 
-                let day = await User.update({ 'old_schedule_time._id': req.body.id }, {
+                let day = await User.updateOne({ 'old_schedule_time._id': req.body.id }, {
                     '$set': {
                         'old_schedule_time.$.booked': k1
                             //   'schedule_time.$.available': k2,
@@ -3421,7 +3421,7 @@ module.exports.oldOfflinePay = async(req, res) => {
                 k2 -= 1;
 
             console.log(req.body.id)
-                let dayy = await User.update({ 'old_schedule_time_fixed._id': req.body.id }, {
+                let dayy = await User.updateOne({ 'old_schedule_time_fixed._id': req.body.id }, {
                     '$set': {
                         'old_schedule_time_fixed.$.booked': k1
                             //   'schedule_time.$.available': k2,
@@ -3528,7 +3528,7 @@ module.exports.bookOldAppointment = async(req, res) => {
                     var temp1 = parseInt(j[temp]);
                     booked.push(temp1);
                 }
-                let day = await User.update({ 'old_schedule_time._id': req.body.id }, {
+                let day = await User.updateOne({ 'old_schedule_time._id': req.body.id }, {
                     '$set': {
                         'old_schedule_time.$.booked': booked
                             //   'schedule_time.$.available': available,
@@ -3713,7 +3713,7 @@ module.exports.bookOldAppointment = async(req, res) => {
                 k2 -= 1;
 
 
-                let day12 = await User.update({ 'old_schedule_time._id': req.body.id }, {
+                let day12 = await User.updateOne({ 'old_schedule_time._id': req.body.id }, {
                     '$set': {
                         'old_schedule_time.$.booked': k1
                             //   'schedule_time.$.available': k2,
@@ -4161,7 +4161,7 @@ module.exports.updateSchedule = async function(req, res) {
     {
         if(typeof(req.body.start) == 'string')
         {
-            let day = await User.update({ 'schedule_time._id': req.body.id }, {
+            let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
                 '$set': {
                     'schedule_time.$.start': req.body.start,
                     'schedule_time.$.end': req.body.end,
@@ -4195,7 +4195,7 @@ module.exports.updateSchedule = async function(req, res) {
             }
            }
 
-            let day = await User.update({ 'schedule_time._id': req.body.id }, {
+            let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
                 '$set': {
                     'schedule_time.$.start': req.body.start,
                     'schedule_time.$.end': req.body.end,
@@ -4211,7 +4211,7 @@ module.exports.updateSchedule = async function(req, res) {
     }
 
     else{
-    let day = await User.update({ 'schedule_time._id': req.body.id }, {
+    let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
         '$set': {
             'schedule_time.$.start': req.body.start,
             'schedule_time.$.end': req.body.end,
@@ -4235,7 +4235,7 @@ module.exports.staffUpdateSchedule = async function(req, res) {
         user.save();
         return res.redirect('back');
     }
-    let day = await User.update({ 'schedule_time._id': req.body.id }, {
+    let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
         '$set': {
             'schedule_time.$.start': req.body.start,
             'schedule_time.$.end': req.body.end,
@@ -4258,7 +4258,7 @@ module.exports.staffOldUpdateSchedule = async function(req, res) {
         doctor.save();
         return res.redirect('back');
     }
-    let day = await User.update({ 'old_schedule_time._id': req.body.id }, {
+    let day = await User.updateOne({ 'old_schedule_time._id': req.body.id }, {
         '$set': {
             'old_schedule_time.$.start': req.body.start,
             'old_schedule_time.$.end': req.body.end,
@@ -5128,7 +5128,7 @@ module.exports.editPatient = async function(req, res) {
         }
     }
 
-    let n1 = await User.update({ "booking._id": req.query.id }, {
+    let n1 = await User.updateOne({ "booking._id": req.query.id }, {
         '$set': {
             
             'booking.$.name': req.body.name,

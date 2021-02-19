@@ -324,14 +324,30 @@ module.exports.labProfile = async(req, res) => {
 
 module.exports.allTests = async(req, res) => {
     let test = await Test.find({});
-    let lab = await User.find({type:'Diagonistic'});
+    let user = await User.findById(req.user.id);
+    let labs = await User.find({type:'Diagonistic'});
+    if(user.cart.tests[0].labid != undefined)
+    {
+    let lab = await User.findById(user.cart.tests[0].labid);
+    }
+    
 
-
+    if(user.cart.tests.length>0)
+    {
+        return res.render('lab-all-tests',{
+            title:'Book Tests',
+            tests:test,
+            lab:lab,
+            labs:labs
+        })
+    }
+    else{
     return res.render('all-tests',{
         title:'All Tests',
         tests:test,
         labs:lab
     })
+}
 
 }
 
@@ -355,13 +371,14 @@ module.exports.selectLab = async(req, res) => {
         for(let u1 of u.tests)
         {
             if(u1.testname.trim()  == req.query.testname.trim() ){
-                console.log(u1.testname,req.query.testname)
+              
                 data.push({
                     name:u.name,
                     avatar:u.avatar,
                     price:u1.testprice,
                     address:u.contacts.address,
-                    city:u.contacts.city
+                    city:u.contacts.city,
+                    id:u.id
                 })
                 
             }
@@ -375,5 +392,107 @@ module.exports.selectLab = async(req, res) => {
 
 module.exports.selectLab1 = async(req, res) => {
     console.log(req.body);
-    return res.redirect('back')
+    let tid;
+    if(typeof(req.body.tid) == 'string')
+    tid = req.body.tid;
+
+    if(typeof(req.body.tid) == 'object')
+    tid = req.body.tid[0];
+
+    let uid;
+    if(typeof(req.body.id) == 'string')
+    uid = req.body.id;
+
+    if(typeof(req.body.id) == 'object')
+    uid = req.body.id[req.body.index];
+    
+    let test = await Test.findById(tid);
+    let tests = await Test.find({});
+    let labs = await User.find({type:'Diagonistic'});
+    let lab = await User.findById(uid);
+    let tname;
+    for(let u of lab.tests)
+    {
+        if(u.testname.trim()  == test.testname.trim() ){
+            tname = u.testprice;
+        }
+    }
+
+    let user = await User.findById(req.user.id);
+    if(!user.cart){
+
+    user.cart.tests.push({
+        testname:test.testname,
+        testprice:tname,
+        labname:lab.name,
+        labid:lab._id
+    });
+}else{
+    let flag = false;
+    for(let u1 of user.cart.tests)
+    {
+        console.log(u1.testname,test.testname)
+        if(u1.testname.trim()  == test.testname.trim() ){
+          flag = true;
+        }
+    }
+    console.log(flag)
+    console.log(user.cart.tests)
+
+    if(!flag)
+    {
+        user.cart.tests.push({
+            testname:test.testname,
+            testprice:tname,
+            labname:lab.name,
+            labid:lab._id
+        });
+    }
+}
+    user.save()
+
+
+   
+    return res.render('lab-all-tests',{
+        title:'Book Tests',
+        tests:tests,
+        lab:lab,
+        labs:labs
+    })
+}
+
+
+module.exports.removeCartItem = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    user.cart.tests.pull(req.query.id);
+    user.save()
+    
+    return res.json({
+        length:user.cart.tests.length
+    })
+
+}
+
+module.exports.addCartItem = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let test = await Test.findById(req.query.id);
+    let lab = await User.findById(req.query.labid);
+
+    
+    user.cart.tests.push({
+        testname:test.testname,
+        testprice:test.testprice,
+        labname:lab.name,
+        labid:lab._id
+    });
+    user.save()
+
+
+    
+    return res.json({
+        length:user.cart.tests.length,
+        testname:test.testname,
+        testprice:test.testprice
+    })
+
 }

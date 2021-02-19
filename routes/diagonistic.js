@@ -32,6 +32,8 @@ router.get('/all-tests',diagController.allTests)
 router.get('/all-labs',diagController.allLabs)
 router.get('/select-lab',diagController.selectLab)
 router.post('/select-lab',diagController.selectLab1)
+router.get('/remove-cart-item',diagController.removeCartItem);
+router.get('/add-cart-item',diagController.addCartItem);
 
 
 module.exports = router;

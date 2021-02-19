@@ -111,6 +111,23 @@ const userSchema = mongoose.Schema({
             type:Number
         }
     }],
+
+    cart:{
+        tests:[{
+            testname:{
+                type:String
+            },
+            testprice:{
+                type:Number
+            },
+            labname:{
+                type:String
+            },
+            labid:{
+                type: mongoose.Schema.Types.ObjectId
+            }
+        }]
+    },
     bloodgroup: {
         type: String
     },
