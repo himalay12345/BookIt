@@ -160,7 +160,7 @@
                                                     
                                                     <%if(u2.testname.trim()  == u.testname.trim() ){%>
                                                        
-                                                        <%cnt++;cns1++;%>
+                                                        <%cnt++;%>
                                                     <%}%>
                                                 <%}%>
                                             <%}%>
@@ -174,27 +174,51 @@
                                     </div>
                                     <form action="">
                                         <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
-                                        <%var flag = false;%>
+                                        <%var flag1 = false;%>
+                                        <%var flag2 = false;%>
+                                        <%if(locals.user.cart.tests[0].labid == lab.id){%>
+                                            <%flag1 = true;%>
+                                        <%}%>
+                                        <%console.log(flag1)%>
                                         <%var cns1=0%>
                                         <%for(let u2 of locals.user.cart.tests){%>
                                         
                                        <%if(u2.testname.trim()  == u.testname.trim()){%>
-                                        <%flag = true;%>
+                                        <%flag2 = true;%>
+                                       
                                         <div style="width: 20%;">
                                             <a href="" class="btn btn-primary" id="remove_item" data-id="<%=u2._id%>" data-count="<%=cns1%>" data-price="<%=u2.testprice%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
                                                 <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
                                         </div>
+                                        <div style="width: 20%;">
+                                            <a  class="btn btn-primary displayNone" id="select_new1" data-name="<%=lab._id%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
+                                        </div>
                                     <%}%>
-                                    <%cns1++%>
+                                    
+                                       
                                     <%}%>
-                                    <%if(!flag){%>
+                                    <%if(!flag2){%>
+                                        <%if(flag1){%>
+                                        <div style="width: 20%;">
+                                            <a href="" class="btn btn-primary displayNone" id="remove_item" data-id="<%=u2._id%>" data-count="<%=cns1%>" data-price="<%=u2.testprice%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
+                                                <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
+                                        </div>
                                         <div style="width: 20%;">
                                             <a  class="btn btn-primary" id="select_new1" data-name="<%=lab._id%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                        </div>
-                                        <%}%>
-                                        <div style="width: 20%;" class="displayNone" id="showbtn">
-                                            <a  class="btn btn-primary"  data-count="<%=i++%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                        </div>
+                                        </div> 
+                                        <%}else{%>
+                                            <div style="width: 20%;">
+                                                <a href="" class="btn btn-primary displayNone" id="remove_item" data-id="<%=u2._id%>" data-count="<%=cns1%>" data-price="<%=u2.testprice%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
+                                                    <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
+                                            </div>
+                                            <div style="width: 20%;">
+                                                <a  class="btn btn-primary" id="" data-name="<%=lab._id%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
+                                            </div> 
+                                        <%}%> 
+                                    <%cns1++%>
+                                    <%}%>
+                                    
+                                        
                                 </form>
                                 </div>
                                 <%}%>
@@ -488,13 +512,18 @@
          }
                  
          var selectnew1 = document.querySelectorAll('#select_new1');
+         var showbtn = document.querySelectorAll('#remove_item');
          for(let i=0;i<selectnew1.length;i++)
          {
             selectnew1[i].addEventListener('click',function(e)
              {
                 e.preventDefault();
+                showbtn[i].classList.remove('displayNone');
+                selectnew1[i].classList.add('displayNone');
                 itemname = selectnew1[i].getAttribute('data-name');
                  itemid = selectnew1[i].getAttribute('data-id');
+                 showbtn[i].setAttribute('data-id',itemid);
+                 showbtn[i].setAttribute('data-name',itemname);
                  let url = "http://localhost:4000/diagonistic/add-cart-item/?id=" + itemid +'&labid='+itemname;
     
     $.get(url, function (data) {

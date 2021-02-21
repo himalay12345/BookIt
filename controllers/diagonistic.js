@@ -326,11 +326,14 @@ module.exports.allTests = async(req, res) => {
     let test = await Test.find({});
     let user = await User.findById(req.user.id);
     let labs = await User.find({type:'Diagonistic'});
-    if(user.cart.tests[0].labid != undefined)
-    {
-    let lab = await User.findById(user.cart.tests[0].labid);
-    }
+    let lab;
     
+    if(user.cart.tests != [])
+    {
+    lab = await User.findById(user.cart.tests[0].labid);
+    console.log(user.cart.tests,lab)
+    }
+    console.log(user.cart.tests,lab)
 
     if(user.cart.tests.length>0)
     {
@@ -345,7 +348,7 @@ module.exports.allTests = async(req, res) => {
     return res.render('all-tests',{
         title:'All Tests',
         tests:test,
-        labs:lab
+        labs:labs
     })
 }
 

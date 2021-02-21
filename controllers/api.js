@@ -17,7 +17,76 @@ module.exports.doctorProfile = async (req, res) => {
         cnt++;
        }
        let rating = parseInt(avgrating/cnt);
+    let scheduletime = [];
     
+    for(let u of i.schedule_time)
+    {
+        let start = [];
+        let end = [];
+        let available = [];
+        let booked = [];
+        let maxcount = [];
+        let day;
+        let reset_flag ;
+        let alt_flag;
+        let bookingover;
+        console.log(u,typeof(u.start))
+        if(typeof(u.start) == 'string')
+        {
+            start.push(u.start);
+            end.push(u.end);
+            available.push(u.available);
+            booked.push(u.booked);
+            maxcount.push(u.max_count);
+            day = u.day;
+            reset_flag = u.reset_flag
+            alt_flag = u.alt_flag
+            bookingover = u.booking_over
+
+            scheduletime.push({
+                day:day,
+                start:start,
+                end:end,
+                maxcount:maxcount,
+                available:available,
+                booked:booked,
+                reset_flag:reset_flag,
+                alt_flag:alt_flag,
+                booking_over:bookingover
+            })
+        }
+
+        if(typeof(u.start) == 'object')
+        {
+            console.log(typeof(u.start))
+            for(let i= 0;i<u.start.length;i++)
+            {
+                start.push(u.start[i]);
+                end.push(u.end[i]);
+                available.push(u.available[i]);
+                booked.push(u.booked[i]);
+                maxcount.push(u.max_count[i]);
+            }
+           
+            day = u.day;
+            reset_flag = u.reset_flag
+            alt_flag = u.alt_flag
+            bookingover = u.booking_over
+
+            scheduletime.push({
+                day:day,
+                start:start,
+                end:end,
+                maxcount:maxcount,
+                available:available,
+                booked:booked,
+                reset_flag:reset_flag,
+                alt_flag:alt_flag,
+                booking_over:bookingover
+            })
+        }
+       
+    }
 
    
 
@@ -38,7 +107,7 @@ module.exports.doctorProfile = async (req, res) => {
            clinicname:i.clinicname,
            clinicaddr:i.clinicaddr,
            reviews:i.reviews,
-           schedule_time:i.schedule_time,
+           schedule_time:scheduletime,
             staff_flag:true,
             ratings:rating,
             rating_count:cnt,
