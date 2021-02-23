@@ -30,10 +30,14 @@ router.post('/update-test', diagController.updateTest);
 router.get('/lab-profile',diagController.labProfile)
 router.get('/all-tests',diagController.allTests)
 router.get('/all-labs',diagController.allLabs)
+router.get('/lab-all-tests',diagController.labAllTests)
 router.get('/select-lab',diagController.selectLab)
 router.post('/select-lab',diagController.selectLab1)
+router.post('/change-lab',diagController.changeLab)
+router.get('/change-lab',diagController.changeLab1)
 router.get('/remove-cart-item',diagController.removeCartItem);
 router.get('/add-cart-item',diagController.addCartItem);
+router.get('/cart',diagController.cart);
 
 
 module.exports = router;

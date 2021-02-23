@@ -21,11 +21,7 @@ module.exports.doctorProfile = async (req, res) => {
     
     for(let u of i.schedule_time)
     {
-        let start = [];
-        let end = [];
-        let available = [];
-        let booked = [];
-        let maxcount = [];
+        let slots = [];
         let day;
         let reset_flag ;
         let alt_flag;
@@ -33,11 +29,13 @@ module.exports.doctorProfile = async (req, res) => {
         console.log(u,typeof(u.start))
         if(typeof(u.start) == 'string')
         {
-            start.push(u.start);
-            end.push(u.end);
-            available.push(u.available);
-            booked.push(u.booked);
-            maxcount.push(u.max_count);
+            slots.push({
+                start:u.start,
+                end:u.end,
+                maxcount:u.max_count,
+                available:u.available,
+                booked:u.booked
+            });
             day = u.day;
             reset_flag = u.reset_flag
             alt_flag = u.alt_flag
@@ -45,11 +43,7 @@ module.exports.doctorProfile = async (req, res) => {
 
             scheduletime.push({
                 day:day,
-                start:start,
-                end:end,
-                maxcount:maxcount,
-                available:available,
-                booked:booked,
+               slots:slots,
                 reset_flag:reset_flag,
                 alt_flag:alt_flag,
                 booking_over:bookingover
@@ -61,11 +55,13 @@ module.exports.doctorProfile = async (req, res) => {
             console.log(typeof(u.start))
             for(let i= 0;i<u.start.length;i++)
             {
-                start.push(u.start[i]);
-                end.push(u.end[i]);
-                available.push(u.available[i]);
-                booked.push(u.booked[i]);
-                maxcount.push(u.max_count[i]);
+                slots.push({
+                    start:u.start[i],
+                    end:u.end[i],
+                    maxcount:u.max_count[i],
+                    available:u.available[i],
+                    booked:u.booked[i]
+                })
             }
            
             day = u.day;
@@ -75,11 +71,7 @@ module.exports.doctorProfile = async (req, res) => {
 
             scheduletime.push({
                 day:day,
-                start:start,
-                end:end,
-                maxcount:maxcount,
-                available:available,
-                booked:booked,
+                slots:slots,
                 reset_flag:reset_flag,
                 alt_flag:alt_flag,
                 booking_over:bookingover
@@ -292,7 +284,68 @@ module.exports.booking = async (req, res) => {
        let rating = parseInt(avgrating/cnt);
     
 
-//    console.log(i.schedule_time)
+       let scheduletime = [];
+
+for(let u of i.schedule_time)
+{
+    let slots = [];
+    let day;
+    let reset_flag ;
+    let alt_flag;
+    let bookingover;
+    console.log(u,typeof(u.start))
+    if(typeof(u.start) == 'string')
+    {
+        slots.push({
+            start:u.start,
+            end:u.end,
+            maxcount:u.max_count,
+            available:u.available,
+            booked:u.booked
+        });
+        day = u.day;
+        reset_flag = u.reset_flag
+        alt_flag = u.alt_flag
+        bookingover = u.booking_over
+
+        scheduletime.push({
+            day:day,
+           slots:slots,
+            reset_flag:reset_flag,
+            alt_flag:alt_flag,
+            booking_over:bookingover
+        })
+    }
+
+    if(typeof(u.start) == 'object')
+    {
+        console.log(typeof(u.start))
+        for(let i= 0;i<u.start.length;i++)
+        {
+            slots.push({
+                start:u.start[i],
+                end:u.end[i],
+                maxcount:u.max_count[i],
+                available:u.available[i],
+                booked:u.booked[i]
+            })
+        }
+       
+        day = u.day;
+        reset_flag = u.reset_flag
+        alt_flag = u.alt_flag
+        bookingover = u.booking_over
+
+        scheduletime.push({
+            day:day,
+            slots:slots,
+            reset_flag:reset_flag,
+            alt_flag:alt_flag,
+            booking_over:bookingover
+        })
+    }
+   
+}
 
     res.json({
         status:true,
@@ -302,7 +355,7 @@ module.exports.booking = async (req, res) => {
             contacts:i.contacts,
             fee:i.booking_fee,
             id: i.id,
-            schedule_time:i.schedule_time,
+            schedule_time:scheduletime,
             staff_flag:true,
             ratings:rating,
             rating_count:cnt,

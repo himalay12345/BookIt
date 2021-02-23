@@ -126,152 +126,82 @@
                        
                         <div class="col-md-12" style="position: absolute;">
                             <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
-                                <span style="font-size:2rem;font-weight: bolder;color:#575557;">Lab Tests</span>
-                                <span style="position:absolute;right:10%;font-size:1.1rem;font-weight: bolder;margin-top: 15px;color:#575557"><%=tests.length%> tests</span>
+                                <span style="font-size:2rem;font-weight: bolder;color:#575557;">Cart</span>
+                                <span style="position:absolute;right:10%;font-size:1.1rem;font-weight: bolder;margin-top: 15px;color:#575557"><%=user.cart.tests.length%> tests</span>
                             </div>
                             <div>
                                <%var i=0%>
-                               <%var cns1=0%>
-                                <%for(let u of tests){%>
-                                    
+                                <%for(let u of user.cart.tests){%>
                                     <%console.log(u._id)%>
-                                    <%var flag = false;%>
-                                    <%var price = 0 ;%>
+                                    <%var cnt=0%>
                                 <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
                                     <div style="width: 10%;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
                                     <div style="width: 70%;">
                                         <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
-                                        
-                                        <%for(let u1 of lab.tests){%>
-                                            
-                                                
-                                                <%if(u1.testname.trim()  == u.testname.trim() ){%>
-                                                   
-                                                    <%flag = true;price=u1.testprice;%>
-                                               
-                                            <%}%>
-                                        <%}%>
-                                        <%if(flag){%>
-                                            <h3 style="font-size: 1rem;">Available At <%=lab.name%></h3>
-                                        <%}else{%>
-                                            <%var cnt = 0%>
-                                           
-                                            <%for(let u1 of labs){%>
-                                                <%for(let u2 of u1.tests){%>
-                                                    
-                                                    <%if(u2.testname.trim()  == u.testname.trim() ){%>
-                                                       
-                                                        <%cnt++;%>
-                                                    <%}%>
-                                                <%}%>
-                                            <%}%>
-                                            <h3 style="font-size: 1rem;color:red;">Available At <%=cnt%> Labs but not at <%=lab.name%></h3>
-                                        <%}%>
-                                        <%if(flag){%>
-                                        <h3 style="font-size: 1rem;font-weight: bolder;">Rs <%=price%> &nbsp;<span style="font-size: 0.8rem;color:grey"></span></h3>
-                                        <%}else{%>
-                                            <h3 style="font-size: 1rem;font-weight: bolder;">Rs <%=u.testprice%> &nbsp;<span style="font-size: 0.8rem;color:grey">onwards</span></h3>
-                                        <%}%>
+                                        <h3 style="font-size: 1rem;">Report in 24 hours</h3>
+                                      
                                     </div>
                                     <form action="">
                                         <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
-                                        <%var flag1 = false;%>
-                                        <%var flag2 = false;%>
-                                        <%if(user.cart.tests[0].labid == lab.id){%>
-                                            <%flag1 = true;%>
-                                        <%}%>
-                                        <%console.log(flag1)%>
-                                        <%var cns2=0,cns3=0%>
-                                        <%for(let u2 of user.cart.tests){%>
-                                        
-                                       <%if(u2.testname.trim()  == u.testname.trim()){%>
-                                        
-                                        
-                                       
-                                        <div style="width: 20%;">
-                                            <a href="" class="btn btn-primary" id="remove_item" data-id="<%=u2._id%>" data-count="<%=cns3%>" data-price="<%=u2.testprice%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
-                                                <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
-                                        </div>
-                                        <div style="width: 20%;">
-                                            <a class="btn btn-primary displayNone" id="select_new1" data-name="<%=lab._id%>" data-price="<%=price%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                        </div>
-                                        <%flag2 = true;cns2++;break;%>
-                                    <%}%>
-                                    
-                                       
-                                    <%}%>
-                                    <%if(!flag2){%>
-                                        <%if(flag1){%>
-                                        <div style="width: 20%;">
-                                            <a href="" class="btn btn-primary displayNone" id="remove_item" data-id="<%=user.cart.tests[cns2]._id%>" data-count="<%=cns2%>" data-price="<%=price%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
-                                                <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
-                                        </div>
-                                        <div style="width: 20%;">
-                                            <a  class="btn btn-primary" id="select_new1" data-name="<%=lab._id%>" data-id="<%=u._id%>" data-price="<%=price%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                        </div> 
-                                        <%}else{%>
-                                            <div style="width: 20%;">
-                                                <a href="" class="btn btn-primary displayNone" id="remove_item" data-id="<%=user.cart.tests[cns2]._id%>" data-count="<%=cns2%>" data-price="<%=price%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
-                                                    <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
-                                            </div>
-                                            <div style="width: 20%;">
-                                                <a  class="btn btn-primary" id="" data-name="<%=lab._id%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                            </div> 
-                                        <%}%> 
-                                   
-                                    <%}%>
-                                    
-                                        
+                                    <div style="width: 100%;display: inline-flex;padding-top: 15px;">
+                                        <h3 style="font-size: 1.2rem;margin-right:15px;">Rs <%=u.testprice%></h3>
+                                        <a  class="" id="remove_btn" data-id="<%=u._id%>" style="background-color: none !important;margin-top: 5px;"><i class="fas fa-trash"></i></a>
+                                    </div>
                                 </form>
                                 </div>
-                                <%cns1++%>
                                 <%}%>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5" style="padding-left: 100px;">
-                        <%if(user.cart.tests.length>0){%>
-                        <div id="select_lab1">
+                        
+                        <div id="select_lab">
                             <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
-                            <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" id="itemcount">
+                            <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" >
                                 <i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>
+                                <span id="itemcount">
                                 <%if(user.cart.tests.length == 1){%>
                                 
                                 <%=user.cart.tests.length%> Item in Cart.
                                 <%}else{%>
                                     <%=user.cart.tests.length%> Items in Cart.
                                 <%}%>
-                            </p>
+                            </span>
+                            </p>        
                             <%var total = 0;%>
-                            <div style="border-bottom: 1px dashed grey;padding-bottom: 10px;" id="cart-box">
-                                <%var cns = 0%>
-                            <%for(u3 of user.cart.tests){%>
-                                <div style="display:inline-flex;width: 100%;" id="item<%=cns++%>">
-                                    <span style="width: 50%;font-weight: bold;font-size: 1.2rem;"><%=u3.testname%></span>
-                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=u3.testprice%></span>
-                                    <%total = total + parseInt(u3.testprice)%>
-                                </div>
-                            <%}%>
-                        </div>
-                            <div style="display:inline-flex;width: 100%;padding-top: 10px;">
-                                <span style="width: 50%;font-weight: bold;font-size: 1.2rem;">Total</span>
-                                <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" id="totalp" data-total="<%=total%>">Rs <%=total%></span>
-                               
-                            </div>
-                            <a class="btn btn-primary" style="width: 100%;margin-top:50px;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
-                        </div>
-                        <%}%>
-                        <%if(user.cart.tests.length == 0){%>
-                        <div id="select_lab">
-                            <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
-                            <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
-                            <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
-                        </div>
-                        <%}%>
-                        <div id="select_lab" class="displayNone">
-                            <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
-                            <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
-                            <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                                <div style="border-bottom: 1px dashed grey;padding-bottom: 10px;" id="cart-box">
+                                   
+                                <%for(u3 of user.cart.tests){%>
+                                   <%total = total+parseInt(u3.testprice)%>
+                                <%}%>  
+                                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Item Total</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                                    
+                                   
+                                </div> 
+                                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Sample Collection Charge</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Free</span>
+                                    
+                                   
+                                </div> 
+                                </div>  
+                                
+                                <div style="display:inline-flex;width: 100%;margin-top: 5px;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Order Total</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                                    
+                                   
+                                </div> 
+                                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Amount Payable</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                                    
+                                   
+                                </div> 
+                            <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;margin-top: 15px;">Select Patient Details</a>
+                            <p style="margin-top: 20px;">Free E-report will be sent to your registered email id</p>
                         </div>
                      
                         
@@ -295,7 +225,7 @@
         <svg onclick="removeLab()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
         
         <h2 style="color:#575557;font-size: 1.5rem;padding-bottom: 0px;font-weight: bolder;">Select Lab</h2>
-        <form action="/diagonistic/change-lab" method="POST">
+        <form action="/diagonistic/select-lab" method="POST">
         <div  style="height: 100vh;">  
             <div id="displayLab" style="height: 90%;overflow-y: auto;"></div>
             <div style="background-color:white;width: 100%;position:sticky;bottom:5px;height: 10%;">
@@ -453,164 +383,7 @@
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
     <script src="<%=assetPath('js/script.js')%>"></script>
-   <script>
-         var items = document.querySelectorAll('#remove_item');
-         var showbtn = document.querySelectorAll('#select_new1');
-         let itemcnt;
-         let itemid;
-         let itemprice;
-         for(let i=0;i<items.length;i++)
-         {
-             items[i].addEventListener('click',function(e)
-             {
-                e.preventDefault();
-                 itemcnt = items[i].getAttribute('data-count');
-                 itemid = items[i].getAttribute('data-id');
-                 itemprice = items[i].getAttribute('data-price');
-                 console.log(itemcnt,itemid)
-
-                 var itemno = document.getElementById('item'+itemcnt)
-                 var totalp = document.getElementById('totalp')
-                 var selectlab1 = document.getElementById('select_lab1')
-                 var selectlab = document.getElementById('select_lab')
-                 totalprice = totalp.getAttribute('data-total');
-                 var newtotal = parseInt(totalprice) - parseInt(itemprice);
-                 totalp.setAttribute('data-total',newtotal)
-                
-                 itemno.classList.add('displayNone');
-                 items[i].classList.add('displayNone')
-                 console.log(totalprice,itemprice,newtotal)
-                 if(newtotal == 0)
-                 {
-                    selectlab1.classList.add('displayNone');
-                    selectlab.classList.remove('displayNone')
-                 }
-
-                 else{
-                    document.getElementById('totalp').innerHTML = 'Rs '+newtotal; 
-                 }
-                 showbtn[i].classList.remove('displayNone');
-                 
-                 let url = "http://localhost:4000/diagonistic/remove-cart-item/?id=" + itemid;
-    
-    $.get(url, function (data) {
-       
-        console.log(data);
-        // $('#displayLab label').html('');
-        var itemcount = document.getElementById('itemcount');
-      
-        if(data.length == 1)
-        {
-            if(itemcount != null)
-            itemcount.innerHtml ='<i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>'+ data.length + 'Item in Cart'
-        }
-
-        else
-        {
-            if(itemcount != null)
-       itemcount.innerHtml ='<i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>'+ data.length + 'Items in Cart'
-        }
-        
-    });
-
-});
-         }
-                 
-         var selectnew1 = document.querySelectorAll('#select_new1');
-         var showbtn1 = document.querySelectorAll('#remove_item');
-         for(let i=0;i<selectnew1.length;i++)
-         {
-            selectnew1[i].addEventListener('click',function(e)
-             {
-                e.preventDefault();
-                showbtn1[i].classList.remove('displayNone');
-                selectnew1[i].classList.add('displayNone');
-                itemname = selectnew1[i].getAttribute('data-name');
-                 itemid = selectnew1[i].getAttribute('data-id');
-                 itemprice = selectnew1[i].getAttribute('data-price');
-                 showbtn1[i].setAttribute('data-id',itemid);
-                 showbtn1[i].setAttribute('data-name',itemname);
-                 let url = "http://localhost:4000/diagonistic/add-cart-item/?id=" + itemid +'&labid='+itemname+'&price='+itemprice;
-    
-    $.get(url, function (data) {
-
-        if(data.count == 0)
-        {
-              showbtn1[i].classList.add('displayNone');
-                selectnew1[i].classList.remove('displayNone');
-            var selectlab = $("#select_lab"); 
-         var show_all = $(".show_all_labs");
-         var testname = document.querySelectorAll('#testname');
-      
-        var displaylab = $("#displayLab");
-
-
-    
- 
-    
-    selectlab.addClass('displayNone');
-    show_all.removeClass('displayNone');
-    
-    let tname= testname[i].value;
-    let tid = itemid
-   console.log(tname)
-
-    let url = "http://localhost:4000/diagonistic/select-lab/?testname=" + tname;
-    
-    $.get(url, function (data) {
-       
-        console.log(data.doctors);
-        $('#displayLab label').html('');
-        var cnt =0;
-        for (let lab of data.doctors) {
-     
-            var addlab = '<label><div id="lab_card"><div class="dis20"><img src="'+ lab.avatar +'"></div><div class="dis75"><h2 class="dish2">'+lab.name + '</h2><p class="disp1">Rs '+ lab.price + '</p><p class="disp2"> '  + lab.address + '</p><p class="disp2">' + lab.city + '</p></div><div class="dis5"><input type="radio" id="rlab" name="index" value="'+ cnt + '" class="disinp"><input type="hidden" name="id" value="'+ lab.id + '"><input type="hidden" name="tid" value="'+ tid + '"></div></div></label></br>'
-            $('#displayLab').append(addlab);
-            cnt++;
-        }
-
-        
-    });
-
-
-
-
-        }
-        else{
-       
-        console.log(data);
-        var itemcount = document.getElementById('itemcount');
-        if(data.length == 1)
-        {
-            if(itemcount != null)
-            itemcount.innerHtml ='<i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>'+ data.length + 'Item in Cart'
-        }
-
-        else
-        {
-            if(itemcount != null)
-       itemcount.innerHtml ='<i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>'+ data.length + 'Items in Cart'
-        }
-        var ind = parseInt(data.length)-1;
-        var cartBox = $('#cart-box');
-        var str =  '<div style="display:inline-flex;width: 100%;"id="item'+ind+'"><span style="width: 50%;font-weight: bold;font-size: 1.2rem;">'+data.testname+'</span><span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs '+itemprice+'</span> </div>'
-        cartBox.append(str);
-        var totalp = document.getElementById('totalp')
-        totalprice = totalp.getAttribute('data-total');
-        var newtotal = parseInt(totalprice) + parseInt(itemprice);
-        console.log(newtotal)
-        totalp.setAttribute('data-total',newtotal)
-        document.getElementById('totalp').innerHTML = 'Rs '+newtotal; 
-    }
-        
-    });
-
-                 
-             });
-         }
-             
-            
-    </script>
+   
     <script>
          var selectlab = $("#select_lab"); 
          var show_all = $(".show_all_labs");

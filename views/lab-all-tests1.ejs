@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+      
+        <section class="laptop-sugar" style="margin-top: 70px;padding-left: 50px;">
+            <div class="search-box lscreen" style="margin-left:70px;">
+                <form action="/user/search-doctor" method="POST">
+                    <div class="form- search-location">
+    
+                        <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
+                        <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
+                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
+    
+                        </ul>
+    
+    
+                    </div>
+    
+                    <div class="form- search-info msearch">
+                        <!-- <span class="form-text" style="margin-top: -20px;">Ex : Dental or Sugar Check up etc</span> -->
+                        <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                        <table class="table table-striped position-absolute" style="margin-top: 3px;">
+    
+                            <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
+    
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+                </form>
+            </div>
+            <div class="search-box sscreen">
+                <form action="/user/search-doctor" method="POST">
+                    <div class="form-search-location">
+                        
+                        <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location">
+                      
+                        
+                        
+                    </div>
+    
+                    <div class="form-search-info msearch">
+                       
+                        <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                        <!-- <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
+                       
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
+                </form>
+            </div>
+             <div class="displayNone filter_box" id="filter_box" style="overflow-y:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            visibility: visible;
+    opacity: 1;">
+                    <div id="header_filter" style="padding:10px ;">
+    
+                        <i class="fas fa-times" style="font-size: 2rem;color:grey;" id="close_btn"></i>
+                        <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
+                    </div>
+                    <div class="card search-filter" style="display: block;">
+    
+                        <form action="/user/filter" method="POST">
+                            <div class="card-body">
+    
+    
+                                <div class="filter-widget">
+                                   
+                                    <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+                                    <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                                   
+                                </div>
+                                <div class="filter-widget">
+                                    <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
+                                        <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                        <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                        <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
+        
+                                        </ul>
+                                        <table class="table table-striped position-absolute" style="margin-left: -20px;">
+    
+                                            <tbody id="myTable1">
+                                                
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <!-- <div class="btn-search">
+                                    <button type="submit" class="btn btn-block tcolor">Search</button>
+                                </div> -->
+    
+                            </div>
+                        </form>
+                    </div>
+    
+                </div>
+            <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    
+                   
+                    <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
+                        <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+                       
+                        <div class="col-md-12" style="position: absolute;">
+                            <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
+                                <span style="font-size:2rem;font-weight: bolder;color:#575557;">Lab Tests</span>
+                                <span style="position:absolute;right:10%;font-size:1.1rem;font-weight: bolder;margin-top: 15px;color:#575557"><%=tests.length%> tests</span>
+                            </div>
+                            <div>
+                               <%var i=0%>
+                                <%for(let u of tests){%>
+                                    <%console.log(u._id)%>
+                                    <%var flag = false;%>
+                                    <%var price = 0 ;%>
+                                <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
+                                    <div style="width: 10%;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
+                                    <div style="width: 70%;">
+                                        <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
+                                        <%for(let u1 of lab.tests){%>
+                                            
+                                                
+                                            <%if(u1.testname.trim()  == u.testname.trim() ){%>
+                                               
+                                                <%flag = true;price=u1.testprice;%>
+                                           
+                                        <%}%>
+                                    <%}%>
+                                    <%if(flag){%>
+                                        <h3 style="font-size: 1rem;">Available At <%=lab.name%></h3>
+                                    <%}else{%>
+                                        <%var labcnt = 0%>
+                                       
+                                        <%for(let u1 of labs){%>
+                                            <%for(let u2 of u1.tests){%>
+                                                
+                                                <%if(u2.testname.trim()  == u.testname.trim() ){%>
+                                                   
+                                                    <%labcnt++;%>
+                                                <%}%>
+                                            <%}%>
+                                        <%}%>
+                                        <h3 style="font-size: 1rem;color:red;">Available At <%=labcnt%> Labs but not at <%=lab.name%></h3>
+                                    <%}%>
+                                    <%if(flag){%>
+                                        <h3 style="font-size: 1rem;font-weight: bolder;">Rs <%=price%> &nbsp;<span style="font-size: 0.8rem;color:grey"></span></h3>
+                                        <%}else{%>
+                                            <h3 style="font-size: 1rem;font-weight: bolder;">Rs <%=u.testprice%> &nbsp;<span style="font-size: 0.8rem;color:grey">onwards</span></h3>
+                                        <%}%>
+                                    </div>
+                                    <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
+                                    <input type="hidden" name="tid" id="testid" value="<%=u._id%>">
+                                    <%if(flag){%>
+                                        <%var flag1 = false;%>
+                                        <%for(let u2 of user.cart.tests){%>
+                                        
+                                            <%if(u2.testname.trim()  == u.testname.trim()){%>
+                                                <%flag1 = true;%>
+                                                <%}%>
+                                                <%}%>
+                                    <%if(flag1){%>         
+                                    <div style="width: 20%;position: absolute;right: 30px;">
+                                        <a  class="btn btn-primary displayNone" id="select_new" data-count="<%=i%>" data-name="<%=u.testname%>" data-lid="<%=lab._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
+                                    </div>
+                                    <div style="width: 20%;position: absolute;right: 30px;">
+                                        <a href="" class="btn btn-primary" id="remove_item" data-count="<%=i%>" data-name="<%=u.testname%>"  style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
+                                            <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
+                                    </div>
+                                    <%}else{%>
+                                        <div style="width: 20%;position: absolute;right: 30px;">
+                                            <a class="btn btn-primary" id="select_new" data-count="<%=i%>" data-name="<%=u.testname%>" data-lid="<%=lab._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
+                                        </div>
+                                        <div style="width: 20%;position: absolute;right: 30px;">
+                                            <a href="" class="btn btn-primary displayNone" id="remove_item" data-name="<%=u.testname%>" data-name="<%=u.testname%>"  style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
+                                                <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
+                                        </div>
+                                        <%}%>
+                                    <%}else{%>
+                                        <div style="width: 20%;position: absolute;right: 30px;">
+                                            <a  class="btn btn-primary" id="select_new" data-flag="true" data-count="<%=i%>" data-name="<%=u.testname%>" data-lid="<%=lab._id%>"  style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select New Lab</a>
+                                        </div>
+                                        <div style="width: 20%;position: absolute;right: 30px;">
+                                            <a href="" class="btn btn-primary displayNone" id="remove_item" data-count="<%=i%>" data-name="<%=u.testname%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
+                                                <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
+                                        </div>
+                                        <%}%>
+                                   
+                                
+                                </div>
+                                <%i++;%>
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="padding-left: 100px;">
+                        
+                        <%if(user.cart.tests.length>0){%>
+                            <div id="select_lab1">
+                                <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                                <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" >
+                                    <i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>
+                                    <span id="itemcount">
+                                    <%if(user.cart.tests.length == 1){%>
+                                    
+                                    <%=user.cart.tests.length%> Item in Cart.
+                                    <%}else{%>
+                                        <%=user.cart.tests.length%> Items in Cart.
+                                    <%}%>
+                                </span>
+                                </p>
+                                <%var total = 0;%>
+                                <div style="border-bottom: 1px dashed grey;padding-bottom: 10px;" id="cart-box">
+                                    <%var cns = 0%>
+                                <%for(u3 of user.cart.tests){%>
+                                    <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                        <span style="width: 50%;font-weight: bold;font-size: 1.2rem;"><%=u3.testname%></span>
+                                        <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=u3.testprice%></span>
+                                        <%total = total + parseInt(u3.testprice)%>
+                                    </div>
+                                <%}%>
+                            </div>
+                                <div style="display:inline-flex;width: 100%;padding-top: 10px;">
+                                    <span style="width: 50%;font-weight: bold;font-size: 1.2rem;">Total</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" id="totalp" data-total="<%=total%>">Rs <%=total%></span>
+                                   
+                                </div>
+                                <a class="btn btn-primary" href="/diagonistic/cart" style="width: 100%;margin-top:50px;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            </div>
+                            <%}%>
+                            <%if(user.cart.tests.length == 0){%>
+                            <div id="select_lab">
+                                <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                                <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
+                                <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            </div>
+                            <%}%>
+                            <div id="select_lab" class="displayNone">
+                                <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                                <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
+                                <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            </div>
+                            <div id="select_lab1" class="displayNone">
+                                <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                                <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" >
+                                    <i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>
+                                    <span id="itemcount">
+                                    <%if(user.cart.tests.length == 1){%>
+                                    
+                                    <%=user.cart.tests.length%> Item in Cart.
+                                    <%}else{%>
+                                        <%=user.cart.tests.length%> Items in Cart.
+                                    <%}%>
+                                </span>
+                                </p>
+                                <%var total = 0;%>
+                                <div style="border-bottom: 1px dashed grey;padding-bottom: 10px;" id="cart-box">
+                                    <%var cns = 0%>
+                                <%for(u3 of user.cart.tests){%>
+                                    <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                        <span style="width: 50%;font-weight: bold;font-size: 1.2rem;"><%=u3.testname%></span>
+                                        <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=u3.testprice%></span>
+                                        <%total = total + parseInt(u3.testprice)%>
+                                    </div>
+                                <%}%>
+                            </div>
+                                <div style="display:inline-flex;width: 100%;padding-top: 10px;">
+                                    <span style="width: 50%;font-weight: bold;font-size: 1.2rem;">Total</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" id="totalp" data-total="<%=total%>">Rs <%=total%></span>
+                                   
+                                </div>
+                                <a class="btn btn-primary" href="/diagonistic/cart" style="width: 100%;margin-top:50px;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            </div>
+                     
+                        
+                    </div>
+                  
+
+            </div>
+          
+
+            <!-- Footer -->
+           
+                <!-- /Footer -->
+
+    </div>
+    </section>
+    <div class="col-md-12 _3oqPe displayNone show_all_labs" style="display: inline-flex;">
+    
+        <div class="col-md-12 jss48" style="overflow-y: auto;">
+          
+    <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;">
+        <svg onclick="removeLab()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+        <div id="displayMyLab" style="height: 20%;overflow-y: auto;">
+        <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;">Select Lab</h2>
+        
+            <label>
+                <div id="lab_card" style="border:none">
+                    <div class="dis20">
+                        <img src="<%=lab.avatar%>"></div>
+                        <div class="dis75">
+                            <h2 class="dish2"><%=lab.name%></h2>
+                            <p class="disp2"><%=lab.address%></p>
+                            <p class="disp2"><%=lab.city%></p></div>
+                            
+                            <div class="dis5">
+                                </div></div>
+                <div id="mylabcard" style="padding-top: 10px;">
+                   
+                </div>
+              
+                            </label></br></div>
+        <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;">Selected items are available at below lab</h2>
+        <form action="/diagonistic/change-lab" method="POST">
+        <div  style="height: 100vh;">  
+            <div id="displayLab" style="height: 90%;overflow-y: auto;"></div>
+            <div style="background-color:white;width: 100%;position:sticky;bottom:5px;height: 10%;">
+                <button type="submit" class="btn btn-primary" style="width:100%;font-size:1.3rem;font-weight: bold;color:white;z-index: 1000;">Select Lab</button>
+            </div>      
+</div>
+</form>
+
+
+    </div>
+</div>
+</div>
+    <!-- /Main Wrapper -->
+    
+    
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+   
+  
+<script>
+             var removeitem = document.querySelectorAll('#remove_item');
+             var selectnew = document.querySelectorAll('#select_new');
+            
+             let itemid,itemname,lid;
+         for(let i=0;i<removeitem.length;i++)
+         {
+            removeitem[i].addEventListener('click',function(e)
+             {
+                e.preventDefault();
+                removeitem[i].classList.add('displayNone')
+                selectnew[i].classList.remove('displayNone');
+                 itemname = removeitem[i].getAttribute('data-name');
+               
+                 
+                 let url = "http://localhost:4000/diagonistic/remove-cart-item/?name=" + itemname;
+    
+    $.get(url, function (data) {
+       
+        console.log(data);
+                 var itemlength =  data.count ; 
+
+                 if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+         
+                 var totalp = document.getElementById('totalp')
+                 var selectlab1 = document.getElementById('select_lab1')
+                 var selectlab = document.getElementById('select_lab')
+                 totalprice = totalp.getAttribute('data-total');
+                 var newtotal = parseInt(totalprice) - parseInt(data.price);
+                 totalp.setAttribute('data-total',newtotal)
+                 var cart_item = document.querySelectorAll('#cart_item');
+                 cart_item[data.count].parentNode.removeChild(cart_item[data.count]);
+                //  itemno.classList.add('displayNone');
+               
+                 console.log(totalprice,data.price,newtotal)
+                 if(newtotal == 0)
+                 {
+                    selectlab1.classList.add('displayNone');
+                    selectlab.classList.remove('displayNone')
+                 }
+
+                 else{
+                    document.getElementById('totalp').innerHTML = 'Rs '+newtotal; 
+                 }
+                var itemcount = document.getElementById('itemcount');
+      
+      if(data.length == 1)
+      {
+          if(itemcount != null)
+          document.getElementById('itemcount').innerText = data.length + ' Item in Cart'
+      }
+
+      else
+      {
+          if(itemcount != null)
+          document.getElementById('itemcount').innerText = data.length + ' Items in Cart'
+      }
+               
+        
+    });
+
+});
+         }
+         
+         for(let i=0;i<selectnew.length;i++)
+         {
+            selectnew[i].addEventListener('click',function(e)
+             {
+                e.preventDefault();
+                var flag = selectnew[i].getAttribute('data-flag');
+                if(flag == 'true')
+                {
+            var selectlab = $("#select_lab"); 
+            var show_all = $(".show_all_labs");
+         var testname = document.querySelectorAll('#testname');
+         var testid= document.querySelectorAll('#testid');
+      
+        var displaylab = $("#displayLab");
+ 
+    selectlab.addClass('displayNone');
+    show_all.removeClass('displayNone');
+    $('#mylabcard p').html('');
+    
+    let tname= testname[i].value;
+    let tid= testid[i].value;
+    console.log(tname,tid)
+
+    let url = "http://localhost:4000/diagonistic/change-lab/?tname=" + tname;
+    
+    $.get(url, function (data) {
+       
+        console.log(data);
+        $('#displayLab label').html('');
+        for(let u of data.tests)
+        {
+        var atest = '<p style="margin-top: -10px ;display: block;"><i class="fas fa-check-circle" style="margin-right: 10px;color:#478e8e"></i>'+u.testname+'</p>'
+        $('#mylabcard').append(atest);
+        }
+        var btest = '<p style="margin-top: -10px;"><i class="fas fa-ban" style="margin-right: 10px;color: red;"></i>'+tname+'</p>'
+        $('#mylabcard').append(btest);
+        var cnt =0;
+        for (let lab of data.labs) {
+     
+            var addlab = '<label><div id="lab_card"><div class="dis20"><img src="'+ lab.avatar +'"></div><div class="dis75"><h2 class="dish2">'+lab.name + '</h2><p class="disp1">Rs '+ lab.price + '</p><p class="disp2"> '  + lab.address + '</p><p class="disp2">' + lab.city + '</p></div><div class="dis5"><input type="radio" id="rlab" name="index" value="'+ cnt + '" class="disinp"><input type="hidden" name="id" value="'+ lab.id + '"><input type="hidden" name="tid" value="'+ tid + '"></div></div></label></br>'
+            $('#displayLab').append(addlab);
+            cnt++;
+        }
+
+        
+    });
+   
+                }
+                
+                else{
+                removeitem[i].classList.remove('displayNone');
+                selectnew[i].classList.add('displayNone');
+                itemname = selectnew[i].getAttribute('data-name');
+                lid = selectnew[i].getAttribute('data-lid');
+                 let url = "http://localhost:4000/diagonistic/add-cart-item/?name="+itemname + '&lid='+ lid 
+    
+    $.get(url, function (data) {
+       
+        console.log(data);
+        var itemcount = document.getElementById('itemcount');
+        if(data.length == 1)
+        {
+            if(itemcount != null)
+            document.getElementById('itemcount').innerText = data.length + ' Item in Cart'
+        }
+
+        else
+        {
+            if(itemcount != null)
+            document.getElementById('itemcount').innerText = data.length + ' Items in Cart'
+        }
+        var ind = parseInt(data.length)-1;
+        var cartBox = $('#cart-box');
+        var str =  '<div style="display:inline-flex;width: 100%;"id="cart_item"><span style="width: 50%;font-weight: bold;font-size: 1.2rem;">'+data.testname+'</span><span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs '+data.testprice+'</span> </div>'
+        cartBox.append(str);
+        var selectlab = $("#select_lab"); 
+         var selectlab1 = $("#select_lab1");
+        var displaylab = $("#displayLab");
+        selectlab.addClass('displayNone');
+        selectlab1.removeClass('displayNone');
+        var totalp = document.getElementById('totalp')
+        totalprice = totalp.getAttribute('data-total');
+        var newtotal = parseInt(totalprice) + parseInt(data.testprice);
+        console.log(newtotal)
+        totalp.setAttribute('data-total',newtotal)
+        document.getElementById('totalp').innerHTML = 'Rs '+newtotal; 
+   
+        
+    });
+
+}     
+             });
+           
+         }
+             
+
+</script>
+  
+
+
+
+</body>
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:53 GMT -->
+
+</html>

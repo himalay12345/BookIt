@@ -327,21 +327,24 @@ module.exports.allTests = async(req, res) => {
     let user = await User.findById(req.user.id);
     let labs = await User.find({type:'Diagonistic'});
     let lab;
-    
-    if(user.cart.tests != [])
+
+
+    console.log(user.cart.tests,lab)
+    if(user.cart.tests.length > 0)
     {
     lab = await User.findById(user.cart.tests[0].labid);
     console.log(user.cart.tests,lab)
     }
-    console.log(user.cart.tests,lab)
+ 
 
     if(user.cart.tests.length>0)
     {
-        return res.render('lab-all-tests',{
+        return res.render('lab-all-tests1',{
             title:'Book Tests',
             tests:test,
             lab:lab,
-            labs:labs
+            labs:labs,
+            user:user
         })
     }
     else{
@@ -454,48 +457,223 @@ module.exports.selectLab1 = async(req, res) => {
 }
     user.save()
 
-
-   
-    return res.render('lab-all-tests',{
+    return res.redirect('/diagonistic/lab-all-tests/?labid='+lab._id)
+}
+module.exports.labAllTests = async(req, res) => {
+    let labs = await User.find({type:'Diagonistic'});
+    let tests = await Test.find({});
+    let user = await User.findById(req.user.id);
+    let lab = await User.findById(req.query.labid)
+    return res.render('lab-all-tests1',{
         title:'Book Tests',
         tests:tests,
         lab:lab,
-        labs:labs
+        labs:labs,
+        user:user
     })
+}
+
+
+module.exports.changeLab1 = async(req, res) => {
+  let user = await User.findById(req.user.id);
+  let labs = await User.find({type:'Diagonistic'});
+
+  let newlabs = [];
+  for(let u of labs)
+  {
+    var cnt = 0;price=0;
+      for(let u1 of u.tests)
+      {
+         
+          for(let u2 of user.cart.tests)
+          {
+            if(u2.testname.trim()  == u1.testname.trim() ){
+                cnt++;
+                price+=u1.testprice;
+               
+              }
+
+              else{
+                  break;
+              }
+          }
+          console.log(cnt,user.cart.tests.length)
+          if(cnt == user.cart.tests.length)
+          {
+            console.log(u1.testname,req.query.tname)
+        if(u1.testname.trim()  == req.query.tname.trim() ){
+            price+=u1.testprice
+          newlabs.push({
+              avatar:u.avatar,
+              name:u.name,
+              price:price,
+              address:u.contacts.address,
+              city:u.contacts.city,
+              id:u._id
+          })
+        }
+         }
+
+         
+      }
+  }
+  return res.json({
+      tests:user.cart.tests,
+      labs:newlabs
+  })
+}
+
+module.exports.changeLab = async(req, res) => {
+    console.log(req.body);
+    let tid;
+    if(typeof(req.body.tid) == 'string')
+    tid = req.body.tid;
+
+    if(typeof(req.body.tid) == 'object')
+    tid = req.body.tid[0];
+
+    let uid;
+    if(typeof(req.body.id) == 'string')
+    uid = req.body.id;
+
+    if(typeof(req.body.id) == 'object')
+    uid = req.body.id[req.body.index];
+    
+    let test = await Test.findById(tid);
+    let tests = await Test.find({});
+    let labs = await User.find({type:'Diagonistic'});
+    let lab = await User.findById(uid);
+    let user = await User.findById(req.user.id)
+
+    let price;
+   for(let u of lab.tests)
+   {
+    if(u.testname.trim() == test.testname.trim())
+    {
+        console.log('new test',test.testname)
+        price = u.testprice
+    }
+       for(let u1 of user.cart.tests)
+       {
+           
+           if(u1.testname.trim() == u.testname.trim())
+           {
+            let day = await User.updateOne({ 'cart.tests._id': u1._id }, {
+                '$set': {
+                    'cart.tests.$.labname': lab.name,
+                    'cart.tests.$.labid': lab._id
+                }
+            });
+               }
+             
+
+       }
+   
+   
+    }
+
+
+user.cart.tests.push({
+    testname:test.testname,
+    testprice:price,
+    labname:lab.name,
+    labid:lab._id
+
+})
+    
+user.save()
+   
+    return res.redirect('/diagonistic/lab-all-tests/?labid='+lab._id)
 }
 
 
 module.exports.removeCartItem = async(req, res) => {
     let user = await User.findById(req.user.id);
-    user.cart.tests.pull(req.query.id);
+    let count = 0,price,id;
+  console.log('query is' + req.query)
+    for(let u of user.cart.tests)
+    {
+        console.log(u.testname.trim(),req.query.name.trim())
+      if(u.testname.trim()  == req.query.name.trim() ){
+        console.log('hello')
+          price = u.testprice;
+          id = u._id;
+            break;
+        }
+        count++;
+    }
+
+
+    user.cart.tests.pull(id);
     user.save()
+    console.log(price)
+
+    if(user.cart.tests.length == 0)
+    {
+        return res.json({
+            length:user.cart.tests.length,
+            count:count,
+            price:price,
+            counter:count,
+            redirect:'/diagonistic/all-tests'
+        }) 
+    }
+
+    else{
     
     return res.json({
-        length:user.cart.tests.length
+        length:user.cart.tests.length,
+        count:count,
+        price:price,
+        counter:count
     })
-
+    }
 }
 
 module.exports.addCartItem = async(req, res) => {
     let user = await User.findById(req.user.id);
-    let test = await Test.findById(req.query.id);
-    let lab = await User.findById(req.query.labid);
+    let test = await Test.findOne({testname:req.query.name});
+    let lab = await User.findById(req.query.lid);
+let price;
+    for(let u of lab.tests)
+    {
+        console.log(u.testname.trim(),req.query.name.trim())
+      if(u.testname.trim()  == req.query.name.trim() ){
+        console.log('hello')
+          price = u.testprice;
+            break;
+        }
+    }
 
+
+   
     
     user.cart.tests.push({
         testname:test.testname,
-        testprice:test.testprice,
+        testprice:price,
         labname:lab.name,
         labid:lab._id
     });
     user.save()
-
+    
 
     
     return res.json({
         length:user.cart.tests.length,
         testname:test.testname,
-        testprice:test.testprice
+        testprice:price,
+        count:user.cart.tests.length
     })
 
+}
+
+module.exports.cart = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let lab = await User.findById(user.cart.tests[0].labid)
+
+    return res.render('cart',{
+        title:'My Cart',
+        lab:lab,
+        user:user
+    })
 }
