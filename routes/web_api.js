@@ -16,6 +16,10 @@ router.post('/doctors',webApiController.doctors);
 router.post('/doctor-profile',webApiController.doctorProfile);
 router.post('/booking',webApiController.booking);
 router.post('/specialist',webApiController.specialist);
+router.post('/send-otp',webApiController.sendOtp)
+router.post('/verify-otp',webApiController.verifyOtp)
+router.post('/create-user-account',webApiController.createUserAccount)
+router.post('/login',webApiController.login)
 
 
 module.exports = router;

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+      
+        <section class="laptop-sugar" style="margin-top: 50px;padding-left: 50px;">
+           
+            <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    
+                   
+                    <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
+                        <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+                       
+                        <div class="col-md-12" style="position: absolute;">
+                            <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
+                                <span style="font-size:2rem;font-weight: bolder;color:#575557;">Order Review</span>
+                            </div>
+                            <div style="width: 100%;">
+                             <label style="width: 100%;position: relative;">
+                                 <div id="lab_card" style="width:100%;">
+                                     <div class="dis20">
+                                         <img src="<%=lab.avatar%>">
+                                    </div>
+                                    <div class="dis75" style="width:30% !important">
+                                        <h2 class="dish2"><%=lab.name%></h2>
+                                        <p class="disp2" style="margin-top:10px !important;"><%=lab.contacts.address%></p>
+                                        <p class="disp2"><%=lab.contacts.city%></p>
+                                    </div>
+                                    <div class="dis5" style="width: 50% !important;">
+                                        <p style="font-weight:bold">Appointment Date : <%=date%></p>
+                                        <p style="margin-top: -10px;font-weight: bold;">Appointment Time : Between <%=stime%> to <%=etime%></p>
+                                    </div>
+                                   
+                                </div>
+                            </label>
+                        </br>
+
+                            </div>
+                            <div style="width: 100%;">
+                                <label style="width: 100%;position: relative;">
+                                    <div id="lab_card" style="width:100%;">
+                                        <div class="dis20">
+                                            <h4 style="font-weight: bold;">Test Booked</h4>
+                                       </div>
+                                       <div class="dis75" style="width:50% !important">
+                                         <ul>
+                                             <%for(let u of locals.user.cart.tests){%>
+                                                <li><%=u.testname%></li>
+                                            <%}%>
+                                         </ul>
+                                       </div>
+                                      
+                                      
+                                   </div>
+                               </label>
+                           </br>
+   
+                               </div>
+                               <div style="width: 100%;">
+                                <label style="width: 100%;position: relative;">
+                                    <div id="lab_card" style="width:100%;">
+                                        <div class="dis20">
+                                            <h4 style="font-weight: bold;">Booked For</h4>
+                                       </div>
+                                       <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                       
+                                             <%for(let u of locals.user.add_patient){%>
+                                                <%if(u.flag){%>
+                                                    <p><span style="font-size: 1rem;font-weight: 600;">Name : <%=u.name%></span><span style="margin-left: 15px;font-weight: 600;">Phone : <%=u.phone%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span>Age : <%=u.age%></span><span style="margin-left: 15px;">Gender : <%=u.gender%></span></p>
+                                                    <%}%>
+                                              
+                                            <%}%>
+                                        
+                                       </div>
+                                      
+                                      
+                                   </div>
+                               </label>
+                           </br>
+   
+                               </div>
+                               <div style="width: 100%;">
+                                <label style="width: 100%;position: relative;">
+                                    <div id="lab_card" style="width:100%;">
+                                        <div class="dis20">
+                                            <h4 style="font-weight: bold;">Sample Pickup From</h4>
+                                       </div>
+                                       <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                       
+                                             <%for(let u of locals.user.add_address){%>
+                                                <%if(u.flag){%>
+                                                    <p><span style="font-size: 1rem;font-weight: 600;"><%=u.name%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span><%=u.flatno%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span><%=u.street%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span><%=u.city%>, <%=u.pincode%></span></p>
+                                                    <%}%>
+                                              
+                                            <%}%>
+                                        
+                                       </div>
+                                      
+                                      
+                                   </div>
+                               </label>
+                           </br>
+   
+                               </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="padding-left: 100px;">
+                        
+                        <div id="select_lab">
+                            <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                            <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" >
+                                <i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>
+                                <span id="itemcount">
+                                <%if(user.cart.tests.length == 1){%>
+                                
+                                <%=user.cart.tests.length%> Item in Cart.
+                                <%}else{%>
+                                    <%=user.cart.tests.length%> Items in Cart.
+                                <%}%>
+                            </span>
+                            </p>        
+                            <%var total = 0;%>
+                                <div style="border-bottom: 1px dashed grey;padding-bottom: 10px;" id="cart-box">
+                                   
+                                <%for(u3 of user.cart.tests){%>
+                                   <%total = total+parseInt(u3.testprice)%>
+                                <%}%>  
+                                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Item Total</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                                    
+                                   
+                                </div> 
+                                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Sample Collection Charge</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Free</span>
+                                    
+                                   
+                                </div> 
+                                </div>  
+                                
+                                <div style="display:inline-flex;width: 100%;margin-top: 5px;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Order Total</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                                    
+                                   
+                                </div> 
+                                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Amount Payable</span>
+                                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                                    
+                                   
+                                </div> 
+                            <a class="btn btn-primary" href="/diagonistic/amount-payable/?lid=<%=lab._id%>&stime=<%=stime%>&etime=<%=etime%>&date=<%=date%>" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;margin-top: 15px;">Select Payment Method</a>
+                        </div>
+                     
+                        
+                    </div>
+                  
+
+            </div>
+          
+
+            <!-- Footer -->
+           
+                <!-- /Footer -->
+
+    </div>
+    </section>
+   
+    <!-- /Main Wrapper -->
+  
+    
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+   
+
+
+    
+
+    <!-- jQuery -->
+  
+
+
+
+</body>
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:53 GMT -->
+
+</html>

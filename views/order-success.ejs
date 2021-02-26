@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+      
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop" style="background-color: #478e8e !important;">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Booking Success</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Success</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content success-page-cont">
+            <div class="container-fluid">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+
+                        <!-- Success Card -->
+                        <div class="card success-card">
+                            <div class="card-body">
+                                <div class="success-cont">
+                                    <i class="fas fa-check"></i>
+                                    <h3>Order Placed Successfully!</h3>
+                                    
+                                   
+                                    <p style="font-size: 0.78rem; font-weight: bold;">You are going to recieve the booking confirmation message on your phone and email.</p>
+                                   <a href="/doctors" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Book again</a>
+                                   <a href="/patient-dashboard" style="padding: 5px;border-radius: 10px;border: 1px solid lightgray;margin-top: 20px;display: inline-flex;">Go to My Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Success Card -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+   
+    <script src="<%=assetPath('js/script.js')%>"></script>
+
+</body>
+
+<!-- doccure/booking-success  30 Nov 2019 04:12:16 GMT -->
+
+</html>

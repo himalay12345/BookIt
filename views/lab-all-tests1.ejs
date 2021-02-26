@@ -334,7 +334,7 @@
         <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;">Selected items are available at below lab</h2>
         <form action="/diagonistic/change-lab" method="POST">
         <div  style="height: 100vh;">  
-            <div id="displayLab" style="height: 90%;overflow-y: auto;"></div>
+            <div id="displayLab" style="height:100vh;overflow-y: auto;"></div>
             <div style="background-color:white;width: 100%;position:sticky;bottom:5px;height: 10%;">
                 <button type="submit" class="btn btn-primary" style="width:100%;font-size:1.3rem;font-weight: bold;color:white;z-index: 1000;">Select Lab</button>
             </div>      
@@ -360,9 +360,12 @@
    
   
 <script>
+
+
              var removeitem = document.querySelectorAll('#remove_item');
              var selectnew = document.querySelectorAll('#select_new');
             
+             
              let itemid,itemname,lid;
          for(let i=0;i<removeitem.length;i++)
          {
@@ -519,7 +522,13 @@
              });
            
          }
-             
+        //  var selectlab = $("#select_lab"); 
+            var show_all = $(".show_all_labs"); 
+function removeLab()
+{
+    // selectlab.removeClass('displayNone');
+    show_all.addClass('displayNone'); 
+}           
 
 </script>
   

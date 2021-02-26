@@ -523,6 +523,48 @@ module.exports.changeLab1 = async(req, res) => {
   })
 }
 
+module.exports.switchLab = async(req, res) => {
+    console.log(req.body);
+
+    let uid;
+    if(typeof(req.body.id) == 'string')
+    uid = req.body.id;
+
+    if(typeof(req.body.id) == 'object')
+    uid = req.body.id[req.body.index];
+    
+
+    let lab = await User.findById(uid);
+    let user = await User.findById(req.user.id)
+
+    let price;
+   for(let u of lab.tests)
+   {
+       for(let u1 of user.cart.tests)
+       {
+           
+           if(u1.testname.trim() == u.testname.trim())
+           {
+            let day = await User.updateOne({ 'cart.tests._id': u1._id }, {
+                '$set': {
+                    'cart.tests.$.testprice': u.testprice,
+                    'cart.tests.$.labname': lab.name,
+                    'cart.tests.$.labid': lab._id
+                }
+            });
+               }
+             
+
+       }
+   
+   
+    }
+
+   
+    return res.redirect('/diagonistic/cart');
+  }
+  
+
 module.exports.changeLab = async(req, res) => {
     console.log(req.body);
     let tid;
@@ -670,10 +712,583 @@ let price;
 module.exports.cart = async(req, res) => {
     let user = await User.findById(req.user.id);
     let lab = await User.findById(user.cart.tests[0].labid)
-
+    let labs = await User.find({type:'Diagonistic'});
+    let nlabs = [];
+    let price,cnt=0;
+    for(let u of labs)
+    {
+        price = 0;
+        cnt = 0;
+        if(u.id == lab.id)
+        continue;
+        for(let u1 of u.tests)
+        {
+            for(let u2 of user.cart.tests)
+            {
+                if(u1.testname.trim()  == u2.testname.trim() ){
+                   price = price + parseInt(u1.testprice);
+                   cnt++;
+                }
+            }
+        }
+        if(cnt == user.cart.tests.length)
+        {
+            nlabs.push({
+                avatar:u.avatar,
+                name:u.name,
+                price:price,
+                address:u.contacts.address,
+                city:u.contacts.city,
+                id:u._id
+            })
+        }
+        
+    }
+console.log('new labs are' + nlabs)
     return res.render('cart',{
         title:'My Cart',
         lab:lab,
-        user:user
+        user:user,
+        nlabs:nlabs
     })
 }
+
+module.exports.addPatient = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let lab = await User.findById(user.cart.tests[0].labid)
+
+    return res.render('add_patient',{
+        title:'Add Patient',
+        user:user,
+        lab:lab
+    })
+}
+
+module.exports.addPatientData = async(req, res) => {
+    let user = await User.findById(req.user.id);
+console.log(req.body)
+    if(req.body.edit == 'false')
+    {
+        if(user.add_patient.length == 0)
+        {
+            user.add_patient.push(req.body);
+            user.save();
+
+            let length  = user.add_patient.length - 1;
+            let id = user.add_patient[length]._id;
+
+            return res.json({
+                name:req.body.name,
+                phone:req.body.phone,
+                age:req.body.age,
+                gender:req.body.gender,
+                id:id
+            })
+        }
+        else{
+            for(let u of user.add_patient)
+            {
+                if(u.flag == true)
+                {
+                    u.flag = false;
+                }
+            }
+
+            
+            user.add_patient.push(req.body);
+            user.save();
+
+            let length  = user.add_patient.length - 1;
+            let id = user.add_patient[length]._id;
+
+            return res.json({
+                name:req.body.name,
+                phone:req.body.phone,
+                age:req.body.age,
+                gender:req.body.gender,
+                id:id
+            })
+
+        }
+}
+
+else{
+    let day = await User.updateOne({ 'add_patient._id': req.body.edit }, {
+        '$set': {
+            'add_patient.$.name': req.body.name,
+            'add_patient.$.phone': req.body.phone,
+            'add_patient.$.age': req.body.age,
+            'add_patient.$.gender': req.body.gender,
+        }
+    });
+    return res.json({
+        name:req.body.name,
+        phone:req.body.phone,
+        age:req.body.age,
+        gender:req.body.gender,
+        id:req.body.id
+    })
+
+}
+}
+
+module.exports.addAddressData = async(req, res) => {
+    let user = await User.findById(req.user.id);
+console.log(req.body)
+    if(req.body.edit == 'false')
+    {
+        if(user.add_address.length == 0)
+        {
+            user.add_address.push(req.body);
+            user.save();
+
+            let length  = user.add_address.length - 1;
+            let id = user.add_address[length]._id;
+
+            return res.json({
+                name:req.body.name,
+                phone:req.body.phone,
+                flatno:req.body.flatno,
+                street:req.body.street,
+                city:req.body.city,
+                pincode:req.body.pincode,
+                type:req.body.type,
+                id:id
+            })
+        }
+        else{
+            for(let u of user.add_address)
+            {
+                if(u.flag == true)
+                {
+                    u.flag = false;
+                }
+            }
+
+            
+            user.add_address.push(req.body);
+            user.save();
+
+            let length  = user.add_address.length - 1;
+            let id = user.add_address[length]._id;
+
+            return res.json({
+                name:req.body.name,
+                phone:req.body.phone,
+                flatno:req.body.flatno,
+                street:req.body.street,
+                city:req.body.city,
+                pincode:req.body.pincode,
+                type:req.body.type,
+                id:id
+            })
+
+        }
+}
+
+else{
+    let day = await User.updateOne({ 'add_address._id': req.body.edit }, {
+        '$set': {
+            'add_address.$.name': req.body.name,
+            'add_address.$.phone': req.body.phone,
+            'add_address.$.flatno': req.body.flatno,
+            'add_address.$.street': req.body.street,
+            'add_address.$.city': req.body.city,
+            'add_address.$.pincode': req.body.pincode,
+            'add_address.$.type': req.body.type,
+        }
+    });
+    return res.json({
+        name:req.body.name,
+        phone:req.body.phone,
+        flatno:req.body.flatno,
+        street:req.body.street,
+        city:req.body.city,
+        pincode:req.body.pincode,
+        type:req.body.type,
+        id:req.body.id
+    })
+
+}
+}
+
+
+module.exports.getPatientData = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    var a ;
+    for(let u of user.add_patient)
+    {
+        if(req.query.id == u._id)
+        {
+           a = u;
+           break;
+        }
+    }
+console.log(a,req.query.id)
+    return res.json({
+        name:a.name,
+        phone:a.phone,
+        age:a.age,
+        gender:a.gender,
+        id:a._id
+    })
+   
+}
+
+
+module.exports.getAddressData = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    var a ;
+    for(let u of user.add_address)
+    {
+        if(req.query.id == u._id)
+        {
+           a = u;
+           break;
+        }
+    }
+console.log(a,req.query.id)
+    return res.json({
+        name:a.name,
+        phone:a.phone,
+        flatno:a.flatno,
+        street:a.street,
+        city:a.city,
+        pincode:a.pincode,
+        type:a.type,
+        id:a._id
+    })
+   
+}
+
+
+module.exports.getPatientByIndex = async(req, res) => {
+    let user = await User.findById(req.user.id);
+
+    for(let i=0;i<user.add_patient.length;i++)
+            {
+                if(i == req.query.index)
+                {
+                    user.add_patient[i].flag = true;
+                }
+                else{
+                if(user.add_patient[i].flag == true)
+                {
+                    user.add_patient[i].flag = false;
+                }
+            }
+            }
+user.save()
+
+    return res.json({
+        name:user.add_patient[req.query.index].name,
+        phone:user.add_patient[req.query.index].phone,
+        age:user.add_patient[req.query.index].age,
+        gender:user.add_patient[req.query.index].gender,
+        id:user.add_patient[req.query.index]._id
+    })
+   
+}
+
+module.exports.getAddressByIndex = async(req, res) => {
+    let user = await User.findById(req.user.id);
+console.log(req.query.index)
+    for(let i=0;i<user.add_address.length;i++)
+            {
+                if(i == req.query.index)
+                {
+                    user.add_address[i].flag = true;
+                }
+                else{
+                if(user.add_address[i].flag == true)
+                {
+                    user.add_address[i].flag = false;
+                }
+            }
+            }
+user.save()
+
+    return res.json({
+        name:user.add_address[req.query.index].name,
+        phone:user.add_address[req.query.index].phone,
+        flatno:user.add_address[req.query.index].flatno,
+        street:user.add_address[req.query.index].street,
+        city:user.add_address[req.query.index].city,
+        pincode:user.add_address[req.query.index].pincode,
+        type:user.add_address[req.query.index].type,
+        id:user.add_address[req.query.index]._id
+    })
+   
+}
+
+module.exports.getallPatients = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let patients = [];
+
+    for(let u of user.add_patient)
+    {
+        patients.push({
+            name:u.name,
+            age:u.age,
+            phone:u.phone,
+            gender:u.gender,
+            id:u._id,
+            flag:u.flag
+        })
+    }
+
+    return res.json(patients);
+}
+
+module.exports.getallAddress = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let address = [];
+
+    for(let u of user.add_address)
+    {
+        address.push({
+            name:u.name,
+            flatno:u.flatno,
+            phone:u.phone,
+            street:u.street,
+            city:u.city,
+            type:u.type,
+            pincode:u.pincode,
+            id:u._id,
+            flag:u.flag
+        })
+    }
+
+    return res.json(address);
+}
+
+
+module.exports.scheduleTiming = async(req, res) => {
+    let user = await User.findById(req.user.id).populate('schedule_time');
+
+
+    return res.render('test-schedule-timings', {
+        title: 'Schedule Timings',
+        user: user
+    })
+}
+
+
+module.exports.setScheduleTiming = async function(req, res) {
+
+    let user = await User.findById(req.user.id);
+
+
+
+
+    if (typeof(req.body.start) == 'string') {
+        user.schedule_time.push({
+            start: req.body.start,
+            end: req.body.end,
+            day: req.body.day,
+            reset_flag:false,
+            alt_flag:false
+        })
+    }
+
+    if (typeof(req.body.start) == 'object') {
+        user.schedule_time.push({
+            day: req.body.day,
+            start: req.body.start,
+            end: req.body.end,
+            reset_flag:false,
+            alt_flag:false
+        });
+
+    }
+
+
+
+    user.save();
+    console.log(req.body);
+
+    return res.redirect('back');
+
+}
+
+module.exports.updateSchedule = async function(req, res) {
+
+
+    if ((!req.body.start) || (!req.body.end)) {
+        let user = await User.findById(req.user.id);
+        user.schedule_time.pull({ _id: req.body.id });
+        user.save();
+        return res.redirect('back');
+    } 
+    
+    if(req.body.flag)
+    {
+        if(typeof(req.body.start) == 'string')
+        {
+            let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
+                '$set': {
+                    'schedule_time.$.start': req.body.start,
+                    'schedule_time.$.end': req.body.end,
+                }
+            });
+        
+        }
+
+        if(typeof(req.body.start) == 'object')
+        { 
+       
+            console.log('index is',req.body.index);
+           let user = await User.findById(req.user.id);
+          
+            let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
+                '$set': {
+                    'schedule_time.$.start': req.body.start,
+                    'schedule_time.$.end': req.body.end,
+
+                }
+            });
+        
+        }
+    }
+
+    else{
+    let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
+        '$set': {
+            'schedule_time.$.start': req.body.start,
+            'schedule_time.$.end': req.body.end
+        }
+    });
+
+}
+
+
+    return res.redirect('back');
+
+}
+
+module.exports.booking = async(req, res) => {
+    let doctor = await User.findOne({ _id: req.query.id });
+    let ndoctor = await User.findOne({ _id: req.query.id });
+
+    if (!doctor) {
+        return res.render('not-available', {
+            title: 'Doctor Not Availble',
+            type: 'Doctor'
+        })
+    }
+
+    return res.render('test-booking', {
+        title: 'Booking',
+        doctor: doctor,
+        ndoctor: ndoctor
+    })
+
+}
+
+module.exports.bookTest = async(req, res) => {
+let lab = await User.findById(req.body.did);
+let user = await User.findById(req.user.id);
+
+let stime;
+let etime;
+if(typeof(lab.schedule_time[req.body.dayindex].start) == 'string')
+{
+  stime = lab.schedule_time[req.body.dayindex].start;
+  etime = lab.schedule_time[req.body.dayindex].end;
+} 
+
+if(typeof(lab.schedule_time[req.body.dayindex].start) == 'object')
+{
+  stime = lab.schedule_time[req.body.dayindex].start[req.body.slotindex];
+  etime = lab.schedule_time[req.body.dayindex].end[req.body.slotindex];
+}
+
+let redirect = '/diagonistic/create-order/?stime='+stime+'&etime='+etime+'&date='+req.body.date+'&lid='+lab._id;
+
+return res.json(redirect);
+
+}
+
+module.exports.createOrder = async(req, res) => {
+
+    let lab = await User.findById(req.query.lid);
+    return res.render('create-order',
+    {
+        title:'Confirm Order',
+        stime:req.query.stime,
+        etime:req.query.etime,
+        date:req.query.date,
+        lab:lab
+    })
+}
+
+
+
+module.exports.amountPayable = async(req, res) => {
+
+    return res.render('amount-payable',
+    {
+        title:'Select Payment',
+        labid:req.query.lid,
+        stime:req.query.stime,
+        etime:req.query.etime,
+        date:req.query.date
+    })
+}
+
+module.exports.orderSuccess = async(req, res) => {
+
+    return res.render('order-success',
+    {
+        title:'Order Placed Suceessfully'
+        // index:req.query.index
+    })
+}
+
+module.exports.bookTestByCash = async(req, res) => {
+
+    let user = await User.findById(req.user.id);
+    let lab  = await User.findById(req.body.lid);
+    if(req.body.pay == 'offline')
+    {
+        let patient;
+        let address;
+        let tests = [];
+        let stime = req.body.stime;
+        let etime = req.body.etime;
+        let date  = req.body.date;
+        let mode = 'Offline';
+        let lname = lab.name;
+        let lid = lab._id;
+        for(let u of user.add_patient)
+        {
+            if(u.flag)
+            {
+                patient = u;
+                break;
+            }
+        }
+        for(let u1 of user.add_address)
+        {
+            if(u1.flag)
+            {
+                address = u1;
+                break;
+            }
+        }
+        let price = 0;
+        for(let u3 of user.cart.tests)
+        {
+            price = price + parseInt(u3.testprice)
+            tests.push({
+                testname:u3.testname,
+                testprice:u3.testprice
+            })
+        }
+
+        console.log(patient,address,tests,stime,etime,date,price,mode,lname,lid)
+    }
+   return res.redirect('/diagonistic/order-success');
+}
+
+

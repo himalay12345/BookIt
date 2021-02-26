@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/booking  30 Nov 2019 04:12:16 GMT -->
+<head>
+<link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+<body>
+
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+<%-include('header');%>
+<!-- Header -->
+
+<!-- /Header -->
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar lptop">
+<div class="container-fluid">
+<div class="row align-items-center">
+<div class="col-md-12 col-12">
+<nav aria-label="breadcrumb" class="page-breadcrumb">
+<ol class="breadcrumb">
+<li  class="breadcrumb-item"><a href="/">Home</a></li>
+<li  class="breadcrumb-item active" aria-current="page">Booking</li>
+</ol>
+</nav>
+<h2 class="breadcrumb-title">Booking</h2>
+</div>
+</div>
+</div>
+</div>
+<!-- /Breadcrumb -->
+
+<!-- Page Content -->
+<div class="content">
+<div class="container">
+<form action="/user/book-appointment" method="POST">
+<input type="hidden" name="doctorid" value="<%=doctor._id%>">
+<div class="row">
+<div class="col-12">
+
+<div class="card-bookinglap" style="display: block !important;margin-top: -20px;">
+<div class="card-body">
+<div class="booking-doc-info">
+<a href="" class="booking-doc-img">
+<img src="<%=doctor.avatar%>" alt="User Image">
+</a>
+<div class="booking-info">
+<h4>
+<a href="">
+<%=doctor.name%>
+</a>
+</h4>
+<%var ntot=0;%>
+<%for(let u of locals.user.cart.tests){%>
+    <%ntot = ntot + parseInt(u.testprice)%>
+<%}%>
+<p class="text-muted mb-0"><i class="far fa-money-bill-alt"></i>&nbsp;&nbsp; Amount Payable : RS
+    <%=ntot%>
+</p>
+<p class="text-muted mb-0"><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>
+<%=doctor.contacts.address%> &nbsp;
+<%=doctor.contacts.city%>
+</p>
+</div>
+</div>
+</div> 
+</div>
+<% var today = new Date();%>
+
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+
+<%var dd1 = String(today.getDate()).padStart(2, '0');
+var mm1 = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy1 = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+
+<!-- Schedule Widget -->
+<div class="card booking-schedule schedule-widget">
+<%var td1,td2,td3,td4,td5,td6,td7;%>
+<!-- Schedule Header -->
+<div class="schedule-header">
+<div class="row">
+<div class=" col-sm-12 col-md-12">
+
+<!-- Day Slot -->
+<div class="day-slot">
+<ul id="md">
+<li class="left-arrow">
+<a data-count='0' onclick="prevSlide()" id="prevslide">
+<i class="fa fa-chevron-left"></i>
+</a>
+</li>
+<% var today = new Date();%>
+<%var k=0%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+<li  id="li0">
+<%if(k==0){%>
+<span>Today</span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+<%td1=dd+'-'+mm+'-'+yyyy%>
+<%k++;continue;}%>
+<%if(k==1){%>
+<span>Tomorrow</span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+<%td2=dd+'-'+mm+'-'+yyyy%>
+<%k++;continue;}else{%>
+<%if(k==2){%>
+<%td3=dd+'-'+mm+'-'+yyyy%>  
+<%}%>
+<span><%=dayOfWeek%></span>
+<%}%>
+
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+
+</li>
+<%}%>
+
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li1" style="display: none;">
+<%if(i==0){%>
+<%td4=dd+'-'+mm+'-'+yyyy%>  
+<%}%>
+<%if(i==1){%>
+<%td5=dd+'-'+mm+'-'+yyyy%>  
+<%}%>
+<%if(i==2){%>
+<%td6=dd+'-'+mm+'-'+yyyy%>  
+<%}%>
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+<li  id="li2" style="display: none;float: none !important;;margin-left: auto;margin-right: auto;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%td7=dd+'-'+mm+'-'+yyyy%>
+<%console.log('ndays are'+td1,td2,td3,td4,td5,td6,td7) %> 
+
+
+<!-- <%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li2" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li3" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li4" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li5" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li6" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li7" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li8" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%>
+<%for(var i=0;i<3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<li  id="li9" style="display: none;">
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+</li>
+
+<%}%> -->
+
+
+
+
+<li  class="right-arrow">
+<a data-count='0' onclick="nextSlide()" id="nextslide">
+<i class="fa fa-chevron-right"></i>
+</a>
+</li>
+</ul>
+<ul id="sm">
+<li  class="left-arrow">
+<a data-count='0' onclick="smprevSlide()" id="smprevslide">
+<i class="fa fa-chevron-left"></i>
+</a>
+</li>
+<% var today = new Date();%>
+<%var k=0%>
+<%for(var i=1;i<=7;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+<%if(k==0){%>
+<li id="smli1">
+
+<span>Today</span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+<%k++;continue;%>
+
+
+</li>
+<%}else{%>
+<li  id="smli<%=i%>" class="displayNone">
+<%if(k==1){%>
+<span>Tomorrow</span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+<%k++;continue;}else{%>
+<span><%=dayOfWeek%></span>
+<span class="slot-date"><%=dd%>-<%=mm%> <small class="slot-year">-<%=yyyy%></small></span>
+<%}%>
+
+
+</li>
+<%}%>
+
+
+<%}%>
+<li  class="right-arrow">
+<a data-count='1' onclick="smnextSlide()" id="smnextslide">
+<i class="fa fa-chevron-right"></i>
+</a>
+</li>
+</ul>
+</div>
+<!-- /Day Slot -->
+
+</div>
+</div>
+</div>
+<!-- /Schedule Header -->
+<%var n1,n2,n3,n4,n5,n6,n7%>
+<%var today = new Date();%>
+<%for(var i=1;i<=7;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+if(i == 1)
+{
+n1=dayOfWeek.toUpperCase();
+
+}
+if(i == 2)
+{
+n2=dayOfWeek.toUpperCase();
+
+}
+if(i == 3)
+{
+n3=dayOfWeek.toUpperCase();
+
+}
+if(i == 4)
+{
+n4=dayOfWeek.toUpperCase();
+
+}
+if(i == 5)
+{
+n5=dayOfWeek.toUpperCase();
+
+}
+if(i == 6)
+{
+n6=dayOfWeek.toUpperCase();
+
+}
+if(i == 7)
+{
+n7=dayOfWeek.toUpperCase();
+
+}
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+<%}%>
+<!-- Schedule Content -->
+<div class="schedule-cont">
+<div class="row">
+<div class="col-md-12">
+
+<!-- Time Slot -->
+<div class="time-slot" id="slots">
+<ul class="clearfix" style="display: flex;" id="md">
+<%var d1,d2,d3,d4,d5,d6,d7,count,t1,t2,t3,t4,t5,t6,t7;%>
+<%var x = 0%>
+<%for(time of doctor.schedule_time){%>
+
+<%var i = time.day.toUpperCase();%>
+
+<%if(n1 == i){%>
+<%d1=time;t1=x++;
+}%>
+
+<%if(n2 == i){%>
+<%d2=time;t2=x++;}%>
+
+<%if(n3 == i){%>
+<%d3=time;t3=x++;}%>
+
+<%if(n4 == i){%>
+<%d4=time;t4=x++;}%>
+
+<%if(n5 == i){%>
+<%d5=time;t5=x++;}%>
+
+<%if(n6 == i){%>
+<%d6=time;t6=x++;}%>
+<%if(n7 == i){%>
+<%d7=time;t7=x++;}%>
+<%}%>
+
+<%var date1,date2,date3;%>
+<%var today = new Date();%>
+<%for(var i=1;i<=3;i++){%>
+<%var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+var dayOfWeek = weekday[today.getDay()];
+if(i==1)
+{
+date1 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==2)
+{
+date2 = dd+'-'+mm+'-'+yyyy;
+}
+
+if(i==3)
+{
+date3 = dd+'-'+mm+'-'+yyyy;
+}
+
+var res = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+var date = new Date(res);
+today=date;%>
+
+<%}%>
+<%console.log(date1,date2,date3)%>
+
+
+<%var z=0;%>
+<%if(d1 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td1){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d1">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="d1">
+
+<%if(typeof(d1.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d1.start.toUpperCase()%></span> - <span><%=d1.end.toUpperCase()%></span>
+</a>
+<%var a = d1.end;%>
+<%var b = a.includes('pm');%>
+<%var c,d=0,e%>
+<%if(b){%>
+<%for(let m=0;m<d1.end.length;m++){%>
+<%if(d1.end[m]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)+12%> 
+<%}else{%>
+<%for(let m1=0;m1<d1.end.length;m1++){%>
+<%if(d1.end[m1]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)%> 
+<%}%>
+<%var tdy= new Date()%>
+<%var tdy1 = tdy.getHours()%>
+<%if(tdy1>=e){%>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+<%z++%>
+
+<a class="timing tbcolorn tcolors" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+<span style="font-size: 1.2rem;color: black !important">Booking Over</span>
+</a>
+</div><%}else{%>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+<a class="timing tbcolor nid" data-id="<%=d1.id%>" data-date="<%=date1%>" data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+<span style="font-size: 1.2rem;color: black !important">Book Now</span>
+</a>
+</div>
+
+
+<%}%>
+<%}else{%>
+<%for(let i=0;i<d1.start.length;i++){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d1.start[i].toUpperCase()%></span> - <span><%=d1.end[i].toUpperCase()%></span>
+</a>
+<%var a = d1.end[i];%>
+<%var b = a.includes('pm');%>
+<%var c,d=0,e%>
+<%if(b){%>
+<%for(let m=0;m<a.length;m++){%>
+<%if(a[m]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)+12%> 
+<%}else{%>
+<%for(let m1=0;m1<a.length;m1++){%>
+<%if(a[m1]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)%> 
+<%}%>
+<%var tdy= new Date()%>
+<%var tdy1 = tdy.getHours()%>
+<%if(tdy1>=e){%>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+<%z++%>
+
+<a class="timing tbcolorn tcolors" style="width: 100% !important; color: black !important; background-color: white !important; font-weight:bold;height:40px;margin-left: 5px;">
+
+<span style="font-size: 1.2rem;color: black !important">Booking Over</span>
+</a>
+</div><%}else{%>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+<a class="timing tbcolor nid" data-id="<%=d1.id%>" data-date="<%=date1%>" data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+<span style="font-size: 1.2rem;color: black !important">Book Now</span>
+</a>
+</div>
+<%}%>
+<%}}%>
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" id="d1">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d2 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td2){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d2">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="d2">
+<%if(typeof(d2.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d2.start.toUpperCase()%></span> -
+<span><%=d2.end.toUpperCase()%></span>
+</a>
+
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                 
+    <a class="timing tbcolor nid" data-id="<%=d2.id%>" data-date="<%=date2%>" data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}else{%>
+<%for(let i=0;i<d2.start.length;i++){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d2.start[i].toUpperCase()%></span>                                                                                                                                                                                                                    - <span><%=d2.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                   
+    <a class="timing tbcolor nid" data-id="<%=d2.id%>" data-date="<%=date2%>" data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t2%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}}%>
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" id="d2">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d3 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td3){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d3">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="d3">
+
+<%if(typeof(d3.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d3.start.toUpperCase()%></span>                                                                                                                                                                                                                        - <span><%=d3.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                  
+    <a class="timing tbcolor nid" data-id="<%=d3.id%>" data-date="<%=date3%>" data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}else{%>
+<%for(let i=0;i<d3.start.length;i++){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d3.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                - <span><%=d3.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                    
+    <a class="timing tbcolor nid" data-id="<%=d3.id%>" data-date="<%=date3%>" data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t3%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}}%>
+
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" id="d3">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d4 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td4){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d4" style="display: none;">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d4">
+<%if(typeof(d4.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d4.start.toUpperCase()%></span>                                                                                                                                                                                                                                    -
+<span><%=d4.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                               
+    <a class="timing tbcolor nid" data-id="<%=d4.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}else{%>
+<%for(let i=0;i<d4.start.length;i++){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d4.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                            - <span><%=d4.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                 
+    <a class="timing tbcolor nid" data-id="<%=d4.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t4%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}}%>
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d4">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d5 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td5){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d5" style="display: none;">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d5">
+<%if(typeof(d5.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d5.start.toUpperCase()%></span>                                                                                                                                                                                                                                                - <span><%=d5.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                               
+    <a class="timing tbcolor nid" data-id="<%=d5.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}else{%>
+<%for(let i=0;i<d5.start.length;i++){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d5.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                                        -
+<span><%=d5.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                     
+    <a class="timing tbcolor nid" data-id="<%=d5.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t5%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}}%>
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d5">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d6 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td6){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d6" style="display: none;">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d6">
+<%if(typeof(d6.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d6.start.toUpperCase()%></span>                                                                                                                                                                                                                                                            -
+<span><%=d6.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                             
+    <a class="timing tbcolor nid" data-id="<%=d6.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}else{%>
+<%for(let i=0;i<d6.start.length;i++){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d6.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                                                    -
+<span><%=d6.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                               
+    <a class="timing tbcolor nid" data-id="<%=d6.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t6%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}}%>
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d6">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d7 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td7){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="d7" style="display: none;">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d7">
+<%if(typeof(d7.start) == 'string'){%>
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+<span><%=d7.start.toUpperCase()%></span>                                                                                                                                                                                                                                                                        -
+<span><%=d7.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                                    
+    <a class="timing tbcolor nid" data-id="<%=d7.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}else{%>
+<%for(let i=0;i<d7.start.length;i++){%>
+
+<a class="timing tbcolor" onclick="showSeats('<%=z%>')">
+
+<span><%=d7.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                                                                -
+<span><%=d7.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="seats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>                                                                                                                                                                                               
+    <a class="timing tbcolor nid" data-id="<%=d7.id%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t7%>" data-doctor-id="<%=doctor._id%>" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+</div>
+<%}}%>
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="d7">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+</ul>
+<ul class="clearfix" id="sm">
+<%var d1,d2,d3,d4,d5,d6,d7,count;%>
+<%for(time of doctor.schedule_time){%>
+
+<%var i = time.day.toUpperCase();%>
+
+<%if(n1 == i){%>
+<%d1=time;}%>
+
+<%if(n2 == i){%>
+<%d2=time;}%>
+
+<%if(n3 == i){%>
+<%d3=time;}%>
+
+<%if(n4 == i){%>
+<%d4=time;}%>
+
+<%if(n5 == i){%>
+<%d5=time;}%>
+
+<%if(n6 == i){%>
+<%d6=time;}%>
+<%if(n7 == i){%>
+<%d7=time;}%>
+<%}%>
+
+
+<%var z=0;%>
+<%if(d1 != undefined){%>
+<%var hflag = false;%>
+<%if(doctor.holidays.length>=1){%>
+<%for(temp of doctor.holidays){%>
+<%if(temp.date == td1){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd1">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="smd1">
+
+
+<%var id = d1._id%>
+<%var doctor = d1%>
+
+<%if(typeof(d1.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d1.start.toUpperCase()%></span> - <span><%=d1.end.toUpperCase()%></span>
+</a>
+<%var a = d1.end;%>
+<%var b = a.includes('pm');%>
+<%var c,d=0,e%>
+<%if(b){%>
+<%for(let m=0;m<d1.end.length;m++){%>
+<%if(d1.end[m]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)+12%> 
+<%}else{%>
+<%for(let m1=0;m1<d1.end.length;m1++){%>
+<%if(d1.end[m1]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)%> 
+<%}%>
+<%var tdy= new Date()%>
+<%var tdy1 = tdy.getHours()%>
+<%if(tdy1>=e){%>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+<%z++%>
+
+<a class="timing tbcolorn tcolors" style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+
+<span style="font-size: 1.2rem;color: black !important">Booking Over</span>
+</a>
+</div><%}else{%>
+    
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+       
+        <a class="timing tbcolorn tcolors" data-id="<%=d1.id%>" data-date="<=date1%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+        
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+        </a>
+        </div>
+
+<%}%>
+<%}else{%>
+<%for(let i=0;i<d1.start.length;i++){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d1.start[i].toUpperCase()%></span> - <span><%=d1.end[i].toUpperCase()%></span>
+</a>
+<%var a = d1.end[i];%>
+<%var b = a.includes('pm');%>
+<%var c,d=0,e%>
+<%if(b){%>
+<%for(let m=0;m<a.length;m++){%>
+<%if(a[m]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)+12%> 
+<%}else{%>
+<%for(let m1=0;m1<a.length;m1++){%>
+<%if(a[m1]=='.'){%>
+
+<%break;%>
+<%}%>
+<%d++;%>
+<%}%>
+<%c=a.slice(0,d)%>
+<%e = parseInt(c)%> 
+<%}%>
+<%var tdy= new Date()%>
+<%var tdy1 = tdy.getHours()%>
+<%if(tdy1>=e){%>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+<%z++%>
+
+<a class="timing tbcolorn tcolors" style="width: 100% !important; color: black !important; background-color: white !important; font-weight:bold;height:40px;margin-left: 5px;">
+
+<span style="font-size: 1.2rem;color: black !important">Booking Over</span>
+</a>
+</div><%}else{%>
+    <div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+        <%z++%>
+       
+        <a class="timing tbcolorn tcolors" data-id="<%=d1.id%>" data-date="<=date1%>"  data-slot-index="<%=i%>" id="checkme" data-day-index="<%=t1%>" data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+        
+        <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+        </a>
+        </div>
+<%}%>
+<%}}%>
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" id="smd1">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d2 != undefined){%>
+<%var hflag = false;%>
+<%if(ndoctor.holidays.length>=1){%>
+<%for(temp of ndoctor.holidays){%>
+<%if(temp.date == td2){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd2" style="display:none">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="smd2" style="display:none">
+
+<%if(typeof(d2.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d2.start.toUpperCase()%></span> - <span><%=d2.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d2.id%>" data-date="<=date2%>" data-day-index="<%=t2%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}else{%>
+<%for(let i=0;i<d2.start.length;i++){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d2.start[i].toUpperCase()%></span> - <span><%=d2.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d2.id%>" data-date="<=date2%>" data-day-index="<%=t2%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}}%>
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" id="smd2" style="display:none;">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d3 != undefined){%>
+<%var hflag = false;%>
+<%if(ndoctor.holidays.length>=1){%>
+<%for(temp of ndoctor.holidays){%>
+<%if(temp.date == td3){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd3" style="display:none">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="smd3" style="display:none;">
+
+<%if(typeof(d3.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d3.start.toUpperCase()%></span> - <span><%=d3.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d3.id%>" data-date="<=date3%>" data-day-index="<%=t3%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}else{%>
+<%for(let i=0;i<d3.start.length;i++){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d3.start[i].toUpperCase()%></span> - <span><%=d3.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d3.id%>" data-date="<=date3%>" data-day-index="<%=t3%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}}%>
+
+
+</li>
+<%}%>
+
+<%}else{%>
+<li class="cloginbtn" id="smd3" style="display:none;">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d4 != undefined){%>
+<%var hflag = false;%>
+<%if(ndoctor.holidays.length>=1){%>
+<%for(temp of ndoctor.holidays){%>
+<%if(temp.date == td4){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd4" style="display:none">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" id="smd4" style="display: none;">
+
+<%if(typeof(d4.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d4.start.toUpperCase()%></span> - <span><%=d4.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d4.id%>"  data-day-index="<%=t4%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}else{%>
+<%for(let i=0;i<d4.start.length;i++){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d4.start[i].toUpperCase()%></span>                                                                                                                                                                                                                - <span><%=d4.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d4.id%>"  data-day-index="<%=t4%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}}%>
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd4">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d5 != undefined){%>
+<%var hflag = false;%>
+<%if(ndoctor.holidays.length>=1){%>
+<%for(temp of ndoctor.holidays){%>
+<%if(temp.date == td5){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd5" style="display:none">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd5">
+<%if(typeof(d5.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d5.start.toUpperCase()%></span>                                                                                                                                                                                                                    - <span><%=d5.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d5.id%>"  data-day-index="<%=t5%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}else{%>
+<%for(let i=0;i<d5.start.length;i++){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d5.start[i].toUpperCase()%></span>                                                                                                                                                                                                                            - <span><%=d5.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d5.id%>"  data-day-index="<%=t5%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}}%>
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd5">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d6 != undefined){%>
+<%var hflag = false;%>
+<%if(ndoctor.holidays.length>=1){%>
+<%for(temp of ndoctor.holidays){%>
+<%if(temp.date == td6){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd6" style="display:none">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd6">
+<%if(typeof(d6.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d6.start.toUpperCase()%></span>                                                                                                                                                                                                                                - <span><%=d6.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d6.id%>"  data-day-index="<%=t6%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}else{%>
+<%for(let i=0;i<d6.start.length;i++){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d6.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                        - <span><%=d6.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d6.id%>"  data-day-index="<%=t6%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}}%>
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd6">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+<%if(d7 != undefined){%>
+<%var hflag = false;%>
+<%if(ndoctor.holidays.length>=1){%>
+<%for(temp of ndoctor.holidays){%>
+<%if(temp.date == td7){%>
+<%hflag = true;%>
+<%}%>
+<%}%>
+<%}%>
+<%if(hflag){%>
+<li class="cloginbtn" id="smd7" style="display:none">
+<a class="timing tbcolor" href="#">Doctor Not Available</a>
+</li>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd7">
+<%if(typeof(d7.start) == 'string'){%>
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+<span><%=d7.start.toUpperCase()%></span>                                                                                                                                                                                                                                            - <span><%=d7.end.toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d7.id%>"  data-day-index="<%=t7%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}else{%>
+<%for(let i=0;i<d7.start.length;i++){%>
+
+<a class="timing tbcolor" onclick="smshowSeats('<%=z%>')">
+
+<span><%=d7.start[i].toUpperCase()%></span>                                                                                                                                                                                                                                                    - <span><%=d7.end[i].toUpperCase()%></span>
+</a>
+<div class="col-md-12" id="smseats" style="display:none;flex-direction: row;flex-wrap: wrap;">
+    <%z++%>
+   
+    <a class="timing tbcolorn tcolors" data-id="<%=d7.id%>"  data-day-index="<%=t7%>"  data-slot-index="<%=i%>" id="checkme"  data-doctor-id="<%=doctor._id%>"  style="width: 100% !important; color: black !important; background-color: white !important;font-weight: bold; height:40px;margin-left: 5px;">
+    
+    <span style="font-size: 1.2rem;color: black !important">Book Now</span>
+    </a>
+    </div>
+<%}}%>
+
+</li>
+<%}%>
+<%}else{%>
+<li class="cloginbtn" style="display: none;" id="smd7">
+<a class="timing tbcolor" href="#">
+Not Available
+</a>
+</li>
+<%}%>
+</ul>
+</div>
+
+<!-- /Time Slot -->
+
+</div>
+
+</div>
+</div>
+<!-- /Schedule Content -->
+
+</div>
+<!-- /Schedule Widget -->
+
+<!-- Submit Section -->
+
+<!-- /Submit Section -->
+
+</div>
+</div>
+</form>
+</div>
+
+</div>
+<!-- /Page Content -->
+
+<!-- Footer -->
+<%-include('footer');%>
+<!-- /Footer -->
+
+</div>
+<!-- /Main Wrapper -->
+
+<!-- jQuery -->
+
+
+<script src="<%=assetPath('js/jquery.min.js')%>"></script>
+<script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+<script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+<script src="<%=assetPath('js/script.js')%>"></script>
+<script src="<%=assetPath('js/extra.js')%>"></script>
+<script>
+    var nid = document.querySelectorAll('.nid');
+    for(let i=0;i<nid.length;i++)
+    {
+        nid[i].addEventListener('click',function(e)
+        {
+            e.preventDefault()
+            var dayindex = nid[i].getAttribute('data-day-index');
+            var slotindex = nid[i].getAttribute('data-slot-index');
+            var id = nid[i].getAttribute('data-id');
+            var did = nid[i].getAttribute('data-doctor-id');
+            var date = nid[i].getAttribute('data-date');
+
+            let url = "http://localhost:4000/diagonistic/book-test"
+    
+    $.post(url, {
+        dayindex:dayindex,
+        slotindex:slotindex,
+        id:id,
+        did:did,
+        date:date
+    }, function (data) {
+        console.log(data)
+        window.location.href = data;
+       
+        })
+    });
+    }
+</script>
+</body>
+
+<!-- doccure/booking  30 Nov 2019 04:12:16 GMT -->
+
+</html>

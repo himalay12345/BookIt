@@ -2833,7 +2833,7 @@ module.exports.bookAppointment = async(req, res) => {
 
 
     let doctor = await User.findById(req.body.doctorid);
-
+console.log(req.body.date)
     if (req.isAuthenticated()) {
 
         return res.render('checkout', {

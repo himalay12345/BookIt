@@ -1,7 +1,12 @@
+const config = require('../config/twilio');
 const User = require('../models/user');
+const client = require('twilio')(config.accountSID, config.authToken);
 const Test = require('../models/test');
 const Consult = require('../models/consult');
-
+const bcrypt = require('bcrypt')
+const fs = require('fs');
+const path = require('path');
+const shortid = require('shortid');
 
 
 
@@ -455,6 +460,169 @@ module.exports.specialist = async (req, res) => {
         doctors:doctors
     });
 }
+
+module.exports.sendOtp = async(req,res) => {
+    if(req.body.phone.length>10)
+    {
+        req.flash('error', 'Please do not use (+91 or 0) before your phone number.');
+        return res.json({
+            status:'false'
+        })
+    }
+    
+    let user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+
+    if (user) {
+        req.flash('error', 'Account already linked with this mobile number');
+        return res.json({
+            status:'false'
+        })
+    } else {
+
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.body.service
+            }).then((data) => {
+                console.log('verify',req.body)
+         return res.json({
+             status:'true'
+            })
+            });
+
+    }
+}
+
+module.exports.verifyOtp = async(req, res) => {
+  
+
+    let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+
+
+    if (data.status == 'approved') {
+       return res.json({
+           status:'true'
+       })
+
+    } else {
+        return res.json({
+            status:'false'
+        })
+
+    }
+}
+
+module.exports.createUserAccount = async(req, res) => {
+    let davatar = path.join(__dirname, '..', '/assets/img/bg.png');
+    if(req.body.password != req.body.cpassword)
+    {
+       return res.json({
+           status:'false',
+           msg:'password mismatch'
+       })
+    }
+    let hashedPass = await bcrypt.hash(req.body.password,10)
+   
+
+    
+    let user = await User.create({
+        name: req.body.name,
+        phone: req.body.phone,
+        email:req.body.email,
+        avatar: davatar,
+        service: 'phone',
+        type: req.body.type,
+        password : hashedPass,
+        encrypt : true
+    });
+    const rand = Math.floor((Math.random() * 100) + 54);
+            
+            if (req.body.email) {
+                
+                    console.log('sent');
+                    user.emailkey = rand;
+                    emailVerification.newAlert(user, rand, req.body.email);
+                    user.email = req.body.email;
+                    user.emailverify = false;
+                    user.save();
+            }
+                
+                   
+
+return res.json({
+    status:'true',
+    user:user
+})
+
+}
+
+
+module.exports.login = async function(req, res) {
+    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+
+    if(!user)
+    {
+        return res.json({
+            status:'false',
+            msg:'Not registered'
+        })
+       
+    }
+  
+  else{
+    if(user.encrypt)
+    {
+        let isEqual = await bcrypt.compare(req.body.password,user.password)
+       
+        if(isEqual){
+            
+            return res.json({
+                status:'true',
+                user:user
+            })
+        }
+        else{
+            return res.json({
+                status:'false',
+                msg:'Wrong Password'
+            })
+           
+        }
+    }
+        else {
+            if(user.password != req.body.password)
+            {
+                return res.json({
+                    status:'false',
+                    msg:'Wrong Password'
+                })
+            }
+
+            else{
+                return res.json({
+                    status:'true',
+                    user:user
+                })
+            }
+           
+    }
+
+   
+
+  }
+
+}
+
 
 
 

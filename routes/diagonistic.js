@@ -38,6 +38,25 @@ router.get('/change-lab',diagController.changeLab1)
 router.get('/remove-cart-item',diagController.removeCartItem);
 router.get('/add-cart-item',diagController.addCartItem);
 router.get('/cart',diagController.cart);
+router.get('/schedule_timing',diagController.scheduleTiming);
+router.get('/add-patient',diagController.addPatient);
+router.get('/get-patient-data',diagController.getPatientData);
+router.get('/get-address-data',diagController.getAddressData);
+router.get('/get-all-patients',diagController.getallPatients);
+router.get('/get-all-address',diagController.getallAddress);
+router.get('/get-patient-by-index',diagController.getPatientByIndex);
+router.get('/get-address-by-index',diagController.getAddressByIndex);
+router.post('/add-address',diagController.addAddressData);
+router.post('/add-patient',diagController.addPatientData);
+router.post('/switch-lab',diagController.switchLab);
+router.post('/set-schedule-timing', diagController.setScheduleTiming);
+router.post('/update-schedule', diagController.updateSchedule);
+router.get('/booking', diagController.booking);
+router.post('/book-test', diagController.bookTest);
+router.post('/book-test-by-cash', diagController.bookTestByCash);
+router.get('/create-order', diagController.createOrder);
+router.get('/amount-payable', diagController.amountPayable);
+router.get('/order-success', diagController.orderSuccess);
 
 
 module.exports = router;

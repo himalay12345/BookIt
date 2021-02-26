@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/login  30 Nov 2019 04:12:20 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/select2/css/select2.min.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https:/cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+</head>
+
+<body class="account-page">
+    
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <%-include('header');%>
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid" style="margin-top: 70px;">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+
+                        <!-- Login Tab Content -->
+                        <div class="account-content">
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-md-7 col-lg-6 login-left">
+                                    <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Login">
+                                </div>
+                              
+                                <div class="col-md-12 col-lg-6 login-right" style="padding:30px 20px;background-color: cadetblue;">
+                                    <%if(locals.user.add_patient.length>0){%>
+                                        <div onclick="changePatient()" id="choose_patient" style="cursor: pointer;">
+                                            <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Booking For</h2>
+                                            <div  style="height: 70px;width: 100%;border:1px solid rgb(240, 240, 240);border-radius:3px;margin-bottom: 20px;padding: 20px;display: inline-flex;background-color: white;">
+                                                <i class="fas fa-user" style="font-size: 1.5rem;margin-right:15px;color:#478e8e;"></i>
+                                                <span style="font-weight: bold;color:#478e8e;">Select Patient</span>
+                                                <i class="fas fa-angle-right" style="position: absolute;right: 15%;font-size: 1.5rem;color:#478e8e;"></i>
+                                            </div>
+                                        </div>
+                                    <%}else{%>
+                                        <div onclick="showPatient()" id="choose_patient" style="cursor: pointer;">
+                                            <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Booking For</h2>
+                                            <div  style="height: 70px;width: 100%;border:1px solid rgb(240, 240, 240);border-radius:3px;margin-bottom: 20px;padding: 20px;display: inline-flex;background-color: white;">
+                                                <i class="fas fa-user" style="font-size: 1.5rem;margin-right:15px;color:#478e8e;"></i>
+                                                <span style="font-weight: bold;color:#478e8e;">Select Patient</span>
+                                                <i class="fas fa-angle-right" style="position: absolute;right: 15%;font-size: 1.5rem;color:#478e8e;"></i>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                  
+
+                                   
+                                    
+                                   
+                                   <div class="displayNone" id="display_p_content" style="cursor: pointer;">
+                                    <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Booking For</h2>
+                                   
+
+                                    <div id="display_patient" style="height: auto;width: 100%;border:1px solid rgb(240, 240, 240);border-radius:3px;margin-bottom: 20px;padding: 20px;display: inline-flex;background-color: white;">
+                                        <div style="width: 10%;">
+                                            <img src="/img/profile.png" style="height: 30px;width:30px;border-radius: 50%;">
+                                        </div>
+                                        <div style="width: 90%;padding-left: 15px;">
+                                            <h3 style="font-size: 1.2rem;font-weight:bold;">Himalay Shankar</h3>
+                                            <p style="display: inline-flex;">Age : 15</p>
+                                            <p style="display: inline-flex;position: absolute;right: 20%;">Gender : Male</p>
+                                            <p style="margin-top: -10px;">Phone : 8789202542</p>
+                                            <div style="display: inline-flex;width: 100%;">
+                                                <div class="">
+                                                    <button type="submit" id="submit_button" class="btn btn-primary" style="width: 100px;">Edit</button>
+                                                </div>
+                                                <div style="margin-left: 20px;">
+                                                    <button type="submit" id="submit_button" class="btn btn-primary" style="width: 100px;">Change</button>
+                                                </div>
+                                          
+                                            </div>
+                                            <span class="badge badge-pill bg-danger-light" style="margin-top:15px;font-size: 0.9rem;padding:15px;">These Details will appear on final test report.</span>
+
+                                        </div>
+                                        
+                                       
+                                    </div>
+                                    
+                                   </div>
+                                   <%if(locals.user.add_address.length>0){%>
+                                   <div onclick="changeAddress()" id="choose_address" style="cursor: pointer;">
+                                    <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Sample Pickup From</h2>
+                                    <div style="height: 70px;width: 100%;border:1px solid rgb(240, 240, 240);border-radius:3px;margin-bottom: 20px;padding: 20px;display: inline-flex;background-color: white;">
+                                        <i class="fas fa-marker" style="font-size: 1.5rem;margin-right:15px;color:#478e8e;"></i>
+                                        <span style="font-weight: bold;color:#478e8e;">Add Address</span>
+                                        <i class="fas fa-angle-right" style="position: absolute;right: 15%;font-size: 1.5rem;color:#478e8e;"></i>
+                                    </div>
+                                   </div>
+                                   <%}else{%>
+                                    <div onclick="showAddress()" id="choose_address" style="cursor: pointer;">
+                                        <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Sample Pickup From</h2>
+                                        <div style="height: 70px;width: 100%;border:1px solid rgb(240, 240, 240);border-radius:3px;margin-bottom: 20px;padding: 20px;display: inline-flex;background-color: white;">
+                                            <i class="fas fa-marker" style="font-size: 1.5rem;margin-right:15px;color:#478e8e;"></i>
+                                            <span style="font-weight: bold;color:#478e8e;">Add Address</span>
+                                            <i class="fas fa-angle-right" style="position: absolute;right: 15%;font-size: 1.5rem;color:#478e8e;"></i>
+                                        </div>
+                                       </div>
+                                    <%}%>
+                                   <div class="displayNone" id="display_a_content" style="cursor: pointer;">
+                                    <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Sample Pickup From</h2>
+                                   
+
+                                    <div id="display_address" style="height: auto;width: 100%;border:1px solid rgb(240, 240, 240);border-radius:3px;margin-bottom: 20px;padding: 20px;display: inline-flex;background-color: white;">
+                                       
+                                    </div>
+                                    
+                                   </div>
+                                   <div class="col-12">
+                                    <a href="/diagonistic/booking/?id=<%=lab._id%>" class="btn btn-google btn-block" style="background-color: white;color:#478e8e;font-weight: bold;margin-top: 15px;"><i class="fab fa-clock-0 mr-1"></i> Select Appointment Time</a>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /Login Tab Content -->
+                        <div class="col-md-12 _3oqPe displayNone show_patients" style="display: inline-flex;">
+    
+                            <div class="col-md-12 jss48" style="overflow-y: auto;">
+                          
+                        <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;height: 100vh;">
+
+                            <svg onclick="removePatient()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                            <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Details</h2>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Full Name <span class="text-danger"></span></label>
+                                    <input type="text" id="pname" placeholder="Enter the Name" name="name" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Phone <span class="text-danger"></span></label>
+                                    <input type="number" id="pphone" placeholder="Enter the Phone" name="name" class="form-control" >
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="display: inline-flex;">
+                            <div class="col-md-6" style="padding:0px !important">
+                                <div class="form-group">
+                                    <label>Gender <span class="text-danger"></span></label>
+                                    <select name="gender" id="pgender" class="form-control select" >
+                                        
+                                        <option selected>Male</option>
+                                     
+                                        <option>Female</option>
+                                       
+                                        <option>Others</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="padding:0px !important;padding-left: 10px !important;">
+                                <div class="form-group">
+                                    <label> Age <span class="text-danger"></span></label>
+                                    <input type="number" id="page" placeholder="Enter the Age" name="age" class="form-control"  >
+                                </div>
+                            </div>
+                            <input type="hidden" id="pedit" name="edit" value="false">
+                        </div>
+                            <div class="submit-section submit-btn-bottom">
+                                <button type="submit" id="add-patient" class="btn btn-primary" style="width: 100px;">Add</button>
+                            </div>
+                    
+                    
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-12 _3oqPe displayNone show_address" style="display: inline-flex;">
+    
+                        <div class="col-md-12 jss48" style="overflow-y: auto;">
+                          
+                    <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
+
+                        <svg onclick="removeAddress()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                        <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Address</h2>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Contact Name <span class="text-danger"></span></label>
+                                <input type="text" id="aname" placeholder="Enter the Name" name="name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Building Name And Flat Number <span class="text-danger"></span></label>
+                                <input type="text" id="aflat" placeholder="Enter the Building Name" name="bname" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Street Name <span class="text-danger"></span></label>
+                                <input type="text" id="astreetname" placeholder="Enter the Street Name" name="streetname" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> City <span class="text-danger"></span></label>
+                                <input type="text" id="acity" placeholder="Enter the City" name="city" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Pincode <span class="text-danger"></span></label>
+                                <input type="number" id="apincode" placeholder="Enter the Pincode" name="pincode" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label> Mobile Number <span class="text-danger"></span></label>
+                                <input type="number" id="aphone" placeholder="Enter the Mobile Number" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+                        <input type="hidden" id="aedit" name="edit" value="false">
+                        <label style="margin-left: 20px;"> Address Type <span class="text-danger"></span></label></br>
+                        <span style="margin-left: 40px;margin-right: 15px;">
+                            <input type="radio" name="type" value="Home" class="cb1" id="Home" onchange="check1();">
+                        </span><span>Home</span></br>
+                        <span style="margin-left: 40px;margin-right: 15px;">
+                            <input type="radio" name="type" value="Work" class="cb1" id="Work" onchange="check2();">
+                        </span><span>Work</span></br>
+                        <span style="margin-left: 40px;margin-right: 15px;">
+                            <input type="radio" name="type" value="Other" id="Other" class="cb1">
+                        </span><span>Other</span></br>
+                        <span style="margin-left: 15px;font-weight: bold;margin-top: 8px;" class="displayNone" id="home_show">Deliver : 9 A.M - 9 P.M, All days</span></br>
+                        <span style="margin-left: 15px;font-weight: bold;margin-top: 8px;" class="displayNone" id="office_show">Deliver : 10 A.M - 5 P.M, Monday to Friday</span></br>
+                        <div style="background-color:white;width: 100%;margin-top: 15px;">
+                            <button type="submit" id="add_address_btn" class="btn btn-primary" style="width:100%;font-size:1.3rem;font-weight: bold;color:white;z-index: 1000;">Add & Continue</button>
+                        </div>    
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-12 _3oqPe displayNone show_all_patients" style="display: inline-flex;">
+    
+                    <div class="col-md-12 jss48" style="overflow-y: auto;">
+                      
+                <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
+
+                    <svg onclick="removeAllPatients()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                    <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Details</h2>
+                    <div id="patients_list">
+                      
+                </div>
+                    <div style="display: inline-flex;width: 100%;margin-left: 50px;margin-top: 20px;">
+                        <div class="">
+                            <button type="submit" id="new_button" class="btn btn-primary" style="width: 100px;">Add New</button>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <button type="submit" id="confirm_button" class="btn btn-primary" style="width: 100px;">Confirm</button>
+                        </div>
+                  
+                    </div>
+                  
+                </div>
+            </div>
+            </div>
+            <div class="col-md-12 _3oqPe displayNone show_all_address" style="display: inline-flex;">
+    
+                <div class="col-md-12 jss48" style="overflow-y: auto;">
+                  
+            <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
+
+                <svg onclick="removeAllAddress()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Details</h2>
+                <div id="address_list">
+                  
+            </div>
+                <div style="display: inline-flex;width: 100%;margin-left: 50px;margin-top: 20px;">
+                    <div class="">
+                        <button type="submit" id="new_address_button" class="btn btn-primary" style="width: 100px;">Add New</button>
+                    </div>
+                    <div style="margin-left: 20px;">
+                        <button type="submit" id="confirm_address_button" class="btn btn-primary" style="width: 100px;">Confirm</button>
+                    </div>
+              
+                </div>
+              
+            </div>
+        </div>
+        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/select2/js/select2.min.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+    <script>
+        function showPatient()
+        {
+            $('.show_patients').removeClass('displayNone');
+        }
+
+        var addnew = document.getElementById('new_button');
+        addnew.addEventListener('click',function(e)
+        {
+            e.preventDefault();
+            $('.show_patients').removeClass('displayNone');
+            $('.show_all_patients').addClass('displayNone');
+        document.getElementById('pname').value = '';
+        document.getElementById('pphone').value = '';
+        document.getElementById('page').value = '';
+
+        })
+        var confirm = document.getElementById('confirm_button');
+        confirm.addEventListener('click',function(e)
+        {
+            e.preventDefault();
+            var radio = document.querySelectorAll('#pcount');
+            let cnt;
+            for(let i=0;i<radio.length;i++)
+            {
+                if(radio[i].checked)
+                {
+                    cnt = radio[i].getAttribute('data-count');
+                    break;
+                }
+            }
+            let url3 = "http://localhost:4000/diagonistic/get-patient-by-index/?index="+cnt;
+            $.get(url3, function (data) {
+                console.log(data)
+                 $('#display_patient').html('');
+                $('#choose_patient').addClass('displayNone')
+                $('#display_p_content').removeClass('displayNone')
+                var str  = ' <div style="width: 10%;">'+
+                            '<img src="/img/profile.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                            '</div>'+
+                            '<div style="width: 90%;padding-left: 15px;">'+
+                                '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data.name+'</h3>'+
+                            '<p style="display: inline-flex;">Age : '+data.age+'</p>'+
+                                '<p style="display: inline-flex;position: absolute;right: 20%;">Gender :'+ data.gender + '</p>'+
+                                '<p style="margin-top: -10px;">Phone : '+data.phone + '</p>'+
+                                '<div style="display: inline-flex;width: 100%;">'+
+                                   '<div class="">'+
+                                        '<button id="edit_button" onclick="editPatient()" data-id="'+data.id+'" class="btn btn-primary" style="width: 100px;">Edit</button>'+
+                                    '</div>'+
+                                    '<div style="margin-left: 20px;">'+
+                                       '<button id="change_button" onclick="changePatient()" class="btn btn-primary" style="width: 100px;">Change</button>'+
+                                    '</div>'+
+                                
+                                '</div>'+
+                                '<span class="badge badge-pill bg-danger-light" style="margin-top:15px;font-size: 0.9rem;padding:15px;">These Details will appear on final test report.</span>'+
+
+                            '</div>'
+                $('#display_patient').append(str);
+                $('.show_all_patients').addClass('displayNone'); 
+            });
+        })
+
+        function showAddress()
+        {
+            $('.show_address').removeClass('displayNone');
+        }
+        function removePatient()
+        {
+            
+            $('.show_patients').addClass('displayNone'); 
+        } 
+        function removeAddress()
+        {
+            
+            $('.show_address').addClass('displayNone'); 
+        } 
+        function removeAllPatients()
+        {
+            
+            $('.show_all_patients').addClass('displayNone'); 
+        } 
+        function removeAllAddress()
+        {
+            
+            $('.show_all_address').addClass('displayNone'); 
+        } 
+
+        var addbtn = document.getElementById('add-patient');
+        let url = "http://localhost:4000/diagonistic/add-patient";
+      
+       
+        addbtn.addEventListener('click',function()
+        {
+        var name = document.getElementById('pname').value;
+        var phone = document.getElementById('pphone').value;
+        var age = document.getElementById('page').value;
+        var gender = document.getElementById('pgender').value;
+        var edit = document.getElementById('pedit').value;
+            $.post(url, 
+            {
+                name:name,
+                phone:phone,
+                age:age,
+                gender:gender,
+                flag:true,
+                edit:edit
+            },
+            function (data) {
+                console.log(data)
+                $('#display_patient').html('');
+                $('#choose_patient').addClass('displayNone')
+                $('#display_p_content').removeClass('displayNone')
+                var str  = ' <div style="width: 10%;">'+
+                            '<img src="/img/profile.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                            '</div>'+
+                            '<div style="width: 90%;padding-left: 15px;">'+
+                                '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data.name+'</h3>'+
+                            '<p style="display: inline-flex;">Age : '+data.age+'</p>'+
+                                '<p style="display: inline-flex;position: absolute;right: 20%;">Gender :'+ data.gender + '</p>'+
+                                '<p style="margin-top: -10px;">Phone : '+data.phone + '</p>'+
+                                '<div style="display: inline-flex;width: 100%;">'+
+                                   '<div class="">'+
+                                        '<button id="edit_button" onclick="editPatient()" data-id="'+data.id+'" class="btn btn-primary" style="width: 100px;">Edit</button>'+
+                                    '</div>'+
+                                    '<div style="margin-left: 20px;">'+
+                                       '<button id="change_button" onclick="changePatient()" class="btn btn-primary" style="width: 100px;">Change</button>'+
+                                    '</div>'+
+                                
+                                '</div>'+
+                                '<span class="badge badge-pill bg-danger-light" style="margin-top:15px;font-size: 0.9rem;padding:15px;">These Details will appear on final test report.</span>'+
+
+                            '</div>'
+                $('#display_patient').append(str);
+                $('.show_patients').addClass('displayNone'); 
+    })
+        })
+    </script>
+    <script>
+
+        function changePatient()
+        {
+            $('.show_all_patients').removeClass('displayNone'); 
+            let url = "http://localhost:4000/diagonistic/get-all-patients";
+            $.get(url, function (data) {
+                console.log(data);
+                $('#patients_list').html('');
+                for(let i=0;i<data.length;i++)
+                {
+                    if(data[i].flag == true)
+                    {
+                let str = '<label style="width:100%;">'+
+                    '<div style="width:100%;display:inline-flex;border-bottom: 1px solid rgb(194, 193, 193);padding-top: 8px;">'+
+                        '<div style="width: 10%;">'+
+                            '<img src="/img/profile.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                        '</div>'+
+                        '<div style="width: 80%;padding-left: 15px;">'+
+                           '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data[i].name+'</h3>'+
+                            '<p style="display: inline-flex;">Age :'+ data[i].age + '</p>'+
+                            '<p style="display: inline-flex;position: absolute;right: 20%;">Gender :'+ data[i].gender + '</p>'+
+                            '<p style="margin-top: -10px;">Phone : '+ data[i].phone + '</p>'+
+                        '</div>'+
+                        '<div style="width: 10%;padding-right: 20px;">'+
+                           '<input type="radio" name="pcount" id="pcount" checked data-count="'+ i + '" class="disinp">'+
+                        '</div>'+
+                    '</div>'+
+                '</label>'
+                $('#patients_list').append(str);
+                        }else{
+                            let str = '<label style="width:100%;">'+
+                    '<div style="width:100%;display:inline-flex;border-bottom: 1px solid rgb(194, 193, 193);padding-top: 8px;">'+
+                        '<div style="width: 10%;">'+
+                            '<img src="/img/profile.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                        '</div>'+
+                        '<div style="width: 80%;padding-left: 15px;">'+
+                           '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data[i].name+'</h3>'+
+                            '<p style="display: inline-flex;">Age :'+ data[i].age + '</p>'+
+                            '<p style="display: inline-flex;position: absolute;right: 20%;">Gender :'+ data[i].gender + '</p>'+
+                            '<p style="margin-top: -10px;">Phone : '+ data[i].phone + '</p>'+
+                        '</div>'+
+                        '<div style="width: 10%;padding-right: 20px;">'+
+                           '<input type="radio" name="pcount" id="pcount" data-count="'+ i + '" class="disinp">'+
+                        '</div>'+
+                    '</div>'+
+                '</label>'
+                $('#patients_list').append(str);
+                        }
+                        }
+            });
+        }
+         function editPatient()
+       {
+            var id = document.getElementById('edit_button').getAttribute('data-id')
+            console.log(id)
+            $('.show_patients').removeClass('displayNone');
+            let url1 = "http://localhost:4000/diagonistic/get-patient-data/?id="+id;
+            $.get(url1, function (data) {
+                console.log(data);
+               document.getElementById('pname').value = data.name;
+               document.getElementById('pphone').value = data.phone;
+               document.getElementById('page').value = data.age;
+               document.getElementById('pgender').value = data.gender;
+               document.getElementById('pedit').value = data.id;
+            });
+       }
+    </script>
+<script>
+
+    function check1()
+    {
+        document.getElementById('home_show').classList.remove('displayNone');
+        document.getElementById('office_show').classList.add('displayNone');
+    }
+    function check2()
+    {
+        document.getElementById('office_show').classList.remove('displayNone');
+        document.getElementById('home_show').classList.add('displayNone');
+    }
+    function changeAddress()
+        {
+            $('.show_all_address').removeClass('displayNone'); 
+            let url6 = "http://localhost:4000/diagonistic/get-all-address";
+            $.get(url6, function (data) {
+                console.log(data);
+                $('#address_list').html('');
+                for(let i=0;i<data.length;i++)
+                {
+                    if(data[i].flag == true)
+                    {
+                let str = '<label style="width:100%;">'+
+                    '<div style="width:100%;display:inline-flex;border-bottom: 1px solid rgb(194, 193, 193);padding-top: 8px;">'+
+                        '<div style="width: 10%;">'+
+                            '<img src="/img/home_icon.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                        '</div>'+
+                        '<div style="width: 80%;padding-left: 15px;">'+
+                           '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data[i].name+'</h3>'+
+                            '<p style="display: inline-flex;">'+ data[i].phone + '</p>'+
+                            '<p style="display: inline-flex;position: absolute;right: 20%;">'+ data[i].type + '</p>'+
+                            '<p style="margin-top: -10px;">'+ data[i].flatno + '</p>'+
+                            '<p style="margin-top: -10px;">'+ data[i].street + '</p>'+
+                            '<p style="margin-top: -10px;">'+ data[i].city + '-' + data[i].pincode + '</p>'+
+                        '</div>'+
+                        '<div style="width: 10%;padding-right: 20px;">'+
+                           '<input type="radio" name="pcount" id="acount" checked data-count="'+ i + '" class="disinp">'+
+                        '</div>'+
+                    '</div>'+
+                '</label>'
+                $('#address_list').append(str);
+                        }else{
+                            let str = '<label style="width:100%;">'+
+                    '<div style="width:100%;display:inline-flex;border-bottom: 1px solid rgb(194, 193, 193);padding-top: 8px;">'+
+                        '<div style="width: 10%;">'+
+                            '<img src="/img/home_icon.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                        '</div>'+
+                        '<div style="width: 80%;padding-left: 15px;">'+
+                           '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data[i].name+'</h3>'+
+                            '<p style="display: inline-flex;">'+ data[i].phone + '</p>'+
+                            '<p style="display: inline-flex;position: absolute;right: 20%;">'+ data[i].type + '</p>'+
+                            '<p style="margin-top: -10px;">'+ data[i].flatno + '</p>'+
+                            '<p style="margin-top: -10px;">'+ data[i].street + '</p>'+
+                            '<p style="margin-top: -10px;">'+ data[i].city + '-' + data[i].pincode + '</p>'+
+                        '</div>'+
+                        '<div style="width: 10%;padding-right: 20px;">'+
+                           '<input type="radio" name="pcount" id="acount" data-count="'+ i + '" class="disinp">'+
+                        '</div>'+
+                    '</div>'+
+                '</label>'
+                $('#address_list').append(str);
+                        }
+                        }
+            });
+        }
+
+    function editAddress()
+       {
+            var id = document.getElementById('edit_address_button').getAttribute('data-id')
+            console.log(id)
+            $('.show_address').removeClass('displayNone');
+            let url5 = "http://localhost:4000/diagonistic/get-address-data/?id="+id;
+            $.get(url5, function (data) {
+                console.log(data);
+               document.getElementById('aname').value = data.name;
+               document.getElementById('aphone').value = data.phone;
+               document.getElementById('astreetname').value = data.street;
+               document.getElementById('acity').value = data.city;
+               document.getElementById('apincode').value = data.pincode;
+               document.getElementById('aflat').value = data.flatno;
+               document.getElementById('aedit').value = data.id;
+               document.getElementById(`${data.type}`).checked = true;
+            });
+       }
+       var addnewaddress = document.getElementById('new_address_button');
+        addnewaddress.addEventListener('click',function(e)
+        {
+            e.preventDefault();
+            $('.show_address').removeClass('displayNone');
+            $('.show_all_address').addClass('displayNone');
+        document.getElementById('aname').value = '';
+        document.getElementById('aphone').value = '';
+        document.getElementById('aflat').value = '';
+        document.getElementById('astreetname').value = '';
+        document.getElementById('acity').value = '';
+        document.getElementById('apincode').value = '';
+      
+
+        })
+        var confirmaddress = document.getElementById('confirm_address_button');
+        confirmaddress.addEventListener('click',function(e)
+        {
+            e.preventDefault();
+            var radio = document.querySelectorAll('#acount');
+            let cnt;
+            for(let i=0;i<radio.length;i++)
+            {
+                if(radio[i].checked)
+                {
+                    cnt = radio[i].getAttribute('data-count');
+                    break;
+                }
+            }
+            let url7 = "http://localhost:4000/diagonistic/get-address-by-index/?index="+cnt;
+            $.get(url7, function (data) {
+                console.log(data)
+                 $('#display_address').html('');
+                $('#choose_address').addClass('displayNone')
+                $('#display_a_content').removeClass('displayNone')
+                var str = '<div style="width: 10%;">'+
+                            '<img src="/img/home_icon.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                        '</div>'+
+                        '<div style="width: 90%;padding-left: 15px;">'+
+                            '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data.type+'</h3>'+
+                            '<p style="font-size: 0.9rem;"> '+ data.name + '</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+data.flatno+'</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+data.street + '</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+ data.city + '-' + data.pincode +'</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+data.phone+'</p>'+
+                            '<div style="display: inline-flex;width: 100%;">'+
+                                '<div class="">'+
+                                    '<button type="submit" id="edit_address_button" onclick="editAddress()" data-id="'+data.id +'" class="btn btn-primary" style="width: 100px;">Edit</button>'+
+                                '</div>'+
+                                '<div style="margin-left: 20px;">'+
+                                    '<button type="submit" id="change_address_button" onclick="changeAddress()" class="btn btn-primary" style="width: 100px;">Change</button>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+                $('#display_address').append(str);
+                $('.show_all_address').addClass('displayNone'); 
+            });
+        })
+     
+       var add_addressbtn = document.getElementById('add_address_btn');
+        let url4 = "http://localhost:4000/diagonistic/add-address";
+      
+       
+        add_addressbtn.addEventListener('click',function()
+        {
+        var name = document.getElementById('aname').value;
+        var phone = document.getElementById('aphone').value;
+        var flatno = document.getElementById('aflat').value;
+        var street = document.getElementById('astreetname').value;
+        var city = document.getElementById('acity').value;
+        var pincode = document.getElementById('apincode').value;
+        var edit = document.getElementById('aedit').value;
+        var cbox = document.querySelectorAll('.cb1');
+        var type;
+        for(let i = 0; i<cbox.length;i++)
+        {
+            if(cbox[i].checked)
+            {
+                type = cbox[i].value;
+            }
+        }
+        console.log(name,phone,flatno,street,city,pincode,type,edit);
+      
+            $.post(url4, 
+            {
+                name:name,
+                phone:phone,
+                flatno:flatno,
+                street:street,
+                city:city,
+                pincode:pincode,
+                type:type,
+                edit:edit,
+                flag:true
+            },
+            function (data) {
+                console.log(data)
+                $('#display_address').html('');
+                $('#choose_address').addClass('displayNone')
+                $('#display_a_content').removeClass('displayNone')
+                var str = '<div style="width: 10%;">'+
+                            '<img src="/img/home_icon.png" style="height: 30px;width:30px;border-radius: 50%;">'+
+                        '</div>'+
+                        '<div style="width: 90%;padding-left: 15px;">'+
+                            '<h3 style="font-size: 1.2rem;font-weight:bold;">'+data.type+'</h3>'+
+                            '<p style="font-size: 0.9rem;"> '+ data.name + '</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+data.flatno+'</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+data.street + '</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+ data.city + '-' + data.pincode +'</p>'+
+                            '<p style="margin-top: -20px;font-size: 0.9rem;">'+data.phone+'</p>'+
+                            '<div style="display: inline-flex;width: 100%;">'+
+                                '<div class="">'+
+                                    '<button type="submit" id="edit_address_button" onclick="editAddress()" data-id="'+data.id +'" class="btn btn-primary" style="width: 100px;">Edit</button>'+
+                                '</div>'+
+                                '<div style="margin-left: 20px;">'+
+                                    '<button type="submit" id="change_address_button" onclick="changeAddress()" class="btn btn-primary" style="width: 100px;">Change</button>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+                $('#display_address').append(str);
+                $('.show_address').addClass('displayNone'); 
+    })
+        })
+    </script>
+</body>
+
+<!-- AarogyaHub/login  30 Nov 2019 04:12:20 GMT -->
+
+</html>
