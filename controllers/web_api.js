@@ -580,16 +580,41 @@ module.exports.login = async function(req, res) {
     }
   
   else{
+
     if(user.encrypt)
     {
         let isEqual = await bcrypt.compare(req.body.password,user.password)
        
         if(isEqual){
+
+            if(user.twofactor)
+            {
+                client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: 'sms'
+                }).then((data) => {
+                    return res.json({
+                        twofactor:'true',
+                        status:'true',
+                        msg:'Otp Sent To Registered Phone'
+                    })
+                });
+            }
+
+            else{
+                return res.json({
+                    twofactor:'false',
+                    status:'true',
+                    user:user
+                })
+            }
+           
             
-            return res.json({
-                status:'true',
-                user:user
-            })
+           
         }
         else{
             return res.json({
@@ -609,10 +634,32 @@ module.exports.login = async function(req, res) {
             }
 
             else{
+
+              if(user.twofactor)
+            {
+                client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: 'sms'
+                }).then((data) => {
+                    return res.json({
+                        twofactor:'true',
+                        status:'true',
+                        msg:'Otp Sent To Registered Phone'
+                    })
+                });
+            }
+
+            else{
                 return res.json({
+                    twofactor:'false',
                     status:'true',
                     user:user
                 })
+            }
             }
            
     }
@@ -621,6 +668,33 @@ module.exports.login = async function(req, res) {
 
   }
 
+}
+
+module.exports.verify2FactorOtp = async(req, res) => {
+  
+    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+    let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+
+
+    if (data.status == 'approved') {
+       return res.json({
+           status:'true',
+           user:user
+       })
+
+    } else {
+        return res.json({
+            status:'false'
+        })
+
+    }
 }
 
 

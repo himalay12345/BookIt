@@ -18,6 +18,7 @@ router.post('/booking',webApiController.booking);
 router.post('/specialist',webApiController.specialist);
 router.post('/send-otp',webApiController.sendOtp)
 router.post('/verify-otp',webApiController.verifyOtp)
+router.post('/verify-2factor',webApiController.verify2FactorOtp)
 router.post('/create-user-account',webApiController.createUserAccount)
 router.post('/login',webApiController.login)
 
