@@ -54,9 +54,12 @@ router.post('/update-schedule', diagController.updateSchedule);
 router.get('/booking', diagController.booking);
 router.post('/book-test', diagController.bookTest);
 router.post('/book-test-by-cash', diagController.bookTestByCash);
-router.get('/create-order', diagController.createOrder);
+router.get('/review-order', diagController.createOrder);
+router.get('/track-order', diagController.trackOrder);
+router.get('/print-bill', diagController.printBill);
 router.get('/amount-payable', diagController.amountPayable);
 router.get('/order-success', diagController.orderSuccess);
+router.get('/booked-test', diagController.bookedTest);
 
 
 module.exports = router;

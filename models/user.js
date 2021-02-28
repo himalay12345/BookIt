@@ -791,21 +791,15 @@ const userSchema = mongoose.Schema({
                 type:String
             }
         },
-        tests:[{
-            testname:{
-                type:String
-            },
-            testprice:{
-                type:Number
-            }
-        }],
-        lab:{
-            labname:{
-                type:String
-            },
-            labid:{
-                type:String
-            }
+        tests:{
+            type:Object
+        },
+
+        labname:{
+            type:String
+        },
+        labid:{
+            type: mongoose.Schema.Types.ObjectId
         },
         mode:{
             type:String
@@ -839,7 +833,8 @@ const userSchema = mongoose.Schema({
         },
         cancel:{
             type:Boolean
-        }
+        },
+        createdAt:{type: Date, default: Date.now}
     }],
 
     booked_test_lab:[{
@@ -905,7 +900,11 @@ const userSchema = mongoose.Schema({
         },
         totalprice:{
             type:String
-        }
+        },
+        cancel:{
+            type:Boolean
+        },
+        createdAt:{type: Date, default: Date.now}
     }],
 
     old_schedule_time_fixed: [{

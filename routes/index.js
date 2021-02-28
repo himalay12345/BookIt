@@ -73,6 +73,8 @@ router.get('/medical-registration', passport.checkDoctorAuthentication, homeCont
 router.get('/medical-proof', passport.checkDoctorAuthentication, homeController.medicalProof);
 router.get('/medical-records', passport.checkPatientAuthentication, homeController.medicalRecords);
 router.get('/my-billing', passport.checkPatientAuthentication, homeController.myBilling);
+router.get('/my-orders', passport.checkPatientAuthentication, homeController.myOrders);
+router.get('/my-cart', passport.checkPatientAuthentication, homeController.myCart);
 router.get('/my-appointments', passport.checkPatientAuthentication, homeController.myAppointments);
 router.get('/notification-settings', passport.checkAuthentication, homeController.notificationSettings);
 router.get('/not-available', passport.checkAuthentication, homeController.notAvailable);

@@ -1585,6 +1585,64 @@ module.exports.offlineCancel = async function(req, res) {
     }
 }
 
+
+module.exports.orderCancel = async function(req, res) {
+
+   
+
+    try{
+
+        let user = await User.findById(req.user.id);
+        let orders = await User.findById(req.user.id).populate({
+            path: 'booked_test_user',
+            populate: {
+                path: 'labid',
+                populate: {
+                    path: 'user',
+                    populate: { path: 'user' }
+                }
+    
+            }
+    
+        });
+               if(req.body.flag == 'yes')
+                {
+
+                       let n1 = await User.updateOne({ "_id" : req.user.id, "booked_test_user._id": req.body.tid}, {
+                            '$set': {
+                                
+                                'booked_test_user.$.cancel': true
+                                
+                            }
+                        });
+                      
+                       
+                        let n2 = await User.updateOne({ "_id" : req.user.id, "booked_test_lab._id": req.body.tid}, {
+                            '$set': {
+                                
+                                'booked_test_lab.$.cancel': true
+                                
+                            }
+                        });
+                      
+                      
+                        
+                      
+               return res.redirect('back');
+
+                   
+                        
+                }
+
+                else{
+                    return res.redirect('back');
+        }
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+}
+
 module.exports.refund = async function(req, res) {
 
     try {

@@ -1333,6 +1333,49 @@ module.exports.myAppointments = async(req, res) => {
     })
 }
 
+module.exports.myOrders = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let orders = await User.findById(req.user.id).populate({
+        path: 'booked_test_user',
+        populate: {
+            path: 'labid',
+            populate: {
+                path: 'user',
+                populate: { path: 'user' }
+            }
+
+        }
+
+    });
+    return res.render('my-orders', {
+        title: 'My Orders',
+        user: user,
+        orders:orders
+    })
+}
+
+
+module.exports.myCart = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let orders = await User.findById(req.user.id).populate({
+        path: 'booked_test_user',
+        populate: {
+            path: 'labid',
+            populate: {
+                path: 'user',
+                populate: { path: 'user' }
+            }
+
+        }
+
+    });
+    return res.render('my-orders', {
+        title: 'My Orders',
+        user: user,
+        orders:orders
+    })
+}
+
 module.exports.notificationSettings = (req, res) => {
     return res.render('notification-settings', {
         title: 'Notifications Settings'

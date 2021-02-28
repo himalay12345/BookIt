@@ -1,27 +1,16 @@
 <!DOCTYPE html> 
 <html lang="en">
-	<head>
-		<title>
-			<%=title%>
-		</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<meta name="theme-color" content="#478e8e">
-		<link href="img/favicon.png" rel="icon">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <!-- Bootstrap core CSS -->
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="<%=assetPath('css/bootstrap-datetimepicker.min.css')%>">
-	 <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
-	 <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
-	 <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
-		<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
 
-		<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
-	</head>
 	
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
 <!-- doccure/invoice-view  30 Nov 2019 04:12:19 GMT -->
 
 	<body>
@@ -67,8 +56,10 @@
 										</div>
 										<div class="col-md-6">
 											<p class="invoice-details">
-												<strong>Appointment No:</strong> #<%=order%> <br>
-												<strong>Issued:</strong> <%=date%>
+												<strong>Order No:</strong> #111111 <br>
+                                                <strong>Issued:</strong> <%=locals.user.booked_test_user[index].date%><br>
+                                                
+                                                
 											</p>
 										</div>
 									</div>
@@ -79,12 +70,11 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="invoice-info">
-												<strong class="customer-text">Invoice From</strong>
+												<strong class="customer-text">Tests Booked With Lab</strong>
 												<p class="invoice-details invoice-details-two text-left" style="float: left !important;">
-													<b>Dr.<%=doctor.name%> </b><br>
-													<b><%=doctor.clinicname%></b> <br>
-														<b><%=doctor.clinicaddr%></b><br>
-													<b><%=doctor.contacts.state%> </b><br>
+													<b><%=lab.name%> </b><br>
+													<b><%=lab.contacts.address%></b> <br>
+													<b><%=lab.contacts.city%> </b><br>
 												</p>
 											</div>
 										</div>
@@ -92,35 +82,19 @@
 											<div class="invoice-info invoice-info2">
 												<strong class="customer-text">Invoice To</strong>
 												<p class="invoice-details">
-													<%=name%> <br>
-													<%=age%> Years, <%=gender%><br>
-													<%=address%><br>
-													<%=phone%><br>
+													<%=locals.user.booked_test_user[index].user.name%> <br>
+                                                    <%=locals.user.booked_test_user[index].user.phone%><br>
+													<%=locals.user.booked_test_user[index].user.age%> Years, <%=locals.user.booked_test_user[index].user.gender%><br>
+													<%=locals.user.booked_test_user[index].address.flatno%><br>
+                                                    <%=locals.user.booked_test_user[index].address.street%><br>
+                                                    <%=locals.user.booked_test_user[index].address.city%>-<%=locals.user.booked_test_user[index].address.pincode%><br>
+													
 												</p>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!-- /Invoice Item -->
 								
-								<!-- Invoice Item -->
-								<!-- <div class="invoice-item">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="invoice-info">
-												<strong class="customer-text">Payment Method</strong>
-												<p class="invoice-details invoice-details-two">
-													Debit Card <br>
-													XXXXXXXXXXXX-2541 <br>
-													HDFC Bank<br>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div> -->
-								<!-- /Invoice Item -->
-								
-								<!-- Invoice Item -->
 								<div class="invoice-item invoice-table-wrap">
 									<div class="row">
 										<div class="col-md-12">
@@ -135,18 +109,18 @@
 														</tr>
 													</thead>
 													<tbody>
+                                                        <%for(let u of locals.user.booked_test_user[index].tests){%>
 														<tr>
-															<td>General Consultation</td>
+															<td><%=u.testname%></td>
 															<td class="text-center">1</td>
-															<td class="text-center">Rs 0</td>
-															<td class="text-right">Rs <%=fee%></td>
+                                                          
+
+                                                            <td class="text-center">Rs 0</td>
+                                                            <td class="text-right">Rs <%=u.testprice%></td>
+                                                           	
 														</tr>
-														<!-- <tr>
-															<td>Video Call Booking</td>
-															<td class="text-center">1</td>
-															<td class="text-center">$0</td>
-															<td class="text-right">$250</td>
-														</tr> -->
+                                                        <%}%>
+													
 													</tbody>
 												</table>
 											</div>
@@ -156,16 +130,20 @@
 												<table class="invoice-table-two table">
 													<tbody>
 													<tr>
-														<th>Subtotal:</th>
-														<td><span>Rs <%=fee%></span></td>
+                                                        <th>Subtotal:</th>
+                                                        
+                                                        <td><span>Rs <%=locals.user.booked_test_user[index].totalprice%></span></td>
+                                                       	
 													</tr>
 													<!-- <tr>
 														<th>Discount:</th>
 														<td><span>-10%</span></td>
 													</tr> -->
 													<tr>
-														<th>Total Amount:</th>
-														<td><span>Rs <%=fee%></span></td>
+                                                        <th>Total Amount:</th>
+                                                        
+                                                        <td><span>Rs <%=locals.user.booked_test_user[index].totalprice%></span></td>
+                                                      
 													</tr>
 													</tbody>
 												</table>

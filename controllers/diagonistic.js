@@ -1203,7 +1203,7 @@ if(typeof(lab.schedule_time[req.body.dayindex].start) == 'object')
   etime = lab.schedule_time[req.body.dayindex].end[req.body.slotindex];
 }
 
-let redirect = '/diagonistic/create-order/?stime='+stime+'&etime='+etime+'&date='+req.body.date+'&lid='+lab._id;
+let redirect = '/diagonistic/review-order/?stime='+stime+'&etime='+etime+'&date='+req.body.date+'&lid='+lab._id;
 
 return res.json(redirect);
 
@@ -1218,7 +1218,33 @@ module.exports.createOrder = async(req, res) => {
         stime:req.query.stime,
         etime:req.query.etime,
         date:req.query.date,
-        lab:lab
+        lab:lab,
+        index:req.query.index
+    })
+}
+
+module.exports.trackOrder = async(req, res) => {
+
+    let lab = await User.findById(req.query.lid);
+    return res.render('track-order',
+    {
+        title:'Track Order',
+        stime:req.query.stime,
+        etime:req.query.etime,
+        date:req.query.date,
+        lab:lab,
+        index:req.query.index
+    })
+}
+
+module.exports.printBill = async(req, res) => {
+
+    let lab = await User.findById(req.query.lid);
+    return res.render('test-bill',
+    {
+        lab:lab,
+        index:req.query.index,
+        layout:'test-bill'
     })
 }
 
@@ -1236,12 +1262,20 @@ module.exports.amountPayable = async(req, res) => {
     })
 }
 
+module.exports.bookedTest = async(req, res) => {
+
+    return res.render('booked-test',
+    {
+        title:'Booked Test'
+    })
+}
+
 module.exports.orderSuccess = async(req, res) => {
 
     return res.render('order-success',
     {
-        title:'Order Placed Suceessfully'
-        // index:req.query.index
+        title:'Order Placed Suceessfully',
+        index:req.query.index
     })
 }
 
@@ -1249,8 +1283,10 @@ module.exports.bookTestByCash = async(req, res) => {
 
     let user = await User.findById(req.user.id);
     let lab  = await User.findById(req.body.lid);
+    let index = user.booked_test_user.length + 1;
     if(req.body.pay == 'offline')
     {
+     
         let patient;
         let address;
         let tests = [];
@@ -1284,11 +1320,57 @@ module.exports.bookTestByCash = async(req, res) => {
                 testname:u3.testname,
                 testprice:u3.testprice
             })
+        
+        }
+        // let day = await User.updateOne({ _id: req.user.id }, {
+        //     '$set': {
+        //         'cart.$.tests': []
+        //     }
+        // });
+        let i = user.cart.tests.length;
+        while(i != 0)
+        {
+            console.log('hii'+i,user.cart.tests.length)
+           user.cart.tests.pull(user.cart.tests[0]._id);
+           i--;
+        
         }
 
-        console.log(patient,address,tests,stime,etime,date,price,mode,lname,lid)
+       
+        user.booked_test_user.push({
+            user:patient,
+            address:address,
+            tests:tests,
+            labname:lname,
+            labid:lid,
+            mode:mode,
+            stime:stime,
+            etime:etime,
+            date:date,
+            totalprice:price,
+            order_placed:true
+
+        })
+
+        lab.booked_test_lab.push({
+            uid:user._id,
+            user:patient,
+            address:address,
+            tests:tests,
+            labname:lname,
+            labid:lid,
+            mode:mode,
+            stime:stime,
+            etime:etime,
+            date:date,
+            totalprice:price
+
+        })
+
+        user.save()
+        lab.save()
     }
-   return res.redirect('/diagonistic/order-success');
+   return res.redirect('/diagonistic/order-success/?index='+index);
 }
 
 

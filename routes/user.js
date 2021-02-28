@@ -73,6 +73,7 @@ router.post('/payment',userController.payment);
 router.post('/offline-pay',userController.offlinePay);
 router.post('/old-offline-pay',userController.oldOfflinePay);
 router.post('/offline-cancel',userController.offlineCancel);
+router.post('/order-cancel',userController.orderCancel);
 router.post('/sort-by-date',userController.sortByDate);
 router.post('/old-sort-by-date',userController.oldSortByDate);
 router.post('/doctor-sort-by-date',userController.doctorSortByDate);

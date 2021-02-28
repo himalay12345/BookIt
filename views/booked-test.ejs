@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/doctor-dashboard  30 Nov 2019 04:12:03 GMT -->
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap-datetimepicker.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar" style="padding: 10px 0px !important;margin-top: 20px;">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12 position-relative" style="margin-bottom: 15px;">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Booked Tests</li>
+                            </ol>
+                        </nav>
+                         
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                   
+                    <div class="col-md-12 col-lg-12 col-xl-12 position-relative">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="mb-4">Patient Appoinment</h4>
+                                <div class="col-12 col-md-12">
+                                    <%var date;%>
+                                    <form action="/user/sort-by-date/?id=" method="POST">
+                                        <div class="form-group" style="display: inline-flex;width: 100%;">
+                                            <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
+                                            <div class="cal-icon col-md-3" style="padding-right: 15px;">
+                                                <input type="text" placeholder="<%=date%>" name="date" class="form-control datetimepicker">
+
+                                            </div>
+                                            <button type="submit" class="btn btn-primary submit-btn msbtn">Sort</button>
+
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="appointment-tab">
+
+                                    <!-- Appointment Tab -->
+
+                                    <!-- /Appointment Tab -->
+                                    <%if(locals.user.booked_test_lab.length == 0){%>
+                                        <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Test Booked Yet !</span></h2>
+                                        <%}else{%>
+                                            <div class="tab-content">
+                                                <div class="tab-pane show active" id="upcoming-appointments">
+                                                    <div class="card card-table mb-0 toverf">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover table-center mb-0 stable">
+                                                                    <thead class="sthead">
+                                                                        <tr class="str">
+                                                                            <th class="sth">Patient Name</th>
+                                                                            <th class="sth">Patient Phone</th>
+                                                                            <th class="sth">Patient Age</th>
+                                                                            <th class="sth">Patient Address</th>
+                                                                            <th class="sth">Appt Date</th> 
+                                                                            <th class="text-center sth">Status</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="stbody">
+                                                                        <%var c=0,z=0;%>
+                                                                            <%var date;%>
+                                                                                <%for(patients of locals.user.booked_test_lab){%>
+                                                                                    <%if(date != undefined){%>
+                                                                                        <%console.log(date)%>
+                                                                                        <%if(date != patients.date){%>
+                                                                                            <%z++;continue;%>
+                                                                                                <%}%>
+                                                                                                <%}%>
+                                                                                               
+                                                                                                    
+                                                                                                        
+                                                                                                        <tr class="str">
+                                                                                                            <td class="std1">
+                                                                                                                <h2 class="table-avatar">
+
+
+
+                                                                                                                    <a href="#">
+                                                                                                                        <%=patients.user.name%> <span>#PT00<%=++c%></span></a>
+                                                                                                                </h2>
+                                                                                                            </td>
+                                                                                                            <td class="std1">
+                                                                                                                <%=patients.user.phone%>
+                                                                                                            </td>
+                                                                                                            <td class="std1">
+                                                                                                                <%=patients.user.age%>/<%=patients.user.gender%>
+                                                                                                            </td>
+                                                                                                            <td class="std1">
+                                                                                                                <%=patients.address.flatno%>
+                                                                                                                <span class="d-block text-info"><%=patients.address.street%></span>
+                                                                                                                <span class="d-block text-info"><%=patients.address.city%></span>
+                                                                                                            </td>
+                                                                                                            <td class="std1">
+                                                                                                                <%=patients.date%><span class="d-block text-info"><%=patients.stime%>-<%=patients.etime%></span></td>
+                                                                                                        
+                                                                                                            <%if(patients.cancel == true){%>
+                                                                                                                <td class="std1"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                <%}else{%>
+                                                                                                                    <td class="std1"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                    <%}%>
+
+
+
+                                                                                                        </tr>
+                                                                                                        <%}%>
+
+                                                                    </tbody>
+
+
+                                                                </table>
+                                                                <%if(z==locals.user.booked_test_lab.length){%>
+                                                                    <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
+                                                                    <%}%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <%}%>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+            <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+    
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/moment.min.js')%>"></script>
+    <script src="<%=assetPath('js/bootstrap-datetimepicker.min.js')%>"></script>
+    <script src="<%=assetPath('js/circle-progress.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/script.js')%>"></script>  
+</body>
+
+<!-- AarogyaHub/doctor-dashboard  30 Nov 2019 04:12:09 GMT -->
+
+</html>

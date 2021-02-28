@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+      
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">My Appointments</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Appointments</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <!-- Profile Sidebar -->
+                    <div class="col-md-2 theiaStickySidebar no-show-mobile">
+                        <div class="profile-sidebar">
+                            <div class="widget-profile pro-widget-content">
+                                <div class="profile-info-widget">
+                                    <a href="#" class="booking-doc-img">
+                                        <img src="<%=locals.user.avatar%> " alt="User Image"onerror='this.src="<%=assetPath('img/profile.png')%>"'>
+                                    </a>
+                                    <div class="profile-det-info">
+                                        <h3>
+                                            <%=locals.user.name%>
+                                        </h3>
+                                       
+                                        <div class="locals.user-details">
+                                            <%if(locals.user.dob){var newDateObject = new Date();
+
+                                                var newObjectCurrentYear = newDateObject.getFullYear();
+                                                
+                                                var userDateObject = locals.user.dob;
+                                                
+                                                var userDateObjectPieces = userDateObject.split("/");
+                                                
+                                                var userObjectYear = userDateObjectPieces[2];
+                                                
+                                                var age = parseInt(newObjectCurrentYear) - parseInt(userObjectYear);
+
+                                                %>
+                                            <h5 style="font-size: 0.85rem;"><i class="fas fa-birthday-cake"></i>
+                                                <%=locals.user.dob%> , <%=age%> Years
+
+                                            </h5>
+                                            <%}%>
+                                            <%if(locals.user.city){%>
+                                            <h5 class="mb-0" style="font-size: 0.85rem;"><i class="fas fa-map-marker-alt"></i>
+                                                <%=locals.user.city%> 
+                                                    <%=locals.user.state%>
+                                            </h5>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-widget">
+                                <nav class="dashboard-menu">
+                                    <ul>
+                                       
+                                        <li >
+                                            <a href="/my-appointments">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>My Appointments</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="/my-orders">
+                                                <i class="fas fa-truck"></i>
+                                                <span>My Orders</span>
+                                            </a>
+                                        </li>
+                                       
+                                        <li>
+                                            <a href="/prescription">
+                                                <i class="fas fa-newspaper"></i>
+                                                <span>My prescriptions</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/medical-records">
+                                                <i class="fas fa-medkit"></i>
+                                                <span>My Medical records</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/my-billing">
+                                                <i class="fas fa-credit-card"></i>
+                                                <span>My Billings</span>
+                                            </a>
+                                        </li>
+                                      
+                                        <li>
+                                            <a href="/favourites">
+                                                <i class="fas fa-bookmark"></i>
+                                                <span>Favourites</span>
+                                            </a>
+                                        </li>
+                                       
+                                       
+                                       
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- / Profile Sidebar -->
+
+                    <div class="col-md-10">
+                         <%if(orders.booked_test_user.length == 0){%>
+                        <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Test Booked Yet !</span></h2>
+                        <%}else{%>
+                        <div class="card">
+                            <div class="card-body pt-0 plr0">
+                               
+
+                                <!-- Tab Menu -->
+                                <nav class="user-tabs mb-4" style="height: 100px!important;">
+                                    <ul class="nav nav-tabs nav-tabs-bottom nav-justified" style="height: 100px !important;padding:0px !important;">
+                                        <li class="nav-item">
+                                            <a class="nav-link active pall-10" href="#pat_appointments" data-toggle="tab">My Orders</a>
+                                        </li>
+                                       
+                                       
+                                    </ul>
+                                </nav>
+                               
+                                <!-- /Tab Menu -->
+
+                                <!-- Tab Content -->
+                                <div class="tab-content pt-0">
+
+                                    <!-- Appointment Tab -->
+                                    <div id="pat_appointments" class="tab-pane fade show active">
+                                        <div class="card card-table mb-0">
+                                           
+                                            <div class="card-body sscreen" style="margin-top: 0px;">
+                                                <%for(let i= orders.booked_test_user.length-1; i>=0 ;i--){%>
+                                                    
+                                                <div class="card-contents" style="height: 200px;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
+                                                    <div class="top-part" style="height: 130px;display:flex;flex-direction: row;">
+                                                        <div class="top-img" style="width: 25%;height:100%;padding-top:5px;padding-left: 4px;">
+                                                            <img src="<%=orders.booked_test_user[i].labid.avatar%>"style="height:50px;width:50px;border-radius:50%;">
+                                                        </div>
+                                                        <div class="top-content" style="width: 75%;height:100%;padding:5px;">
+                                                            <h5 style="font-weight: bold;font-size: 1rem;"><%=orders.booked_test_user[i].labid.name%>, <%=orders.booked_test_user[i].labid.contacts.address%></h5>
+                                                            <%var str2 = orders.booked_test_user[i].date.split('-');%>
+                                                                <%var str3 = formatDate(orders.booked_test_user[i].createdAt);%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+
+                                                        <%var x1 = orders.booked_test_user[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                        <%var x2 = orders.booked_test_user[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                                
+                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=str1%>, <%=orders.booked_test_user[i].stime%> - <%=orders.booked_test_user[i].etime%> </h5>
+                                                            <h5 style="font-weight: 0.9rem;font-weight: 700;"></h5>
+                                                            <span style="display: inline-flex;">
+                                                            <%if(orders.booked_test_user[i].cancel == true){%>
+                                                                <h5><span class="badge badge-pill bg-danger-light">Cancelled</span></h5>
+                                                              <%}else{%>
+                                                                <h5><span class="badge badge-pill bg-success-light">Confirm</span></h5>
+                                                                <%}%>
+                                                                <%if(orders.booked_test_user[i].type == 'Offline'){%>
+                                                                    <h5><span class="badge badge-pill bg-info-light" style="margin-left: 10px;">Pay On Sample Collection</span></h5>
+
+                                                                    <%}else{%>
+                                                                        <h5><span class="badge badge-pill bg-info-light" style="margin-left: 10px;">Paid Online</span></h5>
+
+                                                                        <%}%>
+                                                                    </span>
+
+                                                        </div>
+                                                    </div>
+                                                  
+                                                </div>
+                                                <%}%>
+                                            </div>
+                                            <div class="card-body lscreen">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-center mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Lab Info</th>
+                                                                <th>Appt Date</th>
+                                                                <th>Booking Date</th>
+                                                                <th>Amount</th>
+                                                            
+                                                                <th>Status</th>
+                                                                <th>Order Details</th>
+                                                                <th>Track Status</th>
+                                                                <th>Print Bill</th>
+                                                                <th>Cancel</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <%var j=0,z31=0,c=0;%>
+                                                            <%for(let i= orders.booked_test_user.length-1; i>=0 ;i--){%>
+                                                                <%c++%>
+                                                            <tr>
+                                                                <td>
+                                                                    <h2 class="table-avatar">
+                                                                       
+                                                                                <a href="" class="avatar avatar-sm mr-2">
+                                                                                   
+                                                                            <img class="avatar-img rounded-circle" src="<%=orders.booked_test_user[i].labid.avatar%>" alt="User Image">
+                                                                        </a>
+                                                                       
+                                                                            <a href=""><%=orders.booked_test_user[i].labid.name%> <span><%=orders.booked_test_user[i].labid.contacts.address%></span></a>
+                                                                              
+                                                                    </h2>
+                                                                </td>
+                                                                <%var str2 = orders.booked_test_user[i].date.split('-');%>
+                                                                <%var str3 = formatDate(orders.booked_test_user[i].createdAt);%>
+                                                                    <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
+                                                        <%var str1 = formatDate(str);%>
+                                                        <%function formatDate(d){%>
+                                                            <%var date = new Date(d);
+
+                                                            if ( isNaN( date .getTime() ) ) 
+                                                            {
+                                                               return d;
+                                                            }
+                                                            else
+                                                           {
+                                                             
+                                                             var month = new Array();
+                                                             month[0] = "Jan";
+                                                             month[1] = "Feb";
+                                                             month[2] = "Mar";
+                                                             month[3] = "Apr";
+                                                             month[4] = "May";
+                                                             month[5] = "Jun";
+                                                             month[6] = "Jul";
+                                                             month[7] = "Aug";
+                                                             month[8] = "Sept";
+                                                             month[9] = "Oct";
+                                                             month[10] = "Nov";
+                                                             month[11] = "Dec";
+                                                   
+                                                             day = date.getDate();
+                                                             
+                                                             if(day < 10)
+                                                             {
+                                                                day = "0"+day;
+                                                             }
+                                                             
+                                                             return    day  + " " +month[date.getMonth()] + " " + date.getFullYear();
+                                                             }
+                                                               %>
+                                                        <%}%>
+
+                                                        <%var x1 = orders.booked_test_user[i].createdAt.toLocaleTimeString().slice(0,4);%>
+                                                        <%var x2 = orders.booked_test_user[i].createdAt.toLocaleTimeString().slice(7,11);%>
+                                                                
+                                                                <td><%=str1%> <span class="d-block text-info"></span><%=orders.booked_test_user[i].stime%> - <%=orders.booked_test_user[i].etime%></td>
+                                                                <td><%=str3%> <span class="d-block text-info"></span><%=x1%><%=x2%></td>
+                                                               
+                                                                <td>Rs <%=orders.booked_test_user[i].totalprice%></td>
+                                                              
+                                                                <%if(orders.booked_test_user[i].cancel == true){%>
+                                                                    <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                  <%}else{%>
+                                                                    <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                    <%}%>
+
+                                                                    <td>
+                                                                        <a href="/diagonistic/review-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=j%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Preview</a>
+
+                                                                    </td>
+                                                                    <%if(!orders.booked_test_user[i].cancel){%>
+                                                                    <td class="text-center">
+                                                                        <a href="/diagonistic/track-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=j%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
+                                                                    </td>
+                                                                    <%}%>
+                                                                    <%if(!orders.booked_test_user[i].cancel){%>
+                                                                    <td>
+                                                                        <a href="/diagonistic/print-bill/?lid=<%=orders.booked_test_user[i].labid._id%>&index=<%=j++%>" class="btn btn-sm bg-success" style="color: white;">
+                                                                        <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Print Bill</span>
+                                                                    </a>
+                                                                    </td>
+                                                                    <%}%>
+                                                                    <%if(!orders.booked_test_user[i].cancel){%>
+                                                                    <td class="text-right">
+                                                                        <a href="#popup<%=z31%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
+                                                                        <i class="fas fa-print"></i> Cancel
+                                                                    </a>
+                                                                </td>
+                                                                <%}%>
+                                                                <div id='popup<%=z31%>' class="overlay">
+                                                                    <div class="popup">
+                                                                        <form action="/user/order-cancel" id="form<%=c%>" method="POST">
+                                                                            <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
+                                                                                <div class="form-group">
+                                                                                    <label style="color: rgb(138, 138, 138);">Do you really want to cancel the order?</label></br>
+                                                                                    <input type="hidden" name="tid" value="<%=locals.user.booked_test_user[i]._id%>">
+                                                                                    <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
+                                                                                    <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                <%z31++;%>
+
+                                                                
+                                                            </tr>
+                                                            <%}%>
+                                                            
+                   
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Appointment Tab -->
+                                   
+                                    <!-- Prescription Tab -->
+                                    
+                                   
+                                    <!-- /Prescription Tab -->
+
+                                    <!-- Medical Records Tab -->
+                                  
+                                    <!-- /Medical Records Tab -->
+
+                                    <!-- Billing Tab -->
+                                 
+                                    <!-- /Billing Tab -->
+
+                                </div>
+                                <!-- Tab Content -->
+
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <!-- /Main Wrapper -->
+
+    <!-- <script>
+        var oabtn = document.getElementById('oabtn');
+        var mabtn = document.getElementById('mabtn');
+        var oal = document.getElementById('oal');
+        var mal = document.getElementById('mal'); 
+      
+        
+        oabtn.addEventListener('click',function()
+        {
+            oabtn.classList.add('new_tab2');
+            mabtn.classList.remove('new_tab2');
+            mal.classList.add('displayNone');
+            oal.classList.remove('displayNone');
+
+        })
+        mabtn.addEventListener('click',function()
+        {
+            mabtn.classList.add('new_tab2');
+            oabtn.classList.remove('new_tab2');
+            oal.classList.add('displayNone');
+            mal.classList.remove('displayNone');
+
+        })
+       
+        
+    </script> -->
+
+</body>
+
+<!-- doccure/locals.user-dashboard  30 Nov 2019 04:12:16 GMT -->
+
+</html>

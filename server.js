@@ -22,6 +22,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
+const cors = require('cors');
 
 // const trackServer = require('http').Server(app);
 // const trackSockets = require('./config/track_socket').trackSockets(trackServer);
@@ -54,9 +55,10 @@ app.use(sassMiddleware({
 }
 console.log('Patient Tracking server is running on port 5000');
 
-
+app.use(cors('*'))
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
+app.set("layout test-bill", false);
 app.set("layout invoice-user-view", false);
 app.set("layout general_prescription_pad", false);
 app.set("layout booking-pdf", false);
