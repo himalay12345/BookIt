@@ -9,7 +9,9 @@ const passport = require('passport');
 
 const webApiController = require('../controllers/web_api');
 
-
+router.post('/create-session', passport.authenticate('local', {
+    failureRedirect: '/fail'
+}), webApiController.createSession);
 
 router.post('/home',webApiController.home);
 router.post('/doctors',webApiController.doctors);

@@ -671,6 +671,15 @@ module.exports.login = async function(req, res) {
 
 }
 
+module.exports.createSession = async function(req, res) {
+    let user = await User.findById(req.user.id)
+    return res.json({
+        flag:true,
+        user:user
+    })
+}
+
+
 module.exports.verify2FactorOtp = async(req, res) => {
   
     let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
