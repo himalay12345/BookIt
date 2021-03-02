@@ -600,6 +600,7 @@ module.exports.login = async function(req, res) {
                     return res.json({
                         twofactor:'true',
                         status:'true',
+                        phone:req.body.phone,
                         msg:'Otp Sent To Registered Phone'
                     })
                 });
