@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+      
+        <section class="laptop-sugar" style="margin-top: 50px;padding-left: 50px;">
+           
+            <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    
+                   
+                    <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
+                        <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+                       
+                        <div class="col-md-12" style="position: absolute;">
+                            <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
+                                <span style="font-size:2rem;font-weight: bolder;color:#575557;">Order Review</span>
+                            </div>
+                            <div style="width: 100%;">
+                             <label style="width: 100%;position: relative;">
+                                 <div id="lab_card" style="width:100%;">
+                                     <div class="dis20">
+                                         <img src="<%=lab.avatar%>">
+                                    </div>
+                                    <div class="dis75" style="width:30% !important">
+                                        <h2 class="dish2"><%=lab.name%></h2>
+                                        <p class="disp2" style="margin-top:10px !important;"><%=lab.contacts.address%></p>
+                                        <p class="disp2"><%=lab.contacts.city%></p>
+                                    </div>
+                                    <div class="dis5" style="width: 50% !important;">
+                                        <p style="font-weight:bold">Appointment Date : <%=date%></p>
+                                        <p style="margin-top: -10px;font-weight: bold;">Appointment Time : Between <%=stime%> to <%=etime%></p>
+                                    </div>
+                                   
+                                </div>
+                            </label>
+                        </br>
+
+                            </div>
+                           
+                                <div style="width: 100%;">
+                                    <label style="width: 100%;position: relative;">
+                                        <div id="lab_card" style="width:100%;">
+                                            <div class="dis20">
+                                                <h4 style="font-weight: bold;">Test Booked</h4>
+                                           </div>
+                                           <div class="dis75" style="width:50% !important">
+                                             <ul>
+                                                 <%for(let u of locals.user.booked_test_lab[index].tests){%>
+                                                    <li><%=u.testname%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Rs <%=u.testprice%></b></li>
+                                                <%}%>
+                                             </ul>
+                                           </div>
+                                          
+                                          
+                                       </div>
+                                   </label>
+                               </br>
+       
+                                   </div>
+                        
+                           
+                             
+                                <div style="width: 100%;">
+                                    <label style="width: 100%;position: relative;">
+                                        <div id="lab_card" style="width:100%;">
+                                            <div class="dis20">
+                                                <h4 style="font-weight: bold;">Booked For</h4>
+                                           </div>
+                                           <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                           
+                                                 
+                                                  
+                                                        <p><span style="font-size: 1rem;font-weight: 600;">Name : <%=locals.user.booked_test_lab[index].user.name%></span><span style="margin-left: 15px;font-weight: 600;">Phone :  <%=locals.user.booked_test_lab[index].user.phone%></span></p>
+                                                        <p style="margin-top: -15px;font-weight: 600;"><span>Age :  <%=locals.user.booked_test_lab[index].user.age%></span><span style="margin-left: 15px;">Gender :  <%=locals.user.booked_test_lab[index].user.gender%></span></p>
+                                                       
+                                            
+                                           </div>
+                                          
+                                          
+                                       </div>
+                                   </label>
+                               </br>
+       
+                                   </div>
+                             
+                               
+                                <div style="width: 100%;">
+                                    <label style="width: 100%;position: relative;">
+                                        <div id="lab_card" style="width:100%;">
+                                            <div class="dis20">
+                                                <h4 style="font-weight: bold;">Sample Pickup From</h4>
+                                           </div>
+                                           <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                           
+                                                 
+                                                        <p><span style="font-size: 1rem;font-weight: 600;"><%=locals.user.booked_test_lab[index].address.name%></span></p>
+                                                        <p style="margin-top: -15px;font-weight: 600;"><span><%=locals.user.booked_test_lab[index].address.flatno%></span></p>
+                                                        <p style="margin-top: -15px;font-weight: 600;"><span><%=locals.user.booked_test_lab[index].address.street%></span></p>
+                                                        <p style="margin-top: -15px;font-weight: 600;"><span><%=locals.user.booked_test_lab[index].address.city%>, <%=locals.user.booked_test_lab[index].address.pincode%></span></p>
+                                                       
+                                            
+                                           </div>
+                                          
+                                          
+                                       </div>
+                                   </label>
+                               </br>
+       
+                                   </div>
+                              
+                        </div>
+                    </div>
+                    <div class="col-md-5 track-order" style="padding-left: 120px;margin-top: 50px;">
+                        <%if(locals.user.booked_test_lab[index].order_placed){%>
+                        <h4 style="font-weight: bold;">Status : Order Placed</h4>
+                        <%}%>
+                        <%if(locals.user.booked_test_lab[index].phlebotomist){%>
+                        <h4 style="font-weight: bold;">Status : Phlebotomist Assigned</h4>
+                        <%}%>
+                        <%if(locals.user.booked_test_lab[index].sample_collection){%>
+                        <h4 style="font-weight: bold;">Status : Sample Collected</h4>
+                        <%}%>
+                        <%if(locals.user.booked_test_lab[index].reports){%>
+                        <h4 style="font-weight: bold;">Status : Reports Available</h4>
+                        <%}%>
+                        <%if(locals.user.booked_test_lab[index].order_complete){%>
+                        <h4 style="font-weight: bold;">Status : Order Completed</h4>
+                        <%}%>
+                        <ul id="progress" style="margin-top: 20px;">
+                            <li><div class="node green">1</div><p>Order Placed</p></li>
+                            <%if(locals.user.booked_test_lab[index].phlebotomist){%>
+                                <li><div class="divider green"></div></li>
+                                <li><div class="node green">2</div><p>Phlebotomist Assigned</p></li>
+                            <%}else{%>
+                                <li><div class="divider grey"></div></li>
+                                <li><div class="node grey">2</div><p>Phlebotomist Assigned</p></li>
+                                <%}%>
+                           
+                            <%if(locals.user.booked_test_lab[index].sample_collection){%>
+                                <li><div class="divider green"></div></li>
+                                <li><div class="node green">3</div><p>Sample Collected</p></li>
+                                <%}else{%>
+                                    <li><div class="divider grey"></div></li>
+                                    <li><div class="node grey">3</div><p>Sample Collected</p></li>
+                                    <%}%>
+                           
+                            <%if(locals.user.booked_test_lab[index].reports){%>
+                                <li><div class="divider green"></div></li>
+                                <li><div class="node green">4</div><p>Reports Available</p></li>
+                                <%}else{%>
+                                    <li><div class="divider grey"></div></li>
+                                    <li><div class="node grey">4</div><p>Reports Available</p></li>
+                                    <%}%>
+                           
+                            <%if(locals.user.booked_test_lab[index].order_complete){%>
+                                <li><div class="divider green"></div></li>
+                                <li><div class="node green">5</div><p>Order Completed</p></li>
+                                <%}else{%>
+                                    <li><div class="divider grey"></div></li>
+                                    <li><div class="node grey">5</div><p>Order Completed</p></li>
+                                    <%}%>
+                           
+                        </ul>
+                     
+                        
+                    </div>
+                  
+
+            </div>
+          
+
+            <!-- Footer -->
+           
+                <!-- /Footer -->
+
+    </div>
+    </section>
+   
+    <!-- /Main Wrapper -->
+  
+    
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+   
+
+
+    
+
+    <!-- jQuery -->
+  
+
+
+
+</body>
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:53 GMT -->
+
+</html>

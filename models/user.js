@@ -839,7 +839,7 @@ const userSchema = mongoose.Schema({
 
     booked_test_lab:[{
         uid:{
-            type:String
+            type:mongoose.Schema.Types.ObjectId
         },
         user:{
             name:{
@@ -902,6 +902,21 @@ const userSchema = mongoose.Schema({
             type:String
         },
         cancel:{
+            type:Boolean
+        },
+        order_placed:{
+            type:Boolean
+        },
+        phlebotomist:{
+            type:Boolean
+        },
+        sample_collection:{
+            type:Boolean
+        },
+        reports:{
+            type:Boolean
+        },
+        order_complete:{
             type:Boolean
         },
         createdAt:{type: Date, default: Date.now}

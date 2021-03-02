@@ -1237,6 +1237,20 @@ module.exports.trackOrder = async(req, res) => {
     })
 }
 
+module.exports.trackTest = async(req, res) => {
+
+    let lab = await User.findById(req.query.lid);
+    return res.render('test-track',
+    {
+        title:'Track Order',
+        stime:req.query.stime,
+        etime:req.query.etime,
+        date:req.query.date,
+        lab:lab,
+        index:req.query.index
+    })
+}
+
 module.exports.printBill = async(req, res) => {
 
     let lab = await User.findById(req.query.lid);
@@ -1363,8 +1377,8 @@ module.exports.bookTestByCash = async(req, res) => {
             stime:stime,
             etime:etime,
             date:date,
-            totalprice:price
-
+            totalprice:price,
+            order_placed:true
         })
 
         user.save()

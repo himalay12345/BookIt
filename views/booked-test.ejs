@@ -90,6 +90,8 @@
                                                                             <th class="sth">Patient Address</th>
                                                                             <th class="sth">Appt Date</th> 
                                                                             <th class="text-center sth">Status</th>
+                                                                            <th class="sth">Track</th> 
+                                                                            <th class="sth">Cancel</th> 
 
                                                                         </tr>
                                                                     </thead>
@@ -120,7 +122,7 @@
                                                                                                                 <%=patients.user.phone%>
                                                                                                             </td>
                                                                                                             <td class="std1">
-                                                                                                                <%=patients.user.age%>/<%=patients.user.gender%>
+                                                                                                                <%=patients.user.age%> / <%=patients.user.gender%>
                                                                                                             </td>
                                                                                                             <td class="std1">
                                                                                                                 <%=patients.address.flatno%>
@@ -135,7 +137,15 @@
                                                                                                                 <%}else{%>
                                                                                                                     <td class="std1"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                                                     <%}%>
-
+                                                                                                                    <td>
+                                                                                                                        <a href="/diagonistic/track-test/?lid=<%=locals.user._id%>&stime=<%=patients.stime%>&etime=<%=patients.etime%>&date=<%=patients.date%>&index=<%=c%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Track</a>
+                                                
+                                                                                                                    </td>
+                                                                                                                    <td class="text-right">
+                                                                                                                        <a href="" class="btn btn-sm bg-danger-light" style="width: 100px;">
+                                                                                                                        <i class="fas fa-print"></i> Cancel
+                                                                                                                    </a>
+                                                                                                                </td>
 
 
                                                                                                         </tr>

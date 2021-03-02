@@ -55,6 +55,7 @@ router.get('/booking', diagController.booking);
 router.post('/book-test', diagController.bookTest);
 router.post('/book-test-by-cash', diagController.bookTestByCash);
 router.get('/review-order', diagController.createOrder);
+router.get('/track-test', diagController.trackTest);
 router.get('/track-order', diagController.trackOrder);
 router.get('/print-bill', diagController.printBill);
 router.get('/amount-payable', diagController.amountPayable);
