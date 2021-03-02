@@ -672,9 +672,11 @@ module.exports.login = async function(req, res) {
 }
 
 module.exports.createSession = async function(req, res) {
+ 
     let user = await User.findById(req.user.id)
     return res.json({
         flag:true,
+        cookies:req.cookies,
         user:user
     })
 }
