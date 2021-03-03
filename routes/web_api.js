@@ -26,6 +26,10 @@ router.post('/login',webApiController.login)
 router.post('/profile-settings',webApiController.profileSettings)
 router.post('/profile-settings',webApiController.profileSettings)
 router.post('/update-profile',webApiController.updateProfile)
+router.post('/my-appointments',webApiController.myAppointments)
+router.post('/my-billings',webApiController.myBillings)
+router.post('/my-favourites',webApiController.myFavourites);
+router.post('/change-password',webApiController.changePassword);
 
 
 module.exports = router;

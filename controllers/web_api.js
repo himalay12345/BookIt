@@ -823,6 +823,104 @@ module.exports.updateProfile = async function(req, res) {
 
 }
 
+module.exports.myAppointments = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    if(user)
+    {
+    return res.json({
+        status:'true',
+        appointments:user.doctors
+    })
+}
+else{
+    return res.json({
+        status:'false'
+    })
+}
+}
+
+module.exports.myBillings = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    if(user)
+    {
+    return res.json({
+        status:'true',
+        billings:user.doctors
+    })
+}
+else{
+    return res.json({
+        status:'false'
+    })
+}
+}
+
+module.exports.myFavourites = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    if(user)
+    {
+    return res.json({
+        status:'true',
+        favourites:user.favourites
+    })
+}
+else{
+    return res.json({
+        status:'false'
+    })
+}
+}
+
+module.exports.changePassword = async(req, res) => {
+    let user = await User.findOne({ phone: req.body.phone, service:'phone' });
+
+    let isEqual;
+    if(user.encrypt){
+    isEqual = await bcrypt.compare(req.body.old,user.password)
+    }
+
+    else
+    {
+    if(user.password == req.body.old)
+    isEqual = true;
+
+    else
+    isEqual = false;
+    }
+    if (isEqual) {
+        if (req.body.password != req.body.confirm) {
+            return res.json({
+                status:'false',
+                msg:'Password Mismatch!'
+            })
+        }
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
+        user.save();
+    
+      return res.json({
+          status:'true',
+          msg:'Password Changed'
+      })
+    }
+    else{
+        return res.json({
+            status:'false',
+            msg:'Wrong Old Password!'
+        })
+        
+       
+    }
+
+  
+}
+
+
+
 
 
 
