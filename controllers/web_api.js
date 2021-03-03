@@ -709,6 +709,115 @@ module.exports.verify2FactorOtp = async(req, res) => {
     }
 }
 
+module.exports.profileSettings = async function(req, res) {
+
+    try {
+
+        console.log(req)
+        let user = await User.findById(req.user.id);
+        if(user)
+        {
+        return res.json({
+            status:'true',
+            name:user.name,
+            avatar:user.avatar,
+            gender:user.gender,
+            dob:user.dob,
+            bloodgroup:user.bloodgroup,
+            email:user.email,
+            phone:user.phone,
+            contact_address:user.contacts
+
+        })
+    }else{
+        status:'false'
+    }
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+
+module.exports.profileUpdate = async function(req, res) {
+
+    try {
+
+
+        let user = await User.findById(req.user.id);
+        User.uploadedAvatar(req, res, function(err) {
+            if (err) { console.log('*******Multer Error', err); return; }
+
+            console.log(req.body);
+            user.name = req.body.name;
+            user.dob = req.body.dob;
+            user.phone = req.body.phone;
+
+            user.contacts.address = req.body.address;
+            user.contacts.city = req.body.city;
+            user.contacts.state = req.body.state;
+            user.contacts.pincode = req.body.pincode;
+            user.contacts.country = req.body.country;
+            user.bloodgroup = req.body.bloodgroup;
+            user.gender = req.body.gender;
+
+
+
+
+
+            if (req.files['avatar']) {
+                if (!user.avatar) {
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                } else {
+                    if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
+
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+
+                    }
+
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+
+                }
+            }
+
+            const rand = Math.floor((Math.random() * 100) + 54);
+            
+            if (req.body.email != '') {
+                if (!user.emailkey) {
+                    console.log('sent');
+                    user.emailkey = rand;
+                    emailVerification.newAlert(user, rand, req.body.email);
+                    user.email = req.body.email;
+                    user.emailverify = false;
+                }
+
+                if (user.email != req.body.email) {
+                    console.log('sent again');
+                    emailVerification.newAlert(user, rand, req.body.email);
+                    user.email = req.body.email;
+                    user.emailverify = false;
+                    user.emailkey = rand;
+                }
+            }
+
+
+            user.save();
+
+
+        });
+        req.flash('success', 'Profile updated!');
+        return res.redirect('back');
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+
+
 
 
 

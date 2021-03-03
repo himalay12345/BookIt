@@ -23,6 +23,7 @@ router.post('/verify-otp',webApiController.verifyOtp)
 router.post('/verify-2factor',webApiController.verify2FactorOtp)
 router.post('/create-user-account',webApiController.createUserAccount)
 router.post('/login',webApiController.login)
+router.post('/profile-settings',webApiController.profileSettings)
 
 
 module.exports = router;
