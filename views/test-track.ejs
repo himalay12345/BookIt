@@ -153,7 +153,8 @@
                                 <li><div class="node green">2</div><p>Phlebotomist Assigned</p></li>
                             <%}else{%>
                                 <li><div class="divider grey"></div></li>
-                                <li><div class="node grey">2</div><p>Phlebotomist Assigned</p></li>
+                                <li><div class="node grey">2</div><p>Phlebotomist Assigned</p>
+                                <a href="/diagonistic/assign-phlebotomist/?tid=<%=locals.user.booked_test_lab[index].tid%>&lid=<%=locals.user.booked_test_lab[index]._id%>" style="padding:10px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Assigned</a></li>
                                 <%}%>
                            
                             <%if(locals.user.booked_test_lab[index].sample_collection){%>
@@ -162,6 +163,7 @@
                                 <%}else{%>
                                     <li><div class="divider grey"></div></li>
                                     <li><div class="node grey">3</div><p>Sample Collected</p></li>
+                                    <a href="/diagonistic/collect-sample/?tid=<%=locals.user.booked_test_lab[index].tid%>&lid=<%=locals.user.booked_test_lab[index]._id%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Collected</a></li>
                                     <%}%>
                            
                             <%if(locals.user.booked_test_lab[index].reports){%>
@@ -170,6 +172,7 @@
                                 <%}else{%>
                                     <li><div class="divider grey"></div></li>
                                     <li><div class="node grey">4</div><p>Reports Available</p></li>
+                                    <a style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Send Report</a></li>
                                     <%}%>
                            
                             <%if(locals.user.booked_test_lab[index].order_complete){%>
@@ -178,6 +181,7 @@
                                 <%}else{%>
                                     <li><div class="divider grey"></div></li>
                                     <li><div class="node grey">5</div><p>Order Completed</p></li>
+                                    <a href="/diagonistic/complete-order/?tid=<%=locals.user.booked_test_lab[index].tid%>&lid=<%=locals.user.booked_test_lab[index]._id%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Order Complete</a></li>
                                     <%}%>
                            
                         </ul>

@@ -61,6 +61,9 @@ router.get('/print-bill', diagController.printBill);
 router.get('/amount-payable', diagController.amountPayable);
 router.get('/order-success', diagController.orderSuccess);
 router.get('/booked-test', diagController.bookedTest);
+router.get('/assign-phlebotomist', diagController.assignPhlebotomist);
+router.get('/collect-sample', diagController.collectSample);
+router.get('/complete-order', diagController.completeOrder);
 
 
 module.exports = router;

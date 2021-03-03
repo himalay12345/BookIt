@@ -1263,6 +1263,69 @@ module.exports.printBill = async(req, res) => {
 }
 
 
+module.exports.assignPhlebotomist = async(req, res) => {
+
+
+   
+    let day1 = await User.updateOne({ 'booked_test_user._id': req.query.tid }, {
+        '$set': {
+            'booked_test_user.$.phlebotomist': true
+        }
+    });
+    let day2 = await User.updateOne({ 'booked_test_lab._id': req.query.lid }, {
+        '$set': {
+            'booked_test_lab.$.phlebotomist': true
+        }
+    });
+
+    return res.redirect('back');
+
+
+}
+
+
+module.exports.collectSample = async(req, res) => {
+
+
+   
+    let day1 = await User.updateOne({ 'booked_test_user._id': req.query.tid }, {
+        '$set': {
+            'booked_test_user.$.sample_collection': true
+        }
+    });
+    let day2 = await User.updateOne({ 'booked_test_lab._id': req.query.lid }, {
+        '$set': {
+            'booked_test_lab.$.sample_collection': true
+        }
+    });
+
+    return res.redirect('back');
+
+
+}
+
+module.exports.completeOrder = async(req, res) => {
+
+
+   
+    let day1 = await User.updateOne({ 'booked_test_user._id': req.query.tid }, {
+        '$set': {
+            'booked_test_user.$.order_complete': true
+        }
+    });
+    let day2 = await User.updateOne({ 'booked_test_lab._id': req.query.lid }, {
+        '$set': {
+            'booked_test_lab.$.order_complete': true
+        }
+    });
+
+    return res.redirect('back');
+
+
+}
+
+
+
 
 module.exports.amountPayable = async(req, res) => {
 
@@ -1336,11 +1399,6 @@ module.exports.bookTestByCash = async(req, res) => {
             })
         
         }
-        // let day = await User.updateOne({ _id: req.user.id }, {
-        //     '$set': {
-        //         'cart.$.tests': []
-        //     }
-        // });
         let i = user.cart.tests.length;
         while(i != 0)
         {
@@ -1366,8 +1424,11 @@ module.exports.bookTestByCash = async(req, res) => {
 
         })
 
+        let length = user.booked_test_user.length;
+
         lab.booked_test_lab.push({
             uid:user._id,
+            tid:user.booked_test_user[length-1]._id,
             user:patient,
             address:address,
             tests:tests,

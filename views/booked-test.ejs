@@ -96,7 +96,7 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody class="stbody">
-                                                                        <%var c=0,z=0;%>
+                                                                        <%var c=0,z=0;c1=0;%>
                                                                             <%var date;%>
                                                                                 <%for(patients of locals.user.booked_test_lab){%>
                                                                                     <%if(date != undefined){%>
@@ -138,7 +138,7 @@
                                                                                                                     <td class="std1"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                                                     <%}%>
                                                                                                                     <td>
-                                                                                                                        <a href="/diagonistic/track-test/?lid=<%=locals.user._id%>&stime=<%=patients.stime%>&etime=<%=patients.etime%>&date=<%=patients.date%>&index=<%=c%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Track</a>
+                                                                                                                        <a href="/diagonistic/track-test/?lid=<%=locals.user._id%>&stime=<%=patients.stime%>&etime=<%=patients.etime%>&date=<%=patients.date%>&index=<%=c1++%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Track</a>
                                                 
                                                                                                                     </td>
                                                                                                                     <td class="text-right">

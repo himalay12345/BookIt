@@ -841,6 +841,9 @@ const userSchema = mongoose.Schema({
         uid:{
             type:mongoose.Schema.Types.ObjectId
         },
+        tid:{
+            type:mongoose.Schema.Types.ObjectId
+        },
         user:{
             name:{
                 type:String

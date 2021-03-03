@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt')
 const fs = require('fs');
 const path = require('path');
 const shortid = require('shortid');
+const emailVerification = require('../mailers/email-verify');
 
 
 
@@ -730,7 +731,9 @@ module.exports.profileSettings = async function(req, res) {
 
         })
     }else{
+        return res.json({
         status:'false'
+        })
     }
 
     } catch (err) {
@@ -740,7 +743,7 @@ module.exports.profileSettings = async function(req, res) {
 
 }
 
-module.exports.profileUpdate = async function(req, res) {
+module.exports.updateProfile = async function(req, res) {
 
     try {
 
@@ -749,7 +752,7 @@ module.exports.profileUpdate = async function(req, res) {
         User.uploadedAvatar(req, res, function(err) {
             if (err) { console.log('*******Multer Error', err); return; }
 
-            console.log(req.body);
+
             user.name = req.body.name;
             user.dob = req.body.dob;
             user.phone = req.body.phone;
@@ -803,11 +806,14 @@ module.exports.profileUpdate = async function(req, res) {
 
 
             user.save();
-
+            return res.json({
+                status:'true',
+                user:user,
+                msg:'Profile Updated'
+            })
 
         });
-        req.flash('success', 'Profile updated!');
-        return res.redirect('back');
+     
 
 
     } catch (err) {
