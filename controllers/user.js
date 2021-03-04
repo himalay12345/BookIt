@@ -4469,7 +4469,51 @@ module.exports.staffSetOldScheduleTiming = async function(req, res) {
 }
 
 
+module.exports.bookingFull = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    if(req.query.slot == 'none')
+    {
+        doctor.schedule_time[req.query.index].booking_over.push(0)
+    }
 
+    else{
+        doctor.schedule_time[req.query.index].booking_over.push(req.query.slot)
+
+    }
+
+    doctor.save();
+
+    return res.redirect('back');
+}
+
+module.exports.resumeBooking = async(req, res) => {
+    let doctor = await User.findById(req.query.id);
+    if(req.query.slot == 'none')
+    {
+        doctor.schedule_time[req.query.index].booking_over = [];
+    }
+
+    else{
+        let ar = [];
+        for(let u of doctor.schedule_time[req.query.index].booking_over)
+        {
+            if(u == req.query.slot)
+            continue;
+
+            else
+            ar.push(u)
+       
+        }
+        doctor.schedule_time[req.query.index].booking_over = ar;
+
+      
+
+    }
+
+    doctor.save();
+
+    return res.redirect('back');
+}
 
 module.exports.changePassword = async(req, res) => {
     let user = await User.findOne({ phone: req.body.phone, service:'phone' });

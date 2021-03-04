@@ -1517,7 +1517,7 @@ Not Available
                             </div>
                         </form>
                     </div>
-
+                    <%let index=0;%>
                     <div class="col-md-12 smadd" style="position: absolute;top:65px;left:45%;display: inline-flex;width: 100%;">
                         <%var today = new Date();
                         var dd = String(today.getDate()).padStart(2, '0');
@@ -1526,7 +1526,7 @@ Not Available
                         var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
                         var dayOfWeek = weekday[today.getDay()].toUpperCase();
                         let ih = 0;
-                        let index=0;
+                       
                         let sid;%>
                        <%for(days of doctor1.schedule_time){%>
                         <%console.log(index,ih)%>
@@ -1602,7 +1602,11 @@ console.log(dayOfWeek)%>
                                                                                     
                                                                                         <%if(slots <= 1){%>
                                                                                             <%var c=0,z1=0,z2=0;z31=0;%>
-                                                                                            <span><a href="#" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a></span> 
+                                                                                            <%if(doctor1.schedule_time[index].booking_over.length == 0){%>
+                                                                                            <span><a href="/user/booking-full/?index=<%=index%>&id=<%=doctor1._id%>&slot=none%>" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Today Booking</a></span> 
+                                                                                            <%}else{%>
+                                                                                                <span><a href="/user/resume-booking/?index=<%=index%>&id=<%=doctor1._id%>&slot=none%>" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Resume Today Booking</a></span> 
+                                                                                            <%}%>
                                                                                             <div class="card card-table mb-0 mpdf toverf">
                                                                                                 <div class="card-body">
                                                                                                     <div class="table-responsive">
@@ -1814,7 +1818,21 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                             <a class="nav-link active fsmall" href="#upcoming-appointments" style="height: 70px !important;padding-top: 12px;font-size: 1.8rem;font-weight: bold;margin-bottom: 10px;" data-toggle="tab">
                                                                                                                 <span style="margin-right: 30px;"> Slot <%=i1+1%> </span>
                                                                                                                  <span style="font-size: 1.2rem;border:1px solid white;padding: 8px;margin-top: -10px;" class="f1small"><%=doctor1.schedule_time[sindex].start[i1].toUpperCase()%> - <%=doctor1.schedule_time[sindex].end[i1].toUpperCase()%></span>
-                                                                                                                <span><a href="#" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
+                                                                                                                 <%if(doctor1.schedule_time[index].booking_over.length == 0){%>
+                                                                                                                <span><a href="/user/booking-full/?index=<%=index%>&id=<%=doctor1._id%>&slot=<%=i1+1%>" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
+                                                                                                                <%}else{%>
+                                                                                                                    <%var flagy = false;%>
+                                                                                                                    <%for(let n1=0;n1<doctor1.schedule_time[index].booking_over.length;n1++){%>
+                                                                                                                        <%if(doctor1.schedule_time[index].booking_over[n1] == i1+1){%>
+                                                                                                                            <%flagy = true;%>
+                                                                                                                        <%}%>
+                                                                                                                        <%}%>
+                                                                                                                        <%if(!flagy){%>
+                                                                                                                            <span><a href="/user/booking-full/?index=<%=index%>&id=<%=doctor1._id%>&slot=<%=i1+1%>" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Finish Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
+                                                                                                                        <%}else{%>
+                                                                                                                    <span><a href="/user/resume-booking/?index=<%=index%>&id=<%=doctor1._id%>&slot=<%=i1+1%>" class="btn bg-primary btn-block" style="font-weight: bold;"><i class="fab fa-book mr-1"></i> Resume Slot <%=i1+1%>  Booking</a></span>                                                                                                            </span>
+                                                                                                                            <%}%>
+                                                                                                                    <%}%>
                                                                                                                 </a>
                                                                                                         </li>
                                                                                                     </ul>

@@ -457,7 +457,7 @@ module.exports.booking = async(req, res) => {
                     if (typeof(temp.booked) == 'object') {
                         temp.booked = [0, 0];
                     }
-
+                    temp.booking_over = [];
 
                 }
                 temp.reset_flag = true;
@@ -475,7 +475,7 @@ module.exports.booking = async(req, res) => {
                     if (typeof(temp.booked) == 'object') {
                         temp.booked = [0, 0];
                     }
-
+                    temp.booking_over = [];
                     temp.reset_flag = false;
                     temp.alt_flag = false;
                 }
@@ -529,7 +529,7 @@ module.exports.booking = async(req, res) => {
                     if (typeof(temp.booked) == 'object') {
                         temp.booked = [0, 0];
                     }
-
+                    temp.booking_over = [];
 
                 }
                 temp.reset_flag = true;
@@ -547,7 +547,7 @@ module.exports.booking = async(req, res) => {
                     if (typeof(temp.booked) == 'object') {
                         temp.booked = [0, 0];
                     }
-
+                    temp.booking_over = [];
                     temp.reset_flag = false;
                     temp.alt_flag = false;
                 }
@@ -2493,6 +2493,8 @@ module.exports.staffBooking = async(req, res) => {
                     temp.booked = [0, 0];
                 }
 
+                temp.booking_over = [];
+
 
             }
             temp.reset_flag = true;
@@ -2510,7 +2512,7 @@ module.exports.staffBooking = async(req, res) => {
                 if (typeof(temp.booked) == 'object') {
                     temp.booked = [0, 0];
                 }
-
+                temp.booking_over = [];
                 temp.reset_flag = false;
                 temp.alt_flag = false;
             }
