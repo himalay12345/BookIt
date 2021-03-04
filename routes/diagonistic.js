@@ -53,6 +53,7 @@ router.post('/set-schedule-timing', diagController.setScheduleTiming);
 router.post('/update-schedule', diagController.updateSchedule);
 router.get('/booking', diagController.booking);
 router.post('/book-test', diagController.bookTest);
+router.post('/upload-report', diagController.sendReports);
 router.post('/book-test-by-cash', diagController.bookTestByCash);
 router.get('/review-order', diagController.createOrder);
 router.get('/track-test', diagController.trackTest);

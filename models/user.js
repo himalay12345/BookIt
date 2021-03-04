@@ -768,6 +768,14 @@ const userSchema = mongoose.Schema({
                 type:String
             }
         },
+        my_reports:[{
+            description:{
+                type:String
+            },
+            report:{
+                type:String
+            }
+        }],
         address:{
             name:{
                 type:String
@@ -844,6 +852,14 @@ const userSchema = mongoose.Schema({
         tid:{
             type:mongoose.Schema.Types.ObjectId
         },
+        my_reports:[{
+            description:{
+                type:String
+            },
+            report:{
+                type:String
+            }
+        }],
         user:{
             name:{
                 type:String
@@ -1113,8 +1129,8 @@ let storage = multer.diskStorage({
 userSchema.statics.uploadedAvatar = multer({ storage: storage ,
     fileFilter: function (req, file, cb) {
         var ext=path.extname(file.originalname);
-        if(file.fieldname && (file.fieldname=="avatar" || file.fieldname=="clinicphoto")){
-            var validExtensions = ['.jpg','.png','.jpeg',".gif",".JPG",".PNG",".JPEG",".GIF"];
+        if(file.fieldname && (file.fieldname=="avatar" || file.fieldname=="clinicphoto" || file.fieldname=="reports")){
+            var validExtensions = ['.jpg','.png','.jpeg',".gif",".JPG",".PNG",".JPEG",".GIF",".pdf",".doc",".txt"];
             if (validExtensions.indexOf(ext) < 0) {
               return cb(new Error('Allowed image extentions are jpg,png,jpeg and gif'))
             }
@@ -1123,7 +1139,8 @@ userSchema.statics.uploadedAvatar = multer({ storage: storage ,
         cb(null, true)
    }}).fields([
     { name: 'avatar', maxCount: 1 },
-    { name: 'clinicphoto', maxCount: 10 }
+    { name: 'clinicphoto', maxCount: 15 },
+    {name: 'reports',maxCount:15}
 ]);
 
 

@@ -333,12 +333,12 @@
                                                                     <%}%>
 
                                                                     <td>
-                                                                        <a href="/diagonistic/review-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=j%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Preview</a>
+                                                                        <a href="/diagonistic/review-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=i%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Preview</a>
 
                                                                     </td>
                                                                     <%if(!orders.booked_test_user[i].cancel){%>
                                                                     <td class="text-center">
-                                                                        <a href="/diagonistic/track-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=j%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
+                                                                        <a href="/diagonistic/track-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=i%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #C71585;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-user-md" style="margin-right: 8px;"></i></span>Track</a>
                                                                     </td>
                                                                     <%}%>
                                                                     <%if(!orders.booked_test_user[i].cancel){%>

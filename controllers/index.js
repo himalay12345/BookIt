@@ -1287,16 +1287,16 @@ module.exports.medicalProof = (req, res) => {
 module.exports.medicalRecords = async(req, res) => {
     let user = await User.findById(req.user.id);
     let doctors = await User.findById(req.user.id).populate({
-        path: 'doctors',
+        path: 'booked_test_user',
         populate: {
-            path: 'did',
+            path: 'labid',
             populate: { path: 'user' }
         }
     });
     return res.render('medical-record', {
         title: 'My Medical Records',
         user: user,
-        alldoctors: doctors
+        tests: doctors
     })
 }
 

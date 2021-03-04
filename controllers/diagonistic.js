@@ -1448,4 +1448,51 @@ module.exports.bookTestByCash = async(req, res) => {
    return res.redirect('/diagonistic/order-success/?index='+index);
 }
 
+module.exports.sendReports = async function(req, res) {
+
+    try {
+
+        User.uploadedAvatar(req, res, async function(err) {
+            if (err) { console.log('*******Multer Error', err); return; }
+            
+            if (req.files['reports']) {
+                for (let i = 0; i < req.files['reports'].length; i++) {
+                    let npath = User.avatarPath + '/' + req.files['reports'][i].filename;
+                    let day2 = await User.updateOne({ 'booked_test_user._id': req.body.uid }, {
+                        '$push': {
+                            'booked_test_user.$.my_reports': {description:'New report', report:npath}
+                        }
+                    });
+                    let day4 = await User.updateOne({ 'booked_test_lab._id': req.body.lid }, {
+                        '$push': {
+                            'booked_test_lab.$.my_reports': {description:'New report', report:npath}
+                        }
+                    }); 
+                }
+                    
+                    // let day1 = await User.updateOne({ 'booked_test_user._id': req.body.uid }, {
+                    //     '$set': {
+                    //         'booked_test_user.$.reports': true
+                    //     }
+                    // });
+                    // let day3 = await User.updateOne({ 'booked_test_lab._id': req.body.lid }, {
+                    //     '$set': {
+                    //         'booked_test_lab.$.reports': true
+                    //     }
+                    // });
+                }
+            });
+           
+            return res.redirect('back')
+     
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+
+
 

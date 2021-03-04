@@ -29,7 +29,7 @@
                     
                    
                     <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
-                        <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+                        <div class="col-md-6" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
                        
                         <div class="col-md-12" style="position: absolute;">
                             <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
@@ -130,7 +130,7 @@
                               
                         </div>
                     </div>
-                    <div class="col-md-5 track-order" style="padding-left: 120px;margin-top: 50px;">
+                    <div class="col-md-6 track-order" style="padding-left: 120px;margin-top: 50px;">
                         <%if(locals.user.booked_test_lab[index].order_placed){%>
                         <h4 style="font-weight: bold;">Status : Order Placed</h4>
                         <%}%>
@@ -169,10 +169,18 @@
                             <%if(locals.user.booked_test_lab[index].reports){%>
                                 <li><div class="divider green"></div></li>
                                 <li><div class="node green">4</div><p>Reports Available</p></li>
+                                <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">See Reports</a></li>
                                 <%}else{%>
                                     <li><div class="divider grey"></div></li>
                                     <li><div class="node grey">4</div><p>Reports Available</p></li>
-                                    <a style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Send Report</a></li>
+                                    <form action="/diagonistic/upload-report" id="sub_frm" method="POST" enctype="multipart/form-data">
+                                        <input type="file" onchange="document.getElementById('sub_frm').submit();" multiple name="reports" style="margin-left: 50px;position: absolute;">
+                                        <input type="hidden" name="uid" value="<%=locals.user.booked_test_lab[index].tid%>">
+                                        <input type="hidden" name="lid" value="<%=locals.user.booked_test_lab[index]._id%>">
+                                        <input type="text" name="description">
+                                    <button type="submit"  class="displayNone" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Send Report</button></li>
+                                    </form>
+                                    <!-- <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 0px;margin-left: 150px;position: absolute;">See Reports</a></li> -->
                                     <%}%>
                            
                             <%if(locals.user.booked_test_lab[index].order_complete){%>
