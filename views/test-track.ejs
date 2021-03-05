@@ -168,16 +168,29 @@
                            
                             <%if(locals.user.booked_test_lab[index].reports){%>
                                 <li><div class="divider green"></div></li>
-                                <li><div class="node green">4</div><p>Reports Available</p></li>
-                                <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">See Reports</a></li>
+                                <li id="show_report"><div class="node green">4</div><p>Reports Available</p></li>
+                                <span id="show_all_report">
+                                <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;" id="add_more_btn">Add More</a></li>
+                                <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 180px;position: absolute;">See Reports</a></li>
+                                </span>
+                                <form class="displayNone" action="/diagonistic/upload-report" id="sub_frm1" method="POST" enctype="multipart/form-data">
+                                       
+                                    <input type="hidden" name="uid" value="<%=locals.user.booked_test_lab[index].tid%>">
+                                    <input type="hidden" name="lid" value="<%=locals.user.booked_test_lab[index]._id%>">
+                                    <input type="text" name="description" placeholder="Write Description" style="width: 50% !important;padding-left: 20px;margin-top:5px;margin-bottom: 5px;" class="form-control">
+                                    <input type="file" onchange="document.getElementById('sub_frm1').submit();" multiple name="reports">
+                                <button type="submit"  class="displayNone" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Send Report</button></li>
+                                </form>
+                            
                                 <%}else{%>
                                     <li><div class="divider grey"></div></li>
                                     <li><div class="node grey">4</div><p>Reports Available</p></li>
                                     <form action="/diagonistic/upload-report" id="sub_frm" method="POST" enctype="multipart/form-data">
-                                        <input type="file" onchange="document.getElementById('sub_frm').submit();" multiple name="reports" style="margin-left: 50px;position: absolute;">
+                                       
                                         <input type="hidden" name="uid" value="<%=locals.user.booked_test_lab[index].tid%>">
                                         <input type="hidden" name="lid" value="<%=locals.user.booked_test_lab[index]._id%>">
-                                        <input type="text" name="description">
+                                        <input type="text" name="description" placeholder="Write Description" style="width: 50% !important;padding-left: 20px;margin-top:5px;margin-bottom: 5px;" class="form-control">
+                                        <input type="file" onchange="document.getElementById('sub_frm').submit();" multiple name="reports">
                                     <button type="submit"  class="displayNone" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;">Send Report</button></li>
                                     </form>
                                     <!-- <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 0px;margin-left: 150px;position: absolute;">See Reports</a></li> -->
@@ -220,12 +233,22 @@
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
     <script src="<%=assetPath('js/script.js')%>"></script>
-   
+   <script>
+       var addmorebtn = document.getElementById('add_more_btn');
 
+       addmorebtn.addEventListener('click',function(e)
+       {
+           e.preventDefault();
+           var showall = document.getElementById('show_all_report');
+           var addmore = document.getElementById('sub_frm1')
+
+           showall.classList.add('displayNone');
+           addmore.classList.remove('displayNone')
+       })
+</script>
 
     
 
-    <!-- jQuery -->
   
 
 

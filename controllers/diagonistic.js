@@ -1460,26 +1460,26 @@ module.exports.sendReports = async function(req, res) {
                     let npath = User.avatarPath + '/' + req.files['reports'][i].filename;
                     let day2 = await User.updateOne({ 'booked_test_user._id': req.body.uid }, {
                         '$push': {
-                            'booked_test_user.$.my_reports': {description:'New report', report:npath}
+                            'booked_test_user.$.my_reports': {description:req.body.description, report:npath}
                         }
                     });
                     let day4 = await User.updateOne({ 'booked_test_lab._id': req.body.lid }, {
                         '$push': {
-                            'booked_test_lab.$.my_reports': {description:'New report', report:npath}
+                            'booked_test_lab.$.my_reports': {description:req.body.description, report:npath}
                         }
                     }); 
                 }
                     
-                    // let day1 = await User.updateOne({ 'booked_test_user._id': req.body.uid }, {
-                    //     '$set': {
-                    //         'booked_test_user.$.reports': true
-                    //     }
-                    // });
-                    // let day3 = await User.updateOne({ 'booked_test_lab._id': req.body.lid }, {
-                    //     '$set': {
-                    //         'booked_test_lab.$.reports': true
-                    //     }
-                    // });
+                    let day1 = await User.updateOne({ 'booked_test_user._id': req.body.uid }, {
+                        '$set': {
+                            'booked_test_user.$.reports': true
+                        }
+                    });
+                    let day3 = await User.updateOne({ 'booked_test_lab._id': req.body.lid }, {
+                        '$set': {
+                            'booked_test_lab.$.reports': true
+                        }
+                    });
                 }
             });
            

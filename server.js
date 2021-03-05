@@ -55,10 +55,10 @@ app.use(sassMiddleware({
 }
 console.log('Patient Tracking server is running on port 5000');
 
-app.use(cors({
-    origin:"http://localhost:3000",
-    credentials:true
-}))
+// app.use(cors({
+//     origin:"http://localhost:3000",
+//     credentials:true
+// }))
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
 app.set("layout test-bill", false);
