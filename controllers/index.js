@@ -1725,7 +1725,7 @@ module.exports.payOnClinicPatients = async(req, res) => {
         }
     });
     let doctor = await User.findById(patients.doctorid)
-    return res.render('poc-patients', {
+    return res.render('POC-Patients', {
         title: 'All Patients',
         allpatients: patients,
         user1:doctor
