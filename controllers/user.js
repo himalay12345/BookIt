@@ -1603,6 +1603,7 @@ module.exports.offlineCancel = async function(req, res) {
                 });
 
                 let user = await User.findById(req.body.did);
+                console.log(req.body)
                 
 
                 if(req.body.flag == 'yes')
@@ -2546,7 +2547,8 @@ module.exports.bookPayOnClinic = async(req, res) => {
                             gender:req.body.gender,
                             age: req.body.age,
                             cancel: false,
-                            type: 'payonclinic',                          
+                            type: 'payonclinic',
+                            dayindex: req.body.dayindex,                          
                             time: req.body.time,
                             date: req.body.date,
                             day: req.body.day,
@@ -2620,6 +2622,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                             age: req.body.age,
                             cancel: false,
                             type: 'payonclinic',
+                            dayindex: req.body.dayindex,
                             time: req.body.time,
                             date: req.body.date,
                             day: req.body.day,
@@ -2689,10 +2692,10 @@ module.exports.bookPayOnClinic = async(req, res) => {
                 })
                 .then(message => console.log(message.sid));
             if (user.email) {
-                appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
+                appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
        
-                appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
+                appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
             
 
 
@@ -2791,7 +2794,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                             gender:req.body.gender,
                         age: req.body.age,
                             cancel: false,
-                          
+                            dayindex: req.body.dayindex,
                             type: 'payonclinic',
                             time: req.body.time,
                             date: req.body.date,
@@ -2868,7 +2871,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                             cancel: false,
                             type: 'payonclinic',
                             time: req.body.time,
-                           
+                            dayindex: req.body.dayindex,
                             date: req.body.date,
                             day: req.body.day,
                             fee: req.body.fee,
@@ -2938,9 +2941,9 @@ module.exports.bookPayOnClinic = async(req, res) => {
                 })
                 .then(message => console.log(message.sid));
             if (user.email) {
-                appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
+                appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
-            appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
+            appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
 
 
 
@@ -5490,6 +5493,40 @@ module.exports.sortByDate = async(req, res) => {
             user1:user1
         })
     }
+
+}
+
+module.exports.pocSortByDate = async(req, res) => {
+    let patients = await User.findById(req.user.id).
+    populate({
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+    console.log(str);
+        let user1;
+        if(req.query.id)
+        {
+        user1 = await User.findById(req.query.id);
+        }
+        return res.render('POC-patients', {
+            title: 'All Patients',
+            allpatients: patients,
+            date: str,
+            user1:user1
+        })
+    
 
 }
 module.exports.oldSortByDate = async(req, res) => {

@@ -75,6 +75,7 @@ router.post('/old-offline-pay',userController.oldOfflinePay);
 router.post('/offline-cancel',userController.offlineCancel);
 router.post('/order-cancel',userController.orderCancel);
 router.post('/sort-by-date',userController.sortByDate);
+router.post('/poc-sort-by-date',userController.pocSortByDate);
 router.post('/old-sort-by-date',userController.oldSortByDate);
 router.post('/doctor-sort-by-date',userController.doctorSortByDate);
 router.get('/add-favourite',passport.checkAuthentication, userController.addFavourite);

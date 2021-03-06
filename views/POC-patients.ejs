@@ -58,7 +58,7 @@
                             <div class="col-md-12">
                                 <h4 class="mb-4">Patient Appoinment</h4>
                                 <div class="col-12 col-md-12">
-                                    <form action="/user/sort-by-date/?id=<%=user1._id%>" method="POST">
+                                    <form action="/user/poc-sort-by-date/?id=<%=user1._id%>" method="POST">
                                         <div class="form-group" style="display: inline-flex;width: 100%;">
                                             <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
                                             <div class="cal-icon col-md-3" style="padding-right: 15px;">
@@ -104,13 +104,13 @@
                                                                                 <%for(patients of allpatients.booking){%>
                                                                                     <%if(date != undefined){%>
                                                                                         <%console.log(date)%>
-                                                                                        <%if(date != patients.date || patients.did != user1.id){%>
+                                                                                        <%if(date != patients.date || patients.did != user1.id || patients.accept != true || patients.type != 'payonclinic'){%>
                                                                                             <%console.log(date, patients.date)%>
                                                                                             <%z++;continue;%>
                                                                                                 <%}%>
                                                                                                
                                                                                                     <%}else{%>
-                                                                                                        <%if(patients.did != user1.id || patients.type != 'payonclinic'){%>
+                                                                                                        <%if(patients.did != user1.id || patients.type != 'payonclinic' || patients.accept != true){%>
                                                                                                             <%z++;continue;%>
                                                                                                         <%}%>
                                                                                                        

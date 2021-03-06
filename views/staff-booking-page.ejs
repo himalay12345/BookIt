@@ -1621,10 +1621,11 @@ console.log(dayOfWeek)%>
                                                                                                                     <th class="sth">Booking Mode</th>
                                                                                                                     <th class="text-center sth">Status</th>
                                                                                                                     <th class="sth">Amount</th>
+                                                                                                                    <th class="text-center sth">Edit</th>
+                                                                                                                    <th>Cancel</th>
                                                                                                                     <th>Bill</th>
                                                                                                                     <th>Prescription</th>
-                                                                                                                     <th class="text-center sth">Edit</th>
-                                                                                                                    <th>Cancel</th>
+                                                                                                                    
 
                                                                                                                 </tr>
                                                                                                             </thead>
@@ -1733,6 +1734,40 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                                             Rs <%=patients.fee%>
                                                                                                                                                                                                             <%}%>
                                                                                                                                                                                                     </td>
+                                                                                                                                                                                                    <td class="text-right">
+                                                                                                                                                                                                        <a href="/edit-patient/?id=<%=patients._id%>&index=<%=z31%>&did=<%=patients.did%>" class="btn btn-sm bg-dark" style="color: white;width:110px !important">
+                                                                                                                                                                                                            <span ><i class="fas fa-pencil" style="margin-right: 5px;"></i>Edit</span>
+                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                        <%if(patients.type == 'payonclinic' && patients.cancel != true){%>){%>
+                                                                                                                                                                                                            <%if(patients.accept){%>
+                                                                                                                                                                                                            <td class="text-right">
+                                                                                                                                                                                                                <a  class="btn btn-sm bg-secondary" style="color: white;width:110px !important">
+                                                                                                                                                                                                                    <span ><i class="fas fa-check" style="margin-right: 5px;"></i>Accepted</span>
+                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                            <%}else{%>
+                                                                                                                                                                                                                <td class="text-right">
+                                                                                                                                                                                                                    <a href="/accept-patient/?id=<%=patients._id%>" class="btn btn-sm bg-secondary" style="color: white;width:110px !important">
+                                                                                                                                                                                                                        <span ><i class="fas fa-pencil" style="margin-right: 5px;"></i>Accept</span>
+                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                <td class="text-right">
+
+                                                                                                                                                                                                    <div class="table-action">
+                                                                                                                                                                                                        <%if(patients.cancel == true){%>
+                                                                                                                                                                                                            <a href="#" class="btn btn-sm bg-danger" style="color: white;">
+
+                                                                                                                                                                                                                <i class="fas fa-print"></i> Cancelled
+                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                            <%}else{%>
+
+                                                                                                                                                                                                                <a href="#popup<%=z31%>" class="btn btn-sm bg-danger-light">
+
+                                                                                                                                                                                                                    <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                </td>
 
                                                                                                                                                                                                     <%if(patients.cancel != true){%>
                                                                                                                                                                                                         
@@ -1750,40 +1785,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                                                        
                                                                                                                                                                                                        
         
-                                                                                                                                                                                                            <td class="text-right">
-                                                                                                                                                                                                                <a href="/edit-patient/?id=<%=patients._id%>&index=<%=z31%>&did=<%=patients.did%>" class="btn btn-sm bg-dark" style="color: white;width:110px !important">
-                                                                                                                                                                                                                    <span ><i class="fas fa-pencil" style="margin-right: 5px;"></i>Edit</span>
-                                                                                                                                                                                                                </td>
-                                                                                                                                                                                                                <%if(patients.type == 'payonclinic'){%>
-                                                                                                                                                                                                                    <%if(patients.accept){%>
-                                                                                                                                                                                                                    <td class="text-right">
-                                                                                                                                                                                                                        <a  class="btn btn-sm bg-secondary" style="color: white;width:110px !important">
-                                                                                                                                                                                                                            <span ><i class="fas fa-check" style="margin-right: 5px;"></i>Accepted</span>
-                                                                                                                                                                                                                        </td>
-                                                                                                                                                                                                                    <%}else{%>
-                                                                                                                                                                                                                        <td class="text-right">
-                                                                                                                                                                                                                            <a href="/accept-patient/?id=<%=patients._id%>" class="btn btn-sm bg-secondary" style="color: white;width:110px !important">
-                                                                                                                                                                                                                                <span ><i class="fas fa-pencil" style="margin-right: 5px;"></i>Accept</span>
-                                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                                        <%}%>
-                                                                                                                                                                                                                        <%}%>
-                                                                                                                                                                                                        <td class="text-right">
-
-                                                                                                                                                                                                            <div class="table-action">
-                                                                                                                                                                                                                <%if(patients.cancel == true){%>
-                                                                                                                                                                                                                    <a href="#" class="btn btn-sm bg-danger" style="color: white;">
-
-                                                                                                                                                                                                                        <i class="fas fa-print"></i> Cancelled
-                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                    <%}else{%>
-
-                                                                                                                                                                                                                        <a href="#popup<%=z31%>" class="btn btn-sm bg-danger-light">
-
-                                                                                                                                                                                                                            <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                                                                                                                                                                        </a>
-                                                                                                                                                                                                                        <%}%>
-                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                            
 
 
                                                                                                                                                                             </tr>
@@ -1796,7 +1798,7 @@ var dayOfWeek = weekday[today1.getDay()];%>
 
                                                                                                                                                                                                 <input type="hidden" name="slotindex" value="<%=patients.slot%>">
                                                                                                                                                                                                 <input type="hidden" name="dayindex" value="<%=patients.dayindex%>">
-
+                                                                                                                                                                                                <input type="hidden" name="did" value="<%=doctor1._id%>">
                                                                                                                                                                                                 <input type="hidden" name="bid" value="<%=user1.booking[z31]._id%>">
 
                                                                                                                                                                                                 <input type="hidden" name="phone" value="<%=patients.phone%>">
@@ -1865,10 +1867,11 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                             <th class="sth">Booking Mode</th>
                                                                                                                             <th class="text-center sth">Status</th>
                                                                                                                             <th class="sth">Amount</th>
-                                                                                                                            <th class="sth">Bill</th>
-                                                                                                                            <th class="sth">Prescription</th>
                                                                                                                             <th class="text-center sth">Edit</th>
                                                                                                                             <th class="text-center sth">Cancel</th>
+                                                                                                                            <th class="sth">Bill</th>
+                                                                                                                            <th class="sth">Prescription</th>
+                                                                                                                            
 
                                                                                                                         </tr>
                                                                                                                     </thead>
@@ -1972,27 +1975,12 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                                                                                                             Rs <%=patients.fee%>
                                                                                                                                                                                                             <%}%>
                                                                                                                                                                                                     </td>
-                                                                                                                                                                                                         <%if(patients.cancel != true){%>
-                                                                                                                                                                                                <td>
-                                                                                                                                                                                                    <a href="/invoice-view/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
-                                                                                                                                                                                                    <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Print Bill</span>
-                                                                                                                                                                                                </a>
-                                                                                                                                                                                                </td>
-                                                                                                                                                                                                <%}%>
-                                                                                                                                                                                                <%if(patients.cancel != true){%>
-                                                                                                                                                                                                <td>
-                                                                                                                                                                                                    <a href="/prescription-pad/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
-                                                                                                                                                                                                    <span ><i class="fas fa-newspaper" style="margin-right: 5px;"></i>Prescription</span>
-                                                                                                                                                                                                </a>
-                                                                                                                                                                                                </td>
-                                                                                                                                                                                                <%}%>
-
                                                                                                                                                                                                     <td class="text-right">
                                                                                                                                                                                                         <a href="/edit-patient/?id=<%=patients._id%>&index=<%=z3%>&did=<%=patients.did%>" class="btn btn-sm bg-dark" style="color: white;width:110px !important">
                                                                                                                                                                                                             <span ><i class="fas fa-pencil" style="margin-right: 5px;"></i>Edit</span>
                                                                                                                                                                                                         </td>
 
-                                                                                                                                                                                                        <%if(patients.type == 'payonclinic'){%>
+                                                                                                                                                                                                        <%if(patients.type == 'payonclinic' && patients.cancel != true){%>
                                                                                                                                                                                                             <%if(patients.accept){%>
                                                                                                                                                                                                                 <td class="text-right">
                                                                                                                                                                                                                     <a  class="btn btn-sm bg-secondary" style="color: white;width:110px !important">
@@ -2025,6 +2013,22 @@ var dayOfWeek = weekday[today.getDay()];%>
                                                                                                                                                                                                                                 <%}%>
                                                                                                                                                                                                                     </div>
                                                                                                                                                                                                                 </td>
+                                                                                                                                                                                                         <%if(patients.cancel != true){%>
+                                                                                                                                                                                                <td>
+                                                                                                                                                                                                    <a href="/invoice-view/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-success" style="color: white;">
+                                                                                                                                                                                                    <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Print Bill</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                                </td>
+                                                                                                                                                                                                <%}%>
+                                                                                                                                                                                                <%if(patients.cancel != true){%>
+                                                                                                                                                                                                <td>
+                                                                                                                                                                                                    <a href="/prescription-pad/?id=<%=doctor1._id%>&order=<%=c%>&date=<%=patients.date%>&fee=<%=patients.fee%>&address=<%=patients.address%>&age=<%=patients.age%>&name=<%=patients.name%>&phone=<%=patients.phone%>&gender=<%=patients.gender%>" class="btn btn-sm bg-primary" style="color: white;width:110px !important">
+                                                                                                                                                                                                    <span ><i class="fas fa-newspaper" style="margin-right: 5px;"></i>Prescription</span>
+                                                                                                                                                                                                </a>
+                                                                                                                                                                                                </td>
+                                                                                                                                                                                                <%}%>
+
+                                                                                                                                                                                                    
                                                                                                                                                                                    
 
                                                                                                                                                                                     </tr>

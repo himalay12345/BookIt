@@ -12,8 +12,8 @@ exports.newAlert = (date, time, email, doctor, patient) => {
 
     nodeMailer.transporter.sendMail({
         // from:'himalayshankar31@gmail.com',
-        from:'AarogyaHub',
-        // from:'support@aarogyahub.com',
+        // from:'AarogyaHub',
+        from:'support@aarogyahub.com',
         to: email,
         subject:"AarogyaHub Appointment Alerts",
         html:htmlString
@@ -44,8 +44,40 @@ exports.newDoctorAlert = (name,age,phone,address,number,date,day, time, fee,emai
 
     nodeMailer.transporter.sendMail({
         // from:'himalayshankar31@gmail.com',
-        from:'AarogyaHub',
-        // from:'support@aarogyahub.com',
+        // from:'AarogyaHub',
+        from:'support@aarogyahub.com',
+        to: email,
+        subject:"AarogyaHub Appointment Alerts",
+        html:htmlString
+},(err,info) => {
+    if(err)
+    {
+        console.log('Error in sending mail',err);
+        return;
+    }
+    console.log('Message sent',info);
+    return;
+});
+} 
+
+exports.newDoctorAlertPOC = (name,age,phone,address,number,date,day, time, fee,email) => {
+    let htmlString = nodeMailer.renderTemplate(
+        {
+            name:name,
+            age:age,
+            phone:phone,
+            address:address,
+            number:number,
+            date:date,
+            day:day,
+            time:time,
+            fee:fee
+        },'/appointment-alert/d-booking-success1.ejs');
+
+    nodeMailer.transporter.sendMail({
+        // from:'himalayshankar31@gmail.com',
+        // from:'AarogyaHub',
+        from:'support@aarogyahub.com',
         to: email,
         subject:"AarogyaHub Appointment Alerts",
         html:htmlString
