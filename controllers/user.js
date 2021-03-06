@@ -1370,6 +1370,7 @@ module.exports.Filter = async function(req, res) {
 module.exports.confirmPay = async function(req, res) {
 
     try{
+        if(req.body.pay == 'online'){
             let doctor = await User.findById(req.body.doctorid);
                 const razorpay = new Razorpay({
                     key_id: env.razorpay_key_id,
@@ -1473,11 +1474,103 @@ console.log(response);
             date: req.body.date
 
         })
+        }
+        
+        if(req.body.pay == 'offline'){
+
+            let doctor = await User.findById(req.body.doctorid);
+
+        let user = await User.findById(req.user.id);
+console.log(req.body)
+
+        if (req.body.type == 'own') {
+            user.name = req.body.name;
+            user.phone = req.body.phone;
+            user.age = req.body.age;
+            user.gender = req.body.gender;
+            user.contacts.address = req.body.address;
+        }
+
+        if (req.body.type == 'other') {
+            user.others.push({
+                name: req.body.pname,
+                email: req.body.pemail,
+                phone: req.body.pphone,
+                address: req.body.paddress,
+                age: req.body.page,
+                gender:req.body.pgender
+
+            });
+        }
+
+        user.refresh_flag = true;
+        user.save();
+
+
+        return res.render('pay-on-clinic', {
+            title: 'Pay On Clinic',
+            amount: doctor.booking_fee,
+            booked: req.body.booked,
+            available: req.body.available,
+            slotindex: req.body.slotindex,
+            dayindex: req.body.dayindex,
+            id: req.body.id,
+            doctor: doctor,
+            type: req.body.type,
+            user: user,
+            date: req.body.date
+
+        })
+            
+        }
     } catch (err) {
         console.log('Error', err);
     }
 
 }
+
+module.exports.selectPayment = async function(req, res) {
+
+    try{
+        let doctor = await User.findById(req.body.doctorid);
+        let user = await User.findById(req.user.id);
+
+
+    
+
+
+        return res.render('select-payment', {
+            title: 'Select Payment Method',
+            amount: doctor.booking_fee,
+            booked: req.body.booked,
+            available: req.body.available,
+            slotindex: req.body.slotindex,
+            dayindex: req.body.dayindex,
+            id: req.body.id,
+            doctor: doctor,
+            type: req.body.type,
+            user: user,
+            date: req.body.date,
+            name:req.body.name,
+            phone:req.body.phone,
+            age:req.body.age,
+            gender:req.body.gender,
+            address:req.body.address,
+            pname:req.body.pname,
+            pphone:req.body.pphone,
+            page:req.body.page,
+            pgender:req.body.pgender,
+            pemail:req.body.pemail,
+            paddress:req.body.paddress      
+
+
+        })
+    } catch (err) {
+        console.log('Error', err);
+    }
+
+}
+
 
 
 module.exports.destroySession = function(req, res) {
@@ -1508,7 +1601,8 @@ module.exports.offlineCancel = async function(req, res) {
                         }
                     }
                 });
-                let user = await User.findById(user1.doctorid);
+
+                let user = await User.findById(req.body.did);
                 
 
                 if(req.body.flag == 'yes')
@@ -2299,7 +2393,7 @@ module.exports.verifyPayment = async(req, res) => {
                 .then(message => console.log(message.sid));
                 client.messages
                 .create({
-                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
                     from: '+12019755459',
                     alphanumeric_id : "AarogyaHub",
                     statusCallback: 'http://postb.in/1234abcd',
@@ -2331,6 +2425,540 @@ module.exports.verifyPayment = async(req, res) => {
         } else {
             return res.redirect('/doctors');
         }
+    } else {
+
+        return res.redirect('/login');
+    }
+
+
+}
+
+
+
+module.exports.bookPayOnClinic = async(req, res) => {
+
+
+    let user = await User.findById(req.body.doctorid);
+    let orderid = Math.floor((Math.random() * 100000) + 54);
+    let staff;
+    if(user.staff_id != null)
+    {
+    staff = await User.findById(user.staff_id);
+    }
+    let patient = await User.findById(req.user.id);
+    console.log(user.name,staff.name,user.name,req.body)
+
+    if (patient.refresh_flag == true) {
+        
+            if (typeof(user.schedule_time[req.body.dayindex].start) == 'object') {
+                let available = [];
+               
+                let booked = [];
+                let k = req.body.slotindex;
+                let i = req.body.available.split(',');
+                let a = parseInt(i[k]);
+                a = a - 1;
+                for (var temp = 0; temp < user.schedule_time[req.body.dayindex].start.length; temp++) {
+                    if (temp == k) {
+                        available.push(a);
+                        continue;
+                    }
+                    var temp1 = parseInt(i[temp]);
+                    available.push(temp1);
+                }
+                let j = req.body.booked.split(',');
+                let bd = user.schedule_time[req.body.dayindex].booked[req.body.slotindex];
+                let b = parseInt(bd);
+                b = b + 1;
+                for (var temp = 0; temp < user.schedule_time[req.body.dayindex].start.length; temp++) {
+                    if (temp == req.body.slotindex) {
+                        booked.push(b);
+                        continue;
+                    }
+                    var temp1 = parseInt(j[temp]);
+                    booked.push(temp1);
+                }
+                let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
+                    '$set': {
+                        'schedule_time.$.booked': booked
+                            //   'schedule_time.$.available': available,
+
+                    }
+                });
+                if (req.body.type == 'own') {
+                    user.patients.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        pid: req.body.pid,
+                        avatar:patient.avatar,
+                        city:patient.contacts.city,
+                        dob:patient.dob,
+                        gender:patient.gender,
+                        bloodgroup:patient.bloodgroup,
+                        address: req.body.address,
+                        name: req.body.name,
+                        email: req.body.email,
+                        phone: req.body.phone,
+                        time: req.body.time,
+                        date: req.body.date,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        mode:'payonclinic',
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        type: req.body.type,
+                        seat: b
+
+                    });
+                    patient.doctors.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        did: req.body.doctorid,
+                        davatar:user.avatar,
+                        dname:user.name,
+                        ddept:user.department,
+                        cname:user.clinicname,
+                        dsid:user.staff_id,
+                        mode:'payonclinic',
+                        name: req.body.name,
+                        email: req.body.email,
+                        address: req.body.address,
+                        dayindex: req.body.dayindex,
+                        slotindex: req.body.slotindex,
+                        phone: req.body.phone,
+                        time: req.body.time,
+                        date: req.body.date,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        type: req.body.type,
+                        seat: b
+
+                    });
+                     if (staff) {
+
+                        staff.booking.push({
+                            payment_id: req.body.razorpay_payment_id,
+                            name: req.body.name,
+                            address: req.body.address,
+                            phone: req.body.phone,
+                            gender:req.body.gender,
+                            age: req.body.age,
+                            cancel: false,
+                            type: 'payonclinic',                          
+                            time: req.body.time,
+                            date: req.body.date,
+                            day: req.body.day,
+                            fee: req.body.fee,
+                            slot: req.body.slotindex,
+                            seat: b,
+                            did:user._id
+                        });
+                        staff.save();
+                    }
+} else {
+                    user.patients.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        pid: req.body.pid,
+                        name: req.body.name,
+                        email: req.body.email,
+                        avatar:patient.avatar,
+                        mode:'payonclinic',
+                        city:patient.contacts.city,
+                        dob:patient.dob,
+                        bloodgroup:patient.bloodgroup,
+                        gender:patient.gender,
+                        phone: req.body.phone,
+                        time: req.body.time,
+                        date: req.body.date,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        address: req.body.address,
+                        type: req.body.type,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        seat: b
+
+                    });
+                    patient.doctors.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        did: req.body.doctorid,
+                        name: req.body.name,
+                        email: req.body.email,
+                        mode:'payonclinic',
+                        address: req.body.address,
+                        phone: req.body.phone,
+                        davatar:user.avatar,
+                        dname:user.name,
+                        ddept:user.department,
+                        cname:user.clinicname,
+                        dsid:user.staff_id,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        time: req.body.time,
+                        dayindex: req.body.dayindex,
+                        slotindex: req.body.slotindex,
+                        date: req.body.date,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        type: req.body.type,
+                        seat: b
+
+                    });
+                    
+                    if (staff) {
+
+                        staff.booking.push({
+                            payment_id: orderid,
+                            name: req.body.name,
+                            address: req.body.address,
+                            phone: req.body.phone,
+                            gender:req.body.gender,
+                            age: req.body.age,
+                            cancel: false,
+                            type: 'payonclinic',
+                            time: req.body.time,
+                            date: req.body.date,
+                            day: req.body.day,
+                            fee: req.body.fee,
+                            slot: req.body.slotindex,
+                            seat: b,
+                            did:user._id
+                        });
+                        staff.save();
+                    }
+
+                }
+                patient.refresh_flag = false;
+                patient.payments.push({
+                    payment_id: orderid,
+                    order_id: req.body.razorpay_order_id,
+                    signature: req.body.razorpay_signature
+                });
+                patient.notification.push({
+                    type: 'appointment-success',
+                    message: 'Your Appointment is confirmed with Dr. ' + user.name + ' on ' + req.body.date + ' at ' + req.body.time,
+                    flag: true,
+                    did: req.body.doctorid
+                });
+                user.save();
+
+                patient.save();
+
+
+                //   client.messages 
+                //   .create({ 
+                //     body: 'CONFIRMED Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name + ' . ' + user.clinicname + ', ' + user.cliniccity + ','  + user.clinicaddr + ', Ph: +91' + user.phone + 'Please show this SMS at the clinic front-desk before your appointment.',
+                //     from: 'whatsapp:+14155238886',       
+                //      to: 'whatsapp:+91'+req.query.phone 
+                //    }) 
+                //   .then(message => console.log(message.sid)) 
+                //   .done();
+
+                client.messages
+                    .create({
+                        body: 'CONFIRMED Appointment for ' + req.body.date + ' at ' + req.body.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                        from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
+                        statusCallback: 'http://postb.in/1234abcd',
+                        to: '+91' + req.body.phone
+                    })
+                    .then(message => console.log(message.sid));
+                if (req.body.email) {
+                    appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, patient);
+                }
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + user.phone
+                })
+                .then(message => console.log(message.sid));
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + staff.phone
+                })
+                .then(message => console.log(message.sid));
+            if (user.email) {
+                appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
+            }
+       
+                appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
+            
+
+
+
+                return res.render('booking-success', {
+                    title: 'Booking-Success',
+                    doctor: user,
+                    seat: b,
+
+                    slotindex: req.body.slotindex,
+                    dayindex: req.body.dayindex,
+                    date: req.body.date,
+                    user: patient,
+                    name: req.body.name,
+                    address: req.body.address,
+                    phone: req.body.phone,
+                    age: req.body.age
+                });
+
+            }
+
+            if (typeof(user.schedule_time[req.body.dayindex].start) == 'string') {
+                let bd1 = user.schedule_time[req.body.dayindex].booked;
+                let k1 = parseInt(bd1);
+                k1 += 1;
+                var k2 = parseInt(req.body.available);
+                k2 -= 1;
+
+
+                let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
+                    '$set': {
+                        'schedule_time.$.booked': k1
+                            //   'schedule_time.$.available': k2,
+
+                    }
+                });
+                if (req.body.type == 'own') {
+                    user.patients.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        pid: req.body.pid,
+                        name: req.body.name,
+                        email: req.body.email,
+                        city:patient.contacts.city,
+                        dob:patient.dob,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        mode:'payonclinic',
+                        bloodgroup:patient.bloodgroup,
+                        gender:patient.gender,
+                        phone: req.body.phone,
+                        time: req.body.time,
+                        avatar:patient.avatar,
+                        date: req.body.date,
+                        address: req.body.address,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        type: req.body.type,
+                        seat: k1
+
+                    });
+                    patient.doctors.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        did: req.body.doctorid,
+                        name: req.body.name,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        mode:'payonclinic',
+                        email: req.body.email,
+                        phone: req.body.phone,
+                        time: req.body.time,
+                        davatar:user.avatar,
+                        dname:user.name,
+                        ddept:user.department,
+                        cname:user.clinicname,
+                        address: req.body.address,
+                        dsid:user.staff_id,
+                        date: req.body.date,
+                        dayindex: req.body.dayindex,
+                        // slotindex: req.query.slotindex,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        type: req.body.type,
+                        seat: k1
+
+                    });
+
+                    if (staff) {
+
+                        staff.booking.push({
+                            payment_id: orderid,
+                            name: req.body.name,
+                            address: req.body.address,
+                            phone: req.body.phone,
+                            gender:req.body.gender,
+                        age: req.body.age,
+                            cancel: false,
+                          
+                            type: 'payonclinic',
+                            time: req.body.time,
+                            date: req.body.date,
+                            day: req.body.day,
+                            fee: req.body.fee,
+                            seat: k1,
+                            did:user._id
+                        });
+                        staff.save();
+                    }
+
+                } else {
+                    user.patients.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        pid: req.body.pid,
+                        name: req.body.name,
+                        email: req.body.email,
+                        phone: req.body.phone,
+                        time: req.body.time,
+                        city:patient.contacts.city,
+                        dob:patient.dob,
+                        bloodgroup:patient.bloodgroup,
+                        gender:patient.gender,
+                        address: req.body.address,
+                        avatar:patient.avatar,
+                        mode:'payonclinic',
+                        date: req.body.date,
+                        day: req.body.day,
+                         gender:req.body.gender,
+                        age: req.body.age,
+                        fee: req.body.fee,
+                        type: req.body.type,
+                        seat: k1
+
+                    });
+                    patient.doctors.push({
+                        payment_id: orderid,
+                        cancel: false,
+                        did: req.body.doctorid,
+                        name: req.body.name,
+                        email: req.body.email,
+                        phone: req.body.phone,
+                        davatar:user.avatar,
+                        address: req.body.address,
+                        dname:user.name,
+                        ddept:user.department,
+                        cname:user.clinicname,
+                        dsid:user.staff_id,
+                        time: req.body.time,
+                        date: req.body.date,
+                        gender:req.body.gender,
+                        age: req.body.age,
+                        mode:'payonclinic',
+                        dayindex: req.body.dayindex,
+                        // slotindex: req.body.slotindex,
+                        day: req.body.day,
+                        fee: req.body.fee,
+                        type: req.body.type,
+                        seat: k1
+
+                    });
+                   
+
+                    if (staff) {
+
+                        staff.booking.push({
+                            payment_id: orderid,
+                            name: req.body.name,
+                            address: req.body.address,
+                            phone: req.body.phone,
+                            gender:req.body.gender,
+                            age: req.body.age,
+                            cancel: false,
+                            type: 'payonclinic',
+                            time: req.body.time,
+                           
+                            date: req.body.date,
+                            day: req.body.day,
+                            fee: req.body.fee,
+                            seat: k1,
+                            did:user._id
+                        });
+                        staff.save();
+                    }
+
+
+
+                }
+                patient.refresh_flag = false;
+                patient.payments.push({
+                    payment_id: orderid,
+                    order_id: req.body.razorpay_order_id,
+                    signature: req.body.razorpay_signature
+                });
+                patient.notification.push({
+                    type: 'appointment-success',
+                    message: 'Your Apointment is confirmed with Dr. ' + user.name + ' on ' + req.body.date + ' at ' + req.body.time,
+                    flag: true,
+                    did: req.body.doctorid
+                });
+
+                user.save();
+
+                patient.save();
+
+                //  client.messages 
+                //   .create({ 
+                //     body: 'CONFIRMED Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name + ' . ' + user.clinicname + ', ' + user.cliniccity + ','  + user.clinicaddr + ', Ph: +91' + user.phone + 'Please show this SMS at the clinic front-desk before your appointment.',
+                //     from: 'whatsapp:+14155238886',       
+                //      to: 'whatsapp:+91'+req.query.phone 
+                //    }) 
+                //   .then(message => console.log(message.sid)) 
+                //   .done();
+
+                client.messages
+                    .create({
+                        body: 'CONFIRMED Appointment for ' + req.body.date + ' at ' + req.body.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                        from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
+                        statusCallback: 'http://postb.in/1234abcd',
+                        to: '+91' + req.body.phone
+                    })
+                    .then(message => console.log(message.sid));
+                if (req.body.email) {
+                    appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, patient);
+                }
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + user.phone
+                })
+                .then(message => console.log(message.sid));
+                client.messages
+                .create({
+                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
+                    from: '+12019755459',
+                    alphanumeric_id : "AarogyaHub",
+                    statusCallback: 'http://postb.in/1234abcd',
+                    to: '+91' + staff.phone
+                })
+                .then(message => console.log(message.sid));
+            if (user.email) {
+                appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
+            }
+            appointmentAlert.newDoctorAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
+
+
+
+                return res.render('booking-success', {
+                    title: 'Booking-Success',
+                    doctor: user,
+                    seat: k1,
+                    // slotindex: req.body.slotindex,
+                    dayindex: req.body.dayindex,
+                    date: req.body.date,
+                    user: patient,
+                    name: req.body.name,
+                    address: req.body.address,
+                    phone: req.body.phone,
+                    age: req.body.age
+                });
+
+            }
     } else {
 
         return res.redirect('/login');
@@ -3259,7 +3887,7 @@ module.exports.offlinePay = async(req, res) => {
                 k2 -= 1;
 
 
-                let day = await User.updateOneOne({ 'schedule_time._id': req.body.id }, {
+                let day = await User.updateOne({ 'schedule_time._id': req.body.id }, {
                     '$set': {
                         'schedule_time.$.booked': k1
                             //   'schedule_time.$.available': k2,

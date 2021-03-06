@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+   
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Pay</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Pay Online</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <form action="/user/book-pay-on-clinic" method="POST">
+               
+            <div class="container">
+                <%var day,time,fee,counter=0;%>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <!-- Checkout Form -->
+                      
+                                <input type="hidden" name="type" value="<%=type%>">
+                                <input type="hidden" name="day" value="<%=day%>">
+                                <input type="hidden" name="date" value="<%=date%>">
+                                <input type="hidden" name="fee" value="<%=doctor.booking_fee%>">
+                                <input type="hidden" name="time" value="<%=time%>">
+                                <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                                <input type="hidden" name="id" value="<%=id%>">
+                                <input type="hidden" name="booked" value="<%=booked%>">
+                                <input type="hidden" name="available" value="<%=available%>">
+                                <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                                <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                                    <!-- Personal Information -->
+                                    
+
+                                   
+                                    <div class="info-widget">
+                                        <h4 class="card-title">Patient Details</h4>
+                                        
+                                        <div class="row" id="ownp">
+                                            <!-- <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about <%=locals.user.name%></h5> -->
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <%var c1 = user.others.length;c1=c1-1;%>
+                                                
+                                            <div class="form-group card-label">
+                                                <label>Name</label>
+                                                <%if(type == 'own'){%>
+                                                <input class="form-control" name="name" type="text" value="<%=locals.user.name%>" readonly>
+                                                <%}else{%>
+                                                    <input class="form-control"  name="name" type="text" value="<%=user.others[c1].name%>" readonly>
+
+                                                <%}%>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Phone</label>
+                                                <%if(type == 'own'){%>
+                                                <input class="form-control" name="phone" type="text" value="<%=locals.user.phone%>" readonly>
+                                                <%}else{%>
+                                                    <input class="form-control" name="phone" type="text" value="<%=user.others[c1].phone%>" readonly>
+                                                <%}%>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Address</label>
+                                                <%if(type == 'own'){%>
+                                                <input class="form-control" name="address" type="text" value="<%=locals.user.contacts.address%>" readonly>
+                                                <%}else{%>
+                                                    <input class="form-control" name="address" type="text" value="<%=user.others[c1].address%>" readonly>
+                                                <%}%>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label style="font-size: 0.8rem;margin-left:5px;">Gender</label>
+                                                <%if(type == 'own'){%>
+                                                    <input class="form-control" name="gender" type="text" value="<%=locals.user.gender%>" readonly>
+                                                    <%}else{%>
+                                                        <input class="form-control" name="gender" type="text" value="<%=user.others[c1].gender%>" readonly>
+                                                    <%}%>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group card-label">
+                                                <label>Age</label>
+                                                <%if(type == 'own'){%>
+                                                <input class="form-control" name="age" type="text" value="<%=locals.user.age%>" readonly>
+                                                <%}else{%>
+                                                    <input class="form-control" name="age" type="text" value="<%=user.others[c1].age%>" readonly>
+                                                <%}%>
+
+                                            </div>
+                                        </div>
+                                        </div>
+                                     
+                                       
+                                    </div>
+                                    
+                               
+                                    
+                                    
+                                  
+                            
+                                    <!-- /Personal Information -->
+                                    <%var day,time,fee%>
+                                    <% day = doctor.schedule_time[dayindex].day%>
+                                    <% fee = doctor.booking_fee%>
+                                     <%var today = new Date();%>
+                                        <%var dd = String(today.getDate()).padStart(2, '0');
+                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                        var yyyy = today.getFullYear();
+                                        var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                                        var dayOfWeek = weekday[today.getDay()];%>
+                                    <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                       <%time = doctor.schedule_time[dayindex].start.toUpperCase()%>
+
+                                   <%}else{%>
+                                    <%time = doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%>
+                                    <%}%>
+                                   
+                                  
+                                    <%var pid,name,email,phone,index,age,address;%>
+                                    <%if(type == 'own'){%>
+                                        <%pid=locals.user.id%>
+                                        <%name=locals.user.name%>
+                                        <%email=locals.user.email%>
+                                        <%phone=locals.user.phone%>
+                                        <%age=locals.user.age%>
+                                        <%address=locals.user.contacts.address%>
+                                        <%gender=locals.user.gender%>
+                                
+                                    <%}else{%>
+                                        <%pid=locals.user.id%>
+                                        <%name=user.others[c1].name%>
+                                        <%email=user.others[c1].email%>
+                                        <%phone=user.others[c1].phone%>
+                                        <%age=user.others[c1].age%>
+                                        <%address=user.others[c1].address%>
+                                        <%gender=user.others[c1].gender%>
+                                        <%index=c1%>   
+                                    <%}%>
+                                   
+                                    <div class="payment-widget">
+                                       
+
+                                        <!-- Credit Card Payment -->
+                                      
+                                        <!-- /Terms Accept -->
+
+                                        <!-- Submit Section -->
+                                        <div class="submit-section mt-4">
+                                            <button type="submit" class="btn btn-primary submit-btn tcolor">Confirm and Book</button>
+                                        </div>
+                                        <!-- /Submit Section -->
+
+                                    </div>
+                            
+                                <!-- /Checkout Form -->
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5 col-lg-4 theiaStickySidebar">
+
+                        <!-- Booking Summary -->
+                        <div class="card booking-card">
+                            <div class="card-header">
+                                <h4 class="card-title">Booking Appointment</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Booking Doctor Info -->
+                                <div class="booking-doc-info">
+                                    <a href="/doctor-profile" class="booking-doc-img">
+                                        <img src="<%=doctor.avatar%>" alt="User Image">
+                                    </a>
+                                    <div class="booking-info">
+                                        <h4><a href="/doctor-profile"><%=doctor.name%></a></h4>
+                                        <%var sum=0,avg,cnt=doctor.reviews.length;%>
+                                        <%for(review of doctor.reviews){%>
+                                            <%sum+=review.rating;%>
+                                        <%}%>
+                                        <%avg=sum/cnt;%>
+                                        <div class="rating">
+                                            <%if(avg>=1){%>
+                                            <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=2){%>
+                                            <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=3){%>
+                                            <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=4){%>
+                                            <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <%if(avg>=5){%>
+                                            <i class="fas fa-star filled"></i>
+                                            <%}else{%>
+                                                <i class="fas fa-star"></i>
+                                            <%}%>
+                                            <span class="d-inline-block average-rating">(<%=doctor.reviews.length%>)</span>
+                                        </div>
+                                        <div class="clinic-details">
+                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> <%=doctor.contacts.city%> &nbsp; <%=doctor.contacts.state%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Booking Doctor Info -->
+
+                                <div class="booking-summary">
+                                    
+                                    <div class="booking-item-wrap">
+                                        <ul class="booking-date">
+                                            <li>Date <span><%=date%></span></li>
+                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                                <li>Time <span><%=doctor.schedule_time[dayindex].start.toUpperCase()%></span></li>
+
+                                           <%}else{%>
+                                            <li>Time <span><%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%></span></li>
+                                            <%}%>
+                                            <li> Day <span><%=doctor.schedule_time[dayindex].day%></span>
+                                        </ul>
+                                        <ul class="booking-fee">
+                                            <li>Booking Fee <span>Rs <%=doctor.booking_fee%></span></li>
+                                            <!-- <li>G.S.T <span>Rs 10</span></li> -->
+                                        </ul>
+                                        <div class="booking-total">
+                                            <ul class="booking-total-list">
+                                                <li>
+                                                    <span>Total</span>
+                                                    <span class="total-cost">Rs <%=doctor.booking_fee%></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Booking Summary -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+           
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+   
+    <script>
+        var own = document.getElementById('ownp');
+        var pat = document.getElementById('patientp');
+        function display()
+        {
+            own.classList.add('displayNone');
+            pat.classList.remove('displayNone');
+        }
+        function display1()
+        {
+            own.classList.remove('displayNone');
+            pat.classList.add('displayNone');
+        }
+    </script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+</body>
+
+<!-- doccure/checkout  30 Nov 2019 04:12:16 GMT -->
+
+</html>

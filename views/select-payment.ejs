@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:34 GMT -->
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+
+        <!-- /Header -->
+      
+        <section class="att1" style="margin-top: 50px;padding-left: 50px;">
+           
+            <div class="col-md-12 lipid profile p4px" style="margin-bottom: 20px;">
+                <div class="col-md-12 pad-left16">
+                    
+                   
+                    <div class="col-md-12 pad-left17" style="min-height: 230px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
+                        <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+                       
+                        <div class="col-md-12" style="position: absolute;display:inline-flex;">
+                            <div class="col-md-4 col-sm-12 att2" style="padding: 5px 10px;margin-bottom: 20px;">
+                                <img src="/img/wallet.png" class="attrs1" style="height: 150px;width:150px;">
+                            </div>
+                            <div class="col-md-8 col-sm-12 mlz1" style="padding: 5px 10px;margin-bottom: 20px;margin-top: 30px;margin-left: -30px;">
+                                <span class="attrs2" style="font-size:3rem;font-weight: bolder;color:#575557;">Amount Payable</span></br>
+                                
+
+                                <span class="attrs3" style="font-size:3rem;font-weight: bolder;color:#575557;margin-top: -20px;display: block;">Rs <%=amount%></span>
+                            </div>
+                           
+                            
+                        </br>
+
+                            </div>
+                         
+                             
+                              
+                        </div>
+                        
+                    </div>
+                    <form action="/user/confirm-pay" method="POST">
+                        <input type="hidden" name="doctorid" value="<%=doctor._id%>">
+                        <input type="hidden" name="id" value="<%=id%>">
+                        <input type="hidden" name="booked" value="<%=booked%>">
+                        <input type="hidden" name="available" value="<%=available%>">
+                        <input type="hidden" name="slotindex" value="<%=slotindex%>">
+                        <input type="hidden" name="dayindex" value="<%=dayindex%>">
+                        <input type="hidden" name="date" value="<%=date%>">
+                        <input type="hidden" name="type" value="<%=type%>">
+                        <input type="hidden" name="name" value="<%=name%>">
+                        <input type="hidden" name="pname" value="<%=pname%>">
+                        <input type="hidden" name="phone" value="<%=phone%>">
+                        <input type="hidden" name="pphone" value="<%=pphone%>">
+                        <input type="hidden" name="pemail" value="<%=pemail%>">
+                        <input type="hidden" name="age" value="<%=age%>">
+                        <input type="hidden" name="page" value="<%=page%>">
+                        <input type="hidden" name="gender" value="<%=gender%>">
+                        <input type="hidden" name="pgender" value="<%=pgender%>">
+                        <input type="hidden" name="address" value="<%=address%>">
+                        <input type="hidden" name="paddress" value="<%=paddress%>">
+                    <div class="col-md-7">
+                        <div class="col-md-12" style="display:inline-flex;border-bottom: 1px solid grey;
+                        border-top: 1px solid grey;padding-top: 15px;">
+                            <label style="width: 100%;display: inline-flex;">
+                            <div class="col-md-10 attrs4">
+                                <p style="font-size: 1.5rem;">Pay On Clinic</p>
+                                
+                            </div>
+                            <div class="col-md-2 attrs5">
+                                <input type="radio" id="rlab" onchange="enableButton()" name="pay" value="offline" class="disinp">                                
+                            </div>
+                            </div>
+                           
+                        </div>
+      
+                        <div class="col-md-7">
+                            <div class="col-md-12" style="display:inline-flex;border-bottom: 1px solid grey;padding-top: 15px;">
+                                <label style="width: 100%;display: inline-flex;">
+                                <div class="col-md-10 attrs4">
+                                    <p style="font-size: 1.5rem;">Pay Online</p>
+                                    
+                                </div>
+                                <div class="col-md-2 attrs5">
+                                    <input type="radio" id="rlab" onchange="enableButton()" name="pay" value="online" class="disinp">                                
+                                </div>
+                                </div>
+                            </div>
+          
+                    <div class="col-md-5" style="padding-left: 100px;padding-top: 30px;">
+                        
+                        <div class="submit-section proceed-btn text-right">
+                            <button type="submit" id="submit_btn" class="btn btn-primary tcolor" style="padding:15px !important;width:200px;" disabled>Book Now</button>
+
+
+                        </div>
+                     
+                        
+                    </div>
+                </form>
+                  
+
+            </div>
+          
+
+            <!-- Footer -->
+           
+                <!-- /Footer -->
+
+    </div>
+    </section>
+   
+    <!-- /Main Wrapper -->
+  
+    
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script>
+   
+<script>
+    function enableButton()
+    {
+        $('#submit_btn').prop("disabled", false);  
+    }
+</script>
+
+    
+
+    <!-- jQuery -->
+  
+
+
+
+</body>
+
+<!-- AarogyaHub/  30 Nov 2019 04:11:53 GMT -->
+
+</html>

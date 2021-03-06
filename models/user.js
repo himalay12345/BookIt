@@ -436,6 +436,9 @@ const userSchema = mongoose.Schema({
         address:{
             type:String
         },
+        mode:{
+            type:String
+        } ,
         createdAt: { type: Date, default: Date.now }
     }],
 
@@ -502,7 +505,10 @@ const userSchema = mongoose.Schema({
        
         phone:{
             type:String
-        },  
+        }, 
+        mode:{
+            type:String
+        } ,
         address:{
             type:String
         },
@@ -567,6 +573,9 @@ const userSchema = mongoose.Schema({
             },
             did:{
                 type: mongoose.Schema.Types.ObjectId
+            },
+            accept:{
+                type:Boolean
             },
             
             createdAt: { type: Date, default: Date.now }

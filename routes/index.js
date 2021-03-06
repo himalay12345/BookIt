@@ -119,7 +119,10 @@ router.get('/staff-dashboard', passport.checkStaffAuthentication, homeController
 router.get('/staff-login-page', homeController.staffLoginPage);
 router.get('/customer_service', homeController.customerService);
 
+
 router.get('/staff-booking', passport.checkStaffAuthentication, homeController.staffBooking);
+router.get('/pay-on-clinic-patients', passport.checkStaffAuthentication, homeController.payOnClinicPatients);
+router.get('/accept-patient', passport.checkStaffAuthentication, homeController.acceptPatient);
 router.get('/staff-old-booking', passport.checkStaffAuthentication, homeController.staffOldBooking);
 router.get('/steps', passport.checkDoctorAuthentication, homeController.steps)
 router.get('/term-condition', homeController.termCondition);

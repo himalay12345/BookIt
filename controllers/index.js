@@ -1708,6 +1708,30 @@ module.exports.staffDashboard = async(req, res) => {
     })
 }
 
+module.exports.payOnClinicPatients = async(req, res) => {
+    let patients = await User.findById(req.user.id).
+    populate({
+        path:'doctorid',
+        populate:{
+            path:'user'
+        }
+    }).populate({
+        path:'doctorids',
+        populate:{
+            path:'doctorid',
+            populate:{
+                path:'user'
+            }
+        }
+    });
+    let doctor = await User.findById(patients.doctorid)
+    return res.render('POC-Patients', {
+        title: 'All Patients',
+        allpatients: patients,
+        user1:doctor
+    })
+}
+
 module.exports.staffForgotPassword = (req, res) => {
     return res.render('staff-forgot-password', {
         title: 'Staff Login'
@@ -3525,6 +3549,17 @@ module.exports.editPatient = async(req,res) => {
         index:req.query.index,
         id:req.query.id
     })
+
+}
+
+module.exports.acceptPatient = async(req,res) => {
+    let day = await User.updateOne({ 'booking._id': req.query.id }, {
+        '$set': {
+            'booking.$.accept':true
+
+        }
+    });
+    return res.redirect('back')
 
 }
 

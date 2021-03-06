@@ -81,7 +81,7 @@
                                         <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information about
                                             <%=locals.user.name%>
                                         </h5>
-                                        <form action="/user/confirm-pay" method="POST" style="width: 100%;">
+                                        <form action="/user/select-payment" method="POST" style="width: 100%;">
                                             <input type="hidden" name="type" value="own">
                                             <input type="hidden" name="doctorid" value="<%=doctor._id%>">
                                             <input type="hidden" name="id" value="<%=id%>">
@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="row displayNone" id="patientp">
                                         <h5 style="margin-left: 20px;font-size: 0.9rem;font-weight: 700;margin-bottom: 10px;">Please provide following information.</h5>
-                                        <form action="/user/confirm-pay" method="POST" style="width: 100%;">
+                                        <form action="/user/select-payment" method="POST" style="width: 100%;">
                                             <input type="hidden" name="doctorid" value="<%=doctor._id%>">
                                             <input type="hidden" name="id" value="<%=id%>">
                                             <input type="hidden" name="booked" value="<%=booked%>">
