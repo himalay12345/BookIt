@@ -5520,7 +5520,7 @@ module.exports.pocSortByDate = async(req, res) => {
         {
         user1 = await User.findById(req.query.id);
         }
-        return res.render('POC-patients', {
+        return res.render('poc-patients', {
             title: 'All Patients',
             allpatients: patients,
             date: str,
