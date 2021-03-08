@@ -2695,7 +2695,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
        
-                appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
+                appointmentAlert.adminAlert(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com',user.name);
             
 
 
@@ -2943,7 +2943,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
             if (user.email) {
                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
-            appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com');
+            appointmentAlert.adminAlert(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,'himalayshankar32@gmail.com',user.name);
 
 
 

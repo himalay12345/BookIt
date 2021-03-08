@@ -7312,7 +7312,8 @@ html.menu-opened body {
   .health-concerns {
     display: block; }
   .ssstop {
-    margin-top: 0px !important; }
+    margin-top: 0px !important;
+    max-height: 170px !important; }
   .card {
     margin-bottom: 0.9375rem; }
   .doctor-img img {

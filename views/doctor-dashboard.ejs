@@ -174,7 +174,7 @@
 
                                                                                         <%}%>
                                                                                             <div class="dash-widget-info">
-                                                                                                <h6>Total Patient</h6>
+                                                                                                <h6>Total Online Patient</h6>
                                                                                                 <h3>
                                                                                                     <%=allpatients.patients.length%>
                                                                                                 </h3>
@@ -191,7 +191,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="dash-widget-info">
-                                                        <h6>Today Patient</h6>
+                                                        <h6>Today Online Patient</h6>
                                                         <h3>
                                                             <%=count%>
                                                         </h3>
@@ -288,10 +288,10 @@
                                         <!-- Appointment Tab -->
                                         <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Online Bookings</a>
+                                                <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">All Bookings</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#today-appointments" data-toggle="tab">All Bookings</a>
+                                                <a class="nav-link" href="#today-appointments" data-toggle="tab">Today Bookings</a>
                                             </li>
                                         </ul>
 
@@ -314,40 +314,40 @@
                                                                 <div class="card card-table mb-0">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table table-hover table-center mb-0 stable">
-                                                                                <thead class="sthead">
-                                                                                    <tr class="str">
-                                                                                        <th class="sth">Patient Name</th>
-                                                                                        <th class="sth">Appt Date</th>
-                                                                                        <th class="sth">Purpose</th>
-                                                                                        <th class="sth">Type</th>
-                                                                                        <th class="text-center sth">Status</th>
+                                                                            <table class="table table-hover table-center mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Patient Name</th>
+                                                                                        <th>Appt Date</th>
+                                                                                        <th>Type</th>
+                                                                                        <th>Fee Mode</th>
+                                                                                        <th class="text-center">Status</th>
 
                                                                                     </tr>
                                                                                 </thead>
-                                                                                <tbody class="stbody">
+                                                                                <tbody>
                                                                                     <%var c=0,z=0;%>
-                                                                                        <%for(patients of allpatients.patients){%>
+                                                                                        <%for(let i=allpatients.patients.length-1;i>=0;i--){%>
                                                                                             <%if(date!=undefined){%>
-                                                                                                <%if(patients.date != date){%>
+                                                                                                <%if(allpatients.patients[i].date != date){%>
                                                                                                     <%z++;continue;%>
                                                                                                         <%}%>
                                                                                                             <%}%>
-                                                                                                                <tr class="str">
-                                                                                                                    <td class="std2">
+                                                                                                                <tr>
+                                                                                                                    <td>
                                                                                                                         <h2 class="table-avatar">
 
-                                                                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
+                                                                                                                            <a href="/patient-profile/?pid=<%=allpatients.patients[i].pid%>&doctorid=<%=locals.user.id%>" class="avatar avatar-sm mr-2">
                                                                                 
-                                                                                <img class="avatar-img rounded-circle" src="<%=patients.avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
+                                                                                <img class="avatar-img rounded-circle" src="<%=allpatients.patients[i].avatar%>" onerror="this.src='/img/profile.png'" alt="User Image">
                                                                                </a>
 
 
-                                                                                                                            <a href="/patient-profile/?pid=<%=patients.pid%>&doctorid=<%=locals.user.id%>">
-                                                                                                                                <%=patients.name%> <span>#PT00<%=++c%></span></a>
+                                                                                                                            <a href="/patient-profile/?pid=<%=allpatients.patients[i].pid%>&doctorid=<%=locals.user.id%>">
+                                                                                                                                <%=allpatients.patients[i].name%> <span>#PT00<%=++c%></span></a>
                                                                                                                         </h2>
                                                                                                                     </td>
-                                                                                                                    <%var str2 = patients.date.split('-');%>
+                                                                                                                    <%var str2 = allpatients.patients[i].date.split('-');%>
                                                                                                                         <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
                                                                                                                             <%var str1 = formatDate(str);%>
                                                                                                                                 <%function formatDate(d){%>
@@ -385,25 +385,30 @@
                                                              }
                                                                %>
                                                                                                                                         <%}%>
-                                                                                                                                            <td class="std2">
-                                                                                                                                                <%=str1%><span class="d-block text-info"><%=patients.time%></span></td>
-                                                                                                                                            <td class="std2">General</td>
+                                                                                                                                            <td>
+                                                                                                                                                <%=str1%><span class="d-block text-info"><%=allpatients.patients[i].time%></span></td>
+                                                                                                                                           
                                                                                                                                             <%var zz = 0;%>
 
-                                                                                                                                                <%if(!patients.old_flag){%>
+                                                                                                                                                <%if(!allpatients.patients[i].old_flag){%>
                                                                                                                                                 
-                                                                                                                                                <td class="std2">New Patient</td>
+                                                                                                                                                <td>New Patient</td>
                                                                                                                                                 <%}else{%>
-                                                                                                                                                    <td class="std2">Old Patient</td>
+                                                                                                                                                    <td>Old Patient</td>
                                                                                                                                                     <%}%>
 
+                                                                                                                                                    <%if(allpatients.patients[i].type == 'online'){%>
+                                                                                                                                                        <td><span class="badge badge-pill bg-success-light">Paid Online</span></td>
+                                                                                                                                                        <%}else{%>
+                                                                                                                                                            <td><span class="badge badge-pill bg-danger-light">Pay On Clinic</span></td>
+                                                                                                                                                            <%}%>
 
 
 
-                                                                                                                                                <%if(patients.cancel == true){%>
-                                                                                                                                                    <td class="std2"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                                                <%if(allpatients.patients[i].cancel == true){%>
+                                                                                                                                                    <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                                                                                                     <%}else{%>
-                                                                                                                                                        <td class="std2"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                                        <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                                                                                         <%}%>
 
 
@@ -425,21 +430,21 @@
                                                                 <div class="card card-table mb-0">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table table-hover table-center mb-0 stable">
-                                                                                <thead class="sthead">
-                                                                                    <tr class="str">
-                                                                                        <th class="sth">Patient Name</th>
-                                                                                        <th class="sth">Booking Gender</th>
-                                                                                        <th class="sth">Patient Age</th>
-                                                                                        <th class="sth">Patient Phone</th>
-                                                                                        <th class="sth">Patient Address</th>
-                                                                                        <th class="sth">Type</th>
-                                                                                        <th class="sth">Booking Mode</th>
-                                                                                        <th class="text-center sth">Status</th>
+                                                                            <table class="table table-hover table-center mb-0">
+                                                                                <thead >
+                                                                                    <tr>
+                                                                                        <th>Patient Name</th>
+                                                                                        <th>Booking Gender</th>
+                                                                                        <th>Patient Age</th>
+                                                                                        <th>Patient Phone</th>
+                                                                                        <th>Patient Address</th>
+                                                                                        <th>Type</th>
+                                                                                        <th>Booking Mode</th>
+                                                                                        <th class="text-center">Status</th>
 
                                                                                     </tr>
                                                                                 </thead>
-                                                                                <tbody class="stbody">
+                                                                                <tbody>
 
                                                                                     <%var c=0,z1=0,z2=0;%>
                                                                                    
@@ -479,9 +484,9 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                     <%}%>
                                                                                                                                                         <%}%>
 
-                                                                                                                                                            <tr class="str">
+                                                                                                                                                            <tr>
 
-                                                                                                                                                                <td class="std">
+                                                                                                                                                                <td>
                                                                                                                                                                     <h2 class="table-avatar">
 
 
@@ -489,41 +494,41 @@ var dayOfWeek = weekday[today1.getDay()];%>
                                                                                                                                                                             <%=patients.name%> <span>#PT00<%=++c%></span></a>
                                                                                                                                                                     </h2>
                                                                                                                                                                 </td>
-                                                                                                                                                                <td class="std">
+                                                                                                                                                                <td>
                                                                                                                                                                     <%=patients.gender%>
                                                                                                                                                                 </td>
-                                                                                                                                                                <td class="std">
+                                                                                                                                                                <td>
                                                                                                                                                                     <%=patients.age%>
                                                                                                                                                                 </td>
 
                                                                                                                                                              
 
-                                                                                                                                                                <td class="std">
+                                                                                                                                                                <td>
                                                                                                                                                                     <%=patients.phone%>
                                                                                                                                                                 </td>
 
-                                                                                                                                                                <td class="std">
+                                                                                                                                                                <td>
                                                                                                                                                                     <%=patients.address%>
                                                                                                                                                                 </td>
                                                                                                                                                                 <%if(!patients.old_flag){%>
                                                                                                                                                 
-                                                                                                                                                                    <td class="std">New Patient</td>
+                                                                                                                                                                    <td>New Patient</td>
                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                        <td class="std">Old Patient</td>
+                                                                                                                                                                        <td>Old Patient</td>
                                                                                                                                                                         <%}%>
                                                                                                                                                                 <%if(patients.type=='online'){%>
-                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                                                                                                                    <td><span class="badge badge-pill bg-success-light"><%=patients.type.toUpperCase()%></span></td>
                                                                                                                                                                     <%}else{%>
-                                                                                                                                                                        <td class="std"><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
+                                                                                                                                                                        <td><span class="badge badge-pill bg-danger-light"><%=patients.type.toUpperCase()%></span></td>
 
                                                                                                                                                                         <%}%>
 
 
 
                                                                                                                                                                             <%if(patients.cancel == true){%>
-                                                                                                                                                                                <td class="std"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
+                                                                                                                                                                                <td><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                                                                                                                                 <%}else{%>
-                                                                                                                                                                                    <td class="std"><span class="badge badge-pill bg-success-light">Confirm</span></td>
+                                                                                                                                                                                    <td><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                                                                                                                     <%}%>
                                                                                                                                                                                         <td class="text-right">
 
