@@ -119,7 +119,10 @@ router.get('/staff-dashboard', passport.checkStaffAuthentication, homeController
 router.get('/staff-login-page', homeController.staffLoginPage);
 router.get('/customer_service', homeController.customerService);
 router.get('/payment-failure', homeController.paymentFailure);
-
+router.get('/co-vid', homeController.covid);
+router.get('/covid-info', homeController.covidInfo);
+router.get('/covid-doctors', homeController.covidDoctors);
+router.get('/covid-news', homeController.covidNews);
 router.get('/pay-on-clinic-settings', passport.checkDoctorAuthentication,homeController.payOnClinicSettings);
 router.post('/poc-settings', passport.checkDoctorAuthentication,homeController.pocSettings);
 

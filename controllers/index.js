@@ -3602,6 +3602,37 @@ module.exports.paymentFailure = async(req,res) => {
 
 }
 
+module.exports.covid = async(req,res) => {
+   
+    return res.render('c-index',{
+        title:'Covid Vaccination'
+    });
+
+}
+
+module.exports.covidInfo = async(req,res) => {
+   
+    return res.render('c-about',{
+        title:'Covid Vaccination'
+    });
+
+}
+
+module.exports.covidDoctors = async(req,res) => {
+   
+    return res.render('c-doctors',{
+        title:'Covid Vaccine'
+    });
+
+}
+module.exports.covidNews = async(req,res) => {
+   
+    return res.render('c-news',{
+        title:'Covid News'
+    });
+
+}
+
 module.exports.todayBill = async(req,res) => {
    
     return res.render('today-bill',{

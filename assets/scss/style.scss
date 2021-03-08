@@ -8818,9 +8818,19 @@ html.menu-opened body {
     .consult-specilities {
         display: block;
     }
+    .layout_padding{
+        padding-top: 0px !important;
+    }
+    #my_slider a.carousel-control-next {
+        top:102% !important;
+    }
+    #my_slider a.carousel-control-prev {
+        top:102% !important;
+    }
     .health-concerns {
         display: block;
     }
+
     .ssstop {
         margin-top: 0px !important;
         max-height:170px !important;

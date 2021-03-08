@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Convid</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" type="text/css" href="/co-css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" type="text/css" href="/co-css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="/co-css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="/images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="/co-css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <!-- owl stylesheets --> 
+      <link rel="stylesheet" href="/co-css/owl.carousel.min.css">
+      <link rel="stylesheet" href="/co-css/owl.theme.default.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+      <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+       <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+       
+      <link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+      <link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+   </head>
+   <body>
+      <!--header section start -->
+      <div class="header_section header_bg" style="margin-top: -20px;">
+       <header class="header no_admin">
+               <nav class="navbar navbar-expand-lg header-nav d-block">
+                   <div id="stylenavbar" style="margin-top: 10px !important;">
+                       <div class="navbar-header">
+                           <a id="mobile_btn" href="javascript:void(0);">
+                               <i class="bar-icon fas fa-bars" style="font-size: 1.6rem;">
+                                   
+                               </i>
+                           </a>
+                           <a href="/" class="navbar-brand logo" style="width:250px !important;">
+                               <img src="<%=assetPath('img/aalogo.png')%>" style="height:40px;width:230px;margin-top: 20px;margin-left: 0px;" class="img-fluid mlogo" alt="Logo">
+                           </a>
+           
+                       </div>
+                       <div class="main-menu-wrapper">
+                           <div class="menu-header" >
+                               <a href="/" class="menu-logo">
+                                   <img src="<%=assetPath('img/aalogo.png')%>" style="height: 30px;
+                                   width: 181px;
+                                   margin-top: 0px;" class="img-fluid" alt="Logo">
+                               </a>
+                               <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                                   <i class="fas fa-times"></i>
+                               </a>
+                           </div>
+                           <ul class="main-nav">
+                               <li class="active" style="display: none;">
+                                   <a href="index" style="font-size: 1.5rem;">Home</a>
+           
+                               </li>
+                               <li class="mdlist" style="margin-left: 30px;">
+                                   <a href="/doctors" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Doctors</a>
+                                   <a href="/doctors" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book an appointment</a>
+                               </li>
+           
+                               <li class="smlist" style="display: none;">
+                                   <a href="/doctors"><span><i class="fas fa-search" style="margin-right: 0.9375rem;"></i></span><b>Doctors</b> - <span>Book an appointment</span></a>
+                               </li>
+           
+                               <li class="smlist" style="display: none;">
+                                   <a href="/co-vid"><span><i class="fas fa-comments" style="margin-right: 15px;"></i></span><b>Covid Vaccine</b> - <span>Register Now</span></a>
+                               </li>
+                               <li class="smlist" style="display: none;">
+                                   <a href="/test"><span><i class="fas fa-flask" style="margin-right: 15px;"></i></span><b>Diagonistics</b> - <span>Book tests and checkups</span></a>
+                               </li>
+                               <li class="smlist" style="display: none;">
+                                   <a href="/staff-login-page">Staff Login</a>
+                               </li>
+                               <li class="smlist" style="display: none;">
+                                   <a href="/term-condition">Terms and Conditions</a>
+                               </li>
+                               <li class="smlist" style="display: none;">
+                                   <a href="/privacy-policy">Policy</a>
+                               </li>
+                               <li class="smlist" style="display: none;">
+                                   <a href="/customer_service">Customer Service</a>
+                               </li>
+           
+           
+           
+           
+                               <li class="mdlist">
+                                   <a href="/co-vid" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Covid Vaccine</a>
+                                   <a href="/co-vid" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Register Now</a>
+                               </li>
+                               <li class="mdlist">
+                                   <a href="/test" style="font-size: 1.15rem; margin-top: -5px;font-weight: bold;">Diagonistics</a>
+                                   <a href="/test" style=" font-size:0.8rem;margin-top: -65px;font-weight: lighter;">Book tests and checkups</a>
+                               </li>
+           
+           
+           
+           
+                               <li class="has-submenu" style="display: none;">
+                                   <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
+                                   <ul class="submenu">
+                                       <li><a href="/voice-call">Voice Call</a></li>
+                                       <li><a href="/video-call">Video Call</a></li>
+                                       <li><a href="/consult">consult</a></li>
+                                       <li><a href="/search">Search Doctors</a></li>
+                                       <li><a href="/calendar">Calendar</a></li>
+                                       <li><a href="/components">Components</a></li>
+                                       <li class="has-submenu">
+                                           <a href="invoices">Invoices</a>
+                                           <ul class="submenu">
+                                               <li><a href="/invoices">Invoices</a></li>
+                                               <li><a href="/invoice-view">Invoice View</a></li>
+                                           </ul>
+                                       </li>
+                                       <li><a href="/blank-page">Starter Page</a></li>
+                                       <li><a href="/login">Login</a></li>
+                                       <li><a href="/register">Register</a></li>
+                                       <li><a href="/forgot-password">Forgot Password</a></li>
+                                   </ul>
+                               </li>
+           
+                               <%if(locals.user){%>
+           
+           
+                                   <%}else{%>
+                                       <li class="login-link">
+                                           <a href="/login">Login / Signup</a>
+                                       </li>
+                                       <%}%>
+                           </ul>
+                       </div>
+                       <ul class="nav header-navbar-rht">
+                           <li class="nav-item contact-item">
+                               <div class="header-contact-img">
+                                   <i class="far fa-hospital"></i>
+                               </div>
+                               <div class="header-contact-detail">
+                                   <p class="contact-header">Contact</p>
+                                   <p class="contact-info-header"> +91 9304685471</p>
+                               </div>
+                           </li>
+                           <%if(locals.user){%>
+                               <%var signup;%>
+                               <%}else{%>
+                                   
+                                       <li class="nav-item">
+                                           <a class="nav-link header-login" href="/login">Login </a>
+                                       </li>
+                                     
+                                   <%}%>
+                       </ul>
+                       <%if(locals.user){%>
+                           <ul class="nav user-menu mt-md-3">
+           
+                               <!-- Notifications -->
+                               <li class="nav-item dropdown noti-dropdown bell">
+                                   <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                       <i class="far fa-bell" style="color: black; "></i> <span class="badge badge-pill">1</span>
+                                   </a>
+                                   <div class="dropdown-menu notifications">
+                                       <div class="topnav-dropdown-header">
+                                           <span class="notification-title">Notifications</span>
+                                           <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                                       </div>
+                                       <div class="noti-content" style="padding-top:10px ;">
+                                           <ul class="notification-list">
+                                               <%if(locals.user.approve1 == true && locals.user.approve2 == true){%>
+           
+                                                   <li class="notification-message">
+                                                       <a href="#">
+                                                           <div class="media">
+                                                               <span class="avatar avatar-sm">
+                                                           <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
+                                                       </span>
+                                                               <div class="media-body chng">
+                                                                   <a href="">
+                                                                       <p class="noti-details"><span class="noti-title"></span>
+                                                                           <%=locals.user.name%> <span class="noti-title"> your documents has been verified.</span>
+                                                                       </p>
+                                                                   </a>
+                                                                  
+                                                               </div>
+                                                           </div>
+                                                       </a>
+                                                   </li>
+           
+                                                   <%}%>
+                                                       <%if(locals.user.notification){%>
+                                                           <%for(let i = locals.user.notification.length-1;i>=0;i--){%>
+                                                               <li class="notification-message">
+                                                                   <a href="/doctor-profile/?id=<%=locals.user.notification[i].did._id%>">
+                                                                       <div class="media">
+                                                                           <span class="avatar avatar-sm">
+                                                           <img class="avatar-img rounded-circle" alt="User Image" src="<%=locals.user.notification[i].did.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
+                                                       </span>
+                                                                           <div class="media-body">
+                                                                               <p class="noti-details"><span class="noti-title"><%=locals.user.notification[i].message%></p>
+                                                           
+                                                          
+                                                       <p class="noti-time"><span class="notification-time"><%=locals.user.notification[i].createdAt.toLocaleTimeString()%></span></p>
+                                                                           </div>
+                                                                       </div>
+                                                                   </a>
+                                                               </li>
+                                                               <%}%>
+                                                                   <%}%>
+           
+                                           </ul>
+                                       </div>
+                                       <!-- <div class="topnav-dropdown-footer">
+                                           <a href="#">View all Notifications</a>
+                                       </div> -->
+                                   </div>
+                               </li>
+                               <!-- /Notifications -->
+           
+                               <!-- User Menu -->
+                               <%if(locals.user.type == 'Doctor'){%>
+                                   <li class="nav-item dropdown has-arrow">
+                                       <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                           <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
+                                       </a>
+                                       <div class="dropdown-menu profile-drop cloginbtns">
+                                           <div class="user-header">
+                                               <div class="avatar avatar-sm">
+                                                   <img src="<%=locals.user.avatar%>"  alt="User Image" class="avatar-img rounded-circle"  onerror='this.src="<%=assetPath('img/profile.png')%>"'>
+                                               </div>
+                                               <div class="user-text">
+                                                   <h6>Dr.
+                                                       <%=locals.user.name%>
+                                                   </h6>
+                                                   <p class="text-muted mb-0">Doctor</p>
+                                               </div>
+                                           </div>
+                                           <a class="dropdown-item" href="/doctor-profile-settings">My Profile</a>
+                                           <a class="dropdown-item" href="/doctor-dashboard">My Dashboard</a>
+                                           <a class="dropdown-item" href="/live-patient-tracking/?id=<%=locals.user.id%>">Live Patient Tracking</a>
+           
+                                           <a class="dropdown-item" href="/schedule-timings">Schedule Timing</a>
+                                           <!-- <a class="dropdown-item" href="/appointments">Appointments</a> -->
+                                           <!-- <a class="dropdown-item" href="/my-patients">My Patients</a> -->
+                                           <!-- <a class="dropdown-item" href="/invoices">Invoices</a> -->
+                                           <a class="dropdown-item" href="/reviews">Reviews</a>
+                                           <a class="dropdown-item" href="/bank-details">Bank Account</a>
+           
+                                           <a class="dropdown-item" href="/settings">Settings</a>
+                                           <a class="dropdown-item" href="/user/logout">Logout</a>
+                                       </div>
+                                   </li>
+                                   <%}%>
+                                       <%if(locals.user.type == 'Patient'){%>
+                                           <li class="nav-item dropdown has-arrow">
+                                               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                   <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
+                                               </a>
+                                               <div class="dropdown-menu profile-drop cloginbtns">
+                                                   <div class="user-header">
+                                                       <div class="avatar avatar-sm">
+                                                           <img src="<%=locals.user.avatar%>" alt="User Image" class="avatar-img rounded-circle" onerror='this.src="<%=assetPath('img/profile.png')%>"' >
+                                                       </div>
+                                                       <div class="user-text">
+                                                           <h6>
+                                                               <%=locals.user.name%>
+                                                           </h6>
+                                                           <p class="text-muted mb-0">Patient</p>
+                                                       </div>
+                                                   </div>
+           
+                                                   <a class="dropdown-item" href="/profile-settings">My Profile</a>
+                                                   <a class="dropdown-item" href="/patient-dashboard">My Appointments</a>
+                                                   <!-- <a class="dropdown-item" href="/my-orders">My Orders</a> -->
+                                                   <!-- <a class="dropdown-item" href="/diagonistic/cart">My Cart</a> -->
+                                                   <a class="dropdown-item" href="/medical-records">My Test Reports</a>
+                                                   <a class="dropdown-item" href="/prescription">My Prescriptions</a>
+                                                   <a class="dropdown-item" href="/my-billing">My Billings</a>
+                                                   <a class="dropdown-item" href="/favourites">My Favourites</a>
+           
+           
+                                                   <a class="dropdown-item" href="/settings">Settings</a>
+                                                   <a class="dropdown-item" href="/user/logout">Logout</a>
+                                               </div>
+                                           </li>
+                                           <%}%>
+                                            <%if(locals.user.type == 'Diagonistic'){%>
+                                           <li class="nav-item dropdown has-arrow">
+                                               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                   <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%> " onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
+                                               </a>
+                                               <div class="dropdown-menu profile-drop cloginbtns">
+                                                   <div class="user-header">
+                                                       <div class="avatar avatar-sm">
+                                                           <img src="<%=locals.user.avatar%>" alt="User Image" class="avatar-img rounded-circle" onerror='this.src="<%=assetPath('img/profile.png')%>"' >
+                                                       </div>
+                                                       <div class="user-text">
+                                                           <h6>
+                                                               <%if(locals.user.name){%>
+                                                               <%=locals.user.name%>
+                                                               <%}%>
+                                                           </h6>
+                                                           <p class="text-muted mb-0">Diagonistic</p>
+                                                       </div>
+                                                   </div>
+                                                   <a class="dropdown-item" href="/diagonistic/my-dashboard">My Dashboard</a>
+                                                   <a class="dropdown-item" href="/diagonistic/booked-test">Booked Test</a>
+                                                   <a class="dropdown-item" href="/diagonistic/add-test">Add Test</a>
+                                                   <a class="dropdown-item" href="/diagonistic/schedule_timing">Schedule Timing</a>
+                                                  
+           
+           
+                                                   <a class="dropdown-item" href="/settings">Settings</a>
+                                                   <a class="dropdown-item" href="/user/logout">Logout</a>
+                                               </div>
+                                           </li>
+                                           <%}%>
+                                               <%if(locals.user.type == 'Staff'){%>
+                                                   <li class="nav-item dropdown has-arrow">
+                                                       <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                                           <span class="user-img"><img class="rounded-circle" src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' width="31" alt="Ryan Taylor"></span>
+                                                       </a>
+                                                       <div class="dropdown-menu profile-drop cloginbtns">
+                                                           <div class="user-header">
+                                                               <div class="avatar avatar-sm">
+                                                                   <img src="<%=locals.user.avatar%>"   class="avatar-img rounded-circle" onerror='this.src="<%=assetPath('img/profile.png')%>"'>
+                                                               </div>
+                                                               <div class="user-text">
+                                                                   <h6>
+                                                                       <%=locals.user.name%>
+                                                                   </h6>
+                                                                   <p class="text-muted mb-0">Medical Staff</p>
+                                                               </div>
+                                                           </div>
+                                                           <%var aflag = false;%>
+                                                           <%if(locals.user.doctorids.length>0){%>
+                                                               <%aflag = true;%>
+                                                               <%}%>
+                                                           <a class="dropdown-item" href="/staff-profile">My Profile</a>
+                                                           <%if(aflag){%>
+                                                           <a class="dropdown-item" href="/staff-dashboard/?id=<%=locals.user.doctorids[0].doctorid%>">My Dashboard</a>
+                                                           <%}else{%>
+                                                               <a class="dropdown-item" href="/staff-dashboard/?id=<%=locals.user.doctorid%>">My Dashboard</a>
+                                                               <%}%>
+                                                           <a class="dropdown-item" href="/pay-on-clinic-patients">Pay On Clinic</a>    
+                                                           <%if(aflag){%>
+                                                           <a class="dropdown-item" href="/select-doctor/?type=schedule">Schedule Timing</a>
+                                                           <%}else{%>
+                                                               <a class="dropdown-item" href="/staff-schedule-timings/?id=<%=locals.user.doctorid%>">Schedule Timing</a>
+                                                               <%}%>
+                                                               <%if(aflag){%>
+                                                                   <a class="dropdown-item" href="/select-doctor/?type=bservice">Pause/Resume Booking</a>
+                                                                   <%}else{%>
+                                                                       <a class="dropdown-item" href="/staff-booking-service/?id=<%=locals.user.doctorid%>">Pause/Resume Booking</a>
+                                                                       <%}%>
+                                                               <%if(aflag){%>
+                                                                   <a class="dropdown-item" href="/select-doctor/?type=oldbooking">Old Patient Booking</a>
+                                                                   <%}else{%>
+                                                                  
+                                                                       <%if(locals.user.old_flag){%>
+                                                                           <a class="dropdown-item" href="/staff-old-booking/?id=<%=locals.user.doctorid%>">Old Patient Booking</a>
+                                                                           <%}%>
+                                                                       <%}%> 
+                                                                         
+                                                               <%if(aflag){%>
+                                                                   <a class="dropdown-item" href="/select-doctor/?type=booking">Book Appointment</a>
+                                                                   <%}else{%>
+                                                                       <a class="dropdown-item" href="/staff-booking/?id=<%=locals.user.doctorid%>">Book Appointment</a>
+                                                                       <%}%>
+                                                                       <%if(locals.user.premium){%>
+                                                                           <a class="dropdown-item" href="/add-entries">Add Entries</a>
+                                                                           <%}%>  
+                                                                           <%if(locals.user.premium && locals.user.entries.length>0){%>
+                                                                               <a class="dropdown-item" href="/add-bill">Reception Billing</a>
+                                                                               <%}%>  
+                                                                               <%if(locals.user.premium && locals.user.entries.length>0){%>
+                                                                                   <a class="dropdown-item" href="/lab-bill">Lab Billing</a>
+                                                                                   <%}%>  
+                                                                       <%if(aflag){%>
+                                                                           <a class="dropdown-item" href="/select-doctor/?type=tracking">Track Patient</a>
+                                                                           <%}else{%>
+                                                                               <a class="dropdown-item" href="/patient-tracking">Track Patient</a>
+                                                                               <%}%>
+                                                           <a class="dropdown-item" href="/settings">Settings</a>
+                                                           <a class="dropdown-item" href="/user/logout">Logout</a>
+                                                       </div>
+                                                   </li>
+                                                   <%}%>
+           
+           
+           
+                           </ul>
+                           <%}%>
+           
+           
+                   </div>
+               </nav>
+           </header>
+            <!-- banner section start -->
+            <div class="container" style="background: transparent;">
+               <div class="about_taital_main">
+                  <h2 class="about_tag">Doctors Corona Virus</h2>
+                  
+               </div>
+            </div>
+         <!-- banner section end -->
+      </div>
+      <!-- header section end -->
+      <!-- doctor section start -->
+      <div class="doctors_section layout_padding">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="taital_main">
+                     <div class="taital_left">
+                        <div class="play_icon"><img src="images/play-icon.png"></div>
+                     </div>
+                     <div class="taital_right">
+                        <h1 class="doctor_taital">What doctors say..</h1>
+                        <p class="doctor_text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
+                        <div class="readmore_bt"><a href="#">Read More</a></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- doctor section end -->
+      <!-- footer section start -->
+      <div class="footer_section" style="background-color: none !important; padding: 0px !important;">
+         <%- include('footer')%>
+      </div>
+      <!-- footer section end -->
+      <!-- copyright section start -->
+      
+      <!-- copyright section end -->
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+      <script src="js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/custom.js"></script>
+      <!-- javascript --> 
+      <script src="js/owl.carousel.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+              
+         $(".zoom").hover(function(){
+              
+         $(this).addClass('transition');
+         }, function(){
+              
+         $(this).removeClass('transition');
+         });
+         });
+      </script> 
+      <script>
+         function openNav() {
+         document.getElementById("myNav").style.width = "100%";
+         }
+         function closeNav() {
+         document.getElementById("myNav").style.width = "0%";
+         }
+      </script>  
+   </body>
+</html>
