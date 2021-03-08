@@ -32,6 +32,7 @@ router.get('/delete-consult',passport.checkAdminAuthentication, adminController.
 router.get('/edit-test',passport.checkAdminAuthentication, adminController.edittest);
 router.get('/doctor-list',passport.checkAdminAuthentication, adminController.doctorList);
 router.get('/error-404',passport.checkAdminAuthentication, adminController.error404);
+router.get('/enable-poc',passport.checkAdminAuthentication, adminController.enablePoc);
 router.get('/error-500',passport.checkAdminAuthentication, adminController.error500);
 router.get('/forgot-password',passport.checkAdminAuthentication, adminController.forgotPassword);
 router.get('/form-basic-inputs',passport.checkAdminAuthentication, adminController.formBasicInputs);

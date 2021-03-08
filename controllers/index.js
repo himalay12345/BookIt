@@ -2701,6 +2701,25 @@ module.exports.twoFactor = async(req, res) => {
         
     }
 }
+
+module.exports.pocSettings = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    if(req.body.flag)
+    {
+        if(req.body.flag == 'enable')
+        {
+            user.poc = true;
+        }
+
+        if(req.body.flag == 'disable')
+        {
+            user.poc = false;
+        }
+
+        user.save();
+        return res.redirect('back')
+    }
+}
 module.exports.staffOldBooking = async(req, res) => {
     
     
@@ -3553,13 +3572,33 @@ module.exports.editPatient = async(req,res) => {
 }
 
 module.exports.acceptPatient = async(req,res) => {
+    // let user = await User.findOne({ 'booking._id': req.query.id })
     let day = await User.updateOne({ 'booking._id': req.query.id }, {
         '$set': {
             'booking.$.accept':true
 
         }
     });
+
+    // console.log(user.name,user.type)
     return res.redirect('back')
+
+}
+
+module.exports.payOnClinicSettings = async(req,res) => {
+   
+    return res.render('pay-on-clinic-settings',{
+        title:'Settings'
+    });
+
+}
+
+
+module.exports.paymentFailure = async(req,res) => {
+   
+    return res.render('payment-failure',{
+        title:'Payment Failure'
+    });
 
 }
 

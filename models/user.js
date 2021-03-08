@@ -442,6 +442,31 @@ const userSchema = mongoose.Schema({
         createdAt: { type: Date, default: Date.now }
     }],
 
+    poc:{
+        type:Boolean
+    },
+
+    poc_billing:[{
+        month:{
+            type:String
+        },
+        amount:{
+            type:Number
+        },
+        paid:{
+            type:Number
+        },
+        paid_by:{
+            type:String
+        },
+        due:{
+            type:Number
+        },
+        due_flag:{
+            type:Boolean
+        }
+    }],
+
     patients:[{
         payment_id:{
             type:String

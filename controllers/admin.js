@@ -20,6 +20,14 @@ module.exports.test = async(req, res) => {
         title: 'Test'
     })
 }
+
+module.exports.enablePoc = async(req, res) => {
+    let user = await User.findById(req.query.id);
+   user.poc = true;
+   user.save();
+
+   return res.redirect('back')
+}
 module.exports.addtest = async(req, res) => {
 
 

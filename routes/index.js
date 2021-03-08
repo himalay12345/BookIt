@@ -118,7 +118,10 @@ router.get('/staff-dashboard', passport.checkStaffAuthentication, homeController
 // router.get('/staff-add-doctor', passport.checkStaffAuthentication, homeController.staffAddDoctor);
 router.get('/staff-login-page', homeController.staffLoginPage);
 router.get('/customer_service', homeController.customerService);
+router.get('/payment-failure', homeController.paymentFailure);
 
+router.get('/pay-on-clinic-settings', passport.checkDoctorAuthentication,homeController.payOnClinicSettings);
+router.post('/poc-settings', passport.checkDoctorAuthentication,homeController.pocSettings);
 
 router.get('/staff-booking', passport.checkStaffAuthentication, homeController.staffBooking);
 router.get('/pay-on-clinic-patients', passport.checkStaffAuthentication, homeController.payOnClinicPatients);

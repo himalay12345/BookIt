@@ -37,7 +37,7 @@
                                 <li class="breadcrumb-item active" aria-current="page"><a href="/settings">Settings</a></li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">2-Factor Authentication</h2>
+                        <h2 class="breadcrumb-title">Pay On Clinic</h2>
                     </div>
                 </div>
             </div>
@@ -60,11 +60,11 @@
                                 <li><a href="/doctor-change-password">Change Password</a></li>
                                 <%}%>   
                                 <%if(locals.user.service != 'google'){%>
-                                    <li><a href="/two-factor"><b>2-Factor Authentication</b></a></li>
-                                    <%}%> 
+                                    <li><a href="/two-factor">2-Factor Authentication</a></li>
+                                    <%}%>
                                     <%if(locals.user.type == 'Doctor'){%>
-                                        <li><a href="/pay-on-clinic-settings">Pay On Clinic</a></li>
-                                        <%}%> 
+                                        <li><a href="/pay-on-clinic-settings"><b>Pay On Clinic</b></a></li>
+                                        <%}%>
                                 <%if(locals.user.type != 'Staff'){%>
                                     <li><a href="/notification-settings">Notification Settings</a></li>
                                     <%}%>      
@@ -80,16 +80,16 @@
                             <div class="card-body" style="padding: 2.2rem;">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12">
-                                        <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Two Factor Authentication</h3>
-                                        <h3 style="font-size: 0.8rem; font-weight: bold;">For better security & privacy enable 2-Factor verification so that on every login you will recieve an otp and if otp is entered correct then only you can login. </h3>
+                                        <h3 style="font-size: 0.9rem; font-weight: bold;border-bottom: 1px solid grey;padding-bottom: 10px;">Pay On Clinic</h3>
+                                        <h3 style="font-size: 0.8rem; font-weight: bold;">Once you enable this option patients can book online confirmed appointment and pay the cash on clinic. </h3>
                                         <!-- Change Password Form -->
                                        
                                         <!-- /Change Password Form -->
 
                                     </div>
-                                    <form action="/two-factor" method="POST">
-                                        <%console.log(locals.user.twofactor)%>
-                                        <%if(locals.user.twofactor == true){%>
+                                    <form action="/poc-settings" method="POST">
+                                        <%console.log(locals.user.poc)%>
+                                        <%if(locals.user.poc == true){%>
                                     <div class="col-md-3 nots-span" style="display: inline-flex;margin-top: 15px;">
                                    
                                         <span style="margin-right: 15px;"><input type="checkbox" name="flag" value="enable" checked onchange="check(this)" class="form-check cb"></span>
@@ -102,7 +102,7 @@
                                                 <span><b><p style="margin-top: -5px;">Enable</p></b>
                                                 </div>
                                             <%}%>
-                                        <%if(locals.user.twofactor != true){%>
+                                        <%if(locals.user.poc != true){%>
                                         <div class="col-md-3 nots-span no_margin_left" style="display: inline-flex;margin-top: 15px;margin-left: 50px;">
                                         <span style="margin-right: 15px;"><input type="checkbox" value="disable" name="flag" onchange="check(this)" data-type="disabled" class="form-check cb" checked></span>
                                         <span><b><p style="margin-top: -5px;">Disabled</p></b>

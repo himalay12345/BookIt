@@ -1529,6 +1529,126 @@ console.log(req.body)
 
 }
 
+module.exports.payOnline = async function(req, res) {
+
+    try{
+        
+            let doctor = await User.findById(req.body.doctorid);
+                const razorpay = new Razorpay({
+                    key_id: env.razorpay_key_id,
+                    key_secret: env.razorpay_key_secret
+                
+            });
+
+          
+
+
+            const payment_capture = 1;
+            const amount = doctor.booking_fee;
+            const currency = 'INR';
+            var notes;
+            if (req.body.type == 'own') {
+                notes = {
+                    patient_name: req.body.name,
+                    patient_age:req.body.age,
+                    patient_gender:req.body.gender,
+                    patient_phone:req.body.phone,
+                    patient_address:req.body.address
+                }
+            }
+            if (req.body.type == 'other') {
+                notes = {
+                    patient_name: req.body.pname,
+                    patient_age:req.body.page,
+                    patient_phone:req.body.pphone,
+                    patient_address:req.body.paddress,
+                    patient_gender:req.body.pgender
+                }
+            }
+           
+            const vendor_amount = amount-(amount*0.04);
+           var stra = req.body.date.split('-');
+           var strb = stra[2]+'-'+stra[1]+'-'+stra[0];      
+           var bdate = new Date(strb);
+           bdate.setDate(bdate.getDate() + 1);
+           var ndate = bdate.getTime()/1000;
+            
+            const response = await razorpay.orders.create({
+                amount:amount*100,
+                currency,
+                receipt: shortid.generate(),
+                payment_capture,
+                notes,
+                transfers: [
+                    {
+                    account: doctor.accountid,
+                    amount: vendor_amount*100,
+                    currency: "INR"
+                   
+                    
+                    }
+                ]
+
+        
+        });
+
+        let user = await User.findById(req.user.id);
+console.log(response);
+
+        if (req.body.type == 'own') {
+            user.name = req.body.name;
+            user.phone = req.body.phone;
+            user.age = req.body.age;
+            user.gender = req.body.gender;
+            user.contacts.address = req.body.address;
+        }
+
+        if (req.body.type == 'other') {
+            user.others.push({
+                name: req.body.pname,
+                email: req.body.pemail,
+                phone: req.body.pphone,
+                address: req.body.paddress,
+                age: req.body.page,
+                gender:req.body.pgender
+
+            });
+        }
+
+        user.refresh_flag = true;
+        user.save();
+
+
+        return res.render('pay', {
+            title: 'Payment',
+            response: response,
+            amount: response.amount,
+            orderid: response.id,
+            currency: response.currency,
+            booked: req.body.booked,
+            available: req.body.available,
+            slotindex: req.body.slotindex,
+            dayindex: req.body.dayindex,
+            id: req.body.id,
+            doctor: doctor,
+            type: req.body.type,
+            user: user,
+            date: req.body.date
+
+        })
+        
+        
+      
+    } catch (err) {
+        console.log('Error', err);
+        if(err.statusCode == 400)
+        {
+            return res.redirect('/payment-failure')
+        }
+    }
+
+}
+
 module.exports.selectPayment = async function(req, res) {
 
     try{
@@ -1537,8 +1657,8 @@ module.exports.selectPayment = async function(req, res) {
 
 
     
-
-
+        if(doctor.poc)
+        {
         return res.render('select-payment', {
             title: 'Select Payment Method',
             amount: doctor.booking_fee,
@@ -1565,6 +1685,9 @@ module.exports.selectPayment = async function(req, res) {
 
 
         })
+    }else{
+        return res.redirect(307, '/user/pay-online'); 
+    }
     } catch (err) {
         console.log('Error', err);
     }
