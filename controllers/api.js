@@ -1136,6 +1136,8 @@ console.log(response);
                             to: '+91' + user.phone
                         })
                         .then(message => console.log(message.sid));
+                        if(staff)
+                        {
                         client.messages
                         .create({
                             body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + date + ', Day - ' + day + ', Time - ' + time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
@@ -1145,6 +1147,7 @@ console.log(response);
                             to: '+91' + staff.phone
                         })
                         .then(message => console.log(message.sid));
+                    }
                     if (user.email) {
                         appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,date,day,time, fee,user.email);
                     }
@@ -1416,6 +1419,7 @@ console.log(response);
                             to: '+91' + user.phone
                         })
                         .then(message => console.log(message.sid));
+                        if(staff){
                         client.messages
                         .create({
                             body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + date + ', Day - ' + day + ', Time - ' + time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
@@ -1425,6 +1429,7 @@ console.log(response);
                             to: '+91' + staff.phone
                         })
                         .then(message => console.log(message.sid));
+                    }
                     if (user.email) {
                         appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,date,day, time, fee,user.email);
                     }
