@@ -1102,7 +1102,8 @@ console.log(response);
                         //    }) 
                         //   .then(message => console.log(message.sid)) 
                         //   .done();
-        
+                        if(staff)
+                        {
                         client.messages
                             .create({
                                 body: 'CONFIRMED Appointment for ' + date + ' at ' + time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
@@ -1112,6 +1113,17 @@ console.log(response);
                                 to: '+91' + req.body.phone
                             })
                             .then(message => console.log(message.sid));
+                        }else{
+                            client.messages
+                            .create({
+                                body: 'CONFIRMED Appointment for ' + date + ' at ' + time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                                from: '+12019755459',
+                                alphanumeric_id : "AarogyaHub",
+                                statusCallback: 'http://postb.in/1234abcd',
+                                to: '+91' + req.body.phone
+                            })
+                            .then(message => console.log(message.sid));
+                        }
                         if (req.body.email) {
                             appointmentAlert.newAlert(date, time, req.body.email, user, patient);
                         }
@@ -1367,7 +1379,9 @@ console.log(response);
                         //    }) 
                         //   .then(message => console.log(message.sid)) 
                         //   .done();
-        
+
+                        if(staff)
+                        {
                         client.messages
                             .create({
                                 body: 'CONFIRMED Appointment for ' + date + ' at ' + time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
@@ -1377,6 +1391,19 @@ console.log(response);
                                 to: '+91' + req.body.phone
                             })
                             .then(message => console.log(message.sid));
+                        }
+                        else{
+                            client.messages
+                            .create({
+                                body: 'CONFIRMED Appointment for ' + date + ' at ' + time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                                from: '+12019755459',
+                                alphanumeric_id : "AarogyaHub",
+                                statusCallback: 'http://postb.in/1234abcd',
+                                to: '+91' + req.body.phone
+                            })
+                            .then(message => console.log(message.sid));
+                         
+                        }
                         if (req.body.email) {
                             appointmentAlert.newAlert(date, time, req.body.email, user, patient);
                         }
