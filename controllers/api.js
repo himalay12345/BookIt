@@ -1395,7 +1395,7 @@ console.log(response);
                         else{
                             client.messages
                             .create({
-                                body: 'CONFIRMED Appointment for ' + date + ' at ' + time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                                body: 'CONFIRMED Appointment for ' + date + ' at ' + time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
                                 from: '+12019755459',
                                 alphanumeric_id : "AarogyaHub",
                                 statusCallback: 'http://postb.in/1234abcd',
