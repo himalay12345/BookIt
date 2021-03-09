@@ -2663,7 +2663,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                      if (staff) {
 
                         staff.booking.push({
-                            payment_id: req.body.razorpay_payment_id,
+                            payment_id: orderid,
                             name: req.body.name,
                             address: req.body.address,
                             phone: req.body.phone,
@@ -2759,11 +2759,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
 
                 }
                 patient.refresh_flag = false;
-                patient.payments.push({
-                    payment_id: orderid,
-                    order_id: req.body.razorpay_order_id,
-                    signature: req.body.razorpay_signature
-                });
+               
                 patient.notification.push({
                     type: 'appointment-success',
                     message: 'Your Appointment is confirmed with Dr. ' + user.name + ' on ' + req.body.date + ' at ' + req.body.time,
@@ -3008,11 +3004,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
 
                 }
                 patient.refresh_flag = false;
-                patient.payments.push({
-                    payment_id: orderid,
-                    order_id: req.body.razorpay_order_id,
-                    signature: req.body.razorpay_signature
-                });
+                
                 patient.notification.push({
                     type: 'appointment-success',
                     message: 'Your Apointment is confirmed with Dr. ' + user.name + ' on ' + req.body.date + ' at ' + req.body.time,
