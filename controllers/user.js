@@ -5705,35 +5705,53 @@ module.exports.oldSortByDate = async(req, res) => {
 }
 
 module.exports.saveCovidForm = async(req, res) => {
+    console.log(req.body)
     let covid = await Covid.create({
-        name:req.body.name,
-        aadhar:req.body.aadhar,
-        dob:req.body.dob,
-        gender:req.body.gender,
-        email:req.body.email,
-        phone:req.body.phone,
-        address:req.body.address,
-        doYou:req.body.doYou,
-        medicine:req.body.medicine,
-        allergy:req.body.allergy,
-        symptoms:req.body.symptoms,
-        haveYou:req.body.haveYou,
-        ifYes:req.body.ifYes,
-        iHereby:req.body.iHereby,
+        name:req.body.q3_name.first,
+        aadhar:req.body.q13_idProof,
+        dob:req.body.q8_birthDate,
+        gender:req.body.q9_gender,
+        email:req.body.q4_email,
+        phone:req.body.q5_phoneNumber.phone,
+        address:req.body.q6_address,
+        doYou:req.body.q15_doYou,
+        haveYou:req.body.q20_haveYou,
+        ifYes:req.body.q22_ifYes,
+        iHereby:req.body.q23_iHereby23,
+        idtype:req.body.q24_selectId
 
     })
 
-    // if(covid.email)
-    // {
-    //     appointmentAlert.covidAlert(req.body.name,req.body.aadhar,req.body.dob,req.body.gender,req.body.email,req.body.phone,req.body.address,req.body.doYou,req.body.medicine,req.body.symptoms,req.body.haveYou)
-    // }
-    appointmentAlert.adminCovidAlert(req.body.name,req.body.aadhar,req.body.dob,req.body.gender,req.body.email,req.body.phone,req.body.address,req.body.doYou,req.body.medicine,req.body.symptoms,req.body.haveYou)
+    client.messages
+    .create({
+        body: 'Covid Vaccination Registration Successful for Patient Name - ' + req.body.q3_name.first + ', Phone - ' + req.body.q5_phoneNumber.phone + ', Address - ' + req.body.q6_address.addr_line1 + ', Gender - ' + req.body.q9_gender + '. You will recieve the call from Nucare Hospital for the vaccination. The Address for vaccination is Nucare Hospital, Kumarpara, Dumka, Jharkhand.',
+        from: '+12019755459',
+        alphanumeric_id : "AarogyaHub",
+        statusCallback: 'http://postb.in/1234abcd',
+        to: '+91' + req.body.q5_phoneNumber.phone
+    })
+    .then(message => console.log(message.sid));
+    client.messages
+    .create({
+        body: 'Covid Vaccination Registration Successful from AarogyaHub for Patient Name - ' + req.body.q3_name.first + ', Phone - ' + req.body.q5_phoneNumber.phone + ', Address - ' + req.body.q6_address.addr_line1 + ', Gender - ' + req.body.q9_gender + '. ',
+        from: '+12019755459',
+        alphanumeric_id : "AarogyaHub",
+        statusCallback: 'http://postb.in/1234abcd',
+        to: '+917004483889'
+    })
+    .then(message => console.log(message.sid));
+    appointmentAlert.adminCovidAlert(req.body.q3_name.first,req.body.q13_idProof,req.body.dob,req.body.gender,req.body.email,req.body.q5_phoneNumber.phone,req.body.q6_address.addr_line1,req.body.doYou,req.body.medicine,req.body.symptoms,req.body.haveYou)
 
 
 
 
     return res.render('covid-success', {
-        title: 'Covid Form'
+        title: 'Covid Form',
+        name:req.body.q3_name.first,
+        phone:req.body.q5_phoneNumber.phone,
+        address:req.body.q6_address.addr_line1,
+        gender:req.body.q9_gender
+
     })
 
 }
