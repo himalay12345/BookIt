@@ -1,4 +1,5 @@
 let User = require('../models/user');
+let Covid = require('../models/covid');
 const fs = require('fs');
 const path = require('path');
 const shortid = require('shortid');
@@ -1826,7 +1827,8 @@ module.exports.orderCancel = async function(req, res) {
                if(req.body.flag == 'yes')
                 {
 
-                       let n1 = await User.updateOne({ "_id" : req.user.id, "booked_test_user._id": req.body.tid}, {
+
+                       let n1 = await User.updateOne({ "_id" : req.user.id, "booked_test_user._id": req.body.id}, {
                             '$set': {
                                 
                                 'booked_test_user.$.cancel': true
@@ -1834,8 +1836,10 @@ module.exports.orderCancel = async function(req, res) {
                             }
                         });
                       
-                       
-                        let n2 = await User.updateOne({ "_id" : req.user.id, "booked_test_lab._id": req.body.tid}, {
+                       let lab = await User.findById(req.body.lid);
+                       let id = lab.booked_test_lab[req.body.tindex]._id;
+
+                        let n2 = await User.updateOne({ "_id" : lab._id, "booked_test_lab._id": id}, {
                             '$set': {
                                 
                                 'booked_test_lab.$.cancel': true
@@ -5697,6 +5701,40 @@ module.exports.oldSortByDate = async(req, res) => {
             user1:user1
         })
     }
+
+}
+
+module.exports.saveCovidForm = async(req, res) => {
+    let covid = await Covid.create({
+        name:req.body.name,
+        aadhar:req.body.aadhar,
+        dob:req.body.dob,
+        gender:req.body.gender,
+        email:req.body.email,
+        phone:req.body.phone,
+        address:req.body.address,
+        doYou:req.body.doYou,
+        medicine:req.body.medicine,
+        allergy:req.body.allergy,
+        symptoms:req.body.symptoms,
+        haveYou:req.body.haveYou,
+        ifYes:req.body.ifYes,
+        iHereby:req.body.iHereby,
+
+    })
+
+    // if(covid.email)
+    // {
+    //     appointmentAlert.covidAlert(req.body.name,req.body.aadhar,req.body.dob,req.body.gender,req.body.email,req.body.phone,req.body.address,req.body.doYou,req.body.medicine,req.body.symptoms,req.body.haveYou)
+    // }
+    appointmentAlert.adminCovidAlert(req.body.name,req.body.aadhar,req.body.dob,req.body.gender,req.body.email,req.body.phone,req.body.address,req.body.doYou,req.body.medicine,req.body.symptoms,req.body.haveYou)
+
+
+
+
+    return res.render('covid-success', {
+        title: 'Covid Form'
+    })
 
 }
 module.exports.doctorSortByDate = async(req, res) => {

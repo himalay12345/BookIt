@@ -171,7 +171,7 @@
                                 <li id="show_report"><div class="node green">4</div><p>Reports Available</p></li>
                                 <span id="show_all_report">
                                 <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 50px;position: absolute;" id="add_more_btn">Add More</a></li>
-                                <a href="<%=locals.user.booked_test_lab[index].my_reports%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 180px;position: absolute;">See Reports</a></li>
+                                <a href="/diagonistic/see-reports/?index=<%=index%>" style="padding:2px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;margin-top: 5px;margin-left: 180px;position: absolute;">See Reports</a></li>
                                 </span>
                                 <form class="displayNone" action="/diagonistic/upload-report" id="sub_frm1" method="POST" enctype="multipart/form-data">
                                        

@@ -31,10 +31,11 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Booked Tests</li>
+                                <li class="breadcrumb-item active" aria-current="page">Covid Patients</li>
                             </ol>
                         </nav>
-                         
+                       
+                        <h2 class="breadcrumb-title">Vaccination</h2>
                     </div>
 
                 </div>
@@ -49,12 +50,15 @@
                 <div class="row">
                    
                     <div class="col-md-12 col-lg-12 col-xl-12 position-relative">
+                      
+                       
+                       
+
                         <div class="row">
                             <div class="col-md-12">
                                 <h4 class="mb-4">Patient Appoinment</h4>
                                 <div class="col-12 col-md-12">
-                                    <%var date;%>
-                                    <form action="/diagonistic/test-sort-by-date" method="POST">
+                                    <form action="/user/poc-sort-by-date/?id=" method="POST">
                                         <div class="form-group" style="display: inline-flex;width: 100%;">
                                             <label class="mslabel" style="font-size: 1.1rem;margin-top: 8px;font-weight: bold;">Sort By Date</label>
                                             <div class="cal-icon col-md-3" style="padding-right: 15px;">
@@ -73,8 +77,8 @@
                                     <!-- Appointment Tab -->
 
                                     <!-- /Appointment Tab -->
-                                    <%if(locals.user.booked_test_lab.length == 0){%>
-                                        <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Test Booked Yet !</span></h2>
+                                    <%if(covid.length == 0){%>
+                                        <h2 class="text-center" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Appointment Available !</span></h2>
                                         <%}else{%>
                                             <div class="tab-content">
                                                 <div class="tab-pane show active" id="upcoming-appointments">
@@ -85,29 +89,32 @@
                                                                     <thead class="sthead">
                                                                         <tr class="str">
                                                                             <th class="sth">Patient Name</th>
+                                                                            <th class="sth">Aadhar Number</th>
                                                                             <th class="sth">Patient Phone</th>
-                                                                            <th class="sth">Patient Age</th>
                                                                             <th class="sth">Patient Address</th>
-                                                                            <th class="sth">Appt Date</th> 
-                                                                            <th class="text-center sth">Status</th>
-                                                                            <th class="sth">Track</th> 
-                                                                            <th class="sth">Cancel</th> 
+                                                                            <th class="sth">Patient Dob</th>
+                                                                            <th class="sth">Patient Gender</th>
+                                                                            <th class="sth">Chronic Disease</th>
+                                                                          
 
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody class="stbody">
-                                                                        <%var c=0,z=0;c1=0,z31=0;%>
+                                                                        <%var c=0,z=0;%>
                                                                             <%var date;%>
-                                                                                <%for(patients of locals.user.booked_test_lab){%>
+                                                                                <%for(patients of covid){%>
                                                                                     <%if(date != undefined){%>
                                                                                         <%console.log(date)%>
                                                                                         <%if(date != patients.date){%>
+                                                                                            <%console.log(date, patients.date)%>
                                                                                             <%z++;continue;%>
                                                                                                 <%}%>
-                                                                                                <%}%>
                                                                                                
-                                                                                                    
-                                                                                                        
+                                                                                                    <%}else{%>
+                                                                                                       
+                                                                                                       
+                                                                                                        <%}%>
+                                                                                                        <%console.log(patients.did)%>
                                                                                                         <tr class="str">
                                                                                                             <td class="std1">
                                                                                                                 <h2 class="table-avatar">
@@ -115,58 +122,38 @@
 
 
                                                                                                                     <a href="#">
-                                                                                                                        <%=patients.user.name%> <span>#PT00<%=++c%></span></a>
+                                                                                                                        <%=patients.name%> <span>#PT00<%=++c%></span></a>
                                                                                                                 </h2>
                                                                                                             </td>
                                                                                                             <td class="std1">
-                                                                                                                <%=patients.user.phone%>
+                                                                                                                <%=patients.aadhar%>
                                                                                                             </td>
                                                                                                             <td class="std1">
-                                                                                                                <%=patients.user.age%> / <%=patients.user.gender%>
+                                                                                                                <%=patients.phone%>
                                                                                                             </td>
                                                                                                             <td class="std1">
-                                                                                                                <%=patients.address.flatno%>
-                                                                                                                <span class="d-block text-info"><%=patients.address.street%></span>
-                                                                                                                <span class="d-block text-info"><%=patients.address.city%></span>
+                                                                                                                <%=patients.address.addr_line1%>
                                                                                                             </td>
                                                                                                             <td class="std1">
-                                                                                                                <%=patients.date%><span class="d-block text-info"><%=patients.stime%>-<%=patients.etime%></span></td>
-                                                                                                        
+                                                                                                                <%=patients.dob.day%>-<%=patients.dob.month%>-<%=patients.dob.year%>
+                                                                                                                </td>
+                                                                                                                <td class="std1">
+                                                                                                                    <%=patients.gender%></td>
+                                                                                                                    <td class="std1">
+                                                                                                                        <%=patients.doYou%></td>
+    
+
+
+                                                                                                            
+
+
                                                                                                             <%if(patients.cancel == true){%>
                                                                                                                 <td class="std1"><span class="badge badge-pill bg-danger-light">Cancelled</span></td>
                                                                                                                 <%}else{%>
                                                                                                                     <td class="std1"><span class="badge badge-pill bg-success-light">Confirm</span></td>
                                                                                                                     <%}%>
-                                                                                                                    <td>
-                                                                                                                        <a href="/diagonistic/track-test/?lid=<%=locals.user._id%>&stime=<%=patients.stime%>&etime=<%=patients.etime%>&date=<%=patients.date%>&index=<%=c1++%>" style="padding:8px;border:1px solid grey;border-radius: 5px;background-color: #15558d;color:white;text-align: center;width:120px;display: block;"><span><i class="fas fa-flask" style="margin-right: 8px;"></i></span>Track</a>
-                                                
-                                                                                                                    </td>
-                                                                                                                    <%if(!patients.cancel){%>
-                                                                                                                    <td class="text-right">
-                                                                                                                        <a href="#popup<%=z31%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
-                                                                                                                        <i class="fas fa-print"></i> Cancel
-                                                                                                                    </a>
-                                                                                                                    <%}%>
-                                                                                                                </td>
-                                                                                                                <div id='popup<%=z31%>' class="overlay">
-                                                                                                                    <div class="popup">
-                                                                                                                        <form action="/diagonistic/order-cancel" id="form<%=c%>" method="POST">
-                                                                                                                            <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
-                                                                                                                                <div class="form-group">
-                                                                                                                                    <label style="color: rgb(138, 138, 138);">Do you really want to cancel the order?</label></br>
-                                                                                                                                    <input type="hidden" name="id" value="<%=locals.user.booked_test_lab[z31]._id%>">
-                                                                                                                                    <input type="hidden" name="tid" value="<%=locals.user.booked_test_lab[z31].tid%>">
-                                                                                                                                    <input type="hidden" name="pid" value="<%=locals.user.booked_test_lab[z31].uid%>">
-                                                                                                                                    <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
-                                                                                                                                    <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
-                                                                                                                                    </select>
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" id="form-btns">Continue</button>
-                                                                                                                        </form>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <%z31++;%>
+
+
 
                                                                                                         </tr>
                                                                                                         <%}%>
@@ -175,7 +162,7 @@
 
 
                                                                 </table>
-                                                                <%if(z==locals.user.booked_test_lab.length){%>
+                                                                <%if(z==covid.length){%>
                                                                     <h2 style="margin-top: 50px;margin-bottom: 50px;text-align: center;">No patients visited on this date.</h2>
                                                                     <%}%>
                                                             </div>

@@ -24,10 +24,12 @@ router.post('/accept-agreement', diagController.acceptAgreement);
 router.get('/add-bank', diagController.addBank);
 router.post('/bank-details', diagController.bankDetails);
 router.get('/add-test', diagController.addTest);
-router.post('/add-test', diagController.addTestData);
+router.get('/add-test-data', diagController.addTestData);
 router.get('/delete-test', diagController.deleteTest);
+router.get('/delete-test-data', diagController.deleteTestData);
 router.post('/update-test', diagController.updateTest);
 router.get('/lab-profile',diagController.labProfile)
+router.get('/select-lab-test',diagController.selectLabTest)
 router.get('/all-tests',diagController.allTests)
 router.get('/all-labs',diagController.allLabs)
 router.get('/lab-all-tests',diagController.labAllTests)
@@ -36,7 +38,9 @@ router.post('/select-lab',diagController.selectLab1)
 router.post('/change-lab',diagController.changeLab)
 router.get('/change-lab',diagController.changeLab1)
 router.get('/remove-cart-item',diagController.removeCartItem);
+router.get('/remove-cart-item1',diagController.removeCartItem1);
 router.get('/add-cart-item',diagController.addCartItem);
+router.get('/add-cart-item1',diagController.addCartItem1);
 router.get('/cart',diagController.cart);
 router.get('/schedule_timing',diagController.scheduleTiming);
 router.get('/add-patient',diagController.addPatient);
@@ -65,6 +69,9 @@ router.get('/booked-test', diagController.bookedTest);
 router.get('/assign-phlebotomist', diagController.assignPhlebotomist);
 router.get('/collect-sample', diagController.collectSample);
 router.get('/complete-order', diagController.completeOrder);
+router.get('/see-reports', diagController.seeReports);
+router.post('/order-cancel', diagController.orderCancel)
+router.post('/test-sort-by-date', diagController.testSortByDate);
 
 
 module.exports = router;

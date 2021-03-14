@@ -123,6 +123,8 @@ router.get('/co-vid', homeController.covid);
 router.get('/covid-info', homeController.covidInfo);
 router.get('/covid-doctors', homeController.covidDoctors);
 router.get('/covid-news', homeController.covidNews);
+router.get('/covid-patients', homeController.covidPatients);
+router.get('/covid-form', homeController.covidForm);
 router.get('/pay-on-clinic-settings', passport.checkDoctorAuthentication,homeController.payOnClinicSettings);
 router.post('/poc-settings', passport.checkDoctorAuthentication,homeController.pocSettings);
 

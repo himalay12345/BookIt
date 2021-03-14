@@ -361,7 +361,9 @@
                                                                             <div class="col-12 col-md-12" style="margin-left: -15px;margin-top:20px;margin-bottom: 20px;">
                                                                                 <div class="form-group">
                                                                                     <label style="color: rgb(138, 138, 138);">Do you really want to cancel the order?</label></br>
-                                                                                    <input type="hidden" name="tid" value="<%=locals.user.booked_test_user[i]._id%>">
+                                                                                    <input type="hidden" name="id" value="<%=locals.user.booked_test_user[i]._id%>">
+                                                                                    <input type="hidden" name="lid" value="<%=locals.user.booked_test_user[i].labid%>">
+                                                                                    <input type="hidden" name="tindex" value="<%=locals.user.booked_test_user[i].tindex%>">
                                                                                     <input type="radio" name="flag" value="yes" style="margin-right: 10px;">Yes</br>
                                                                                     <input type="radio" name="flag" value="no" style="margin-right: 10px;">No
                                                                                     </select>

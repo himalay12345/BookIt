@@ -843,6 +843,9 @@ const userSchema = mongoose.Schema({
         labid:{
             type: mongoose.Schema.Types.ObjectId
         },
+        tindex:{
+            type:Number
+        },
         mode:{
             type:String
         },

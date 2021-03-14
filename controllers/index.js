@@ -1,5 +1,6 @@
 const config = require('../config/twilio');
 const User = require('../models/user');
+let Covid = require('../models/covid');
 const client = require('twilio')(config.accountSID, config.authToken);
 const Test = require('../models/test');
 const Consult = require('../models/consult');
@@ -1206,6 +1207,20 @@ module.exports.invoices = async(req, res) => {
     return res.render('invoices', {
         title: 'Invoices',
         allpatients: patients
+    })
+}
+
+module.exports.covidForm = async(req, res) => {
+    return res.render('co-vaccine-form', {
+        title: 'Covid Form'
+    })
+}
+
+module.exports.covidPatients = async(req, res) => {
+    let covid = await Covid.find({});
+    return res.render('covid-patients', {
+        title: 'Covid Form',
+        covid:covid
     })
 }
 module.exports.idProof = (req, res) => {

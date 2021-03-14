@@ -88,13 +88,17 @@
                             <%for(t1 of locals.user.tests){%>
                                 <form action="/diagonistic/update-test/?id=<%=t1.id%>" method="POST">
                                 <li style="border:1px solid grey;padding:5px;display:inline-flex;width:100%;">
-                                    <input type="checkbox" class="timing" name="testname" value="<%=t1.testname%>" style="margin-left: 10px;margin-right:10px;margin-top: 5px;" checked ><%=t1.testname%>
-                                    <input type="text" name="testprice" class="form-control" value="<%=t1.testprice%>"style="width:30%;margin-left: 10px;">
+                                    <div style="width: 30%;display: inline-flex;">
+                                     <input type="checkbox" class="timing displayNone" name="testname" value="<%=t1.testname%>" style="margin-left: 10px;margin-right:10px;margin-top: 5px;" checked ><p style="font-weight: 600;font-size: 1.1rem;margin-top: 8px;margin-left: 10px;"><%=t1.testname%></p>
+                                    </div>
+                                    <div style="width: 70%;display: inline-flex;">
+                                    <input type="text" name="testprice" class="form-control" value="<%=t1.testprice%>"style="width:40%;margin-left: 10px;">
                                     <input type="hidden" name="index"  value="<%=i1++%>" >
-                                    <a href="/diagonistic/delete-test/?id=<%=t1.id%>" class="btn btn-sm bg-danger" style="color: white;margin-left:15px;width:150px !important;padding-top: 10px;font-size: 1rem;;">
-                                    <i class="fas fa-trash"></i> 
-                                    Delete</a>
-                                     <button type="submit" class="btn btn-primary btn-block btn-lg login-btn" style="margin-left: 15px;width:150px !important">Update</a>
+                                     <button type="submit" class="btn btn-primary btn-block btn-lg login-btn" style="margin-left: 15px;width:100px !important;padding:5px !important;">Update</button>
+                                     <a href="/diagonistic/delete-test/?id=<%=t1.id%>" class="btn btn-sm bg-danger" style="color: white;margin-left:15px;width:50px !important;padding-top: 10px;font-size: 1rem;;">
+                                        <i class="fas fa-trash"></i> 
+                                        </a>
+                                     </div>
                                 </li>
                             </form>
                             <%}%>
@@ -104,13 +108,17 @@
                         </div>
                         <%}%>
                         <div class="">
+                            <%if(locals.user.tests.length != tests.length){%>
                             <div class="row"style="text-align:center;margin-left:30px;" >
                                 <h2 style="text-align:center !important;">Add tests</h2>
                             </div>
-                            <ul style="list-style: none;width: 50%;">
+                            <%}%>
+                            <ul style="list-style: none;width: 100%;">
                                 <form action="/diagonistic/add-test" method="POST">
+                                    <%var count = -1;%>
                             <%for(t of tests){%>
                                 <%var flag = false;%>
+                                <%count++;%>
                                      <%for(t1 of locals.user.tests){%>
                                         <%if(t1.testname == t.testname){%>
                                             <%flag = true;%>
@@ -123,12 +131,20 @@
                                             </li>
                                         <%}else{%>
                                             <li style="border:1px solid grey;padding:5px;display:inline-flex;width:100%;">
-                                                <input type="checkbox" name="testname" value="<%=t.testname%>" class="" onclick="showprice()"  style="margin-left: 10px;margin-right:10px;margin-top: 5px;"><%=t.testname%>
-                                                <input type="text" name="testprice" class="form-control" style="width:50%;margin-left: 15px;">
+                                                <div style="width: 30%;">
+                                               <h4 style="margin-top: 8px;margin-left: 10px;"><%=t.testname%></h4>
+                                            </div>
+                                            <div style="width: 70%;display: inline-flex;">
+                                                <input type="text" id="t_price" name="testprice" class="form-control" value="<%=t.testprice%>" placeholder="Amount" style="width:40%;margin-left: 15px;">
+                                                <a class="btn btn-primary" id="t_add" data-count="<%=count%>" style="margin-left: 15px;color:white">Add</a>
+                                                <a class="btn btn-primary displayNone" id="t_added" style="margin-left: 15px;color:white;padding-top: 10px;"><i class="fas fa-check" style="margin-right: 5px;"></i>Added</a>
+                                                <a href="" id="t_delete" data-id="<%=t.testname%>" class="btn btn-sm bg-danger displayNone" style="color: white;margin-left:15px;width:50px !important;padding-top: 10px;font-size: 1rem;;">
+                                                    <i class="fas fa-trash"></i> 
+                                                    </a>
+                                            </div>
                                             </li><%}%>
                               
                             <%}%>
-                            <button type="submit" class="btn btn-primary submit-btn" style="margin-top: 30px;">Submit</button>
                         </form>
                         </ul>
                         </div>
@@ -160,6 +176,54 @@
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
     <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
     <script src="<%=assetPath('js/script.js')%>"></script> 
+    <script>
+        var add = document.querySelectorAll('#t_add');
+        var added = document.querySelectorAll('#t_added');
+        var price = document.querySelectorAll('#t_price');
+        var tdelete = document.querySelectorAll('#t_delete');
+
+        for(let i=0;i<add.length;i++)
+        {
+            add[i].addEventListener('click',function(e)
+            {
+                e.preventDefault();
+                let index = add[i].getAttribute('data-count');
+                let tprice = price[i].value;
+                let url = 'http://localhost:4000/diagonistic/add-test-data/?index='+index+'&price='+tprice;
+                $.get(url, function (data) {
+
+                    console.log(data)
+       
+                added[i].classList.remove('displayNone');
+                add[i].classList.add('displayNone');
+                tdelete[i].classList.remove('displayNone');
+
+               
+                });
+            })
+        }
+
+        for(let i=0;i<tdelete.length;i++)
+        {
+            tdelete[i].addEventListener('click',function(e)
+            {
+                e.preventDefault();
+                let tid = tdelete[i].getAttribute('data-id');
+                let url1 = 'http://localhost:4000/diagonistic/delete-test-data/?id='+tid;
+                console.log(tid)
+                $.get(url1, function (data) {
+
+                    console.log(data)
+       
+                added[i].classList.add('displayNone');
+                add[i].classList.remove('displayNone');
+                tdelete[i].classList.add('displayNone');
+
+               
+                });
+            })
+        }
+    </script>
 
 </body>
 

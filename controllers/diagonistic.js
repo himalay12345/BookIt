@@ -269,26 +269,30 @@ module.exports.addTest = async(req, res) => {
 
 module.exports.addTestData = async(req, res) => {
     let user = await User.findById(req.user.id);
-    console.log(req.body)
-    if(typeof(req.body.testname) == 'string')
+    let tests = await Test.find({});
+
+    var flag = false;
+    for(let u of user.tests)
     {
+        if(u.testname.trim()  == tests[req.query.index].testname.trim() ){ 
+            flag = true;
+            break;
+        }  
+    }
+   if(!flag)
+   {
     user.tests.push({
-        testname:req.body.testname,
-        testprice:req.body.testprice[0]
+        testname:tests[req.query.index].testname,
+        testprice:req.query.price
     })
 }
 
-if(typeof(req.body.testname) == 'object')
-{
-    for(let i=0;i<req.body.testname.length;i++){
-user.tests.push({
-    testname:req.body.testname[i],
-    testprice:req.body.testprice[i]
-})
-    }
-}
+
 user.save();
-return res.redirect('back');
+return res.json({
+    status:true
+})
+
 }
 
 module.exports.deleteTest = async(req, res) => {
@@ -296,6 +300,23 @@ module.exports.deleteTest = async(req, res) => {
     user.tests.pull(req.query.id);
     user.save()
     return res.redirect('back')
+}
+
+module.exports.deleteTestData = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    for(let u of user.tests)
+    {
+        if(u.testname.trim()  == req.query.id.trim() ){
+            let id = u._id;
+            user.tests.pull(id);
+            user.save();
+            break;
+        }
+    }
+   
+    return res.json({
+        status:true
+    })
 }
 
 module.exports.updateTest = async(req, res) => {
@@ -450,6 +471,44 @@ module.exports.selectLab1 = async(req, res) => {
         user.cart.tests.push({
             testname:test.testname,
             testprice:tname,
+            labname:lab.name,
+            labid:lab._id
+        });
+    }
+}
+    user.save()
+
+    return res.redirect('/diagonistic/lab-all-tests/?labid='+lab._id)
+}
+
+module.exports.selectLabTest = async(req, res) => {
+    
+    let lab = await User.findById(req.query.labid);
+    let user = await User.findById(req.user.id);
+    if(!user.cart){
+
+    user.cart.tests.push({
+        testname:lab.tests[req.query.index].testname,
+        testprice:lab.tests[req.query.index].testprice,
+        labname:lab.name,
+        labid:lab._id
+    });
+}else{
+    let flag = false;
+    for(let u1 of user.cart.tests)
+    {
+        if(u1.testname.trim()  == lab.tests[req.query.index].testname.trim() ){
+          flag = true;
+        }
+    }
+    console.log(flag)
+    console.log(user.cart.tests)
+
+    if(!flag)
+    {
+        user.cart.tests.push({
+            testname:lab.tests[req.query.index].testname,
+            testprice:lab.tests[req.query.index].testprice,
             labname:lab.name,
             labid:lab._id
         });
@@ -672,6 +731,33 @@ module.exports.removeCartItem = async(req, res) => {
     }
 }
 
+module.exports.removeCartItem1 = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let count = 0,price,id;
+    for(let u of user.cart.tests)
+    {
+      if(u.testname.trim()  == req.query.name.trim() ){
+          price = u.testprice;
+          id = u._id;
+            break;
+        }
+        count++;
+    }
+
+
+    user.cart.tests.pull(id);
+    user.save()
+    console.log(price)
+
+    return res.json({
+        length:user.cart.tests.length,
+        count:count,
+        price:price,
+        counter:count
+    })
+    
+}
+
 module.exports.addCartItem = async(req, res) => {
     let user = await User.findById(req.user.id);
     let test = await Test.findOne({testname:req.query.name});
@@ -707,6 +793,84 @@ let price;
         count:user.cart.tests.length
     })
 
+}
+
+module.exports.addCartItem1 = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let lab = await User.findById(req.query.lid);
+    let price;
+
+    var labid;
+    if(user.cart.tests.length>=1)
+    {
+        labid = user.cart.tests[0].labid;
+        if(labid == lab.id)
+        {
+            for(let u of lab.tests)
+            {
+                console.log(u.testname.trim(),req.query.name.trim())
+              if(u.testname.trim()  == req.query.name.trim() ){
+                console.log('hello')
+                  price = u.testprice;
+                    break;
+                }
+            }
+            
+            user.cart.tests.push({
+                testname:req.query.name,
+                testprice:price,
+                labname:lab.name,
+                labid:lab._id
+            });
+            user.save()
+            return res.json({
+                length:user.cart.tests.length,
+                testname:req.query.name,
+                testprice:price,
+                count:user.cart.tests.length
+            })
+        }
+
+        else{
+            return res.json({
+                flag:'true'
+            })
+        }
+       
+    
+    }
+
+    if(user.cart.tests.length == 0)
+    {
+        for(let u of lab.tests)
+        {
+            console.log(u.testname.trim(),req.query.name.trim())
+          if(u.testname.trim()  == req.query.name.trim() ){
+            console.log('hello')
+              price = u.testprice;
+                break;
+            }
+        }
+        
+        user.cart.tests.push({
+            testname:req.query.name,
+            testprice:price,
+            labname:lab.name,
+            labid:lab._id
+        });
+        user.save()
+        
+    
+        return res.json({
+            length:user.cart.tests.length,
+            testname:req.query.name,
+            testprice:price,
+            count:user.cart.tests.length
+        })
+    }
+
+
+ 
 }
 
 module.exports.cart = async(req, res) => {
@@ -1408,8 +1572,10 @@ module.exports.bookTestByCash = async(req, res) => {
         
         }
 
-       
+        let length1 = lab.booked_test_lab.length;
+        console.log(length1)
         user.booked_test_user.push({
+            tindex:length1,
             user:patient,
             address:address,
             tests:tests,
@@ -1444,6 +1610,8 @@ module.exports.bookTestByCash = async(req, res) => {
 
         user.save()
         lab.save()
+    
+
     }
    return res.redirect('/diagonistic/order-success/?index='+index);
 }
@@ -1491,6 +1659,84 @@ module.exports.sendReports = async function(req, res) {
         console.log('Error', err);
         return;
     }
+
+}
+
+module.exports.seeReports = async function(req, res) {
+    let user = await User.findById(req.user.id);
+        return res.render('see-reports-list',{
+            title:'Reports',
+            index:req.query.index
+        })
+}
+
+module.exports.orderCancel = async function(req, res) {
+
+   
+
+    try{
+
+        let user = await User.findById(req.user.id);
+        let orders = await User.findById(req.user.id).populate({
+            path: 'booked_test_lab',
+            populate: {
+                path: 'uid',
+                populate: {
+                    path: 'user',
+                    populate: { path: 'user' }
+                }
+    
+            }
+    
+        });
+               if(req.body.flag == 'yes')
+                {
+
+                       let n1 = await User.updateOne({ "_id" : req.user.id, "booked_test_lab._id": req.body.id}, {
+                            '$set': {
+                                
+                                'booked_test_lab.$.cancel': true
+                                
+                            }
+                        });
+                      
+                       
+                        let n2 = await User.updateOne({ "_id" : req.body.pid, "booked_test_user._id": req.body.tid}, {
+                            '$set': {
+                                
+                                'booked_test_user.$.cancel': true
+                                
+                            }
+                        });
+                      
+                      
+                        
+                      
+               return res.redirect('back');
+
+                   
+                        
+                }
+
+                else{
+                    return res.redirect('back');
+        }
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+}
+
+module.exports.testSortByDate = async(req, res) => {
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+   
+    return res.render('booked-test',
+    {
+        title:'Booked Test',
+        date:str
+    })
+    
 
 }
 

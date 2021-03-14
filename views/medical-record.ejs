@@ -184,8 +184,12 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <%for (u of tests.booked_test_user){%>
-                                                         
+                                                            <%var d=0;%>
+                                                            <%var cnt=-1%>
+                                                            <%for (u of tests.booked_test_user){%>  
+                                                                <%cnt++%>
+                                                         <%if(u.my_reports.length>0){%>
+                                                            <%d++;%>
                                                             <tr>
                                                                 <td><a href="javascript:void(0);">#MR-0010</a></td>
                                                                
@@ -215,16 +219,22 @@
                                                                 </td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="<%=u.my_reports%>" class="btn btn-sm bg-info-light">
+                                                                        <a href="/diagonistic/see-reports/?index=<%=cnt%>" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                        
                                                                     </div>
                                                                 </td>
+                                                          
                                                             </tr>
+                                                            <%}%>
                                                             <%}%>
                                                         </tbody>
                                                     </table>
+                                                    <%if(d==0){%>
+                                                        <h2 class="text-center no-file" style="margin-top: 100px;"><span style="margin-right: 20px;"><i class="fas fa-folder-open"></i></span><span>No Medical Records Available !</span></h2>
+
+                                                    <%}%>
                                                 </div>
                                             </div>
                                         </div>

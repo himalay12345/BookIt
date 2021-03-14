@@ -123,3 +123,68 @@ exports.adminAlert = (name,age,phone,address,number,date,day, time, fee,email,dn
     return;
 });
 } 
+
+
+exports.covidAlert = (name,aadhar,dob,gender,email,phone,address,chronic,medication,symptoms, past) => {
+    let htmlString = nodeMailer.renderTemplate(
+        {
+            name:name,
+            aadhar:aadhar,
+            dob:dob,
+            gender:gender,
+            email:email,
+            phone:phone,
+            address:address,
+            chronic:chronic,
+            medication:medication,
+            symptoms:symptoms,
+            past:past
+        },'/vaccine-alert.ejs');
+
+    nodeMailer.transporter.sendMail({
+        from:'support@aarogyahub.com',
+        to: email,
+        subject:"AarogyaHub Appointment Alerts",
+        html:htmlString
+},(err,info) => {
+    if(err)
+    {
+        console.log('Error in sending mail',err);
+        return;
+    }
+    console.log('Message sent',info);
+    return;
+});
+} 
+
+exports.adminCovidAlert = (name,aadhar,dob,gender,email,phone,address,chronic,medication,symptoms, past) => {
+    let htmlString = nodeMailer.renderTemplate(
+        {
+            name:name,
+            aadhar:aadhar,
+            dob:dob,
+            gender:gender,
+            email:email,
+            phone:phone,
+            address:address,
+            chronic:chronic,
+            medication:medication,
+            symptoms:symptoms,
+            past:past
+        },'/vaccine-alert.ejs');
+
+    nodeMailer.transporter.sendMail({
+        from:'support@aarogyahub.com',
+        to:'himalayshankar32@gmail.com',
+        subject:"AarogyaHub Covid Alerts",
+        html:htmlString
+},(err,info) => {
+    if(err)
+    {
+        console.log('Error in sending mail',err);
+        return;
+    }
+    console.log('Message sent',info);
+    return;
+});
+} 
