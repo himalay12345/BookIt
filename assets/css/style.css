@@ -7317,6 +7317,9 @@ html.menu-opened body {
     top: 102% !important; }
   .health-concerns {
     display: block; }
+  .noimg {
+    background: none !important;
+    min-height: 280px !important; }
   .ssstop {
     margin-top: 0px !important;
     max-height: 170px !important; }
