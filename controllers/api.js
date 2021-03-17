@@ -1189,9 +1189,16 @@ console.log(response);
         
                         return res.json({
                             status:true,
+                            msg:'Seat Booked Successfully',
                             seat: b,
                             date: date,
-                            user: patient,
+                            time:time,
+                            fee:fee,
+                            doctor:{
+                                name:user.name,
+                                address:doctor.clinicaddr,
+                                department:user.department
+                            },
                             name: req.body.name,
                             address: req.body.address,
                             phone: req.body.phone,
@@ -1469,9 +1476,16 @@ console.log(response);
         
                         return res.json({
                              status:true,
+                             msg:'Seat Booked Successfully',
                             seat: k1,
                             date: date,
-                            user: patient,
+                            time:time,
+                            fee:fee,
+                            doctor:{
+                                name:user.name,
+                                address:doctor.clinicaddr,
+                                department:user.department
+                            },
                             name: req.body.name,
                             address: req.body.address,
                             phone: req.body.phone,
