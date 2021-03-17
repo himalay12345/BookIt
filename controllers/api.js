@@ -632,24 +632,54 @@ module.exports.checkout = async (req, res) => {
      cnt++;
     }
     let rating = parseInt(avgrating/cnt);
-    return res.json({
-        doctor:{
-            name:name,
-            reviews:user.reviews,
-            ratings:rating,
-            rating_count:cnt,
-            contacts:contacts,
-            date:date,
-            time:time,
-            day:day,
-            fee:fee
-        },
-        slotindex:req.body.slotindex,
-        dayindex:req.body.dayindex,
-        id:req.body.id,
-        did:req.body.did,
 
-    })
+    if(user.poc)
+    {
+        return res.json({
+            status:'true',
+            msg:'Display Both Option Pay on clinic and pay online',
+            doctor:{
+                name:name,
+                reviews:user.reviews,
+                ratings:rating,
+                rating_count:cnt,
+                contacts:contacts,
+                date:date,
+                time:time,
+                day:day,
+                fee:fee
+            },
+            slotindex:req.body.slotindex,
+            dayindex:req.body.dayindex,
+            id:req.body.id,
+            did:req.body.did,
+    
+        })
+    }
+
+    else{
+        return res.json({
+            status:'false',
+            msg:'Display only Pay online',
+            doctor:{
+                name:name,
+                reviews:user.reviews,
+                ratings:rating,
+                rating_count:cnt,
+                contacts:contacts,
+                date:date,
+                time:time,
+                day:day,
+                fee:fee
+            },
+            slotindex:req.body.slotindex,
+            dayindex:req.body.dayindex,
+            id:req.body.id,
+            did:req.body.did,
+    
+        })
+    }
+   
 
 
    
