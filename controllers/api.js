@@ -1196,7 +1196,7 @@ console.log(response);
                             fee:fee,
                             doctor:{
                                 name:user.name,
-                                address:doctor.clinicaddr,
+                                address:user.clinicaddr,
                                 department:user.department
                             },
                             name: req.body.name,
@@ -1483,7 +1483,7 @@ console.log(response);
                             fee:fee,
                             doctor:{
                                 name:user.name,
-                                address:doctor.clinicaddr,
+                                address:user.clinicaddr,
                                 department:user.department
                             },
                             name: req.body.name,
