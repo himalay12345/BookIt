@@ -2574,7 +2574,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
     staff = await User.findById(user.staff_id);
     }
     let patient = await User.findById(req.user.id);
-    console.log(user.name,staff.name,user.name,req.body)
+   
 
     if (patient.refresh_flag == true) {
         
