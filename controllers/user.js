@@ -2255,7 +2255,8 @@ module.exports.verifyPayment = async(req, res) => {
                 //    }) 
                 //   .then(message => console.log(message.sid)) 
                 //   .done();
-
+                if(staff)
+                {
                 client.messages
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. Please show this SMS at the clinic front-desk before your appointment.',
@@ -2265,9 +2266,22 @@ module.exports.verifyPayment = async(req, res) => {
                         to: '+91' + req.query.phone
                     })
                     .then(message => console.log(message.sid));
+                }
+                else{
+                    client.messages
+                    .create({
+                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + '. The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. Please show this SMS at the clinic front-desk before your appointment.',
+                        from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
+                        statusCallback: 'http://postb.in/1234abcd',
+                        to: '+91' + req.query.phone
+                    })
+                    .then(message => console.log(message.sid));
+                }
                 if (req.query.email) {
                     appointmentAlert.newAlert(req.query.date, req.query.time, req.query.email, user, patient);
                 }
+
                 client.messages
                 .create({
                     body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
@@ -2277,6 +2291,7 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
+                if(staff){
                 client.messages
                 .create({
                     body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
@@ -2286,6 +2301,7 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + staff.phone
                 })
                 .then(message => console.log(message.sid));
+            }
             if (user.email) {
                 appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,b,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
             }
@@ -2497,7 +2513,7 @@ module.exports.verifyPayment = async(req, res) => {
                 //    }) 
                 //   .then(message => console.log(message.sid)) 
                 //   .done();
-
+                if(staff){
                 client.messages
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. Please show this SMS at the clinic front-desk before your appointment.',
@@ -2507,6 +2523,17 @@ module.exports.verifyPayment = async(req, res) => {
                         to: '+91' + req.query.phone
                     })
                     .then(message => console.log(message.sid));
+                }else{
+                    client.messages
+                    .create({
+                        body: 'CONFIRMED Appointment for ' + req.query.date + ' at ' + req.query.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + '. The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. Please show this SMS at the clinic front-desk before your appointment.',
+                        from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
+                        statusCallback: 'http://postb.in/1234abcd',
+                        to: '+91' + req.query.phone
+                    })
+                    .then(message => console.log(message.sid)); 
+                }
                 if (req.query.email) {
                     appointmentAlert.newAlert(req.query.date, req.query.time, req.query.email, user, patient);
                 }
@@ -2519,6 +2546,7 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
+                if(staff){
                 client.messages
                 .create({
                     body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
@@ -2528,6 +2556,7 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + staff.phone
                 })
                 .then(message => console.log(message.sid));
+            }
             if (user.email) {
                 appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,k1,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
             }
@@ -2783,7 +2812,8 @@ module.exports.bookPayOnClinic = async(req, res) => {
                 //    }) 
                 //   .then(message => console.log(message.sid)) 
                 //   .done();
-
+                if(staff)
+                {
                 client.messages
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.body.date + ' at ' + req.body.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
@@ -2793,6 +2823,18 @@ module.exports.bookPayOnClinic = async(req, res) => {
                         to: '+91' + req.body.phone
                     })
                     .then(message => console.log(message.sid));
+                }
+                else{
+                    client.messages
+                    .create({
+                        body: 'CONFIRMED Appointment for ' + req.body.date + ' at ' + req.body.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ b + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                        from: '+12019755459',
+                        alphanumeric_id : "AarogyaHub",
+                        statusCallback: 'http://postb.in/1234abcd',
+                        to: '+91' + req.body.phone
+                    })
+                    .then(message => console.log(message.sid));
+                }
                 if (req.body.email) {
                     appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, patient);
                 }
@@ -2805,6 +2847,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
+                if(staff){
                 client.messages
                 .create({
                     body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
@@ -2814,6 +2857,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                     to: '+91' + staff.phone
                 })
                 .then(message => console.log(message.sid));
+            }
             if (user.email) {
                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
@@ -3028,7 +3072,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                 //    }) 
                 //   .then(message => console.log(message.sid)) 
                 //   .done();
-
+                if(staff){
                 client.messages
                     .create({
                         body: 'CONFIRMED Appointment for ' + req.body.date + ' at ' + req.body.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ', Ph: +91' + staff.phone + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
@@ -3038,6 +3082,17 @@ module.exports.bookPayOnClinic = async(req, res) => {
                         to: '+91' + req.body.phone
                     })
                     .then(message => console.log(message.sid));
+                    }else{
+                        client.messages
+                        .create({
+                            body: 'CONFIRMED Appointment for ' + req.body.date + ' at ' + req.body.time + ' with Dr. ' + user.name + '.Your Appointment number is '+ k1 + '. The clinic details are ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + '. The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. Please show this SMS at the clinic front-desk and pay the amount before your appointment.',
+                            from: '+12019755459',
+                            alphanumeric_id : "AarogyaHub",
+                            statusCallback: 'http://postb.in/1234abcd',
+                            to: '+91' + req.body.phone
+                        })
+                        .then(message => console.log(message.sid));
+                    }
                 if (req.body.email) {
                     appointmentAlert.newAlert(req.body.date, req.body.time, req.body.email, user, patient);
                 }
@@ -3050,6 +3105,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
+                if(staff){
                 client.messages
                 .create({
                     body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
@@ -3059,6 +3115,7 @@ module.exports.bookPayOnClinic = async(req, res) => {
                     to: '+91' + staff.phone
                 })
                 .then(message => console.log(message.sid));
+            }
             if (user.email) {
                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
