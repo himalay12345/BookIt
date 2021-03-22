@@ -43,15 +43,15 @@ const sassMiddleware = require('node-sass-middleware');
 console.log(env.name);
 console.log(env.asset_path);
 
-if(env.name == 'development'){
+if (env.name == 'development') {
 
-app.use(sassMiddleware({
-    src:path.join(__dirname,env.asset_path,'scss'),
-    dest:path.join(__dirname,env.asset_path,'css'),
-    debug: true,
-    outputStyle:'extended',
-    prefix:'/css'
-}));
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
 }
 console.log('Patient Tracking server is running on port 5000');
 
@@ -113,22 +113,22 @@ app.use(customMiddleware.setFlash);
 app.use('/', require('./routes/index'));
 
 const swaggerOptions = {
-    swaggerDefinition:{
-        info:{
-            title:'Home Page Api',
-            version:'1.0.0'
+    swaggerDefinition: {
+        info: {
+            title: 'Home Page Api',
+            version: '1.0.0'
         }
     },
-    apis:['./routes/api.js']
+    apis: ['./routes/api.js']
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 // console.log(swaggerDocs);
 var options2 = {
     explorer: true
-  };
+};
 
-app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocs,options2))
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs, options2))
 
 app.listen(port, function(err) {
     if (err) {

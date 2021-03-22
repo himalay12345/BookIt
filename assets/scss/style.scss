@@ -154,6 +154,7 @@
 .cutomer-mobile {
     display: none;
 }
+
 .jss48 {
     --swiper-theme-color: #007aff;
     --swiper-navigation-size: 44px;
@@ -179,9 +180,7 @@
     -webkit-tap-highlight-color: transparent;
     opacity: 1;
     transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    
 }
-
 
 ._3oqPe {
     --swiper-theme-color: #007aff;
@@ -381,32 +380,43 @@
 .consult-specilities {
     display: none;
 }
-.sp-slider .slick-dots{
-    margin-top:15px !important;
+
+.sp-slider .slick-dots {
+    margin-top: 15px !important;
 }
+
 .filter_box::-webkit-scrollbar {
-    display: none !important; }
+    display: none !important;
+}
+
 .filter_box {
--ms-overflow-style: none;
-/* IE and Edge */
-scrollbar-width: none;
-/* Firefox */ }
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
 .jss48::-webkit-scrollbar {
-    display: none !important; }
+    display: none !important;
+}
+
 .jss48 {
--ms-overflow-style: none;
-/* IE and Edge */
-scrollbar-width: none;
-/* Firefox */ }
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
 
 .jss488::-webkit-scrollbar {
-    display: none !important; }
-.jss488 {
--ms-overflow-style: none;
-/* IE and Edge */
-scrollbar-width: none;
-/* Firefox */ }
+    display: none !important;
+}
 
+.jss488 {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
 
 .mobile-Pregnancy {
     display: none;
@@ -420,40 +430,56 @@ scrollbar-width: none;
     display: none;
 }
 
-#lab_card{
-    display: inline-flex;padding:10px;border:1px solid rgb(194, 193, 193);border-radius:3px;width: 100%;margin-top: 0px;margin-bottom: 5px;
+#lab_card {
+    display: inline-flex;
+    padding: 10px;
+    border: 1px solid rgb(194, 193, 193);
+    border-radius: 3px;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
 
-.dis20{
+.dis20 {
     display: 20%;
 }
 
-.dis20 img{
-    width:150px;height:80px;border-radius: 5px;
+.dis20 img {
+    width: 150px;
+    height: 80px;
+    border-radius: 5px;
 }
 
-.dis75{
-    display: 75%;margin-left: 10px;
+.dis75 {
+    display: 75%;
+    margin-left: 10px;
 }
 
-.dis5{
-    display:5%;
+.dis5 {
+    display: 5%;
 }
 
-.disinp{
-height:22px;width:40px;
+.disinp {
+    height: 22px;
+    width: 40px;
 }
 
-.dish2{
-    font-size: 1.2rem;font-weight: bolder;
+.dish2 {
+    font-size: 1.2rem;
+    font-weight: bolder;
 }
 
-.disp1{
-    margin-top:-5px;color:black;font-weight:bold;font-size: 0.9rem;
+.disp1 {
+    margin-top: -5px;
+    color: black;
+    font-weight: bold;
+    font-size: 0.9rem;
 }
 
-.disp2{
-    margin-top: -20px !important;color:grey;font-size: 0.9rem;
+.disp2 {
+    margin-top: -20px !important;
+    color: grey;
+    font-size: 0.9rem;
 }
 
 .active-popular1 {
@@ -529,6 +555,22 @@ height:22px;width:40px;
     height: auto;
     border: 1px solid lightgrey;
     background-color: white;
+}
+
+.mbanner {
+    display: block;
+}
+
+.nbanner {
+    display: none;
+}
+
+.lclinic {
+    display: block;
+}
+
+.sclinic {
+    display: none;
 }
 
 .search-li {
@@ -1086,7 +1128,6 @@ input[type=password] {
 .mobile-blood {
     display: none;
 }
-
 
 #max {
     margin-top: 50px;
@@ -3151,14 +3192,14 @@ button.bg-danger:hover {
     margin-left: 220px;
     width: 150px;
     position: absolute;
-    border-radius: 4px;
+    border-radius: 31px;
     padding: 8px 15px !important;
     text-align: center;
     font-size: 15px;
-    color: #fff;
+    color: #478e8e;
     text-transform: uppercase;
     font-weight: 500;
-    background-color: #478e8e;
+    background-color: #fff;
     ;
 }
 
@@ -3721,9 +3762,9 @@ html.menu-opened body {
 }
 
 .search-box .form-control {
-    border: 1px solid #ccc;
+    border: 1px #ccc;
     box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075);
-    border-radius: 5px;
+    border-radius: 39px;
     padding-left: 35px;
 }
 
@@ -3756,6 +3797,7 @@ html.menu-opened body {
     -ms-flex: 0 0 46px;
     flex: 0 0 46px;
     height: 46px;
+    border-radius: 21px;
 }
 
 .search-box .search-btn span {
@@ -8219,54 +8261,42 @@ html.menu-opened body {
     }
     .sidebar-overlay.opened {
         display: block;
-        z-index:1000;
+        z-index: 1000;
     }
-
-    .notab{
-        display:none !important;
+    .notab {
+        display: none !important;
     }
-
-    .tabview{
-        display:block !important;
+    .tabview {
+        display: block !important;
     }
-
-    .tabfilter{
-        height:85px !important;
+    .tabfilter {
+        height: 85px !important;
     }
-
-    .tsearch{
-        margin-top:10px;
-        width:65%;
+    .tsearch {
+        margin-top: 10px;
+        width: 65%;
     }
-
-    .tfilter{
-        margin-top:80px !important;
+    .tfilter {
+        margin-top: 80px !important;
     }
-
-    .tright{
-    max-width:185px !important;
+    .tright {
+        max-width: 185px !important;
     }
-
-    .taddbtn{
-        min-width:100px !important;
+    .taddbtn {
+        min-width: 100px !important;
     }
-
-    .popup{
-        width:70% !important;
+    .popup {
+        width: 70% !important;
     }
-
-    .tbadd{
-        left:51% !important;
+    .tbadd {
+        left: 51% !important;
     }
-
-    .toverf{
+    .toverf {
         overflow-x: auto !important;
     }
-
-    .tpadding{
-        padding:12px 16px !important;
+    .tpadding {
+        padding: 12px 16px !important;
     }
-
     .about-content {
         margin-bottom: 30px;
     }
@@ -8375,6 +8405,12 @@ html.menu-opened body {
     }
     .card {
         margin-bottom: 20px;
+    }
+    .lclinic {
+        display: none;
+    }
+    .sclinic {
+        display: block;
     }
     .profile-sidebar {
         margin-bottom: 20px;
@@ -8818,27 +8854,25 @@ html.menu-opened body {
     .consult-specilities {
         display: block;
     }
-    .layout_padding{
+    .layout_padding {
         padding-top: 0px !important;
     }
     #my_slider a.carousel-control-next {
-        top:102% !important;
+        top: 102% !important;
     }
     #my_slider a.carousel-control-prev {
-        top:102% !important;
+        top: 102% !important;
     }
     .health-concerns {
         display: block;
     }
-
-    .noimg{
-    background:none !important;
-   min-height:280px !important
+    .noimg {
+        background: none !important;
+        min-height: 280px !important
     }
-
     .ssstop {
         margin-top: 0px !important;
-        max-height:170px !important;
+        max-height: 170px !important;
     }
     .card {
         margin-bottom: 0.9375rem;
@@ -8888,6 +8922,10 @@ html.menu-opened body {
     }
     .mbanner {
         margin-top: -20px;
+        display: none;
+    }
+    .nbanner {
+        display: block;
     }
     .m30 {
         margin-top: 30px;
@@ -8895,66 +8933,53 @@ html.menu-opened body {
     .mmbanner {
         margin-top: 10px;
     }
-
-    .att1{
+    .att1 {
         padding-left: 20px !important;
     }
-
-     .att2{
-       width: 30% !important;
+    .att2 {
+        width: 30% !important;
     }
-
-    .pad-left16{
+    .pad-left16 {
         padding-left: 0px !important;
     }
-    .pad-left17{
+    .pad-left17 {
         padding-left: 0px !important;
         margin-top: 0px !important;
         min-height: 150px !important;
-        width:115% !important;
+        width: 115% !important;
     }
-
-    .attrs4{
-        width:90% !important;
+    .attrs4 {
+        width: 90% !important;
     }
-
-    .attrs5{
-        width:10% !important;
+    .attrs5 {
+        width: 10% !important;
     }
-
-    .mheight1{
+    .mheight1 {
         min-height: 160px !important;
         margin-top: 20px !important;
     }
-
-    .mlz{
+    .mlz {
         margin-top: 0px !important;
         padding-left: 0px !important;
     }
-
-    .mlz1{
+    .mlz1 {
         margin-top: 0px !important;
         margin-left: 0px !important;
     }
-
-    .attrs1{
-        height:70px !important;
-        width:70px !important;
+    .attrs1 {
+        height: 70px !important;
+        width: 70px !important;
     }
-
-    .attrs2{
-       
-        font-size:2rem !important;
-        line-height:2rem !important;
+    .attrs2 {
+        font-size: 2rem !important;
+        line-height: 2rem !important;
     }
-    .attrs3{
+    .attrs3 {
         margin-top: 0px !important;
-        font-size:2rem !important;
-        
+        font-size: 2rem !important;
     }
-
-    .p4px{
-        padding-left:0px !important;
+    .p4px {
+        padding-left: 0px !important;
     }
     .mmmbanner {
         margin-top: -25px !important;
@@ -9315,12 +9340,11 @@ html.menu-opened body {
         transition: 0.5s ease;
         cursor: pointer;
     }
-#dlist{
-    max-height:350px !important;
-}
-    .no_margin_left
-    {
-        margin-left:0px !important;
+    #dlist {
+        max-height: 350px !important;
+    }
+    .no_margin_left {
+        margin-left: 0px !important;
     }
     .no-show-mobile {
         display: none;
@@ -9476,11 +9500,10 @@ html.menu-opened body {
         position: absolute;
         right: 62%;
     }
-
-    .npdf{
+    .npdf {
         top: 207px !important;
     }
-    .mpdf{
+    .mpdf {
         margin-top: 70px !important;
     }
     .hideinphone {
@@ -9507,9 +9530,8 @@ html.menu-opened body {
         height: 47px;
         padding: 0;
     }
-
-    .wsm100{
-        width:100% !important;
+    .wsm100 {
+        width: 100% !important;
     }
     .phoneul {
         position: absolute;
@@ -9781,28 +9803,23 @@ html.menu-opened body {
     .x-men {
         display: none;
     }
-
     .schedule-cont {
-        margin-left:0px !important;
-        }
-
-    .pdfbtn{
-        padding:6px 15px !important;
-        margin-left:-10px !important;
-        }
-
-        .pdftopm{
-            margin-left:-23px;
-        }
-
-    .billbtn{
-        padding:3px 0px;
-        width:60% !important;
+        margin-left: 0px !important;
     }
-
-    .billmleft{
-        margin-top:55px !important;
-        margin-left:-127px !important;
+    .pdfbtn {
+        padding: 6px 15px !important;
+        margin-left: -10px !important;
+    }
+    .pdftopm {
+        margin-left: -23px;
+    }
+    .billbtn {
+        padding: 3px 0px;
+        width: 60% !important;
+    }
+    .billmleft {
+        margin-top: 55px !important;
+        margin-left: -127px !important;
     }
     .prices-health {
         margin-top: 2px;
@@ -10543,54 +10560,58 @@ input:-webkit-autofill:focus {
     color: black !important;
 }
 
-.track-order{
-
-*, *:after, *:before { margin:0; padding:0; }
-body { 
-    padding: 15px; 
-    font-family: Helvetica, sans-serif;
-}
-
-input[type="button"] {
-    margin-top: 20px;
-}
-.node {
-    height: 30px;
-    width: 30px;
-  padding-top:14px;
-  padding-left:10px;
-  box-sizing:border-box;
-    border-radius: 50%;
-    display:inline-block;
-    transition: all 1000ms ease;
-  color:white;
-}
-
-.activated {
-    box-shadow: 0px 0px 3px 2px rgba(194, 255, 194, 0.8);
-}
-
-.divider {
-    height: 40px;
-    width: 2px;
-    margin-left: 14px;
-    transition: all 800ms ease;
-}
-
-li p {
-    display:inline-block;
-    margin-left: 25px;
-}
-
-li {
-    list-style: none;
-    line-height: 1px;
-}
-
-
-.blue { background-color: rgba(82, 165, 255, 1); }
-.green{ background-color: rgba(92, 184, 92, 1) }
-.red { background-color: rgba(255, 148, 148, 1); }
-.grey { background-color: rgba(201, 201, 201, 1); }
-
+.track-order {
+    *,
+    *:after,
+    *:before {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        padding: 15px;
+        font-family: Helvetica, sans-serif;
+    }
+    input[type="button"] {
+        margin-top: 20px;
+    }
+    .node {
+        height: 30px;
+        width: 30px;
+        padding-top: 14px;
+        padding-left: 10px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: inline-block;
+        transition: all 1000ms ease;
+        color: white;
+    }
+    .activated {
+        box-shadow: 0px 0px 3px 2px rgba(194, 255, 194, 0.8);
+    }
+    .divider {
+        height: 40px;
+        width: 2px;
+        margin-left: 14px;
+        transition: all 800ms ease;
+    }
+    li p {
+        display: inline-block;
+        margin-left: 25px;
+    }
+    li {
+        list-style: none;
+        line-height: 1px;
+    }
+    .blue {
+        background-color: rgba(82, 165, 255, 1);
+    }
+    .green {
+        background-color: rgba(92, 184, 92, 1)
+    }
+    .red {
+        background-color: rgba(255, 148, 148, 1);
+    }
+    .grey {
+        background-color: rgba(201, 201, 201, 1);
+    }
 }
