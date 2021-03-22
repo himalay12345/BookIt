@@ -79,7 +79,7 @@
                             <form action="/user/search-doctor" method="POST">
                                 <div class="form- search-location">
 
-                                    <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
+                                    <input type="text" style="background-color: #e8e8e8 !important;" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
                                     <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
                                         <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
                                         <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
@@ -92,7 +92,7 @@
 
                                 <div class="form- search-info msearch">
                                     <span class="form-text" style="margin-top: -20px; font-family: 'Poppins', sans-serif;">Ex : Dental or Sugar Check up etc</span>
-                                    <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                    <input type="text" style="background-color: #e8e8e8 !important;" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                     <table class="table table-striped position-absolute" style="margin-top: 3px;">
 
                                         <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
@@ -107,7 +107,7 @@
                             <form action="/user/search-doctor" method="POST">
                                 <div class="form-search-location">
 
-                                    <input type="text" name="location" class="form-control searchul" onfocus="showsearch()" placeholder="Search Location">
+                                    <input type="text" name="location" class="form-control searchul" onfocus="showsearch()" style="background-color: #e8e8e8 !important;" placeholder="Search Location">
 
 
 
@@ -115,7 +115,7 @@
 
                                 <div class="form-search-info msearch">
 
-                                    <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                    <input type="text" style="background-color: #e8e8e8 !important;" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
                                     <span class="form-text">Ex : Dental or Sugar Check up etc</span>
 
                                 </div>
@@ -180,7 +180,7 @@
 
             </div>
             <!-- / Banner -->
-            <section class="sscreen" style="margin-bottom: -10px;margin-top: -20px;">
+            <section class="sscreen" style="margin-bottom: -10px;margin-top: -40px;">
                 <a href="/covid-form">
                     <div class=" col-sm-12 index-content">
                         <div class="col-sm-12 index-first" style="background-image: url('<%=assetPath('img/co1.jpg')%>');background-repeat:no-repeat; margin-bottom: 10px; position: relative; height: 200px;  border-radius: 14px;background-size:cover;">
@@ -388,7 +388,7 @@
                         <div class="row">
 
                             <div class="col-lg-12">
-                                <div class="doctor-slider slider">
+                                <div class="doctor-slider slider" style="margin-top: 100px !important;">
                                     <!-- <% var count2=1 %>
                                     <%for(consult of consults) {%>
                                         <% if(count2>=10) {%>
