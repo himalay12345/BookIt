@@ -84,6 +84,7 @@ router.get('/add-favourite',passport.checkAuthentication, userController.addFavo
 router.post('/upload-id', userController.uploadId);
 router.post('/upload-idproof', userController.uploadIdProof);
 router.post('/upload-degree', userController.uploadDegree);
+router.get('/cancel-appointment', userController.cancelAppointment);
 router.post('/upload-eproof', passport.checkDoctorAuthentication, userController.uploadEProof);
 router.post('/accept-agreement', userController.acceptAgreement);
 router.get('/delete-registration', userController.deleteRegistration);

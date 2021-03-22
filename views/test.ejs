@@ -43,7 +43,7 @@
 
                     </div>
                     <button type="submit" class="btn btn-primary search-btn"><i class="fas fa-search"></i> <span>Search</span></button>
-                    <a style="padding: 8px;border:1px solid grey;border-radius:3px;font-size: 1rem;font-family: sans-serif;height:45px;margin-left: auto;margin-right: 40px;"><i class="fas fa-shopping-cart" style="margin-right: 5px;"></i><b>Cart</b></a>
+                    <a href="/diagonistic/cart" style="padding: 8px;border:1px solid grey;border-radius:3px;font-size: 1rem;font-family: sans-serif;height:45px;margin-left: auto;margin-right: 40px;"><i class="fas fa-shopping-cart" style="margin-right: 5px;"></i><b>Cart</b></a>
                 </form>
             </div>
             <section class="banner-class" style="margin-top: -40px;">
@@ -222,8 +222,8 @@
                                         </div>
                                     </div>
                                     <div class="test-des des " style="height: 36px; ">
-                                        <div class="test-about ">
-                                            <p class="added" id="add" data-flag="false" onclick="changeText(this); "> Add</p>
+                                        <div class="test-about " style="text-align: center;margin-top: 5px;">
+                                            <a href="/diagonistic/test-profile/?id=<%=tests._id%>"  data-flag="false"> Book Now</a>
 
                                         </div>
                                     </div>
@@ -252,7 +252,7 @@
                         <p class="acrossm " style="margin-top: -2px;  margin-left: 145px;text-align: justify;padding-top: 5px; padding-left: 30px; font-size: 21px; ">Book your health checkups now with the best labs available in your city.</p>
     
                     </div>
-                    <div class="row ">
+                    <div class="row">
     
                         <div class="col-lg-12 ">
                             <div class="adoctor-slider doctor-slider slider mslide">
@@ -269,14 +269,16 @@
     
                                             </div>
                                         </a>
-                                        <div class="carda-stats ">
-                                            <div class="stat " style="height:100px">
+                                        <div class="carda-stats" style="background-color: #478e8e;">
+                                            <div class="stat " style="height:100px;">
                                                 <div class="value ">
-                                                    <a href="/diagonistic/lab-profile/?id=<%=u._id%>" style="font-size: 1.1rem;color:white;">
+                                                    <a href="/diagonistic/lab-profile/?id=<%=u._id%>" style="font-size: 0.9rem;color:white;">
                                                         <%=u.name%>
                                                     </a>
                                                 </div>
-                                                <div class="type "><%=u.address%><a href="/diagonistic/lab-profile/?id=<%=u._id%>" style="color: white !important;">Book now</a><br>
+                                                <div class="type">
+                                                    <p style="margin-top: ;"><%=u.contacts.address%></p>
+                                                    <a href="/diagonistic/lab-profile/?id=<%=u._id%>" style="color: white !important;font-weight: bold;text-decoration: underline;">Book now</a><br>
                                                     
                                                 </div>
                                             </div>
@@ -293,7 +295,7 @@
                 </div>
             </section>
 
-            <section style="margin-top: 80px;height: 650px;">
+            <section style="margin-top: 80px;height: 650px;" class="displayNone">
                 <div>
                     <div class="Header-checkup " style="margin-left: 83px; margin-top: 20px ">
                         <h2 style="font-weight: 700; ">Popular Health Checkup Packages</h2>

@@ -29,6 +29,7 @@ router.get('/delete-test', diagController.deleteTest);
 router.get('/delete-test-data', diagController.deleteTestData);
 router.post('/update-test', diagController.updateTest);
 router.get('/lab-profile',diagController.labProfile)
+router.get('/test-profile',diagController.testProfile)
 router.get('/select-lab-test',diagController.selectLabTest)
 router.get('/all-tests',diagController.allTests)
 router.get('/all-labs',diagController.allLabs)
@@ -36,6 +37,7 @@ router.get('/lab-all-tests',diagController.labAllTests)
 router.get('/select-lab',diagController.selectLab)
 router.post('/select-lab',diagController.selectLab1)
 router.post('/change-lab',diagController.changeLab)
+router.post('/empty-cart',diagController.emptyCart)
 router.get('/change-lab',diagController.changeLab1)
 router.get('/remove-cart-item',diagController.removeCartItem);
 router.get('/remove-cart-item1',diagController.removeCartItem1);

@@ -236,6 +236,13 @@ module.exports.addBank = (req, res) => {
     })
 }
 
+module.exports.skipBank = (req, res) => {
+    if (req.user.approve1 == true && req.user.approve2 == true) {
+        return res.redirect('/doctor-dashboard');
+    }
+    return res.redirect('back')
+}
+
 module.exports.bankDetails = async function(req, res) {
 
     if (req.body.accountnumber != req.body.reaccountnumber) {
@@ -338,6 +345,18 @@ module.exports.labProfile = async(req, res) => {
     return res.render('lab-profile',{
         title:'Lab Profile',
         lab:lab
+    })
+
+}
+
+module.exports.testProfile = async(req, res) => {
+    let test = await Test.findById(req.query.id);
+    let labs = await User.find({type:'Diagonistic'});
+
+    return res.render('test-profile',{
+        title:'Test Profile',
+        test:test,
+        labs:labs
     })
 
 }
@@ -833,7 +852,12 @@ module.exports.addCartItem1 = async(req, res) => {
 
         else{
             return res.json({
-                flag:'true'
+                flag:'true',
+                itemname:req.query.name,
+                lid:req.query.lid,
+                labname:user.cart.tests[0].labname
+
+
             })
         }
        
@@ -871,6 +895,42 @@ module.exports.addCartItem1 = async(req, res) => {
 
 
  
+}
+
+module.exports.emptyCart = async(req, res) => {
+    let user = await User.findById(req.user.id);
+    let lab = await User.findById(req.body.lid);
+    let price;
+console.log(req.body)
+    var labid;
+        labid = user.cart.tests[0].labid;
+  var length = user.cart.tests.length;
+            while(length != 0)
+            {
+                console.log('hii'+length,user.cart.tests.length)
+                user.cart.tests.pull(user.cart.tests[0]._id);
+                length--;
+            
+            }
+            for(let u of lab.tests)
+            {
+                console.log(u.testname.trim(),req.body.name.trim())
+              if(u.testname.trim()  == req.body.name.trim() ){
+                console.log('hello')
+                  price = u.testprice;
+                    break;
+                }
+            }
+            
+            user.cart.tests.push({
+                testname:req.body.name,
+                testprice:price,
+                labname:lab.name,
+                labid:lab._id
+            });
+            user.save()
+
+    return res.redirect('back')
 }
 
 module.exports.cart = async(req, res) => {

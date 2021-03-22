@@ -62,7 +62,13 @@
                     </div>
                     <div class="col-md-5" style="padding-left: 100px;">
                       
-                  
+                        <%if(user.cart.tests.length == 0){%>
+                            <div id="select_lab">
+                                <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                                <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
+                                <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            </div>
+                            <%}else{%>
                         <div id="select_lab1" style="margin-top: 50px;">
                             <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
                             <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" >
@@ -94,6 +100,7 @@
                             </div>
                             <a class="btn btn-primary" href="/diagonistic/cart" style="width: 100%;margin-top:50px;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
                         </div>
+                        <%}%>
 
                       
                      

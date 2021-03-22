@@ -287,17 +287,23 @@
                                                     <%if(bdate > tdate){%>
                                                         <%if(alldoctors.doctors[i].cancel != true){%>
                                                         <td>
-                                                            <!-- <a href="/user/payments/refund/?doctorid=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&id=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&index=<%=i%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&date=<%=alldoctors.doctors[i].date%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>" class="btn btn-sm bg-danger-light" style="width: 100%;"> -->
-                                                                <a href="/refund-checkout/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100%;">
-
-
-                                                                <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <%if(alldoctors.doctors[i].mode == 'payonclinic'){%>
+                                                                <a href="/cancel-appointment/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100%;">
+                                                                    <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             </a>
+                                                            <%}else{%>
+                                                                <a href="/refund-checkout/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100%;">
+                                                                    <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </a>
+                                                            <%}%>
+
+
+                                                                
                                                         </td>
                                                         <%}else{%>
                                                             <a href="#" class="btn btn-sm bg-danger" style="color: white;width: 100%;">
 
-                                                                <i class="fas fa-print"></i> Cancellled
+                                                                <i class="fas fa-print"></i> Cancelled
                                                             </a>
                                                             <%}%>
                                                         <%}else{%>
@@ -435,11 +441,17 @@
                                                                 <%if(bdate > tdate){%>
                                                                     <%if(alldoctors.doctors[i].cancel != true){%>
                                                                     <td class="text-right">
-                                                                        <!-- <a href="/user/payments/refund/?doctorid=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&id=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&index=<%=i%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&date=<%=alldoctors.doctors[i].date%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>" class="btn btn-sm bg-danger-light" style="width: 100%;"> -->
-                                                                            <a href="/refund-checkout/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
+                                                                        <%if(alldoctors.doctors[i].mode == 'payonclinic'){%>
+                                                                            <a href="/user/cancel-appointment/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
 
                                                                             <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                         </a>
+                                                                        <%}else{%>
+                                                                            <a href="/refund-checkout/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
+
+                                                                                <i class="fas fa-print"></i> Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            </a>
+                                                                            <%}%>
                                                                     </td>
                                                                     <%}else{%>
                                                                         <td class="std" ><span class="badge badge-pill bg-danger-light" style="margin-left: 40px;">Cancelled</span></td>
@@ -466,11 +478,19 @@
                                                                                 <%}else{%>
                                                                                     <%console.log(tdate,today)%>
                                                                                     <%if(tdate<today){%> 
+                                                                                        <%if(alldoctors.doctors[i].mode == 'payonclinic'){%>
                                                                                 <td class="text-right">
+                                                                                        <a href="/user/cancel-appointment/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
+                                                                                        <i class="fas fa-print"></i> Cancel
+                                                                                    </a>
+                                                                                </td>
+                                                                                <%}else{%>
+                                                                                    <td class="text-right">
                                                                                         <a href="/refund-checkout/?id=<%=alldoctors.doctors[i].did%>&fee=<%=alldoctors.doctors[i].fee%>&payid=<%=alldoctors.doctors[i].payment_id%>&dayindex=<%=alldoctors.doctors[i].dayindex%>&date=<%=alldoctors.doctors[i].date%>&slotindex=<%=alldoctors.doctors[i].slotindex%>&time=<%=alldoctors.doctors[i].time%>&email=<%=alldoctors.doctors[i].email%>&index=<%=i%>&reschedule=<%=alldoctors.doctors[i].reschedule%>" class="btn btn-sm bg-danger-light" style="width: 100px;">
                                                                                         <i class="fas fa-print"></i> Cancel
                                                                                     </a>
                                                                                 </td>
+                                                                                <%}%>
                                                                                 <%}else{%>
                                                                                     <td class="text-right">
                                                                    

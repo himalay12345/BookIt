@@ -22,117 +22,39 @@
 
         <!-- /Header -->
       
-        <section class="laptop-sugar" style="margin-top: 70px;">
-            <div class="search-box lscreen" style="margin-left:70px;">
-                <form action="/user/search-doctor" method="POST">
-                    <div class="form- search-location">
-    
-                        <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
-                        <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
-                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
-                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
-                            <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
-    
-                        </ul>
-    
-    
-                    </div>
-    
-                    <div class="form- search-info msearch">
-                        <!-- <span class="form-text" style="margin-top: -20px;">Ex : Dental or Sugar Check up etc</span> -->
-                        <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
-                        <table class="table table-striped position-absolute" style="margin-top: 3px;">
-    
-                            <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
-    
-                            </tbody>
-                        </table>
-                    </div>
-                    <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
-                </form>
+        <section class="laptop-sugar" style="margin-top: 30px;">
+            <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
+                <span style="font-size:2rem;font-weight: bolder;color:#575557;border-bottom: 1px solid grey;display: block;margin-left: 80px;">Test Details</span>
             </div>
-            <div class="search-box sscreen">
-                <form action="/user/search-doctor" method="POST">
-                    <div class="form-search-location">
-                        
-                        <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location">
-                      
-                        
-                        
-                    </div>
-    
-                    <div class="form-search-info msearch">
-                       
-                        <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Test, Health Packages, Labs">
-                        <!-- <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
-                       
-                    </div>
-                    <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
-                </form>
-            </div>
-             <div class="displayNone filter_box" id="filter_box" style="overflow-y:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            visibility: visible;
-    opacity: 1;">
-                    <div id="header_filter" style="padding:10px ;">
-    
-                        <i class="fas fa-times" style="font-size: 2rem;color:grey;" id="close_btn"></i>
-                        <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
-                    </div>
-                    <div class="card search-filter" style="display: block;">
-    
-                        <form action="/user/filter" method="POST">
-                            <div class="card-body">
-    
-    
-                                <div class="filter-widget">
-                                   
-                                    <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
-                                    <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Test, Health Packages, Labs">
-                                   
-                                </div>
-                                <div class="filter-widget">
-                                    <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
-                                        <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
-                                        <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
-                                        <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
-        
-                                        </ul>
-                                        <table class="table table-striped position-absolute" style="margin-left: -20px;">
-    
-                                            <tbody id="myTable1">
-                                                
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <!-- <div class="btn-search">
-                                    <button type="submit" class="btn btn-block tcolor">Search</button>
-                                </div> -->
-    
-                            </div>
-                        </form>
-                    </div>
-    
-                </div>
+          
             <div class="col-md-12 lipid profile" style="margin-bottom:0px;">
                 <div class="col-md-12">
                     
                    
                     <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;">
                         <div class="col-md-8" style="display: inline-flex;width: 100%;margin-bottom: 0px;">
-                        <div class="col-md-4" style=" height:35%; left: 20px;">
-                            <a href="/"><img src="<%=lab.avatar%>" style="width: 100%;height: 250px;"></a>
+                        <div class="col-md-5" style=" height:35%; left: 20px;">
+                            <div class="lip-heading">
+                                <h2 style="font-size:2rem;font-weight: bolder;color:#575557"><%=test.testname%></h2>
+                                <%var cnt=0;%>
+                                <%for(let u1 of labs){%>
+                                    <%for(let u2 of u1.tests){%>
+                                        
+                                        <%if(u2.testname.trim()  == test.testname.trim() ){%>
+                                           
+                                            <%cnt++%>
+                                        <%}%>
+                                    <%}%>
+                                <%}%>
+                                <h3 style="font-size: 1rem;">Available At <%=cnt%> Labs</h3>
+                                <p style="font-weight: 600;">Rs <%=test.testprice%> Onwards</p>
+                                <!-- <a  class="btn btn-primary"  style="border-radius: 3px !important;width:200px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a> -->
+                            </div>
 
                         </div>
-                        <div class="col-md-8" style="height: 100%; left: 20px">
-                            <div class="lip-heading">
-                                <h2><%=lab.name%></h2>
-                                <p><%=lab.contacts.address%>, <%=lab.contacts.city%></p>
-                            </div>
-                            <!-- <div class="certi" style="display: inline-flex;">
+                        <div class="col-md-7" style="height: 100%; left: 20px">
+                          
+                            <div class="certi" style="display: inline-flex;">
                                 <div class="certi-logo" style="margin-left: -4px;">
                                     <img src="<%=assetPath('img/patients/certi2.png')%>" style="height: 37px;">
                                 </div>
@@ -149,27 +71,22 @@
                             <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> 100% Secured with Accuracy
                             </span</li>                    
                         </ul>
-                    </div> -->
-                    <!-- <div class=" col-md-12 lip-block" style="height: 60px;position: relative; display: inline-flex; border-top: 1px solid black; border-bottom: 1px solid black;">
+                    </div>
+                    <div class=" col-md-12 lip-block" style="height: 70px;position: relative; display: inline-flex; border-top: 1px solid black; border-bottom: 1px solid black;padding-bottom: 15px !important;">
                         <div class="lips-price" style="margin-left: -7px;" >
-                            <h3 style="margin-top: 13px;margin-left: 0px;">₹ 400</h3>
+                            <h3 style="margin-top: 13px;margin-left: 0px;">Rs <%=test.testprice%> Onwards</h3>
                             <p style="margin-top:-12px; margin-left:-2px"><span style="margin-left: 2px; color: #558B2F">+</span><span style="color: #558B2F">10% Health Cashback*</span> </p>
                             </div>
-                            <div class="lip-add" style="border: 1px solid black; height: 39px;width: 109px;left: 303px;
-                    margin-top: 13px;
-                    border-radius: 3px;position: absolute;">
-                                <h4 style="text-align: center; padding-top: 7px;">Add Cart</h4>
-
-                            </div>
-                            <div class="lip-add" style="border: 1px solid #fff; position: absolute; height: 39px;width: 116px; left: 422px;
+                           
+                            <div class="lip-add" style=" position: absolute; height: 39px;width: 116px; left: 200px;
                     margin-top: 13px;
                     border-radius: 3px;
-                    background-color: #4DD0E1">
-                                <h4 style="text-align: center; padding-top: 7px;color: white;
-                        font-weight: 800; color: #fff; cursor: pointer;">Book Now</h4>
+                ">
+                                <a class="btn btn-primary"style="text-align: center; padding-top: 7px;color: white;
+                        font-weight: 800; color: #fff; cursor: pointer;width:150px">Select</a>
 
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
                             <div class="imgs">
                                 <img src="<%=assetPath('img/patients/first1.jfif')%>" style="height: 45px; width: 40px;">
@@ -294,49 +211,6 @@
                
 
             </div>
-            <div class="col-md-11" style="margin-left: 30px;margin-top: -170px;">
-                <div class="" style="border:3px solid #478e8e;padding: 5px 10px;margin-bottom: 20px;">
-                    <span style="font-size:2rem;font-weight: bolder;color:#e36d25;">Available Tests</span>
-                    <span style="position:absolute;right:10%;font-size:1.5rem;font-weight: bolder;"><%=lab.tests.length%> Tests</span>
-                </div>
-                <div>
-                    <%var j=0%>
-                    <%for(let u of lab.tests){%>
-                    <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
-                        <div style="width: 10%;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
-                        <div style="width: 70%;">
-                            <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
-                            <h3 style="font-size: 1rem;">Rs <%=u.testprice%></h3>
-                        </div>
-                        <%var flag1 = false;%>
-                        <%for(let u2 of user.cart.tests){%>
-                                        
-                            <%if(u2.testname.trim()  == u.testname.trim() && u2.labid == lab.id){%>
-                                <%flag1 = true;%>
-                                <%}%>
-                                <%}%>
-                                <%if(flag1){%>         
-                                    <div style="width: 20%;position: absolute;right: 30px;">
-                                        <a  class="btn btn-primary displayNone" id="select_new" data-count="<%=j%>" data-name="<%=u.testname%>" data-lid="<%=lab._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                    </div>
-                                    <div style="width: 20%;position: absolute;right: 30px;">
-                                        <a href="" class="btn btn-primary" id="remove_item" data-count="<%=j%>" data-name="<%=u.testname%>"  style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
-                                            <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
-                                    </div>
-                                    <%}else{%>
-                                        <div style="width: 20%;position: absolute;right: 30px;">
-                                            <a class="btn btn-primary" id="select_new" data-count="<%=j%>" data-name="<%=u.testname%>" data-lid="<%=lab._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
-                                        </div>
-                                        <div style="width: 20%;position: absolute;right: 30px;">
-                                            <a href="" class="btn btn-primary displayNone" id="remove_item" data-name="<%=u.testname%>" data-name="<%=u.testname%>"  style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;background-color: red;">
-                                                <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
-                                        </div>
-                                        <%}%>
-                    </div>
-                    <%j++;%>
-                    <%}%>
-                </div>
-            </div>
          
 
             <!-- Footer -->
@@ -354,14 +228,12 @@
         <div id="displayMyLab" style="height: 20%;overflow-y: auto;display: inline-flex;">
             <i class="fas fa-shopping-cart" style="margin-right: 15px;width: 5%;margin-top: 5px;"></i>
             <%if(locals.user.cart.tests.length>0){%>
-            <h2 style="color:#575557;font-size: 1.1rem;padding-bottom: 0px;font-weight: bolder;width: 95%;">  You have <%=locals.user.cart.tests.length%> items in your cart from <%=locals.user.cart.tests[0].labname%></h2>
             <%}%>
           </div>
         <form action="/diagonistic/empty-cart" method="POST">
         <div  style="height: 100vh;">  
             
             <div id="displayLab" style="height:100vh;overflow-y: auto;"></div>
-            <p style="font-size: 1rem;top: 80px;margin-left: 20px;position: absolute;">Your cart will be emptied. Do you wish to continue with the lab <%=lab.name%>?</p>
 
             <div style="background-color:white;width: 100%;position:absolute;top: 200px;bottom:5px;height: 10%;">
                 <button type="submit" id="confirm_address_button" class="btn btn-primary" style="width: 100px;margin-right: 20px;">Yes</button>
