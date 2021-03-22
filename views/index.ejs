@@ -1,122 +1,128 @@
 <head>
     <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
 
-	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
     <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
-    
-	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
-	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+
+    <link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
 </head>
+
 <body>
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
         <%-include('header');%>
-        <!-- Header -->
+            <!-- Header -->
 
-        <!-- /Header -->
-        <div class="lab-test-checks sscreen" style="background-image: url('<%=assetPath('img/co3.jpg')%>');margin-left: 15px;
+            <!-- /Header -->
+            <div class="lab-test-checks sscreen" style="background-image: url('<%=assetPath('img/co3.jpg')%>');margin-left: 15px;
             margin-right: 15px;
             margin-top: 15px;height: 85px;background-size: cover;background-repeat: no-repeat;border-radius: 10px;">
-            <a href="/covid-form">
-                <div style="height: 30%;padding: 2px;">
-                    <div style="width: 70%;;height: 100%;border-radius: 10px;display: inline-flex;">
-                        <div style="width:80%; border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
-                            <p style="margin-left: 3px;margin-top: 5px;font-family: poppins;"> <span style="font-size: 0.8rem; margin-top:0px; padding-left: 6px; color:rgb(41, 38, 38); font-weight: 700;">Covid Vaccine</span></p>
-                            <p style="margin-left: 3px;margin-top:-21px;font-family: poppins;"> <span style="font-size: 0.8rem;  padding-left: 6px; color:rgb(41, 38, 38); font-weight: 700;">Available </span></p>
+                <a href="/covid-form">
+                    <div style="height: 30%;padding: 2px;">
+                        <div style="width: 70%;;height: 100%;border-radius: 10px;display: inline-flex;">
+                            <div style="width:80%; border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
+                                <p style="margin-left: 3px;margin-top: 5px;font-family: 'Poppins', sans-serif;"> <span style="font-size: 0.8rem; margin-top:0px; padding-left: 6px; color:rgb(41, 38, 38); font-weight: 700;">Covid Vaccine</span></p>
+                                <p style="margin-left: 3px;margin-top:-21px;font-family: 'Poppins', sans-serif;"> <span style="font-size: 0.8rem;  padding-left: 6px; color:rgb(41, 38, 38); font-weight: 700;">Available </span></p>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div style="height: 70%;">
-                    <h3 style="padding-left: 10px;
+                    <div style="height: 70%;">
+                        <h3 style="padding-left: 10px;
                     font-weight: 300;
                     font-size: 0.7rem;
                     margin-top: 25px;
-                    font-family: unset;font-family: poppins;">Register Now<br> safely at home</h3>
+                    font-family: unset;font-family: 'Poppins', sans-serif;">Register Now<br> safely at home</h3>
 
-                </div>
-            </a>
+                    </div>
+                </a>
             </div>
-        <!-- Home Banner -->
-        <section class="section section-search noimg" style="margin-top: 20px;   background: #f9f9f9 url(<%=assetPath('img/search-bg.png')%>) no-repeat bottom center;">
-            <div id="popup1" class="overlay">
-                <div class="popup">
-                    <form action="/user/update-type" method="POST">
-                        <div class="col-12 col-md-12" style="margin-left: -0.9375rem;margin-top:20px;margin-bottom: 20px;">
-                            <div class="form-">
-                                <label style="color: rgb(138, 138, 138);">Are you a ?</label>
-                                <%if(locals.user){%>
-                                    <input type="hidden" name="user" value="<%=locals.user.id%>">
-                                    <%}%>
-                                        <select name="type" class="form-control select1" style="margin-bottom: 15px;">
+
+            <!-- Home Banner -->
+            <section class="section section-search noimg" style="margin-top: 20px;   background: #f9f9f9 url(<%=assetPath('img/search-bg.png')%>) no-repeat bottom center;">
+                <div id="popup1" class="overlay">
+                    <div class="popup">
+                        <form action="/user/update-type" method="POST">
+                            <div class="col-12 col-md-12" style="margin-left: -0.9375rem;margin-top:20px;margin-bottom: 20px;">
+                                <div class="form-">
+                                    <label style="color: rgb(138, 138, 138);">Are you a ?</label>
+                                    <%if(locals.user){%>
+                                        <input type="hidden" name="user" value="<%=locals.user.id%>">
+                                        <%}%>
+                                            <select name="type" class="form-control select1" style="margin-bottom: 15px;">
                                             <option value="Patient">Patient</option>
                                 <option value="Doctor">Doctor</option>
                                
                             </select>
-                            <span style="font-size: 0.9rem;margin-top:15px;margin-left:5px;">By signing up, I agree to</span> <span><a class="forgot-link" href="/term-condition" style="color:blue">terms & condition</a></span>
+                                            <span style="font-size: 0.9rem;margin-top:15px;margin-left:5px;">By signing up, I agree to</span> <span><a class="forgot-link" href="/term-condition" style="color:blue">terms & condition</a></span>
+                                </div>
                             </div>
-                        </div>
-                        <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
-                    </form>
+                            <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Sumbit</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="container-fluid">
-                <div class="banner-wrapper">
-                    <div class="banner-header text-center mbanner">
-                        <h1>Search Doctor, Make an Appointment</h1>
-                        <p>Discover the best doctors, clinic & hospital the city nearest to you.</p>
-                    </div>
+                <div class="container-fluid">
+                    <div class="banner-wrapper">
+                        <div class=" mbanner">
+                            <h1 style="font-family: 'Poppins', sans-serif;">Search Doctor, Make an Appointment</h1>
+                            <p style="font-family: 'Poppins', sans-serif;margin-top: -12px;margin-bottom: 29px;font-size: 1rem;line-height: 10px;">Discover the best doctors, clinic & hospital the city nearest to you.</p>
+                        </div>
+                        <div class="nbanner" style="margin-top: -13px;">
+                            <h1 style="font-size: 19px;line-height: 19px;font-family: 'Poppins', sans-serif;">Search Doctor, <br>Make an Appointment</h1>
+                            <p style="margin-top: -11px;line-height: 15px;font-size: 13px;font-family: 'Poppins', sans-serif;">Discover the best doctors,<br> clinic & hospital the city nearest to you.</p>
+                        </div>
 
-                    <!-- Search -->
-                    <div class="search-box lscreen">
-                        <form action="/user/search-doctor" method="POST">
-                            <div class="form- search-location">
+                        <!-- Search -->
+                        <div class="search-box lscreen">
+                            <form action="/user/search-doctor" method="POST">
+                                <div class="form- search-location">
 
-                                <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
-                                <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
-                                    <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
-                                    <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
-                                    <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
+                                    <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
+                                    <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
+                                        <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                        <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                        <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
 
-                                </ul>
+                                    </ul>
 
 
-                            </div>
+                                </div>
 
-                            <div class="form- search-info msearch">
-                                <span class="form-text" style="margin-top: -20px;">Ex : Dental or Sugar Check up etc</span>
-                                <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
-                                <table class="table table-striped position-absolute" style="margin-top: 3px;">
+                                <div class="form- search-info msearch">
+                                    <span class="form-text" style="margin-top: -20px; font-family: 'Poppins', sans-serif;">Ex : Dental or Sugar Check up etc</span>
+                                    <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                    <table class="table table-striped position-absolute" style="margin-top: 3px;">
 
-                                    <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
+                                        <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
-                        </form>
-                    </div>
-                    <div class="search-box sscreen">
-                        <form action="/user/search-doctor" method="POST">
-                            <div class="form-search-location">
-                                
-                                <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location">
-                              
-                                
-                                
-                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+                            </form>
+                        </div>
+                        <div class="search-box sscreen">
+                            <form action="/user/search-doctor" method="POST">
+                                <div class="form-search-location">
 
-                            <div class="form-search-info msearch">
-                               
-                                <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
-                                <span class="form-text">Ex : Dental or Sugar Check up etc</span>
-                               
-                            </div>
-                            <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
-                        </form>
-                    </div>
-                     <div class="displayNone" id="filter_box" style="overflow:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+                                    <input type="text" name="location" class="form-control searchul" onfocus="showsearch()" placeholder="Search Location">
+
+
+
+                                </div>
+
+                                <div class="form-search-info msearch">
+
+                                    <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                                    <span class="form-text">Ex : Dental or Sugar Check up etc</span>
+
+                                </div>
+                                <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
+                            </form>
+                        </div>
+                        <div class="displayNone" id="filter_box" style="overflow:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
                     top: 0;
                     bottom: 0;
                     left: 0;
@@ -135,24 +141,24 @@
 
 
                                         <div class="filter-widget">
-                                           
-                                            <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+
+                                            <input type="text" name="location" id="searchkey1" class="form-control" placeholder="Search Location" style="margin-bottom: 5px;">
                                             <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
-                                           
+
                                         </div>
                                         <div class="filter-widget">
                                             <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
                                                 <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
                                                 <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
                                                 <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
-                
-                                                </ul>
-                                                <table class="table table-striped position-absolute" style="margin-left: -20px;">
-   
-                                                    <tbody id="myTable1">
-                                                        
-                                                    </tbody>
-                                                </table>
+
+                                            </ul>
+                                            <table class="table table-striped position-absolute" style="margin-left: -20px;">
+
+                                                <tbody id="myTable1">
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                         <!-- <div class="btn-search">
                                             <button type="submit" class="btn btn-block tcolor">Search</button>
@@ -163,238 +169,252 @@
                             </div>
 
                         </div>
-                    <!-- /Search -->
+                        <!-- /Search -->
 
+                    </div>
                 </div>
+            </section>
+            <div class="lab-test-checks sscreen" style="background-image: url('<%=assetPath('img/pop.jpg')%>');margin-left: -1px;
+            
+            margin-top: -62px;height: 100px; background-size: cover;background-repeat: no-repeat;">
+
             </div>
-        </section>
-        <!-- / Banner -->
-        <section class="sscreen" style="margin-bottom: -10px;margin-top: 20px;">
-            <a href="/covid-form">
-                <div class=" col-sm-12 index-content">
-                    <div class="col-sm-12 index-first" style="background-image: url('<%=assetPath('img/co1.jpg')%>');background-repeat:no-repeat; margin-bottom: 10px; position: relative; height: 200px;  border-radius: 14px;background-size:cover;">
-                        <div class="say-doubts" style="position: absolute;">
-                            <h4 style="color: white;
+            <!-- / Banner -->
+            <section class="sscreen" style="margin-bottom: -10px;margin-top: 20px;">
+                <a href="/covid-form">
+                    <div class=" col-sm-12 index-content">
+                        <div class="col-sm-12 index-first" style="background-image: url('<%=assetPath('img/co1.jpg')%>');background-repeat:no-repeat; margin-bottom: 10px; position: relative; height: 200px;  border-radius: 14px;background-size:cover;">
+                            <div class="say-doubts" style="position: absolute;">
+                                <h4 style="color: rgb(39, 34, 34);
                                         margin-top: 16px;
                                         margin-left: 3px;
                                         font-size: 14px;
-                                        font-family: poppins;">
-                                Goodbye Corona Virus,
-                            </h4>
-                        </div>
-                        <div class="say-hello" style="position: absolute;">
-                            <h3 style="font-weight: 800;margin-top: 33px;  font-size: 1.3rem;color: white;">Covid Vaccine Available.</h3>
+                                        font-family: 'Poppins', sans-serif;">
+                                    Goodbye Corona Virus,
+                                </h4>
+                            </div>
+                            <div class="say-hello" style="position: absolute;">
+                                <h3 style="font-weight: 600;margin-top: 33px;  font-size: 0.9375rem;color: black;font-family: 'Poppins', sans-serif;">Covid Vaccine Available.</h3>
 
-                        </div>
-                        <div class="doctor-hi">
-                            <!-- <img class="hi-image" src="<%=assetPath('img/vaccine1.jpg')%>" style="margin-left: 87px !important;margin-top:11px !important;height:200px !important;border-top-right-radius: 14px;border-bottom-right-radius: 14px;"> -->
-                        </div>
-                        <div class="btn sb-sd-3 st-sd-5" style="position: absolute;    top: 125px;
+                            </div>
+                            <div class="doctor-hi">
+                                <!-- <img class="hi-image" src="<%=assetPath('img/vaccine1.jpg')%>" style="margin-left: 87px !important;margin-top:11px !important;height:200px !important;border-top-right-radius: 14px;border-bottom-right-radius: 14px;"> -->
+                            </div>
+                            <div class="btn sb-sd-3 st-sd-5" style="position: absolute;    top: 125px;
                         left: -6px;">
-                            <a href="/covid-form" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" style="font-family: poppins;border:2px solid#478e8e; margin-top: 5px;background:transparent;color: #072135;padding: 3px 8px !important;font-size: 0.9rem; font-weight: 400;margin-left: 0px;border-radius: 15px;">Register Now</a>
-                        </div>
-                        <div class="off" style="position: absolute; bottom: -5px; color: white;">
-                            <p style="line-height: 1rem;"><span style=" font-weight: 500;font-size: 0.75rem;color: #072135;  font-family: poppins;  
+                                <a href="/covid-form" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" style="font-family: 'Poppins', sans-serif;border:2px solid#478e8e; margin-top: 5px;background:transparent;color: #072135;padding: 3px 8px !important;font-size: 0.9rem; font-weight: 400;margin-left: 0px;border-radius: 15px;">Register Now</a>
+                            </div>
+                            <div class="off" style="position: absolute; bottom: -5px; color: white;">
+                                <p style="line-height: 1rem;"><span style=" font-weight: 500;font-size: 0.75rem;color: #072135;  font-family: 'Poppins', sans-serif;  
                            ">Free Registration</span><span style="margin-left: 2px;"> 
                     </span> <span> </span></p>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-        </section>
-        <!-- Clinic and Specialities -->
-        <section class="section section-specialities mmbanner">
-            <div class="container-fluid">
-                <div class="section-header text-center">
-                    <h2 style="font-weight: bold;">Clinic and Specialities</h2>
-                    <p class="sub-title lscreen">
-                        Start your care now by choosing from our top specialities</p>
-                </div>
-                <div class="row justify-content-center mmmbanner" style="">
-                    <div class="col-md-11">
-                        <!-- Slider -->
-                        <div class="specialities-slider slider">
-                            <a href="/specialist/?dep=General Physician">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/physical.jfif')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>General Physician</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Common health issues</p>
-                                </div>
-                            </a>
-                            <a href="/specialist/?dep=Ophthalmology">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/eye.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Ophthalmology</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">For Eye Care</p>
-                                </div>
-                            </a>
-                            <a href="/specialist/?dep=Dermatology">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/hair.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Dermatology</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Common hair issues</p>
-                                </div>
-                            </a>
-                            <a href="/specialist/?dep=Paediatrics">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/child.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Paediatrics</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Children health care</p>
-                                </div>
-                            </a>
-
-                            <!-- Slider Item -->
-                            <a href="/specialist/?dep=Urology">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/urology.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Urology</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Disorders of urinary tract</p>
-                                </div>
-                            </a>
-                            <!-- /Slider Item -->
-
-                            <!-- Slider Item -->
-                            <a href="/specialist/?dep=Neurology">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/brain.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Neurology</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Disorder of nervous system</p>
-                                </div>
-                            </a>
-                            <!-- /Slider Item -->
-
-                            <!-- Slider Item -->
-                            <a href="/specialist/?dep=Orthopedic">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/bone.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Orthopedic</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Management of bone pain</p>
-                                </div>
-                            </a>
-                            <!-- /Slider Item -->
-
-                            <!-- Slider Item -->
-                            <a href="/specialist/?dep=Cardiologist">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/heart.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Cardiologist</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Heart and blood pressure</p>
-                                </div>
-                            </a>
-                            <!-- /Slider Item -->
-
-                            <!-- Slider Item -->
-                            <a href="/specialist/?dep=Dentist">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/teeth.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Dentist</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Tooth pain and other issues</p>
-                                </div>
-                            </a>
-                            <a href="/specialist/?dep=Gynaecology">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>Gynaecology</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Female specialist</p>
-                                </div>
-                            </a>
-                            <a href="/specialist/?dep=General Surgeon">
-                                <div class="speicality-item text-center">
-                                    <div class="speicality-img">
-                                        <img src="<%=assetPath('img/specialities/surgery1.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
-                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                                    </div>
-                                    <p>General Surgeon</p>
-                                    <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Surgery</p>
-                                </div>
-                            </a>
-                            <!-- /Slider Item -->
-
-                        </div>
-                        <div class="view-all" style="margin-top: -15px;
-                        margin-right: -10px;">
-                           
-                             <a href="/specialist-all" style=" padding:2px 20px;color: turquoise;text-align: right;display: block;">View All </a>
-                           
-                        </div>
-                        <!-- /Slider -->
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="laptop-index">
-            <section class="section section-doctor" id="inclinic" style="padding-bottom: 50px;">
+                </a>
+            </section>
+            <!-- Clinic and Specialities -->
+            <section class="section section-specialities mmbanner">
                 <div class="container-fluid">
-                    <div class="section-header text-center">
-                        <h3 style="font-size: 25px; font-family: Camphor,Helvetica,Arial,sans-serif!important;margin-block-start: 0.83em;margin-block-end: 0.83em;margin-inline-start: 0px; ">Book an appointment for an in-clinic consultation
-
-                        </h3>
-                        <p style="font-style: bold;display: block; margin-top:-10px;color: #414146;position: relative;-webkit-font-smoothing: antialiased;text-size-adjust: 100%; ">
-                            Find experienced doctors across all specialties</p>
+                    <div class=" lclinic" style="margin-left: 320px !important; margin-top: -5px; ">
+                        <h2 style="font-weight: bold;font-family: 'Poppins', sans-serif;">Clinic and Specialities</h2>
+                        <p style="font-family: 'Poppins', sans-serif;">
+                            Start your care now by choosing from our top specialities</p>
                     </div>
-                    <div class="row">
 
-                        <div class="col-lg-12">
-                            <div class="doctor-slider slider">
-                                <!-- <% var count2=1 %>
+                    <div class=" sclinic">
+                        <h2 style="font-weight: bold; text-align: left; margin-left: 11px;margin-top: -11px;
+                        font-size: 19px; font-family: 'Poppins', sans-serif; ">Clinic and Specialities</h2>
+
+                        <p class=" sclinic" style="text-align: left;margin-left: 12px; line-height: 15px;font-size:12px;font-weight:500;margin-top: 3px;font-family: 'Poppins', sans-serif;">
+                            Start your care now by choosing <br>from our top specialities</p>
+                    </div>
+
+                    <div class="row justify-content-center mmmbanner">
+                        <div class="col-md-11">
+                            <!-- Slider -->
+                            <div class="specialities-slider slider">
+                                <a href="/specialist/?dep=General Physician">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/physical.jfif')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>General Physician</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Common health issues</p>
+                                    </div>
+                                </a>
+                                <a href="/specialist/?dep=Ophthalmology">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/eye.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Ophthalmology</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">For Eye Care</p>
+                                    </div>
+                                </a>
+                                <a href="/specialist/?dep=Dermatology">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/hair.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Dermatology</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Common hair issues</p>
+                                    </div>
+                                </a>
+                                <a href="/specialist/?dep=Paediatrics">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/child.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Paediatrics</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Children health care</p>
+                                    </div>
+                                </a>
+
+                                <!-- Slider Item -->
+                                <a href="/specialist/?dep=Urology">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/urology.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Urology</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Disorders of urinary tract</p>
+                                    </div>
+                                </a>
+                                <!-- /Slider Item -->
+
+                                <!-- Slider Item -->
+                                <a href="/specialist/?dep=Neurology">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/brain.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Neurology</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Disorder of nervous system</p>
+                                    </div>
+                                </a>
+                                <!-- /Slider Item -->
+
+                                <!-- Slider Item -->
+                                <a href="/specialist/?dep=Orthopedic">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/bone.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Orthopedic</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Management of bone pain</p>
+                                    </div>
+                                </a>
+                                <!-- /Slider Item -->
+
+                                <!-- Slider Item -->
+                                <a href="/specialist/?dep=Cardiologist">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/heart.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Cardiologist</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Heart and blood pressure</p>
+                                    </div>
+                                </a>
+                                <!-- /Slider Item -->
+
+                                <!-- Slider Item -->
+                                <a href="/specialist/?dep=Dentist">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/teeth.png')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Dentist</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Tooth pain and other issues</p>
+                                    </div>
+                                </a>
+                                <a href="/specialist/?dep=Gynaecology">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/pregnacy.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>Gynaecology</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Female specialist</p>
+                                    </div>
+                                </a>
+                                <a href="/specialist/?dep=General Surgeon">
+                                    <div class="speicality-item text-center">
+                                        <div class="speicality-img">
+                                            <img src="<%=assetPath('img/specialities/surgery1.jpg')%>" style="border-radius: 50%;" class="img-fluid" alt="Speciality">
+                                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                        </div>
+                                        <p>General Surgeon</p>
+                                        <p style="font-size: 0.7rem; font-weight: bold; margin-top: 0px;color: black;">Surgery</p>
+                                    </div>
+                                </a>
+                                <!-- /Slider Item -->
+
+                            </div>
+                            <div class="view-all" style="margin-top: -15px;
+                        margin-right: -10px;">
+
+                                <a href="/specialist-all" style=" padding:2px 20px;color: turquoise;text-align: right;display: block;">View All </a>
+
+                            </div>
+                            <!-- /Slider -->
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="laptop-index">
+                <section class="section section-doctor" id="inclinic" style="padding-bottom: 50px;">
+                    <div class="container-fluid">
+                        <div class="section-header text-center" style="position: relative;">
+                            <h3 style="font-size: 25px; position: absolute; left:230px;font-weight: 700; font-family:  'Poppins', sans-serif;!important;margin-block-start: 0.83em;margin-block-end: 0.83em;margin-inline-start: 0px; ">Book an appointment for an in-clinic consultation
+
+                            </h3>
+                            <p style="font-style: bold;display: block;left: 230px !important;color: #414146;font-family:  'Poppins', sans-serif;position: absolute;top: 40px; ">
+                                Find experienced doctors across all specialties</p>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="doctor-slider slider">
+                                    <!-- <% var count2=1 %>
                                     <%for(consult of consults) {%>
                                         <% if(count2>=10) {%>
                                             <% break;} %>
                                                 <%count2++%> -->
-                                <div style="height: 260px; width: 90px;   border:1px solid grey;  border-radius: 5px;">
+                                    <div style="height: 260px; width: 90px;   border:1px solid grey;  border-radius: 5px;">
 
 
-                                    <div style="height: 65%; width: 100%;">
-                                        <a href="/coming-soon">
+                                        <div style="height: 65%; width: 100%;">
+                                            <a href="/coming-soon">
                                         <img src="<%=consult.consultavatar%> " style="height: 100%; width: 100%;">
                                         </a>
 
-                                    </div>
-                                    <div style="height: 35%; width: 100%; position: relative;padding-left: 10px; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
-                                        <a href="/coming-soon">
-                                            <h4 style="padding-top: 5px;
+                                        </div>
+                                        <div style="height: 35%; width: 100%; position: relative;padding-left: 10px; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+                                            <a href="/coming-soon">
+                                                <h4 style="padding-top: 5px;
                                         padding-left: 4px;
                                         font-family: system-ui;">
-                                                <%=consult.consultname %>
-                                            </h4>
-                                        </a>
-                                        <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 5px; display: block;margin-top: -4px;">₹
-                                            <%=consult.consultprice %>
-                                        </p>
-                                        <a href="/coming-soon" style="color:#455A64;font-weight:bold; position: absolute;    margin-top: -16px;
+                                                    <%=consult.consultname %>
+                                                </h4>
+                                            </a>
+                                            <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 5px; display: block;margin-top: -4px;">₹
+                                                <%=consult.consultprice %>
+                                            </p>
+                                            <a href="/coming-soon" style="color:#455A64;font-weight:bold; position: absolute;    margin-top: -16px;
                                         display: block;
                                         padding-left: 5px;">Consult Now<span style="margin-left: 7px;"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></span>
                                          </a>
@@ -404,259 +424,259 @@
 
 
 
+                                        </div>
                                     </div>
+
+
+                                    <!-- <% } %> -->
+
+
+
+
                                 </div>
-
-
-                                <!-- <% } %> -->
-
-
-
-
                             </div>
                         </div>
-                    </div>
-            </section>
+                </section>
 
 
 
 
-            <!-- Clinic and Specialities -->
+                <!-- Clinic and Specialities -->
 
 
-            <!-- Popular Section -->
-            <section class="section section-doctor" style="background-color: white;">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="section-header ">
-                                <h2>Book Our Doctor</h2>
-                                <p>Find experienced doctors across all specialties</p>
+                <!-- Popular Section -->
+                <section class="section section-doctor" style="background-color: white;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="section-header ">
+                                    <h2>Book Our Doctor</h2>
+                                    <p>Find experienced doctors across all specialties</p>
+                                </div>
+                                <div class="about-content">
+                                    <p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is
+                                        now a critical tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
+                                    <a href="javascript:;" class="tcolor">Read More..</a>
+                                </div>
                             </div>
-                            <div class="about-content">
-                                <p>As COVID infection rates continued to climb in parts of the country, it became clear for the whole nation, that there would be no immediate return to normal. Treatment on appointment, once a nice-to-have option, is now
-                                    a critical tool to maintain efficient, safe operations, avoding risks to come in contact with any one and save your valuable time and efforts.</p>
-                                <a href="javascript:;" class="tcolor">Read More..</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="doctor-slider slider">
-                                <%for(doctor of doctors){%>
-                                                                                    <%if(!doctor.premium){%>
-                                                    <%continue;%>
+                            <div class="col-lg-8">
+                                <div class="doctor-slider slider">
+                                    <%for(doctor of doctors){%>
+                                        <%if(!doctor.premium){%>
+                                            <%continue;%>
                                                 <%}%>
-                                    <div class="profile-widget">
-                                        <div class="doc-img">
-                                            <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                    <div class="profile-widget">
+                                                        <div class="doc-img">
+                                                            <a href="/doctor-profile/?id=<%=doctor._id%>">
                                         <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height: 200px; width: 150%;">
                                     </a>
-                                            <a href="javascript:void(0)" class="fav-btn">
-                                                <i class="far fa-bookmark"></i>
-                                            </a>
-                                        </div>
-                                        <div class="pro-content">
-                                            <h3 class="title">
-                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
-                                                    <%=doctor.name%>
-                                                </a>
-                                                <i class="fas fa-check-circle verified"></i>
-                                            </h3>
-                                            <p class="speciality">
-                                                <%=doctor.department%>
-                                            </p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(49)</span>
-                                            </div>
-                                            <ul class="available-info">
-                                                <li>
-                                                    <i class="fas fa-map-marker-alt"></i>
-                                                    <%=doctor.contacts.city%>
-                                                        <%=doctor.contacts.state%>
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                                                </li>
-                                                <li>
-                                                    <i class="far fa-money-bill-alt"></i>
-                                                    <%=doctor.booking_fee%>
-                                                        <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-                                                </li>
-                                            </ul>
-                                            <div class="row row-sm">
-                                                <div class="col-6 cloginbtn">
-                                                    <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn tbcolor">View Profile</a>
-                                                </div>
-                                                <div class="col-6">
-                                                    <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                    <%for(doctor of doctors){%>
-                                        <%if(doctor.premium){%>
-        <%continue;%>
-    <%}%>
-<div class="profile-widget">
-<div class="doc-img">
-<a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                            <a href="javascript:void(0)" class="fav-btn">
+                                                                <i class="far fa-bookmark"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="pro-content">
+                                                            <h3 class="title">
+                                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                                    <%=doctor.name%>
+                                                                </a>
+                                                                <i class="fas fa-check-circle verified"></i>
+                                                            </h3>
+                                                            <p class="speciality">
+                                                                <%=doctor.department%>
+                                                            </p>
+                                                            <div class="rating">
+                                                                <i class="fas fa-star filled"></i>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <i class="fas fa-star filled"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <span class="d-inline-block average-rating">(49)</span>
+                                                            </div>
+                                                            <ul class="available-info">
+                                                                <li>
+                                                                    <i class="fas fa-map-marker-alt"></i>
+                                                                    <%=doctor.contacts.city%>
+                                                                        <%=doctor.contacts.state%>
+                                                                </li>
+                                                                <li>
+                                                                    <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                                                                </li>
+                                                                <li>
+                                                                    <i class="far fa-money-bill-alt"></i>
+                                                                    <%=doctor.booking_fee%>
+                                                                        <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="row row-sm">
+                                                                <div class="col-6 cloginbtn">
+                                                                    <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn tbcolor">View Profile</a>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                        <%for(doctor of doctors){%>
+                                                            <%if(doctor.premium){%>
+                                                                <%continue;%>
+                                                                    <%}%>
+                                                                        <div class="profile-widget">
+                                                                            <div class="doc-img">
+                                                                                <a href="/doctor-profile/?id=<%=doctor._id%>">
 <img class="img-fluid" alt="User Image" src="<%=doctor.avatar%>" style="height: 200px; width: 150%;">
 </a>
-<a href="javascript:void(0)" class="fav-btn">
-    <i class="far fa-bookmark"></i>
-</a>
-</div>
-<div class="pro-content">
-<h3 class="title">
-    <a href="/doctor-profile/?id=<%=doctor._id%>">
-        <%=doctor.name%>
-    </a>
-    <i class="fas fa-check-circle verified"></i>
-</h3>
-<p class="speciality">
-    <%=doctor.department%>
-</p>
-<div class="rating">
-    <i class="fas fa-star filled"></i>
-    <i class="fas fa-star filled"></i>
-    <i class="fas fa-star filled"></i>
-    <i class="fas fa-star filled"></i>
-    <i class="fas fa-star"></i>
-    <span class="d-inline-block average-rating">(49)</span>
-</div>
-<ul class="available-info">
-    <li>
-        <i class="fas fa-map-marker-alt"></i>
-        <%=doctor.contacts.city%>
-            <%=doctor.contacts.state%>
-    </li>
-    <li>
-        <i class="far fa-clock"></i> Available on Fri, 22 Mar
-    </li>
-    <li>
-        <i class="far fa-money-bill-alt"></i>
-        <%=doctor.booking_fee%>
-            <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
-    </li>
-</ul>
-<div class="row row-sm">
-    <div class="col-6 cloginbtn">
-        <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn tbcolor">View Profile</a>
-    </div>
-    <div class="col-6">
-        <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
-    </div>
-</div>
-</div>
-</div>
-<% } %>
-                                        <!-- /Doctor Widget -->
+                                                                                <a href="javascript:void(0)" class="fav-btn">
+                                                                                    <i class="far fa-bookmark"></i>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="pro-content">
+                                                                                <h3 class="title">
+                                                                                    <a href="/doctor-profile/?id=<%=doctor._id%>">
+                                                                                        <%=doctor.name%>
+                                                                                    </a>
+                                                                                    <i class="fas fa-check-circle verified"></i>
+                                                                                </h3>
+                                                                                <p class="speciality">
+                                                                                    <%=doctor.department%>
+                                                                                </p>
+                                                                                <div class="rating">
+                                                                                    <i class="fas fa-star filled"></i>
+                                                                                    <i class="fas fa-star filled"></i>
+                                                                                    <i class="fas fa-star filled"></i>
+                                                                                    <i class="fas fa-star filled"></i>
+                                                                                    <i class="fas fa-star"></i>
+                                                                                    <span class="d-inline-block average-rating">(49)</span>
+                                                                                </div>
+                                                                                <ul class="available-info">
+                                                                                    <li>
+                                                                                        <i class="fas fa-map-marker-alt"></i>
+                                                                                        <%=doctor.contacts.city%>
+                                                                                            <%=doctor.contacts.state%>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <i class="far fa-money-bill-alt"></i>
+                                                                                        <%=doctor.booking_fee%>
+                                                                                            <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <div class="row row-sm">
+                                                                                    <div class="col-6 cloginbtn">
+                                                                                        <a href="/doctor-profile/?id=<%=doctor._id%>" class="btn view-btn tbcolor">View Profile</a>
+                                                                                    </div>
+                                                                                    <div class="col-6">
+                                                                                        <a href="/booking/?id=<%=doctor._id%>" class="btn book-btn tcolor" style="height:35px !important">Book Now</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% } %>
+                                                                            <!-- /Doctor Widget -->
 
-                                        <!-- Doctor Widget -->
+                                                                            <!-- Doctor Widget -->
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- /Popular Section -->
+                </section>
+                <!-- /Popular Section -->
 
-            <!-- Availabe Features -->
-            <section class="section section-features position-relative" id="inclinic" style="background-color: rgba(252, 245, 245, 0.918);padding-top: 50px;padding-bottom: 50px;">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-5 features-img">
-                            <img src="<%=assetPath('img/features/feature.png')%>" class="img-fluid" alt="Feature">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="section-header">
-                                <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 1.8rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the AarogyaHub app</h2>
-                                <div class="u-t-c--black_1 u-font--14 u-margin--20__top">
-                                    <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;font-size:1rem;">Access video consultation with India’s top doctors on the AarogyaHub app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
-
-
-                                    <!-- <h4>Book appointments </h4> -->
-                                    <ul class="list-item" style="margin-top: 50px;">
-                                        <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">
-                                            </i>Book appointments</li>
-                                        <li style="font-size: 1rem;margin-top: 10px;font-weight: bold;">Consult doctors online</li>
-                                        <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Store health records</li>
-                                        <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Read health tips</li>
+                <!-- Availabe Features -->
+                <section class="section section-features position-relative" id="inclinic" style="background-color: rgba(252, 245, 245, 0.918);padding-top: 50px;padding-bottom: 50px;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-5 features-img">
+                                <img src="<%=assetPath('img/features/feature.png')%>" class="img-fluid" alt="Feature">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="section-header">
+                                    <h2 class="mt-4" style="margin: 0;font-weight: 700;font-size: 1.8rem;font-family: Camphor,Helvetica,Arial,sans-serif!important;"> Download the AarogyaHub app</h2>
+                                    <div class="u-t-c--black_1 u-font--14 u-margin--20__top">
+                                        <h3 style="font-family: Camphor,Helvetica,Arial,sans-serif!important; margin-top: 20px;font-size:1rem;">Access video consultation with India’s top doctors on the AarogyaHub app.<br> Connect with doctors online, available 24/7, from the comfort of your<br> home.</h3>
 
 
-                                    </ul>
-                                    <div>
-                                        <p style="margin-top: 50px;font-weight: 700;font-size: 16px;line-height: 1.5; font-family:Camphor,Helvetica,Arial,sans-serif!important;">Get the link to download the app</p>
+                                        <!-- <h4>Book appointments </h4> -->
+                                        <ul class="list-item" style="margin-top: 50px;">
+                                            <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">
+                                                </i>Book appointments</li>
+                                            <li style="font-size: 1rem;margin-top: 10px;font-weight: bold;">Consult doctors online</li>
+                                            <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Store health records</li>
+                                            <li style="font-size:  1rem;margin-top: 10px;font-weight: bold;">Read health tips</li>
 
-                                    </div>
-                                    <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
-                                        <div class="col-md-12" style="display: inline-flex;">
-                                            <div class="col-md-1" style="border:1px solid lightgrey; padding: 5.8px;height:46px;font-size: 1.3rem;font-weight: bold;margin-right: -15px;">
-                                                +91
-                                            </div>
-                                            <div class="form-group col-md-5">
-                                                <input type="Number" required placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;width: 275px;">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-3" id="sum_phone">
 
-                                            <a href="/app-coming-soon"><button type="submit" class="form-control" style="border-radius:20px; background-color: #fff; border-color: #dddddd;color:#2c2929;">Send SMS</button></a>
+                                        </ul>
+                                        <div>
+                                            <p style="margin-top: 50px;font-weight: 700;font-size: 16px;line-height: 1.5; font-family:Camphor,Helvetica,Arial,sans-serif!important;">Get the link to download the app</p>
 
                                         </div>
+                                        <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
+                                            <div class="col-md-12" style="display: inline-flex;">
+                                                <div class="col-md-1" style="border:1px solid lightgrey; padding: 5.8px;height:46px;font-size: 1.3rem;font-weight: bold;margin-right: -15px;">
+                                                    +91
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <input type="Number" required placeholder="Enter your Mobile Number" class="form-control" style="border-top-left-radius:0 ;border-bottom-left-radius:0;width: 275px;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-3" id="sum_phone">
+
+                                                <a href="/app-coming-soon"><button type="submit" class="form-control" style="border-radius:20px; background-color: #fff; border-color: #dddddd;color:#2c2929;">Send SMS</button></a>
+
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <!-- <p>AarogyaHub is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
                                 </div>
 
-                                <!-- <p>AarogyaHub is a new era online platform which gives you ease from booking an appointment to tracking it. </p> -->
-                            </div>
-
-                            <div class="row text-center position-absolute" style="padding-right: 20px; padding-left: 50px !important;bottom: 0;left: -450px;">
+                                <div class="row text-center position-absolute" style="padding-right: 20px; padding-left: 50px !important;bottom: 0;left: -450px;">
 
 
-                                <p>
+                                    <p>
 
-                                    <a href="/app-coming-soon" class="btn btn-store" style="margin-top: -40px;">
-                                        <span><img src="<%=assetPath('img/googleplay.png')%>" style="height: 70px;width:250px;margin-left: 0px;"></span>
-                                        <span class="btn-label">Download on the</span>
-                                        <span class="btn-caption">Google Play Store</span>
-                                    </a>
-
-
-                                </p>
-                                <style>
-                                    .btn-store {
-                                        color: #2c2929;
-                                        min-width: 254px;
-                                        padding: 12px 20px !important;
-                                        border-color: #dddddd !important;
-                                    }
-                                    
-                                    .btn-store:focus,
-                                    .btn-store:hover {
-                                        color: #ffffff !important;
-                                        background-color: #072135;
-                                        border-color: #0a1014 !important;
-                                    }
-                                    
-                                    .btn-store .btn-label,
-                                    .btn-store .btn-caption {
-                                        display: block;
-                                        text-align: left;
-                                        line-height: 1;
-                                    }
-                                    
-                                    .btn-store .btn-caption {
-                                        font-size: 24px;
-                                    }
-                                </style>
-                            </div>
+                                        <a href="/app-coming-soon" class="btn btn-store" style="margin-top: -40px;">
+                                            <span><img src="<%=assetPath('img/googleplay.png')%>" style="height: 70px;width:250px;margin-left: 0px;"></span>
+                                            <span class="btn-label">Download on the</span>
+                                            <span class="btn-caption">Google Play Store</span>
+                                        </a>
 
 
-                            <!-- <div class="features-slider slider">
+                                    </p>
+                                    <style>
+                                        .btn-store {
+                                            color: #2c2929;
+                                            min-width: 254px;
+                                            padding: 12px 20px !important;
+                                            border-color: #dddddd !important;
+                                        }
+                                        
+                                        .btn-store:focus,
+                                        .btn-store:hover {
+                                            color: #ffffff !important;
+                                            background-color: #072135;
+                                            border-color: #0a1014 !important;
+                                        }
+                                        
+                                        .btn-store .btn-label,
+                                        .btn-store .btn-caption {
+                                            display: block;
+                                            text-align: left;
+                                            line-height: 1;
+                                        }
+                                        
+                                        .btn-store .btn-caption {
+                                            font-size: 24px;
+                                        }
+                                    </style>
+                                </div>
+
+
+                                <!-- <div class="features-slider slider">
                                 Slider Item
                                 <div class="feature-item text-center">
                                     <img src="/img/features/feature-01.jpg" class="img-fluid" alt="Feature">
@@ -664,283 +684,283 @@
                                 </div>
                               
                             </div> -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <!-- Availabe Features -->
+
+                <!-- Footer -->
+
             </section>
-            <!-- Availabe Features -->
+            <section class="mobile-index mt-2 mb-2">
 
-            <!-- Footer -->
-
-        </section>
-        <section class="mobile-index mt-2 mb-2">
-           
-            <section class="health-concerns" style="margin-bottom: 30px;padding-top:20px">
-                <div class="concerns position-relative" style="margin-top: -14px;">
-                    <h3 style="font-weight: 700; margin-left: 13px;
+                <section class="health-concerns" style="margin-bottom: 30px;padding-top:20px">
+                    <div class="concerns position-relative" style="margin-top: -14px;">
+                        <h3 style="font-weight: 700; margin-left: 13px;
                     margin-bottom: 15px;
                     font-size: 1.375rem;">Book Our Doctors</h3>
-                     <a style="font-weight: 700; position:absolute;right:20px;top:5px;
+                        <a style="font-weight: 700; position:absolute;right:20px;top:5px;
                      font-size: 1rem;text-decoration: underline;" href="/doctors">View All</a>
 
-                    <div class="common-consult" style="height:265px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+                        <div class="common-consult" style="height:265px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
 
 
-                        <%for(let i=0; i<doctors.length;i++){%>
-                            <%if(!doctors[i].premium){%>
-                                <%continue;%>
-                            <%}%>
-                            <div class="img-cough-cold" style="width:180px;padding-bottom:10px;min-height: 260px;height:auto;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
-                                <div style="height: 53%;">
+                            <%for(let i=0; i<doctors.length;i++){%>
+                                <%if(!doctors[i].premium){%>
+                                    <%continue;%>
+                                        <%}%>
+                                            <div class="img-cough-cold" style="width:180px;padding-bottom:10px;min-height: 260px;height:auto;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
+                                                <div style="height: 53%;">
 
-                                    <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                                </div>
-                                <div style="height: 47%;padding: 5px;position: relative;">
-                                    <h4 style="font-weight: bold;margin-top: 10px;">
-                                        Dr.
-                                        <%=doctors[i].name%>
-                                    </h4>
-                                    <h4 style="font-weight: 600;margin-top: -5px;
-                                        font-size: 13px;">
-                                        <%=doctors[i].department%>
-                                    </h4>
-                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;
-                                        margin-left: 2px;margin-top: -10px; ">₹
-                                        <%=doctors[i].booking_fee%>
-                                    </p>
-                                    <div style="position: absolute;bottom:5px; display: inline-flex;">
-
-
-                                        <div style="border-radius: 2px;
-                                            background-color: skyblue;margin-top: 17px;width: 80px;">
-                                            <a href="/doctor-profile/?id=<%=doctors[i]._id%>" style="font-size: 13px;
-                                                font-weight: 800;
-                                                color: white; text-align: center;margin-left: 4px;">View Profile</a>
-                                        </div>
-                                        <div style="border-radius: 2px;width: 75px;
-                                            background-color: skyblue;margin-top: 17px;margin-left: 18px;">
-                                            <a href="/booking/?id=<%=doctors[i]._id%>" style="font-size: 13px;
-                                                font-weight: 800;
-                                                color: white;text-align:center;margin-left: 9px;">Book Now</a>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                            <%}%>
-                              <%for(let i=0; i<doctors.length;i++){%>
-                            <%if(doctors[i].premium){%>
-                                <%continue;%>
-                            <%}%>
-                            <div class="img-cough-cold" style="width:180px;padding-bottom:10px;min-height: 260px;height:auto;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
-                                <div style="height: 53%;">
-
-                                    <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                                </div>
-                                <div style="height: 47%;padding: 5px;position: relative;">
-                                    <h4 style="font-weight: bold;margin-top: 10px;">
-                                        Dr.
-                                        <%=doctors[i].name%>
-                                    </h4>
-                                    <h4 style="font-weight: 600;margin-top: -5px;
-                                        font-size: 13px;">
-                                        <%=doctors[i].department%>
-                                    </h4>
-                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;
-                                        margin-left: 2px;margin-top: -10px; ">₹
-                                        <%=doctors[i].booking_fee%>
-                                    </p>
-                                    <div style="position: absolute;bottom:5px; display: inline-flex;">
-
-
-                                        <div style="border-radius: 2px;
-                                            background-color: skyblue;margin-top: 17px;width: 80px;">
-                                            <a href="/doctor-profile/?id=<%=doctors[i]._id%>" style="font-size: 13px;
-                                                font-weight: 800;
-                                                color: white; text-align: center;margin-left: 4px;">View Profile</a>
-                                        </div>
-                                        <div style="border-radius: 2px;width: 75px;
-                                            background-color: skyblue;margin-top: 17px;margin-left: 18px;">
-                                            <a href="/booking/?id=<%=doctors[i]._id%>" style="font-size: 13px;
-                                                font-weight: 800;
-                                                color: white;text-align:center;margin-left: 9px;">Book Now</a>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                            <%}%>
-
-
-                    </div>
-
-
-                </div>
-
-            </section>
-            <section class="health-concerns m30" style="margin-bottom: 20px;margin-top: -10px;">
-                <div class="concerns">
-                    <h3 style="font-weight: 700; margin-left: 13px;
-                    margin-bottom: 15px;
-                    font-size: 1.375rem;">Online Consultation</h3>
-
-                    <div class="common-consult" style="height:270px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
-
-                        <% var count1=1 %>
-                            <%for(consult of consults) {%>
-                                <% if(count1>=10) {%>
-                                    <% break;} %>
-                                        <%count1++%>
-
-
-                                            <div class="img-cough-cold" style="min-height:260px;padding-bottom:5px;height:auto;width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
-                                                <div style="height: 50%;">
-                                                    <a href="/consult">
-                                                    <img src="<%=consult.consultavatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                                                </a>
+                                                    <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
                                                 </div>
-                                                <div style="height: 40%;padding: 5px; position: relative;">
-                                                    <h4 class="consultname" style="padding-top: 20px;">
-                                                        <%=consult.consultname %>
+                                                <div style="height: 47%;padding: 5px;position: relative;">
+                                                    <h4 style="font-weight: bold;margin-top: 10px;">
+                                                        Dr.
+                                                        <%=doctors[i].name%>
                                                     </h4>
-                                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 6px;">₹
-                                                        <%=consult.consultprice %>
+                                                    <h4 style="font-weight: 600;margin-top: -5px;
+                                        font-size: 13px;">
+                                                        <%=doctors[i].department%>
+                                                    </h4>
+                                                    <p style="font-family: ui-serif;font-weight: 800;color: #616161;
+                                        margin-left: 2px;margin-top: -10px; ">₹
+                                                        <%=doctors[i].booking_fee%>
                                                     </p>
-                                                    <a href="/coming-soon" style="color:#455A64;font-weight:bold;position:absolute;bottom:-10px;left: 7px;">Consult Now
-                                </a>
+                                                    <div style="position: absolute;bottom:5px; display: inline-flex;">
+
+
+                                                        <div style="border-radius: 2px;
+                                            background-color: skyblue;margin-top: 17px;width: 80px;">
+                                                            <a href="/doctor-profile/?id=<%=doctors[i]._id%>" style="font-size: 13px;
+                                                font-weight: 800;
+                                                color: white; text-align: center;margin-left: 4px;">View Profile</a>
+                                                        </div>
+                                                        <div style="border-radius: 2px;width: 75px;
+                                            background-color: skyblue;margin-top: 17px;margin-left: 18px;">
+                                                            <a href="/booking/?id=<%=doctors[i]._id%>" style="font-size: 13px;
+                                                font-weight: 800;
+                                                color: white;text-align:center;margin-left: 9px;">Book Now</a>
+                                                        </div>
+                                                    </div>
+
 
                                                 </div>
 
                                             </div>
-                                            <% } %>
+                                            <%}%>
+                                                <%for(let i=0; i<doctors.length;i++){%>
+                                                    <%if(doctors[i].premium){%>
+                                                        <%continue;%>
+                                                            <%}%>
+                                                                <div class="img-cough-cold" style="width:180px;padding-bottom:10px;min-height: 260px;height:auto;margin-right: 10px; border-radius: 10px;background-color: rgb(247 244 244);">
+                                                                    <div style="height: 53%;">
+
+                                                                        <img src="<%=doctors[i].avatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                                                    </div>
+                                                                    <div style="height: 47%;padding: 5px;position: relative;">
+                                                                        <h4 style="font-weight: bold;margin-top: 10px;">
+                                                                            Dr.
+                                                                            <%=doctors[i].name%>
+                                                                        </h4>
+                                                                        <h4 style="font-weight: 600;margin-top: -5px;
+                                        font-size: 13px;">
+                                                                            <%=doctors[i].department%>
+                                                                        </h4>
+                                                                        <p style="font-family: ui-serif;font-weight: 800;color: #616161;
+                                        margin-left: 2px;margin-top: -10px; ">₹
+                                                                            <%=doctors[i].booking_fee%>
+                                                                        </p>
+                                                                        <div style="position: absolute;bottom:5px; display: inline-flex;">
 
 
+                                                                            <div style="border-radius: 2px;
+                                            background-color: skyblue;margin-top: 17px;width: 80px;">
+                                                                                <a href="/doctor-profile/?id=<%=doctors[i]._id%>" style="font-size: 13px;
+                                                font-weight: 800;
+                                                color: white; text-align: center;margin-left: 4px;">View Profile</a>
+                                                                            </div>
+                                                                            <div style="border-radius: 2px;width: 75px;
+                                            background-color: skyblue;margin-top: 17px;margin-left: 18px;">
+                                                                                <a href="/booking/?id=<%=doctors[i]._id%>" style="font-size: 13px;
+                                                font-weight: 800;
+                                                color: white;text-align:center;margin-left: 9px;">Book Now</a>
+                                                                            </div>
+                                                                        </div>
 
 
+                                                                    </div>
+
+                                                                </div>
+                                                                <%}%>
 
 
-                    </div>
-
-
-                </div>
-
-            </section>
-           
-
-            <section style="height: 350px;">
-                <div>
-                    <div class="head">
-                        <h3 style="font-weight: 800;    margin-bottom: 16px;
-                margin-left: 7px;">
-                            Top Test
-                        </h3>
-                    </div>
-
-                    <div class="top-specilities" style="height: 250px;">
-                        <div class="col-sm-12 upper" style="height: 50%; padding-left: 2px; display: inline-flex; margin-left: -6px;">
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
-                                <div style="height: 70%; border-radius: 10px;">
-                                    <img src="<%=assetPath('img/patients/blood1.jpg')%>" style="height: 100%;border-radius: 10px;width:100%">
-                                </div>
-                                <div>
-                                    <h3 style="font-size: 0.9375rem;
-                                        padding-top: 5px;
-                                        line-height: 1rem;
-                                        font-family: system-ui;">
-                                        Blood Test
-                                    </h3>
-
-                                </div>
-
-                            </div>
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
-                                <div style="height: 70%;width: 100%; border-radius: 10px;">
-                                    <a href="/coming-soon">
-                                        <img src="<%=assetPath('img/patients/checkup10.jfif')%>" style="height: 100%;width:100%;border-radius: 10px;">
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="/coming-soon">
-                                        <h3 style="font-size: 0.9375rem;
-                                    padding-top: 5px;
-                                    line-height: 1rem;
-                                    font-family: system-ui;">
-                                            Thyroid Test
-                                        </h3>
-                                    </a>
-
-                                </div>
-
-                            </div>
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
-                                <div style="height: 70%; border-radius: 10px;width: 100%;">
-                                    <a href="/coming-soon">
-                                        <img src="<%=assetPath('img/patients/health13.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;"></a>
-                                </div>
-                                <div>
-                                    <a href="/coming-soon">
-                                        <h3 style="font-size: 0.9375rem;
-                                        padding-top: 5px;
-                                        line-height: 1rem;
-                                        font-family: system-ui;">
-                                            Diabetes
-                                        </h3>
-                                    </a>
-
-                                </div>
-
-                            </div>
                         </div>
 
 
-                        <div class="col-sm-12 upper" style="height: 50%; padding-left: 2px; display: inline-flex; margin-top: 20px; margin-left: -8px;">
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
-                                <div style="height: 70%; border-radius: 10px;">
-                                    <a href="/coming-soon">
+                    </div>
+
+                </section>
+                <section class="health-concerns m30" style="margin-bottom: 20px;margin-top: -10px;">
+                    <div class="concerns">
+                        <h3 style="font-weight: 700; margin-left: 13px;
+                    margin-bottom: 15px;
+                    font-size: 1.375rem;">Online Consultation</h3>
+
+                        <div class="common-consult" style="height:270px;width:100%;display: inline-flex;overflow-x: auto;padding-left: 0.9375rem;flex-wrap: wrap;flex-direction: column;">
+
+                            <% var count1=1 %>
+                                <%for(consult of consults) {%>
+                                    <% if(count1>=10) {%>
+                                        <% break;} %>
+                                            <%count1++%>
+
+
+                                                <div class="img-cough-cold" style="min-height:260px;padding-bottom:5px;height:auto;width:180px;margin-right: 10px;border-radius: 10px;background-color: rgb(247 244 244);">
+                                                    <div style="height: 50%;">
+                                                        <a href="/consult">
+                                                    <img src="<%=consult.consultavatar%>" style="height: 135px;width: 100%;border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                                                </a>
+                                                    </div>
+                                                    <div style="height: 40%;padding: 5px; position: relative;">
+                                                        <h4 class="consultname" style="padding-top: 20px;">
+                                                            <%=consult.consultname %>
+                                                        </h4>
+                                                        <p style="font-family: ui-serif;font-weight: 800;color: #616161;padding-left: 6px;">₹
+                                                            <%=consult.consultprice %>
+                                                        </p>
+                                                        <a href="/coming-soon" style="color:#455A64;font-weight:bold;position:absolute;bottom:-10px;left: 7px;">Consult Now
+                                </a>
+
+                                                    </div>
+
+                                                </div>
+                                                <% } %>
+
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <section style="height: 350px;">
+                    <div>
+                        <div class="head">
+                            <h3 style="font-weight: 800;    margin-bottom: 16px;
+                margin-left: 7px;">
+                                Top Test
+                            </h3>
+                        </div>
+
+                        <div class="top-specilities" style="height: 250px;">
+                            <div class="col-sm-12 upper" style="height: 50%; padding-left: 2px; display: inline-flex; margin-left: -6px;">
+                                <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
+                                    <div style="height: 70%; border-radius: 10px;">
+                                        <img src="<%=assetPath('img/patients/blood1.jpg')%>" style="height: 100%;border-radius: 10px;width:100%">
+                                    </div>
+                                    <div>
+                                        <h3 style="font-size: 0.9375rem;
+                                        padding-top: 5px;
+                                        line-height: 1rem;
+                                        font-family: system-ui;">
+                                            Blood Test
+                                        </h3>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
+                                    <div style="height: 70%;width: 100%; border-radius: 10px;">
+                                        <a href="/coming-soon">
+                                        <img src="<%=assetPath('img/patients/checkup10.jfif')%>" style="height: 100%;width:100%;border-radius: 10px;">
+                                    </a>
+                                    </div>
+                                    <div>
+                                        <a href="/coming-soon">
+                                            <h3 style="font-size: 0.9375rem;
+                                    padding-top: 5px;
+                                    line-height: 1rem;
+                                    font-family: system-ui;">
+                                                Thyroid Test
+                                            </h3>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
+                                    <div style="height: 70%; border-radius: 10px;width: 100%;">
+                                        <a href="/coming-soon">
+                                        <img src="<%=assetPath('img/patients/health13.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;"></a>
+                                    </div>
+                                    <div>
+                                        <a href="/coming-soon">
+                                            <h3 style="font-size: 0.9375rem;
+                                        padding-top: 5px;
+                                        line-height: 1rem;
+                                        font-family: system-ui;">
+                                                Diabetes
+                                            </h3>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12 upper" style="height: 50%; padding-left: 2px; display: inline-flex; margin-top: 20px; margin-left: -8px;">
+                                <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%; margin-left: 5px; width: 100%;padding-left: 15px;padding-right: 5px;">
+                                    <div style="height: 70%; border-radius: 10px;">
+                                        <a href="/coming-soon">
                                         <img src="<%=assetPath('img/patients/health6.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;">
                                     </a>
-                                </div>
-                                <div>
-                                    <a href="/coming-soon">
-                                        <h3 style="font-size: 0.9375rem;
+                                    </div>
+                                    <div>
+                                        <a href="/coming-soon">
+                                            <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                            Liver function test
-                                        </h3>
-                                    </a>
+                                                Liver function test
+                                            </h3>
+                                        </a>
+
+                                    </div>
 
                                 </div>
-
-                            </div>
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%;width: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
-                                <div style="height: 70%; border-radius: 10px;">
-                                    <a href="/coming-soon">
+                                <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%;width: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
+                                    <div style="height: 70%; border-radius: 10px;">
+                                        <a href="/coming-soon">
                                         <img src="<%=assetPath('img/patients/checkup2.jfif')%>" style="height: 100%;width: 100%;border-radius: 10px;">
                                     </a>
-                                </div>
-                                <div>
-                                    <a href="/coming-soon">
-                                        <h3 style="font-size: 0.9375rem;
+                                    </div>
+                                    <div>
+                                        <a href="/coming-soon">
+                                            <h3 style="font-size: 0.9375rem;
                                     padding-top: 5px;
                                     line-height: 1rem;
                                     font-family: system-ui;">
-                                            Full Body Checkup
-                                        </h3>
-                                    </a>
+                                                Full Body Checkup
+                                            </h3>
+                                        </a>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
-
-                            <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%;width: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
-                                <a href="/test">
-                                    <div style="height: 70%; border-radius: 10px;">
-                                        <p style="padding: 11px;
+                                <div class="col-sm-4 atom" style="border-radius: 5px; height: 100%;width: 100%; margin-left: 5px;padding-left: 5px;padding-right: 5px;">
+                                    <a href="/test">
+                                        <div style="height: 70%; border-radius: 10px;">
+                                            <p style="padding: 11px;
                                         height: 100%;
                                         border-radius: 10px;
                                         border: 2px solid #126a78;
@@ -949,372 +969,330 @@
                                         padding-top: 24px;
                                         margin-left: -6px;
                                         ">
-                                            <a href="/coming-soon">
-                                                <span style="font-weight: 700;color: #12444c">See More Specialities</span></a>
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3 style="font-size: 0.9375rem;
+                                                <a href="/coming-soon">
+                                                    <span style="font-weight: 700;color: #12444c">See More Specialities</span></a>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h3 style="font-size: 0.9375rem;
                                             padding-top: 5px;
                                             line-height: 1rem;
                                             font-family: system-ui;">
-                                            Explore More Expert
-                                        </h3>
+                                                Explore More Expert
+                                            </h3>
 
-                                    </div>
-                                </a>
+                                        </div>
+                                    </a>
 
+                                </div>
                             </div>
+
+
+
+                        </div>
+                    </div>
+
+                </section>
+                <section style="height: 360px;padding:15px 8px;background-color: #478e8e;">
+                    <div style="display: inline-flex;margin-top: 10px;">
+                        <div style="width: 20%;">
+                            <img src="<%=assetPath('img/crowns.png')%>" style="height: 50px;width:60px;">
+                        </div>
+                        <div style="width: 80%;">
+                            <h4 style="font-weight: bold;font-size: 1.5rem;color:white">India's 1<sup>st</sup> Online Patient Tracking System Website.</h4>
                         </div>
 
-
-
                     </div>
-                </div>
-
-            </section>
-            <section style="height: 360px;padding:15px 8px;background-color: #478e8e;">
-                <div style="display: inline-flex;margin-top: 10px;">
-                    <div style="width: 20%;">
-                        <img src="<%=assetPath('img/crowns.png')%>" style="height: 50px;width:60px;">
-                    </div>
-                    <div style="width: 80%;">
-                        <h4 style="font-weight: bold;font-size: 1.5rem;color:white">India's 1<sup>st</sup> Online Patient Tracking System Website.</h4>
-                    </div>
-
-                </div>
-                <ul style="list-style: none;margin-top: 30px;margin-left: -20px;">
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/calendar.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Book the doctor online.</li>
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/waiting.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Sit, Relax and track your turn on </li>
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;">our patient tracking system.</li>
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/visitor.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Get the reminder from us and </li>
-                    <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;"> visit the doctor.</li>
-                </ul>
+                    <ul style="list-style: none;margin-top: 30px;margin-left: -20px;">
+                        <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/calendar.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Book the doctor online.</li>
+                        <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/waiting.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Sit, Relax and track your turn on </li>
+                        <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;">our patient tracking system.</li>
+                        <li style="font-size: 1.2rem;font-weight:bold;color:white"><img src="<%=assetPath('img/visitor.png')%>" style="height: 25px;width: 25px;margin-right: 10px;margin-bottom: 15px;margin-top: 15px;">Get the reminder from us and </li>
+                        <li style="font-size: 1.2rem;font-weight:bold;color:white;margin-left: 35px;margin-top: -15px;"> visit the doctor.</li>
+                    </ul>
 
 
-            </section>
+                </section>
 
-            <section style="background-color: #fff;padding-top: 30px;margin-bottom: -10px;">
-                <div class="app-download--banner">
-                    <div class="app-download__top" style="height: 400px;width: 100%;">
-                        <div class="image">
-                            <span class="LazyLoad is-visible">
+                <section style="background-color: #fff;padding-top: 30px;margin-bottom: -10px;">
+                    <div class="app-download--banner">
+                        <div class="app-download__top" style="height: 400px;width: 100%;">
+                            <div class="image">
+                                <span class="LazyLoad is-visible">
                             <img class="app-download__top__image" src="<%=assetPath('img/and1.png')%>" style="height:400px;width: 70%;margin-left: 50px;">
                         </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="app-download__bottom">
+                    <div class="app-download__bottom">
 
-                    <div class="app-download__bottom__message">
-                        <div class="app-download__bottom__header" style="text-align: center;font-size: 1.5rem;font-weight: bold;margin-top: 20px;">Download the AarogyaHub app</div>
-                        <div class="app-download__bottom__subHeader" style="font-weight: bold;margin-top: -5px;margin-left: 20px;">Get Rs. 10 CashBack</div>
+                        <div class="app-download__bottom__message">
+                            <div class="app-download__bottom__header" style="text-align: center;font-size: 1.5rem;font-weight: bold;margin-top: 20px;">Download the AarogyaHub app</div>
+                            <div class="app-download__bottom__subHeader" style="font-weight: bold;margin-top: -5px;margin-left: 20px;">Get Rs. 10 CashBack</div>
+                        </div>
+                        <ul class="margin--top--12" style="list-style: none;margin-top: 20px;">
+                            <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Get Rs. 10 Cashback</li>
+                            <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Live Patient tracking System</li>
+                            <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Exclusive healthcare packages</li>
+                        </ul>
+                        <div class="app-download__bottom__footer margin--top--16">
+                            <a href="/app-coming-soon"><button type="button"  class="app-download__bottom__footer__button btn btn-secondary" style="width: 100%;border-radius: 0px;padding:15px;font-weight: 700;">Download the app now</button></a>
+                        </div>
                     </div>
-                    <ul class="margin--top--12" style="list-style: none;margin-top: 20px;">
-                        <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Get Rs. 10 Cashback</li>
-                        <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Live Patient tracking System</li>
-                        <li class="app-download__bottom__description" style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color:#478e8e;margin-right: 8px;"></i>Exclusive healthcare packages</li>
-                    </ul>
-                    <div class="app-download__bottom__footer margin--top--16">
-                        <a href="/app-coming-soon"><button type="button"  class="app-download__bottom__footer__button btn btn-secondary" style="width: 100%;border-radius: 0px;padding:15px;font-weight: 700;">Download the app now</button></a>
-                    </div>
-                </div>
+                </section>
+
+
             </section>
+            <%-include('footer');%>
 
 
-        </section>
-        <%-include('footer');%>
+                <!-- /Footer -->
+
+                </div>
+                <!-- /Main Wrapper -->
+
+                <!-- jQuery -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+                <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+                <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
 
 
-            <!-- /Footer -->
+                <script src="<%=assetPath('js/slick.js')%>"></script>
 
-            </div>
-            <!-- /Main Wrapper -->
+                <script src="<%=assetPath('js/script.js')%>"></script>
+                <script>
+                    function showsearch() {
+                        document.getElementById('searchkey1').focus();
 
-            <!-- jQuery -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script src="<%=assetPath('js/jquery.min.js')%>"></script>
-    <script src="<%=assetPath('js/popper.min.js')%>"></script>
-
-    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
-   
-
-    <script src="<%=assetPath('js/slick.js')%>"></script>
-
-    <script src="<%=assetPath('js/script.js')%>"></script>
-           <script>
-
-               function showsearch()
-               {
-                document.getElementById('searchkey1').focus();
-               
-        var fbox = document.getElementById('filter_box');
-      
-       
-        fbox.classList.remove('displayNone');
-
-               }
-               var fbox = document.getElementById('filter_box');
-               var close_btn = document.getElementById('close_btn');
-               close_btn.addEventListener('click',function(){
-            fbox.classList.add('displayNone');
-        })
-
-                function updatesearch(key)
-               {
-                document.getElementById('searchkey').value = key;
-                document.getElementById('searchul').classList.add('displayNone');
-               }
-
-               function updatesearch1(key)
-               {
-                document.getElementById('searchkey1').value = key;
-               }
-
-                $(document).click(function(event){
-                if (!$(event.target).hasClass('searchul')) {
-                    $("#searchul").addClass("displayNone");
-                }
-            });
-               document.getElementById('locationsearch').addEventListener('click',function()
-               {
-                   if(navigator.geolocation)
-                   {
-                       navigator.geolocation.getCurrentPosition(function(position)
-                       {
-                           console.log(position);
-                           $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
-                    console.log(data);
-
-                       })
-                      
-                  })
-                   }
-
-                   else{
-                       console.log('geo not supported')
-                   }
-               })
-
-               document.getElementById('locationsearch1').addEventListener('click',function()
-               {
-                   if(navigator.geolocation)
-                   {
-                       navigator.geolocation.getCurrentPosition(function(position)
-                       {
-                           console.log(position);
-                           $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+ position.coords.latitude + "," + position.coords.longitude +"&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
-                    document.getElementById('searchkey1').value = 'Dumka';
-                       })
-                      
-                  })
-                   }
-
-                   else{
-                       console.log('geo not supported')
-                   }
-               })
-
-              
-               </script>
-               <script>
-                
-                
+                        var fbox = document.getElementById('filter_box');
 
 
+                        fbox.classList.remove('displayNone');
 
-$('#searchkd').on('keyup', function()
-{
-    var value = $(this).val()
-    console.log(value);
-    
-    var data  = searchTable(value,<%-ar%>)
-    buildTable(data);
-})
-   
+                    }
+                    var fbox = document.getElementById('filter_box');
+                    var close_btn = document.getElementById('close_btn');
+                    close_btn.addEventListener('click', function() {
+                        fbox.classList.add('displayNone');
+                    })
 
-function searchTable(value1,data){
-    var fdata = []
-    $.each(data, function( key, value ) {
-        value1 = value1.toLowerCase();
-        var name = value.name.toLowerCase();
-        console.log(value1,name)
-        
-        if(name.includes(value1) && value1 !='')
-        {
-            fdata.push(value)
-        }
-}
+                    function updatesearch(key) {
+                        document.getElementById('searchkey').value = key;
+                        document.getElementById('searchul').classList.add('displayNone');
+                    }
 
-);
+                    function updatesearch1(key) {
+                        document.getElementById('searchkey1').value = key;
+                    }
 
-return fdata;
-}
- 
-    
-function buildTable(data){
-    var table = document.getElementById('myTable')
-    table.innerHTML = ''
-    for (var i = 0; i < data.length; i++){
-       
-        var row = `<tr>
+                    $(document).click(function(event) {
+                        if (!$(event.target).hasClass('searchul')) {
+                            $("#searchul").addClass("displayNone");
+                        }
+                    });
+                    document.getElementById('locationsearch').addEventListener('click', function() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                console.log(position);
+                                $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                                    console.log(data);
+
+                                })
+
+                            })
+                        } else {
+                            console.log('geo not supported')
+                        }
+                    })
+
+                    document.getElementById('locationsearch1').addEventListener('click', function() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                console.log(position);
+                                $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false&key=AIzaSyD0mzqd1eM5yPzEiYeIT4YA4ue-ibkxzk4", function(data) {
+                                    document.getElementById('searchkey1').value = 'Dumka';
+                                })
+
+                            })
+                        } else {
+                            console.log('geo not supported')
+                        }
+                    })
+                </script>
+                <script>
+                    $('#searchkd').on('keyup', function() {
+                        var value = $(this).val()
+                        console.log(value);
+
+                        var data = searchTable(value, <%-ar%>)
+                        buildTable(data);
+                    })
+
+
+                    function searchTable(value1, data) {
+                        var fdata = []
+                        $.each(data, function(key, value) {
+                                value1 = value1.toLowerCase();
+                                var name = value.name.toLowerCase();
+                                console.log(value1, name)
+
+                                if (name.includes(value1) && value1 != '') {
+                                    fdata.push(value)
+                                }
+                            }
+
+                        );
+
+                        return fdata;
+                    }
+
+
+                    function buildTable(data) {
+                        var table = document.getElementById('myTable')
+                        table.innerHTML = ''
+                        for (var i = 0; i < data.length; i++) {
+
+                            var row = `<tr>
                         <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
                         <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
                      
                    </tr>`
-        table.innerHTML += row
-    }
-    
-                  
-}
-    
-$('#searchkd1').on('keyup', function()
-{
-   var valuesliced;
-    var value = $(this).val()
-    $('#searchul1').addClass('displayNone')
-    if(value == '')
-    {
-        $('#searchul1').removeClass('displayNone')
-    }
-    console.log(value);
-    
-    if(value.length>=3)
-    {
-        if(value.length>=3)
-        {
-        valuesliced = value.toString().slice(0,3);
-        console.log(valuesliced)
-        }
-      
-   
-    if(valuesliced == 'dr.' && value.length>=4)
-    {
-        valuesliced = value.toString().slice(0,4);
-        if(valuesliced == 'dr. '){
-        var data  = searchTabledr1(value,<%-ar%>)
-        }else{
-            var data  = searchTabledr(value,<%-ar%>) 
-        } 
-        buildTable1(data); 
-    }
-    if(valuesliced == 'dr ')
-    {
-        var data  = searchTabledr(value,<%-ar%>) 
-        buildTable1(data); 
-    }
-    if(valuesliced == 'Dr.')
-    {
-        var data  = searchTabledr(value,<%-ar%>) 
-        buildTable1(data); 
-    }
-    if(valuesliced == 'Dr.' && value.length>=4)
-    {
-        valuesliced = value.toString().slice(0,4);
-        if(valuesliced == 'Dr. '){
-            var data  = searchTabledr1(value,<%-ar%>) 
-        }else{
-            var data  = searchTabledr1(value,<%-ar%>) 
-        } 
-        
-        buildTable1(data); 
-    }
-    if(valuesliced == 'Dr ')
-    {
-        var data  = searchTabledr(value,<%-ar%>) 
-        buildTable1(data); 
-    }
-    else{
-    var data  = searchTable(value,<%-ar%>)
-    buildTable1(data);
-}
-}
+                            table.innerHTML += row
+                        }
 
-else{
-    var data  = searchTable(value,<%-ar%>)
-    buildTable1(data);
-}
-})
 
-function searchTabledr(value1,data){
-    var fdata = []
-    var value2 = value1.slice(3);
-    $.each(data, function( key, value ) {
-        value2 = value2.toLowerCase();
-        var name = value.name.toLowerCase();
-        console.log(value2,name)
-        
-        if(name.includes(value2) && value2 !='')
-        {
-            fdata.push(value)
-        }
-}
+                    }
 
-);
+                    $('#searchkd1').on('keyup', function() {
+                        var valuesliced;
+                        var value = $(this).val()
+                        $('#searchul1').addClass('displayNone')
+                        if (value == '') {
+                            $('#searchul1').removeClass('displayNone')
+                        }
+                        console.log(value);
 
-return fdata;
-}
+                        if (value.length >= 3) {
+                            if (value.length >= 3) {
+                                valuesliced = value.toString().slice(0, 3);
+                                console.log(valuesliced)
+                            }
 
-function searchTabledr1(value1,data){
-    var fdata = []
-    var value2 = value1.slice(4);
-    $.each(data, function( key, value ) {
-        value2 = value2.toLowerCase();
-        var name = value.name.toLowerCase();
-        console.log(value2,name)
-        
-        if(name.includes(value2) && value2 !='')
-        {
-            fdata.push(value)
-        }
-}
 
-);
+                            if (valuesliced == 'dr.' && value.length >= 4) {
+                                valuesliced = value.toString().slice(0, 4);
+                                if (valuesliced == 'dr. ') {
+                                    var data = searchTabledr1(value, <%-ar%>)
+                                } else {
+                                    var data = searchTabledr(value, <%-ar%>)
+                                }
+                                buildTable1(data);
+                            }
+                            if (valuesliced == 'dr ') {
+                                var data = searchTabledr(value, <%-ar%>)
+                                buildTable1(data);
+                            }
+                            if (valuesliced == 'Dr.') {
+                                var data = searchTabledr(value, <%-ar%>)
+                                buildTable1(data);
+                            }
+                            if (valuesliced == 'Dr.' && value.length >= 4) {
+                                valuesliced = value.toString().slice(0, 4);
+                                if (valuesliced == 'Dr. ') {
+                                    var data = searchTabledr1(value, <%-ar%>)
+                                } else {
+                                    var data = searchTabledr1(value, <%-ar%>)
+                                }
 
-return fdata;
-}
-   
+                                buildTable1(data);
+                            }
+                            if (valuesliced == 'Dr ') {
+                                var data = searchTabledr(value, <%-ar%>)
+                                buildTable1(data);
+                            } else {
+                                var data = searchTable(value, <%-ar%>)
+                                buildTable1(data);
+                            }
+                        } else {
+                            var data = searchTable(value, <%-ar%>)
+                            buildTable1(data);
+                        }
+                    })
 
-function searchTable1(value1,data){
-    var fdata = []
-    $.each(data, function( key, value ) {
-        value1 = value1.toLowerCase();
-        var name = value.name.toLowerCase();
-        console.log(value1,name)
-        
-        if(name.includes(value1) && value1 !='')
-        {
-           
-            fdata.push(value)
-        }
-}
+                    function searchTabledr(value1, data) {
+                        var fdata = []
+                        var value2 = value1.slice(3);
+                        $.each(data, function(key, value) {
+                                value2 = value2.toLowerCase();
+                                var name = value.name.toLowerCase();
+                                console.log(value2, name)
 
-);
+                                if (name.includes(value2) && value2 != '') {
+                                    fdata.push(value)
+                                }
+                            }
 
-return fdata;
-}
- 
-    
-function buildTable1(data){
-    var table = document.getElementById('myTable1')
-    table.innerHTML = ''
-    for (var i = 0; i < data.length; i++){
-       
-        var row = `<tr>
+                        );
+
+                        return fdata;
+                    }
+
+                    function searchTabledr1(value1, data) {
+                        var fdata = []
+                        var value2 = value1.slice(4);
+                        $.each(data, function(key, value) {
+                                value2 = value2.toLowerCase();
+                                var name = value.name.toLowerCase();
+                                console.log(value2, name)
+
+                                if (name.includes(value2) && value2 != '') {
+                                    fdata.push(value)
+                                }
+                            }
+
+                        );
+
+                        return fdata;
+                    }
+
+
+                    function searchTable1(value1, data) {
+                        var fdata = []
+                        $.each(data, function(key, value) {
+                                value1 = value1.toLowerCase();
+                                var name = value.name.toLowerCase();
+                                console.log(value1, name)
+
+                                if (name.includes(value1) && value1 != '') {
+
+                                    fdata.push(value)
+                                }
+                            }
+
+                        );
+
+                        return fdata;
+                    }
+
+
+                    function buildTable1(data) {
+                        var table = document.getElementById('myTable1')
+                        table.innerHTML = ''
+                        for (var i = 0; i < data.length; i++) {
+
+                            var row = `<tr>
                         <td><a href="/booking/?id=${data[i].id}"><img src='${data[i].avatar}'> </a></td>
                         <td><a href="/booking/?id=${data[i].id}">${data[i].name}<span class="d-block text-info">${data[i].dept}</span></a></td>
                      
                    </tr>`
-        table.innerHTML += row
-    }
-    
-                  
-}
-    
-                
-                   
-                
-               </script>
+                            table.innerHTML += row
+                        }
+
+
+                    }
+                </script>
 
 
 
