@@ -304,7 +304,8 @@
                 e.preventDefault();
                 let index = add[i].getAttribute('data-count');
                 let tprice = price[i].value;
-                let url = 'http://localhost:4000/diagonistic/add-test-data/?index='+index+'&price='+tprice;
+                // let url = 'http://localhost:4000/diagonistic/add-test-data/?index='+index+'&price='+tprice;
+                let url = 'https://aarogyahub.com/diagonistic/add-test-data/?index='+index+'&price='+tprice;
                 $.get(url, function (data) {
 
                     console.log(data)
@@ -324,7 +325,8 @@
             {
                 e.preventDefault();
                 let tid = tdelete[i].getAttribute('data-id');
-                let url1 = 'http://localhost:4000/diagonistic/delete-test-data/?id='+tid;
+                // let url1 = 'http://localhost:4000/diagonistic/delete-test-data/?id='+tid;
+                let url1 = 'https://aarogyahub.com/diagonistic/delete-test-data/?id='+tid;
                 console.log(tid)
                 $.get(url1, function (data) {
 
