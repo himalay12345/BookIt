@@ -302,7 +302,8 @@ module.exports.addTestData = async(req, res) => {
    {
     user.tests.push({
         testname:tests[req.query.index].testname,
-        testprice:req.query.price
+        testprice:req.query.price,
+        testnumber:tests[req.query.index].testnumber
     })
 }
 
