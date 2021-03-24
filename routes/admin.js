@@ -6,12 +6,15 @@ const adminController = require('../controllers/admin');
 
 router.get('/appointment-list',passport.checkAdminAuthentication, adminController.appointmentList);
 router.get('/application-request',passport.checkAdminAuthentication, adminController.applicationRequest);
+router.get('/lab-request',passport.checkAdminAuthentication, adminController.labRequest);
 router.get('/premium-doctor',passport.checkAdminAuthentication, adminController.premium);
 router.get('/add-premium',passport.checkAdminAuthentication, adminController.addPremium);
 router.get('/remove-premium',passport.checkAdminAuthentication, adminController.removePremium);
 router.get('/account-change',passport.checkAdminAuthentication, adminController.accountChange);
 router.post('/approve-documents',passport.checkAdminAuthentication, adminController.approveDocuments);
 router.post('/approve-bank',passport.checkAdminAuthentication, adminController.approveBank);
+router.post('/approve-lab-documents',passport.checkAdminAuthentication, adminController.approveLabDocuments);
+router.post('/approve-lab-bank',passport.checkAdminAuthentication, adminController.approveLabBank);
 router.post('/approve-requested-bank',passport.checkAdminAuthentication,adminController.approveRequestedBank);
 router.post('/addconsult',passport.checkAdminAuthentication, adminController.addConsultData);
 router.get('/addtest',passport.checkAdminAuthentication, adminController.addtest);
@@ -50,6 +53,7 @@ router.get('/a-test',passport.checkAdminAuthentication, adminController.test);
 router.get('/patient-list',passport.checkAdminAuthentication, adminController.patientList);
 router.get('/staff-list',passport.checkAdminAuthentication, adminController.staffList);
 router.get('/profile',passport.checkAdminAuthentication, adminController.profile);
+router.get('/lab-profile',passport.checkAdminAuthentication, adminController.labProfile);
 router.get('/phone-login',adminController.phoneLogin)
 router.post('/verify',adminController.verify);
 router.post('/signup',adminController.signUp);

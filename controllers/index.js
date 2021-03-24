@@ -610,7 +610,7 @@ module.exports.chatDoctor = async(req, res) => {
 }
 module.exports.test = async(req, res) => {
     let test = await Test.find({});
-    let labs = await User.find({type:'Diagonistic'});
+    let labs = await User.find({type:'Diagonistic',approve1:true,approve2:true});
     return res.render('test', {
 
         title: 'Tests',

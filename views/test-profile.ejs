@@ -48,30 +48,23 @@
                                 <%}%>
                                 <h3 style="font-size: 1rem;">Available At <%=cnt%> Labs</h3>
                                 <p style="font-weight: 600;">Rs <%=test.testprice%> Onwards</p>
+                                <div class="certi-heading">
+                                    <h3 style="font-weight: 800; margin-top: 11px;color:#575557">Requirement : </h3>
+                                    <p><b>Fasting : </b><%=test.testfast.toUpperCase()%></p>
+                                    <p style="margin-top: -15px;"><b>Sample Type : </b><%=test.testsample%></p>
+                                </div>
                                 <!-- <a  class="btn btn-primary"  style="border-radius: 3px !important;width:200px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a> -->
                             </div>
 
                         </div>
                         <div class="col-md-7" style="height: 100%; left: 20px">
                           
-                            <div class="certi" style="display: inline-flex;">
-                                <div class="certi-logo" style="margin-left: -4px;">
-                                    <img src="<%=assetPath('img/patients/certi2.png')%>" style="height: 37px;">
-                                </div>
-                                <div class="certi-heading">
-                                    <h4 style="font-weight: 800; margin-top: 11px; margin-left: 6px;">Certified Labs</h4>
-                                </div>
+                            <div class="certi-heading">
+                                <h3 style="font-weight: 800; margin-top: 11px;">Description : </h3>
+                                <p><%=test.testdescription%></p>
                             </div>
-                            <div class="lip-sec" style="margin-left: -42px;">
-                                <ul class="lip-ul" style="list-style:none">
-                                    <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span> <span style="line-height: 30px; margin-left:10px;">Free Home Sample Pickup
-                            </span</li>
-                            <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> E-Reports on next day
-                            </span</li>
-                            <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> 100% Secured with Accuracy
-                            </span</li>                    
-                        </ul>
-                    </div>
+                           
+                          
                     <div class=" col-md-12 lip-block" style="height: 70px;position: relative; display: inline-flex; border-top: 1px solid black; border-bottom: 1px solid black;padding-bottom: 15px !important;">
                         <div class="lips-price" style="margin-left: -7px;" >
                             <h3 style="margin-top: 13px;margin-left: 0px;">Rs <%=test.testprice%> Onwards</h3>
@@ -82,45 +75,42 @@
                     margin-top: 13px;
                     border-radius: 3px;
                 ">
-                                <a class="btn btn-primary"style="text-align: center; padding-top: 7px;color: white;
+                <%var flag5 = false;%>
+                <%for(let u of locals.user.cart.tests){%>
+                    <%if(test.testname.trim() == u.testname.trim()){%>
+                        <%console.log(test.testname.trim(),u.testname.trim())%>
+                        <%flag5 = true;%>
+                    <%}%>
+                <%}%>
+                <%if(!flag5){%>
+                    <a class="btn btn-primary" id="select_btn" style="text-align: center; padding-top: 7px;color: white;
                         font-weight: 800; color: #fff; cursor: pointer;width:150px">Select</a>
-
+                <%}else{%>
+                    <a href="" class="btn btn-primary" id="remove_item"  style=" padding-top: 7px;color: white;
+                    font-weight: 800; color: #fff; cursor: pointer;width:150px;background-color: red;">
+                        <i class="fas fa-trash" style="margin-right: 5px;"></i>Remove</a>
+                    <%}%>
+                                
                             </div>
                         </div>
-                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
-                            <div class="imgs">
-                                <img src="<%=assetPath('img/patients/first1.jfif')%>" style="height: 45px; width: 40px;">
+                        <div class="certi" style="display: inline-flex;margin-top:15px">
+                            <div class="certi-logo" style="margin-left: -4px;">
+                                <img src="<%=assetPath('img/patients/certi2.png')%>" style="height: 37px;">
                             </div>
-                            <div class="imgs-heading" style="margin-left: 15px;">
-                                <h4 style="font-weight: 800;"> Home sample collection for FREE</h4>
-                                <p style="font-weight: 400;line-height: 17px;
-                        margin-top: -6px;">A certified professional will collect your sample from a location of your preference.</p>
+                            <div class="certi-heading">
+                                <h4 style="font-weight: 800; margin-top: 11px; margin-left: 6px;">Certified Labs</h4>
                             </div>
                         </div>
-
-                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
-                            <div class="imgs">
-                                <img src="<%=assetPath('img/patients/e12.png')%>" style="height: 45px; width: 40px;">
-                            </div>
-                            <div class="imgs-heading" style="margin-left: 15px;">
-                                <h4 style="font-weight: 800;">
-                                    Digital reports</h4>
-                                <p style="font-weight: 400;line-height: 17px;
-                        margin-top: -6px;">Access your reports anytime on your AarogyaHub account. We will email you a copy.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12 first-img" style="margin-top: 20px; display: inline-flex;">
-                            <div class="imgs">
-                                <img src="<%=assetPath('img/patients/offer.jpg')%>" style="height: 45px; width: 40px;">
-                            </div>
-                            <div class="imgs-heading" style="margin-left: 15px;">
-                                <h4 style="font-weight: 800;">
-                                    Offers and affordable prices</h4>
-                                <p style="font-weight: 400;line-height: 17px;
-                        margin-top: -6px;">Get great discounts and offers on tests and packages</p>
-                            </div>
-                        </div>
-
+                        <div class="lip-sec" style="margin-left: -42px;">
+                            <ul class="lip-ul" style="list-style:none">
+                                <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span> <span style="line-height: 30px; margin-left:10px;">Free Home Sample Pickup
+                        </span</li>
+                        <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> E-Reports on next day
+                        </span</li>
+                        <li><span><i class="fa fa-check-circle" aria-hidden="true"></i></span><span style="line-height: 30px; margin-left:10px;"> 100% Secured with Accuracy
+                        </span</li>                    
+                    </ul>
+                </div>
 
 
                         </div>
@@ -132,13 +122,13 @@
                         <div id="select_lab">
                             <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
                             <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
-                            <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            <a href="/diagonistic/cart" class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
                         </div>
                         <%}%>
                         <div id="select_lab" class="displayNone">
                             <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
                             <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
-                            <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                            <a class="btn btn-primary"  href="/diagonistic/cart" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
                         </div>
                         <div id="select_lab1" class="displayNone">
                             <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>

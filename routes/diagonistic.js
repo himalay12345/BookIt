@@ -22,6 +22,8 @@ router.post('/upload-eproof', diagController.uploadEProof);
 router.get('/terms', diagController.terms);
 router.post('/accept-agreement', diagController.acceptAgreement);
 router.get('/add-bank', diagController.addBank);
+router.get('/skip-bank', diagController.skipBank);
+router.get('/dashboard', diagController.dashboard);
 router.post('/bank-details', diagController.bankDetails);
 router.get('/add-test', diagController.addTest);
 router.get('/add-test-data', diagController.addTestData);
@@ -71,9 +73,13 @@ router.get('/booked-test', diagController.bookedTest);
 router.get('/assign-phlebotomist', diagController.assignPhlebotomist);
 router.get('/collect-sample', diagController.collectSample);
 router.get('/complete-order', diagController.completeOrder);
+router.get('/profile-setting', diagController.profileSetting);
+router.get('/edit-test', diagController.editTest);
 router.get('/see-reports', diagController.seeReports);
 router.post('/order-cancel', diagController.orderCancel)
 router.post('/test-sort-by-date', diagController.testSortByDate);
+router.post('/sort-by-date', diagController.sortByDate);
+router.post('/profile-update', diagController.profileUpdate);
 
 
 module.exports = router;

@@ -27,7 +27,7 @@
             <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
                 <div class="col-md-12">
                     
-                   
+                   <%if(lab != undefined){%>
                     <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
                         <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
                        
@@ -138,6 +138,11 @@
                   
 
             </div>
+            <%}else{%>
+                <div class="" style="padding: 5px 10px;margin-bottom: 20px;text-align: center;margin-top: 200px;">
+                    <span style="font-size:2rem;font-weight: bolder;color:#575557;"><i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>No Items in the cart. Your Cart Is Empty !</span>
+                </div>
+                <%}%>
           
 
             <!-- Footer -->
@@ -146,6 +151,7 @@
 
     </div>
     </section>
+    <%if(lab != undefined){%>
     <div class="col-md-12 _3oqPe displayNone show_all_labs" style="display: inline-flex;">
     
         <div class="col-md-12 jss48" style="overflow-y: auto;">
@@ -209,6 +215,7 @@
     </div>
 </div>
 </div>
+<%}%>
     <!-- /Main Wrapper -->
   
     

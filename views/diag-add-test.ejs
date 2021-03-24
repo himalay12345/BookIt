@@ -79,11 +79,50 @@
                     <div class="col-md-7 col-lg-8 col-xl-9" style="background-color: white;padding: 15px;">
                        <%if(locals.user.tests.length>0){%>
                         <div class="">
-                            <div class="row"style="text-align:center;margin-left:30px;" >
-                                <h2 style="text-align:center !important;">Recently Added tests</h2>
+                            <div class="row"style="text-align:center;margin-left:10px;" >
+                                <h2 style="text-align:center !important;font-weight: bold;">Recently Added tests</h2>
                             </div>
                             <!-- <h2>Test Added</h2> -->
-                            <ul style="list-style: none;width: 100%;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped custom-table mb-0 datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Amount</th>
+                                                    <th class="text-right">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%var j=0;%>
+                                                <%for(u of locals.user.tests){%>
+                                                <tr>
+                                                    <td>
+                                                        <strong><%=u.testname%></strong>
+                                                    </td>
+                                                    <td>Rs <%=u.testprice%></td>
+                                                  
+                                                  
+                                                    <td class="text-right">
+                                                        <div class="dropdown dropdown-action">
+                                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a class="dropdown-item" href="/diagonistic/edit-test/?index=<%=j%>"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                                <a class="dropdown-item" href="/diagonistic/delete-test/?id=<%=u.id%>"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                              
+                                                <%j++;%>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul style="list-style: none;width: 100%;" class="lscreen displayNone">
                                <%var i1 =0%>
                             <%for(t1 of locals.user.tests){%>
                                 <form action="/diagonistic/update-test/?id=<%=t1.id%>" method="POST">
@@ -105,15 +144,91 @@
                            
                        
                         </ul>
+                        <ul style="list-style: none;width: 110%;margin-left: -30px;" class="lscreen displayNone">
+                            <%var i1 =0%>
+                         <%for(t1 of locals.user.tests){%>
+                             <form action="/diagonistic/update-test/?id=<%=t1.id%>" method="POST">
+                             <li style="border:1px solid grey;padding:5px;display:inline-flex;width:100%;">
+                                <div style="width: 100%;display: inline-flex;">
+                                 <div style="width: 80%;">
+                                  <input type="checkbox" class="timing displayNone" name="testname" value="<%=t1.testname%>" style="margin-left: 10px;margin-right:10px;margin-top: 5px;" checked ><p style="font-weight: 600;font-size: 1.1rem;margin-top: 8px;margin-left: 10px;"><%=t1.testname%></p>
+                                 </div>
+                                 <div style="width: 20%;">
+                                 <input type="text" name="testprice" class="form-control" value="<%=t1.testprice%>"style="width:40%;margin-left: 10px;">
+                                 <input type="hidden" name="index"  value="<%=i1++%>" >
+                                  
+                                  </div>
+                                </div>
+                                <div style="width: 100%;">
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg login-btn" style="margin-left: 15px;width:100px !important;padding:5px !important;">Update</button>
+                                  <a href="/diagonistic/delete-test/?id=<%=t1.id%>" class="btn btn-sm bg-danger" style="color: white;margin-left:15px;width:50px !important;padding-top: 10px;font-size: 1rem;;">
+                                     <i class="fas fa-trash"></i> 
+                                     </a>
+                                </div>
+                             </li>
+                         </form>
+                         <%}%>
+                        
+                    
+                     </ul>
+                   
                         </div>
                         <%}%>
                         <div class="">
                             <%if(locals.user.tests.length != tests.length){%>
-                            <div class="row"style="text-align:center;margin-left:30px;" >
-                                <h2 style="text-align:center !important;">Add tests</h2>
+                            <div class="row"style="text-align:center;margin-left:10px;margin-top:20px;" >
+                                <h2 style="text-align:center !important;font-weight: bold;">Add tests</h2>
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped custom-table mb-0 datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Amount</th>
+                                                    <th>Add</th>
+                                                    <th class="text-right">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <%var count = -1;%>
+                            <%for(u of tests){%>
+                                <%var flag = false;%>
+                                <%count++;%>
+                                     <%for(t1 of locals.user.tests){%>
+                                        <%if(t1.testname == u.testname){%>
+                                            <%flag = true;%>
+                                        <%}%>
+                                        <%}%>
+                                        <%if(!flag){%>
+                                                <tr>
+                                                    <td>
+                                                        <strong><%=u.testname%></strong>
+                                                    </td>
+                                                    <td><input type="text" id="t_price" name="testprice" class="form-control" value="<%=t.testprice%>" placeholder="Amount" style="width:100%;margin-left: 15px;min-width: 70px;"></td>
+                                                        <td><a class="btn btn-primary" id="t_add" data-count="<%=count%>" style="margin-left: 15px;color:white">Add</a>
+                                                            <a class="btn btn-primary displayNone" id="t_added" style="margin-left: 15px;color:white;padding-top: 10px;min-width: 120px;"><i class="fas fa-check" style="margin-right: 5px;"></i>Added</a></td>
+                                                        
+                                                        <td><a href="" id="t_delete" data-id="<%=t.testname%>" class="btn btn-sm bg-danger displayNone" style="color: white;margin-left:15px;width:50px !important;padding-top: 5px;font-size: 1rem;;">
+                                                            <i class="fas fa-trash"></i> 
+                                                            </a></td>
+                                                  
+                                                  
+                                                   
+                                                </tr>
+                                                <%}%>
+                                              
+                                                <%j++;%>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <%}%>
-                            <ul style="list-style: none;width: 100%;">
+                            <ul style="list-style: none;width: 100%;" class="displayNone">
                                 <form action="/diagonistic/add-test" method="POST">
                                     <%var count = -1;%>
                             <%for(t of tests){%>

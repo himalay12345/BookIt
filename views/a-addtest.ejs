@@ -38,20 +38,20 @@
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-
+<%-include('header')%>
         <!-- Header -->
       
-        <div class="breadcrumb-bar setting-bread" style="margin-top: 20px;">
+        <div class="breadcrumb-bar setting-bread" style="padding-top: 120px;">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Test</li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">Profile Settings</h2>
+                       
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
 
                                 <form action="/admin/addtest" method="POST" enctype="multipart/form-data">
                                     <div class="row form-row">
-                                        <div class="col-12 col-md-12">
+                                        <!-- <div class="col-12 col-md-12">
                                             <div class="form-group">
                                                 <div class="change-avatar">
                                                     <div class="profile-img">
@@ -86,7 +86,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
                                                 <label> Test Name</label>
@@ -102,14 +102,14 @@
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
                                                 <label> Test Description</label>
-                                                <input type="text" placeholder="Enter The Test Description" name="testdescription" class="form-control" value="">
+                                                <textarea placeholder="Enter The Test Description" name="testdescription" class="form-control" style="height: 70px !important;"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
-                                                <label> Fasting required</label>
-                                                <input type="checkbox" placeholder="Yes" name="fast" class="form-control" value="yes">
-                                                <input type="checkbox" placeholder="No" name="fast" class="form-control" value="no">
+                                                <label> Fasting required</label></br>
+                                                <input type="checkbox" placeholder="Yes" name="fast" class="" value="yes" style="margin-right:15px">&nbsp;&nbsp;Yes</br>
+                                                <input type="checkbox" placeholder="No" name="fast" class="" value="no" style="margin-right:15px">&nbsp;&nbsp;No
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -143,140 +143,7 @@
             <!-- /Page Content -->
 
             <!-- Footer -->
-            <footer class="footer">
-
-                <!-- Footer Top -->
-                <div class="footer-top">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-about">
-                                    <div class="footer-logo">
-                                        <img src="/img/footer-logo.png" alt="logo">
-                                    </div>
-                                    <div class="footer-about-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <div class="social-icon">
-                                            <ul>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">For Patients</h2>
-                                    <ul>
-                                        <li><a href="/search"><i class="fas fa-angle-double-right"></i> Search for Doctors</a></li>
-                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                        <li><a href="/register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                        <li><a href="/booking"><i class="fas fa-angle-double-right"></i> Booking</a></li>
-                                        <li><a href="/patient-dashboard"><i class="fas fa-angle-double-right"></i> Patient Dashboard</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-menu">
-                                    <h2 class="footer-title">For Doctors</h2>
-                                    <ul>
-                                        <li><a href="/appointments"><i class="fas fa-angle-double-right"></i> Appointments</a></li>
-                                        <li><a href="/chat"><i class="fas fa-angle-double-right"></i> Chat</a></li>
-                                        <li><a href="/login"><i class="fas fa-angle-double-right"></i> Login</a></li>
-                                        <li><a href="/doctor-register"><i class="fas fa-angle-double-right"></i> Register</a></li>
-                                        <li><a href="/doctor-dashboard"><i class="fas fa-angle-double-right"></i> Doctor Dashboard</a></li>
-                                    </ul>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                            <div class="col-lg-3 col-md-6">
-
-                                <!-- Footer Widget -->
-                                <div class="footer-widget footer-contact">
-                                    <h2 class="footer-title">Contact Us</h2>
-                                    <div class="footer-contact-info">
-                                        <div class="footer-address">
-                                            <span><i class="fas fa-map-marker-alt"></i></span>
-                                            <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
-                                        </div>
-                                        <p>
-                                            <i class="fas fa-phone-alt"></i> +1 315 369 5943
-                                        </p>
-                                        <p class="mb-0">
-                                            <i class="fas fa-envelope"></i> doccure@example.com
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- /Footer Widget -->
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /Footer Top -->
-
-                <!-- Footer Bottom -->
-                <div class="footer-bottom">
-                    <div class="container-fluid">
-
-                        <!-- Copyright -->
-                        <div class="copyright">
-                            <div class="row">
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="copyright-text">
-                                        <p class="mb-0"><a href="/templateshub.net">Templates Hub</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-6">
-
-                                    <!-- Copyright Menu -->
-                                    <div class="copyright-menu">
-                                        <ul class="policy-menu">
-                                            <li><a href="/term-condition">Terms and Conditions</a></li>
-                                            <li><a href="/privacy-policy">Policy</a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- /Copyright Menu -->
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Copyright -->
-
-                    </div>
-                </div>
-                <!-- /Footer Bottom -->
-
-            </footer>
+            <%-include('footer')%>
             <!-- /Footer -->
 
         </div>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/patient-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/profile by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:46 GMT -->
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Doccure - Patient List Page</title>
+    <title>Doccure - Profile</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
@@ -20,11 +20,10 @@
     <!-- Feathericon CSS -->
     <link rel="stylesheet" href="/css/feathericon.min.css">
 
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" href="/plugins/datatables/datatables.min.css">
-
     <!-- Main CSS -->
     <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
 
     <!--[if lt IE 9]>
 			<script src="/js/html5shiv.min.js"></script>
@@ -171,7 +170,6 @@
 
         </div>
         <!-- /Header -->
-
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-inner slimscroll">
@@ -195,9 +193,6 @@
                         <li>
                             <a href="/admin/patient-list"><i class="fe fe-user"></i> <span>Patients</span></a>
                         </li>
-                        <li class="active">
-                            <a href="/admin/a-test"><i class="fe fe-user"></i> <span>Test</span></a>
-                        </li>
                         <li>
                             <a href="/admin/reviews"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
                         </li>
@@ -216,7 +211,7 @@
                         <li class="menu-title">
                             <span>Pages</span>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="/admin/profile"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
                         </li>
                         <li class="submenu">
@@ -299,89 +294,194 @@
                 <!-- Page Header -->
                 <div class="page-header">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <h3 class="page-title">List of Patient</h3>
+                        <div class="col">
+                            <h3 class="page-title">Profile</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/admin/index">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="/adminjavascript:(0);">Users</a></li>
-                                <li class="breadcrumb-item active">Patient</li>
-                                <li> <a class="position-absolute" href="/admin/addtest" style="top:30px;right:10px;padding-top: 2px;
-                                    border: 1px solid;
-                                    height: 33px;
-                                    text-align: center;
-                                    border-radius: 7px;
-                                    width: 96px;">Add Test</a></li>
+                                <li class="breadcrumb-item active">Profile</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- /Page Header -->
 
-                <div class="row position-relative">
-                    <div class="col-sm-12">
-                        <div class="card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-header">
+                            <div class="row align-items-center">
+                                <div class="col-auto profile-image">
+                                    <a href="#">
+											<img  alt="User Image" src="<%=user.avatar%>">
+										</a>
+                                </div>
+                                <div class="col ml-md-n2 profile-user-info">
+                                    <h4 class="user-name mb-0">
+                                        <%=user.name%>
+                                    </h4>
+                                    <h6 class="text-muted">
+                                        <%=user.email%>
+                                    </h6>
+                                    <div class="user-Location"><i class="fa fa-map-marker"></i>
+                                        <%=user.contacts.city%>,
+                                            <%=user.contacts.state%>
+                                    </div>
+                                    <!-- <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> -->
+                                </div>
+                                <div class="col-auto profile-btn">
 
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <div class="table-responsive">
-                                        <table class="datatable table table-hover table-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Test Number</th>
-                                                    <th>Test Name</th>
-                                                    <th>Price</th>
-                                                    <th>Discount Price</th>
-                                                    <th>Total Price</th>
-                                                    <th>Edit</th>
-                                                </tr>
-                                                <%var c=1;%>
-                                                    <%for(test of tests){%>
-                                                        <tr>
-                                                            <td>
-                                                                <%=test.testnumber%>
-                                                            </td>
-                                                          
-                                                            <td>
-                                                                <%=test.testname%>
-                                                            </td>
-                                                            <td>Rs
-                                                                <%=test.testprice%>
-                                                            </td>
-                                                            <%if(!test.testdiscountprice){%>
-                                                                <td>Rs 0</td>
-                                                                <%}else{%>
-                                                                    <td>
-                                                                        <%=test.testdiscountprice%>
-                                                                    </td>
+                                    <a href="#" class="btn btn-primary">
+											Edit
+										</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-menu">
+                            <ul class="nav nav-tabs nav-tabs-solid">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#per_details_tab">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#password_tab">Documents</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#bank_tab">Bank Details</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content profile-tab-cont">
 
-                                                                    <%}%>
-                                                                        <%if(!test.testtotalprice){%>
-                                                                            <td>Rs
-                                                                                <%=test.testprice%>
-                                                                            </td>
-                                                                            <%}else{%>
-                                                                                <td>
-                                                                                    <%=test.testtotalprice%>
-                                                                                </td>
+                            <!-- Personal Details Tab -->
+                            <div class="tab-pane fade show active" id="per_details_tab">
 
-                                                                                <%}%>
-                                                                                    <td style="cursor: pointer;">
-                                                                                        <a href="/admin/edit-test/?id=<%=test.id %> "> <img src="/img/patients/e2.png" style="height:30px; width: 30px;"></a>
-                                                                                        <a href="/admin/delete-test/?id=<%=test._id %> "><img src="/img/patients/e1.png" style="height:30px; width: 30px;"></a>
-                                                                                    </td>
+                                <!-- Personal Details -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title d-flex justify-content-between">
+                                                    <span>Personal Details</span>
+                                                </h5>
+                                                <div class="row">
+                                                    <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                                                    <p class="col-sm-10">
+                                                        <%=user.name%>
+                                                    </p>
+                                                </div>
+                                               
+                                                <div class="row">
+                                                    <p class="col-sm-2 text-muted text-sm-right mb-0">Address</p>
+                                                    <p class="col-sm-10 mb-0">
+                                                        <%=user.contacts.city%>
+
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Edit Details Modal -->
+                                      
+                                        <!-- /Edit Details Modal -->
+
+                                    </div>
 
 
+                                </div>
+                                <!-- /Personal Details -->
 
-                                                        </tr>
-                                                        <%}%>
+                            </div>
+                            <!-- /Personal Details Tab -->
 
-                                            </thead>
+                            <!-- Change Password Tab -->
+                            <div id="password_tab" class="tab-pane fade">
 
-
-                                        </table>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Review documents</h5>
+                                        <form action="/admin/approve-lab-documents" method="POST">
+                                            <div class="row">
+                                                <div class="col-md-10 col-lg-6">
+                                                   
+                                                    <div class="form-group">
+                                                        <label>Establishment Proof</label></br>
+                                                        <img src="<%=user.estphoto%>" style="height: 200px;width: 300px;margin-bottom: 20px;"></br>
+                                                        <a download="estproof.jpg" href="<%=user.estphoto%>" title="ImageName" style="color: black;">
+                                                            <i class="fa fa-download" aria-hidden="true"></i>Download
+                                                        </a>
+                                                    </div>
+                                                    <input type="hidden" name="id" value="<%=user._id%>">
+                                                    <%if(user.approve1 == true){%>
+                                                        <button class="btn btn-success" style="margin-left: 500px; width: 200px;" type="submit" disabled>Approved</button>
+                                                        <%}else{%>
+                                                            <button class="btn btn-primary" style="margin-left: 500px; width: 200px;" type="submit">Approve Application</button>
+                                                            <%}%>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                            <div id="bank_tab" class="tab-pane fade">
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Review Bank Details</h5>
+                                        <form action="/admin/approve-lab-bank" method="POST">
+                                            <div class="row">
+                                                <div class="col-md-10 col-lg-6">
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.accountholdername%>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Bank Name</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.bankname%>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Bank Account Number</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.accountnumber%>
+                                                        </p>
+                                                    </div>
+                                                    <div class="row">
+                                                        <p class="col-sm-4 text-muted text-sm-right mb-0 mb-sm-3">Bank IFSC Code</p>
+                                                        <p class="col-sm-8">
+                                                            <%=user.bank.ifsccode%>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Enter the Account ID</label>
+                                                            <input type="text" class="form-control" name="accountid" value="<%=user.accountid%>" placeholder="Enter account id">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Renter the Account ID</label>
+                                                            <input type="text" class="form-control" name="reaccountid" value="<%=user.accountid%>" placeholder="Renter account id">
+                                                        </div>
+                                                    </div>
+                                                   
+                                                   
+                                                    <input type="hidden" name="id" value="<%=user._id%>">
+                                                    <%if(user.approve2 == true){%>
+                                                        <button class="btn btn-success" style="margin-left: 500px; width: 200px;" type="submit" disabled>Approved</button>
+                                                        <%}else{%>
+                                                            <button class="btn btn-primary" style="margin-left: 500px; width: 200px;" type="submit">Approve Application</button>
+                                                            <%}%>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Change Password Tab -->
+
                         </div>
                     </div>
                 </div>
@@ -403,15 +503,31 @@
     <!-- Slimscroll JS -->
     <script src="/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Datatables JS -->
-    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/plugins/datatables/datatables.min.js"></script>
-
     <!-- Custom JS -->
     <script src="/js/script1.js"></script>
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
 
 </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/patient-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:52 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/profile by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:46 GMT -->
 
-</html
+</html>

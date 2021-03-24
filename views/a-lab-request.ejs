@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/patient-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Doccure - Patient List Page</title>
+    <title>Doccure - Doctor List Page</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
@@ -46,12 +46,12 @@
                     <img src="/img/logo.png" alt="Logo">
                 </a>
                 <a href="/admin/index" class="logo logo-small">
-                    <img src="/img/logo-small.png" alt="Logo" width="30" height="30">
+                    <img src="/img/logo.png" alt="Logo" width="30" height="30">
                 </a>
             </div>
             <!-- /Logo -->
 
-            <a href="javascript:void(0);" id="toggle_btn">
+            <a href="/adminjavascript:void(0);" id="toggle_btn">
                 <i class="fe fe-text-align-left"></i>
             </a>
 
@@ -79,7 +79,7 @@
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span class="notification-title">Notifications</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                            <a href="/adminjavascript:void(0)" class="clear-noti"> Clear All </a>
                         </div>
                         <div class="noti-content">
                             <ul class="notification-list">
@@ -183,6 +183,9 @@
                         <li>
                             <a href="/admin/index"><i class="fe fe-home"></i> <span>Dashboard</span></a>
                         </li>
+                        <li class="active">
+                            <a href="/admin/application-request"><i class="fe fe-layout"></i> <span>Application Request</span></a>
+                        </li>
                         <li>
                             <a href="/admin/appointment-list"><i class="fe fe-layout"></i> <span>Appointments</span></a>
                         </li>
@@ -194,9 +197,6 @@
                         </li>
                         <li>
                             <a href="/admin/patient-list"><i class="fe fe-user"></i> <span>Patients</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="/admin/a-test"><i class="fe fe-user"></i> <span>Test</span></a>
                         </li>
                         <li>
                             <a href="/admin/reviews"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
@@ -263,26 +263,26 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
+                            <a href="/adminjavascript:void(0);"><i class="fe fe-code"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li class="submenu">
-                                    <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
+                                    <a href="/adminjavascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
                                     <ul style="display: none;">
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
+                                        <li><a href="/adminjavascript:void(0);"><span>Level 2</span></a></li>
                                         <li class="submenu">
-                                            <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
+                                            <a href="/adminjavascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
                                             <ul style="display: none;">
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
+                                                <li><a href="/adminjavascript:void(0);">Level 3</a></li>
+                                                <li><a href="/adminjavascript:void(0);">Level 3</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);"> <span>Level 2</span></a>
+                                            <a href="/adminjavascript:void(0);"> <span>Level 2</span></a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);"> <span>Level 1</span></a>
+                                    <a href="/adminjavascript:void(0);"> <span>Level 1</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -300,86 +300,65 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="page-title">List of Patient</h3>
+                            <h3 class="page-title">List of Requested Applications</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/admin/index">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="/adminjavascript:(0);">Users</a></li>
-                                <li class="breadcrumb-item active">Patient</li>
-                                <li> <a class="position-absolute" href="/admin/addtest" style="top:30px;right:10px;padding-top: 2px;
-                                    border: 1px solid;
-                                    height: 33px;
-                                    text-align: center;
-                                    border-radius: 7px;
-                                    width: 96px;">Add Test</a></li>
+                                <li class="breadcrumb-item active">Doctor</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- /Page Header -->
 
-                <div class="row position-relative">
+                <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
-
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div class="table-responsive">
-                                        <table class="datatable table table-hover table-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Test Number</th>
-                                                    <th>Test Name</th>
-                                                    <th>Price</th>
-                                                    <th>Discount Price</th>
-                                                    <th>Total Price</th>
-                                                    <th>Edit</th>
-                                                </tr>
-                                                <%var c=1;%>
-                                                    <%for(test of tests){%>
-                                                        <tr>
-                                                            <td>
-                                                                <%=test.testnumber%>
-                                                            </td>
-                                                          
-                                                            <td>
-                                                                <%=test.testname%>
-                                                            </td>
-                                                            <td>Rs
-                                                                <%=test.testprice%>
-                                                            </td>
-                                                            <%if(!test.testdiscountprice){%>
-                                                                <td>Rs 0</td>
-                                                                <%}else{%>
-                                                                    <td>
-                                                                        <%=test.testdiscountprice%>
-                                                                    </td>
+                                    <table class="datatable table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Lab Name</th>
+                                                <th>Address</th>
+                                                <th>Member Since</th>
+                                                <th>Application Status</th>
+                                                
 
-                                                                    <%}%>
-                                                                        <%if(!test.testtotalprice){%>
-                                                                            <td>Rs
-                                                                                <%=test.testprice%>
-                                                                            </td>
-                                                                            <%}else{%>
-                                                                                <td>
-                                                                                    <%=test.testtotalprice%>
-                                                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%for(u of user){%>
+                                            <tr>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="/admin/lab-profile/?id=<%=u._id%>" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<%=u.avatar%>" alt="User Image"></a>
+                                                        <a href="/admin/lab-profile/?id=<%=u._id%>"><%=u.name%></a>
+                                                    </h2>
+                                                </td>
+                                                <td><%=u.contacts.address%></td>
 
-                                                                                <%}%>
-                                                                                    <td style="cursor: pointer;">
-                                                                                        <a href="/admin/edit-test/?id=<%=test.id %> "> <img src="/img/patients/e2.png" style="height:30px; width: 30px;"></a>
-                                                                                        <a href="/admin/delete-test/?id=<%=test._id %> "><img src="/img/patients/e1.png" style="height:30px; width: 30px;"></a>
-                                                                                    </td>
+                                                <td><%=u.createdAt.toDateString()%> <br><small></small></td>
+                                               
+                                             
 
-
-
-                                                        </tr>
-                                                        <%}%>
-
-                                            </thead>
-
-
-                                        </table>
-                                    </div>
+                                                <td>
+                                                    <%if(u.approve2 == true && u.approve1 == true){%>
+                                                    <div class="status-toggle">
+                                                        <input type="checkbox" id="status_1" class="check" checked>
+                                                        <label for="status_1" class="checktoggle">checkbox</label>
+                                                    </div>
+                                                    <%}else{%>
+                                                        <div class="status-toggle">
+                                                            <input type="checkbox" id="status_1" class="check">
+                                                            <label for="status_1" class="checktoggle">checkbox</label>
+                                                        </div>
+                                                    <%}%>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -412,6 +391,6 @@
 
 </body>
 
-<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/patient-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:52 GMT -->
+<!-- Mirrored from dreamguys.co.in/demo/doccure/admin/doctor-list by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 30 Nov 2019 04:12:51 GMT -->
 
-</html
+</html>

@@ -37,8 +37,16 @@ module.exports.addtest = async(req, res) => {
     })
 }
 module.exports.applicationRequest = async(req, res) => {
-    let user = await User.find({ step4: true });
+    let user = await User.find({ type:'Doctor',step4: true });
     return res.render('a-application-request', {
+        title: 'Application Request',
+        user: user
+    })
+}
+
+module.exports.labRequest = async(req, res) => {
+    let user = await User.find({ type:'Diagonistic',step4: true });
+    return res.render('a-lab-request', {
         title: 'Application Request',
         user: user
     })
@@ -136,6 +144,9 @@ module.exports.updatetest = async function(req, res) {
             let test = await Test.findById(req.body.id);
             test.testname = req.body.testname,
                 test.testprice = req.body.testprice
+                test.testdescription = req.body.testdescription,
+                test.testsample = req.body.testsample,
+                test.testfast = req.body.testfast
 
 
 
@@ -150,7 +161,7 @@ module.exports.updatetest = async function(req, res) {
             console.log(test);
 
             req.flash('success', 'Test updated Successfully');
-            return res.redirect('back');
+            return res.redirect('/admin/a-test');
 
         });
 
@@ -172,12 +183,15 @@ module.exports.atest = async function(req, res) {
                 console.log('Multer Error', err);
                 return;
             }
+            let tests = await Test.find({});
+            let length = tests.length;
             let test = await Test.create({
                 testname: req.body.testname,
                 testprice: req.body.testprice,
                 testdescription:req.body.testdescription,
                 testfast:req.body.fast,
-                testsample:req.body.sample
+                testsample:req.body.sample,
+                testnumber:length+1
 
             });
             if(req.file)
@@ -189,7 +203,7 @@ module.exports.atest = async function(req, res) {
             test.save();
             console.log(test);
             req.flash('success', 'Test Added Successfully');
-            return res.redirect('back');
+            return res.redirect('/admin/a-test');
 
         });
 
@@ -237,7 +251,7 @@ module.exports.addConsultData = async function(req, res) {
 }
 module.exports.approveDocuments = async(req, res) => {
     let users = await User.findById(req.body.id);
-    let user = await User.find({ step4: true });
+    let user = await User.find({ type:'Doctor',step4: true });
     users.approve1 = true;
     users.save();
     if (users.approve2 == true) {
@@ -245,7 +259,7 @@ module.exports.approveDocuments = async(req, res) => {
         {
             client.messages
             .create({
-               body: 'Hii Dr.'+users.name+'! Your request of bank account change in AarogyaHub is approved. Now all your online transactions will be routed to your requested bank.If you have disabled your online booking service then click on this link to enable https://aarogyahub.com/booking-service',
+               body: 'Hii Dr.'+users.name+'! Your account is live now. Aarogyahub welcomes you on our platform to give patients a good user experience.',
                from: '+12019755459',
                statusCallback: 'http://postb.in/1234abcd',
                to: '+91'+users.phone
@@ -255,7 +269,7 @@ module.exports.approveDocuments = async(req, res) => {
 
         if(users.email)
         {
-        accountChangeAlert.newAlert(user,users.email);
+            serviceStartAlert.newAlert(users,users.email);
         }
        
         return res.render('a-application-request', {
@@ -264,6 +278,41 @@ module.exports.approveDocuments = async(req, res) => {
         })
     } else {
         return res.render('a-profile', {
+            title: 'Profile',
+            user: users
+        })
+    }
+}
+
+module.exports.approveLabDocuments = async(req, res) => {
+    let users = await User.findById(req.body.id);
+    let user = await User.find({ type:'Diagonistic',step4: true });
+    users.approve1 = true;
+    users.save();
+    if (users.approve2 == true) {
+        if(users.phone)
+        {
+            client.messages
+            .create({
+               body: 'Hii Lab '+users.name+'! Your account is live now. Users can book tests at any time. So Please Stay Tuned',
+               from: '+12019755459',
+               statusCallback: 'http://postb.in/1234abcd',
+               to: '+91'+users.phone
+             })
+            .then(message => console.log(message.sid));
+        }
+
+        // if(users.email)
+        // {
+        // accountChangeAlert.newAlert(user,users.email);
+        // }
+       
+        return res.render('a-lab-request', {
+            title: 'Application Request',
+            user: user
+        })
+    } else {
+        return res.render('a-lab-profile', {
             title: 'Profile',
             user: users
         })
@@ -322,7 +371,7 @@ module.exports.approveRequestedBank = async(req, res) => {
 
 module.exports.approveBank = async(req, res) => {
     let users = await User.findById(req.body.id);
-    let user = await User.find({ step4: true });
+    let user = await User.find({  type:'Doctor',step4: true });
 
     if (req.body.accountid == req.body.reaccountid) {
         users.accountid = req.body.accountid;
@@ -334,7 +383,7 @@ module.exports.approveBank = async(req, res) => {
             {
                 client.messages
                 .create({
-                   body: 'Hii Dr.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Aarpgyahub. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link https://aarogyahub.com/doctor-dashboard',
+                   body: 'Hii Dr.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Aarogyahub. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link https://aarogyahub.com/doctor-dashboard',
                    from: '+12019755459',
                    statusCallback: 'http://postb.in/1234abcd',
                    to: '+91'+users.phone
@@ -363,6 +412,85 @@ module.exports.approveBank = async(req, res) => {
             user: users
         })
     }
+
+}
+
+module.exports.approveLabBank = async(req, res) => {
+    let users = await User.findById(req.body.id);
+    let user = await User.find({ type:'Diagonistic',step4: true });
+    if(req.body.accountid){
+    if (req.body.accountid == req.body.reaccountid) {
+        users.accountid = req.body.accountid;
+        users.approve2 = true;
+        users.booking_service = true;
+        users.save();
+        if (users.approve1 == true) {
+            if(users.phone)
+            {
+                client.messages
+                .create({
+                   body: 'Hii Lab.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Aarogyahub. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link https://aarogyahub.com/diagonistic/dashboard',
+                   from: '+12019755459',
+                   statusCallback: 'http://postb.in/1234abcd',
+                   to: '+91'+users.phone
+                 })
+                .then(message => console.log(message.sid));
+            }
+    
+            if(users.email)
+            {
+            serviceStartAlert.newAlert(users,users.email);
+            }
+            return res.render('a-application-request', {
+                title: 'Application Request',
+                user: user
+            })
+        } else {
+            return res.render('a-profile', {
+                title: 'Profile',
+                user: users
+            })
+        }
+    } else {
+        req.flash('error', 'AccountId Donot match');
+        return res.render('a-profile', {
+            title: 'Profile',
+            user: users
+        })
+    }
+}else{
+        users.approve2 = true;
+        users.booking_service = true;
+        users.save();
+        if (users.approve1 == true) {
+            if(users.phone)
+            {
+                client.messages
+                .create({
+                   body: 'Hii Lab.'+users.name+'! Your documents has been approved and now you are live. Now your patients can book you online through Aarogyahub. You can visit your dashboard to keep track of appointments. If you want to see your dashboard now then use this link https://aarogyahub.com/diagonistic/dashboard',
+                   from: '+12019755459',
+                   statusCallback: 'http://postb.in/1234abcd',
+                   to: '+91'+users.phone
+                 })
+                .then(message => console.log(message.sid));
+            }
+    
+            // if(users.email)
+            // {
+            // serviceStartAlert.newAlert(users,users.email);
+            // }
+            return res.render('a-lab-request', {
+                title: 'Application Request',
+                user: user
+            })
+        } else {
+            return res.render('a-lab-profile', {
+                title: 'Profile',
+                user: users
+            })
+        }
+     
+}
 
 }
 module.exports.blankPage = (req, res) => {
@@ -505,6 +633,14 @@ module.exports.staffList = async(req, res) => {
 module.exports.profile = async(req, res) => {
     let user = await User.findById(req.query.id);
     return res.render('a-profile', {
+        title: 'Profile',
+        user: user
+    })
+}
+
+module.exports.labProfile = async(req, res) => {
+    let user = await User.findById(req.query.id);
+    return res.render('a-lab-profile', {
         title: 'Profile',
         user: user
     })

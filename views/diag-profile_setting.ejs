@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/doctor-profile-settings  30 Nov 2019 04:12:14 GMT -->
+
+<head>
+   
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+
+    <link rel="stylesheet" href="<%=assetPath('plugins/select2/css/select2.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css')%>">
+
+    <link rel="stylesheet" href="<%=assetPath('plugins/dropzone/dropzone.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap-datetimepicker.min.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+    
+   
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+    
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+     
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar setting-bread" style=" margin-top: 20px;">
+            <div class="container-fluid ">
+                <div class="row align-items-center ">
+                    <div class="col-md-12 col-12 ">
+                        <nav aria-label="breadcrumb " class="page-breadcrumb ">
+                            <ol class="breadcrumb ">
+                                <li class="breadcrumb-item "><a href="/index-2 ">Home</a></li>
+                                <li class="breadcrumb-item active " aria-current="page ">Profile Settings</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title ">Profile Settings</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content ">
+            <div class="container-fluid" style="padding: 0px 30px;">
+
+                <div class="row ">
+                    <div class="col-md-12 col-lg-12 col-xl-12" style="padding: 0px 0px!important;">
+                       
+                        <form action="/diagonistic/profile-update" method="POST" enctype="multipart/form-data" id="edit_form">
+                            <!-- Basic Information -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Basic Information</h4>
+                                    <div class="row form-row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="change-avatar">
+                                                    <div class="profile-img">
+                                                        <img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
+                                                    </div>
+                                                    <div class="upload-img">
+                                                        <div class="change-photo-btn upload-sm-btn">
+                                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                            <input type="file" class="upload" name="avatar" id="imageUpload">
+                                                        </div>
+                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Lab Name <span class="text-danger"></span></label>
+                                                <input type="text" placeholder="Enter Your Name" name="name" class="form-control" value="<%=locals.user.name%>" >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <%if(locals.user.service == 'google'){%>
+                                                    <label>Email ID</label><span style="margin-left: 15px;margin-right: 5px;"><i class="fas fa-check-circle" style="color:green"></i></span><b  style="font-size: 0.8rem;">Verified</b>
+                                                    <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>" readonly >
+                                                <%}else{%>
+                                                <%if(!locals.user.emailverify){%>
+                                                    <label>Email ID</label>
+                                                <%}%>
+                                                <%if(locals.user.emailverify == false){%>
+                                                    <label>Email ID</label><span style="margin-left: 15px;margin-right: 5px;"><i class="fas fa-exclamation-circle" style="color:red"></i></span><b style="font-size: 0.8rem;;">Not Verified</b>
+                                                <%}%>
+                                                <%if(locals.user.emailverify == true){%>
+                                                    <label>Email ID</label><span style="margin-left: 15px;margin-right: 5px;"><i class="fas fa-check-circle" style="color:green"></i></span><b  style="font-size: 0.8rem;">Verified</b>
+                                                <%}%>
+                                                
+                                                <input type="email" placeholder="Enter your Email" name="email" class="form-control" value="<%=locals.user.email%>">
+                                                <%}%>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Mobile Number <span class="text-danger"></span></label>
+                                                <%if(locals.user.service == 'phone'){%>
+                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control" readonly >
+                                                <%}else{%>
+                                                <input type="Number" placeholder="Enter your Mobile Number" name="phone" value="<%=locals.user.phone%>" class="form-control"  >
+                                                <%}%>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label>Add Biodata</label>
+                                                <div class="">
+                                                    <input type="textarea" placeholder="Write something about yourself." name="biodata" class="form-control" value="<%=locals.user.biodata%>" style="height: 100px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /Basic Information -->
+
+                            <!-- About Me -->
+                           
+                            <div class="col-md-12 col-lg-12 col-xl-12" style="margin-left: -10px; padding-top: 10px;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Social Media</h4>
+
+                                        <!-- Social Form -->
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12 col-sm-12" style="display: inline-flex;padding: 0px 0px !important;">
+
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                    <label>Facebook URL</label>
+
+                                                    <input type="text" name="facebook" value="<%=locals.user.facebook%>" class="form-control">
+
+                                                </div>
+                                                <div class="col-md-6 col-sm-2 social-sm" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                    <a href="<%=locals.user.facebook%>" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;padding: 0px 0px !important;">
+                                                <div class="form-group col-md-6">
+                                                    <label>Twitter URL</label>
+                                                    <input type="text" value="<%=locals.user.twitter%>" name="twitter" class="form-control">
+
+                                                </div>
+                                                <div class="col-md-6 social-sm" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                    <a href="<%=locals.user.twitter%>" target="_blank"><i class="fab fa-twitter"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-12" style="display: inline-flex;padding: 0px 0px !important;">
+                                                <div class="form-group col-md-6">
+                                                    <label>Instagram URL</label>
+                                                    <input type="text" name="instagram" value="<%=locals.user.instagram%>" class="form-control">
+                                                </div>
+                                                <div class="col-md-6 social-sm" style="margin-top: 30px;font-size: 2rem; margin-left: 15px;">
+                                                    <a href="<%=locals.user.instagram%>" target="_blank"><i class="fab fa-instagram"></i> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- /Social Form -->
+
+
+                            <!-- /About Me -->
+
+                            <!-- Clinic Info -->
+                          
+                            <!-- /Clinic Info -->
+
+                            <!-- Contact Details -->
+                            <div class="card contact-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Lab Details<span class="text-danger"></span></h4>
+                                    <div class="row form-row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" name="address" placeholder="Enter your Addresss" value="<%=locals.user.contacts.address%>" >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">City</label>
+                                                <input type="text" class="form-control" name="city" placeholder="Enter your City" value="<%=locals.user.contacts.city%>" >
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">State / Province</label>
+                                                <input type="text" class="form-control" name="state" placeholder="Enter your State" value="<%=locals.user.contacts.state%>" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Country</label>
+                                                <input type="text" class="form-control" name="country" placeholder="Enter your Country" value="<%=locals.user.contacts.country%>" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Postal Code</label>
+                                                <input type="text" class="form-control" name="pincode" placeholder="Enter your Pin code" value="<%=locals.user.contacts.pincode%>" >
+                                            </div>
+                                        </div>
+                                         <div class="col-md-12" style="padding: 0px 0px !important; margin-left: 15px;">
+                                        <div class="form-group">
+                                            <label>Lab Images</label>
+                                            <div class="col-md-12" style="padding: 0px 0px !important;">
+                                                <div class="upload-container col-md-12" style="margin-left: -15px;">
+                                                    <div class="border-container">
+                                                        <div class="icons fa-4x text-center">
+                                                            <i class="fas fa-file-image" data-fa-transform="shrink-3 down-2 left-6 rotate--45"></i>
+                                                            <i class="fas fa-file-alt" data-fa-transform="shrink-2 up-4"></i>
+                                                            <i class="fas fa-file-pdf" data-fa-transform="shrink-3 down-2 right-6 rotate-45"></i>
+                                                        </div>
+                                                        <input type="file" id="file-upload" name="clinicphoto" multiple>
+                                                        <p class="text-center" style="margin-top: -20px;font-size: 0.9rem;">Drag and drop files here, or
+                                                            <a href="#" id="file-browser">browse</a> your computer.Max 10 photos ( 2MB Max per image)</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="upload-wrap" style="overflow-x: auto;">
+                                     
+                                            <div class="upload-images mr-4 gallery" style="display:inline-flex;">
+                                              
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div class="upload-wrap" style="overflow-x: auto;margin-top: 10px;">
+                                            <%var i=0%>
+                                                <%for(photo of locals.user.clinicphoto){%>
+                                                    <div class="upload-images mr-4">
+                                                        <img src="<%=photo%>" style="width: 120px;">
+                                                        <a href="/user/delete-clinic-photo/?path=<%=photo%>&index=<%=i%>" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
+                                                        <%i++%>
+                                                    </div>
+                                                    <%}%>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Contact Details -->
+
+                            <!-- Pricing -->
+                            <!-- /Pricing -->
+
+                         
+                            <!-- /Registrations -->
+
+                            <div class="submit-section submit-btn-bottom">
+                                <button type="submit" id="submit_button" class="btn btn-primary submit-btn">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('plugins/select2/js/select2.min.js')%>"></script>
+    <script src="<%=assetPath('plugins/dropzone/dropzone.min.js')%>"></script>
+    <script src="<%=assetPath('plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js')%>"></script>
+    <script src="<%=assetPath('js/profile-settings.js')%>"></script>
+    <script src="<%=assetPath('js/moment.min.js')%>"></script>
+    <script src="<%=assetPath('js/bootstrap-datetimepicker.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/script.js')%>"></script>
+    <script>
+       $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#file-upload').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+});
+    </script>
+    <script>
+        $("#file-upload").css("opacity", "0");
+
+        $("#file-browser").click(function(e) {
+            e.preventDefault();
+            $("#file-upload").trigger("click");
+        });
+    </script>
+    <script>
+        document.getElementById("imageUpload").onchange = function() {
+            document.getElementById("edit_form").submit();
+        };
+      
+
+
+
+   
+    </script>
+    
+    <script>
+        <%if(flash.success && flash.success.length>0){%>
+        new Noty({
+            theme: 'metroui ',
+            text: '<%=flash.success%>',
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+        <%if(flash.error && flash.error.length>0){%>
+        new Noty({
+            theme: 'metroui',
+            text: '<%=flash.error%>',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 3000
+        }).show();
+        <%}%>
+    </script>
+
+
+</body>
+
+<!-- doccure/doctor-profile-settings  30 Nov 2019 04:12:15 GMT -->
+
+</html>

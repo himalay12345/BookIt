@@ -575,6 +575,35 @@
     </div>
     </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Set Home Collection Charges</h4>
+                    <div class="profile-box">
+                        <div class="row">
+                            <form action="/user/set-booking-fee" method="POST">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-md-12 col-sm-12" style="margin-left: -15px;">
+                                        <div class="form-group">
+                                            <label for="booking">Collection Fee (In rupees)</label></br>
+                                            <input type="text" name="fee" class="form-control" value="<%=locals.user.booking_fee%>" id="booking" placeholder="Enter the booking fee">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="submit-section submit-btn-bottom">
+                                        <button type="submit" class="btn btn-primary submit-btn">Sumbit</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

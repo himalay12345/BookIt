@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="<%=assetPath('css/bootstrap.min.css')%>">
+
+	<link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/fontawesome.min.css')%>">
+    <link rel="stylesheet" href="<%=assetPath('plugins/fontawesome/css/all.min.css')%>">
+    
+	<link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
+	<link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+</head>
+
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <%-include('header');%>
+        <!-- Header -->
+     
+        <!-- /Header -->
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar lptop">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tests</li>
+                            </ol>
+                        </nav>
+                        <h2 class="breadcrumb-title">Add Tests</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Breadcrumb -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar lscreen">
+
+                        <!-- Profile Sidebar -->
+                        <div class="profile-sidebar">
+                            <div class="widget-profile pro-widget-content">
+                                <div class="profile-info-widget">
+                                    <a href="#" class="booking-doc-img">
+										<img src="<%=locals.user.avatar%>" onerror='this.src="<%=assetPath('img/profile.png')%>"' alt="User Image">
+
+                                    </a>
+                                    <div class="profile-det-info">
+                                        <h3> 
+                                            <%=locals.user.name%>
+                                        </h3>
+
+                                        <div class="patient-details">
+                                            <h5 class="mb-0">
+                                                <%=locals.user.department%>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-widget">
+                                <nav class="dashboard-menu">
+                                   
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- /Profile Sidebar -->
+
+                    </div>
+                    <div class="col-md-7 col-lg-8 col-xl-9" style="background-color: white;padding: 15px;">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <h4 class="page-title" style="margin-bottom: 20px;">Edit Test</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <form action="/diagonistic/update-test/?id=<%=locals.user.tests[index].id%>" method="POST">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Test Name</label>
+                                                    <input class="form-control" name="testname" value="<%=locals.user.tests[index].testname%>" type="text" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Test Price</label>
+                                                    <input class="form-control" name="testprice" value="<%=locals.user.tests[index].testprice%>" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="m-t-20 text-center">
+                                            <button class="btn btn-primary submit-btn">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                   
+
+                    </div>
+                
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /Page Content -->
+
+        <!-- Footer -->
+        <%-include('footer');%>
+        <!-- /Footer -->
+
+    </div>
+    <!-- /Main Wrapper -->
+
+    <!-- jQuery -->
+    <script src="<%=assetPath('js/jquery.min.js')%>"></script>
+    <script src="<%=assetPath('js/popper.min.js')%>"></script>
+
+    <script src="<%=assetPath('js/bootstrap.min.js')%>"></script>
+   
+
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/ResizeSensor.js')%>"></script>
+    <script src="<%=assetPath('plugins/theia-sticky-sidebar/theia-sticky-sidebar.js')%>"></script>
+    <script src="<%=assetPath('js/script.js')%>"></script> 
+  
+
+</body>
+
+<!-- doccure/invoices  30 Nov 2019 04:12:14 GMT -->
+
+</html>

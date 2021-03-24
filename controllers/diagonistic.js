@@ -5,6 +5,7 @@ let User = require('../models/user');
 let Test = require('../models/test');
 const fs = require('fs')
 const path = require('path')
+const emailVerification = require('../mailers/email-verify');
 
 module.exports.register = async (req, res) => {
     return res.render('diag-register',{
@@ -236,10 +237,21 @@ module.exports.addBank = (req, res) => {
     })
 }
 
-module.exports.skipBank = (req, res) => {
+module.exports.dashboard = (req, res) => {
+   
+    return res.render('diag-dashboard', {
+        title: 'My Dashboard'
+    })
+}
+
+module.exports.skipBank = async(req, res) => {
+
     if (req.user.approve1 == true && req.user.approve2 == true) {
         return res.redirect('/doctor-dashboard');
     }
+    let user = await User.findById(req.user.id)
+    user.step4 = true;
+    user.save();
     return res.redirect('back')
 }
 
@@ -336,7 +348,7 @@ module.exports.updateTest = async(req, res) => {
             
         }
     });
-    return res.redirect('back')
+    return res.redirect('/diagonistic/add-test')
 }
 
 module.exports.labProfile = async(req, res) => {
@@ -398,7 +410,7 @@ module.exports.allTests = async(req, res) => {
 }
 
 module.exports.allLabs = async(req, res) => {
-    let lab = await User.find({type:'Diagonistic'});
+    let lab = await User.find({type:'Diagonistic',approve1:true,approve2:true});
 
     return res.render('all-labs',{
         title:'All Labs',
@@ -935,7 +947,9 @@ console.log(req.body)
 
 module.exports.cart = async(req, res) => {
     let user = await User.findById(req.user.id);
-    let lab = await User.findById(user.cart.tests[0].labid)
+    let lab;
+    if(user.cart.tests.length>0){
+    lab = await User.findById(user.cart.tests[0].labid)
     let labs = await User.find({type:'Diagonistic'});
     let nlabs = [];
     let price,cnt=0;
@@ -968,13 +982,23 @@ module.exports.cart = async(req, res) => {
         }
         
     }
-console.log('new labs are' + nlabs)
     return res.render('cart',{
         title:'My Cart',
         lab:lab,
         user:user,
         nlabs:nlabs
     })
+    }
+    else{
+        return res.render('cart',{
+            title:'My Cart',
+            lab:undefined,
+            user:user,
+            nlabs:[]
+        })
+    }
+    
+   
 }
 
 module.exports.addPatient = async(req, res) => {
@@ -985,6 +1009,14 @@ module.exports.addPatient = async(req, res) => {
         title:'Add Patient',
         user:user,
         lab:lab
+    })
+}
+
+module.exports.editTest = async(req, res) => {
+   
+    return res.render('diag-edit-test',{
+        title:'Edit Test',
+        index:req.query.index
     })
 }
 
@@ -1800,5 +1832,100 @@ module.exports.testSortByDate = async(req, res) => {
 
 }
 
+
+module.exports.sortByDate = async(req, res) => {
+    const date = req.body.date;
+    const str = date.split("/").join("-");
+   
+    return res.render('diag-dashboard',
+    {
+        title:'My Dashboard',
+        date:str
+    })
+    
+
+}
+
+module.exports.profileSetting = async(req, res) => {
+    return res.render('diag-profile_setting',
+    {
+        title:'Profile Setting'
+    })
+    
+
+}
+
+module.exports.profileUpdate = async function(req, res) {
+
+    try {
+        let user = await User.findById(req.user.id);
+        User.uploadedAvatar(req, res, function(err) {
+            if (err) { console.log('*******Multer Error', err); return; }
+
+            console.log(req.body)
+            user.name = req.body.name;
+            user.phone = req.body.phone;
+            user.facebook = req.body.facebook;
+            user.instagram = req.body.instagram;
+            user.twitter = req.body.twitter;
+            user.biodata = req.body.biodata;
+            user.contacts = {
+                address: req.body.address,
+                city: req.body.city,
+                state: req.body.state,
+                pincode: req.body.pincode,
+                country: req.body.country
+            };
+
+            if (req.files['avatar']) {
+                if (!user.avatar) {
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                } else {
+                    if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
+
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                }
+            }
+            if (req.files['clinicphoto']) {
+                for (let i = 0; i < req.files['clinicphoto'].length; i++) {
+                    user.clinicphoto.push(User.avatarPath + '/' + req.files['clinicphoto'][i].filename);
+                }
+            }
+
+            const rand = Math.floor((Math.random() * 100) + 54);
+            user.emailkey = rand;
+            if (!user.emailverify && user.service == 'phone') {
+                console.log('sent');
+                emailVerification.newAlert(user, rand, req.body.email);
+                user.email = req.body.email;
+                user.emailverify = false;
+            }
+
+            if (user.email != req.body.email) {
+                console.log('sent again');
+                emailVerification.newAlert(user, rand, req.body.email);
+                user.email = req.body.email;
+                user.emailverify = false;
+            }
+
+
+
+            user.save();
+            // console.log(user);
+
+
+        });
+        req.flash('success', 'Profile updated!');
+        return res.redirect('back');
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
 
 

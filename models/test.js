@@ -12,6 +12,9 @@ const testSchema = mongoose.Schema({
     testname: {
         type: String
     },
+    testnumber: {
+        type: Number
+    },
     testprice: {
         type: String
     },
