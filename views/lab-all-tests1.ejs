@@ -623,8 +623,8 @@ opacity: 1;">
                  itemname = removeitem[i].getAttribute('data-name');
                
                  
-                //  let url = "https://aarogyahub.com/diagonistic/remove-cart-item/?name=" + itemname;
-                let url = "http://localhost:4000/diagonistic/remove-cart-item/?name=" + itemname;
+                 let url = "https://aarogyahub.com/diagonistic/remove-cart-item/?name=" + itemname;
+                // let url = "http://localhost:4000/diagonistic/remove-cart-item/?name=" + itemname;
 
     $.get(url, function (data) {
        
@@ -708,8 +708,8 @@ opacity: 1;">
     let tid= testid[i].value;
     console.log(tname,tid)
 
-    // let url = "https://aarogyahub.com/diagonistic/change-lab/?tname=" + tname;
-        let url = "http://localhost:4000/diagonistic/change-lab/?tname=" + tname;
+    let url = "https://aarogyahub.com/diagonistic/change-lab/?tname=" + tname;
+        // let url = "http://localhost:4000/diagonistic/change-lab/?tname=" + tname;
 
     $.get(url, function (data) {
        
@@ -740,8 +740,8 @@ opacity: 1;">
                 selectnew[i].classList.add('displayNone');
                 itemname = selectnew[i].getAttribute('data-name');
                 lid = selectnew[i].getAttribute('data-lid');
-                //  let url = "https://aarogyahub.com/diagonistic/add-cart-item/?name="+itemname + '&lid='+ lid 
-                let url = "http://localhost:4000/diagonistic/add-cart-item/?name="+itemname + '&lid='+ lid 
+                 let url = "https://aarogyahub.com/diagonistic/add-cart-item/?name="+itemname + '&lid='+ lid 
+                // let url = "http://localhost:4000/diagonistic/add-cart-item/?name="+itemname + '&lid='+ lid 
     
     $.get(url, function (data) {
        
