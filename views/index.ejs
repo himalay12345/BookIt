@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="<%=assetPath('css/style1.css')%>">
     <link rel="stylesheet" href="<%=assetPath('css/style.css')%>">
+   
 </head>
 
 <body>
@@ -16,7 +17,7 @@
             <!-- Header -->
 
             <!-- /Header -->
-            <div class="lab-test-checks sscreen" style="background-image: url('<%=assetPath('img/co3.jpg')%>');margin-left: 15px;
+            <div class="lab-test-checks sscreen displayNone" style="background-image: url('<%=assetPath('img/co3.jpg')%>');margin-left: 15px;
             margin-right: 15px;
             margin-top: 15px;height: 85px;background-size: cover;background-repeat: no-repeat;border-radius: 10px;">
                 <a href="/covid-form">
@@ -39,6 +40,127 @@
                     </div>
                 </a>
             </div>
+            <div class="banner displayNone">
+
+                <div id="myCarousel" class="carousel slide pointer-event">
+    
+    
+    
+                    <!-- Wrapper for slides -->
+    
+                    <div class="carousel-inner">
+    
+                        <div class="item item1">
+    
+                            <div class="fill" style=" background-color:#eaf6ff;">
+    
+                                <div class="banner-wrapper">
+    
+                                  <div class="banner-left carousel-img">
+    
+                                      <img src="https://www.mydrcity.com/assets/newdesign/images/banner-left-img.png" alt="" class="img img-responsive">
+    
+                                    </div>
+    
+                                    <div class="banner-right carousel-desc">
+    
+                                      <h3>Emergency?</h3>
+    
+                                        <h2>Meet The<br>Best Doctor</h2>
+    
+                                        <p>Take care of your Health</p>
+    
+                                        <a href="https://www.mydrcity.com/appoinments">Make Appointment</a>
+    
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        <div class="item item2 active">
+    
+                            <div class="fill" style=" background-color:#eaf6ff;">
+    
+                                <div class="banner-wrapper">
+    
+                                <div class="banner-right carousel-desc">
+    
+                                      <h3>Emergency?</h3>
+    
+                                        <h2>Meet The<br>Best Doctor</h2>
+    
+                                        <p>Take care of your Health</p>
+    
+                                        <a href="https://www.mydrcity.com/appoinments">Make Appointment</a>
+    
+                                    </div>
+    
+                                  <div class="banner-left carousel-img">
+    
+                                      <img src="https://www.mydrcity.com/assets/newdesign/images/banner1.png" alt="" class="img img-responsive">
+    
+                                    </div>
+    
+                                    
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        <div class="item item3">
+    
+                            <div class="fill" style=" background-color:#eaf6ff;">
+    
+                                <div class="banner-wrapper">
+    
+                                  <div class="banner-left carousel-img">
+    
+                                      <img src="https://www.mydrcity.com/assets/newdesign/images/banner2.png" alt="" class="img img-responsive">
+    
+                                    </div>
+    
+                                    <div class="banner-right carousel-desc">
+    
+                                      <h3>Emergency?</h3>
+    
+                                        <h2>Meet The<br>Best Doctor</h2>
+    
+                                        <p>Take care of your Health</p>
+    
+                                        <a href="https://www.mydrcity.com/appoinments">Make Appointment</a>
+    
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        
+    
+    <!-- Controls -->
+    
+     <a class="left carousel-control" href="#myCarousel" data-slide="prev"><img src="https://www.mydrcity.com/assets/newdesign/images/pre.png"></a>
+    
+     <a class="right carousel-control" href="#myCarousel" data-slide="next"><img src="https://www.mydrcity.com/assets/newdesign/images/next.png"></a>
+    
+    
+    
+    
+    
+          
+    
+                    </div>
+    
+                </div>
+    
+        </div>
 
             <!-- Home Banner -->
             <section class="section section-search noimg" style="margin-top: 20px;   background: #f9f9f9 url(<%=assetPath('img/search-bg.png')%>) no-repeat bottom center;">
@@ -1070,6 +1192,10 @@
                 <script src="<%=assetPath('js/slick.js')%>"></script>
 
                 <script src="<%=assetPath('js/script.js')%>"></script>
+                <audio id="myAudio">
+                    <source src="https://www.mydrcity.com/assets/ring/phone_ring.mp3" type="audio/mp3">
+                    </audio>
+                  
                 <script>
                     function showsearch() {
                         document.getElementById('searchkey1').focus();

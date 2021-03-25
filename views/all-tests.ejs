@@ -134,7 +134,7 @@
                                 <%for(let u of tests){%>
                                     <%console.log(u._id)%>
                                     <%var cnt=0%>
-                                <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
+                                <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;height: 100px !important;margin-bottom: 15px;">
                                     <div style="width: 10%;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
                                     <div style="width: 70%;">
                                         <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
@@ -153,7 +153,7 @@
                                     <form action="">
                                         <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
                                     <div style="width: 20%;">
-                                        <a  class="btn btn-primary" id="select_new" data-count="<%=i++%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
+                                        <a  class="btn btn-primary" id="select_new" data-count="<%=i++%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:110px !important;padding:5px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white">Select</a>
                                     </div>
                                 </form>
                                 </div>
@@ -186,15 +186,15 @@
     
         <div class="col-md-12 jss48" style="overflow-y: auto;">
           
-    <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;">
-        <svg onclick="removeLab()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+    <div id="testpop" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;">
+        <svg onclick="removeLab()" id="test_close"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
         
         <h2 style="color:#575557;font-size: 1.5rem;padding-bottom: 0px;font-weight: bolder;">Select Lab</h2>
         <form action="/diagonistic/select-lab" method="POST">
         <div  style="height: 100vh;">  
             <div id="displayLab" style="height: 90%;overflow-y: auto;"></div>
-            <div style="background-color:white;width: 100%;position:sticky;bottom:5px;height: 10%;">
-                <button type="submit" class="btn btn-primary" style="width:100%;font-size:1.3rem;font-weight: bold;color:white;z-index: 1000;">Select Lab</button>
+            <div style="background-color:white;width: 100%;position:sticky;bottom:0px;height: 10%;">
+                <button type="submit" class="btn btn-primary" style="width:100%;font-size:1.3rem;font-weight: bold;color:white;z-index: 1000;margin-left: 5px;">Select Lab</button>
             </div>      
 </div>
 </form>
@@ -205,137 +205,167 @@
 </div>
     <!-- /Main Wrapper -->
     <section class="mobile-sugar">
-        <div class=" Sugar" style="height: 200px; margin-top:3px;background-size: cover; position: relative; margin-bottom: 31px;background-image:linear-gradient(transparent,95%,white) ,url('/img/patients/v4.jpg');">
+        <div class="search-box lscreen" style="">
+            <form action="/user/search-doctor" method="POST">
+                <div class="form- search-location">
 
-            <div class="pric-health" style="    
-            margin-top: -3px;
-            margin-left: -17px;
-            font-family: unset;
-            font-weight: 700;
-            height: 23px;
-            width: 61px;
-            position: absolute;
-            left: 0.875rem;
-            border-radius: 5px;
-            bottom: -15px;
-            left: 28px;
-            ">
-                <p class="price-healths" style="color:grey;text-decoration: line-through;"> ₹ 300</p>
-            </div>
-            <div class="pric-health" style="    
-            margin-top: -3px;
-            margin-left: -17px;
-            font-family: unset;
-            font-weight: 700;
-            height: 23px;
-            width: 61px;
-            position: absolute;
-            left: 0.875rem;
-            border-radius: 5px;
-            bottom: -15px;
-            left: 91px;
-            background-color: #B94085;">
-                <p class="price-healths"> ₹ 200</p>
-            </div>
+                    <input type="text" name="location" id="searchkey" class="form-control searchul" onfocus="document.getElementById('searchul').classList.toggle('displayNone');" placeholder="Search Location">
+                    <ul style="list-style: none;margin-left: 0px;width:280px;border:1px solid rgb(184, 181, 181);width: 100%;" class="displayNone position-absolute" id="searchul">
+                        <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                        <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                        <li style="background-color:white;border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li>
 
+                    </ul>
+
+
+                </div>
+
+                <div class="form- search-info msearch">
+                    <!-- <span class="form-text" style="margin-top: -20px;">Ex : Dental or Sugar Check up etc</span> -->
+                    <input type="text" name="keyword" id="searchkd" class="form-control" placeholder="Search Doctors, Clinics, Hospitals, Diseases Etc">
+                    <table class="table table-striped position-absolute" style="margin-top: 3px;">
+
+                        <tbody id="myTable" style="  border:1px solid rgb(184, 181, 181);">
+
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button>
+            </form>
         </div>
-        <div class="Pregnancy" style="margin-bottom: 17px;">
-            <h3 style="margin-left: 8px;
-            font-weight: 700;">Diabetes Test</h3>
-        </div>
-        <div class="col-sm-12 test-type" style="display: inline-flex;">
-            <div class="col-sm-4" style="display:inline-flex">
-                <div class="col-sm-2" style="height: 54px;
-                width: 54px; border-radius: 7px; background-image: url('/img/patients/p3.png'); background-size: cover; background-color:#a93e65;">
-
+        <div class="search-box sscreen">
+            <form action="/user/search-doctor" method="POST">
+                <div class="form-search-location">
+                    
+                    <!-- <input type="text" name="location"  class="form-control searchul" onfocus="showsearch()"   placeholder="Search Location"> -->
+                  
+                    
+                    
                 </div>
-                <div class="col-sm-1" style="width: 117px; margin-left: -4px;">
-                    <p style="line-height: 17px;"><span style="font-weight: 800;
-                        font-size: 19px;
-                        margin-left: 1px;">3</span><span style="margin-left: 3px;">Test Included</span></p>
+
+                <div class="form-search-info msearch">
+                   
+                    <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                    <!-- <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
+                   
+                </div>
+                <!-- <button type="submit" class="btn btn-primary search-btn m20" style="background-color:#478e8e !important;border: none;"><i class="fas fa-search"></i> <span>Search</span></button> -->
+            </form>
+        </div>
+         <div class="displayNone filter_box" id="filter_box" style="overflow-y:auto;margin-top:60px;border-top-left-radius:5px;border-top-right-radius:5px;border:1px solid #dee2e6;bottom: -540px;z-index:500;background-color: white; position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        visibility: visible;
+opacity: 1;">
+                <div id="header_filter" style="padding:10px ;">
+
+                    <i class="fas fa-times" style="font-size: 2rem;color:grey;" id="close_btn"></i>
+                    <h5 class="text-center" style="margin-top: -25px;font-weight: bold;font-size: 1.2rem;">Search</h5>
+                </div>
+                <div class="card search-filter" style="display: block;">
+
+                    <form action="/user/filter" method="POST">
+                        <div class="card-body">
+
+
+                            <div class="filter-widget">
+                               
+                                <input type="text" name="location" id="searchkey1" class="form-control"  placeholder="Search Location" style="margin-bottom: 5px;">
+                                <input type="text" name="keyword" id="searchkd1" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                               
+                            </div>
+                            <div class="filter-widget">
+                                <ul style="list-style: none;width:100%;margin-top: 00px;border:1px solid rgb(224, 221, 221);width: 87%;background-color: rgba(255, 255, 255, 0.692);" class="position-absolute" id="searchul1">
+                                    <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="font-size: 1rem;font-weight: bold;cursor: pointer;" id="locationsearch1"><i class="fas fa-map-marker-alt" style="margin-right: 10px;margin-left: 10px;color:rgb(0, 174, 255);"></i>Get My Location</a></li>
+                                    <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Dumka');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Dumka</a></li>
+                                    <!-- <li style="border-bottom:1px solid rgb(184, 181, 181);padding:8px;margin-left: -40px;"><a style="cursor: pointer;" onclick="updatesearch1('Deoghar');"><i class="fas fa-search" style="margin-right: 10px;margin-left: 10px;"></i>Deoghar</a></li> -->
+    
+                                    </ul>
+                                    <table class="table table-striped position-absolute" style="margin-left: -20px;">
+
+                                        <tbody id="myTable1">
+                                            
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <!-- <div class="btn-search">
+                                <button type="submit" class="btn btn-block tcolor">Search</button>
+                            </div> -->
+
+                        </div>
+                    </form>
                 </div>
 
             </div>
-            <div class="col-sm-4" style="display:inline-flex; margin-left: -70px;">
-                <div class="col-sm-2" style="height: 54px;
-                width: 54px; border-radius: 7px; background-image: url('/img/patients/p5.jpg'); background-size: cover; background-color:#a93e65;">
-
-                </div>
-                <div class="col-sm-1" style="width: 100px;">
-                    <p style="line-height: 17px;"><span style="font-weight: 800;
-                        font-size: 19px;
-                        margin-left: 1px;">100+</span><span style="margin-left: 3px;">Booked in 10 Last Days </span></p>
-                </div>
-
-            </div>
-
-
-        </div>
-        <div style="margin-left: 3px; margin-top: 12px;">
-            <h3 style="font-weight: 600; margin-left: 7px;"> This package covers</h3>
-            <ul style="font-family: system-ui;
-            font-weight: 500;">
-                <li>Measurment:Complete Blood Count</li>
-                <li>A1C Test</li>
-                <li>Glucose levels in Body</li>
-            </ul>
-        </div>
-
-        <div style="background-color: #EEEEEE;">
-            <div class="col-sm-12">
-                <h3 style="text-align: center;
-                padding-top: 15px;
-                font-size: 1.125rem;
-            ">Why should you choose this Package?</h3>
-            </div>
-
-
-
-            <div class="col-sm-12" style="display: inline-flex; height: 200px;margin-top: 15px;">
-
-                <div class="col-sm-6">
-                    <img src="<%=assetPath('img/patients/v2.jpg')%>" style="height: 70px; width: 70px; border-radius: 0.6rem;;">
-                    <p style="font-size: 0.875rem;
-                    margin-top: 8px;">if your a male or female above 40 years of age.</p>
-                </div>
-                <div class="col-sm-6">
-                    <img src="<%=assetPath('img/patients/v3.jpg')%>" style="height:70px; width:70px; border-radius: 0.6rem;;">
-                    <p style="font-size: 0.875rem;
-                    margin-top: 8px;"> To help evaluate lifestyle changes and health risks.</p>
-                </div>
-
-            </div>
-
-
-        </div>
-        <div class="col-md-12">
-            <div class="col-sm-12 last" style="border: 1px solid #BDBDBD;
-            margin-bottom: 8px;
-            border-radius: 0.6rem;;
-            margin-top: 16px;">
-                <div style="display: inline-flex;margin-top: 18px;height: auto;">
-                    <div class=" col-sm-4 ">
-                        <img src="<%=assetPath('img/patients/l3.png')%> " style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
-                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Sample Pickup at home</p>
+        <div class="col-md-12 lipid profile" style="margin-bottom: 20px;padding-left: 0px !important;padding-right: 0px !important;">
+            <div class="col-md-12" style="padding-left: 0px !important;padding-right: 0px !important;">
+                
+               
+                <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;padding-left: 0px !important;padding-right: 0px !important;">
+                    <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);padding-left: 0px !important;padding-right: 0px !important;">
+                   
+                    <div class="col-md-12" style="position: absolute;margin-top: -30px;padding-left: 0px !important;padding-right: 0px !important;">
+                        <div class="displayNone" style="padding: 5px 10px;margin-bottom: 20px;">
+                            <span style="font-size:2rem;font-weight: bolder;color:#575557;">Lab Tests</span>
+                            <span style="position:absolute;right:10%;font-size:1.1rem;font-weight: bolder;margin-top: 15px;color:#575557"><%=tests.length%> tests</span>
+                        </div>
+                        <div>
+                           <%var i=0%>
+                            <%for(let u of tests){%>
+                                <%console.log(u._id)%>
+                                <%var cnt=0%>
+                                <div style="border-bottom:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;min-height: 100px !important;margin-bottom: 15px;">
+                            <div style="display: inline-flex;">
+                                <div style="width: 20%;margin-right: 20px;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
+                                <div style="width: 80%;">
+                                    <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
+                                    <%for(let u1 of labs){%>
+                                        <%for(let u2 of u1.tests){%>
+                                            
+                                            <%if(u2.testname.trim()  == u.testname.trim() ){%>
+                                               
+                                                <%cnt++%>
+                                            <%}%>
+                                        <%}%>
+                                    <%}%>
+                                    <h3 style="font-size: 1rem;">Available At <%=cnt%> Labs</h3>
+                                    <h3 style="font-size: 1rem;font-weight: bolder;">Rs <%=u.testprice%> &nbsp;<span style="font-size: 0.8rem;color:grey">onwards</span></h3>
+                                </div>
+                                
+                            </div>
+                            <form action="">
+                                <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
+                            <div style="width: 100%;">
+                                <a  class="btn btn-primary" id="select_new" data-count="<%=i++%>" data-id="<%=u._id%>" style="border-radius: 3px !important;width:150px !important;padding:5px 5px !important;min-width: none !important;margin-top: 10px;font-weight: bolder;color:white;margin-left: 40px;">Select</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-sm-4 ">
-                        <img src="<%=assetPath('img/patients/l1.jpg ')%>" style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
-                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Online reports in 24-48 hours</p>
-                    </div>
-                    <div class="col-sm-4 ">
-                        <img src="<%=assetPath('img/patients/l2.png ')%>" style="height: 43px; border-radius: 0.6rem;; width:42px;margin-left: 13px; ">
-                        <p style="font-size: 0.6rem;; font-weight:600;text-align: center;">Reports analysis by top doctors</p>
+                            <%}%>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="col-md-5 displayNone" style="padding-left: 100px;">
+                    
+                    <div id="select_lab">
+                        <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+                        <p style="margin-top: 15px;font-size: 1.2rem;font-weight: bolder;">Please select a test to proceed</p>
+                        <a class="btn btn-primary" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;">View Cart</a>
+                    </div>
+                 
+                    
+                </div>
+              
 
-        <div class="col-sm-12 text-center position-sticky" style="bottom:0px">
-            <a class="btn" style="text-align: center;padding: 8px;background-color: #FF5722;margin-top: 18px; border-radius:27px;color:white;margin-bottom: 20px;width:186px; ">
-               Book Now
-            </a>
-
         </div>
+      
+
+        <!-- Footer -->
+       
+            <!-- /Footer -->
+
+</div>
 
     </section>
     
@@ -375,7 +405,8 @@ for(let i=0;i<selectnew.length;i++)
     let tid = selectnew[i].getAttribute('data-id')
    console.log(tname)
 
-    let url = "https://aarogyahub.com/diagonistic/select-lab/?testname=" + tname;
+    // let url = "https://aarogyahub.com/diagonistic/select-lab/?testname=" + tname;
+       let url = "http://localhost:4000/diagonistic/select-lab/?testname=" + tname;
     
     $.get(url, function (data) {
        

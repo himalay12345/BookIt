@@ -623,6 +623,8 @@ module.exports.checkout = async (req, res) => {
     let date = req.body.date;
     let day = user.schedule_time[req.body.dayindex].day;
     let fee = user.booking_fee;
+    let account_id = user.accountid;
+    let percantage_fee = parseInt(user.booking_fee) - parseInt(user.booking_fee)*0.04;
     let name = user.name;
     let contacts = user.contacts;
     let avgrating = 0,cnt=0;
@@ -653,6 +655,8 @@ module.exports.checkout = async (req, res) => {
             dayindex:req.body.dayindex,
             id:req.body.id,
             did:req.body.did,
+            accountid:account_id,
+            percantage_fee:percantage_fee
     
         })
     }
@@ -676,7 +680,8 @@ module.exports.checkout = async (req, res) => {
             dayindex:req.body.dayindex,
             id:req.body.id,
             did:req.body.did,
-    
+            accountid:account_id,
+            percantage_fee:percantage_fee
         })
     }
    

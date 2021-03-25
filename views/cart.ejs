@@ -216,6 +216,134 @@
 </div>
 </div>
 <%}%>
+
+<section class="mobile-sugar">
+    <div class="col-md-12 lipid profile" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            
+           <%if(lab != undefined){%>
+            <div class="col-md-12" style="min-height: 600px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
+                <div class="col-md-12" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+               
+                <div class="col-md-12" style="position: absolute;">
+                    <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
+                        <span style="font-size:2rem;font-weight: bolder;color:#575557;">Cart</span>
+                        <span style="position:absolute;right:10%;font-size:1.1rem;font-weight: bolder;margin-top: 15px;color:#575557"><%=user.cart.tests.length%> tests</span>
+                    </div>
+                    <div style="width: 100%;">
+                     <label style="width: 100%;position: relative;">
+                         <div id="lab_card" style="width:100%;">
+                             <div class="dis20">
+                                 <img src="<%=lab.avatar%>">
+                            </div>
+                            <div class="dis75">
+                                <h2 class="dish2"><%=lab.name%></h2>
+                                <p class="disp2" style="margin-top:10px !important;"><%=lab.contacts.address%></p>
+                                <p class="disp2"><%=lab.contacts.city%></p>
+                            </div>
+                            <div class="dis5">
+                                <input type="hidden" name="id" value="<%=lab.id%>">
+                            </div>
+                            <div style="width: 20%;position: absolute;right: 30px;">
+                                <a  class="btn btn-primary" id="switch-lab" style="border-radius: 3px !important;width:110px !important;padding:10px 5px !important;min-width: none !important;margin-top: 20px;font-weight: bolder;color:white">Change Lab</a>
+                            </div>
+                        </div>
+                    </label>
+                </br>
+
+                    </div>
+                    <div>
+                       <%var i=0%>
+                        <%for(let u of user.cart.tests){%>
+                            <%console.log(u._id)%>
+                            <%var cnt=0%>
+                        <div style="display: inline-flex;border:1px solid grey;width: 100%;padding: 15px;border-radius: 5px;margin-bottom: 5px;">
+                            <div style="width: 10%;"><span style="margin-top: 5px;margin-left:15px;color:#478e8e;font-size: 1.5rem;"><i class="fas fa-flask"></i></span></div>
+                            <div style="width: 70%;">
+                                <h2 style="margin-top: 0px;font-weight:bolder;font-size: 1.2rem;"><%=u.testname%></h2>
+                                <h3 style="font-size: 1rem;">Report in 24 hours</h3>
+                              
+                            </div>
+                            <form action="">
+                                <input type="hidden" name="id" id="testname" value="<%=u.testname%>">
+                            <div style="width: 100%;display: inline-flex;padding-top: 15px;">
+                                <h3 style="font-size: 1.2rem;margin-right:15px;">Rs <%=u.testprice%></h3>
+                                <a  class="" id="remove_btn" data-id="<%=u._id%>" style="background-color: none !important;margin-top: 5px;"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </form>
+                        </div>
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+ 
+    </div>
+    <div class="col-md-12" style="position: fixed;bottom: 5px;width:100%;background-color: white;border-top: 1px solid rgb(173, 172, 172);">
+                
+        <div id="select_lab">
+            <h2 style="color: grey;border-bottom: 1px solid grey;font-size: 1rem;padding-bottom: 10px;">Order Summary</h2>
+            <p style="margin-top: 15px;font-size: 1rem;font-weight: 700;border-bottom: 1px dashed grey;padding-bottom: 10px;" >
+                <i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>
+                <span id="itemcount">
+                <%if(user.cart.tests.length == 1){%>
+                
+                <%=user.cart.tests.length%> Item in Cart.
+                <%}else{%>
+                    <%=user.cart.tests.length%> Items in Cart.
+                <%}%>
+            </span>
+            </p>        
+            <%var total = 0;%>
+                <div style="border-bottom: 1px dashed grey;padding-bottom: 10px;" id="cart-box">
+                   
+                <%for(u3 of user.cart.tests){%>
+                   <%total = total+parseInt(u3.testprice)%>
+                <%}%>  
+                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Item Total</span>
+                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                    
+                   
+                </div> 
+                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Sample Collection Charge</span>
+                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Free</span>
+                    
+                   
+                </div> 
+                </div>  
+                
+                <div style="display:inline-flex;width: 100%;margin-top: 5px;" id="cart_item">
+                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Order Total</span>
+                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                    
+                   
+                </div> 
+                <div style="display:inline-flex;width: 100%;" id="cart_item">
+                    <span style="width: 100%;font-weight: bold;font-size: 1.2rem;">Amount Payable</span>
+                    <span style="width: 50%;text-align: right;font-weight: bold;font-size: 1.2rem;" >Rs <%=total%></span>
+                    
+                   
+                </div> 
+            <a class="btn btn-primary" href="/diagonistic/add-patient" style="width: 100%;background-color: grey !important;padding:10px !important;color: white;font-weight: bolder;margin-top: 15px;">Select Patient Details</a>
+            <p style="margin-top: 20px;">Free E-report will also be sent to your registered email id</p>
+        </div>
+     
+        
+    </div>
+    <%}else{%>
+        <div class="" style="padding: 5px 10px;margin-bottom: 20px;text-align: center;margin-top: 200px;">
+            <span style="font-size:2rem;font-weight: bolder;color:#575557;"><i class="fas fa-shopping-cart" style="margin-right: 15px;"></i>No Items in the cart. Your Cart Is Empty !</span>
+        </div>
+        <%}%>
+  
+
+    <!-- Footer -->
+   
+        <!-- /Footer -->
+
+</div>
+</section>
     <!-- /Main Wrapper -->
   
     
