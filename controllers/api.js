@@ -638,7 +638,7 @@ module.exports.checkout = async (req, res) => {
     }
 
     if(typeof(user.schedule_time[req.body.dayindex].start) == 'object'){
-        time = user.schedule_time[req.body.dayindex].start[0];
+        time = user.schedule_time[req.body.dayindex].start[req.body.slotindex];
     }
    
     let date = req.body.date;
