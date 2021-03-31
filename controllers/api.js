@@ -519,8 +519,8 @@ module.exports.specialist = async (req, res) => {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = '';
-       if(parseInt(avgrating/cnt) != null)
+       let rating = 0;
+       if(i.review.length > 0)
        {
         rating = parseInt(avgrating/cnt);
        }
@@ -528,6 +528,7 @@ module.exports.specialist = async (req, res) => {
        let specialisation;
        let specfirst = '';
        let experience = '';
+       
        if(i.wexperience != null)
        {
            experience = i.wexperience;
@@ -551,6 +552,7 @@ module.exports.specialist = async (req, res) => {
             specialist:specfirst,
             fee:i.booking_fee,
             clinicaddr:i.clinicaddr,
+            clinicname:i.clinicname,
             id: i.id,
             staff_flag:true,
             avatar: i.avatar,
@@ -579,7 +581,16 @@ module.exports.doctors = async (req, res) => {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = parseInt(avgrating/cnt);
+       let experience = '';
+       let rating = 0;
+       if(i.review.length > 0)
+       {
+        rating = parseInt(avgrating/cnt);
+       }
+       if(i.wexperience != null)
+       {
+           experience = i.wexperience;
+       }
        let specialisations;
        let specialisation;
        let specfirst = '';
@@ -596,12 +607,13 @@ module.exports.doctors = async (req, res) => {
        }
         doctors.push( {
             name: i.name,
-            experience:i.wexperience,
+            experience:experience,
             department: i.department,
             education:education,
             specialist:specfirst,
             fee:i.booking_fee,
             clinicaddr:i.clinicaddr,
+            clinicname:i.clinicname,
             id: i.id,
             staff_flag:true,
             avatar: i.avatar,
