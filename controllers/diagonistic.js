@@ -1443,6 +1443,8 @@ module.exports.booking = async(req, res) => {
 }
 
 module.exports.bookTest = async(req, res) => {
+
+    console.log(req.body)
 let lab = await User.findById(req.body.did);
 let user = await User.findById(req.user.id);
 

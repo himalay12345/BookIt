@@ -271,6 +271,211 @@
 
     </div>
     </section>
+
+    <section class="mobile-sugar">
+        <div class="col-md-12 lipid profile" style="margin-top:-20px;padding-left: 0px !important;padding-right: 0px !important;">
+            <div class="col-md-12" style="padding-left: 0px !important;padding-right: 0px !important;">
+                
+               
+                <div class="col-md-12" style="min-height: 700px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;padding-left: 0px !important;padding-right: 0px !important;margin-bottom: 50px !important;">
+                    <div class="col-md-12" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);padding-left: 0px !important;padding-right: 0px !important;">
+                   
+                    <div class="col-md-12" style="position: absolute;">
+                        <div class="" style="padding: 5px 10px;margin-bottom: 20px;">
+                            <span style="font-size:1.2rem;font-weight: bolder;color:#575557;">Order Review</span>
+                        </div>
+                        <div style="width: 100%;">
+                         <label style="width: 100%;position: relative;">
+                             <div id="lab_card" style="width:100%;">
+                                 <div class="dis20">
+                                     <img src="<%=lab.avatar%>" style="height: 60px !important;width:60px !important;">
+                                </div>
+                                <div class="dis75" style="width:30% !important;margin-right: 5px;">
+                                    <h2 class="dish2"><%=lab.name%></h2>
+                                    <p class="disp2" style="margin-top:10px !important;"><%=lab.contacts.address%></p>
+                                    <p class="disp2"><%=lab.contacts.city%></p>
+                                </div>
+                                <div class="dis5" style="width: 50% !important;">
+                                    <p style="font-weight:500">Appointment Date : <%=date%></p>
+                                    <p style="margin-top: -10px;font-weight: 500;">Appointment Time : Between <%=stime%> to <%=etime%></p>
+                                </div>
+                               
+                            </div>
+                        </label>
+                    </br>
+
+                        </div>
+                        <%if(index == undefined){%>
+                        <div style="width: 100%;">
+                            <label style="width: 100%;position: relative;">
+                                <div id="lab_card" style="width:100%;">
+                                    <div class="dis20">
+                                        <h4 style="font-weight: bold;">Test Booked</h4>
+                                   </div>
+                                   <div class="dis75" style="width:50% !important">
+                                     <ul style="list-style: circle !important;">
+                                         <%for(let u of locals.user.cart.tests){%>
+                                            <li><%=u.testname%></li>
+                                        <%}%>
+                                     </ul>
+                                   </div>
+                                  
+                                  
+                               </div>
+                           </label>
+                       </br>
+
+                           </div>
+                           <%}else{%>
+                            <div style="width: 100%;">
+                                <label style="width: 100%;position: relative;">
+                                    <div id="lab_card" style="width:100%;">
+                                        <div class="dis20">
+                                            <h4 style="font-weight: bold;">Test Booked</h4>
+                                       </div>
+                                       <div class="dis75" style="width:50% !important">
+                                         <ul>
+                                             <%for(let u of locals.user.booked_test_user[index].tests){%>
+                                                <li><%=u.testname%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Rs <%=u.testprice%></b></li>
+                                            <%}%>
+                                         </ul>
+                                       </div>
+                                      
+                                      
+                                   </div>
+                               </label>
+                           </br>
+   
+                               </div>
+                        <%}%>
+                        <%if(index == undefined){%>
+                           <div style="width: 100%;">
+                            <label style="width: 100%;position: relative;">
+                                <div id="lab_card" style="width:100%;">
+                                    <div class="dis20">
+                                        <h4 style="font-weight: bold;">Booked For</h4>
+                                   </div>
+                                   <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                   
+                                         <%for(let u of locals.user.add_patient){%>
+                                            <%if(u.flag){%>
+                                                <p><span style="font-size: 1rem;font-weight: 400;">Name : <%=u.name%></span></br><span style="font-weight: 400;">Phone : <%=u.phone%></span></p>
+                                                <p style="margin-top: -15px;font-weight: 400;"><span>Age : <%=u.age%></span><span style="margin-left: 15px;font-weight: 400;">Gender : <%=u.gender%></span></p>
+                                                <%}%>
+                                          
+                                        <%}%>
+                                    
+                                   </div>
+                                  
+                                  
+                               </div>
+                           </label>
+                       </br>
+
+                           </div>
+                           <%}else{%>
+                            <div style="width: 100%;">
+                                <label style="width: 100%;position: relative;">
+                                    <div id="lab_card" style="width:100%;">
+                                        <div class="dis20">
+                                            <h4 style="font-weight: bold;">Booked For</h4>
+                                       </div>
+                                       <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                       
+                                             
+                                              
+                                                    <p><span style="font-size: 1rem;font-weight: 600;">Name : <%=locals.user.booked_test_user[index].user.name%></span><span style="margin-left: 15px;font-weight: 600;">Phone :  <%=locals.user.booked_test_user[index].user.phone%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span>Age :  <%=locals.user.booked_test_user[index].user.age%></span><span style="margin-left: 15px;">Gender :  <%=locals.user.booked_test_user[index].user.gender%></span></p>
+                                                   
+                                        
+                                       </div>
+                                      
+                                      
+                                   </div>
+                               </label>
+                           </br>
+   
+                               </div>
+                            <%}%>
+                            <%if(index == undefined){%>
+                           <div style="width: 100%;">
+                            <label style="width: 100%;position: relative;">
+                                <div id="lab_card" style="width:100%;">
+                                    <div class="dis20">
+                                        <h4 style="font-weight: bold;">Sample Pickup From</h4>
+                                   </div>
+                                   <div class="dis75" style="width:100% !important;margin-left: 50px;">
+                                   
+                                         <%for(let u of locals.user.add_address){%>
+                                            <%if(u.flag){%>
+                                                <p><span style="font-size: 1rem;font-weight: 400;"><%=u.name%></span></p>
+                                                <p style="margin-top: -15px;font-weight: 400;"><span><%=u.flatno%></span></p>
+                                                <p style="margin-top: -15px;font-weight: 400;"><span><%=u.street%></span></p>
+                                                <p style="margin-top: -15px;font-weight: 400;"><span><%=u.city%>, <%=u.pincode%></span></p>
+                                                <%}%>
+                                          
+                                        <%}%>
+                                    
+                                   </div>
+                                  
+                                  
+                               </div>
+                           </label>
+                       </br>
+
+                           </div>
+                           <%}else{%>
+                            <div style="width: 100%;">
+                                <label style="width: 100%;position: relative;">
+                                    <div id="lab_card" style="width:100%;">
+                                        <div class="dis20">
+                                            <h4 style="font-weight: bold;">Sample Pickup From</h4>
+                                       </div>
+                                       <div class="dis75" style="width:50% !important;margin-left: 50px;">
+                                       
+                                             <%for(let u of locals.user.add_address){%>
+                                                <%if(u.flag){%>
+                                                    <p><span style="font-size: 1rem;font-weight: 600;"><%=locals.user.booked_test_user[index].address.name%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span><%=locals.user.booked_test_user[index].address.flatno%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span><%=locals.user.booked_test_user[index].address.street%></span></p>
+                                                    <p style="margin-top: -15px;font-weight: 600;"><span><%=locals.user.booked_test_user[index].address.city%>, <%=locals.user.booked_test_user[index].address.pincode%></span></p>
+                                                    <%}%>
+                                              
+                                            <%}%>
+                                        
+                                       </div>
+                                      
+                                      
+                                   </div>
+                               </label>
+                           </br>
+   
+                               </div>
+                            <%}%>
+                    </div>
+                </div>
+              
+              
+
+        </div>
+        <div class="col-md-5" style="position:fixed;bottom:8px;padding-left: 0px !important;padding-right: 0px !important;">
+            <%if(index == undefined){%>
+            <div id="select_lab">
+                <a class="btn btn-primary" href="/diagonistic/amount-payable/?lid=<%=lab._id%>&stime=<%=stime%>&etime=<%=etime%>&date=<%=date%>" style="width: 100%;background-color:#478e8e !important;padding:10px !important;color: white;font-weight: bolder;margin-top: 15px;">Select Payment Method</a>
+            </div>
+
+            <%}%>
+         
+            
+        </div>
+      
+
+        <!-- Footer -->
+       
+            <!-- /Footer -->
+
+</div>
+    </section>
    
     <!-- /Main Wrapper -->
   

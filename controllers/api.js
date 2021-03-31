@@ -519,10 +519,14 @@ module.exports.specialist = async (req, res) => {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = parseInt(avgrating/cnt);
+       let rating = '';
+       if(parseInt(avgrating/cnt) != null)
+       {
+        rating = parseInt(avgrating/cnt);
+       }
        let specialisations;
        let specialisation;
-       let specfirst = null;
+       let specfirst = '';
        let education;
        if(i.education.length>0)
        {
@@ -573,7 +577,7 @@ module.exports.doctors = async (req, res) => {
        let rating = parseInt(avgrating/cnt);
        let specialisations;
        let specialisation;
-       let specfirst = null;
+       let specfirst = '';
        let education;
        if(i.education.length>0)
        {

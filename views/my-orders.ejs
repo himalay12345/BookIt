@@ -149,7 +149,7 @@
                                
 
                                 <!-- Tab Menu -->
-                                <nav class="user-tabs mb-4" style="height: 100px!important;">
+                                <nav class="user-tabs mb-4" style="height: 30px!important;">
                                     <ul class="nav nav-tabs nav-tabs-bottom nav-justified" style="height: 100px !important;padding:0px !important;">
                                         <li class="nav-item">
                                             <a class="nav-link active pall-10" href="#pat_appointments" data-toggle="tab">My Orders</a>
@@ -229,7 +229,7 @@
                                                               <%}else{%>
                                                                 <h5><span class="badge badge-pill bg-success-light">Confirm</span></h5>
                                                                 <%}%>
-                                                                <%if(orders.booked_test_user[i].type == 'Offline'){%>
+                                                                <%if(orders.booked_test_user[i].mode == 'Offline'){%>
                                                                     <h5><span class="badge badge-pill bg-info-light" style="margin-left: 10px;">Pay On Sample Collection</span></h5>
 
                                                                     <%}else{%>

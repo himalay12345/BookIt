@@ -109,6 +109,96 @@
 
     </div>
     </section>
+
+    <section class="mobile-sugar">
+        <section class="att1" style="margin-top: 50px;padding-left: 50px;">
+           
+            <div class="col-md-12 lipid profile p4px" style="margin-bottom: 20px;">
+                <div class="col-md-12 pad-left16">
+                    
+                   
+                    <div class="col-md-12 pad-left17" style="min-height: 230px;height:auto; display:inline-flex;margin-top: 20px;position:relative;opacity: 1;">
+                        <div class="col-md-7" style="display: inline-flex;width: 100%;margin-bottom: 50px;backdrop-filter: blur(5px);">
+                       
+                        <div class="col-md-12" style="position: absolute;display:inline-flex;">
+                            <div class="col-md-4 col-sm-12 att2" style="padding: 5px 10px;margin-bottom: 20px;">
+                                <img src="/img/wallet.png" class="attrs1" style="height: 150px;width:150px;">
+                            </div>
+                            <div class="col-md-8 mlz1" style="padding: 5px 10px;margin-bottom: 20px;margin-top: 30px;margin-left: -30px;">
+                                <span class="attrs2" style="font-size:3rem;font-weight: bolder;color:#575557;">Amount Payable</span></br>
+                                <%var tot = 0;%>
+                                <%for(let u of locals.user.cart.tests){%>
+                                    <%tot = tot + parseInt(u.testprice)%>
+                                    <%}%>
+
+                                <span class="attrs3"  style="font-size:3rem;font-weight: bolder;color:#575557;margin-top: -20px;display: block;">Rs <%=tot%></span>
+                            </div>
+                           
+                            
+                        </br>
+
+                            </div>
+                         
+                             
+                              
+                        </div>
+                        
+                    </div>
+                    <form action="/diagonistic/book-test-by-cash" method="POST">
+                        <div class="col-md-7">
+                            <div class="col-md-12" style="display:inline-flex;border-bottom: 1px solid grey;
+                            border-top: 1px solid grey;padding-top: 15px;">
+                                <label style="width: 100%;display: inline-flex;">
+                                <div class="col-md-10 attrs4">
+                                    <p style="font-size: 1.5rem;">Cash at the time of sample collection</p>
+                                    
+                                </div>
+                                <div class="col-md-2 attrs5">
+                                    <input type="radio" id="rlab" onchange="enableButton()" name="pay" value="offline" class="disinp">                                
+                                </div>
+                                </div>
+                                <input type="hidden" name="lid" value="<%=labid%>">
+                                <input type="hidden" name="stime" value="<%=stime%>">
+                                <input type="hidden" name="etime" value="<%=etime%>">
+                                <input type="hidden" name="date" value="<%=date%>">
+                            </div>
+          
+                            <div class="col-md-7">
+                                <div class="col-md-12" style="display:inline-flex;border-bottom: 1px solid grey;padding-top: 15px;">
+                                    <label style="width: 100%;display: inline-flex;">
+                                    <div class="col-md-10 attrs4">
+                                        <p style="font-size: 1.5rem;">Pay Online</p>
+                                        
+                                    </div>
+                                    <div class="col-md-2 attrs5">
+                                        <input type="radio" id="rlab" onchange="enableButton()" name="pay" value="online" class="disinp">                                
+                                    </div>
+                                    </div>
+                                </div>
+              
+                        <div class="col-md-5" style="padding-left: 100px;padding-top: 30px;">
+                            
+                            <div class="submit-section proceed-btn text-right">
+                                <button type="submit" id="submit_btn1" class="btn btn-primary tcolor" style="padding:15px !important;width:200px;" disabled>Book Test</button>
+    
+    
+                            </div>
+                         
+                            
+                        </div>
+                    </form>
+                  
+
+            </div>
+          
+
+            <!-- Footer -->
+           
+                <!-- /Footer -->
+
+    </div>
+    </section>
+    </section>
    
     <!-- /Main Wrapper -->
   
@@ -127,6 +217,14 @@
     function enableButton()
     {
         $('#submit_btn').prop("disabled", false);  
+    }
+</script>
+
+
+<script>
+    function enableButton()
+    {
+        $('#submit_btn1').prop("disabled", false);  
     }
 </script>
 

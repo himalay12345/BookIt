@@ -245,7 +245,7 @@
 
                 <div class="form-search-info msearch">
                    
-                    <input type="text" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Test, Health Packages, Labs">
+                    <input type="text" style="background-color: #e8e8e8 !important;" name="keyword" onfocus="showsearch()" class="form-control" placeholder="Search Test, Health Packages, Labs">
                     <!-- <span class="form-text">Ex : Dental or Sugar Check up etc</span> -->
                    
                 </div>
@@ -405,8 +405,8 @@ for(let i=0;i<selectnew.length;i++)
     let tid = selectnew[i].getAttribute('data-id')
    console.log(tname)
 
-    let url = "https://aarogyahub.com/diagonistic/select-lab/?testname=" + tname;
-    //    let url = "http://localhost:4000/diagonistic/select-lab/?testname=" + tname;
+    // let url = "https://aarogyahub.com/diagonistic/select-lab/?testname=" + tname;
+       let url = "http://localhost:4000/diagonistic/select-lab/?testname=" + tname;
     
     $.get(url, function (data) {
        

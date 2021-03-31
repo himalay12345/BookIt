@@ -26,8 +26,8 @@
         <%-include('header');%>
 
         <!-- Page Content -->
-        <div class="content">
-            <div class="container-fluid" style="margin-top: 70px;">
+        <div class="" style="margin-bottom: 30px;margin-top: 100px;">
+            <div class="container-fluid" style="margin-top: 70px;min-height:none !important;">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
 
@@ -38,7 +38,7 @@
                                     <img src="<%=assetPath('img/login-banner.png')%>" class="img-fluid" alt="AarogyaHub Login">
                                 </div>
                               
-                                <div class="col-md-12 col-lg-6 login-right" style="padding:30px 20px;background-color: cadetblue;">
+                                <div class="col-md-12 col-lg-6 login-right" style="padding:30px 20px;background-color: #478e8e;">
                                     <%if(locals.user.add_patient.length>0){%>
                                         <div onclick="changePatient()" id="choose_patient" style="cursor: pointer;">
                                             <h2 style="font-size:1.2rem;margin-left: 5px;margin-bottom: 10px;font-weight: bold;color:white;">Booking For</h2>
@@ -133,9 +133,9 @@
     
                             <div class="col-md-12 jss48" style="overflow-y: auto;">
                           
-                        <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;height: 100vh;">
+                        <div id="sm_patient" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;height: 100vh;">
 
-                            <svg onclick="removePatient()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                            <svg onclick="removePatient()" id="sm_patient_close"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
                             <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Details</h2>
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -183,9 +183,9 @@
     
                         <div class="col-md-12 jss48" style="overflow-y: auto;">
                           
-                    <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
+                    <div id="sm_patient" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
 
-                        <svg onclick="removeAddress()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                        <svg onclick="removeAddress()" id="sm_patient_close"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
                         <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Address</h2>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -246,9 +246,9 @@
     
                     <div class="col-md-12 jss48" style="overflow-y: auto;">
                       
-                <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
+                <div id="sm_patient" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
 
-                    <svg onclick="removeAllPatients()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                    <svg onclick="removeAllPatients()" id="sm_patient_close"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
                     <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Details</h2>
                     <div id="patients_list">
                       
@@ -270,9 +270,9 @@
     
                 <div class="col-md-12 jss48" style="overflow-y: auto;">
                   
-            <div id="" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
+            <div id="sm_patient" class=""  style="background-color: white;padding:20px;border:1px solid rgb(194, 193, 193);width: 30%;margin-left:50px;margin-top:0px;position: absolute;right:-1%;border-radius:5px;min-height: 100vh;height: auto;">
 
-                <svg onclick="removeAllAddress()"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
+                <svg onclick="removeAllAddress()" id="sm_patient_close"  viewBox="0 0 24 24" style="height: 50px;cursor:pointer;width:50px;margin-left:-65px;background-color:white;top:10px;position:fixed;padding:10px"><path fill="currentColor" fill-rule="evenodd" d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"></path></svg>
                 <h2 style="color:#575557;font-size: 1.2rem;padding-bottom: 0px;font-weight: bolder;padding-bottom: 5px;border-bottom:1px solid grey;margin-bottom: 20px;margin-left: 10px;">Add Patient Details</h2>
                 <div id="address_list">
                   
@@ -388,7 +388,7 @@
                                     '</div>'+
                                 
                                 '</div>'+
-                                '<span class="badge badge-pill bg-danger-light" style="margin-top:15px;font-size: 0.9rem;padding:15px;">These Details will appear on final test report.</span>'+
+                                '<span class="badge badge-pill bg-danger-light" style="margin-top:15px;font-size: 0.7rem;padding:5px;">These Details will appear on final test report.</span>'+
 
                             '</div>'
                 $('#display_patient').append(str);
