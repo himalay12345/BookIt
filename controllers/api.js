@@ -776,7 +776,7 @@ module.exports.selectPayment = async function(req, res) {
 }
 
 module.exports.confirmBooking = async function(req, res) {
-
+console.log(req.body)
     try{
         if(req.body.pay == 'online'){
             let doctor = await User.findById(req.body.doctorid);
