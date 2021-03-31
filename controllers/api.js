@@ -520,13 +520,18 @@ module.exports.specialist = async (req, res) => {
         cnt++;
        }
        let rating = '';
-       if(parseInt(avgrating/cnt) != null)
+       if(parseInt(avgrating/cnt) != 'null')
        {
         rating = parseInt(avgrating/cnt);
        }
        let specialisations;
        let specialisation;
        let specfirst = '';
+       let experience = '';
+       if(i.wexperience != 'null')
+       {
+           experience = i.wexperience;
+       }
        let education;
        if(i.education.length>0)
        {
@@ -540,7 +545,7 @@ module.exports.specialist = async (req, res) => {
        }
         doctors.push( {
             name: i.name,
-            experience:i.wexperience,
+            experience:experience,
             department: i.department,
             education:education,
             specialist:specfirst,
