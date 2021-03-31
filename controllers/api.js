@@ -520,7 +520,7 @@ module.exports.specialist = async (req, res) => {
         cnt++;
        }
        let rating = '';
-       if(parseInt(avgrating/cnt) != 'null')
+       if(parseInt(avgrating/cnt) != null)
        {
         rating = parseInt(avgrating/cnt);
        }
@@ -528,7 +528,7 @@ module.exports.specialist = async (req, res) => {
        let specialisation;
        let specfirst = '';
        let experience = '';
-       if(i.wexperience != 'null')
+       if(i.wexperience != null)
        {
            experience = i.wexperience;
        }
