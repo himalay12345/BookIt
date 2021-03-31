@@ -520,7 +520,7 @@ module.exports.specialist = async (req, res) => {
         cnt++;
        }
        let rating = 0;
-       if(i.review.length > 0)
+       if(i.reviews.length > 0)
        {
         rating = parseInt(avgrating/cnt);
        }
@@ -583,7 +583,7 @@ module.exports.doctors = async (req, res) => {
        }
        let experience = '';
        let rating = 0;
-       if(i.review.length > 0)
+       if(i.reviews.length > 0)
        {
         rating = parseInt(avgrating/cnt);
        }
