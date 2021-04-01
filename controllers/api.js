@@ -635,6 +635,10 @@ module.exports.doctors = async (req, res) => {
     });
 }
 
+module.exports.orderValidation = async (req, res) => {
+    console.log(req.body);
+
+}
 module.exports.checkout = async (req, res) => {
     console.log(req.body)
     // let doctor = await User.findOne({ _id: req.body.did, booking_service: true });
@@ -1737,6 +1741,7 @@ console.log(response);
 
         if(!req.body.pay)
         {
+            res.sendStatus(422);
             return res.json({
                 status:'false',
                 msg:'Please select the payment method.'
@@ -1747,6 +1752,8 @@ console.log(response);
     }
 
 }
+
+
 
 
 
