@@ -804,6 +804,19 @@ module.exports.checkout = async (req, res) => {
 
     // doctor.save();
 // -----------------------------------------
+var userId;
+        if (req.headers && req.headers.authorization) {
+            
+            var authorization = req.headers.authorization.split(' ')[1];
+           
+           
+              var decoded = jwt.verify(authorization, '123456');
+            userId = decoded.username;
+        }
+        let patient_data = await User.findOne({phone:userId,type:'Patient'});
+        let patient_data_address = patient_data.contacts.address;
+        let patient_data_age = patient_data.age;
+        
     let user = await User.findById(req.body.did);
     let time;
     if(typeof(user.schedule_time[req.body.dayindex].start) == 'string'){
@@ -855,7 +868,14 @@ module.exports.checkout = async (req, res) => {
             id:req.body.id,
             did:req.body.did,
             accountid:account_id,
-            percantage_fee:percantage_fee
+            percantage_fee:percantage_fee,
+            user:{
+                name:patient_data.name,
+                address:patient_data_address,
+                age:patient_data_age,
+                phone:patient_data.phone
+
+            }
     
         })
     }
@@ -881,7 +901,15 @@ module.exports.checkout = async (req, res) => {
             id:req.body.id,
             did:req.body.did,
             accountid:account_id,
-            percantage_fee:percantage_fee
+            percantage_fee:percantage_fee,
+            user:{
+                name:patient_data.name,
+                address:patient_data_address,
+                age:patient_data_age,
+                phone:patient_data.phone
+
+            }
+    
         })
     }
    
