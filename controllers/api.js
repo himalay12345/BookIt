@@ -1741,8 +1741,7 @@ console.log(response);
 
         if(!req.body.pay)
         {
-            res.sendStatus(422);
-            return res.json({
+            res.sendStatus(422).json({
                 status:'false',
                 msg:'Please select the payment method.'
             })
