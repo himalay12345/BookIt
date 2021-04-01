@@ -828,7 +828,7 @@ module.exports.checkout = async (req, res) => {
      cnt++;
     }
     let rating = 0;
-       if(i.reviews.length > 0)
+       if(user.reviews.length > 0)
        {
         rating = parseInt(avgrating/cnt);
        }
