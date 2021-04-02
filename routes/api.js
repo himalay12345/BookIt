@@ -18,6 +18,7 @@ router.post('/booking',jwt.authenticateToken,apiController.booking);
 router.post('/checkout',jwt.authenticateToken,apiController.checkout);
 router.post('/select-payment',jwt.authenticateToken,apiController.selectPayment);
 router.post('/confirm-booking',jwt.authenticateToken,apiController.confirmBooking);
+router.post('/order-validation',jwt.authenticateToken,apiController.orderValidation);
 
 // router.get('/doctors',apiController.doctors);
 
