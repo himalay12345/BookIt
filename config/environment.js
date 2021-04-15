@@ -35,10 +35,10 @@ const development = {
         }
     },
 
-    // razorpay_key_id: process.env.RAZOR_TEST_KEY,
-    razorpay_key_id:  process.env.RAZOR_LIVE_KEY,
-    // razorpay_key_secret:  process.env.RAZOR_TEST_SECRET,
-    razorpay_key_secret: process.env.RAZOR_LIVE_SECRET,
+    razorpay_key_id: process.env.RAZOR_TEST_KEY,
+    // razorpay_key_id:  process.env.RAZOR_LIVE_KEY,
+    razorpay_key_secret:  process.env.RAZOR_TEST_SECRET,
+    // razorpay_key_secret: process.env.RAZOR_LIVE_SECRET,
     google_client_id:  process.env.G_CLIENTID,
     google_client_secret:  process.env.G_CLIENTSECRET,
     // google_callback_url:  process.env.G_TESTCALLBACK,

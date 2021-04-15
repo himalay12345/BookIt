@@ -171,13 +171,13 @@
                                             <div class="card-body sscreen" style="margin-top: 0px;">
                                                 <%for(let i= orders.booked_test_user.length-1; i>=0 ;i--){%>
                                                     
-                                                <div class="card-contents" style="height: 200px;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
-                                                    <div class="top-part" style="height: 130px;display:flex;flex-direction: row;">
+                                                <div class="card-contents" style="height: auto;width:100%;border:1px solid lightgrey;border-radius:5px;padding: 8px;margin-bottom: 3px;">
+                                                    <div class="top-part" style="height: auto;display:flex;flex-direction: row;">
                                                         <div class="top-img" style="width: 25%;height:100%;padding-top:5px;padding-left: 4px;">
                                                             <img src="<%=orders.booked_test_user[i].labid.avatar%>"style="height:50px;width:50px;border-radius:50%;">
                                                         </div>
                                                         <div class="top-content" style="width: 75%;height:100%;padding:5px;">
-                                                            <h5 style="font-weight: bold;font-size: 1rem;"><%=orders.booked_test_user[i].labid.name%>, <%=orders.booked_test_user[i].labid.contacts.address%></h5>
+                                                            <h5 style="font-weight: bold;font-size: 1.1rem;"><%=orders.booked_test_user[i].user.name%>, <%=orders.booked_test_user[i].address.street%></h5>
                                                             <%var str2 = orders.booked_test_user[i].date.split('-');%>
                                                                 <%var str3 = formatDate(orders.booked_test_user[i].createdAt);%>
                                                                     <%var str = str2[2]+'-'+str2[1]+'-'+str2[0];%>
@@ -221,8 +221,9 @@
                                                         <%var x1 = orders.booked_test_user[i].createdAt.toLocaleTimeString().slice(0,4);%>
                                                         <%var x2 = orders.booked_test_user[i].createdAt.toLocaleTimeString().slice(7,11);%>
                                                                 
-                                                            <h5 style="font-weight: 0.8rem;font-weight: 500;"><%=str1%>, <%=orders.booked_test_user[i].stime%> - <%=orders.booked_test_user[i].etime%> </h5>
-                                                            <h5 style="font-weight: 0.9rem;font-weight: 700;"></h5>
+                                                            <h5 style="font-weight: 600;font-weight: 700;color:#478e8e;font-size: 1.1rem;">Order Placed</h5>
+                                                            <h5 style="font-weight: 600;font-weight: 700;color:black;font-size: 1rem;"><%=orders.booked_test_user[i].labid.name%></h5>
+                                                            <h5 style="font-weight: 600;font-weight: 700;color:black;font-size: 1rem;"><%=orders.booked_test_user[i].labid.contacts.address%></h5>
                                                             <span style="display: inline-flex;">
                                                             <%if(orders.booked_test_user[i].cancel == true){%>
                                                                 <h5><span class="badge badge-pill bg-danger-light">Cancelled</span></h5>
@@ -237,6 +238,12 @@
 
                                                                         <%}%>
                                                                     </span>
+                                                                    <div style="display: inline-flex;width: 100%;margin-top: 10px;">
+                                                                        <h5 style="font-weight: 0.9rem;font-weight: 800;"><%=str1%></br><span style="margin-top: 5px;display: block;"> <%=orders.booked_test_user[i].stime%> - <%=orders.booked_test_user[i].etime%></span> </h5>
+                                                                        <a href="/diagonistic/track-order/?lid=<%=orders.booked_test_user[i].labid._id%>&stime=<%=orders.booked_test_user[i].stime%>&etime=<%=orders.booked_test_user[i].etime%>&date=<%=orders.booked_test_user[i].date%>&index=<%=i%>" class="btn btn-sm bg-success" style="color: white;margin-left: 20px;height:30px !important">
+                                                                        <span ><i class="fas fa-print"style="margin-right: 5px;"></i> Track Order</span>
+                                                                    </a>
+                                                                    </div>
 
                                                         </div>
                                                     </div>
