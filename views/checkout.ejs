@@ -90,6 +90,12 @@
                                             <input type="hidden" name="slotindex" value="<%=slotindex%>">
                                             <input type="hidden" name="dayindex" value="<%=dayindex%>">
                                             <input type="hidden" name="date" value="<%=date%>">
+                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                                <input type="hidden" name="time" value="<%=doctor.schedule_time[dayindex].start.toUpperCase()%>">
+                                                <%}else{%>
+                                                    <input type="hidden" name="time" value="<%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%>"> 
+                                                <%}%>
+                                            <input type="hidden" name="day" value="<%=doctor.schedule_time[dayindex].day%>">
 
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group card-label">
@@ -164,6 +170,12 @@
                                             <input type="hidden" name="dayindex" value="<%=dayindex%>">
                                             <input type="hidden" name="date" value="<%=date%>">
                                             <input type="hidden" name="type" value="other">
+                                            <%if(typeof(doctor.schedule_time[dayindex].start) == 'string'){%>
+                                                <input type="hidden" name="time" value="<%=doctor.schedule_time[dayindex].start.toUpperCase()%>">
+                                                <%}else{%>
+                                                    <input type="hidden" name="time" value="<%=doctor.schedule_time[dayindex].start[slotindex].toUpperCase()%>"> 
+                                                <%}%>
+                                            <input type="hidden" name="day" value="<%=doctor.schedule_time[dayindex].day%>">
                                             <div class="col-md-12 col-sm-12">
 
                                                 <div class="form-group card-label">

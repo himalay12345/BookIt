@@ -642,172 +642,174 @@ module.exports.doctors = async (req, res) => {
 
 module.exports.checkout = async (req, res) => {
     console.log(req.body)
-    // let doctor = await User.findOne({ _id: req.body.did, booking_service: true });
-    // if (!doctor) {
-    //     return res.render('not-available', {
-    //         title: 'Doctor Not Availble',
-    //         type: 'Doctor'
-    //     })
-    // }
+    let doctor = await User.findOne({ _id: req.body.did, booking_service: true });
+    if (!doctor) {
+        return res.json({
+           status:'false',
+           msg:'Doctor not available'
+        })
+    }
 
-    // let user1 = await User.findById(doctor.staff_id);
-    // var today = new Date();
+    let user1 = await User.findById(doctor.staff_id);
+    var today = new Date();
     // today.setDate(today.getDate() - 1)
-    // var dd = String(today.getDate()).padStart(2, '0');
-    // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    // var yyyy = today.getFullYear();
-    // var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-    // var dayOfWeek = weekday[today.getDay()].toUpperCase();
-    // console.log(dayOfWeek);
-    // var str = dd + '-' + mm + '-' + yyyy;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()].toUpperCase();
+    console.log(dayOfWeek);
+    var str = dd + '-' + mm + '-' + yyyy;
 
-    // if (user1) {
-    //     for (temp of doctor.schedule_time) {
-    //         if (temp.day.toUpperCase() == dayOfWeek) {
-    //             var vflag = true;
-    //             var vflag1 = false;
+    console.log(str)
 
-    //             if (typeof(temp.booked) == 'string') {
-    //                 if (temp.booked != '0') {
-    //                     vflag1 = true;
-    //                 }
-    //             }
+    if (user1) {
+        for (temp of doctor.schedule_time) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
 
-    //             if (typeof(temp.booked) == 'number') {
-    //                 if (temp.booked != '0') {
-    //                     vflag1 = true;
-    //                 }
-    //             }
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
 
-    //             if (typeof(temp.booked) == 'object') {
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
 
-    //                 for (temp2 of temp.booked) {
-    //                     if (temp2 != '0') {
-    //                         vflag1 = true;
-    //                     }
+                if (typeof(temp.booked) == 'object') {
 
-    //                 }
-    //             }
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
 
-    //             for (temp1 of user1.booking) {
-    //                 if (temp1.date == str) {
-    //                     vflag = false;
-    //                 }
-    //             }
-    //             console.log(vflag, vflag1)
+                    }
+                }
 
-    //             if (vflag && vflag1) {
-    //                 if (typeof(temp.booked) == 'string') {
-    //                     temp.booked = 0;
-    //                 }
+                for (temp1 of user1.booking) {
+                    if (temp1.date == str) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
 
-    //                 if (typeof(temp.booked) == 'number') {
-    //                     temp.booked = 0;
-    //                 }
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
 
-    //                 if (typeof(temp.booked) == 'object') {
-    //                     temp.booked = [0, 0];
-    //                 }
-    //                 temp.booking_over = [];
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
 
-    //             }
-    //             temp.reset_flag = true;
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+                    temp.booking_over = [];
 
-    //         } else {
-    //             if (temp.reset_flag == true) {
-    //                 if (typeof(temp.booked) == 'string') {
-    //                     temp.booked = 0;
-    //                 }
+                }
+                temp.reset_flag = true;
 
-    //                 if (typeof(temp.booked) == 'number') {
-    //                     temp.booked = 0;
-    //                 }
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
 
-    //                 if (typeof(temp.booked) == 'object') {
-    //                     temp.booked = [0, 0];
-    //                 }
-    //                 temp.booking_over = [];
-    //                 temp.reset_flag = false;
-    //                 temp.alt_flag = false;
-    //             }
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
 
-    //         }
-    //     }
-    // } else {
-    //     for (temp of doctor.schedule_time) {
-    //         if (temp.day.toUpperCase() == dayOfWeek) {
-    //             var vflag = true;
-    //             var vflag1 = false;
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+                    temp.booking_over = [];
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
 
-    //             if (typeof(temp.booked) == 'string') {
-    //                 if (temp.booked != '0') {
-    //                     vflag1 = true;
-    //                 }
-    //             }
+            }
+        }
+    } else {
+        for (temp of doctor.schedule_time) {
+            if (temp.day.toUpperCase() == dayOfWeek) {
+                var vflag = true;
+                var vflag1 = false;
 
-    //             if (typeof(temp.booked) == 'number') {
-    //                 if (temp.booked != '0') {
-    //                     vflag1 = true;
-    //                 }
-    //             }
+                if (typeof(temp.booked) == 'string') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
 
-    //             if (typeof(temp.booked) == 'object') {
+                if (typeof(temp.booked) == 'number') {
+                    if (temp.booked != '0') {
+                        vflag1 = true;
+                    }
+                }
 
-    //                 for (temp2 of temp.booked) {
-    //                     if (temp2 != '0') {
-    //                         vflag1 = true;
-    //                     }
+                if (typeof(temp.booked) == 'object') {
 
-    //                 }
-    //             }
+                    for (temp2 of temp.booked) {
+                        if (temp2 != '0') {
+                            vflag1 = true;
+                        }
 
-    //             for (temp1 of doctor.patients) {
-    //                 if (temp1.date == str) {
-    //                     vflag = false;
-    //                 }
-    //             }
-    //             console.log(vflag, vflag1)
+                    }
+                }
 
-    //             if (vflag && vflag1) {
-    //                 if (typeof(temp.booked) == 'string') {
-    //                     temp.booked = 0;
-    //                 }
+                for (temp1 of doctor.patients) {
+                    if (temp1.date == str) {
+                        vflag = false;
+                    }
+                }
+                console.log(vflag, vflag1)
 
-    //                 if (typeof(temp.booked) == 'number') {
-    //                     temp.booked = 0;
-    //                 }
+                if (vflag && vflag1) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
 
-    //                 if (typeof(temp.booked) == 'object') {
-    //                     temp.booked = [0, 0];
-    //                 }
-    //                 temp.booking_over = [];
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
 
-    //             }
-    //             temp.reset_flag = true;
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+                    temp.booking_over = [];
 
-    //         } else {
-    //             if (temp.reset_flag == true) {
-    //                 if (typeof(temp.booked) == 'string') {
-    //                     temp.booked = 0;
-    //                 }
+                }
+                temp.reset_flag = true;
 
-    //                 if (typeof(temp.booked) == 'number') {
-    //                     temp.booked = 0;
-    //                 }
+            } else {
+                if (temp.reset_flag == true) {
+                    if (typeof(temp.booked) == 'string') {
+                        temp.booked = 0;
+                    }
 
-    //                 if (typeof(temp.booked) == 'object') {
-    //                     temp.booked = [0, 0];
-    //                 }
-    //                 temp.booking_over = [];
-    //                 temp.reset_flag = false;
-    //                 temp.alt_flag = false;
-    //             }
+                    if (typeof(temp.booked) == 'number') {
+                        temp.booked = 0;
+                    }
 
-    //         }
-    //     }
-    // }
+                    if (typeof(temp.booked) == 'object') {
+                        temp.booked = [0, 0];
+                    }
+                    temp.booking_over = [];
+                    temp.reset_flag = false;
+                    temp.alt_flag = false;
+                }
 
-    // doctor.save();
+            }
+        }
+    }
+
+    doctor.save();
 // -----------------------------------------
 var userId;
         if (req.headers && req.headers.authorization) {

@@ -1472,7 +1472,9 @@ console.log(response);
             doctor: doctor,
             type: req.body.type,
             user: user,
-            date: req.body.date
+            date: req.body.date,
+            day:req.body.day,
+            time:req.body.time,
 
         })
         }
@@ -1516,6 +1518,8 @@ console.log(req.body)
             slotindex: req.body.slotindex,
             dayindex: req.body.dayindex,
             id: req.body.id,
+            day:req.body.day,
+            time:req.body.time,
             doctor: doctor,
             type: req.body.type,
             user: user,
@@ -1656,7 +1660,7 @@ module.exports.selectPayment = async function(req, res) {
         let doctor = await User.findById(req.body.doctorid);
         let user = await User.findById(req.user.id);
 
-
+console.log('select payment',req.body)
     
         if(doctor.poc)
         {
@@ -1672,6 +1676,8 @@ module.exports.selectPayment = async function(req, res) {
             type: req.body.type,
             user: user,
             date: req.body.date,
+            day:req.body.day,
+            time:req.body.time,
             name:req.body.name,
             phone:req.body.phone,
             age:req.body.age,
@@ -2696,6 +2702,7 @@ module.exports.verifyPayment = async(req, res) => {
 
 module.exports.bookPayOnClinic = async(req, res) => {
 
+    console.log('payon clinic booking',req.body)
 
     let user = await User.findById(req.body.doctorid);
     let orderid = Math.floor((Math.random() * 100000) + 54);
