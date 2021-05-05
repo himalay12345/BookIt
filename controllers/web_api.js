@@ -186,7 +186,29 @@ module.exports.doctors = async (req, res) => {
     let doctors = [];
     let p_doctors = [];
   
+
     for (i of doctor) {
+        let n1;
+        let d1;
+        var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    var dayOfWeek = weekday[today.getDay()];
+    n1=dayOfWeek.toUpperCase();
+    d1=dd+'-'+mm+'-'+yyyy;
+   
+
+        
+        let t_active = false;
+     
+     for(let holiday of i.holidays)
+     {
+         console.log(holiday.date,d1)
+         if(d1 === holiday.date)
+         t_active = true;
+     }
     let avgrating = 0,cnt=0,rating=0;
        for(j of i.reviews)
        {
@@ -201,6 +223,7 @@ module.exports.doctors = async (req, res) => {
        let specialisations;
        let specialisation;
        let specfirst = null;
+       let specfirst1 = null;
        let education;
        if(i.education.length>0)
        {
@@ -212,16 +235,20 @@ module.exports.doctors = async (req, res) => {
        specialisation = specialisations.split(',');
        specfirst = specialisation[0]
        }
+       if(specfirst !== null)
+       specfirst1 = specfirst + ' Specialist'
+
        if(i.premium){
         p_doctors.push( {
             name: i.name,
+            t_active:t_active,
             experience:i.wexperience,
             contacts:i.contacts,
             clinicphotos:i.clinicphoto,
             services:i.services,
             department: i.department,
             education:education,
-            specialist:specfirst+' Specialist',
+            specialist:specfirst1,
             fee:i.booking_fee,
             clinicname:i.clinicname,
             clinicaddr:i.clinicaddr,
@@ -237,13 +264,14 @@ module.exports.doctors = async (req, res) => {
        else{
         doctors.push( {
             name: i.name,
+            t_active:t_active,
             experience:i.wexperience,
             contacts:i.contacts,
             clinicphotos:i.clinicphoto,
             services:i.services,
             department: i.department,
             education:education,
-            specialist:specfirst,
+            specialist:specfirst1,
             fee:i.booking_fee,
             clinicname:i.clinicname,
             clinicaddr:i.clinicaddr,
@@ -269,10 +297,6 @@ module.exports.doctors = async (req, res) => {
 
 module.exports.doctorProfile = async (req, res) => {
     let i = await User.findById(req.body.id);
- 
-   
-
-  
     let avgrating = 0,cnt=0,rating=0;
        for(j of i.reviews)
        {
@@ -283,18 +307,225 @@ module.exports.doctorProfile = async (req, res) => {
        {
            rating = parseInt(avgrating/cnt);
        }
-    
 
+       let specialisations;
+       let specialisation;
+       let specfirst = null;
+       let specfirst1 = null;
+       let education;
+       if(i.education.length>0)
+       {
+           education = i.education[0].degree;
+       }
+       if(i.specialisation != undefined)
+       {
+       specialisations = i.specialisation;
+       specialisation = specialisations.split(',');
+       specfirst = specialisation[0]
+       }
+       if(specfirst !== null)
+       specfirst1 = specfirst + ' Specialist'
+    
+       let n1,n2,n3,n4,n5,n6,n7;
+       let d1,d2,d3,d4,d5,d6,d7;
+       let f1 = true,f2 = true,f3 = true,f4 = true,f5 = true,f6 = true,f7 = true;
+       var today = new Date();
+       for(let i1=1;i1<=7;i1++){
+   var dd = String(today.getDate()).padStart(2, '0');
+   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+   var yyyy = today.getFullYear();
+   var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+   var dayOfWeek = weekday[today.getDay()];
+   if(i1 == 1)
+   {
+   n1=dayOfWeek.toUpperCase();
+   d1=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 2)
+   {
+   n2=dayOfWeek.toUpperCase();
+   d2=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 3)
+   {
+   n3=dayOfWeek.toUpperCase();
+   d3=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 4)
+   {
+   n4=dayOfWeek.toUpperCase();
+   d4=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 5)
+   {
+   n5=dayOfWeek.toUpperCase();
+   d5=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 6)
+   {
+   n6=dayOfWeek.toUpperCase();
+   d6=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 7)
+   {
+   n7=dayOfWeek.toUpperCase();
+   d7=dd+'-'+mm+'-'+yyyy;
+   }
+   
+   var res1 = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+   var date = new Date(res1);
+   today=date;
+       }
+       let t_active = false;
+    
+    for(let holiday of i.holidays)
+    {
+        console.log(holiday.date,d1)
+        if(d1 === holiday.date)
+        t_active = true;
+    }
+      
+       let scheduletime = [];
+       for(let u of i.schedule_time)
+       {
+          
+           let slots = [];
+           let day;
+           let id;
+           let reset_flag ;
+           let alt_flag;
+           let bookingover;
+          
+           if(typeof(u.start) == 'string')
+           {
+               slots.push({
+                   start:u.start,
+                   end:u.end,
+                   maxcount:u.max_count,
+                   available:u.available,
+                   booked:u.booked
+               });
+               day = u.day;
+               reset_flag = u.reset_flag
+               alt_flag = u.alt_flag
+               id = u._id;
+               bookingover = u.booking_over
+               let date;
+               if(u.day.toUpperCase() == n1)
+               {
+                   date = d1;
+               }
+               if(u.day.toUpperCase() == n2)
+               {
+                   date = d2;
+               }
+               if(u.day.toUpperCase() == n3)
+               {
+                   date = d3;
+               }
+               if(u.day.toUpperCase() == n4)
+               {
+                   date = d4;
+               }
+               if(u.day.toUpperCase() == n5)
+               {
+                   date = d5;
+               }
+               if(u.day.toUpperCase() == n6)
+               {
+                   date = d6;
+               }
+               if(u.day.toUpperCase() == n7)
+               {
+                   date = d7;
+               }
+   
+               scheduletime.push({
+                   id:id,
+                   date:date,
+                   day:day,
+                  slots:slots,
+                   reset_flag:reset_flag,
+                   alt_flag:alt_flag,
+                   booking_over:bookingover
+                  
+               })
+           }
+   
+           if(typeof(u.start) == 'object')
+           {
+              
+               let date;
+           if(u.day.toUpperCase() == n1)
+           {
+               date = d1;
+           }
+           if(u.day.toUpperCase() == n2)
+           {
+               date = d2;
+           }
+           if(u.day.toUpperCase() == n3)
+           {
+               date = d3;
+           }
+           if(u.day.toUpperCase() == n4)
+           {
+               date = d4;
+           }
+           if(u.day.toUpperCase() == n5)
+           {
+               date = d5;
+           }
+           if(u.day.toUpperCase() == n6)
+           {
+               date = d6;
+           }
+           if(u.day.toUpperCase() == n7)
+           {
+               date = d7;
+           }
+               for(let i= 0;i<u.start.length;i++)
+               {
+                   slots.push({
+                       start:u.start[i],
+                       end:u.end[i],
+                       maxcount:u.max_count[i],
+                       available:u.available[i],
+                       booked:u.booked[i]
+                   })
+               }
+              
+               day = u.day;
+               reset_flag = u.reset_flag
+               alt_flag = u.alt_flag
+               bookingover = u.booking_over
+   
+               scheduletime.push({
+                   id:u._id,
+                   date:date,
+                   day:day,
+                   slots:slots,
+                   reset_flag:reset_flag,
+                   alt_flag:alt_flag,
+                   booking_over:bookingover
+               })
+           }
+          
+       }
    
 
     res.json({
         avatar: i.avatar,
             name: i.name,
+            degree:education,
+            t_active:t_active,
+            specialist:specfirst1,
             education:i.education,
             department: i.department,
             contacts:i.contacts,
             clinicphotos:i.clinicphoto,
-            specialities:i.specialities,
+            specialities:i.specialisation,
+            biodata:i.biodata,
             services:i.services,
             fee:i.booking_fee,
             id: i.id,
@@ -304,7 +535,7 @@ module.exports.doctorProfile = async (req, res) => {
            clinicname:i.clinicname,
            clinicaddr:i.clinicaddr,
            reviews:i.reviews,
-           schedule_time:i.schedule_time,
+           schedule_time:scheduletime,
             staff_flag:true,
             ratings:rating,
             rating_count:cnt,
