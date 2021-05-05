@@ -15,6 +15,7 @@ router.post('/create-session', passport.authenticate('local', {
 
 router.post('/home',webApiController.home);
 router.post('/doctors',webApiController.doctors);
+router.post('/filter-doctor',webApiController.Filter);
 router.post('/doctor-profile',webApiController.doctorProfile);
 router.post('/booking',webApiController.booking);
 router.post('/specialist',webApiController.specialist);

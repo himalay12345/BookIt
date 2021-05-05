@@ -9,6 +9,128 @@ const path = require('path');
 const shortid = require('shortid');
 const emailVerification = require('../mailers/email-verify');
 
+module.exports.Filter = async function(req, res) {
+    console.log(req.body);
+    let doctors = [];
+
+    if (typeof(req.body.select_specialist) == 'string') {
+        if (req.body.gender_type) {
+            doctors = await User.find({
+                department: req.body.select_specialist,
+                gender: req.body.gender_type,
+                type: "Doctor",
+                approve1: true, approve2: true, booking_service: true
+            });
+            let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+            let ar = [];
+            for(i of doctors1)
+            {
+                ar.push({
+                    name: i.name,
+                    id : i.id,
+                    dept: i.department,
+                    avatar: i.avatar
+                });
+            }
+            return res.json({
+                status:true,
+                msg:'Filtered Doctors',
+                doctors:doctors
+            })
+        } else {
+            doctors = await User.find({ department: req.body.select_specialist, type: "Doctor",approve1: true, approve2: true, booking_service: true });
+            let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+            let ar = [];
+            for(i of doctors1)
+            {
+                ar.push({
+                    name: i.name,
+                    id : i.id,
+                    dept: i.department,
+                    avatar: i.avatar
+                });
+            }
+            return res.json({
+                status:true,
+                msg:'Filtered Doctors',
+                doctors:doctors
+            })
+        }
+    }
+
+    if (typeof(req.body.select_specialist) == 'object') {
+        for (let i = 0; i < req.body.select_specialist.length; i++) {
+            let doctor;
+            if (req.body.gender_type) {
+                doctor = await User.find({
+                    department: req.body.select_specialist[i],
+                    gender: req.body.gender_type,
+                    type: "Doctor",
+                    approve1: true, approve2: true, booking_service: true
+                });
+                
+            } else {
+                doctor = await User.find({ department: req.body.select_specialist[i], type: "Doctor",approve1: true, approve2: true, booking_service: true })
+            }
+            console.log(doctor);
+            if (doctor != undefined) {
+                for (let j = 0; j < doctor.length; j++) {
+                    doctors.push(doctor[j]);
+
+                }
+            }
+
+
+
+
+        }
+        let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+        let ar = [];
+        for(i of doctors1)
+        {
+            ar.push({
+                name: i.name,
+                id : i.id,
+                dept: i.department,
+                avatar: i.avatar
+            });
+        }
+        return res.json({
+            status:true,
+            msg:'Filtered Doctors',
+            doctors:doctors
+        })
+    }
+    
+     else {
+        doctors = await User.find({
+            gender: req.body.gender_type,
+            type: "Doctor",
+            approve1: true, approve2: true, booking_service: true
+        });
+        let doctors1 = await User.find({ type: "Doctor" ,approve1: true, approve2: true, booking_service: true});
+
+        let ar = [];
+        for(i of doctors1)
+        {
+            ar.push({
+                name: i.name,
+                id : i.id,
+                dept: i.department,
+                avatar: i.avatar
+            });
+        }
+         return res.json({
+            status:true,
+            msg:'Filtered Doctors',
+            doctors:doctors
+        })
+
+    }
+}
 
 
 
@@ -65,13 +187,17 @@ module.exports.doctors = async (req, res) => {
     let p_doctors = [];
   
     for (i of doctor) {
-    let avgrating = 0,cnt=0;
+    let avgrating = 0,cnt=0,rating=0;
        for(j of i.reviews)
        {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = parseInt(avgrating/cnt);
+       if(i.reviews.length > 0)
+        {
+            rating = parseInt(avgrating/cnt);
+        }
+       
        let specialisations;
        let specialisation;
        let specfirst = null;
@@ -95,7 +221,7 @@ module.exports.doctors = async (req, res) => {
             services:i.services,
             department: i.department,
             education:education,
-            specialist:specfirst,
+            specialist:specfirst+' Specialist',
             fee:i.booking_fee,
             clinicname:i.clinicname,
             clinicaddr:i.clinicaddr,
@@ -147,13 +273,16 @@ module.exports.doctorProfile = async (req, res) => {
    
 
   
-    let avgrating = 0,cnt=0;
+    let avgrating = 0,cnt=0,rating=0;
        for(j of i.reviews)
        {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = parseInt(avgrating/cnt);
+       if(i.reviews.length > 0)
+       {
+           rating = parseInt(avgrating/cnt);
+       }
     
 
    
@@ -352,13 +481,16 @@ module.exports.booking = async (req, res) => {
    
 
   
-    let avgrating = 0,cnt=0;
+    let avgrating = 0,cnt=0,rating=0;
        for(j of i.reviews)
        {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = parseInt(avgrating/cnt);
+       if(i.reviews.length > 0)
+       {
+           rating = parseInt(avgrating/cnt);
+       }
     
 
 //    console.log(i.schedule_time)
@@ -386,13 +518,16 @@ module.exports.specialist = async (req, res) => {
     let p_doctors = [];
   
     for (i of doctor) {
-    let avgrating = 0,cnt=0;
+    let avgrating = 0,cnt=0,rating=0;
        for(j of i.reviews)
        {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let rating = parseInt(avgrating/cnt);
+       if(i.reviews.length > 0)
+        {
+            rating = parseInt(avgrating/cnt);
+        }
        let specialisations;
        let specialisation;
        let specfirst = null;

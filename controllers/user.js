@@ -316,14 +316,14 @@ module.exports.pauseBookingService = async(req, res) => {
                  }
              });
          }
-         client.messages
-             .create({
-                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
-                 from: '+12019755459',
-                 statusCallback: 'http://postb.in/1234abcd',
-                 to: '+91' + temp.phone
-             })
-             .then(message => console.log(message.sid));
+        //  client.messages
+        //      .create({
+        //          body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+        //          from: '+12019755459',
+        //          statusCallback: 'http://postb.in/1234abcd',
+        //          to: '+91' + temp.phone
+        //      })
+        //      .then(message => console.log(message.sid));
              let patient = await User.findById(temp.pid);
          if (temp.email) {
              appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
@@ -380,14 +380,14 @@ module.exports.pauseBookingService = async(req, res) => {
                      }
                  });
              }
-             client.messages
-             .create({
-                 body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
-                 from: '+12019755459',
-                 statusCallback: 'http://postb.in/1234abcd',
-                 to: '+91' + temp.phone
-             })
-             .then(message => console.log(message.sid));
+            //  client.messages
+            //  .create({
+            //      body: 'This is to inform you that due to some circumstances Dr.'+ user.name + ' is not available on the date of your booked appointment (' + temp.date + ') on ' + temp.time + ' at ' + user.clinicname + ', ' + user.cliniccity + ', ' + user.clinicaddr + ' .Due to which you are informed to cancel the appointment.You can reschedule the appointment after cancellation.Cancellation is valid for 3 days prior to your appointment date.So we recommend you to cancel the appointment from your My billings section or you can use this link https://aarogyahub.com/my-billing',
+            //      from: '+12019755459',
+            //      statusCallback: 'http://postb.in/1234abcd',
+            //      to: '+91' + temp.phone
+            //  })
+            //  .then(message => console.log(message.sid));
              let patient = await User.findById(temp.pid);
          if (temp.email) {
              appointmentAlert1.newAlert(temp.date, temp.time, temp.email, user, patient);
@@ -2399,17 +2399,17 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
-                if(staff){
-                client.messages
-                .create({
-                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
-                    from: '+12019755459',
-                    alphanumeric_id : "AarogyaHub",
-                    statusCallback: 'http://postb.in/1234abcd',
-                    to: '+91' + staff.phone
-                })
-                .then(message => console.log(message.sid));
-            }
+            //     if(staff){
+            //     client.messages
+            //     .create({
+            //         body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+            //         from: '+12019755459',
+            //         alphanumeric_id : "AarogyaHub",
+            //         statusCallback: 'http://postb.in/1234abcd',
+            //         to: '+91' + staff.phone
+            //     })
+            //     .then(message => console.log(message.sid));
+            // }
             if (user.email) {
                 appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,b,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
             }
@@ -2654,17 +2654,17 @@ module.exports.verifyPayment = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
-                if(staff){
-                client.messages
-                .create({
-                    body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
-                    from: '+12019755459',
-                    alphanumeric_id : "AarogyaHub",
-                    statusCallback: 'http://postb.in/1234abcd',
-                    to: '+91' + staff.phone
-                })
-                .then(message => console.log(message.sid));
-            }
+            //     if(staff){
+            //     client.messages
+            //     .create({
+            //         body: 'CONFIRMED Online Appointment : The details of the patient are :- Patient Name - ' + req.query.name + ', Age - ' + req.query.age + ', Phone - ' + req.query.phone + ', Address - ' + req.query.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.query.date + ', Day - ' + req.query.day + ', Time - ' + req.query.time + ', Fees Paid - ' + req.query.fee + '. Please make sure to ask the online patient to show the appointment success message.',
+            //         from: '+12019755459',
+            //         alphanumeric_id : "AarogyaHub",
+            //         statusCallback: 'http://postb.in/1234abcd',
+            //         to: '+91' + staff.phone
+            //     })
+            //     .then(message => console.log(message.sid));
+            // }
             if (user.email) {
                 appointmentAlert.newDoctorAlert(req.query.name,req.query.age,req.query.phone,req.query.address,k1,req.query.date,req.query.day, req.query.time, req.query.fee,user.email);
             }
@@ -2956,17 +2956,17 @@ module.exports.bookPayOnClinic = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
-                if(staff){
-                client.messages
-                .create({
-                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
-                    from: '+12019755459',
-                    alphanumeric_id : "AarogyaHub",
-                    statusCallback: 'http://postb.in/1234abcd',
-                    to: '+91' + staff.phone
-                })
-                .then(message => console.log(message.sid));
-            }
+            //     if(staff){
+            //     client.messages
+            //     .create({
+            //         body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
+            //         from: '+12019755459',
+            //         alphanumeric_id : "AarogyaHub",
+            //         statusCallback: 'http://postb.in/1234abcd',
+            //         to: '+91' + staff.phone
+            //     })
+            //     .then(message => console.log(message.sid));
+            // }
             if (user.email) {
                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
@@ -3214,17 +3214,17 @@ module.exports.bookPayOnClinic = async(req, res) => {
                     to: '+91' + user.phone
                 })
                 .then(message => console.log(message.sid));
-                if(staff){
-                client.messages
-                .create({
-                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
-                    from: '+12019755459',
-                    alphanumeric_id : "AarogyaHub",
-                    statusCallback: 'http://postb.in/1234abcd',
-                    to: '+91' + staff.phone
-                })
-                .then(message => console.log(message.sid));
-            }
+            //     if(staff){
+            //     client.messages
+            //     .create({
+            //         body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + req.body.date + ', Day - ' + req.body.day + ', Time - ' + req.body.time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
+            //         from: '+12019755459',
+            //         alphanumeric_id : "AarogyaHub",
+            //         statusCallback: 'http://postb.in/1234abcd',
+            //         to: '+91' + staff.phone
+            //     })
+            //     .then(message => console.log(message.sid));
+            // }
             if (user.email) {
                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,req.body.date,req.body.day, req.body.time, req.body.fee,user.email);
             }
@@ -5888,15 +5888,15 @@ module.exports.saveCovidForm = async(req, res) => {
 
     })
 
-    client.messages
-    .create({
-        body: 'Covid Vaccination Registration Successful for Patient Name - ' + req.body.q3_name.first + ', Phone - ' + req.body.q5_phoneNumber.phone + ', Address - ' + req.body.q6_address.addr_line1 + ', Gender - ' + req.body.q9_gender + '. You will recieve the call from Nucare Hospital for the vaccination. The Address for vaccination is Nucare Hospital, Kumarpara, Dumka, Jharkhand.',
-        from: '+12019755459',
-        alphanumeric_id : "AarogyaHub",
-        statusCallback: 'http://postb.in/1234abcd',
-        to: '+91' + req.body.q5_phoneNumber.phone
-    })
-    .then(message => console.log(message.sid));
+    // client.messages
+    // .create({
+    //     body: 'Covid Vaccination Registration Successful for Patient Name - ' + req.body.q3_name.first + ', Phone - ' + req.body.q5_phoneNumber.phone + ', Address - ' + req.body.q6_address.addr_line1 + ', Gender - ' + req.body.q9_gender + '. You will recieve the call from Nucare Hospital for the vaccination. The Address for vaccination is Nucare Hospital, Kumarpara, Dumka, Jharkhand.',
+    //     from: '+12019755459',
+    //     alphanumeric_id : "AarogyaHub",
+    //     statusCallback: 'http://postb.in/1234abcd',
+    //     to: '+91' + req.body.q5_phoneNumber.phone
+    // })
+    // .then(message => console.log(message.sid));
     client.messages
     .create({
         body: 'Covid Vaccination Registration Successful from AarogyaHub for Patient Name - ' + req.body.q3_name.first + ', Phone - ' + req.body.q5_phoneNumber.phone + ', Address - ' + req.body.q6_address.addr_line1 + ', Gender - ' + req.body.q9_gender + '. ',

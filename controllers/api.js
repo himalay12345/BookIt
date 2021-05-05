@@ -3766,5 +3766,95 @@ module.exports.refund = async function(req, res) {
 
 
 
+module.exports.updateProfile = async function(req, res) {
+
+    try {
+
+
+        var userId;
+        if (req.headers && req.headers.authorization) {
+            
+            var authorization = req.headers.authorization.split(' ')[1];
+           
+           
+              var decoded = jwt.verify(authorization, '123456');
+            userId = decoded.username;
+        }
+        let user = await User.findOne({phone:userId,type:'Patient',service:'phone'});
+        User.uploadedAvatar(req, res, function(err) {
+            if (err) { console.log('*******Multer Error', err); return; }
+
+
+            user.name = req.body.name;
+            user.dob = req.body.dob;
+            user.phone = req.body.phone;
+
+            user.contacts.address = req.body.address;
+            user.contacts.city = req.body.city;
+            user.contacts.state = req.body.state;
+            user.contacts.pincode = req.body.pincode;
+            user.contacts.country = req.body.country;
+            user.bloodgroup = req.body.bloodgroup;
+            user.gender = req.body.gender;
+
+
+
+
+
+            if (req.files['avatar']) {
+                if (!user.avatar) {
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                } else {
+                    if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
+
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+
+                    }
+
+                    user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+
+                }
+            }
+
+            const rand = Math.floor((Math.random() * 100) + 54);
+            
+            if (req.body.email != '') {
+                if (!user.emailkey) {
+                    console.log('sent');
+                    user.emailkey = rand;
+                    emailVerification.newAlert(user, rand, req.body.email);
+                    user.email = req.body.email;
+                    user.emailverify = false;
+                }
+
+                if (user.email != req.body.email) {
+                    console.log('sent again');
+                    emailVerification.newAlert(user, rand, req.body.email);
+                    user.email = req.body.email;
+                    user.emailverify = false;
+                    user.emailkey = rand;
+                }
+            }
+
+
+            user.save();
+            return res.json({
+                status:'true',
+                user:user,
+                msg:'Profile Updated'
+            })
+
+        });
+     
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+
+
 
 
