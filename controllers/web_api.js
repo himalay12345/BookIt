@@ -831,18 +831,20 @@ module.exports.specialist = async (req, res) => {
 module.exports.sendOtp = async(req,res) => {
     if(req.body.phone.length>10)
     {
-        req.flash('error', 'Please do not use (+91 or 0) before your phone number.');
+        // req.flash('error', 'Please do not use (+91 or 0) before your phone number.');
         return res.json({
-            status:'false'
+            status:false,
+            msg:'Phone Number Greater than 10 digits'
         })
     }
     
     let user = await User.findOne({ phone: req.body.phone, service: 'phone' });
 
     if (user) {
-        req.flash('error', 'Account already linked with this mobile number');
+        // req.flash('error', 'Account already linked with this mobile number');
         return res.json({
-            status:'false'
+            status:false,
+            msg:'Account already linked with this mobile number'
         })
     } else {
 
@@ -855,9 +857,10 @@ module.exports.sendOtp = async(req,res) => {
                 channel: req.body.service
             }).then((data) => {
                 console.log('verify',req.body)
-         return res.json({
-             status:'true'
-            })
+                return res.json({
+                    status:true,
+                    msg:'Otp Sent Successfully'
+                    })
             });
 
     }
@@ -878,24 +881,26 @@ module.exports.verifyOtp = async(req, res) => {
 
     if (data.status == 'approved') {
        return res.json({
-           status:'true'
+           status:true,
+           msg:'Otp Verified Successfully'
        })
 
     } else {
         return res.json({
-            status:'false'
+            status:false,
+            msg:'Otp Not Verified'
         })
 
     }
 }
 
 module.exports.createUserAccount = async(req, res) => {
-    let davatar = path.join(__dirname, '..', '/assets/img/bg.png');
+    let davatar = path.join(__dirname, '..', '/assets/img/profile.png');
     if(req.body.password != req.body.cpassword)
     {
        return res.json({
-           status:'false',
-           msg:'password mismatch'
+           status:false,
+           msg:'Password donot match !'
        })
     }
     let hashedPass = await bcrypt.hash(req.body.password,10)
@@ -927,21 +932,22 @@ module.exports.createUserAccount = async(req, res) => {
                    
 
 return res.json({
-    status:'true',
-    user:user
+    status:true,
+    msg:'Account Created Successfully',
+    user:user.name
 })
 
 }
 
 
 module.exports.login = async function(req, res) {
-    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+    let user = await User.findOne({phone:req.body.phone,service:'phone'})
 
     if(!user)
     {
         return res.json({
-            status:'false',
-            msg:'Not registered'
+            status:false,
+            msg:'Not Registered ! Please Create a account'
         })
        
     }
@@ -965,8 +971,8 @@ module.exports.login = async function(req, res) {
                     channel: 'sms'
                 }).then((data) => {
                     return res.json({
-                        twofactor:'true',
-                        status:'true',
+                        twofactor:true,
+                        status:true,
                         phone:req.body.phone,
                         msg:'Otp Sent To Registered Phone'
                     })
@@ -975,9 +981,9 @@ module.exports.login = async function(req, res) {
 
             else{
                 return res.json({
-                    twofactor:'false',
-                    status:'true',
-                    user:user
+                    twofactor:false,
+                    status:true,
+                    user:user.name
                 })
             }
            
@@ -986,8 +992,8 @@ module.exports.login = async function(req, res) {
         }
         else{
             return res.json({
-                status:'false',
-                msg:'Wrong Password'
+                status:false,
+                msg:'Invalid Username/Password'
             })
            
         }
@@ -996,8 +1002,8 @@ module.exports.login = async function(req, res) {
             if(user.password != req.body.password)
             {
                 return res.json({
-                    status:'false',
-                    msg:'Wrong Password'
+                    status:false,
+                    msg:'Invalid Username/Password'
                 })
             }
 
@@ -1014,8 +1020,9 @@ module.exports.login = async function(req, res) {
                     channel: 'sms'
                 }).then((data) => {
                     return res.json({
-                        twofactor:'true',
-                        status:'true',
+                        twofactor:true,
+                        status:true,
+                        user:user.name,
                         msg:'Otp Sent To Registered Phone'
                     })
                 });
@@ -1023,9 +1030,9 @@ module.exports.login = async function(req, res) {
 
             else{
                 return res.json({
-                    twofactor:'false',
-                    status:'true',
-                    user:user
+                    twofactor:false,
+                    status:true,
+                    user:user.name
                 })
             }
             }
@@ -1038,20 +1045,48 @@ module.exports.login = async function(req, res) {
 
 }
 
+module.exports.logout = async function(req, res) {
+    req.logout();
+
+    return res.json({
+        status:true,
+        msg:'User Logged out'
+    })
+}
+
 module.exports.createSession = async function(req, res) {
- 
     let user = await User.findById(req.user.id)
     return res.json({
         flag:true,
-        cookies:req.cookies,
         user:user
     })
+}
+
+module.exports.getUserInfo = async function(req, res) {
+    let user;
+    if(req.isAuthenticated())
+    user = await User.findById(req.user.id)
+    if(user)
+    {
+        return res.json({
+            flag:true,
+            msg:'User is logged in now',
+            user:user
+        })
+    }
+    else{
+        return res.json({
+            flag:false,
+            msg:'User is logged out now',
+            user:user
+        }) 
+    }
 }
 
 
 module.exports.verify2FactorOtp = async(req, res) => {
   
-    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+    let user = await User.findOne({phone:req.body.phone,service:'phone'})
     let data = await client
         .verify
         .services(config.serviceID)
@@ -1064,13 +1099,12 @@ module.exports.verify2FactorOtp = async(req, res) => {
 
     if (data.status == 'approved') {
        return res.json({
-           status:'true',
-           user:user
+           status:true
        })
 
     } else {
         return res.json({
-            status:'false'
+            status:false
         })
 
     }
