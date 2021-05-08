@@ -1130,24 +1130,26 @@ module.exports.createSession = async function(req, res) {
 }
 
 module.exports.getUserInfo = async function(req, res) {
-    let user;
-    if(req.isAuthenticated())
-    user = await User.findById(req.user.id)
-    if(user)
-    {
-        return res.json({
-            flag:true,
-            msg:'User is logged in now',
-            user:user
-        })
-    }
-    else{
-        return res.json({
-            flag:false,
-            msg:'User is logged out now',
-            user:user
-        }) 
-    }
+    // let user;
+    // if(req.isAuthenticated())
+    // user = await User.findById(req.user.id)
+    // if(user)
+    // {
+    //     return res.json({
+    //         flag:true,
+    //         msg:'User is logged in now',
+    //         user:user
+    //     })
+    // }
+    // else{
+    //     return res.json({
+    //         flag:false,
+    //         msg:'User is logged out now',
+    //         user:user
+    //     }) 
+    // }
+
+    res.send(req.user)
 }
 
 
