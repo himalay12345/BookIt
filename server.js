@@ -70,6 +70,8 @@ var corsOptions = {
 
 app.use(cors({
     origin:corsOptions,
+    allowedHeaders: ['sessionId', 'Content-Type'],
+    exposedHeaders: ['sessionId'],
     credentials:true
 }))
 app.use(expressLayouts);
