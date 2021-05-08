@@ -1043,12 +1043,12 @@ module.exports.login = async function(req, res) {
             }
 
             else{
-                // return res.json({
-                //     twofactor:false,
-                //     status:true,
-                //     user:user.name
-                // })
-                return res.redirect(307, '/web/create-session');
+                return res.json({
+                    twofactor:false,
+                    status:true,
+                    user:user.name
+                })
+               
             }
 
             
@@ -1095,12 +1095,12 @@ module.exports.login = async function(req, res) {
             }
 
             else{
-                // return res.json({
-                //     twofactor:false,
-                //     status:true,
-                //     user:user.name
-                // })
-                return res.redirect(307, '/web/create-session');
+                return res.json({
+                    twofactor:false,
+                    status:true,
+                    user:user.name
+                })
+              
             }
             }
            
