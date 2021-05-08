@@ -866,6 +866,69 @@ module.exports.sendOtp = async(req,res) => {
     }
 }
 
+
+module.exports.forgotSendOtp = async(req,res) => {
+    if(req.body.phone.length>10)
+    {
+        return res.json({
+            status:false,
+            msg:'Phone Number Greater than 10 digits'
+        })
+    }
+    
+    let user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+
+    if (!user) {
+        return res.json({
+            status:false,
+            msg:'No Account Linked with this number'
+        })
+    } else {
+
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.body.service
+            }).then((data) => {
+                console.log('verify',req.body)
+                return res.json({
+                    status:true,
+                    msg:'Otp Sent Successfully'
+                    })
+            });
+
+    }
+}
+
+module.exports.resetPassword = async(req, res) => {
+    if (req.body.password != req.body.confirm) {
+        return res.json({
+            msg:'Password Mismatch',
+            status:false,
+            phone: req.body.phone
+        })
+    }
+
+        let user = await User.findOne({ phone: req.body.phone , service:'phone'});
+
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
+        user.save();
+
+      return res.json({
+          status:true,
+          msg:'Password Reset Successful'
+      })
+    
+}
+
 module.exports.verifyOtp = async(req, res) => {
   
 
@@ -980,12 +1043,15 @@ module.exports.login = async function(req, res) {
             }
 
             else{
-                return res.json({
-                    twofactor:false,
-                    status:true,
-                    user:user.name
-                })
+                // return res.json({
+                //     twofactor:false,
+                //     status:true,
+                //     user:user.name
+                // })
+                return res.redirect(307, '/web/create-session');
             }
+
+            
            
             
            
@@ -1029,11 +1095,12 @@ module.exports.login = async function(req, res) {
             }
 
             else{
-                return res.json({
-                    twofactor:false,
-                    status:true,
-                    user:user.name
-                })
+                // return res.json({
+                //     twofactor:false,
+                //     status:true,
+                //     user:user.name
+                // })
+                return res.redirect(307, '/web/create-session');
             }
             }
            
