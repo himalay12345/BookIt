@@ -1043,6 +1043,7 @@ module.exports.login = async function(req, res) {
             }
 
             else{
+                res.header("Access-Control-Allow-Origin", "true");
                 return res.json({
                     twofactor:false,
                     status:true,
@@ -1095,6 +1096,7 @@ module.exports.login = async function(req, res) {
             }
 
             else{
+                res.header("Access-Control-Allow-Origin", "true");
                 return res.json({
                     twofactor:false,
                     status:true,
@@ -1148,7 +1150,7 @@ module.exports.getUserInfo = async function(req, res) {
     //         user:user
     //     }) 
     // }
-
+res.header("Access-Control-Allow-Origin", "true");
     res.send(req.user)
 }
 
