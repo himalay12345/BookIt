@@ -117,8 +117,7 @@ app.use(session({
     cookie: {
         maxAge: (20000 * 60 * 100),
         httpOnly:true,
-        secure:false,
-        sameSite:'lax'
+        secure:false
     },
     store: new MongoStore({
         mongooseConnection: db,
