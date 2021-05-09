@@ -55,7 +55,7 @@ if (env.name == 'development') {
 }
 console.log('Patient Tracking server is running on port 5000');
 
-var whitelist = ['http://localhost:3000','http://192.168.0.139:3000']
+var whitelist = ['http://localhost:3000','http://192.168.0.139:3000','https://aarogyahub.netlify.app']
 var corsOptions = {
     origin:function (origin,callback) {
         if(whitelist.indexOf(origin) !== -1){
