@@ -118,8 +118,7 @@ app.use(session({
         maxAge: (20000 * 60 * 100),
         sameSite : 'None',
         secure : true,
-        httponly : true,
-        path:'/'
+        httponly : true
 
     },
     store: new MongoStore({
