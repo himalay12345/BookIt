@@ -70,10 +70,20 @@ var corsOptions = {
 
 app.use(cors({
     origin:corsOptions,
-    allowedHeaders: ['sessionId', 'Content-Type'],
-    exposedHeaders: ['sessionId'],
+    methods:['POST','PUT','GET','OPTIONS','HEAD'], 
     credentials:true
 }))
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
+  
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
 app.set("layout test-bill", false);
@@ -105,7 +115,10 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (20000 * 60 * 100)
+        maxAge: (20000 * 60 * 100),
+        httpOnly:true,
+        secure:false,
+        sameSite:'lax'
     },
     store: new MongoStore({
         mongooseConnection: db,
