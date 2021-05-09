@@ -1150,7 +1150,7 @@ module.exports.getUserInfo = async function(req, res) {
     //         user:user
     //     }) 
     // }
-res.header("Access-Control-Allow-Origin", "true");
+// res.header("Access-Control-Allow-Origin", "true");
     res.send(req.user)
 }
 
