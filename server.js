@@ -55,34 +55,33 @@ if (env.name == 'development') {
 }
 console.log('Patient Tracking server is running on port 5000');
 
-var whitelist = ['http://localhost:3000','http://192.168.0.139:3000']
-var corsOptions = {
-    origin:function (origin,callback) {
-        if(whitelist.indexOf(origin) !== -1){
-            callback(null,true)
-        }
-        else
-        {
-            callback(new Error('Not Allowed by CORS'))
-        }
-    }
-}
+// var whitelist = ['http://localhost:3000','http://192.168.0.139:3000']
+// var corsOptions = {
+//     origin:function (origin,callback) {
+//         if(whitelist.indexOf(origin) !== -1){
+//             callback(null,true)
+//         }
+//         else
+//         {
+//             callback(new Error('Not Allowed by CORS'))
+//         }
+//     }
+// }
 
-app.use(cors({
-    origin:'http://localhost:3000',
-    methods:['POST','PUT','GET','OPTIONS','HEAD'], 
-    credentials:true
-}))
+// app.use(cors({
+//     origin:'http://localhost:3000',
+//     methods:['POST','PUT','GET','OPTIONS','HEAD'], 
+//     credentials:true
+// }))
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header(
-//       "Access-Control-Allow-Headers",
-//       "Origin, X-Requested-With, Content-Type, Accept"
-//     );
-//     next();
-//   });
-
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    res.setHeader('Access-Control-Allow-Credentials', true)
+  
+    next()
+  })
   
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
@@ -115,9 +114,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: (20000 * 60 * 100),
-        httpOnly:true,
-        secure:'false'
+        maxAge: (20000 * 60 * 100)
     },
     store: new MongoStore({
         mongooseConnection: db,
