@@ -1154,7 +1154,7 @@ module.exports.renewRefreshToken = (req,res) => {
         }
 
         else{
-            const accessToken = jwt.sign({username:user.name} ,'access',{expiresIn:'20s'})
+            const accessToken = jwt.sign({phone:user.phone} ,'access',{expiresIn:'20s'})
             return res.status(201).json({
                 status:true,
                 accessToken
