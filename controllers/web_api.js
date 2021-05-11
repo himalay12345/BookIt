@@ -6,6 +6,7 @@ const Consult = require('../models/consult');
 const bcrypt = require('bcrypt')
 const fs = require('fs');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 const shortid = require('shortid');
 const emailVerification = require('../mailers/email-verify');
 
@@ -1112,6 +1113,78 @@ module.exports.login = async function(req, res) {
 
   }
 
+}
+
+
+module.exports.getUserDetails = async (req,res) => {
+    var userId;
+    if (req.headers && req.headers.authorization) {
+        var authorization = req.headers.authorization.split(' ')[1];
+        var decoded = jwt.verify(authorization, 'access');
+    userId = decoded.phone;
+    }
+    console.log(userId)
+    let patient = await User.findOne({phone:userId,service:'phone'});
+    res.json({
+        status:true,
+        msg:'In protected route',
+        user:patient
+    })
+}
+
+// let refreshTokens = [];
+
+module.exports.renewRefreshToken = (req,res) => {
+ const refreshToken = req.body.token;
+//  || refreshTokens.includes(refreshToken)
+    if(!refreshToken){
+        return res.status(403).json({
+            status:false,
+            msg:'Refresh Token Not Found, Login Again !'
+        })
+    }
+
+    jwt.verify(refreshToken,"refresh",(err, user) => {
+        if(err)
+        {
+            return res.status(403).json({
+                status:false,
+                msg:'Invalid Refresh Token'
+            })
+        }
+
+        else{
+            const accessToken = jwt.sign({username:user.name} ,'access',{expiresIn:'20s'})
+            return res.status(201).json({
+                status:true,
+                accessToken
+            })
+        }
+    })
+
+}
+
+module.exports.jwtLogin = async (req,res) => {
+    let user1 = await User.findOne({_id:req.user.id,service:'phone'})
+    const user2 = {
+        username:user1.phone
+    }
+    const phone = req.body.phone;
+
+    if(!phone){
+        return res.status(404).json({ meassage: 'Body Empty'});
+    }
+
+    let accessToken = jwt.sign({phone}, "access" , {expiresIn: 30});
+    let refreshToken = jwt.sign({phone},"refresh",{expiresIn: '7d'});
+    // refreshTokens.push(refreshToken)
+
+    return res.status(201).json({
+        status:true,
+        accessToken,
+        refreshToken,
+        user:user1
+    })
 }
 
 module.exports.logout = async function(req, res) {

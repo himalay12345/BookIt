@@ -55,33 +55,33 @@ if (env.name == 'development') {
 }
 console.log('Patient Tracking server is running on port 5000');
 
-// var whitelist = ['http://localhost:3000','http://192.168.0.139:3000']
-// var corsOptions = {
-//     origin:function (origin,callback) {
-//         if(whitelist.indexOf(origin) !== -1){
-//             callback(null,true)
-//         }
-//         else
-//         {
-//             callback(new Error('Not Allowed by CORS'))
-//         }
-//     }
-// }
+var whitelist = ['http://localhost:3000','http://192.168.0.139:3000','https://aarogyahub.netlify.app']
+var corsOptions = {
+    origin:function (origin,callback) {
+        if(whitelist.indexOf(origin) !== -1){
+            callback(null,true)
+        }
+        else
+        {
+            callback(new Error('Not Allowed by CORS'))
+        }
+    }
+}
 
-// app.use(cors({
-//     origin:'http://localhost:3000',
-//     methods:['POST','PUT','GET','OPTIONS','HEAD'], 
-//     credentials:true
-// }))
+app.use(cors({
+    origin:corsOptions,
+    methods:['POST','PUT','GET','OPTIONS','HEAD'], 
+    credentials:true
+}))
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://aarogyahub.netlify.app')
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-    res.setHeader('Access-Control-Allow-Credentials', true)
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'https://aarogyahub.netlify.app')
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+//     res.setHeader('Access-Control-Allow-Credentials', true)
   
-    next()
-  })
+//     next()
+//   })
   
 app.use(expressLayouts);
 app.set("layout invoice-view", false);
@@ -115,9 +115,9 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (20000 * 60 * 100),
-        secure:true,
+        // secure:true,
         // httpOnly:true,
-        sameSite:'None'
+        // sameSite:'None'
     },
     store: new MongoStore({
         mongooseConnection: db,
