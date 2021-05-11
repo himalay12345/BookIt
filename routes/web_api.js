@@ -34,8 +34,7 @@ router.post('/jwt-login',passport.authenticate('local', {
     failureRedirect: '/fail'
 }),webApiController.jwtLogin)
 router.post('/profile-settings',webApiController.profileSettings)
-router.post('/profile-settings',webApiController.profileSettings)
-router.post('/update-profile',webApiController.updateProfile)
+router.post('/update-profile',authenticateWebToken,webApiController.profileSettings)
 router.post('/my-appointments',webApiController.myAppointments)
 router.post('/my-billings',webApiController.myBillings)
 router.post('/my-favourites',webApiController.myFavourites);
