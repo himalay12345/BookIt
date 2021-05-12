@@ -35,7 +35,8 @@ router.post('/jwt-login',passport.authenticate('local', {
 }),webApiController.jwtLogin)
 router.post('/profile-settings',webApiController.profileSettings)
 router.post('/update-profile',authenticateWebToken,webApiController.profileSettings)
-router.post('/my-appointments',webApiController.myAppointments)
+router.post('/my-appointments',authenticateWebToken,webApiController.myAppointments)
+router.post('/appointment-detail',authenticateWebToken,webApiController.appointmentDetail)
 router.post('/my-billings',webApiController.myBillings)
 router.post('/my-favourites',webApiController.myFavourites);
 router.post('/change-password',webApiController.changePassword);

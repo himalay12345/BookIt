@@ -3297,6 +3297,61 @@ module.exports.orderValidation = async function(req, res){
                 })
             }
 }
+module.exports.appointmentDetail = async(req, res) => {
+    var userId;
+                if (req.headers && req.headers.authorization) {
+                    
+                    var authorization = req.headers.authorization.split(' ')[1];
+                   
+                   
+                      var decoded = jwt.verify(authorization, '123456');
+                    userId = decoded.username;
+                }
+    if(userId){
+        let user = await User.findOne({service:'phone',type:'Patient',phone:userId});
+        if(user)
+        {
+            console.log(user.name,user.phone)
+            let appointment;
+            for(let u of user.doctors)
+            {
+                console.log(u.id)
+                if(u.id === req.body.id)
+                {
+                    appointment = u;
+                    break;
+                }
+            }
+
+            if(appointment){
+                return res.json({
+                    status:true,
+                    appointment:appointment
+                })
+            }
+            else{
+                return res.json({
+                    status:false,
+                    msg:'No Appointment Found'
+                }) 
+            }
+        }
+        else{
+            return res.json({
+                status:false,
+                msg:'Invalid User'
+            })
+        }
+    }
+    else{
+        return res.json({
+        status:false,
+        msg:'Invalid User'
+        })
+    }
+    
+    }
+
 
 module.exports.myAppointments = async function(req, res)
 {

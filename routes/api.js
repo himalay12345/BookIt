@@ -20,6 +20,7 @@ router.post('/select-payment',jwt.authenticateToken,apiController.selectPayment)
 router.post('/confirm-booking',jwt.authenticateToken,apiController.confirmBooking);
 router.post('/order-validation',jwt.authenticateToken,apiController.orderValidation);
 router.post('/appointments',jwt.authenticateToken,apiController.myAppointments)
+router.post('/appointment-detail',jwt.authenticateToken,apiController.appointmentDetail)
 router.post('/cancel-appointment',jwt.authenticateToken,apiController.refund)
 
 

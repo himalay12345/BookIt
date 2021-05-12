@@ -1261,9 +1261,13 @@ function getUserId(headers)
         var authorization = headers.authorization.split(' ')[1];
         var decoded = jwt.verify(authorization, 'access');
     userId = decoded.phone;
+    return userId
     }
 
-    return userId
+    else{
+        return;
+    }
+
 }
 module.exports.profileSettings = async function(req, res) {
 
@@ -1271,20 +1275,28 @@ module.exports.profileSettings = async function(req, res) {
 
         let userId = await getUserId(req.headers)
         if(userId){
-        let user = await User.findOne({service:'phone',phone:userId})
+        let user = await User.findOne({service:'phone',type:'Patient',phone:userId})
             User.uploadedAvatar(req, res, function(err) {
                 if (err) { console.log('*******Multer Error', err); return; }
     
     console.log(req.body)
+                if(req.body.name != undefined)
                 user.name = req.body.name;
+                if(req.body.dob != undefined)
                 user.dob = req.body.dob;
-    
+                if(req.body.address != undefined)
                 user.contacts.address = req.body.address;
+                if(req.body.city != undefined)
                 user.contacts.city = req.body.city;
+                if(req.body.state != undefined)
                 user.contacts.state = req.body.state;
+                if(req.body.pincode != undefined)
                 user.contacts.pincode = req.body.pincode;
+                if(req.body.country != undefined)
                 user.contacts.country = req.body.country;
+                if(req.body.bloodgroup != undefined)
                 user.bloodgroup = req.body.bloodgroup;
+                if(req.body.gender != undefined)
                 user.gender = req.body.gender;
     
     
@@ -1308,7 +1320,7 @@ module.exports.profileSettings = async function(req, res) {
     
                 const rand = Math.floor((Math.random() * 100) + 54);
                 
-                if (req.body.email != '') {
+                if (req.body.email != '' || req.body.email != undefined) {
                     if (!user.emailkey) {
                         console.log('sent');
                         user.emailkey = rand;
@@ -1332,7 +1344,8 @@ module.exports.profileSettings = async function(req, res) {
             });
             return res.json({
                 status:true,
-                msg:'Profile Updated'
+                msg:'Profile Updated',
+                user:user
             })
     }else{
         return res.json({
@@ -1429,20 +1442,76 @@ module.exports.updateProfile = async function(req, res) {
 }
 
 module.exports.myAppointments = async(req, res) => {
-    let user = await User.findById(req.user.id);
+let userId = await getUserId(req.headers)
+if(userId){
+    let user = await User.findOne({service:'phone',type:'Patient',phone:userId});
     if(user)
     {
     return res.json({
-        status:'true',
+        status:true,
         appointments:user.doctors
     })
+    }
+    else{
+        return res.json({
+            status:false,
+            msg:'Invalid User'
+        })
+    }
 }
 else{
     return res.json({
-        status:'false'
+    status:false,
+    msg:'Invalid User'
     })
 }
+
 }
+
+module.exports.appointmentDetail = async(req, res) => {
+    let userId = await getUserId(req.headers)
+    if(userId){
+        let user = await User.findOne({service:'phone',type:'Patient',phone:userId});
+        if(user)
+        {
+            let appointment;
+            for(let u of user.doctors)
+            {
+                if(u.id === req.body.id)
+                {
+                    appointment = u;
+                    break;
+                }
+            }
+
+            if(appointment){
+                return res.json({
+                    status:true,
+                    appointment:appointment
+                })
+            }
+            else{
+                return res.json({
+                    status:false,
+                    msg:'No Appointment Found'
+                }) 
+            }
+        }
+        else{
+            return res.json({
+                status:false,
+                msg:'Invalid User'
+            })
+        }
+    }
+    else{
+        return res.json({
+        status:false,
+        msg:'Invalid User'
+        })
+    }
+    
+    }
 
 module.exports.myBillings = async(req, res) => {
     let user = await User.findById(req.user.id);
