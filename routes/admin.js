@@ -21,6 +21,11 @@ router.get('/addtest',passport.checkAdminAuthentication, adminController.addtest
 router.get('/a-consult',passport.checkAdminAuthentication, adminController.aconsult);
 router.get('/addconsult',passport.checkAdminAuthentication, adminController.addconsult);
 router.post('/addtest',passport.checkAdminAuthentication, adminController.atest);
+router.post('/add-speciality',passport.checkAdminAuthentication, adminController.addSpecialityData);
+router.post('/update-speciality',passport.checkAdminAuthentication, adminController.updateSpeciality);
+router.get('/delete-speciality',passport.checkAdminAuthentication, adminController.deleteSpeciality);
+router.get('/add-speciality',passport.checkAdminAuthentication, adminController.addSpeciality);
+router.get('/edit-speciality',passport.checkAdminAuthentication, adminController.editSpeciality);
 router.post('/updatetest',passport.checkAdminAuthentication, adminController.updatetest);
 router.get('/blank-page',passport.checkAdminAuthentication, adminController.blankPage);
 router.get('/components',passport.checkAdminAuthentication, adminController.componentsList);

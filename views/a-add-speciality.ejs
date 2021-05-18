@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/patient-profile  30 Nov 2019 04:12:09 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Doccure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="/js/html5shiv.min.js"></script>
+			<script src="/js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+<%-include('header')%>
+        <!-- Header -->
+      
+        <div class="breadcrumb-bar setting-bread" style="padding-top: 120px;">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/index-2">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Speciality</li>
+                            </ol>
+                        </nav>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!-- Profile Sidebar -->
+
+                    <!-- /Profile Sidebar -->
+
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+                                <form action="/admin/add-speciality" method="POST" enctype="multipart/form-data">
+                                    <div class="row form-row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <div class="change-avatar">
+                                                    <div class="profile-img">
+                                                        <img id="blah" src="#" alt="Select Image">
+                                                    </div>
+                                                    <div class="upload-img">
+                                                        <div class="change-photo-btn">
+                                                            <span><i class="fa fa-upload"></i>Upload Photo</span>
+                                                            <input type="file" class="upload" id="imageUpload" name="avatar">
+                                                        </div>
+                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label> Name</label>
+                                                <input type="text" placeholder="Enter The Speciality Name" name="name" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <input type="text" placeholder="Enter The Description" name="description" class="form-control" value="">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="submit-section" style="margin-top: 30px;">
+                                            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                                        </div>
+                                </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Header -->
+
+            <!-- Breadcrumb -->
+
+            <!-- /Breadcrumb -->
+
+            <!-- Page Content -->
+
+            <!-- /Page Content -->
+
+            <!-- Footer -->
+            <%-include('footer')%>
+            <!-- /Footer -->
+
+        </div>
+        <!-- /Main Wrapper -->
+
+        <!-- Add Medical Records Modal -->
+
+        <!-- /Add Medical Records Modal -->
+
+        <!-- jQuery -->
+        <script src="/js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+
+        <!-- Datetimepicker JS -->
+        <script src="/js/moment.min.js"></script>
+        <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+        <!-- Sticky Sidebar JS -->
+        <script src="/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+        <script src="/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+
+        <!-- Custom JS -->
+        <script src="/js/script.js"></script>
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]); // convert to base64 string
+                }
+            }
+
+            $("#imageUpload").change(function() {
+                readURL(this);
+            });
+        </script>
+        <script>
+            <%if(flash.success && flash.success.length>0){%>
+            new Noty({
+                theme: 'metroui ',
+                text: '<%=flash.success%>',
+                type: 'success',
+                layout: 'topRight',
+                timeout: 3000
+            }).show();
+            <%}%>
+            <%if(flash.error && flash.error.length>0){%>
+            new Noty({
+                theme: 'metroui',
+                text: '<%=flash.error%>',
+                type: 'error',
+                layout: 'topRight',
+                timeout: 3000
+            }).show();
+            <%}%>
+        </script>
+
+</body>
+
+<!-- doccure/patient-profile  30 Nov 2019 04:12:13 GMT -->
+
+</html>

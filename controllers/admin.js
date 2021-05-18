@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Test = require('../models/test');
 const Consult = require('../models/consult');
+const Specialities = require('../models/specialities')
 const fs = require('fs');
 const path = require('path');
 const accountChangeAlert = require('../mailers/account-change');
@@ -36,6 +37,16 @@ module.exports.addtest = async(req, res) => {
         title: 'Add Test'
     })
 }
+
+module.exports.addSpeciality = async(req, res) => {
+
+
+    return res.render('a-add-speciality', {
+
+        title: 'Add Speciality'
+    })
+}
+
 module.exports.applicationRequest = async(req, res) => {
     let user = await User.find({ type:'Doctor',step4: true });
     return res.render('a-application-request', {
@@ -99,6 +110,26 @@ module.exports.deletetest = async function(req, res) {
     return res.redirect('back');
 
 }
+
+module.exports.deleteSpeciality = async function(req, res) {
+
+
+    let test = await Specialities.findOne({ _id: req.query.id });
+
+    if(test.avatar)
+    {
+
+    fs.unlinkSync(path.join(__dirname, '..', test.avatar));
+}
+
+
+    let prope = await Specialities.deleteOne({ _id: req.query.id });
+
+    req.flash('success', 'Test removed Successfully');
+    return res.redirect('back');
+
+}
+
 module.exports.deleteconsult = async function(req, res) {
 
 
@@ -127,10 +158,14 @@ module.exports.edittest = async function(req, res) {
         title: 'Edit Test',
         test: test
     })
-
-
-
-
+}
+module.exports.editSpeciality = async function(req, res) {
+    let test = await Specialities.findOne({ _id: req.query.id });
+    
+    return res.render('a-edit-speciality', {
+        title: 'Edit Speciality',
+        test: test
+    })
 }
 module.exports.updatetest = async function(req, res) {
 
@@ -162,6 +197,41 @@ module.exports.updatetest = async function(req, res) {
 
             req.flash('success', 'Test updated Successfully');
             return res.redirect('/admin/a-test');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+module.exports.updateSpeciality = async function(req, res) {
+
+    try {
+
+        Specialities.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let test = await Specialities.findById(req.body.id);
+            test.department = req.body.name,
+                test.description = req.body.description
+            if (req.file) {
+                let newPath = Specialities.avatarPath + '/' + req.file.filename;
+                test.avatar = newPath;
+            }
+
+
+
+            test.save();
+            console.log(test);
+
+            req.flash('success', 'Test updated Successfully');
+            return res.redirect('/admin/specialities');
 
         });
 
@@ -215,6 +285,42 @@ module.exports.atest = async function(req, res) {
     }
 
 }
+
+module.exports.addSpecialityData = async function(req, res) {
+
+    try {
+        Specialities.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let specialities = await Specialities.find({});
+            let length = specialities.length;
+            let speciality = await Specialities.create({
+                department: req.body.name,
+                description:req.body.description,
+            });
+            if(req.file)
+            {
+            let newPath = Specialities.avatarPath + '/' + req.file.filename;
+            speciality.avatar = newPath;
+            }
+
+            speciality.save();
+            req.flash('success', 'Speciality Added Successfully');
+            return res.redirect('/admin/specialities');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+
 module.exports.addConsultData = async function(req, res) {
 
     try {
@@ -681,9 +787,11 @@ module.exports.tablesBasic = (req, res) => {
         title: 'tablesBasic'
     })
 }
-module.exports.specialities = (req, res) => {
-    return res.render('a-specialities', {
-        title: 'Specialities List'
+module.exports.specialities = async (req, res) => {
+let specialities = await Specialities.find({});
+    return res.render('a-specialities1', {
+        title: 'Specialities List',
+        specialities:specialities
     })
 }
 module.exports.transactionsList = (req, res) => {

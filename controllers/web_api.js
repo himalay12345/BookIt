@@ -3,6 +3,7 @@ const User = require('../models/user');
 const client = require('twilio')(config.accountSID, config.authToken);
 const Test = require('../models/test');
 const Consult = require('../models/consult');
+const Specialities = require('../models/specialities')
 const bcrypt = require('bcrypt')
 const fs = require('fs');
 const path = require('path');
@@ -133,9 +134,6 @@ module.exports.Filter = async function(req, res) {
     }
 }
 
-
-
-
 module.exports.home = async (req, res) => {
     let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
     let data = [];
@@ -182,6 +180,7 @@ module.exports.home = async (req, res) => {
 }
 
 module.exports.doctors = async (req, res) => {
+    let specialities = await Specialities.find({});
     let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
  
     let doctors = [];
@@ -292,7 +291,8 @@ module.exports.doctors = async (req, res) => {
     res.json({
         status:'true',
         premium_doctors:p_doctors,
-        doctors:doctors
+        doctors:doctors,
+        specialities:specialities
     });
 }
 
@@ -868,6 +868,7 @@ module.exports.sendOtp = async(req,res) => {
 }
 
 
+
 module.exports.forgotSendOtp = async(req,res) => {
     if(req.body.phone.length>10)
     {
@@ -1003,119 +1004,6 @@ return res.json({
 
 }
 
-
-module.exports.login = async function(req, res) {
-    let user = await User.findOne({phone:req.body.phone,service:'phone'})
-
-    if(!user)
-    {
-        return res.json({
-            status:false,
-            msg:'Not Registered ! Please Create a account'
-        })
-       
-    }
-  
-  else{
-
-    if(user.encrypt)
-    {
-        let isEqual = await bcrypt.compare(req.body.password,user.password)
-       
-        if(isEqual){
-
-            if(user.twofactor)
-            {
-                client
-                .verify
-                .services(config.serviceID)
-                .verifications
-                .create({
-                    to: `+91${req.body.phone}`,
-                    channel: 'sms'
-                }).then((data) => {
-                    return res.json({
-                        twofactor:true,
-                        status:true,
-                        phone:req.body.phone,
-                        msg:'Otp Sent To Registered Phone'
-                    })
-                });
-            }
-
-            else{
-                res.header("Access-Control-Allow-Origin", "true");
-                return res.json({
-                    twofactor:false,
-                    status:true,
-                    user:user.name
-                })
-               
-            }
-
-            
-           
-            
-           
-        }
-        else{
-            return res.json({
-                status:false,
-                msg:'Invalid Username/Password'
-            })
-           
-        }
-    }
-        else {
-            if(user.password != req.body.password)
-            {
-                return res.json({
-                    status:false,
-                    msg:'Invalid Username/Password'
-                })
-            }
-
-            else{
-
-              if(user.twofactor)
-            {
-                client
-                .verify
-                .services(config.serviceID)
-                .verifications
-                .create({
-                    to: `+91${req.body.phone}`,
-                    channel: 'sms'
-                }).then((data) => {
-                    return res.json({
-                        twofactor:true,
-                        status:true,
-                        user:user.name,
-                        msg:'Otp Sent To Registered Phone'
-                    })
-                });
-            }
-
-            else{
-                res.header("Access-Control-Allow-Origin", "true");
-                return res.json({
-                    twofactor:false,
-                    status:true,
-                    user:user.name
-                })
-              
-            }
-            }
-           
-    }
-
-   
-
-  }
-
-}
-
-
 module.exports.getUserDetails = async (req,res) => {
     var userId;
     if (req.headers && req.headers.authorization) {
@@ -1175,7 +1063,7 @@ module.exports.jwtLogin = async (req,res) => {
         return res.status(404).json({ meassage: 'Body Empty'});
     }
 
-    let accessToken = jwt.sign({phone}, "access" , {expiresIn: 30});
+    let accessToken = jwt.sign({phone}, "access" , {expiresIn: '1h'});
     let refreshToken = jwt.sign({phone},"refresh",{expiresIn: '7d'});
     // refreshTokens.push(refreshToken)
 
@@ -1227,33 +1115,6 @@ module.exports.getUserInfo = async function(req, res) {
     res.send(req.user)
 }
 
-
-module.exports.verify2FactorOtp = async(req, res) => {
-  
-    let user = await User.findOne({phone:req.body.phone,service:'phone'})
-    let data = await client
-        .verify
-        .services(config.serviceID)
-        .verificationChecks
-        .create({
-            to: `+91${req.body.phone}`,
-            code: req.body.otp
-        });
-
-
-    if (data.status == 'approved') {
-       return res.json({
-           status:true
-       })
-
-    } else {
-        return res.json({
-            status:false
-        })
-
-    }
-}
-
 function getUserId(headers)
 {
     var userId;
@@ -1269,12 +1130,150 @@ function getUserId(headers)
     }
 
 }
+
+module.exports.login = async function(req, res) {
+    let user = await User.findOne({phone:req.body.phone,service:'phone'})
+
+    if(!user)
+    {
+        return res.json({
+            status:false,
+            msg:'Not Registered ! Please Create a account'
+        })
+       
+    }
+  
+  else{
+
+    if(user.encrypt)
+    {
+        let isEqual = await bcrypt.compare(req.body.password,user.password)
+       
+        if(isEqual){
+
+            if(user.twofactor)
+            {
+                client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: 'sms'
+                }).then((data) => {
+                    return res.json({
+                        twofactor:true,
+                        status:true,
+                        phone:req.body.phone,
+                        password:req.body.password,
+                        msg:'Otp Sent To Registered Phone'
+                    })
+                });
+            }
+
+            else{
+                return res.json({
+                    twofactor:false,
+                    status:true,
+                    user:user.name
+                })
+               
+            }
+           
+        }
+        else{
+            return res.json({
+                status:false,
+                msg:'Invalid Username/Password'
+            })
+           
+        }
+    }
+        else {
+            if(user.password != req.body.password)
+            {
+                return res.json({
+                    status:false,
+                    msg:'Invalid Username/Password'
+                })
+            }
+
+            else{
+
+              if(user.twofactor)
+            {
+                client
+                .verify
+                .services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+91${req.body.phone}`,
+                    channel: 'sms'
+                }).then((data) => {
+                    return res.json({
+                        twofactor:true,
+                        status:true,
+                        user:user.name,
+                        phone:req.body.phone,
+                        password:req.body.password,
+                        msg:'Otp Sent To Registered Phone'
+                    })
+                });
+            }
+
+            else{
+                return res.json({
+                    twofactor:false,
+                    status:true,
+                    user:user.name
+                })
+            }
+            }
+           
+    }
+
+   
+
+  }
+
+}
+
+module.exports.verify2FactorOtp = async(req, res) => {
+
+     
+      let data = await client
+        .verify
+        .services(config.serviceID)
+        .verificationChecks
+        .create({
+            to: `+91${req.body.phone}`,
+            code: req.body.otp
+        });
+
+
+    if (data.status == 'approved') {
+       return res.json({
+           status:true,
+           msg:'Otp Verified'
+       })
+
+    } else {
+        return res.json({
+            status:false,
+            msg:'Otp Not Verified',
+            phone:req.body.phone
+        })
+
+    }
+}
+
 module.exports.profileSettings = async function(req, res) {
 
     try {
 
         let userId = await getUserId(req.headers)
         if(userId){
+            let imgUrl;
         let user = await User.findOne({service:'phone',type:'Patient',phone:userId})
             User.uploadedAvatar(req, res, function(err) {
                 if (err) { console.log('*******Multer Error', err); return; }
@@ -1306,6 +1305,7 @@ module.exports.profileSettings = async function(req, res) {
                 if (req.files['avatar']) {
                     if (!user.avatar) {
                         user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                        imgUrl = User.avatarPath + '/' + req.files['avatar'][0].filename;
                     } else {
                         if (fs.existsSync(path.join(__dirname, '..', user.avatar))) {
     
@@ -1314,9 +1314,11 @@ module.exports.profileSettings = async function(req, res) {
                         }
     
                         user.avatar = User.avatarPath + '/' + req.files['avatar'][0].filename;
+                        imgUrl = User.avatarPath + '/' + req.files['avatar'][0].filename;
     
                     }
                 }
+
     
                 const rand = Math.floor((Math.random() * 100) + 54);
                 
@@ -1340,13 +1342,15 @@ module.exports.profileSettings = async function(req, res) {
     
     
                 user.save();
+                return res.json({
+                    status:true,
+                    msg:'Profile Updated Now',
+                    imgUrl:imgUrl,
+                    user:user
+                })
     
             });
-            return res.json({
-                status:true,
-                msg:'Profile Updated',
-                user:user
-            })
+           
     }else{
         return res.json({
         status:false,
@@ -1426,6 +1430,7 @@ module.exports.updateProfile = async function(req, res) {
             user.save();
             return res.json({
                 status:'true',
+                avatar:User.avatarPath + '/' + req.files['avatar'][0].filename,
                 user:user,
                 msg:'Profile Updated'
             })
@@ -1444,13 +1449,18 @@ module.exports.updateProfile = async function(req, res) {
 module.exports.myAppointments = async(req, res) => {
 let userId = await getUserId(req.headers)
 if(userId){
-    let user = await User.findOne({service:'phone',type:'Patient',phone:userId});
-    if(user)
+    let query = User.findOne({service:'phone',type:'Patient',phone:userId})
+    .sort({'doctors.createdAt':'desc'})
+
+    let promise = query.exec();
+    if(promise)
     {
-    return res.json({
-        status:true,
-        appointments:user.doctors
-    })
+        promise.then(doctors => {
+            return res.json({
+                status:true,
+                appointments:doctors.doctors
+            })
+        });
     }
     else{
         return res.json({
@@ -1513,42 +1523,115 @@ module.exports.appointmentDetail = async(req, res) => {
     
     }
 
-module.exports.myBillings = async(req, res) => {
-    let user = await User.findById(req.user.id);
-    if(user)
-    {
-    return res.json({
-        status:'true',
-        billings:user.doctors
-    })
-}
-else{
-    return res.json({
-        status:'false'
-    })
-}
-}
-
 module.exports.myFavourites = async(req, res) => {
-    let user = await User.findById(req.user.id);
+      let userId = await getUserId(req.headers)
+    if(userId){
+        let user = await User.findOne({service:'phone',type:'Patient',phone:userId});
     if(user)
     {
     return res.json({
-        status:'true',
+        status:true,
         favourites:user.favourites
     })
 }
 else{
     return res.json({
-        status:'false'
+        status:false,
+        msg:'Invalid User'
+    })
+}
+}
+else{
+    return res.json({
+    status:false,
+    msg:'Invalid User'
+    })
+}
+}
+
+module.exports.addFavourite = async(req, res) => {
+    let userId = await getUserId(req.headers)
+    if(userId){
+        console.log(req.body)
+        let patient = await User.findOne({service:'phone',type:'Patient',phone:userId});
+        let doctor = await User.findById(req.body.id);
+        if(!patient || !doctor)
+        {
+            return res.json({
+                status:false,
+                msg:'Not verified'
+            })
+        }
+
+        else{
+            patient.favourites.push({
+                dname:doctor.name,
+                davatar:doctor.avatar,
+                did:doctor._id,
+                ddept:doctor.department,
+                daddress:doctor.clinicaddr,
+                dcname:doctor.clinicname,
+                dcity:doctor.contacts.city,
+                dstate:doctor.contacts.state,
+                dfee:doctor.booking_fee
+            });
+            patient.save();
+            return res.json({
+                status:true,
+                msg:'Favourite Added'
+            })
+        }
+}
+else{
+    return res.json({
+    status:false,
+    msg:'Invalid User'
+    })
+}
+}
+
+module.exports.removeFavourite = async(req, res) => {
+    let userId = await getUserId(req.headers)
+    if(userId){
+        console.log(req.body)
+        let patient = await User.findOne({service:'phone',type:'Patient',phone:userId});
+        if(!patient || !req.body.id)
+        {
+            return res.json({
+                status:false,
+                msg:'Not verified'
+            })
+        }
+
+            patient.favourites.pull(req.body.id)
+            patient.save();
+            return res.json({
+                status:true,
+                msg:'Favourite Removed'
+            })
+        }
+
+else{
+    return res.json({
+    status:false,
+    msg:'Invalid User'
     })
 }
 }
 
 module.exports.changePassword = async(req, res) => {
-    let user = await User.findOne({ phone: req.body.phone, service:'phone' });
-
+let userId = await getUserId(req.headers)
+if(userId){
+    console.log(req.body)
+    let user = await User.findOne({service:'phone',phone:userId});
     let isEqual;
+    if(!req.body.password || !req.body.confirm || !req.body.old)
+    {
+        return res.json({
+            status:false,
+            msg:'Body incomplete'
+        })
+    }
     if(user.encrypt){
     isEqual = await bcrypt.compare(req.body.old,user.password)
     }
@@ -1564,7 +1647,7 @@ module.exports.changePassword = async(req, res) => {
     if (isEqual) {
         if (req.body.password != req.body.confirm) {
             return res.json({
-                status:'false',
+                status:false,
                 msg:'Password Mismatch!'
             })
         }
@@ -1577,13 +1660,13 @@ module.exports.changePassword = async(req, res) => {
         user.save();
     
       return res.json({
-          status:'true',
+          status:true,
           msg:'Password Changed'
       })
     }
     else{
         return res.json({
-            status:'false',
+            status:false,
             msg:'Wrong Old Password!'
         })
         
@@ -1592,6 +1675,137 @@ module.exports.changePassword = async(req, res) => {
 
   
 }
+else{
+    return res.json({
+    status:false,
+    msg:'Invalid User'
+    })
+}
+
+}
+
+module.exports.twoFactor = async(req, res) => {
+    let userId = await getUserId(req.headers)
+    if(userId){
+        let user = await User.findOne({service:'phone',phone:userId});  
+    if(req.body.flag === true || req.body.flag === false)
+    {
+        console.log(req.body)
+       
+            client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${user.phone}`,
+                channel: 'sms'
+            }).then((data) => {
+                // console.log(data);
+                return res.json({
+                   status:'true',
+                   msg:'Otp sent successfully',
+                   phone:user.phone,
+                   flag:req.body.flag
+                })
+            });
+    }
+    else{
+        return res.json({
+            status:false,
+            msg:'No Body'
+            }) 
+    }
+}
+else{
+    return res.json({
+    status:false,
+    msg:'Invalid User'
+    })
+}
+}
+
+module.exports.enable2Factor = async(req, res) => {
+    console.log(req.body)
+    let userId = await getUserId(req.headers)
+    if(userId){
+    let data = await client
+    .verify
+    .services(config.serviceID)
+    .verificationChecks
+    .create({
+        to: `+91${req.body.phone}`,
+        code: req.body.otp
+    });
+
+
+if (data.status == 'approved') {
+    let user = await User.findOne({service:'phone',phone:userId});  
+    if(req.body.flag === true){
+    user.twofactor = true;
+    user.save();
+    return res.json({
+        status:true,
+        msg:'Two Factor Enabled',
+        twofactor:true
+    })
+    }
+    else if(req.body.flag === false){
+        user.twofactor = false;
+        user.save();
+        return res.json({
+            status:true,
+            msg:'Two Factor Disabled',
+            twofactor:false
+        })
+    }
+
+    else{
+        return res.json({
+            status:false,
+            msg:'No Body'
+            }) 
+    }
+
+} else {
+    return res.json({
+        status:false,
+        msg:'Otp Not Verified',
+        flag:req.body.flag,
+        phone:req.body.phone
+    })
+
+}
+    }
+    else{
+        return res.json({
+        status:false,
+        msg:'Invalid User'
+        })
+    }
+}
+
+// module.exports.deleteAccount = async(req, res) => {
+//     let userId = await getUserId(req.headers)
+//     if(userId){
+//         let user = await User.findOne({service:'phone',phone:userId});  
+//     console.log(req.body);
+//     Feedback.create({
+//         delete_value: req.body.delete,
+//         description: req.body.del_description,
+//         did:user.id
+//     });
+   
+//     if(user.type == 'Patient')
+//     {
+        
+//     }
+
+//     return res.redirect('/');
+// }
+// }
+
+
+
 
 
 

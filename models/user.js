@@ -183,6 +183,12 @@ const userSchema = mongoose.Schema({
         dfee:{
             type: String
         },
+        dcname:{
+            type: String
+        },
+        daddress:{
+            type: String
+        },
         did:{
             type:  mongoose.Schema.Types.ObjectId
         }
@@ -386,6 +392,9 @@ const userSchema = mongoose.Schema({
             type:String
         },
         cname:{
+            type:String
+        },
+        caddr:{
             type:String
         },
         dsid:{
