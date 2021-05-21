@@ -43,6 +43,8 @@ router.post('/remove-favourite',authenticateWebToken,webApiController.removeFavo
 router.post('/change-password',authenticateWebToken,webApiController.changePassword);
 router.post('/two-factor',authenticateWebToken,webApiController.twoFactor);
 router.post('/enable-two-factor',authenticateWebToken,webApiController.enable2Factor)
+router.post('/saved-patients',authenticateWebToken,webApiController.savedPatients)
+router.post('/checkout',authenticateWebToken,webApiController.checkout)
 
 
 module.exports = router;

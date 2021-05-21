@@ -1784,6 +1784,95 @@ if (data.status == 'approved') {
     }
 }
 
+module.exports.savedPatients = async(req, res) => {
+    let userId = await getUserId(req.headers)
+    if(userId){
+        let user = await User.findOne({service:'phone',phone:userId,type:'Patient'});
+        if(user)
+        {
+            if(user.others.length>0)
+            {
+                return res.json({
+                    status:true,
+                    flag:true,
+                    patients:user.others
+                })
+           }
+           else{
+            return res.json({
+                status:true,
+                flag:false,
+                patients:user.others
+            })
+           }
+        }
+        else{
+            return res.json({
+                status:false,
+                msg:'Invalid User'
+                })
+        }
+    }
+    else{
+        return res.json({
+        status:false,
+        msg:'Invalid User'
+        })
+    }
+}
+
+module.exports.checkout = async (req, res) => {
+console.log(req.body)
+let userId = await getUserId(req.headers)
+    if(userId){
+    let patient = await User.findOne({service:'phone',type:'Patient',phone:userId});
+    if (req.body.new) {
+        patient.others.push({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            address: req.body.address,
+            age: req.body.age,
+            gender:req.body.gender
+        });
+
+        patient.save()
+    }
+    let user = await User.findById(req.body.did);
+    let account_id = user.accountid;
+    let percantage_fee = parseInt(user.booking_fee) - parseInt(user.booking_fee)*0.04;
+    if(user.poc)
+    {
+        return res.json({
+            status:true,
+            poc:true,
+            online:false,
+            msg:'Display Both Option Pay on clinic and pay online',
+            did:req.body.did,
+            new:req.body.new
+        })
+    }
+
+    else{
+        return res.json({
+            status:true,
+            poc:false,
+            online:true,
+            new:req.body.new,
+            msg:'Display only Pay online',
+            did:req.body.did,
+            accountid:account_id,
+            percantage_fee:percantage_fee
+        })
+    }
+}
+else{
+        return res.json({
+        status:false,
+        msg:'Invalid User'
+        })
+    }
+}
 // module.exports.deleteAccount = async(req, res) => {
 //     let userId = await getUserId(req.headers)
 //     if(userId){
