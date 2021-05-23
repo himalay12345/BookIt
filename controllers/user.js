@@ -6427,7 +6427,7 @@ module.exports.login = async function(req, res) {
 
     else{
 
-    if (!user || user.password != password) {
+    if (!user || user.password != req.body.password) {
         res.status(403).json({
             status:false,
             msg:'Invalid Username/Password'
