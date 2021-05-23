@@ -6276,7 +6276,7 @@ if(user)
 }
 
 else{
-    if(req.body.phone.length>10 || req.body.length < 10)
+    if(req.body.phone.length>10 || req.body.phone.length < 10)
     {
         res.json({
             status:false,
