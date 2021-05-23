@@ -2597,13 +2597,13 @@ module.exports.orderValidation = async function(req, res){
                     msg:'Please enter the did.'
                 })
             }
-            if(!req.body.slotindex)
-            {
-                return res.status(422).json({
-                    status:false,
-                    msg:'Please enter the slotindex.'
-                })
-            }
+            // if(!req.body.slotindex)
+            // {
+            //     return res.status(422).json({
+            //         status:false,
+            //         msg:'Please enter the slotindex.'
+            //     })
+            // }
             if(!req.body.dayindex)
             {
                 return res.status(422).json({
@@ -2625,9 +2625,6 @@ module.exports.orderValidation = async function(req, res){
                             key_secret: env.razorpay_key_secret
                         
                     });
-        
-                  
-        
         
                     const payment_capture = 1;
                     const amount = doctor.booking_fee;
@@ -2658,16 +2655,12 @@ module.exports.orderValidation = async function(req, res){
                             account: doctor.accountid,
                             amount: vendor_amount*100,
                             currency: "INR"
-                           
-                            
                             }
                         ]
-        
-                
                 });
 
                 return res.json({
-                    status:'true',
+                    status:true,
                     amount: response.amount,
                     orderid: response.id,
                     currency: response.currency,
@@ -2681,8 +2674,6 @@ module.exports.orderValidation = async function(req, res){
                     age:req.body.age,
                     gender:req.body.gender,
                     address:req.body.address
-                    
-        
                 })
             } 
         }
