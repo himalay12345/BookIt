@@ -6270,15 +6270,17 @@ let user = await User.findOne({phone:req.body.phone,service:'phone'})
 if(user)
 {
     res.json({
-        status:true
+        status:true,
+        hasAccount:true
     })
 }
 
 else{
-    if(req.body.phone.length>10)
+    if(req.body.phone.length>10 || req.body.length < 10)
     {
         res.json({
-            length:true
+            status:false,
+            msg:'Please enter the 10 digit phone number !'
         })
     }
 
@@ -6296,6 +6298,7 @@ else{
            {
            res.json({
                status:true,
+               hasAccount:false,
                msg:'Otp sent Successfully'
            })
         }
