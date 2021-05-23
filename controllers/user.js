@@ -6398,6 +6398,52 @@ module.exports.createUserSession = async function(req, res) {
 
 }
 
+module.exports.login = async function(req, res) {
+    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+    const users = {
+        username:user.phone
+    }
+    const accessToken = generateAccessToken(users);
+    
+    if( user && user.encrypt)
+    {
+       
+        let isEqual = await bcrypt.compare(req.body.password,user.password)
+       
+        if(isEqual){
+            return res.json({
+                accessToken:accessToken,
+                user:user
+                
+            })
+        }
+        else{
+            res.status(403).json({
+                status:false,
+                msg:'Invalid Username/Password'
+            })
+        }
+    }
+
+    else{
+
+    if (!user || user.password != password) {
+        res.status(403).json({
+            status:false,
+            msg:'Invalid Username/Password'
+        })
+    }
+
+    return res.json({
+        accessToken:accessToken,
+        user:user
+        
+    })
+}
+  
+
+}
+
 module.exports.demo = async function(req,res){
     let user =  await User.findOne({phone:req.user.username,service:'phone',type:'Patient'})
     res.json({

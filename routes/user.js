@@ -115,6 +115,7 @@ router.get('/delete-expenses1',userController.deleteExpenses1)
 router.get('/delete-entry',userController.deleteEntry)
 // -------------------------------------------
 router.get('/validate-user',jwt.authenticateToken, userController.demo);
+router.post('/jwt-login',userController.login);
 router.post('/check-authentication',userController.checkAuthentication);
 router.post('/create-user-account',userController.createUserAccount);
 router.post('/create-user-session', passport.authenticate('local', {
