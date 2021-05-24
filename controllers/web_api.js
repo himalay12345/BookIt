@@ -1071,7 +1071,7 @@ module.exports.jwtLogin = async (req,res) => {
         return res.status(404).json({ meassage: 'Body Empty'});
     }
 
-    let accessToken = jwt.sign({phone}, "access" , {expiresIn: '1h'});
+    let accessToken = jwt.sign({phone}, "access" , {expiresIn: '5d'});
     let refreshToken = jwt.sign({phone},"refresh",{expiresIn: '7d'});
     // refreshTokens.push(refreshToken)
 
@@ -3330,6 +3330,112 @@ module.exports.orderValidation = async function(req, res){
                     msg:'Please select the correct payment method.'
                 })
             }
+}
+
+module.exports.cancelAppointment = async function(req, res) {
+
+    try {
+                console.log(req.body)
+                let userId = await getUserId(req.headers)
+                let user = await User.findById(req.body.did);
+                let staff;
+                if(user.staff_id){
+                staff = await User.findById(user.staff_id);
+                }
+                let user1 = await User.findOne({phone:userId,type:'Patient',service:'phone'});
+
+                       let n1 = await User.updateOne({ "_id" : user1._id, "doctors.payment_id": user1.doctors[req.query.index].payment_id }, {
+                            '$set': {
+                                
+                                'doctors.$.cancel': true
+                                
+                            }
+                        });
+                        let n2 = await User.updateOne({ "_id" : req.query.id, "patients.payment_id": user1.doctors[req.query.index].payment_id }, {
+                            '$set': {
+                                
+                                'patients.$.cancel': true
+                                
+                            }
+                        });
+                        if(staff)
+                        {
+                        let n3 = await User.updateOne({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.query.index].payment_id }, {
+                            '$set': {
+                                
+                                'booking.$.cancel': true
+                                
+                            }
+                        });
+                    }
+                        if(typeof(user.schedule_time[req.query.dayindex].start) == 'object')
+                        {
+                            let available1 = [];
+                            let k = req.query.slotindex;
+                            let id = user.schedule_time[req.query.dayindex]._id;
+
+                            let j = user.schedule_time[req.query.dayindex].available;
+                            var a2 = parseInt(user.schedule_time[req.query.dayindex].available[req.query.slotindex]);
+                            console.log(a2);
+                            for(var temp =0;temp<user.schedule_time[req.query.dayindex].start.length;temp++)
+                                {
+                                    if(temp == k)
+                                    {
+                                        available1.push(a2+1);
+                                        continue;
+                                    }
+                                    var temp1 = parseInt(j[temp]);
+                                    available1.push(temp1);
+                                }
+                            let day = await User.updateOne({ 'schedule_time._id': id }, {
+                                '$set': {
+                                    
+                                    'schedule_time.$.available': available1
+                                    
+                                }
+                            });
+                            // user.schedule_time[0].available[0] = 5;
+                            user.save();
+                        }
+                        else{
+                            var a1 = parseInt(user.schedule_time[req.query.dayindex].available);
+                            
+                            user.schedule_time[req.query.dayindex].available= a1 + 1 ;
+                            user.save();
+
+                        }
+                        user1.notification.push({
+                            type:'appointment-cancel',
+                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time ,
+                            flag:true,
+                            did:req.query.id
+                        });
+                        
+                        
+                        user1.save();
+                        
+                        client.messages
+                        .create({
+                            body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
+                            from: '+12019755459',
+                            statusCallback: 'http://postb.in/1234abcd',
+                            to: '+91'+req.query.phone
+                        })
+                        .then(message => console.log(message.sid));
+                        appointmentCancelAlert.newAlert(req.query.date,req.query.time,req.query.email,user,user1);
+                        
+                        return res.render('refund',{
+                            title:'Refund',
+                            doctor:user,
+                            slotindex:req.query.slotindex,
+                            dayindex:req.query.dayindex
+                        });
+                
+    
+}catch (err) {
+        console.log('Error', err);
+        return;
+    }
 }
 
 // module.exports.deleteAccount = async(req, res) => {

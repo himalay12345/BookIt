@@ -378,6 +378,102 @@ module.exports.login = async function(req, res) {
     
     }
 
+module.exports.forgotSendOtp = async(req,res) => {
+    if(!req.body.phone)
+    {
+        return res.status(403).json({
+            status:false,
+            msg:'Please enter a phone number'
+        })
+    }
+
+    if(!req.body.service)
+    {
+        return res.status(403).json({
+            status:false,
+            msg:'Please enter the service'
+        })
+    }
+    if(req.body.phone.length>10 || req.body.phone.length<10)
+    {
+        return res.status(403).json({
+            status:false,
+            msg:'Please enter a 10 digit phone number'
+        })
+    }
+    
+    let user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+
+    if (!user) {
+        return res.json({
+            status:false,
+            msg:'No Account Linked with this number'
+        })
+    } else {
+
+        client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: req.body.service
+            }).then((data) => {
+                return res.json({
+                    status:true,
+                    msg:'Otp Sent Successfully'
+                    })
+            });
+
+    }
+}
+
+module.exports.resetPassword = async(req, res) => {
+
+    if (!req.body.password) {
+        return res.status(403).json({
+            msg:'Please enter a password',
+            status:false
+        })
+    }
+    if (!req.body.phone) {
+        return res.status(403).json({
+            msg:'Please enter a phone number',
+            status:false
+        })
+    }
+    if (!req.body.confirm) {
+        return res.status(403).json({
+            msg:'Please enter a Confirm Password',
+            status:false
+        })
+    }
+    
+    if (req.body.password != req.body.confirm) {
+        return res.json({
+            msg:'Password Mismatch',
+            status:false,
+            phone: req.body.phone
+        })
+    }
+
+        let user = await User.findOne({ phone: req.body.phone , type:'Patient', service:'phone'});
+
+        let hashedPass = await bcrypt.hash(req.body.password,10)
+        user.password = hashedPass;
+        if(!user.encrypt)
+        {
+            user.encrypt = true;
+        }
+        user.save();
+
+      return res.json({
+          status:true,
+          msg:'Password Reset Successful'
+      })
+    
+}
+
 // -------------------------------------------
 // User Sign Up Process Start
 // -------------------------------------------

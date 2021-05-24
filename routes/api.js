@@ -17,6 +17,8 @@ router.post('/auth/verify-otp',apiController.verifyOtp)
 router.post('/auth/resend-otp',apiController.resendOtp)
 router.post('/auth/create-user-account',apiController.createUserAccount)
 router.post('/auth/login',apiController.login)
+router.post('/auth/forgot-password',apiController.forgotSendOtp)
+router.post('/auth/reset-password',apiController.resetPassword)
 // -------------------------------------------
 // User Sign Up Process End
 // -------------------------------------------
