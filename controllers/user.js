@@ -6278,9 +6278,9 @@ if(user)
 else{
     if(req.body.phone.length>10 || req.body.phone.length < 10)
     {
-        res.json({
+        return  res.status(403).json({
             status:false,
-            msg:'Please enter the 10 digit phone number !'
+            msg:'Enter a 10 digit phone number'
         })
     }
 
@@ -6303,9 +6303,9 @@ else{
            })
         }
         else{
-            res.json({
+            return  res.status(403).json({
                 status:false,
-                msg:'Otp not sent'
+                msg:'Otp Not sent'
             })
         }
         });
@@ -6321,10 +6321,11 @@ module.exports.createUserAccount = async function(req, res) {
 
         if(req.body.password != req.body.cpassword)
         {
-           res.json({
-               password:'mismatch',
-               msg:'Password Do Not Match'
-           })
+            return  res.status(403).json({
+                status:false,
+                msg:'Password Do Not Match',
+                password:'mismatch'
+            })
         }
 
         else{
@@ -6338,14 +6339,14 @@ module.exports.createUserAccount = async function(req, res) {
             if(user1)
             {
                 
-                res.json({
+                return  res.status(403).json({
                     status:false,
                     msg:'User Already Exists'
                 })
             }
             if(req.body.authkey != process.env.authkey || !req.body.authkey)
            {
-                res.json({
+            return  res.status(403).json({
                     status:false,
                     msg:'Not verified User'
                 })
@@ -6399,11 +6400,19 @@ module.exports.createUserSession = async function(req, res) {
 }
 
 module.exports.login = async function(req, res) {
+
+    if(req.body.phone > 10 || re.body.phone < 10){
+        return  res.status(403).json({
+            status:false,
+            msg:'Enter a 10 digit phone number'
+        })
+    }
     let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
     const users = {
         username:user.phone
     }
     const accessToken = generateAccessToken(users);
+
     
     if( user && user.encrypt)
     {

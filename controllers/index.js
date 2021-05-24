@@ -3718,7 +3718,7 @@ module.exports.verifyUser = async function(req, res) {
     let user = await User.findOne({phone:req.body.phone,service:'phone'})
     if(user)
     {
-        res.json({
+        return  res.status(403).json({
             status:false,
             msg:'User Already Exists'
         })
@@ -3740,7 +3740,7 @@ module.exports.verifyUser = async function(req, res) {
            })
         }
         else{
-            res.json({
+            return  res.status(403).json({
                 status:false,
                 msg:'Otp not sent'
             })
@@ -3774,7 +3774,7 @@ try{
             })
     
         } else {
-            res.json({
+            return  res.status(403).json({
                 status:false,
                 msg:'Otp Not Verified'
             })
@@ -3786,7 +3786,7 @@ try{
     {
         console.log('error',err)
          res.status(404).json({
-        status:'expired',
+        status:false,
         msg:'Otp expired'
     })
     }

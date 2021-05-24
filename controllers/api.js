@@ -9,6 +9,380 @@ const Razorpay = require('razorpay');
 const env = require('../config/environment');
 const shortid = require('shortid');
 const appointmentCancelAlert = require('../mailers/appointment-cancel');
+const bcrypt = require('bcrypt')
+
+// -------------------------------------------
+// User Sign Up Process Start
+// -------------------------------------------
+
+function generateAccessToken(user)
+{
+    return jwt.sign(user,'123456')
+}
+
+
+module.exports.resendOtp = async function(req, res) {
+
+    if(!req.body.phone)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the phone number'
+    })
+    }
+    
+    if(!req.body.service)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the service'
+    })
+    }
+    
+    if(req.body.phone.length>10 || req.body.phone.length <10)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'Please enter 10 digit mobile number'
+        })
+    }
+
+    let user = await User.findOne({phone:req.body.phone,service:'phone'})
+    if(user)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'User Already Exists'
+        })
+    }
+    else{
+        client
+        .verify
+        .services(config.serviceID)
+        .verifications
+        .create({
+            to: `+91${req.body.phone}`,
+            channel: req.body.service
+        }).then((data) => {
+           if(data)
+           {
+           res.json({
+               status:true,
+               msg:'Otp sent Successfully'
+           })
+        }
+        else{
+            return  res.status(403).json({
+                status:false,
+                msg:'Otp not sent'
+            })
+        }
+        });
+    }
+    
+        
+
+    
+}
+
+module.exports.verifyOtp = async function(req, res) {
+try{
+    if(!req.body.phone)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the phone number'
+    })
+    }
+    if(!req.body.otp)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the otp'
+    })
+    }
+    if(req.body.phone.length>10 || req.body.phone.length <10)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'Please enter 10 digit mobile number'
+        })
+    }
+        let data = await client
+            .verify
+            .services(config.serviceID)
+            .verificationChecks
+            .create({
+                to: `+91${req.body.phone}`,
+                code: req.body.otp
+            });
+        
+    
+    
+        if (data.status == 'approved') {
+            res.json({
+                status:true,
+                msg:'Otp Verified Successfully'
+            })
+    
+        } else {
+            return  res.status(403).json({
+                status:false,
+                msg:'Otp Not Verified'
+            })
+    
+        }
+
+    }
+    catch(err)
+    {
+        console.log('error',err)
+         res.status(404).json({
+        status:false,
+        msg:'Otp expired'
+    })
+    }
+    
+
+}
+
+module.exports.checkAuthentication = async function(req, res) {
+
+    try{
+        if(!req.body.phone)
+            { return  res.status(403).json({
+                status:false,
+                msg:'Please enter the phone number'
+            })
+    }
+    let user = await User.findOne({phone:req.body.phone,service:'phone'})
+    if(user)
+    {
+        res.json({
+            status:true,
+            hasAccount:true
+        })
+    }
+    
+    else{
+        if(req.body.phone.length>10 || req.body.phone.length < 10)
+        {
+            return  res.status(403).json({
+                status:false,
+                msg:'Enter a 10 digit phone number'
+            })
+        }
+    
+      
+    
+            client
+            .verify
+            .services(config.serviceID)
+            .verifications
+            .create({
+                to: `+91${req.body.phone}`,
+                channel: 'sms'
+            }).then((data) => {
+               if(data)
+               {
+               res.json({
+                   status:true,
+                   hasAccount:false,
+                   msg:'Otp sent Successfully'
+               })
+            }
+            else{
+                return  res.status(403).json({
+                    status:false,
+                    msg:'Otp Not sent'
+                })
+            }
+            });
+        
+        
+            
+    }
+    }
+    catch(error)
+    {
+        res.status(404).json({
+            status:false,
+            msg:'Otp Not sent'
+        })
+    }
+}
+    
+module.exports.createUserAccount = async function(req, res) {
+
+    if(!req.body.name)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'Please enter the name'
+        })
+    }
+     
+    if(!req.body.phone)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'Please enter the phone number'
+        })
+    }
+    if(!req.body.password)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'Please enter the password'
+        })
+    }
+    if(!req.body.cpassword)
+    {
+        return  res.status(403).json({
+            status:false,
+            msg:'Please enter the confirm password'
+        })
+    }
+    if(!req.body.authkey)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the authkey'
+    })
+        
+    }
+    
+            if(req.body.password != req.body.cpassword)
+            {
+                return  res.status(403).json({
+                    status:false,
+                    msg:'Password Do Not Match',
+                    password:'mismatch'
+                })
+            }
+    
+            else{
+                
+                let user1 = await User.findOne({
+                    phone:req.body.phone,
+                    service:'phone',
+                    type:'Patient'
+                })
+    
+                if(user1)
+                {
+                    
+                    return  res.status(403).json({
+                        status:false,
+                        msg:'User Already Exists'
+                    })
+                }
+                if(req.body.authkey != process.env.authkey || !req.body.authkey)
+               {
+                return  res.status(403).json({
+                        status:false,
+                        msg:'Not verified User'
+                    })
+                
+                }
+                else{
+                    let hashedPass = await bcrypt.hash(req.body.password,10)
+                    let user = await User.create({
+                        name: req.body.name,
+                        phone: req.body.phone,
+                        email:req.body.email,
+                        password: hashedPass, 
+                        encrypt:true,    
+                        service: 'phone',
+                        type: 'Patient'
+                    });
+    
+                    const user1 = {
+                        username:user.phone
+                    }
+                    const accessToken = generateAccessToken(user1);
+                
+                   
+                   res.json({
+                       accessToken:accessToken,
+                       status:true,
+                       msg:'Account Created Successfully',
+                       user:user
+                       
+                   })
+                }
+            
+        }
+        
+    }
+
+module.exports.login = async function(req, res) {
+
+    if(!req.body.phone)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the phone number'
+    })
+    }
+    if(!req.body.password)
+    { return  res.status(403).json({
+        status:false,
+        msg:'Please enter the password'
+    })
+    }
+    
+        if(req.body.phone.length > 10 || req.body.phone.length < 10){
+            return  res.status(403).json({
+                status:false,
+                msg:'Enter a 10 digit phone number'
+            })
+        }
+        let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
+        const users = {
+            username:user.phone
+        }
+        const accessToken = generateAccessToken(users);
+    
+        
+        if( user && user.encrypt)
+        {
+           
+            let isEqual = await bcrypt.compare(req.body.password,user.password)
+           
+            if(isEqual){
+                return res.json({
+                    accessToken:accessToken,
+                    user:user
+                    
+                })
+            }
+            else{
+                res.status(403).json({
+                    status:false,
+                    msg:'Invalid Username/Password'
+                })
+            }
+        }
+    
+        else{
+    
+        if (!user || user.password != req.body.password) {
+            res.status(403).json({
+                status:false,
+                msg:'Invalid Username/Password'
+            })
+        }
+    
+        return res.json({
+            accessToken:accessToken,
+            user:user
+            
+        })
+    }
+      
+    
+    }
+
+// -------------------------------------------
+// User Sign Up Process Start
+// -------------------------------------------
+
+
 
 module.exports.doctorProfile = async (req, res) => {
     let i = await User.findById(req.body.id);

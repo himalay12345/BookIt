@@ -16,6 +16,8 @@ const request = require('request');
 const appointmentAlert = require('../mailers/appointment-alert');
 const appointmentAlert1 = require('../mailers/appointment-cancel1');
 const appointmentCancelAlert = require('../mailers/appointment-cancel');
+const env = require('../config/environment');
+
 
 module.exports.Filter = async function(req, res) {
     console.log(req.body);
@@ -1898,39 +1900,9 @@ module.exports.orderValidation = async function(req, res){
         if(req.body.orderid && req.body.payid)
         {
                 let user = await User.findById(req.body.did);
-                
-                var userId;
-                if (req.headers && req.headers.authorization) {
-                    
-                    var authorization = req.headers.authorization.split(' ')[1];
-                   
-                   
-                      var decoded = jwt.verify(authorization, '123456');
-                    userId = decoded.username;
-                }
-               
+                let userId = await getUserId(req.headers)
                 let patient = await User.findOne({phone:userId,type:'Patient',service:'phone'});
-   
-                if (req.body.type == 'own') {
-                    patient.name = req.body.name;
-                    // patient.phone = req.body.phone;
-                    patient.age = req.body.age;
-                    patient.gender = req.body.gender;
-                    patient.contacts.address = req.body.address;
-                }
-                if (req.body.type == 'other') {
-                    patient.others.push({
-                        name: req.body.name,
-                        email: req.body.email,
-                        phone: req.body.phone,
-                        address: req.body.address,
-                        age: req.body.age,
-                        gender:req.body.gender
         
-                    });
-                }
-        
-                patient.refresh_flag = true;
                 let booked,available,time;
                 if(typeof(user.schedule_time[req.body.dayindex].start) == 'string'){
                     booked = parseInt(user.schedule_time[req.body.dayindex].booked);
@@ -2192,7 +2164,7 @@ module.exports.orderValidation = async function(req, res){
                                     })
                                     .then(message => console.log(message.sid));
                                 }
-                                if (req.body.email) {
+                                if (patient.email) {
                                     appointmentAlert.newAlert(date, time, req.body.email, user, patient);
                                 }
                                 client.messages
@@ -2204,18 +2176,7 @@ module.exports.orderValidation = async function(req, res){
                                     to: '+91' + user.phone
                                 })
                                 .then(message => console.log(message.sid));
-                                if(staff)
-                                {
-                                client.messages
-                                .create({
-                                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ b + ', Date - ' + date + ', Day - ' + day + ', Time - ' + time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
-                                    from: '+12108995132',
-                                    alphanumeric_id : "AarogyaHub",
-                                    statusCallback: 'http://postb.in/1234abcd',
-                                    to: '+91' + staff.phone
-                                })
-                                .then(message => console.log(message.sid));
-                            }
+                                
                             if (user.email) {
                                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,b,date,day,time, fee,user.email);
                             }
@@ -2232,11 +2193,10 @@ module.exports.orderValidation = async function(req, res){
                                     date: date,
                                     time:time,
                                     fee:fee,
-                                    doctor:{
-                                        name:user.name,
-                                        address:user.clinicaddr,
-                                        department:user.department
-                                    },
+                                    dname:user.name,
+                                    daddress:user.clinicaddr,
+                                    ddepartment:user.department,
+                                    id:user._id,
                                     name: req.body.name,
                                     address: req.body.address,
                                     phone: req.body.phone,
@@ -2486,7 +2446,7 @@ module.exports.orderValidation = async function(req, res){
                                     .then(message => console.log(message.sid));
                                  
                                 }
-                                if (req.body.email) {
+                                if (patient.email) {
                                     appointmentAlert.newAlert(date, time, req.body.email, user, patient);
                                 }
                                 client.messages
@@ -2498,17 +2458,7 @@ module.exports.orderValidation = async function(req, res){
                                     to: '+91' + user.phone
                                 })
                                 .then(message => console.log(message.sid));
-                                if(staff){
-                                client.messages
-                                .create({
-                                    body: 'CONFIRMED Online Appointment (PAY-ON-CLINIC): The details of the patient are :- Patient Name - ' + req.body.name + ', Age - ' + req.body.age + ', Phone - ' + req.body.phone + ', Address - ' + req.body.address + '. The appointment details are :- Appointment number - '+ k1 + ', Date - ' + date + ', Day - ' + day + ', Time - ' + time + '. Please make sure to ask the online patient to pay the amount and show the appointment success message.',
-                                    from: '+12108995132',
-                                    alphanumeric_id : "AarogyaHub",
-                                    statusCallback: 'http://postb.in/1234abcd',
-                                    to: '+91' + staff.phone
-                                })
-                                .then(message => console.log(message.sid));
-                            }
+                                
                             if (user.email) {
                                 appointmentAlert.newDoctorAlertPOC(req.body.name,req.body.age,req.body.phone,req.body.address,k1,date,day, time, fee,user.email);
                             }
@@ -2523,11 +2473,10 @@ module.exports.orderValidation = async function(req, res){
                                     date: date,
                                     time:time,
                                     fee:fee,
-                                    doctor:{
-                                        name:user.name,
-                                        address:user.clinicaddr,
-                                        department:user.department
-                                    },
+                                    dname:user.name,
+                                    daddress:user.clinicaddr,
+                                    ddepartment:user.department,
+                                    id:user._id,
                                     name: req.body.name,
                                     address: req.body.address,
                                     phone: req.body.phone,
@@ -2604,13 +2553,13 @@ module.exports.orderValidation = async function(req, res){
             //         msg:'Please enter the slotindex.'
             //     })
             // }
-            if(!req.body.dayindex)
-            {
-                return res.status(422).json({
-                    status:false,
-                    msg:'Please enter the dayindex.'
-                })
-            }
+            // if(!req.body.dayindex)
+            // {
+            //     return res.status(422).json({
+            //         status:false,
+            //         msg:'Please enter the dayindex.'
+            //     })
+            // }
             if(req.body.type !='own' && req.body.type!='other')
             {
                 return res.status(422).json({
@@ -2619,12 +2568,16 @@ module.exports.orderValidation = async function(req, res){
                 })
             }
             else{
+                    let userId = await getUserId(req.headers)
+                    let patient = await User.findOne({service:'phone',type:'Patient',phone:userId});
                     let doctor = await User.findById(req.body.did);
                         const razorpay = new Razorpay({
                             key_id: env.razorpay_key_id,
                             key_secret: env.razorpay_key_secret
                         
                     });
+
+
         
                     const payment_capture = 1;
                     const amount = doctor.booking_fee;
@@ -2659,6 +2612,8 @@ module.exports.orderValidation = async function(req, res){
                         ]
                 });
 
+              
+
                 return res.json({
                     status:true,
                     amount: response.amount,
@@ -2666,11 +2621,14 @@ module.exports.orderValidation = async function(req, res){
                     currency: response.currency,
                     slotindex: req.body.slotindex,
                     dayindex: req.body.dayindex,
+                    notes:notes,
                     id: req.body.id,
                     did: req.body.did,
                     date: req.body.date,
                     type: req.body.type,
                     name:req.body.name,
+                    phone:patient.phone,
+                    email:patient.email,
                     age:req.body.age,
                     gender:req.body.gender,
                     address:req.body.address

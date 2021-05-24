@@ -9,6 +9,18 @@ const jwt = require('../config/noty');
 
 const apiController = require('../controllers/api');
 
+// -------------------------------------------
+// User Sign Up Process Start
+// -------------------------------------------
+router.post('/auth/check-authentication',apiController.checkAuthentication)
+router.post('/auth/verify-otp',apiController.verifyOtp)
+router.post('/auth/resend-otp',apiController.resendOtp)
+router.post('/auth/create-user-account',apiController.createUserAccount)
+router.post('/auth/login',apiController.login)
+// -------------------------------------------
+// User Sign Up Process End
+// -------------------------------------------
+
 
 router.post('/home',jwt.authenticateToken,apiController.home);
 router.post('/doctor-profile',jwt.authenticateToken,apiController.doctorProfile);
