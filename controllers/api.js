@@ -45,7 +45,7 @@ module.exports.resendOtp = async function(req, res) {
         })
     }
 
-    let user = await User.findOne({phone:req.body.phone,service:'phone'})
+    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
     if(user)
     {
         return  res.status(403).json({
@@ -151,7 +151,7 @@ module.exports.checkAuthentication = async function(req, res) {
                 msg:'Please enter the phone number'
             })
     }
-    let user = await User.findOne({phone:req.body.phone,service:'phone'})
+    let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
     if(user)
     {
         res.json({
@@ -332,16 +332,13 @@ module.exports.login = async function(req, res) {
                 msg:'Enter a 10 digit phone number'
             })
         }
-        let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'})
-        const users = {
-            username:user.phone
-        }
-        const accessToken = generateAccessToken(users);
-    
-        
+        let user = await User.findOne({phone:req.body.phone,service:'phone',type:'Patient'}) 
         if( user && user.encrypt)
         {
-           
+            const users = {
+                username:user.phone
+            }
+            const accessToken = generateAccessToken(users);
             let isEqual = await bcrypt.compare(req.body.password,user.password)
            
             if(isEqual){
@@ -367,12 +364,18 @@ module.exports.login = async function(req, res) {
                 msg:'Invalid Username/Password'
             })
         }
-    
+
+        else{
+            const users = {
+                username:user.phone
+            }
+            const accessToken = generateAccessToken(users);
         return res.json({
             accessToken:accessToken,
             user:user
             
         })
+    }
     }
       
     
@@ -402,7 +405,7 @@ module.exports.forgotSendOtp = async(req,res) => {
         })
     }
     
-    let user = await User.findOne({ phone: req.body.phone, service: 'phone' });
+    let user = await User.findOne({ phone: req.body.phone, service: 'phone',type:'Patient' });
 
     if (!user) {
         return res.json({
@@ -457,7 +460,7 @@ module.exports.resetPassword = async(req, res) => {
         })
     }
 
-        let user = await User.findOne({ phone: req.body.phone , type:'Patient', service:'phone'});
+        let user = await User.findOne({ phone: req.body.phone , type:'Patient', service:'phone',type:'Patient'});
 
         let hashedPass = await bcrypt.hash(req.body.password,10)
         user.password = hashedPass;
