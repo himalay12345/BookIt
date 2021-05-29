@@ -3344,14 +3344,14 @@ module.exports.cancelAppointment = async function(req, res) {
                 }
                 let user1 = await User.findOne({phone:userId,type:'Patient',service:'phone'});
 
-                       let n1 = await User.updateOne({ "_id" : user1._id, "doctors.payment_id": user1.doctors[req.query.index].payment_id }, {
+                       let n1 = await User.updateOne({ "_id" : user1._id, "doctors.payment_id": req.body.payment_id }, {
                             '$set': {
                                 
                                 'doctors.$.cancel': true
                                 
                             }
                         });
-                        let n2 = await User.updateOne({ "_id" : req.query.id, "patients.payment_id": user1.doctors[req.query.index].payment_id }, {
+                        let n2 = await User.updateOne({ "_id" : user._id, "patients.payment_id": req.body.payment_id  }, {
                             '$set': {
                                 
                                 'patients.$.cancel': true
@@ -3360,7 +3360,7 @@ module.exports.cancelAppointment = async function(req, res) {
                         });
                         if(staff)
                         {
-                        let n3 = await User.updateOne({ "_id" : user.staff_id, "booking.payment_id": user1.doctors[req.query.index].payment_id }, {
+                        let n3 = await User.updateOne({ "_id" : user.staff_id, "booking.payment_id": req.body.payment_id  }, {
                             '$set': {
                                 
                                 'booking.$.cancel': true
@@ -3368,16 +3368,16 @@ module.exports.cancelAppointment = async function(req, res) {
                             }
                         });
                     }
-                        if(typeof(user.schedule_time[req.query.dayindex].start) == 'object')
+                        if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
                         {
                             let available1 = [];
-                            let k = req.query.slotindex;
-                            let id = user.schedule_time[req.query.dayindex]._id;
+                            let k = req.body.slotindex;
+                            let id = user.schedule_time[req.body.dayindex]._id;
 
-                            let j = user.schedule_time[req.query.dayindex].available;
-                            var a2 = parseInt(user.schedule_time[req.query.dayindex].available[req.query.slotindex]);
+                            let j = user.schedule_time[req.body.dayindex].available;
+                            var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
                             console.log(a2);
-                            for(var temp =0;temp<user.schedule_time[req.query.dayindex].start.length;temp++)
+                            for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
                                 {
                                     if(temp == k)
                                     {
@@ -3398,17 +3398,17 @@ module.exports.cancelAppointment = async function(req, res) {
                             user.save();
                         }
                         else{
-                            var a1 = parseInt(user.schedule_time[req.query.dayindex].available);
+                            var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
                             
-                            user.schedule_time[req.query.dayindex].available= a1 + 1 ;
+                            user.schedule_time[req.body.dayindex].available= a1 + 1 ;
                             user.save();
 
                         }
                         user1.notification.push({
                             type:'appointment-cancel',
-                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.query.date +' at '+ req.query.time ,
+                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time ,
                             flag:true,
-                            did:req.query.id
+                            did:req.body.id
                         });
                         
                         
@@ -3416,25 +3416,273 @@ module.exports.cancelAppointment = async function(req, res) {
                         
                         client.messages
                         .create({
-                            body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
+                            body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
                             from: '+12019755459',
                             statusCallback: 'http://postb.in/1234abcd',
-                            to: '+91'+req.query.phone
+                            to: '+91'+req.body.phone
                         })
                         .then(message => console.log(message.sid));
-                        appointmentCancelAlert.newAlert(req.query.date,req.query.time,req.query.email,user,user1);
+                        appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
                         
                         return res.render('refund',{
                             title:'Refund',
                             doctor:user,
-                            slotindex:req.query.slotindex,
-                            dayindex:req.query.dayindex
+                            slotindex:req.body.slotindex,
+                            dayindex:req.body.dayindex
                         });
                 
     
 }catch (err) {
         console.log('Error', err);
         return;
+    }
+}
+
+module.exports.refund = async function(req, res) {
+
+    try {
+                let user = await User.findById(req.body.did);
+                let staff = await User.findById(user.staff_id);
+                let userId = await getUserId(req.headers)
+                console.log(userId)
+                let user1 = await User.findOne({phone:userId,type:'Patient',service:'phone'});
+
+                if(req.body.mode == 'online')
+                {
+                    const razorpay1 = new Razorpay({
+                        key_id: env.razorpay_key_id,
+                        key_secret: env.razorpay_key_secret
+                        
+                    });
+                    var refund_amount = req.body.fee - 50 ;
+                    const response = await razorpay1.payments.refund(req.body.payid,  
+                        {
+                            amount : refund_amount*100,
+                            speed : 'optimum',
+                            reverse_all : 1
+                        });
+
+                    if(response.id && response.payment_id)
+                    {
+                       let n1 = await User.updateOne({ "_id" : user1._id, "doctors.payment_id": req.body.payid }, {
+                            '$set': {
+                                
+                                'doctors.$.cancel': true
+                                
+                            }
+                        });
+                        let n2 = await User.updateOne({ "_id" : req.body.did, "patients.payment_id": req.body.payid }, {
+                            '$set': {
+                                
+                                'patients.$.cancel': true
+                                
+                            }
+                        });
+
+                        if(staff){
+                        let n3 = await User.updateOne({ "_id" : user.staff_id, "booking.payment_id": req.body.payid }, {
+                            '$set': {
+                                
+                                'booking.$.cancel': true
+                                
+                            }
+                        });
+                    }
+                        if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
+                        {
+                            let available1 = [];
+                            let k = req.body.slotindex;
+                            let id = user.schedule_time[req.body.dayindex]._id;
+
+                            let j = user.schedule_time[req.body.dayindex].available;
+                            var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
+                            console.log(a2);
+                            for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+                                {
+                                    if(temp == k)
+                                    {
+                                        available1.push(a2+1);
+                                        continue;
+                                    }
+                                    var temp1 = parseInt(j[temp]);
+                                    available1.push(temp1);
+                                }
+                            let day = await User.updateOne({ 'schedule_time._id': id }, {
+                                '$set': {
+                                    
+                                    'schedule_time.$.available': available1
+                                    
+                                }
+                            });
+                            // user.schedule_time[0].available[0] = 5;
+                            user.save();
+                        }
+                        else{
+                            var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
+                            
+                            user.schedule_time[req.body.dayindex].available= a1 + 1 ;
+                            user.save();
+
+                        }
+                        user1.notification.push({
+                            type:'appointment-cancel',
+                            message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time ,
+                            flag:true,
+                            did:req.body.did
+                        });
+                        
+                        
+                        user1.save();
+                        
+                        // client.messages 
+                        // .create({ 
+                        //     body: 'Looks like you had to cancel your Appointment for '+ req.query.date +' at '+ req.query.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +user.phone+ '. If you want to book another appointment, please visit http://doccure.com.',
+                        //     from: 'whatsapp:+14155238886',       
+                        //     to: 'whatsapp:+91'+req.query.phone 
+                        // }) 
+                        // .then(message => console.log(message.sid)) 
+                        // .done();
+
+                        if(staff)
+                        {
+                        client.messages
+                        .create({
+                            body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ ', Ph: +91' +staff.phone+ '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
+                            from: '+12019755459',
+                            statusCallback: 'http://postb.in/1234abcd',
+                            to: '+91'+req.body.phone
+                        })
+                        .then(message => console.log(message.sid));
+                    }
+                    else{
+                        client.messages
+                        .create({
+                            body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+  '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
+                            from: '+12019755459',
+                            statusCallback: 'http://postb.in/1234abcd',
+                            to: '+91'+req.body.phone
+                        })
+                        .then(message => console.log(message.sid));
+                    }
+                        appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
+                        
+                        return res.json({
+                            status:'true',
+                            msg:'Appointment cancelled successfully',
+                            doctor:{
+                                name:user.name,
+                                dept:user.department,
+                                clinicname:user.clinicname
+                            },
+                            date:req.body.date,
+                            time:req.body.time
+                        });
+    } 
+}else{
+    
+    let n1 = await User.updateOne({ "_id" : user1._id, "doctors.payment_id": req.body.payid }, {
+        '$set': {
+            
+            'doctors.$.cancel': true
+            
+        }
+    });
+    let n2 = await User.updateOne({ "_id" : req.body.did, "patients.payment_id": req.body.payid }, {
+        '$set': {
+            
+            'patients.$.cancel': true
+            
+        }
+    });
+    if(staff)
+    {
+    let n3 = await User.updateOne({ "_id" : user.staff_id, "booking.payment_id": req.body.payid }, {
+        '$set': {
+            
+            'booking.$.cancel': true
+            
+        }
+    });
+}
+    if(typeof(user.schedule_time[req.body.dayindex].start) == 'object')
+    {
+        let available1 = [];
+        let k = req.body.slotindex;
+        let id = user.schedule_time[req.body.dayindex]._id;
+
+        let j = user.schedule_time[req.body.dayindex].available;
+        var a2 = parseInt(user.schedule_time[req.body.dayindex].available[req.body.slotindex]);
+        console.log(a2);
+        for(var temp =0;temp<user.schedule_time[req.body.dayindex].start.length;temp++)
+            {
+                if(temp == k)
+                {
+                    available1.push(a2+1);
+                    continue;
+                }
+                var temp1 = parseInt(j[temp]);
+                available1.push(temp1);
+            }
+        let day = await User.updateOne({ 'schedule_time._id': id }, {
+            '$set': {
+                
+                'schedule_time.$.available': available1
+                
+            }
+        });
+        // user.schedule_time[0].available[0] = 5;
+        user.save();
+    }
+    else{
+        var a1 = parseInt(user.schedule_time[req.body.dayindex].available);
+        
+        user.schedule_time[req.body.dayindex].available= a1 + 1 ;
+        user.save();
+
+    }
+    // user1.notification.push({
+    //     type:'appointment-cancel',
+    //     message:'Your cancelled the appointment with Dr. '+ user.name +' on '+ req.body.date +' at '+ req.body.time ,
+    //     flag:true,
+    //     did:req.body.did
+    // });
+    
+    
+    user1.save();
+    
+    
+    client.messages
+    .create({
+        body: 'Looks like you had to cancel your Appointment for '+ req.body.date +' at '+ req.body.time + ' with Dr. ' + user.name+ ' at ' +user.clinicname+ ', ' +user.cliniccity+ ', '  +user.clinicaddr+ '. If you want to book another appointment, please visit https://aarogyahub.com/doctors',
+        from: '+12019755459',
+        statusCallback: 'http://postb.in/1234abcd',
+        to: '+91'+req.body.phone
+    })
+    .then(message => console.log(message.sid));
+    if(req.body.email){
+    appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
+    }
+    
+    return res.json({
+        status:'true',
+        msg:'Appointment cancelled successfully',
+        doctor:{
+            name:user.name,
+            dept:user.department,
+            clinicname:user.clinicname
+        },
+        date:req.body.date,
+        time:req.body.time
+    });
+}
+}catch (err) {
+        console.log('Error', err);
+        return res.status(400).json({
+            status:false,
+            code: err.error.code,
+            description: err.error.description,
+        })
+       
     }
 }
 

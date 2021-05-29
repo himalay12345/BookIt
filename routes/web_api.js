@@ -46,6 +46,7 @@ router.post('/enable-two-factor',authenticateWebToken,webApiController.enable2Fa
 router.post('/saved-patients',authenticateWebToken,webApiController.savedPatients)
 router.post('/checkout',authenticateWebToken,webApiController.checkout)
 router.post('/order-validation',authenticateWebToken,webApiController.orderValidation)
+router.post('/cancel-appointment',authenticateWebToken,webApiController.refund)
 
 
 module.exports = router;
