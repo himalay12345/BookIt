@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Test = require('../models/test');
 const Consult = require('../models/consult');
+const Specialities = require('../models/specialities')
 const jwt = require('jsonwebtoken');
 const config = require('../config/twilio');
 const client = require('twilio')(config.accountSID, config.authToken);
@@ -959,6 +960,7 @@ for(let u of i.schedule_time)
 
 
 module.exports.home = async (req, res) => {
+    let specialities = await Specialities.find({});
     let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
     let data = [];
     let doctors = [];
@@ -977,14 +979,14 @@ module.exports.home = async (req, res) => {
 
     let consults = await Consult.find({});
     let tests = await Test.find({});
+    let urls = [ 'http://107.21.15.88:4000/img/1.png', 'http://107.21.15.88:4000/img/2.png', 'http://107.21.15.88:4000/img/3.png' ]
   
    
 
     res.json({
-
-        doctors:doctors,
-        consults:consults,
-        tests: tests
+        imgSlider:urls,
+        specialities:specialities,
+        doctors:doctors
     });
 }
 
