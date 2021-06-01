@@ -3567,9 +3567,10 @@ module.exports.refund = async function(req, res) {
                         appointmentCancelAlert.newAlert(req.body.date,req.body.time,req.body.email,user,user1);
                         
                         return res.json({
-                            status:'true',
+                            status:true,
                             msg:'Appointment cancelled successfully',
                             doctor:{
+                                id:user._id,
                                 name:user.name,
                                 dept:user.department,
                                 clinicname:user.clinicname
@@ -3664,9 +3665,10 @@ module.exports.refund = async function(req, res) {
     }
     
     return res.json({
-        status:'true',
+        status:true,
         msg:'Appointment cancelled successfully',
         doctor:{
+            id:user._id,
             name:user.name,
             dept:user.department,
             clinicname:user.clinicname
@@ -3686,6 +3688,9 @@ module.exports.refund = async function(req, res) {
     }
 }
 
+module.exports.labs = async (req, res) => {
+    
+}
 // module.exports.deleteAccount = async(req, res) => {
 //     let userId = await getUserId(req.headers)
 //     if(userId){
