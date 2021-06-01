@@ -332,6 +332,7 @@
                                                     <th>Price</th>
                                                     <th>Discount Price</th>
                                                     <th>Total Price</th>
+                                                    <th>Mark Popular</th>
                                                     <th>Edit</th>
                                                 </tr>
                                                 <%var c=1;%>
@@ -363,8 +364,12 @@
                                                                                 <td>
                                                                                     <%=test.testtotalprice%>
                                                                                 </td>
-
+                                                                                
                                                                                 <%}%>
+                                                                                <td>
+                                                                                    <a href="/admin/mark-popular-test/?id=<%=test.id %>">Popular</a>
+                                                                                </td>
+                                                                                
                                                                                     <td style="cursor: pointer;">
                                                                                         <a href="/admin/edit-test/?id=<%=test.id %> "> <img src="/img/patients/e2.png" style="height:30px; width: 30px;"></a>
                                                                                         <a href="/admin/delete-test/?id=<%=test._id %> "><img src="/img/patients/e1.png" style="height:30px; width: 30px;"></a>

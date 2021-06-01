@@ -47,6 +47,7 @@ router.post('/saved-patients',authenticateWebToken,webApiController.savedPatient
 router.post('/checkout',authenticateWebToken,webApiController.checkout)
 router.post('/order-validation',authenticateWebToken,webApiController.orderValidation)
 router.post('/cancel-appointment',authenticateWebToken,webApiController.refund)
+router.post('/all-tests',webApiController.allTests)
 
 
 module.exports = router;

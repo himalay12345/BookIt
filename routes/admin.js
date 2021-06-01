@@ -38,6 +38,8 @@ router.get('/data-tables',passport.checkAdminAuthentication, adminController.dat
 router.get('/delete-test',passport.checkAdminAuthentication, adminController.deletetest);
 router.get('/delete-consult',passport.checkAdminAuthentication, adminController.deleteconsult);
 router.get('/edit-test',passport.checkAdminAuthentication, adminController.edittest);
+router.get('/mark-popular-test',passport.checkAdminAuthentication, adminController.markPopularTest);
+router.post('/mark-popular-test',passport.checkAdminAuthentication, adminController.markPopular);
 router.get('/doctor-list',passport.checkAdminAuthentication, adminController.doctorList);
 router.get('/error-404',passport.checkAdminAuthentication, adminController.error404);
 router.get('/enable-poc',passport.checkAdminAuthentication, adminController.enablePoc);

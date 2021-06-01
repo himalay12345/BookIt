@@ -422,23 +422,33 @@
                             <div class="card-body">
 
 
-                                <form action="/admin/update-speciality" method="POST" enctype="multipart/form-data">
+                                <form action="/admin/mark-popular-test" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<%=test._id%>">
+
                                     <div class="row form-row">
-                                       
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <div class="change-avatar">
+                                                    <div class="profile-img">
+                                                        <img id="blah" src="#" alt="Select Image">
+                                                    </div>
+                                                    <div class="upload-img">
+                                                        <div class="change-photo-btn">
+                                                            <span><i class="fa fa-upload"></i>Upload Photo</span>
+                                                            <input type="file" class="upload" id="imageUpload" name="avatar">
+                                                        </div>
+                                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-12 col-md-3">
                                             <div class="form-group">
-                                                <label> Name</label>
-                                                <input type="text" placeholder="Enter The Speciality Name" name="name" class="form-control" value="<%=test.department %> ">
+                                                <label> Set Common Name</label>
+                                                <input type="text" placeholder="Enter The Test Name" name="commonname" class="form-control" value="<%=test.testname%> ">
                                             </div>
                                         </div>
                             
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
-                                                <label> Description</label>
-                                                <textarea placeholder="Enter The Speciality Description" name="description"  class="form-control" style="height: 70px !important;"><%=test.description%></textarea>
-                                            </div>
-                                        </div>
                                         <div class="submit-section" style="margin-top: 30px;">
                                             <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
                                         </div>

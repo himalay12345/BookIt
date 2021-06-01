@@ -159,6 +159,54 @@ module.exports.edittest = async function(req, res) {
         test: test
     })
 }
+
+module.exports.markPopularTest = async function(req, res) {
+    let test = await Test.findOne({ _id: req.query.id });
+
+    return res.render('a-mark-popular', {
+        title: 'Edit Test',
+        test: test
+    })
+}
+
+module.exports.markPopular = async function(req, res) {
+
+    try {
+
+        Test.uploadedAvatar(req, res, async function(err) {
+            if (err) {
+                console.log('Multer Error', err);
+                return;
+            }
+            let test = await Test.findById(req.body.id);
+                test.commonname = req.body.commonname
+                test.popular = true;
+
+
+
+            if (req.file) {
+                let newPath = Test.avatarPath + '/' + req.file.filename;
+                test.avatar = newPath;
+            }
+
+
+
+            test.save();
+
+            req.flash('success', 'Test updated Successfully');
+            return res.redirect('/admin/a-test');
+
+        });
+
+
+
+    } catch (err) {
+        console.log('Error', err);
+        return;
+    }
+
+}
+
 module.exports.editSpeciality = async function(req, res) {
     let test = await Specialities.findOne({ _id: req.query.id });
     

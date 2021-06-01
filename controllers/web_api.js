@@ -158,7 +158,8 @@ module.exports.home = async (req, res) => {
                 avatar: i.avatar,
                 fee:i.booking_fee,
                 contacts:i.contacts,
-                
+                clinicname:i.clinicname,
+                clinicaddr:i.clinicaddr,
                 premium:i.premium
             });
         }
@@ -169,26 +170,30 @@ module.exports.home = async (req, res) => {
             department: i.department,
             avatar: i.avatar,
             fee:i.booking_fee,
-            premium:i.premium
+            premium:i.premium,
+            clinicname:i.clinicname,
+            clinicaddr:i.clinicaddr
         });
     }
     }
 
-    let consults = await Consult.find({});
-    let tests = await Test.find({});
-  
+    let tests = await Test.find({popular:true});
+    let labs = await User.find({type:'Diagonistic'});
+    let specialities = await Specialities.find({});
    
 
     res.json({
+        status:true,
+        specialities:specialities,
         premium_doctors:p_doctors,
         doctors:doctors,
-        consults:consults,
+        labs:labs,
         tests: tests
     });
 }
 
 module.exports.doctors = async (req, res) => {
-    let specialities = await Specialities.find({});
+
     let doctor = await User.find({ type: "Doctor", approve1: true, approve2: true, booking_service: true });
  
     let doctors = [];
@@ -299,8 +304,7 @@ module.exports.doctors = async (req, res) => {
     res.json({
         status:'true',
         premium_doctors:p_doctors,
-        doctors:doctors,
-        specialities:specialities
+        doctors:doctors
     });
 }
 
@@ -3688,9 +3692,18 @@ module.exports.refund = async function(req, res) {
     }
 }
 
-module.exports.labs = async (req, res) => {
-    
+module.exports.allTests = async(req, res) => {
+    let tests = await Test.find({})
+    let labs = await User.find({type:'Diagonistic'});
+
+    return res.json({
+        status:true,
+        labs:labs,
+        tests:tests
+    })
+
 }
+
 // module.exports.deleteAccount = async(req, res) => {
 //     let userId = await getUserId(req.headers)
 //     if(userId){

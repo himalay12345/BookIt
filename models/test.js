@@ -12,6 +12,9 @@ const testSchema = mongoose.Schema({
     testname: {
         type: String
     },
+    commonname: {
+        type: String
+    },
     testnumber: {
         type: Number
     },
@@ -25,6 +28,9 @@ const testSchema = mongoose.Schema({
         type: String
 
     },
+    popular:{
+        type:Boolean
+    },
     testdescription: {
         type: String
 
@@ -32,10 +38,11 @@ const testSchema = mongoose.Schema({
     testtotalprice: {
         type: String
     },
-    testavatar: {
+    avatar: {
         type: String
 
     },
+
     testsample: {
         type: String
 
