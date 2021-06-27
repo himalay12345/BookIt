@@ -565,9 +565,9 @@ today=date;
             slots.push({
                 start:u.start,
                 end:u.end,
-                maxcount:u.max_count,
-                available:u.available,
-                booked:u.booked
+                maxcount:parseInt(u.max_count),
+                available:parseInt(u.available),
+                booked:parseInt(u.booked)
             });
             day = u.day;
             reset_flag = u.reset_flag
@@ -653,9 +653,9 @@ today=date;
                 slots.push({
                     start:u.start[i],
                     end:u.end[i],
-                    maxcount:u.max_count[i],
-                    available:u.available[i],
-                    booked:u.booked[i]
+                    maxcount:parseInt(u.max_count[i]),
+                    available:parseInt(u.available[i]),
+                    booked:parseInt(u.booked[i])
                 })
             }
            
@@ -676,6 +676,11 @@ today=date;
         }
        
     }
+    let experience = 0;
+       if(i.wexperience != null)
+       {
+           experience = i.wexperience;
+       }
     return res.json({
         status:true,
         avatar: i.avatar,
@@ -689,6 +694,7 @@ today=date;
             fee:i.booking_fee,
             id: i.id,
             experience:i.experience,
+            wexperience:experience,
             awards:i.awards,
            clinicname:i.clinicname,
            clinicaddr:i.clinicaddr,
@@ -1065,12 +1071,12 @@ module.exports.doctors = async (req, res) => {
         avgrating = avgrating+j.rating;
         cnt++;
        }
-       let experience = '';
        let rating = 0;
        if(i.reviews.length > 0)
        {
         rating = parseInt(avgrating/cnt);
        }
+       let experience = 0;
        if(i.wexperience != null)
        {
            experience = i.wexperience;
