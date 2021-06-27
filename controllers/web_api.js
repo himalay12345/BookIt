@@ -3704,25 +3704,201 @@ module.exports.allTests = async(req, res) => {
 
 }
 
-// module.exports.deleteAccount = async(req, res) => {
-//     let userId = await getUserId(req.headers)
-//     if(userId){
-//         let user = await User.findOne({service:'phone',phone:userId});  
-//     console.log(req.body);
-//     Feedback.create({
-//         delete_value: req.body.delete,
-//         description: req.body.del_description,
-//         did:user.id
-//     });
-   
-//     if(user.type == 'Patient')
-//     {
-        
-//     }
+module.exports.fetchLabById = async(req, res) => {
+    let lab = await User.findOne({type:'Diagonistic',_id:req.body.id});
+    console.log(req.body,lab.schedule_time)
 
-//     return res.redirect('/');
-// }
-// }
+    let n1,n2,n3,n4,n5,n6,n7;
+       let d1,d2,d3,d4,d5,d6,d7;
+       var today = new Date();
+       for(let i1=1;i1<=7;i1++){
+   var dd = String(today.getDate()).padStart(2, '0');
+   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+   var yyyy = today.getFullYear();
+   var weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+   var dayOfWeek = weekday[today.getDay()];
+   if(i1 == 1)
+   {
+   n1=dayOfWeek.toUpperCase();
+   d1=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 2)
+   {
+   n2=dayOfWeek.toUpperCase();
+   d2=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 3)
+   {
+   n3=dayOfWeek.toUpperCase();
+   d3=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 4)
+   {
+   n4=dayOfWeek.toUpperCase();
+   d4=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 5)
+   {
+   n5=dayOfWeek.toUpperCase();
+   d5=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 6)
+   {
+   n6=dayOfWeek.toUpperCase();
+   d6=dd+'-'+mm+'-'+yyyy;
+   }
+   if(i1 == 7)
+   {
+   n7=dayOfWeek.toUpperCase();
+   d7=dd+'-'+mm+'-'+yyyy;
+   }
+   
+   var res1 = today.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000));
+   var date = new Date(res1);
+   today=date;
+       }
+
+       let scheduletime = [];
+       for(let u of lab.schedule_time)
+       {
+          
+           let slots = [];
+           let day;
+           let id;
+           let reset_flag ;
+           let alt_flag;
+           let bookingover;
+          
+           if(typeof(u.start) == 'string')
+           {
+               slots.push({
+                   start:u.start,
+                   end:u.end
+               });
+               day = u.day;
+               reset_flag = u.reset_flag
+               alt_flag = u.alt_flag
+               id = u._id;
+               bookingover = u.booking_over
+               let date;
+               if(u.day.toUpperCase() == n1)
+               {
+                   date = d1;
+               }
+               if(u.day.toUpperCase() == n2)
+               {
+                   date = d2;
+               }
+               if(u.day.toUpperCase() == n3)
+               {
+                   date = d3;
+               }
+               if(u.day.toUpperCase() == n4)
+               {
+                   date = d4;
+               }
+               if(u.day.toUpperCase() == n5)
+               {
+                   date = d5;
+               }
+               if(u.day.toUpperCase() == n6)
+               {
+                   date = d6;
+               }
+               if(u.day.toUpperCase() == n7)
+               {
+                   date = d7;
+               }
+   
+               scheduletime.push({
+                   id:id,
+                   date:date,
+                   day:day,
+                  slots:slots,
+                   reset_flag:reset_flag,
+                   alt_flag:alt_flag,
+                   booking_over:bookingover
+                  
+               })
+           }
+   
+           if(typeof(u.start) == 'object')
+           {
+              
+               let date;
+           if(u.day.toUpperCase() == n1)
+           {
+               date = d1;
+           }
+           if(u.day.toUpperCase() == n2)
+           {
+               date = d2;
+           }
+           if(u.day.toUpperCase() == n3)
+           {
+               date = d3;
+           }
+           if(u.day.toUpperCase() == n4)
+           {
+               date = d4;
+           }
+           if(u.day.toUpperCase() == n5)
+           {
+               date = d5;
+           }
+           if(u.day.toUpperCase() == n6)
+           {
+               date = d6;
+           }
+           if(u.day.toUpperCase() == n7)
+           {
+               date = d7;
+           }
+               for(let i= 0;i<u.start.length;i++)
+               {
+                   slots.push({
+                       start:u.start[i],
+                       end:u.end[i]
+                   })
+               }
+              
+               day = u.day;
+               reset_flag = u.reset_flag
+               alt_flag = u.alt_flag
+               bookingover = u.booking_over
+   
+               scheduletime.push({
+                   id:u._id,
+                   date:date,
+                   day:day,
+                   slots:slots,
+                   reset_flag:reset_flag,
+                   alt_flag:alt_flag,
+                   booking_over:bookingover
+               })
+           }
+          
+       }
+   
+
+    return res.json({
+        status:true,
+        labs:lab,
+        scheduletime:scheduletime
+    })
+
+}
+
+module.exports.fetchTestById = async(req, res) => {
+    let test = await Test.findOne({_id:req.body.id})
+
+    return res.json({
+        status:true,
+        test:test
+    })
+
+}
+
 
 
 

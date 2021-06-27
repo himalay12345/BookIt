@@ -48,6 +48,8 @@ router.post('/checkout',authenticateWebToken,webApiController.checkout)
 router.post('/order-validation',authenticateWebToken,webApiController.orderValidation)
 router.post('/cancel-appointment',authenticateWebToken,webApiController.refund)
 router.post('/all-tests',webApiController.allTests)
+router.post('/fetch-lab-by-id',webApiController.fetchLabById)
+router.post('/fetch-test-by-id',webApiController.fetchTestById)
 
 
 module.exports = router;
