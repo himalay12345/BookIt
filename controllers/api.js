@@ -2588,11 +2588,13 @@ module.exports.orderValidation = async function(req, res){
                                     time:time,
                                     fee:fee,
                                     doctor:{
+                                        id:user._id,
                                         name:user.name,
                                         address:user.clinicaddr,
                                         department:user.department
                                     },
                                     name: req.body.name,
+                                    appointmentid:patient.doctors[patient.doctors.length-1]._id,
                                     address: req.body.address,
                                     phone: req.body.phone,
                                     age: req.body.age,
@@ -2879,11 +2881,13 @@ module.exports.orderValidation = async function(req, res){
                                     time:time,
                                     fee:fee,
                                     doctor:{
+                                        id:user._id,
                                         name:user.name,
                                         address:user.clinicaddr,
                                         department:user.department
                                     },
                                     name: req.body.name,
+                                    appointmentid:patient.doctors[patient.doctors.length-1]._id,
                                     address: req.body.address,
                                     phone: req.body.phone,
                                     age: req.body.age,
@@ -3046,6 +3050,7 @@ module.exports.orderValidation = async function(req, res){
 
     if(req.body.pay == 'offline')
     {
+        let bapp;
             //Validation
             if(!req.body.name)
             {
@@ -3464,10 +3469,12 @@ module.exports.orderValidation = async function(req, res){
                                     time:time,
                                     fee:fee,
                                     doctor:{
+                                        id:user._id,
                                         name:user.name,
                                         address:user.clinicaddr,
                                         department:user.department
                                     },
+                                    appointmentid:patient.doctors[patient.doctors.length-1]._id,
                                     name: req.body.name,
                                     address: req.body.address,
                                     phone: req.body.phone,
@@ -3752,11 +3759,13 @@ module.exports.orderValidation = async function(req, res){
                                     time:time,
                                     fee:fee,
                                     doctor:{
+                                        id:user._id,
                                         name:user.name,
                                         address:user.clinicaddr,
                                         department:user.department
                                     },
                                     name: req.body.name,
+                                    appointmentid:patient.doctors[patient.doctors.length-1]._id,
                                     address: req.body.address,
                                     phone: req.body.phone,
                                     age: req.body.age,
