@@ -484,6 +484,7 @@ module.exports.resetPassword = async(req, res) => {
 
 
 
+
 module.exports.doctorProfile = async (req, res) => {
     let i = await User.findById(req.body.id);
  
@@ -3786,6 +3787,24 @@ module.exports.orderValidation = async function(req, res){
                     msg:'Please select the correct payment method.'
                 })
             }
+}
+
+module.exports.getUserDetails = async (req,res) => {
+    var userId;
+    if (req.headers && req.headers.authorization) {
+        
+        var authorization = req.headers.authorization.split(' ')[1];
+       
+       
+          var decoded = jwt.verify(authorization, '123456');
+        userId = decoded.username;
+    }
+    let patient = await User.findOne({phone:userId,service:'phone'});
+    res.json({
+        status:true,
+        msg:'In protected route',
+        user:patient
+    })
 }
 module.exports.appointmentDetail = async(req, res) => {
     var userId;
