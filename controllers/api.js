@@ -2267,13 +2267,13 @@ module.exports.orderValidation = async function(req, res){
                
                 let patient = await User.findOne({phone:userId,type:'Patient',service:'phone'});
    
-                if (req.body.type == 'own') {
-                    patient.name = req.body.name;
-                    // patient.phone = req.body.phone;
-                    patient.age = req.body.age;
-                    patient.gender = req.body.gender;
-                    patient.contacts.address = req.body.address;
-                }
+                // if (req.body.type == 'own') {
+                //     patient.name = req.body.name;
+                //     // patient.phone = req.body.phone;
+                //     patient.age = req.body.age;
+                //     patient.gender = req.body.gender;
+                //     patient.contacts.address = req.body.address;
+                // }
                 if (req.body.type == 'other') {
                     patient.others.push({
                         name: req.body.name,
@@ -3147,13 +3147,13 @@ module.exports.orderValidation = async function(req, res){
                 console.log(userId)
                 let patient = await User.findOne({phone:userId,type:'Patient',service:'phone'});
                 console.log(userId,patient)
-                if (req.body.type == 'own') {
-                    patient.name = req.body.name;
-                    // patient.phone = req.body.phone;
-                    patient.age = req.body.age;
-                    patient.gender = req.body.gender;
-                    patient.contacts.address = req.body.address;
-                }
+                // if (req.body.type == 'own') {
+                //     patient.name = req.body.name;
+                //     // patient.phone = req.body.phone;
+                //     patient.age = req.body.age;
+                //     patient.gender = req.body.gender;
+                //     patient.contacts.address = req.body.address;
+                // }
                 if (req.body.type == 'other') {
                     patient.others.push({
                         name: req.body.name,
